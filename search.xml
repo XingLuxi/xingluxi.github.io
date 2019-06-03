@@ -22,9 +22,9 @@
             
             <tag> nlp </tag>
             
-            <tag> mrc </tag>
-            
             <tag> paper </tag>
+            
+            <tag> mrc </tag>
             
             <tag> multi-hop </tag>
             
@@ -55,9 +55,9 @@
             
             <tag> nlp </tag>
             
-            <tag> mrc </tag>
-            
             <tag> knowledge </tag>
+            
+            <tag> mrc </tag>
             
             <tag> reasoning </tag>
             
@@ -121,9 +121,9 @@
             
             <tag> nlp </tag>
             
-            <tag> mrc </tag>
-            
             <tag> paper </tag>
+            
+            <tag> mrc </tag>
             
         </tags>
       
@@ -150,9 +150,9 @@
             
             <tag> nlp </tag>
             
-            <tag> mrc </tag>
-            
             <tag> paper </tag>
+            
+            <tag> mrc </tag>
             
             <tag> research </tag>
             
@@ -181,9 +181,9 @@
             
             <tag> nlp </tag>
             
-            <tag> mrc </tag>
-            
             <tag> paper </tag>
+            
+            <tag> mrc </tag>
             
             <tag> research </tag>
             
@@ -243,11 +243,11 @@
             
             <tag> nlp </tag>
             
-            <tag> mrc </tag>
-            
             <tag> paper </tag>
             
             <tag> knowledge </tag>
+            
+            <tag> mrc </tag>
             
         </tags>
       
@@ -274,11 +274,11 @@
             
             <tag> nlp </tag>
             
-            <tag> mrc </tag>
-            
             <tag> paper </tag>
             
             <tag> knowledge </tag>
+            
+            <tag> mrc </tag>
             
             <tag> nli </tag>
             
@@ -307,9 +307,9 @@
             
             <tag> nlp </tag>
             
-            <tag> mrc </tag>
-            
             <tag> paper </tag>
+            
+            <tag> mrc </tag>
             
             <tag> model </tag>
             
@@ -338,13 +338,13 @@
             
             <tag> nlp </tag>
             
-            <tag> mrc </tag>
-            
             <tag> paper </tag>
             
-            <tag> multi-hop </tag>
+            <tag> mrc </tag>
             
             <tag> reasoning </tag>
+            
+            <tag> multi-hop </tag>
             
             <tag> commonsense </tag>
             
@@ -501,9 +501,9 @@
             
             <tag> nlp </tag>
             
-            <tag> mrc </tag>
-            
             <tag> paper </tag>
+            
+            <tag> mrc </tag>
             
             <tag> research </tag>
             
@@ -563,9 +563,9 @@
             
             <tag> nlp </tag>
             
-            <tag> mrc </tag>
-            
             <tag> paper </tag>
+            
+            <tag> mrc </tag>
             
             <tag> dataset </tag>
             
@@ -594,9 +594,9 @@
             
             <tag> nlp </tag>
             
-            <tag> mrc </tag>
-            
             <tag> paper </tag>
+            
+            <tag> mrc </tag>
             
             <tag> reasoning </tag>
             
@@ -625,9 +625,9 @@
             
             <tag> nlp </tag>
             
-            <tag> mrc </tag>
-            
             <tag> paper </tag>
+            
+            <tag> mrc </tag>
             
             <tag> nlu </tag>
             
@@ -706,7 +706,7 @@
       <link href="/2019/01/09/schedule-2019/"/>
       <url>/2019/01/09/schedule-2019/</url>
       
-        <content type="html"><![CDATA[<h1 id="2019年讨论组论文报告会"><a href="#2019年讨论组论文报告会" class="headerlink" title="2019年讨论组论文报告会"></a>2019年讨论组论文报告会</h1><a id="more"></a><style>    table th:nth-of-type(1){    width: 90px;    }    table th:nth-of-type(2){    width: 90px;    }    table th:nth-of-type(3){    width: 50%;    }    table th:nth-of-type(4){    width: 100px;    }</style><table><thead><tr><th align="left">Date</th><th align="left">Reporter</th><th align="left">Title/Papers</th><th align="left">Appx.</th></tr></thead><tbody><tr><td align="left">01.13</td><td align="left">邢璐茜</td><td align="left">Multi-Granular Sequence Encoding via Dilated Compositional Units for RC</td><td align="left"><a href="http://aclweb.org/anthology/D18-1238" target="_blank" rel="noopener">EMNLP2018</a><br><a href="/2019/01/12/paper-emnlp2018-dcu/" title="note link">note link</a></td></tr><tr><td align="left">01.13</td><td align="left">孙雅静</td><td align="left">The Design and Implementation of XiaoIce, an Empathetic Social Chatbot</td><td align="left"><a href="https://arxiv.org/abs/1812.08989" target="_blank" rel="noopener">link</a></td></tr><tr><td align="left">01.13</td><td align="left">谢玉强</td><td align="left">Analysis on MS MARCOv1 Leaderboard Top 3:<br>1.S-Net<br>2.V-Net<br>3.MARS<br>Multi-task Learning</td><td align="left"><a href="https://github.com/IndexFziQ/MSMARCO-MRC-Analysis" target="_blank" rel="noopener">details-1</a><br><a href="https://github.com/IndexFziQ/Thinking-about-Multi-Task-Learning" target="_blank" rel="noopener">details-2</a></td></tr><tr><td align="left">01.18</td><td align="left">雷扬帆</td><td align="left">Self-Supervised Learning Introduction</td><td align="left"></td></tr><tr><td align="left">01.18</td><td align="left">魏相鹏</td><td align="left">Meta-Learning Introduction</td><td align="left"><a href="https://lilianweng.github.io/lil-log/2018/11/30/meta-learning.html" target="_blank" rel="noopener">blog</a></td></tr><tr><td align="left">01.18</td><td align="left">邢璐茜</td><td align="left">Meta-Learning a Dynamic Language Model</td><td align="left">ICLR workshop</td></tr><tr><td align="left">01.18</td><td align="left">孙雅静</td><td align="left">Continual Leanring Introduction</td><td align="left"></td></tr><tr><td align="left">01.24</td><td align="left">孙雅静</td><td align="left">1. A Dual-Attention Hierarchical RNN for Dialogue Act Classification<br>2.LifeLong Learning with Dynamically Expandable Networks</td><td align="left"></td></tr><tr><td align="left">01.24</td><td align="left">谢玉强</td><td align="left">A Survey to Self-Supervised Learning</td><td align="left"></td></tr><tr><td align="left">01.24</td><td align="left">雷扬帆</td><td align="left">Self-Supervised Learning<br>Unsupervised Learning by Cross-Channel Prediction</td><td align="left"></td></tr><tr><td align="left">01.24</td><td align="left">彭伟</td><td align="left">Attention-over-Attention NN for RC</td><td align="left">ACL,2017</td></tr><tr><td align="left">02.20</td><td align="left">邢璐茜</td><td align="left">Evaluation Metrics for Machine Reading Comprehension: Prerequisite Skills and Readability</td><td align="left">ACL,2017</td></tr><tr><td align="left">02.20</td><td align="left">谢玉强</td><td align="left">Multi-Style Generative Reading Comprehension</td><td align="left"></td></tr><tr><td align="left">02.20</td><td align="left">彭伟</td><td align="left">Match-LSTM</td><td align="left"></td></tr><tr><td align="left">02.20</td><td align="left">孙雅静</td><td align="left">个性化对话:<br>1.Persona-Chat对话数据集<br>2.Personalizing a Dialogue Systems with Transfer Reinforcement Learning</td><td align="left"></td></tr><tr><td align="left">02.20</td><td align="left">于静</td><td align="left">Lifelong Learning Cross Media Search</td><td align="left">ACM-MM</td></tr><tr><td align="left">03.01</td><td align="left">邢璐茜</td><td align="left">TG with Commonsense</td><td align="left"><a href="/2019/01/23/paper-tg-with-commonsense/" title="tg-with-cs-note">tg-with-cs-note</a></td></tr><tr><td align="left">03.01</td><td align="left">谢玉强</td><td align="left">Incorporating Structured Commonsense Knowledge in Story Completion</td><td align="left">AAAI,2019</td></tr><tr><td align="left">03.01</td><td align="left">孙雅静</td><td align="left">What makes a good conversation? How controllable attributes affect human judgments</td><td align="left"></td></tr><tr><td align="left">03.08</td><td align="left">孙雅静</td><td align="left">Learning Personalized End-to-End Goal-Oriented Dialog</td><td align="left">AAAI,2019</td></tr><tr><td align="left">03.08</td><td align="left">于静</td><td align="left">1.Compositional Attention Networks for Machine Reasoning<br>2.Visual Dialog</td><td align="left">ICLR,2018<br>CVPR,2017</td></tr><tr><td align="left">03.08</td><td align="left">邢璐茜</td><td align="left">Commonsense for Generative Multi-Hop Question Answering Tasks</td><td align="left"><a href="http://xingluxi.github.io/2019/02/21/paper-emnlp2018-mhpgm/">details</a></td></tr><tr><td align="left">03.09</td><td align="left">魏相鹏</td><td align="left">1.Cross-Lingual Language Model Pretraining<br>2.An Effective Approach to Unsupervised Machine Translation</td><td align="left"></td></tr><tr><td align="left">03.09</td><td align="left">谢玉强</td><td align="left">Self-supervised learning in video and multi-modal</td><td align="left"></td></tr><tr><td align="left">03.09</td><td align="left">彭伟</td><td align="left">Dynamic Coattention Networks For Question Answering</td><td align="left">ICLR,2017</td></tr><tr><td align="left">03.15</td><td align="left">谢玉强</td><td align="left">Improving Machine Reading Comprehension with General Reading Strategies</td><td align="left"></td></tr><tr><td align="left">03.15</td><td align="left">邢璐茜</td><td align="left">Improving Question Answering with External Knowledge</td><td align="left"></td></tr><tr><td align="left">03.15</td><td align="left">孙雅静</td><td align="left">Learning to Select Knowledge for Response Generation in Dialog System</td><td align="left"></td></tr><tr><td align="left">03.22</td><td align="left">邢璐茜</td><td align="left">Multi-Granularity Hierarchical Attention Fusion Networks for Reading Comprehension and Question Answering</td><td align="left">ACL, 2018</td></tr><tr><td align="left">03.22</td><td align="left">谢玉强</td><td align="left">Tackling the Story Encding Biases in The Story Cloze Test</td><td align="left">ACL,2018</td></tr><tr><td align="left">03.22</td><td align="left">于静</td><td align="left">文本匹配模型介绍</td><td align="left"></td></tr><tr><td align="left">03.29</td><td align="left">邢璐茜</td><td align="left">Multi-Choice Machine Reading Comprehension Task - PartI</td><td align="left"><a href="/2019/03/28/mrc-analysis-multichoice/" title="details">details</a></td></tr><tr><td align="left">03.29</td><td align="left">孙雅静</td><td align="left">Sentence embedding Alignment for LifeLong Relation Extraction</td><td align="left">NAACL,2019</td></tr><tr><td align="left">04.12</td><td align="left">谢玉强</td><td align="left">Does it care what you asked? Understanding Importance of Verbs in QA Model</td><td align="left">EMNLP,2018 workshop</td></tr><tr><td align="left">04.12</td><td align="left">孙雅静</td><td align="left">1.Mem2Seq: Effectively Incorporating Knowledge Bases into End-to-End Task-Oriented Dialog Systems<br>2.Global-to-Local Memory Pointer Networks for Task-Oriented Dialogue</td><td align="left">ACL,2018<br>ICLR,2019</td></tr><tr><td align="left">04.12</td><td align="left">李云鹏</td><td align="left">Relation Extraction Survey - 1</td><td align="left"></td></tr><tr><td align="left">04.19</td><td align="left">邢璐茜</td><td align="left">Commonsense Reasoning for Natural Language Understanding</td><td align="left"><a href="/2019/04/18/mrc-cs-reasoning-for-nlu-survey/" title="detail">detail</a></td></tr><tr><td align="left"></td><td align="left"></td><td align="left"></td><td align="left"></td></tr></tbody></table><h1 id="往期内容列表"><a href="#往期内容列表" class="headerlink" title="往期内容列表"></a>往期内容列表</h1><ul><li><a href="/2019/01/09/schedule-2017-md/" title="2017年讨论组内容列表">2017年讨论组内容列表</a></li><li><a href="/2019/01/09/schedule-2018-md/" title="2018年讨论组内容列表">2018年讨论组内容列表</a></li></ul>]]></content>
+        <content type="html"><![CDATA[<h1 id="2019年讨论组论文报告会"><a href="#2019年讨论组论文报告会" class="headerlink" title="2019年讨论组论文报告会"></a>2019年讨论组论文报告会</h1><a id="more"></a><style>    table th:nth-of-type(1){    width: 90px;    }    table th:nth-of-type(2){    width: 90px;    }    table th:nth-of-type(3){    width: 50%;    }    table th:nth-of-type(4){    width: 100px;    }</style><table><thead><tr><th align="left">Date</th><th align="left">Reporter</th><th align="left">Title/Papers</th><th align="left">Appx.</th></tr></thead><tbody><tr><td align="left">01.13</td><td align="left">邢璐茜</td><td align="left">Multi-Granular Sequence Encoding via Dilated Compositional Units for RC</td><td align="left"><a href="http://aclweb.org/anthology/D18-1238" target="_blank" rel="noopener">EMNLP2018</a><br><a href="/2019/01/12/paper-emnlp2018-dcu/" title="note link">note link</a></td></tr><tr><td align="left">01.13</td><td align="left">孙雅静</td><td align="left">The Design and Implementation of XiaoIce, an Empathetic Social Chatbot</td><td align="left"><a href="https://arxiv.org/abs/1812.08989" target="_blank" rel="noopener">link</a></td></tr><tr><td align="left">01.13</td><td align="left">谢玉强</td><td align="left">Analysis on MS MARCOv1 Leaderboard Top 3:<br>1.S-Net<br>2.V-Net<br>3.MARS<br>Multi-task Learning</td><td align="left"><a href="https://github.com/IndexFziQ/MSMARCO-MRC-Analysis" target="_blank" rel="noopener">details-1</a><br><a href="https://github.com/IndexFziQ/Thinking-about-Multi-Task-Learning" target="_blank" rel="noopener">details-2</a></td></tr><tr><td align="left">01.18</td><td align="left">雷扬帆</td><td align="left">Self-Supervised Learning Introduction</td><td align="left"></td></tr><tr><td align="left">01.18</td><td align="left">魏相鹏</td><td align="left">Meta-Learning Introduction</td><td align="left"><a href="https://lilianweng.github.io/lil-log/2018/11/30/meta-learning.html" target="_blank" rel="noopener">blog</a></td></tr><tr><td align="left">01.18</td><td align="left">邢璐茜</td><td align="left">Meta-Learning a Dynamic Language Model</td><td align="left">ICLR workshop</td></tr><tr><td align="left">01.18</td><td align="left">孙雅静</td><td align="left">Continual Leanring Introduction</td><td align="left"></td></tr><tr><td align="left">01.24</td><td align="left">孙雅静</td><td align="left">1. A Dual-Attention Hierarchical RNN for Dialogue Act Classification<br>2.LifeLong Learning with Dynamically Expandable Networks</td><td align="left"></td></tr><tr><td align="left">01.24</td><td align="left">谢玉强</td><td align="left">A Survey to Self-Supervised Learning</td><td align="left"></td></tr><tr><td align="left">01.24</td><td align="left">雷扬帆</td><td align="left">Self-Supervised Learning<br>Unsupervised Learning by Cross-Channel Prediction</td><td align="left"></td></tr><tr><td align="left">01.24</td><td align="left">彭伟</td><td align="left">Attention-over-Attention NN for RC</td><td align="left">ACL,2017</td></tr><tr><td align="left">02.20</td><td align="left">邢璐茜</td><td align="left">Evaluation Metrics for Machine Reading Comprehension: Prerequisite Skills and Readability</td><td align="left">ACL,2017</td></tr><tr><td align="left">02.20</td><td align="left">谢玉强</td><td align="left">Multi-Style Generative Reading Comprehension</td><td align="left"></td></tr><tr><td align="left">02.20</td><td align="left">彭伟</td><td align="left">Match-LSTM</td><td align="left"></td></tr><tr><td align="left">02.20</td><td align="left">孙雅静</td><td align="left">个性化对话:<br>1.Persona-Chat对话数据集<br>2.Personalizing a Dialogue Systems with Transfer Reinforcement Learning</td><td align="left"></td></tr><tr><td align="left">02.20</td><td align="left">于静</td><td align="left">Lifelong Learning Cross Media Search</td><td align="left">ACM-MM</td></tr><tr><td align="left">03.01</td><td align="left">邢璐茜</td><td align="left">TG with Commonsense</td><td align="left"><a href="/2019/01/23/paper-tg-with-commonsense/" title="tg-with-cs-note">tg-with-cs-note</a></td></tr><tr><td align="left">03.01</td><td align="left">谢玉强</td><td align="left">Incorporating Structured Commonsense Knowledge in Story Completion</td><td align="left">AAAI,2019</td></tr><tr><td align="left">03.01</td><td align="left">孙雅静</td><td align="left">What makes a good conversation? How controllable attributes affect human judgments</td><td align="left"></td></tr><tr><td align="left">03.08</td><td align="left">孙雅静</td><td align="left">Learning Personalized End-to-End Goal-Oriented Dialog</td><td align="left">AAAI,2019</td></tr><tr><td align="left">03.08</td><td align="left">于静</td><td align="left">1.Compositional Attention Networks for Machine Reasoning<br>2.Visual Dialog</td><td align="left">ICLR,2018<br>CVPR,2017</td></tr><tr><td align="left">03.08</td><td align="left">邢璐茜</td><td align="left">Commonsense for Generative Multi-Hop Question Answering Tasks</td><td align="left"><a href="http://xingluxi.github.io/2019/02/21/paper-emnlp2018-mhpgm/">details</a></td></tr><tr><td align="left">03.09</td><td align="left">魏相鹏</td><td align="left">1.Cross-Lingual Language Model Pretraining<br>2.An Effective Approach to Unsupervised Machine Translation</td><td align="left"></td></tr><tr><td align="left">03.09</td><td align="left">谢玉强</td><td align="left">Self-supervised learning in video and multi-modal</td><td align="left"></td></tr><tr><td align="left">03.09</td><td align="left">彭伟</td><td align="left">Dynamic Coattention Networks For Question Answering</td><td align="left">ICLR,2017</td></tr><tr><td align="left">03.15</td><td align="left">谢玉强</td><td align="left">Improving Machine Reading Comprehension with General Reading Strategies</td><td align="left"></td></tr><tr><td align="left">03.15</td><td align="left">邢璐茜</td><td align="left">Improving Question Answering with External Knowledge</td><td align="left"></td></tr><tr><td align="left">03.15</td><td align="left">孙雅静</td><td align="left">Learning to Select Knowledge for Response Generation in Dialog System</td><td align="left"></td></tr><tr><td align="left">03.22</td><td align="left">邢璐茜</td><td align="left">Multi-Granularity Hierarchical Attention Fusion Networks for Reading Comprehension and Question Answering</td><td align="left">ACL, 2018</td></tr><tr><td align="left">03.22</td><td align="left">谢玉强</td><td align="left">Tackling the Story Encding Biases in The Story Cloze Test</td><td align="left">ACL,2018</td></tr><tr><td align="left">03.22</td><td align="left">于静</td><td align="left">文本匹配模型介绍</td><td align="left"></td></tr><tr><td align="left">03.29</td><td align="left">邢璐茜</td><td align="left">Multi-Choice Machine Reading Comprehension Task - PartI</td><td align="left"><a href="/2019/03/28/mrc-analysis-multichoice/" title="details">details</a></td></tr><tr><td align="left">03.29</td><td align="left">孙雅静</td><td align="left">Sentence embedding Alignment for LifeLong Relation Extraction</td><td align="left">NAACL,2019</td></tr><tr><td align="left">04.12</td><td align="left">谢玉强</td><td align="left">Does it care what you asked? Understanding Importance of Verbs in QA Model</td><td align="left">EMNLP,2018 workshop</td></tr><tr><td align="left">04.12</td><td align="left">孙雅静</td><td align="left">1.Mem2Seq: Effectively Incorporating Knowledge Bases into End-to-End Task-Oriented Dialog Systems<br>2.Global-to-Local Memory Pointer Networks for Task-Oriented Dialogue</td><td align="left">ACL,2018<br>ICLR,2019</td></tr><tr><td align="left">04.12</td><td align="left">李云鹏</td><td align="left">Relation Extraction Survey - 1</td><td align="left"></td></tr><tr><td align="left">04.19</td><td align="left">邢璐茜</td><td align="left">Commonsense Reasoning for Natural Language Understanding</td><td align="left"><a href="/2019/04/18/mrc-cs-reasoning-for-nlu-survey/" title="detail">detail</a></td></tr><tr><td align="left">05.24</td><td align="left">彭伟</td><td align="left">1.A Deep Cascade Model for Multi-Document Reading Comprehension<br>2.Multi-Granularity Hierarchical Attention Fusion Networks for Reading Comprehension and Question Answering</td><td align="left"></td></tr><tr><td align="left">05.24</td><td align="left">魏相鹏</td><td align="left">MASS: Masked Sequence to Sequence Pre-training for Language Generation</td><td align="left">ICML,2019</td></tr><tr><td align="left">05.31</td><td align="left">邢璐茜</td><td align="left">HotpotQA at ACL 2019</td><td align="left"><a href="http://xingluxi.github.io/2019/05/30/mrc-paper-hotpotqa/">details</a></td></tr><tr><td align="left">05.31</td><td align="left">孙雅静</td><td align="left">Challenges in Building Intelligent Open-domain Dialog Systems</td><td align="left">2019</td></tr><tr><td align="left"></td><td align="left"></td><td align="left"></td><td align="left"></td></tr></tbody></table><h1 id="往期内容列表"><a href="#往期内容列表" class="headerlink" title="往期内容列表"></a>往期内容列表</h1><ul><li><a href="/2019/01/09/schedule-2017-md/" title="2017年讨论组内容列表">2017年讨论组内容列表</a></li><li><a href="/2019/01/09/schedule-2018-md/" title="2018年讨论组内容列表">2018年讨论组内容列表</a></li></ul>]]></content>
       
       
       <categories>
@@ -782,11 +782,11 @@
             
             <tag> nlp </tag>
             
-            <tag> mrc </tag>
-            
             <tag> paper </tag>
             
             <tag> knowledge </tag>
+            
+            <tag> mrc </tag>
             
         </tags>
       
