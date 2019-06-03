@@ -1,0 +1,1250 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon-universe-32.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-universe-32.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-universe-16.ico?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/favicon-universe-32.ico?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="nlp,paper,mrc,dataset,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="Contributed by Luxi Xing and Yuqiang Xie. IIE, CAS. IntroductionBased on the style of the ANSWER for each datasets, we split the datasets into several category and we will give details for each datase">
+<meta name="keywords" content="nlp,paper,mrc,dataset">
+<meta property="og:type" content="article">
+<meta property="og:title" content="机器阅读理解数据集">
+<meta property="og:url" content="http://xingluxi.github.io/2019/01/12/mrc-dataset-info/index.html">
+<meta property="og:site_name" content="Luxi Xing - Blog">
+<meta property="og:description" content="Contributed by Luxi Xing and Yuqiang Xie. IIE, CAS. IntroductionBased on the style of the ANSWER for each datasets, we split the datasets into several category and we will give details for each datase">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-04-19T03:11:20.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="机器阅读理解数据集">
+<meta name="twitter:description" content="Contributed by Luxi Xing and Yuqiang Xie. IIE, CAS. IntroductionBased on the style of the ANSWER for each datasets, we split the datasets into several category and we will give details for each datase">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":true,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://xingluxi.github.io/2019/01/12/mrc-dataset-info/">
+
+
+
+
+
+  <title>机器阅读理解数据集 | Luxi Xing - Blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Luxi Xing - Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Time is In NO Hurry</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            About
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://xingluxi.github.io/2019/01/12/mrc-dataset-info/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Luxi Xing">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Luxi Xing - Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">机器阅读理解数据集</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-01-12T17:27:03+08:00">
+                2019-01-12
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Post modified&#58;</span>
+              
+              <time title="Post modified" itemprop="dateModified" datetime="2019-04-19T11:11:20+08:00">
+                2019-04-19
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/MRC-Research/" itemprop="url" rel="index">
+                    <span itemprop="name">MRC-Research</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-area-chart"></i> Post Total Visits
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Words count in article&#58;</span>
+                
+                <span title="Words count in article">
+                  896
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Reading time &asymp;</span>
+                
+                <span title="Reading time">
+                  4
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>Contributed by Luxi Xing and Yuqiang Xie. IIE, CAS.</p>
+<h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><p>Based on the style of the ANSWER for each datasets, we split the datasets into several category and we will give details for each datasets.</p>
+<blockquote>
+<ol>
+<li><a href="#Extractive">Extractive</a></li>
+<li><a href="#Multi-Choice">Multi-Choice</a></li>
+<li><a href="#Generative">Generative</a></li>
+<li><a href="#Sequential">Sequential</a></li>
+<li><a href="#Others">Others</a><br><del>Cloze-Style</del></li>
+</ol>
+</blockquote>
+<h2 id="Extractive"><a href="#Extractive" class="headerlink" title="Extractive"></a>Extractive</h2><table>
+<thead>
+<tr>
+<th>Dataset</th>
+<th>Language</th>
+<th>Domain</th>
+<th>#Train<br>#Doc</th>
+<th>#Dev</th>
+<th>#Test</th>
+<th>Year</th>
+<th>Features</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>SQuADv1</td>
+<td>English</td>
+<td>Wikipedia</td>
+<td>87599<br>442</td>
+<td>10570<br>48</td>
+<td>9533<br>46</td>
+<td>2016</td>
+<td></td>
+</tr>
+<tr>
+<td>SQuADv2</td>
+<td>English</td>
+<td>Wikipedia</td>
+<td>130319<br>442</td>
+<td>11873<br>35</td>
+<td>8862<br>28</td>
+<td>2018</td>
+<td>have no answer</td>
+</tr>
+<tr>
+<td>TriviaQA</td>
+<td>English</td>
+<td>Web<br>Wikipedia</td>
+<td>528979<br>61888</td>
+<td>68621<br>9951</td>
+<td>65059<br>9509</td>
+<td>2017</td>
+<td>avg. length is 2895</td>
+</tr>
+<tr>
+<td>HotPotQA</td>
+<td>English</td>
+<td>Wikipedia</td>
+<td>90564</td>
+<td>7405</td>
+<td>7405</td>
+<td>2017</td>
+<td>multiple supporting doc. to answer</td>
+</tr>
+<tr>
+<td>Natural Questions</td>
+<td>English</td>
+<td>Wikipedia</td>
+<td>307k</td>
+<td>8k</td>
+<td>8k</td>
+<td>2019</td>
+<td>whole wikipedia article;<br>long answer</td>
+</tr>
+</tbody></table>
+<h2 id="Multi-Choice"><a href="#Multi-Choice" class="headerlink" title="Multi-Choice"></a>Multi-Choice</h2><table>
+<thead>
+<tr>
+<th>Dataset</th>
+<th>Language</th>
+<th>Domain</th>
+<th>#Train<br>#Doc</th>
+<th>#Dev</th>
+<th>#Test</th>
+<th>Year</th>
+<th>Features</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>RACE</td>
+<td>English</td>
+<td>Multi</td>
+<td>87866<br>25137</td>
+<td>4887<br>1389</td>
+<td>4934<br>1407</td>
+<td>2017</td>
+<td>high<br>middle</td>
+</tr>
+<tr>
+<td>MCScript</td>
+<td>English</td>
+<td>InScript</td>
+<td>9731<br>1470</td>
+<td>1411<br>219</td>
+<td>2797<br>430</td>
+<td>2018</td>
+<td></td>
+</tr>
+<tr>
+<td>ARC</td>
+<td>English</td>
+<td>Science</td>
+<td></td>
+<td></td>
+<td>14M/7787</td>
+<td>2018</td>
+<td>hard</td>
+</tr>
+<tr>
+<td>OpenBook</td>
+<td>English</td>
+<td></td>
+<td>4957</td>
+<td>500</td>
+<td>500</td>
+<td>2018</td>
+<td>multi-hop;<br>commonsense;<br>science fact</td>
+</tr>
+<tr>
+<td>MultiRC</td>
+<td>English</td>
+<td>7 domain</td>
+<td>9872<br>871</td>
+<td></td>
+<td></td>
+<td>2018</td>
+<td>multi correct answers</td>
+</tr>
+<tr>
+<td>QAngaroo<br>wikihop</td>
+<td>English</td>
+<td></td>
+<td>43738</td>
+<td>5129</td>
+<td>2451</td>
+<td>2017</td>
+<td>multi evidence pieces;<br>multi options</td>
+</tr>
+<tr>
+<td>DREAM</td>
+<td>English</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td>2019</td>
+<td>dialogue-based multi-choice</td>
+</tr>
+</tbody></table>
+<h2 id="Generative"><a href="#Generative" class="headerlink" title="Generative"></a>Generative</h2><p>Free-form answer generation</p>
+<table>
+<thead>
+<tr>
+<th>Dataset</th>
+<th>Language</th>
+<th>Domain</th>
+<th>#Train</th>
+<th>#Dev</th>
+<th>#Test</th>
+<th>Year</th>
+<th>Features</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>MSMARCO<br>v1</td>
+<td>English</td>
+<td>Web</td>
+<td></td>
+<td></td>
+<td>100k</td>
+<td>2016</td>
+<td></td>
+</tr>
+<tr>
+<td>MSMARCO<br>v2</td>
+<td>English</td>
+<td>Web</td>
+<td></td>
+<td></td>
+<td>100k</td>
+<td>2018</td>
+<td></td>
+</tr>
+<tr>
+<td>NarrativeQA</td>
+<td>English</td>
+<td>book/moive<br>(wikipedia)</td>
+<td>32747</td>
+<td>3461</td>
+<td>10557</td>
+<td>2018</td>
+<td>based on summary</td>
+</tr>
+<tr>
+<td>DuReader</td>
+<td>Chinese</td>
+<td>Web</td>
+<td></td>
+<td></td>
+<td></td>
+<td>2017</td>
+<td></td>
+</tr>
+</tbody></table>
+<ul>
+<li>Metric for evaluate the Generative-style QA dataset is: ROUGE-L/BLEU</li>
+</ul>
+<h3 id="MS-MARCO"><a href="#MS-MARCO" class="headerlink" title="MS MARCO"></a>MS MARCO</h3><ul>
+<li>More details about MSMARCO, please reference to <a href="https://github.com/IndexFziQ/MSMARCO-MRC-Analysis" target="_blank" rel="noopener">this REPO</a></li>
+</ul>
+<h3 id="Narrative-QA"><a href="#Narrative-QA" class="headerlink" title="Narrative QA"></a>Narrative QA</h3><ul>
+<li>dataset consists of two settings:<ul>
+<li>based on the summary： average 659 tokens</li>
+<li>based on the full book/movie script: average 62528 tokens</li>
+</ul>
+</li>
+</ul>
+<h2 id="Sequential"><a href="#Sequential" class="headerlink" title="Sequential"></a>Sequential</h2><table>
+<thead>
+<tr>
+<th>Dataset</th>
+<th>Language</th>
+<th>Domain</th>
+<th>Document</th>
+<th>Question</th>
+<th>Size<br>(Train/Dev/Test)</th>
+<th>Year</th>
+<th>Features</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>QuAC</td>
+<td>English</td>
+<td>Wikipedia</td>
+<td></td>
+<td></td>
+<td></td>
+<td>2018</td>
+<td></td>
+</tr>
+<tr>
+<td>CoQA</td>
+<td>English</td>
+<td>Wikipedia</td>
+<td></td>
+<td></td>
+<td></td>
+<td>2018</td>
+<td></td>
+</tr>
+<tr>
+<td>DREAM</td>
+<td>English</td>
+<td>Daily life</td>
+<td>6444</td>
+<td>10197</td>
+<td></td>
+<td>2019</td>
+<td>dialogue-based multi-choice;<br>multi-turn multi-party</td>
+</tr>
+</tbody></table>
+<h2 id="Others"><a href="#Others" class="headerlink" title="Others"></a>Others</h2><h3 id="Chinese-Datasets"><a href="#Chinese-Datasets" class="headerlink" title="Chinese Datasets"></a>Chinese Datasets</h3><ul>
+<li>People Daily &amp; Children’s Fairy Tale (PD&amp;CFT): <a href="https://github.com/ymcui/Chinese-RC-Dataset" target="_blank" rel="noopener">https://github.com/ymcui/Chinese-RC-Dataset</a><ul>
+<li>cloze-style</li>
+</ul>
+</li>
+<li>dureader: <a href="https://github.com/baidu/DuReader" target="_blank" rel="noopener">https://github.com/baidu/DuReader</a><ul>
+<li>generative</li>
+</ul>
+</li>
+<li>cmrc2018: <a href="https://github.com/ymcui/cmrc2018" target="_blank" rel="noopener">https://github.com/ymcui/cmrc2018</a><ul>
+<li>extractive</li>
+</ul>
+</li>
+</ul>
+<h3 id="Multi-Documents-Datasets"><a href="#Multi-Documents-Datasets" class="headerlink" title="Multi-Documents Datasets"></a>Multi-Documents Datasets</h3><ul>
+<li>TriviaQA: A large scale distantly supervised challenge dataset for reading comprehension.</li>
+<li>SearchQA: A new Q&amp;A dataset augmented with context from a search engine.</li>
+<li>HotpotQA: A Dataset for Diverse, Explainable Multi-hop Question Answering.</li>
+</ul>
+<h3 id="Commonsense-Reasoning"><a href="#Commonsense-Reasoning" class="headerlink" title="Commonsense Reasoning"></a>Commonsense Reasoning</h3><ul>
+<li>Winograd Schema Challenge. <a href="https://cs.nyu.edu/faculty/davise/papers/WinogradSchemas/WS.html" target="_blank" rel="noopener">https://cs.nyu.edu/faculty/davise/papers/WinogradSchemas/WS.html</a></li>
+<li>COPA: Choice of Plausible Alternatives. <a href="https://www.cs.york.ac.uk/semeval-2012/task7/index.html" target="_blank" rel="noopener">https://www.cs.york.ac.uk/semeval-2012/task7/index.html</a></li>
+<li>ReCoRD: Bridging the Gap between Human and Machine Commonsense Reading Comprehension</li>
+<li>CommonsenseQA</li>
+</ul>
+<h3 id="FEVER-Fact-Extraction-and-VERification"><a href="#FEVER-Fact-Extraction-and-VERification" class="headerlink" title="FEVER: Fact Extraction and VERification"></a>FEVER: Fact Extraction and VERification</h3><ul>
+<li>FEVER data: <a href="http://fever.ai/resources.html" target="_blank" rel="noopener">link</a></li>
+<li>FEVER shared Task(with NAACL 2018) info: <a href="http://fever.ai/task.html" target="_blank" rel="noopener">details here</a></li>
+<li>FEVER official baseline code: <a href="https://github.com/sheffieldnlp/fever-naacl-2018" target="_blank" rel="noopener">github repo</a></li>
+<li>my note and analysis of FEVER: <a href="/2019/01/15/mrc-analysis-fever/" title="fever-note">fever-note</a></li>
+</ul>
+<h3 id="Google-Natural-Questions"><a href="#Google-Natural-Questions" class="headerlink" title="Google Natural Questions"></a>Google Natural Questions</h3><p>official details: <a href="https://ai.googleblog.com/2019/01/natural-questions-new-corpus-and.html" target="_blank" rel="noopener">https://ai.googleblog.com/2019/01/natural-questions-new-corpus-and.html</a><br>github: <a href="https://github.com/google-research-datasets/natural-questions" target="_blank" rel="noopener">https://github.com/google-research-datasets/natural-questions</a></p>
+<p>自然问题数据集(NQ)是一个公开的自然发生问题(即由寻求信息的人提出的问题)</p>
+<ul>
+<li>用于训练和评估开放领域问答系统的新的、大规模语料库;</li>
+<li>也是第一个复制人类查找问题答案的端到端流程的语料库;</li>
+<li>专注于通过阅读整个页面来查找答案，而不是从一个短段落中提取答案;</li>
+<li>来源于Wikipedia;</li>
+<li>人工注释答案:<ul>
+<li>要求注释者通过通读整个维基百科页面来找到答案，就好像这个问题是他们自己提出的一样。</li>
+<li>注释者需要找到一个长答案和一个短答案，长答案涵盖推断问题所需的所有信息，短答案需要用一个或多个实体的名称简洁地回答问题</li>
+</ul>
+</li>
+</ul>
+<p><strong>自然语言理解挑战：</strong></p>
+<ul>
+<li>NQ的目的是使QA系统能够阅读和理解完整的维基百科文章，其中可能包含问题的答案，也可能不包含问题的答案。</li>
+<li>系统首先需要确定这个问题的定义是否足够充分，是否可以回答<ul>
+<li>许多问题本身基于错误的假设，或者过于模糊，无法简明扼要地回答。</li>
+</ul>
+</li>
+<li>然后，系统需要确定维基百科页面中是否包含推断答案所需的所有信息。</li>
+<li>作者认为，相比在知道长答案后在寻找短答案，长答案识别任务(找到推断答案所需的所有信息)需要更深层次的语言理解。</li>
+</ul>
+<p>human upper bound:</p>
+<ul>
+<li>long answer selection task: 87% F1</li>
+<li>short answer selection task: 76% F1</li>
+</ul>
+<p>dataset statistics:</p>
+<ul>
+<li>train: 307k</li>
+<li>dev: 8k</li>
+<li>test: 8k</li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+      <div>
+        
+    <div style="text-align:center;color: #ccc;font-size:14px;">
+    **** END of This Post. Thank for Your READING ****
+    </div>
+    <div style="text-align:center;color: #ccc;font-size:14px;">
+    If you have any Question, welcome to Email me or leave your comments below.
+    </div>
+
+      </div>
+    
+
+    
+
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>Post author:</strong>
+    Luxi Xing
+  </li>
+  <li class="post-copyright-link">
+    <strong>Post link:</strong>
+    <a href="http://xingluxi.github.io/2019/01/12/mrc-dataset-info/" title="机器阅读理解数据集">http://xingluxi.github.io/2019/01/12/mrc-dataset-info/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>Copyright Notice: </strong>
+    All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> unless stating additionally.
+  </li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/nlp/" rel="tag"><i class="fa fa-tag"></i> nlp</a>
+          
+            <a href="/tags/paper/" rel="tag"><i class="fa fa-tag"></i> paper</a>
+          
+            <a href="/tags/mrc/" rel="tag"><i class="fa fa-tag"></i> mrc</a>
+          
+            <a href="/tags/dataset/" rel="tag"><i class="fa fa-tag"></i> dataset</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/01/12/paper-emnlp2018-dcu/" rel="next" title="Multi-Granular Sequence Encoding via Dilated Compositional Units for Reading Comprehension">
+                <i class="fa fa-chevron-left"></i> Multi-Granular Sequence Encoding via Dilated Compositional Units for Reading Comprehension
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/01/14/mrc-measure-skills/" rel="prev" title="MRC 的评测与所需能力">
+                MRC 的评测与所需能力 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="lv-container" data-id="city" data-uid="MTAyMC80MjA1OC8xODYwNQ=="></div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.gif" alt="Luxi Xing">
+            
+              <p class="site-author-name" itemprop="name">Luxi Xing</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">29</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">33</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/XingLuxi" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://twitter.com/XingLuxi" target="_blank" title="Twitter">
+                      
+                        <i class="fa fa-fw fa-twitter"></i>Twitter</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:xingluxixlx@gmail.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Introduction"><span class="nav-text">Introduction</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Extractive"><span class="nav-text">Extractive</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Multi-Choice"><span class="nav-text">Multi-Choice</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Generative"><span class="nav-text">Generative</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#MS-MARCO"><span class="nav-text">MS MARCO</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Narrative-QA"><span class="nav-text">Narrative QA</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Sequential"><span class="nav-text">Sequential</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Others"><span class="nav-text">Others</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Chinese-Datasets"><span class="nav-text">Chinese Datasets</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Multi-Documents-Datasets"><span class="nav-text">Multi-Documents Datasets</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Commonsense-Reasoning"><span class="nav-text">Commonsense Reasoning</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#FEVER-Fact-Extraction-and-VERification"><span class="nav-text">FEVER: Fact Extraction and VERification</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Google-Natural-Questions"><span class="nav-text">Google Natural Questions</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+            <span id="scrollpercent"><span>0</span>%</span>
+          
+        </div>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-grav"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Luxi Xing</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a></div>
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i> Site Total Visiters
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
+  
+
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+</body>
+</html>

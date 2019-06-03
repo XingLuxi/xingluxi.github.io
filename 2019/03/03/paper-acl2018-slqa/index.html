@@ -1,0 +1,1091 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon-universe-32.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-universe-32.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-universe-16.ico?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/favicon-universe-32.ico?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="nlp,paper,mrc,model,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="Multi-Granularity Hierarchical Attention Fusion Networks for Reading Comprehension and Question AnsweringACL 2018Wei Wang, Ming Yan, Chen Wu.Alibaba Group.Multi-Granularity; Hierarchical Attention Fu">
+<meta name="keywords" content="nlp,paper,mrc,model">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ACL2018 | Multi-Granularity Hierarchical Attention Fusion Networks for Reading Comprehension and Question Answering">
+<meta property="og:url" content="http://xingluxi.github.io/2019/03/03/paper-acl2018-slqa/index.html">
+<meta property="og:site_name" content="Luxi Xing - Blog">
+<meta property="og:description" content="Multi-Granularity Hierarchical Attention Fusion Networks for Reading Comprehension and Question AnsweringACL 2018Wei Wang, Ming Yan, Chen Wu.Alibaba Group.Multi-Granularity; Hierarchical Attention Fu">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://xingluxi.github.io/.io//slqa-model.png">
+<meta property="og:updated_time" content="2019-03-29T07:10:40.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="ACL2018 | Multi-Granularity Hierarchical Attention Fusion Networks for Reading Comprehension and Question Answering">
+<meta name="twitter:description" content="Multi-Granularity Hierarchical Attention Fusion Networks for Reading Comprehension and Question AnsweringACL 2018Wei Wang, Ming Yan, Chen Wu.Alibaba Group.Multi-Granularity; Hierarchical Attention Fu">
+<meta name="twitter:image" content="http://xingluxi.github.io/.io//slqa-model.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":true,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://xingluxi.github.io/2019/03/03/paper-acl2018-slqa/">
+
+
+
+
+
+  <title>ACL2018 | Multi-Granularity Hierarchical Attention Fusion Networks for Reading Comprehension and Question Answering | Luxi Xing - Blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Luxi Xing - Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Time is In NO Hurry</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            About
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://xingluxi.github.io/2019/03/03/paper-acl2018-slqa/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Luxi Xing">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Luxi Xing - Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">ACL2018 | Multi-Granularity Hierarchical Attention Fusion Networks for Reading Comprehension and Question Answering</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-03-03T20:03:19+08:00">
+                2019-03-03
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Post modified&#58;</span>
+              
+              <time title="Post modified" itemprop="dateModified" datetime="2019-03-29T15:10:40+08:00">
+                2019-03-29
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Paper-Note/" itemprop="url" rel="index">
+                    <span itemprop="name">Paper-Note</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-area-chart"></i> Post Total Visits
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Words count in article&#58;</span>
+                
+                <span title="Words count in article">
+                  1.3k
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Reading time &asymp;</span>
+                
+                <span title="Reading time">
+                  5
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <blockquote>
+<p>Multi-Granularity Hierarchical Attention Fusion Networks for Reading Comprehension and Question Answering<br>ACL 2018<br>Wei Wang, Ming Yan, Chen Wu.<br>Alibaba Group.<br>Multi-Granularity; Hierarchical Attention Fusion; Architecture<br>Datasets: SQuAD; TriviaQA</p>
+</blockquote>
+<p>看到题目，首先就产生了三个关注点：</p>
+<ul>
+<li>multi-granularity, 代表哪些粒度？ (word level 和 sentence level)</li>
+<li>hierarchical, 有哪些层次？（co-attention 和 self-attention）</li>
+<li>fusion, 怎样进行融合？对粒度的融合（global level）</li>
+</ul>
+<h2 id="Motivation"><a href="#Motivation" class="headerlink" title="Motivation"></a>Motivation</h2><ul>
+<li>启发于人类通常的阅读模式：<ul>
+<li>浏览全篇文章，大致了解文章内容（通读全文）</li>
+<li>浏览问题，记住问题，找到P和Q之间的联系，理解Q的意图</li>
+<li>定位一个大致/粗略的潜在的答案区域，使注意力聚集到定位的上下文（重点阅读上下文）</li>
+<li>再次回顾问题，确定一个最优答案</li>
+</ul>
+</li>
+</ul>
+<h3 id="This-Work"><a href="#This-Work" class="headerlink" title="This Work"></a>This Work</h3><ul>
+<li>建模问题和文章中特定区域关联的同时，借助分层策略逐步集中注意力，是答案边界清晰</li>
+<li>提出 hierarchical attention network：<ul>
+<li>逐步定位答案边界</li>
+<li>建模P和Q之间的不同粒度层级间的关系</li>
+</ul>
+</li>
+<li>在Encoder层：<ul>
+<li>为了更好的建模Q和P的多个aspects：同时使用预训练的glove表示和ELMo表示作为一个词的表示</li>
+<li>针对ELMo的融合，设计了一个 Representation-aware fusion 方法来结合ELMo输出向量和BiLSTM建模的上下文表示</li>
+</ul>
+</li>
+<li>在本文提出的Hierarchical Attention Fusion Network中：<ul>
+<li>利用co-attention和self-attention机制，逐步的将注意力聚集到最优的答案span<ul>
+<li>co-attention with shallow semantic fusion</li>
+<li>self-attention with deep semantic fusion </li>
+<li>memory-wise bilinear alignment function</li>
+</ul>
+</li>
+<li>特点：<ul>
+<li>fine-grained fusion 结合attention vector 更好的建模P和Q的关系</li>
+<li>multi-granularity attention 应用于 word-level 和 sentence-level</li>
+</ul>
+</li>
+<li>与其他方法不同的是：<ul>
+<li>利用全局表示（原始的上下文表示）构建attention表示</li>
+<li>利用fusion layer来对attention表示进行进一步的微调</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="Model"><a href="#Model" class="headerlink" title="Model"></a>Model</h2><ul>
+<li>本文提出模型 SLQA+ (Semantic Learning for Question Answering) 的整体架构：<ul>
+<li>encoder、attention、matching、output</li>
+<li><img src="/.io//slqa-model.png" alt="slqa+模型图"></li>
+</ul>
+</li>
+</ul>
+<h3 id="1-Encoder-Layer"><a href="#1-Encoder-Layer" class="headerlink" title="1.Encoder Layer"></a>1.Encoder Layer</h3><ul>
+<li>输入是 P和Q的每个词的glove向量和ELMo向量：<ul>
+<li>问题：${e_t^Q}<em>{t=1}^m$，${c_t^Q}</em>{t=1}^m$</li>
+<li>文章：${e_t^P}<em>{t=1}^n$，${c_t^P}</em>{t=1}^n$</li>
+</ul>
+</li>
+<li>输出：original context representation<ul>
+<li>BiLSTM 的输出结果，再次和ELMo 串联concat</li>
+<li>问题：Q = $u_t^Q = [BiLSTM_Q(e_t^Q, c_t^Q), c_t^Q]$</li>
+<li>文章：P = $u_t^P = [BiLSTM_P(e_t^P, c_t^P), c_t^P]$</li>
+</ul>
+</li>
+</ul>
+<h3 id="2-Hierarchical-Attention-Fusion-Layer"><a href="#2-Hierarchical-Attention-Fusion-Layer" class="headerlink" title="2.Hierarchical Attention Fusion Layer"></a>2.Hierarchical Attention Fusion Layer</h3><ul>
+<li>original context representation和通过attention得到的aligned representation可以反映上下文不同粒度的语义</li>
+</ul>
+<h4 id="2-1-Co-attention-amp-Fusion"><a href="#2-1-Co-attention-amp-Fusion" class="headerlink" title="2.1 Co-attention &amp; Fusion"></a>2.1 Co-attention &amp; Fusion</h4><ul>
+<li>co-attention 过程：<ul>
+<li>计算一个soft-alignment 矩阵：<ul>
+<li>$$S_{ij} = Att(u_t^Q, u_t^P) = ReLU(W^T_{lin}u_t^Q)^T \cdot ReLU(W^T_{lin}u_t^P)$$</li>
+</ul>
+</li>
+<li>计算 P2Q attention<ul>
+<li>$$\alpha_{j} = softmax(S_{:j})$$</li>
+<li>$$\tilde{Q}<em>{:t} = \sum_j \alpha</em>{ij} \cdot Q_{:j}, \forall j \in [1,…,m]$$</li>
+</ul>
+</li>
+<li>计算 Q2P attention<ul>
+<li>$$\beta_j = softmax(S_{i:})$$</li>
+<li>$$\tilde{P}<em>{k:} = \sum_i \beta</em>{ik} \cdot P_{i:}, \forall i \in [1,..,n]$$</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><font color="red"><strong>Fusion</strong></font>：本文重点<ul>
+<li>定义fusion kernel<ul>
+<li>$P^\prime=Fuse(P,\tilde{Q})$</li>
+<li>$Q^\prime=Fuse(Q,\tilde{P})$</li>
+</ul>
+</li>
+<li>simple fusion 过程：<ul>
+<li>$$m(P,\tilde{Q}) = tanh(W_f[P;\tilde{Q};P\circ\tilde{Q};P-\tilde{Q}] + b_f)$$</li>
+</ul>
+</li>
+<li>输出：利用gate机制，融合/refine 注意力表示和original contextual 表示<ul>
+<li>希望利用 original context representation 提供的重要的 global level 的语义信息提供指导，进一步引入gate机制控制不同层次表示的融合</li>
+<li>文档：$P^\prime = g(P,\tilde{Q})\cdot m(P,\tilde{Q}) + (1-g(P, \tilde{Q})）\cdot P$</li>
+<li>问题：$Q^\prime = g(Q,\tilde{P})\cdot m(Q,\tilde{P}) + (1-g(Q, \tilde{P})）\cdot Q$</li>
+<li>$g(\cdot)$的定义见2.3</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="2-2-Self-attention-amp-Fusion"><a href="#2-2-Self-attention-amp-Fusion" class="headerlink" title="2.2 Self-attention &amp; Fusion"></a>2.2 Self-attention &amp; Fusion</h4><p>文档的self-attention fusion过程：</p>
+<ul>
+<li>首先将manual feature引入，与refined question-aware passage表示进行串接<ul>
+<li>$D = BiLSTM([P^\prime; feat_{man}])$</li>
+</ul>
+</li>
+<li>self-alignment <strong>fusion</strong> process<ul>
+<li>$L = softmax(D \cdot W_1 \cdot D^T)$</li>
+<li>$\tilde{D} = L \cdot D$</li>
+<li>$D^\prime = Fuse(D,\tilde{D})$</li>
+</ul>
+</li>
+<li>双向LSTM获得最终的上下文文档表示：<ul>
+<li>$D^{\prime\prime} = BiLSTM(D^\prime)$</li>
+</ul>
+</li>
+</ul>
+<p>问题端的self-attention fusion过程</p>
+<ul>
+<li>获得新的问题上下文表示：$Q^{\prime\prime} = BiLSTM(Q^\prime)$<ul>
+<li>$Q^\prime$ 来自于co-attention+fusion的结果</li>
+</ul>
+</li>
+<li>linear self-alignment, 使用 linear transformation (linear sequence attention，同drqa中的问题编码)，将问题编码为向量<ul>
+<li>$\gamma = softmax(w_q^T Q^{\prime\prime})$</li>
+<li>$q = \sum_{j} \gamma_j \cdot Q^{\prime\prime}, \forall j \in [1,…,m]$</li>
+</ul>
+</li>
+</ul>
+<h4 id="2-3-Fusion-Functions"><a href="#2-3-Fusion-Functions" class="headerlink" title="2.3 Fusion Functions"></a>2.3 Fusion Functions</h4><ul>
+<li>simple concat：简单讲两个channel的输入进行串联（计算m(·)时）</li>
+<li>Full Projection：heuristic matching，形如<ul>
+<li>$[P;\tilde{Q};P\circ\tilde{Q};P-\tilde{Q}]$</li>
+</ul>
+</li>
+<li>Scalar-based fusion：训练一个标量参数<ul>
+<li>$g(P,\tilde{Q}) = g_p$</li>
+</ul>
+</li>
+<li><font color="green"><strong>Vector-based Fusion</strong></font>: 效果最好的<ul>
+<li>$g(P,\tilde{Q}) = \sigma(w_g^T \cdot [P;\tilde{Q};P\circ\tilde{Q};P-\tilde{Q}] + b_g)$</li>
+<li>$w_g$是待训练的权重向量</li>
+</ul>
+</li>
+<li>Matrix-based Fusion：<ul>
+<li>$g(P,\tilde{Q}) = \sigma(W_g^T \cdot [P;\tilde{Q};P\circ\tilde{Q};P-\tilde{Q}] + b_g)$</li>
+<li>$W_g$是待训练的权重矩阵</li>
+</ul>
+</li>
+</ul>
+<h3 id="3-Output-Layer"><a href="#3-Output-Layer" class="headerlink" title="3.Output Layer"></a>3.Output Layer</h3><ul>
+<li>bilinear match function<ul>
+<li>$P_{start} = softmax(q \cdot W_s^T D^{\prime\prime})$</li>
+<li>$P_{end} = softmax(q \cdot W_e^T D^{\prime\prime})$</li>
+<li>可以看做是对问题的回顾</li>
+</ul>
+</li>
+</ul>
+<h2 id="Experiments"><a href="#Experiments" class="headerlink" title="Experiments"></a>Experiments</h2><h2 id="Summary-amp-Analysis"><a href="#Summary-amp-Analysis" class="headerlink" title="Summary &amp; Analysis"></a>Summary &amp; Analysis</h2><ul>
+<li>ELMo 与上下文表示融合的新思路</li>
+<li><strong>原始的context representation可以看做是global level的信息，在fusion中的作用很大</strong>(每一步的fusion都是将attention representation与original context representation进行融合)，利用original context representation对attention之后的表示进行融合，微调带有注意力的表示</li>
+<li>计算attention时，采取 linear + relu 的bilinear的效果最优</li>
+<li>输出层的 <font color="blue"><strong>bilinear match function</strong></font> 对结果的提升很大</li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+      <div>
+        
+    <div style="text-align:center;color: #ccc;font-size:14px;">
+    **** END of This Post. Thank for Your READING ****
+    </div>
+    <div style="text-align:center;color: #ccc;font-size:14px;">
+    If you have any Question, welcome to Email me or leave your comments below.
+    </div>
+
+      </div>
+    
+
+    
+
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>Post author:</strong>
+    Luxi Xing
+  </li>
+  <li class="post-copyright-link">
+    <strong>Post link:</strong>
+    <a href="http://xingluxi.github.io/2019/03/03/paper-acl2018-slqa/" title="ACL2018 | Multi-Granularity Hierarchical Attention Fusion Networks for Reading Comprehension and Question Answering">http://xingluxi.github.io/2019/03/03/paper-acl2018-slqa/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>Copyright Notice: </strong>
+    All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> unless stating additionally.
+  </li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/nlp/" rel="tag"><i class="fa fa-tag"></i> nlp</a>
+          
+            <a href="/tags/paper/" rel="tag"><i class="fa fa-tag"></i> paper</a>
+          
+            <a href="/tags/mrc/" rel="tag"><i class="fa fa-tag"></i> mrc</a>
+          
+            <a href="/tags/model/" rel="tag"><i class="fa fa-tag"></i> model</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/02/21/paper-emnlp2018-mhpgm/" rel="next" title="EMNLP2018 | Commonsense for Generative Multi-Hop Question Answering Tasks">
+                <i class="fa fa-chevron-left"></i> EMNLP2018 | Commonsense for Generative Multi-Hop Question Answering Tasks
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/03/06/paper-2018-refinewordemb/" rel="prev" title="2018 | Dynamic Integration of Background Knowledge in Neural NLU Systems">
+                2018 | Dynamic Integration of Background Knowledge in Neural NLU Systems <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="lv-container" data-id="city" data-uid="MTAyMC80MjA1OC8xODYwNQ=="></div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.gif" alt="Luxi Xing">
+            
+              <p class="site-author-name" itemprop="name">Luxi Xing</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">29</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">33</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/XingLuxi" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://twitter.com/XingLuxi" target="_blank" title="Twitter">
+                      
+                        <i class="fa fa-fw fa-twitter"></i>Twitter</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:xingluxixlx@gmail.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Motivation"><span class="nav-text">Motivation</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#This-Work"><span class="nav-text">This Work</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Model"><span class="nav-text">Model</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-Encoder-Layer"><span class="nav-text">1.Encoder Layer</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-Hierarchical-Attention-Fusion-Layer"><span class="nav-text">2.Hierarchical Attention Fusion Layer</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#2-1-Co-attention-amp-Fusion"><span class="nav-text">2.1 Co-attention &amp; Fusion</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-2-Self-attention-amp-Fusion"><span class="nav-text">2.2 Self-attention &amp; Fusion</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-3-Fusion-Functions"><span class="nav-text">2.3 Fusion Functions</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-Output-Layer"><span class="nav-text">3.Output Layer</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Experiments"><span class="nav-text">Experiments</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Summary-amp-Analysis"><span class="nav-text">Summary &amp; Analysis</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+            <span id="scrollpercent"><span>0</span>%</span>
+          
+        </div>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-grav"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Luxi Xing</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a></div>
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i> Site Total Visiters
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
+  
+
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+</body>
+</html>

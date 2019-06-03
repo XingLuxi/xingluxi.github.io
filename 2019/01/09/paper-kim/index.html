@@ -1,0 +1,1037 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon-universe-32.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-universe-32.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-universe-16.ico?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/favicon-universe-32.ico?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="nlp,paper,knowledge,nli,wordnet,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="Neural Natural Language Inference Models Enhanced with External KnowledgeACL,2018.Qian Chen, et al.offical code link: here.  Motivation作者针对NLI任务提出了一个问题：  是否可以从数据中学习NLI所需要的所有知识？ 如果不能，如何使外部知识帮助神经网络模型？如">
+<meta name="keywords" content="nlp,paper,knowledge,nli,wordnet">
+<meta property="og:type" content="article">
+<meta property="og:title" content="KIM">
+<meta property="og:url" content="http://xingluxi.github.io/2019/01/09/paper-kim/index.html">
+<meta property="og:site_name" content="Luxi Xing - Blog">
+<meta property="og:description" content="Neural Natural Language Inference Models Enhanced with External KnowledgeACL,2018.Qian Chen, et al.offical code link: here.  Motivation作者针对NLI任务提出了一个问题：  是否可以从数据中学习NLI所需要的所有知识？ 如果不能，如何使外部知识帮助神经网络模型？如">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://xingluxi.github.io/.io//kim.png">
+<meta property="og:updated_time" content="2019-03-04T07:41:24.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="KIM">
+<meta name="twitter:description" content="Neural Natural Language Inference Models Enhanced with External KnowledgeACL,2018.Qian Chen, et al.offical code link: here.  Motivation作者针对NLI任务提出了一个问题：  是否可以从数据中学习NLI所需要的所有知识？ 如果不能，如何使外部知识帮助神经网络模型？如">
+<meta name="twitter:image" content="http://xingluxi.github.io/.io//kim.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":true,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://xingluxi.github.io/2019/01/09/paper-kim/">
+
+
+
+
+
+  <title>KIM | Luxi Xing - Blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Luxi Xing - Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Time is In NO Hurry</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            About
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://xingluxi.github.io/2019/01/09/paper-kim/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Luxi Xing">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Luxi Xing - Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">KIM</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-01-09T13:35:53+08:00">
+                2019-01-09
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Post modified&#58;</span>
+              
+              <time title="Post modified" itemprop="dateModified" datetime="2019-03-04T15:41:24+08:00">
+                2019-03-04
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Paper-Note/" itemprop="url" rel="index">
+                    <span itemprop="name">Paper-Note</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-area-chart"></i> Post Total Visits
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Words count in article&#58;</span>
+                
+                <span title="Words count in article">
+                  943
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Reading time &asymp;</span>
+                
+                <span title="Reading time">
+                  4
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <blockquote>
+<p>Neural Natural Language Inference Models Enhanced with External Knowledge<br>ACL,2018.<br>Qian Chen, et al.<br>offical code link: <a href="https://github.com/lukecq1231/kim" target="_blank" rel="noopener">here</a>.</p>
+</blockquote>
+<h2 id="Motivation"><a href="#Motivation" class="headerlink" title="Motivation"></a>Motivation</h2><p>作者针对NLI任务提出了一个问题：</p>
+<ul>
+<li>是否可以从数据中学习NLI所需要的所有知识？</li>
+<li>如果不能，如何使外部知识帮助神经网络模型？如何构建NLI模型利用外部知识？</li>
+</ul>
+<p>本文的工作是作者基于其ESIM模型之上完成的</p>
+<h2 id="Model-Framework"><a href="#Model-Framework" class="headerlink" title="Model Framework"></a>Model Framework</h2><ul>
+<li>模型整体结构分为四部分:<ul>
+<li><img src="/.io//kim.png" alt="kim"></li>
+<li>1、representing</li>
+<li>2、collecting local inference information</li>
+<li>3、aggregating and composing local information</li>
+<li>4、make global decision at sentence level</li>
+<li>其中，将外部知识加入到了: co-attention、local inference collection、inference composition 模块中</li>
+</ul>
+</li>
+</ul>
+<h3 id="External-Knowledge"><a href="#External-Knowledge" class="headerlink" title="External Knowledge"></a>External Knowledge</h3><p>首先确定需要哪些知识来帮助NLI任务</p>
+<ul>
+<li>external, inference-related knowledge</li>
+<li>intuitively Knowledge: <strong>synonymy(同义)</strong>、<strong>antonymy(反义)</strong>、<strong>hypernymy(上位)</strong>、<strong>hyponymy(下位)</strong><ul>
+<li>上下位的关系可以帮助捕捉 entailment 信息</li>
+<li>反义和co-hyponymy(共享相同上位词)的关系可以更好的建模 contradiction 关系</li>
+</ul>
+</li>
+<li>这篇文章主要是引入了基础的词汇级的语义知识<ul>
+<li>建模词$w_i$和$w_j$知识为 $r_{ij}$</li>
+<li>重点是：如何构建 $r_ij$</li>
+</ul>
+</li>
+</ul>
+<h3 id="M1-Encoding-Premise-and-Hypothesis"><a href="#M1-Encoding-Premise-and-Hypothesis" class="headerlink" title="M1.Encoding Premise and Hypothesis"></a>M1.Encoding Premise and Hypothesis</h3><ul>
+<li>premise: $a=(a_1,…,a_m)$</li>
+<li>hypothesis: $b=(b_1,…,b_n)$</li>
+<li>通过BiLSTM进行编码，得到context-dependent 隐藏状态：<ul>
+<li>$a_i^s = Encoder(E(a),i)$</li>
+<li>$b_j^s = Encoder(E(b),j)$</li>
+</ul>
+</li>
+</ul>
+<h3 id="M2-Knowledge-Enriched-Co-Attention"><a href="#M2-Knowledge-Enriched-Co-Attention" class="headerlink" title="M2.Knowledge-Enriched Co-Attention"></a>M2.Knowledge-Enriched Co-Attention</h3><ul>
+<li>知识关系特征：$r_{ij} \in \mathbb{R}^{d_r}$</li>
+<li>Co-attention:<ul>
+<li>$e_{ij} = (a^s_i)^T b_j^s + F(r_{ij})$</li>
+<li>$F(r_{ij}) = \lambda \mathbb{1}(r_{ij})$<ul>
+<li>$\mathbb{1}(r_{ij})$ 判断 $r_{ij}$ 是否为0向量</li>
+</ul>
+</li>
+<li>得到的 co-attention 矩阵 $e \in \mathbb{R}^{m\times n}$</li>
+</ul>
+</li>
+<li>根据co-attention对premise和hypothesis的表示进行更新：<ul>
+<li>$$a_i^c=\sum_{j=1}^n \alpha _{ij} b_j^s$$<ul>
+<li>$$\alpha_{ij} = exp(e_{ij}) / \sum_{k=1}^n exp(e_{ik})$$</li>
+</ul>
+</li>
+<li>$$b_j^c=\sum_{i=1}^m \beta _{ij} a_i^s$$<ul>
+<li>$$\beta_{ij} = exp(e_{ij}) / \sum_{k=1}^m exp(e_{kj})$$</li>
+</ul>
+</li>
+<li>$\alpha \in \mathbb{R}^{m\times n}$、$\beta \in \mathbb{R}^{m\times n}$</li>
+</ul>
+</li>
+</ul>
+<h3 id="M3-Local-inference-Collection-with-External-Knowledge"><a href="#M3-Local-inference-Collection-with-External-Knowledge" class="headerlink" title="M3.Local inference Collection with External Knowledge"></a>M3.Local inference Collection with External Knowledge</h3><ul>
+<li>通过比较$a_i^s$、$a_i^c$ 和 他们的关系（从外部知识获得），可以获得词级的推理信息</li>
+<li>Knowledge-enriched local inference:<ul>
+<li>$$a_i^m = G([a_i^s; a_i^c; a_i^s - a_i^c; a_i^s \circ a_i^c; \sum_{j=1}^n \alpha_{ij}r_{ij}])$$</li>
+<li>$$b_j^m = G([b_j^s; b_j^c; b_j^s - b_j^c; b_j^s \circ b_j^c; \sum_{i=1}^m \beta_{ij}r_{ji}])$$</li>
+<li>最后一项的目的是：收集对齐词之间的关系特征，是从外部知识获得的word-level inference information</li>
+<li>$G$ 是非线性映射，用于降维，relu + shortcut connection<ul>
+<li>$$a_i^m + \sum_{j=1}^n \alpha_{ij}r_{ij}$$</li>
+<li>$$b_j^m + \sum_{i=1}^m \beta_{ij}r_{ij}$$</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="M4-Knowledge-Enhanced-Inference-Composition"><a href="#M4-Knowledge-Enhanced-Inference-Composition" class="headerlink" title="M4.Knowledge-Enhanced Inference Composition"></a>M4.Knowledge-Enhanced Inference Composition</h3><ul>
+<li>决定总体的推理关系：BiLSTM –&gt; mean;max;weighted Pooling，得到定长向量<ul>
+<li>Composition = BiLSTM<ul>
+<li>$a_i^v = Composition(a^m,i)$</li>
+<li>$b_j^v = Composition(b^m,j)$</li>
+</ul>
+</li>
+<li>Weighted Pooling<ul>
+<li>$$a^w = \sum_{i=1}^m \left( \frac{exp(H(\sum_{j=1}^n \alpha_{ij}r_{ij}))}{\sum_{i=1}^m exp(H(\sum_{j=1}^n\alpha_{ij}r_{ij}))} \right) a_i^v$$</li>
+<li>$$b^w = \sum_{j=1}^n \left( \frac{exp(H(\sum_{i=1}^m \beta_{ij}r_{ji}))}{\sum_{j=1}^n exp(H(\sum_{i=1}^m\beta_{ij}r_{ji}))} \right) b_j^v $$</li>
+<li>$H$ 函数是 1层的前馈神经网络，激活函数是relu</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>最后得到定长向量之后，再过一层MLP，激活函数为tanh，和一层 softmax，得到分类结果</li>
+</ul>
+<h2 id="Experiment-Settings"><a href="#Experiment-Settings" class="headerlink" title="Experiment Settings"></a>Experiment Settings</h2><h3 id="Representation-of-External-Knowledge"><a href="#Representation-of-External-Knowledge" class="headerlink" title="Representation of External Knowledge"></a>Representation of External Knowledge</h3><h4 id="Lexical-Semantic-Relations"><a href="#Lexical-Semantic-Relations" class="headerlink" title="Lexical Semantic Relations"></a>Lexical Semantic Relations</h4><ul>
+<li>relations of lexical pairs: 检索范围是wordnet<ul>
+<li>synonymy: 如果词对是同义词，使值为1，否则为0</li>
+<li>antonymy: 如果词对是反义词，使值为1，否则为0</li>
+<li>hypernymy: 如果一个词是另一个词的上位词，取值 $1-\frac{n}{8}$，否则为0<ul>
+<li>其中 $n$ 是两个词在层次上的边数</li>
+<li>忽略边数超过8的</li>
+</ul>
+</li>
+<li>hyponymy: inverse of the hypernymy feature</li>
+<li>co-hyponymys: 如果两个词有相同的上位词且不是同义词，取值为1，否则为0</li>
+<li>向量 $r$ 的维度为 $d_r = 5$</li>
+<li>在 wordnet 中还有额外的一些（15种）关系，但是对结果的提升没有贡献</li>
+</ul>
+</li>
+<li>relation embeddings<ul>
+<li>pretrain based on wordnet</li>
+<li>TransE</li>
+</ul>
+</li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+      <div>
+        
+    <div style="text-align:center;color: #ccc;font-size:14px;">
+    **** END of This Post. Thank for Your READING ****
+    </div>
+    <div style="text-align:center;color: #ccc;font-size:14px;">
+    If you have any Question, welcome to Email me or leave your comments below.
+    </div>
+
+      </div>
+    
+
+    
+
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>Post author:</strong>
+    Luxi Xing
+  </li>
+  <li class="post-copyright-link">
+    <strong>Post link:</strong>
+    <a href="http://xingluxi.github.io/2019/01/09/paper-kim/" title="KIM">http://xingluxi.github.io/2019/01/09/paper-kim/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>Copyright Notice: </strong>
+    All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> unless stating additionally.
+  </li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/nlp/" rel="tag"><i class="fa fa-tag"></i> nlp</a>
+          
+            <a href="/tags/paper/" rel="tag"><i class="fa fa-tag"></i> paper</a>
+          
+            <a href="/tags/knowledge/" rel="tag"><i class="fa fa-tag"></i> knowledge</a>
+          
+            <a href="/tags/nli/" rel="tag"><i class="fa fa-tag"></i> nli</a>
+          
+            <a href="/tags/wordnet/" rel="tag"><i class="fa fa-tag"></i> wordnet</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/01/09/paper-knreader/" rel="next" title="Knowledgeable Reader Enhancing Cloze-Style Reading Comprehension with External Commonsense Knowledge">
+                <i class="fa fa-chevron-left"></i> Knowledgeable Reader Enhancing Cloze-Style Reading Comprehension with External Commonsense Knowledge
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/01/09/schedule-2019/" rel="prev" title="2019年讨论组日程记录">
+                2019年讨论组日程记录 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="lv-container" data-id="city" data-uid="MTAyMC80MjA1OC8xODYwNQ=="></div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.gif" alt="Luxi Xing">
+            
+              <p class="site-author-name" itemprop="name">Luxi Xing</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">29</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">33</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/XingLuxi" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://twitter.com/XingLuxi" target="_blank" title="Twitter">
+                      
+                        <i class="fa fa-fw fa-twitter"></i>Twitter</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:xingluxixlx@gmail.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Motivation"><span class="nav-text">Motivation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Model-Framework"><span class="nav-text">Model Framework</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#External-Knowledge"><span class="nav-text">External Knowledge</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#M1-Encoding-Premise-and-Hypothesis"><span class="nav-text">M1.Encoding Premise and Hypothesis</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#M2-Knowledge-Enriched-Co-Attention"><span class="nav-text">M2.Knowledge-Enriched Co-Attention</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#M3-Local-inference-Collection-with-External-Knowledge"><span class="nav-text">M3.Local inference Collection with External Knowledge</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#M4-Knowledge-Enhanced-Inference-Composition"><span class="nav-text">M4.Knowledge-Enhanced Inference Composition</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Experiment-Settings"><span class="nav-text">Experiment Settings</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Representation-of-External-Knowledge"><span class="nav-text">Representation of External Knowledge</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Lexical-Semantic-Relations"><span class="nav-text">Lexical Semantic Relations</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+            <span id="scrollpercent"><span>0</span>%</span>
+          
+        </div>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-grav"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Luxi Xing</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a></div>
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i> Site Total Visiters
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
+  
+
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+</body>
+</html>
