@@ -4,11 +4,44 @@
   
     
     <entry>
+      <title>Recent Advances on Multi-Hop RC - WikiHop</title>
+      <link href="/2019/06/06/paper-wikihop-1/"/>
+      <url>/2019/06/06/paper-wikihop-1/</url>
+      
+        <content type="html"><![CDATA[<p>WikiHop in QAngaroo benchmark is a dataset for Multi-hop Reading Comprehension <strong>Across Documents</strong>.Style: Multiple-Choice</p><p>Reference papers on WikiHop task:</p><blockquote><ol start="0"><li>Question Answering by Reasoning Across Documents with Graph Convolutional Networks. NAACL,2019.</li><li>Multi-hop Reading Comprehension across Multiple Documents by Reasoning over Heterogeneous Graphs. 2019.</li><li>Coarse-Grain Fine-Grain Coattention Network for Multi-Evidence Question Answering. ICLR,2019.</li><li>Neural models for reasoning over multiple mentions using coreference. NAACL,2018.</li><li>Exploiting explicit paths for multihop reading comprehension. 2018.</li><li>Exploring graph-structured passage representation for multihop reading comprehension with graph neural networks. 2018.</li></ol></blockquote>]]></content>
+      
+      
+      <categories>
+          
+          <category> MRC-Paper-Intro </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> nlp </tag>
+            
+            <tag> paper </tag>
+            
+            <tag> mrc </tag>
+            
+            <tag> multi-hop </tag>
+            
+            <tag> gnn </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Recent Advances on Multi-Hop RC - HotpotQA</title>
       <link href="/2019/05/30/mrc-paper-hotpotqa/"/>
       <url>/2019/05/30/mrc-paper-hotpotqa/</url>
       
-        <content type="html"><![CDATA[<p><strong>HotpotQA</strong> is a dataset for <strong>Diverse</strong>, <strong>Explainable</strong> <strong>Multi-hop</strong> Question Answering.</p><p>HotpotQA has 4 features, which can also be seen as challenges:</p><ul><li>questions require finding and reasoning over multiple supporting documents to answer</li><li>questions are diverse and not constrained to any pre-existing knowledge</li><li>contains two types of questions: 1.<strong>bridge</strong> and 2.<strong>comparison</strong> (factoid comparision questions)</li><li>provides sentence-level supporting facts required for reasoning<ul><li>introduces the <strong>strong supervision</strong> for reasoning and make the final predictions <strong>explainable</strong></li></ul></li><li>(can form a reasoning chain through the support facts)</li></ul><p>Reference papers on HotpotQA task:</p><blockquote><ol start="0"><li>Cognitive Graph for Multi-Hop Reading Comprehension at Scale. ACL, 2019.</li><li>Dynamically Fused Graph Network for Multi-Hop Reasoning. ACL, 2019.</li><li>Answering while Summarizing: Multi-task Learning for Multi-Hop QA with Evidence Extraction. ACL, 2019.</li></ol></blockquote><h2 id="Cognitive-Graph-QA"><a href="#Cognitive-Graph-QA" class="headerlink" title="Cognitive Graph QA"></a>Cognitive Graph QA</h2><h3 id="Motivation"><a href="#Motivation" class="headerlink" title="Motivation"></a>Motivation</h3><p>Dual Process Theory</p><h3 id="Model-Details"><a href="#Model-Details" class="headerlink" title="Model Details"></a>Model Details</h3><h3 id="Experiments"><a href="#Experiments" class="headerlink" title="Experiments"></a>Experiments</h3><h2 id="Dynamically-Fused-Graph-Network"><a href="#Dynamically-Fused-Graph-Network" class="headerlink" title="Dynamically Fused Graph Network"></a>Dynamically Fused Graph Network</h2><h3 id="Motivation-1"><a href="#Motivation-1" class="headerlink" title="Motivation"></a>Motivation</h3><h3 id="Model-Details-1"><a href="#Model-Details-1" class="headerlink" title="Model Details"></a>Model Details</h3><h2 id="Query-Focused-Extractor"><a href="#Query-Focused-Extractor" class="headerlink" title="Query Focused Extractor"></a>Query Focused Extractor</h2><h3 id="Motivation-2"><a href="#Motivation-2" class="headerlink" title="Motivation"></a>Motivation</h3><h3 id="Model-Details-2"><a href="#Model-Details-2" class="headerlink" title="Model Details"></a>Model Details</h3><h3 id="Experiments-1"><a href="#Experiments-1" class="headerlink" title="Experiments"></a>Experiments</h3>]]></content>
+        <content type="html"><![CDATA[<p><strong>HotpotQA</strong> is a dataset for <strong>Diverse</strong>, <strong>Explainable</strong> <strong>Multi-hop</strong> Question Answering.<br>Style: Extractive-based</p><p>HotpotQA has 4 features, which can also be seen as challenges:</p><ul><li>questions require finding and reasoning over multiple supporting documents to answer</li><li>questions are diverse and not constrained to any pre-existing knowledge</li><li>contains two types of questions: 1.<strong>bridge</strong> and 2.<strong>comparison</strong> (factoid comparision questions)</li><li>provides sentence-level supporting facts required for reasoning<ul><li>introduces the <strong>strong supervision</strong> for reasoning and make the final predictions <strong>explainable</strong></li></ul></li><li>(can form a reasoning chain through the support facts)</li></ul><p>Reference papers on HotpotQA task:</p><blockquote><ol start="0"><li>Cognitive Graph for Multi-Hop Reading Comprehension at Scale. ACL, 2019.</li><li>Dynamically Fused Graph Network for Multi-Hop Reasoning. ACL, 2019.</li><li>Answering while Summarizing: Multi-task Learning for Multi-Hop QA with Evidence Extraction. ACL, 2019.</li></ol></blockquote><h2 id="Cognitive-Graph-QA"><a href="#Cognitive-Graph-QA" class="headerlink" title="Cognitive Graph QA"></a>Cognitive Graph QA</h2><h3 id="Motivation"><a href="#Motivation" class="headerlink" title="Motivation"></a>Motivation</h3><p>Dual Process Theory</p><h3 id="Model-Details"><a href="#Model-Details" class="headerlink" title="Model Details"></a>Model Details</h3><h3 id="Experiments"><a href="#Experiments" class="headerlink" title="Experiments"></a>Experiments</h3><h2 id="Dynamically-Fused-Graph-Network"><a href="#Dynamically-Fused-Graph-Network" class="headerlink" title="Dynamically Fused Graph Network"></a>Dynamically Fused Graph Network</h2><h3 id="Motivation-1"><a href="#Motivation-1" class="headerlink" title="Motivation"></a>Motivation</h3><h3 id="Model-Details-1"><a href="#Model-Details-1" class="headerlink" title="Model Details"></a>Model Details</h3><h2 id="Query-Focused-Extractor"><a href="#Query-Focused-Extractor" class="headerlink" title="Query Focused Extractor"></a>Query Focused Extractor</h2><h3 id="Motivation-2"><a href="#Motivation-2" class="headerlink" title="Motivation"></a>Motivation</h3><h3 id="Model-Details-2"><a href="#Model-Details-2" class="headerlink" title="Model Details"></a>Model Details</h3><h3 id="Experiments-1"><a href="#Experiments-1" class="headerlink" title="Experiments"></a>Experiments</h3>]]></content>
       
       
       <categories>
@@ -61,9 +94,9 @@
             
             <tag> reasoning </tag>
             
-            <tag> survey </tag>
-            
             <tag> commonsense </tag>
+            
+            <tag> survey </tag>
             
         </tags>
       
