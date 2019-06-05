@@ -59,11 +59,11 @@
             
             <tag> mrc </tag>
             
-            <tag> reasoning </tag>
-            
             <tag> survey </tag>
             
             <tag> commonsense </tag>
+            
+            <tag> reasoning </tag>
             
         </tags>
       
@@ -342,11 +342,11 @@
             
             <tag> mrc </tag>
             
-            <tag> multi-hop </tag>
+            <tag> commonsense </tag>
             
             <tag> reasoning </tag>
             
-            <tag> commonsense </tag>
+            <tag> multi-hop </tag>
             
         </tags>
       
@@ -629,9 +629,9 @@
             
             <tag> mrc </tag>
             
-            <tag> nlu </tag>
-            
             <tag> reasoning </tag>
+            
+            <tag> nlu </tag>
             
         </tags>
       
