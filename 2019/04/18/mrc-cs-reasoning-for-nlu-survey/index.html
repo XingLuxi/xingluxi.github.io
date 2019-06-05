@@ -75,7 +75,7 @@
 
 
 
-  <meta name="keywords" content="nlp,knowledge,mrc,reasoning,commonsense,survey,">
+  <meta name="keywords" content="nlp,knowledge,mrc,reasoning,survey,commonsense,">
 
 
 
@@ -87,23 +87,23 @@
 
 
 <meta name="description" content="Authors: Shane Storks, Qianzi Gao, Joyce Y. ChaiOrg.: Department of Computers Science and Engineering, Michigan State UniversityYear: 2019  AbstractCommonsense Knowledge (CS Know.) 和 Commonsense Reas">
-<meta name="keywords" content="nlp,knowledge,mrc,reasoning,commonsense,survey">
+<meta name="keywords" content="nlp,knowledge,mrc,reasoning,survey,commonsense">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Commonsense Reasoning for Natural Language Understanding - A Survey of Benchmarks, Resources, and Approachs">
 <meta property="og:url" content="http://xingluxi.github.io/2019/04/18/mrc-cs-reasoning-for-nlu-survey/index.html">
 <meta property="og:site_name" content="Luxi Xing - Blog">
 <meta property="og:description" content="Authors: Shane Storks, Qianzi Gao, Joyce Y. ChaiOrg.: Department of Computers Science and Engineering, Michigan State UniversityYear: 2019  AbstractCommonsense Knowledge (CS Know.) 和 Commonsense Reas">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="http://xingluxi.github.io/.io//mind.png">
-<meta property="og:image" content="http://xingluxi.github.io/.io//overview.png">
-<meta property="og:image" content="http://xingluxi.github.io/.io//benchmark-trend.png">
-<meta property="og:image" content="http://xingluxi.github.io/.io//MaslowReissPlutchik.png">
-<meta property="og:image" content="http://xingluxi.github.io/.io//neural-approachs.png">
-<meta property="og:updated_time" content="2019-04-19T04:35:15.000Z">
+<meta property="og:image" content="http://xingluxi.github.io/images/mrc-cs-reasoning-for-nlu-survey/mind.png">
+<meta property="og:image" content="http://xingluxi.github.io/images/mrc-cs-reasoning-for-nlu-survey/overview.png">
+<meta property="og:image" content="http://xingluxi.github.io/images/mrc-cs-reasoning-for-nlu-survey/benchmark-trend.png">
+<meta property="og:image" content="http://xingluxi.github.io/images/mrc-cs-reasoning-for-nlu-survey/MaslowReissPlutchik.png">
+<meta property="og:image" content="http://xingluxi.github.io/images/mrc-cs-reasoning-for-nlu-survey/neural-approachs.png">
+<meta property="og:updated_time" content="2019-06-05T15:03:48.421Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Commonsense Reasoning for Natural Language Understanding - A Survey of Benchmarks, Resources, and Approachs">
 <meta name="twitter:description" content="Authors: Shane Storks, Qianzi Gao, Joyce Y. ChaiOrg.: Department of Computers Science and Engineering, Michigan State UniversityYear: 2019  AbstractCommonsense Knowledge (CS Know.) 和 Commonsense Reas">
-<meta name="twitter:image" content="http://xingluxi.github.io/.io//mind.png">
+<meta name="twitter:image" content="http://xingluxi.github.io/images/mrc-cs-reasoning-for-nlu-survey/mind.png">
 
 
 
@@ -321,8 +321,8 @@
               
                 <span class="post-meta-item-text">Post modified&#58;</span>
               
-              <time title="Post modified" itemprop="dateModified" datetime="2019-04-19T12:35:15+08:00">
-                2019-04-19
+              <time title="Post modified" itemprop="dateModified" datetime="2019-06-05T23:03:48+08:00">
+                2019-06-05
               </time>
             
           </span>
@@ -428,17 +428,17 @@
 </li>
 <li><p>关于本篇文章的思维导图：</p>
 <ul>
-<li><img src="/.io//mind.png" alt="mind-note"></li>
+<li><img src="/images/mrc-cs-reasoning-for-nlu-survey/mind.png" alt="mind-note"></li>
 </ul>
 </li>
 </ul>
 <h2 id="1-Introduction"><a href="#1-Introduction" class="headerlink" title="1.Introduction"></a>1.Introduction</h2><p>Davis and Marcus (2015)[^davis] 指出常识推理的挑战：spans from difficulties in <strong>understanding and formulating commonsense knowledge for specific or general domains</strong> to complexities in <strong>various forms of reasoning and their integration for problem solving</strong>.</p>
 <p>现有的研究主要关注如下图所示的几个方面：(在这篇文章中主要关注文本数据源)</p>
-<p><img src="/.io//overview.png" alt="image-overview"></p>
+<p><img src="/images/mrc-cs-reasoning-for-nlu-survey/overview.png" alt="image-overview"></p>
 <h2 id="2-Benchmarks-and-Tasks"><a href="#2-Benchmarks-and-Tasks" class="headerlink" title="2.Benchmarks and Tasks"></a>2.Benchmarks and Tasks</h2><p>这章主要介绍一些需要常识推理的benchmarks，以及对构建这类benchmarks的重要要求进行一个总结。</p>
 <ul>
 <li>benchmarks数据集的发展：<ul>
-<li><img src="/.io//benchmark-trend.png" alt="benchmark-trend"></li>
+<li><img src="/images/mrc-cs-reasoning-for-nlu-survey/benchmark-trend.png" alt="benchmark-trend"></li>
 </ul>
 </li>
 </ul>
@@ -474,7 +474,7 @@
 <li>代表数据集：Triangle-COPA、Story Commonsense、Event2Mind<ul>
 <li>StoryCommonsense[^rashkin-2018a]：要求预测Motivation和Emotions，以及Maslow (human need)、Reiss (human motives)、Plutchik (emotions)<ul>
 <li>link：<a href="http://uwnlp.github.io/storycommonsense" target="_blank" rel="noopener">http://uwnlp.github.io/storycommonsense</a></li>
-<li>Theories of Motivation (Maslow and Reiss) and Emotional Reaction (Plutchik): <img src="/.io//MaslowReissPlutchik.png" alt="png"></li>
+<li>Theories of Motivation (Maslow and Reiss) and Emotional Reaction (Plutchik): <img src="/images/mrc-cs-reasoning-for-nlu-survey/MaslowReissPlutchik.png" alt="png"></li>
 </ul>
 </li>
 <li>Event2Mind[^rashkin-2018b]：推理关于事件的intentions和reactions，每个事件都有1到2个参与者，三个任务：预测主要参与者的意图和反应，并预测其他人的反应<ul>
@@ -604,7 +604,7 @@
 </ul>
 <h2 id="4-Learning-and-Inference-Approaches"><a href="#4-Learning-and-Inference-Approaches" class="headerlink" title="4.Learning and Inference Approaches"></a>4.Learning and Inference Approaches</h2><h3 id="4-1-Symbolic-and-Statistical-Approaches"><a href="#4-1-Symbolic-and-Statistical-Approaches" class="headerlink" title="4.1 Symbolic and Statistical Approaches"></a>4.1 Symbolic and Statistical Approaches</h3><h3 id="4-2-Neural-Approaches"><a href="#4-2-Neural-Approaches" class="headerlink" title="4.2 Neural Approaches"></a>4.2 Neural Approaches</h3><ul>
 <li>common components in neural models: <ul>
-<li><img src="/.io//neural-approachs.png" alt="neural"></li>
+<li><img src="/images/mrc-cs-reasoning-for-nlu-survey/neural-approachs.png" alt="neural"></li>
 </ul>
 </li>
 </ul>
@@ -786,9 +786,9 @@
           
             <a href="/tags/reasoning/" rel="tag"><i class="fa fa-tag"></i> reasoning</a>
           
-            <a href="/tags/commonsense/" rel="tag"><i class="fa fa-tag"></i> commonsense</a>
-          
             <a href="/tags/survey/" rel="tag"><i class="fa fa-tag"></i> survey</a>
+          
+            <a href="/tags/commonsense/" rel="tag"><i class="fa fa-tag"></i> commonsense</a>
           
         </div>
       
