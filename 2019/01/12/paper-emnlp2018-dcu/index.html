@@ -94,15 +94,15 @@
 <meta property="og:site_name" content="Luxi Xing - Blog">
 <meta property="og:description" content="Multi-Granular Sequence Encoding via Dilated Compositional Units for Reading ComprehensionEMNLP 2018Yi Tay et al.多粒度/尺度序列编码; 膨胀组合单元  Motivation Sequence encoder是MRC中的重要部件: helps to model compositiona">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="http://xingluxi.github.io/.io//dcu-1-overall.png">
-<meta property="og:image" content="http://xingluxi.github.io/.io//dcu-2-op.png">
-<meta property="og:image" content="http://xingluxi.github.io/.io//dcu-results-race.png">
-<meta property="og:image" content="http://xingluxi.github.io/.io//dcu-results-narrativeqa.png">
+<meta property="og:image" content="http://xingluxi.github.io/paper-emnlp2018-dcu/dcu-1-overall.png">
+<meta property="og:image" content="http://xingluxi.github.io/paper-emnlp2018-dcu/dcu-2-op.png">
+<meta property="og:image" content="http://xingluxi.github.io/paper-emnlp2018-dcu/dcu-results-race.png">
+<meta property="og:image" content="http://xingluxi.github.io/paper-emnlp2018-dcu/dcu-results-narrativeqa.png">
 <meta property="og:updated_time" content="2019-01-13T07:51:56.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Multi-Granular Sequence Encoding via Dilated Compositional Units for Reading Comprehension">
 <meta name="twitter:description" content="Multi-Granular Sequence Encoding via Dilated Compositional Units for Reading ComprehensionEMNLP 2018Yi Tay et al.多粒度/尺度序列编码; 膨胀组合单元  Motivation Sequence encoder是MRC中的重要部件: helps to model compositiona">
-<meta name="twitter:image" content="http://xingluxi.github.io/.io//dcu-1-overall.png">
+<meta name="twitter:image" content="http://xingluxi.github.io/paper-emnlp2018-dcu/dcu-1-overall.png">
 
 
 
@@ -441,7 +441,7 @@
 </li>
 </ul>
 <h2 id="Model"><a href="#Model" class="headerlink" title="Model"></a>Model</h2><ul>
-<li>DCU用于MRC时的整体结构，左侧为DCU Encoder，右侧为DCU分别用于span prediction model和Multiple choice model的结构:<br><img src="/.io//dcu-1-overall.png" alt="dcu-model"></li>
+<li>DCU用于MRC时的整体结构，左侧为DCU Encoder，右侧为DCU分别用于span prediction model和Multiple choice model的结构:<br><img src="/paper-emnlp2018-dcu/dcu-1-overall.png" alt="dcu-model"></li>
 </ul>
 <p>本节只介绍 DCU 的操作和 encoding 操作，不对整体的mrc模型进行介绍</p>
 <h3 id="Dilated-Compositional-Mechanism"><a href="#Dilated-Compositional-Mechanism" class="headerlink" title="Dilated Compositional Mechanism"></a>Dilated Compositional Mechanism</h3><p>Notations:</p>
@@ -465,7 +465,7 @@
 </ul>
 <h4 id="2-Unfold"><a href="#2-Unfold" class="headerlink" title="2.Unfold"></a>2.Unfold</h4><p>将transformed之后的序列展开为原长</p>
 <ul>
-<li>下图中为 $r_j=2$ 时的 Fold-Unfold 操作:<br><img src="/.io//dcu-2-op.png" alt="dcu-fold-unfold"></li>
+<li>下图中为 $r_j=2$ 时的 Fold-Unfold 操作:<br><img src="/paper-emnlp2018-dcu/dcu-2-op.png" alt="dcu-fold-unfold"></li>
 </ul>
 <h4 id="3-Multi-Granular-Reasoning"><a href="#3-Multi-Granular-Reasoning" class="headerlink" title="3.Multi-Granular Reasoning"></a>3.Multi-Granular Reasoning</h4><p>多尺度推理</p>
 <ul>
@@ -502,8 +502,8 @@
 <li>最大序列长度 (RACE/SearchQA/NarrativeQA): $500/200/1100$</li>
 </ul>
 <h3 id="Results"><a href="#Results" class="headerlink" title="Results"></a>Results</h3><p>只关注了一下RACE和NarrativeQA上的结果，在没有使用RNN-based编码器的情况下，取得了不错的效果，在论文完成时(2018.03)是RACE上的top-1</p>
-<h4 id="RACE"><a href="#RACE" class="headerlink" title="RACE"></a>RACE</h4><p><img src="/.io//dcu-results-race.png" alt="results-race"></p>
-<h4 id="NarrativeQA"><a href="#NarrativeQA" class="headerlink" title="NarrativeQA"></a>NarrativeQA</h4><p><img src="/.io//dcu-results-narrativeqa.png" alt="results-nqa"></p>
+<h4 id="RACE"><a href="#RACE" class="headerlink" title="RACE"></a>RACE</h4><p><img src="/paper-emnlp2018-dcu/dcu-results-race.png" alt="results-race"></p>
+<h4 id="NarrativeQA"><a href="#NarrativeQA" class="headerlink" title="NarrativeQA"></a>NarrativeQA</h4><p><img src="/paper-emnlp2018-dcu/dcu-results-narrativeqa.png" alt="results-nqa"></p>
 <h2 id="Summary-amp-Analysis"><a href="#Summary-amp-Analysis" class="headerlink" title="Summary &amp; Analysis"></a>Summary &amp; Analysis</h2><ul>
 <li>对于长文本的编码问题是MRC中的重点问题之一【–&gt;表示问题】<ul>
 <li>长文本和多篇文本</li>
