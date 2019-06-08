@@ -86,19 +86,19 @@
 
 
 
-<meta name="description" content="Multi-Granularity Hierarchical Attention Fusion Networks for Reading Comprehension and Question Answering ACL 2018 Wei Wang, Ming Yan, Chen Wu. Alibaba Group. Multi-Granularity; Hierarchical Attentio">
+<meta name="description" content="Multi-Granularity Hierarchical Attention Fusion Networks for Reading Comprehension and Question AnsweringACL 2018Wei Wang, Ming Yan, Chen Wu.Alibaba Group.Multi-Granularity; Hierarchical Attention Fu">
 <meta name="keywords" content="nlp,paper,mrc,model">
 <meta property="og:type" content="article">
 <meta property="og:title" content="ACL2018 | Multi-Granularity Hierarchical Attention Fusion Networks for Reading Comprehension and Question Answering">
 <meta property="og:url" content="http://xingluxi.github.io/2019/03/03/paper-acl2018-slqa/index.html">
 <meta property="og:site_name" content="Luxi Xing - Blog">
-<meta property="og:description" content="Multi-Granularity Hierarchical Attention Fusion Networks for Reading Comprehension and Question Answering ACL 2018 Wei Wang, Ming Yan, Chen Wu. Alibaba Group. Multi-Granularity; Hierarchical Attentio">
+<meta property="og:description" content="Multi-Granularity Hierarchical Attention Fusion Networks for Reading Comprehension and Question AnsweringACL 2018Wei Wang, Ming Yan, Chen Wu.Alibaba Group.Multi-Granularity; Hierarchical Attention Fu">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://xingluxi.github.io/.io//slqa-model.png">
 <meta property="og:updated_time" content="2019-03-29T07:10:40.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="ACL2018 | Multi-Granularity Hierarchical Attention Fusion Networks for Reading Comprehension and Question Answering">
-<meta name="twitter:description" content="Multi-Granularity Hierarchical Attention Fusion Networks for Reading Comprehension and Question Answering ACL 2018 Wei Wang, Ming Yan, Chen Wu. Alibaba Group. Multi-Granularity; Hierarchical Attentio">
+<meta name="twitter:description" content="Multi-Granularity Hierarchical Attention Fusion Networks for Reading Comprehension and Question AnsweringACL 2018Wei Wang, Ming Yan, Chen Wu.Alibaba Group.Multi-Granularity; Hierarchical Attention Fu">
 <meta name="twitter:image" content="http://xingluxi.github.io/.io//slqa-model.png">
 
 
@@ -409,13 +409,8 @@
       
 
       
-        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><blockquote>
-<p>Multi-Granularity Hierarchical Attention Fusion Networks for Reading Comprehension and Question Answering
-ACL 2018
-Wei Wang, Ming Yan, Chen Wu.
-Alibaba Group.
-Multi-Granularity; Hierarchical Attention Fusion; Architecture
-Datasets: SQuAD; TriviaQA</p>
+        <blockquote>
+<p>Multi-Granularity Hierarchical Attention Fusion Networks for Reading Comprehension and Question Answering<br>ACL 2018<br>Wei Wang, Ming Yan, Chen Wu.<br>Alibaba Group.<br>Multi-Granularity; Hierarchical Attention Fusion; Architecture<br>Datasets: SQuAD; TriviaQA</p>
 </blockquote>
 <p>看到题目，首先就产生了三个关注点：</p>
 <ul>
@@ -423,10 +418,8 @@ Datasets: SQuAD; TriviaQA</p>
 <li>hierarchical, 有哪些层次？（co-attention 和 self-attention）</li>
 <li>fusion, 怎样进行融合？对粒度的融合（global level）</li>
 </ul>
-<h2>Motivation</h2>
-<ul>
-<li>启发于人类通常的阅读模式：
-<ul>
+<h2 id="Motivation"><a href="#Motivation" class="headerlink" title="Motivation"></a>Motivation</h2><ul>
+<li>启发于人类通常的阅读模式：<ul>
 <li>浏览全篇文章，大致了解文章内容（通读全文）</li>
 <li>浏览问题，记住问题，找到P和Q之间的联系，理解Q的意图</li>
 <li>定位一个大致/粗略的潜在的答案区域，使注意力聚集到定位的上下文（重点阅读上下文）</li>
@@ -434,38 +427,31 @@ Datasets: SQuAD; TriviaQA</p>
 </ul>
 </li>
 </ul>
-<h3>This Work</h3>
-<ul>
+<h3 id="This-Work"><a href="#This-Work" class="headerlink" title="This Work"></a>This Work</h3><ul>
 <li>建模问题和文章中特定区域关联的同时，借助分层策略逐步集中注意力，是答案边界清晰</li>
-<li>提出 hierarchical attention network：
-<ul>
+<li>提出 hierarchical attention network：<ul>
 <li>逐步定位答案边界</li>
 <li>建模P和Q之间的不同粒度层级间的关系</li>
 </ul>
 </li>
-<li>在Encoder层：
-<ul>
+<li>在Encoder层：<ul>
 <li>为了更好的建模Q和P的多个aspects：同时使用预训练的glove表示和ELMo表示作为一个词的表示</li>
 <li>针对ELMo的融合，设计了一个 Representation-aware fusion 方法来结合ELMo输出向量和BiLSTM建模的上下文表示</li>
 </ul>
 </li>
-<li>在本文提出的Hierarchical Attention Fusion Network中：
-<ul>
-<li>利用co-attention和self-attention机制，逐步的将注意力聚集到最优的答案span
-<ul>
+<li>在本文提出的Hierarchical Attention Fusion Network中：<ul>
+<li>利用co-attention和self-attention机制，逐步的将注意力聚集到最优的答案span<ul>
 <li>co-attention with shallow semantic fusion</li>
-<li>self-attention with deep semantic fusion</li>
+<li>self-attention with deep semantic fusion </li>
 <li>memory-wise bilinear alignment function</li>
 </ul>
 </li>
-<li>特点：
-<ul>
+<li>特点：<ul>
 <li>fine-grained fusion 结合attention vector 更好的建模P和Q的关系</li>
 <li>multi-granularity attention 应用于 word-level 和 sentence-level</li>
 </ul>
 </li>
-<li>与其他方法不同的是：
-<ul>
+<li>与其他方法不同的是：<ul>
 <li>利用全局表示（原始的上下文表示）构建attention表示</li>
 <li>利用fusion layer来对attention表示进行进一步的微调</li>
 </ul>
@@ -473,73 +459,58 @@ Datasets: SQuAD; TriviaQA</p>
 </ul>
 </li>
 </ul>
-<h2>Model</h2>
-<ul>
-<li>本文提出模型 SLQA+ (Semantic Learning for Question Answering) 的整体架构：
-<ul>
+<h2 id="Model"><a href="#Model" class="headerlink" title="Model"></a>Model</h2><ul>
+<li>本文提出模型 SLQA+ (Semantic Learning for Question Answering) 的整体架构：<ul>
 <li>encoder、attention、matching、output</li>
 <li><img src="/.io//slqa-model.png" alt="slqa+模型图"></li>
 </ul>
 </li>
 </ul>
-<h3>1.Encoder Layer</h3>
-<ul>
-<li>输入是 P和Q的每个词的glove向量和ELMo向量：
-<ul>
-<li>问题：${e_t^Q}<em>{t=1}^m$，${c_t^Q}</em>{t=1}^m$</li>
-<li>文章：${e_t^P}<em>{t=1}^n$，${c_t^P}</em>{t=1}^n$</li>
+<h3 id="1-Encoder-Layer"><a href="#1-Encoder-Layer" class="headerlink" title="1.Encoder Layer"></a>1.Encoder Layer</h3><ul>
+<li>输入是 P和Q的每个词的glove向量和ELMo向量：<ul>
+<li>问题：${e<em>t^Q}</em>{t=1}^m$，${c<em>t^Q}</em>{t=1}^m$</li>
+<li>文章：${e<em>t^P}</em>{t=1}^n$，${c<em>t^P}</em>{t=1}^n$</li>
 </ul>
 </li>
-<li>输出：original context representation
-<ul>
+<li>输出：original context representation<ul>
 <li>BiLSTM 的输出结果，再次和ELMo 串联concat</li>
 <li>问题：Q = $u_t^Q = [BiLSTM_Q(e_t^Q, c_t^Q), c_t^Q]$</li>
 <li>文章：P = $u_t^P = [BiLSTM_P(e_t^P, c_t^P), c_t^P]$</li>
 </ul>
 </li>
 </ul>
-<h3>2.Hierarchical Attention Fusion Layer</h3>
-<ul>
+<h3 id="2-Hierarchical-Attention-Fusion-Layer"><a href="#2-Hierarchical-Attention-Fusion-Layer" class="headerlink" title="2.Hierarchical Attention Fusion Layer"></a>2.Hierarchical Attention Fusion Layer</h3><ul>
 <li>original context representation和通过attention得到的aligned representation可以反映上下文不同粒度的语义</li>
 </ul>
-<h4>2.1 Co-attention &amp; Fusion</h4>
-<ul>
-<li>co-attention 过程：
-<ul>
-<li>计算一个soft-alignment 矩阵：
-<ul>
-<li>$$S_{ij} = Att(u_t^Q, u_t^P) = ReLU(W^T_{lin}u_t^Q)^T \cdot ReLU(W^T_{lin}u_t^P)$$</li>
+<h4 id="2-1-Co-attention-amp-Fusion"><a href="#2-1-Co-attention-amp-Fusion" class="headerlink" title="2.1 Co-attention &amp; Fusion"></a>2.1 Co-attention &amp; Fusion</h4><ul>
+<li>co-attention 过程：<ul>
+<li>计算一个soft-alignment 矩阵：<ul>
+<li><script type="math/tex; mode=display">S_{ij} = Att(u_t^Q, u_t^P) = ReLU(W^T_{lin}u_t^Q)^T \cdot ReLU(W^T_{lin}u_t^P)</script></li>
 </ul>
 </li>
-<li>计算 P2Q attention
-<ul>
-<li>$$\alpha_{j} = softmax(S_{:j})$$</li>
-<li>$$\tilde{Q}<em>{:t} = \sum_j \alpha</em>{ij} \cdot Q_{:j}, \forall j \in [1,...,m]$$</li>
+<li>计算 P2Q attention<ul>
+<li><script type="math/tex; mode=display">\alpha_{j} = softmax(S_{:j})</script></li>
+<li><script type="math/tex; mode=display">\tilde{Q}_{:t} = \sum_j \alpha_{ij} \cdot Q_{:j}, \forall j \in [1,...,m]</script></li>
 </ul>
 </li>
-<li>计算 Q2P attention
-<ul>
-<li>$$\beta_j = softmax(S_{i:})$$</li>
-<li>$$\tilde{P}<em>{k:} = \sum_i \beta</em>{ik} \cdot P_{i:}, \forall i \in [1,..,n]$$</li>
+<li>计算 Q2P attention<ul>
+<li><script type="math/tex; mode=display">\beta_j = softmax(S_{i:})</script></li>
+<li><script type="math/tex; mode=display">\tilde{P}_{k:} = \sum_i \beta_{ik} \cdot P_{i:}, \forall i \in [1,..,n]</script></li>
 </ul>
 </li>
 </ul>
 </li>
-<li>&lt;font color=red&gt;<strong>Fusion</strong>&lt;/font&gt;：本文重点
-<ul>
-<li>定义fusion kernel
-<ul>
+<li><font color="red"><strong>Fusion</strong></font>：本文重点<ul>
+<li>定义fusion kernel<ul>
 <li>$P^\prime=Fuse(P,\tilde{Q})$</li>
 <li>$Q^\prime=Fuse(Q,\tilde{P})$</li>
 </ul>
 </li>
-<li>simple fusion 过程：
-<ul>
-<li>$$m(P,\tilde{Q}) = tanh(W_f[P;\tilde{Q};P\circ\tilde{Q};P-\tilde{Q}] + b_f)$$</li>
+<li>simple fusion 过程：<ul>
+<li><script type="math/tex; mode=display">m(P,\tilde{Q}) = tanh(W_f[P;\tilde{Q};P\circ\tilde{Q};P-\tilde{Q}] + b_f)</script></li>
 </ul>
 </li>
-<li>输出：利用gate机制，融合/refine 注意力表示和original contextual 表示
-<ul>
+<li>输出：利用gate机制，融合/refine 注意力表示和original contextual 表示<ul>
 <li>希望利用 original context representation 提供的重要的 global level 的语义信息提供指导，进一步引入gate机制控制不同层次表示的融合</li>
 <li>文档：$P^\prime = g(P,\tilde{Q})\cdot m(P,\tilde{Q}) + (1-g(P, \tilde{Q})）\cdot P$</li>
 <li>问题：$Q^\prime = g(Q,\tilde{P})\cdot m(Q,\tilde{P}) + (1-g(Q, \tilde{P})）\cdot Q$</li>
@@ -549,84 +520,69 @@ Datasets: SQuAD; TriviaQA</p>
 </ul>
 </li>
 </ul>
-<h4>2.2 Self-attention &amp; Fusion</h4>
-<p>文档的self-attention fusion过程：</p>
+<h4 id="2-2-Self-attention-amp-Fusion"><a href="#2-2-Self-attention-amp-Fusion" class="headerlink" title="2.2 Self-attention &amp; Fusion"></a>2.2 Self-attention &amp; Fusion</h4><p>文档的self-attention fusion过程：</p>
 <ul>
-<li>首先将manual feature引入，与refined question-aware passage表示进行串接
-<ul>
+<li>首先将manual feature引入，与refined question-aware passage表示进行串接<ul>
 <li>$D = BiLSTM([P^\prime; feat_{man}])$</li>
 </ul>
 </li>
-<li>self-alignment <strong>fusion</strong> process
-<ul>
+<li>self-alignment <strong>fusion</strong> process<ul>
 <li>$L = softmax(D \cdot W_1 \cdot D^T)$</li>
 <li>$\tilde{D} = L \cdot D$</li>
 <li>$D^\prime = Fuse(D,\tilde{D})$</li>
 </ul>
 </li>
-<li>双向LSTM获得最终的上下文文档表示：
-<ul>
+<li>双向LSTM获得最终的上下文文档表示：<ul>
 <li>$D^{\prime\prime} = BiLSTM(D^\prime)$</li>
 </ul>
 </li>
 </ul>
 <p>问题端的self-attention fusion过程</p>
 <ul>
-<li>获得新的问题上下文表示：$Q^{\prime\prime} = BiLSTM(Q^\prime)$
-<ul>
+<li>获得新的问题上下文表示：$Q^{\prime\prime} = BiLSTM(Q^\prime)$<ul>
 <li>$Q^\prime$ 来自于co-attention+fusion的结果</li>
 </ul>
 </li>
-<li>linear self-alignment, 使用 linear transformation (linear sequence attention，同drqa中的问题编码)，将问题编码为向量
-<ul>
+<li>linear self-alignment, 使用 linear transformation (linear sequence attention，同drqa中的问题编码)，将问题编码为向量<ul>
 <li>$\gamma = softmax(w_q^T Q^{\prime\prime})$</li>
-<li>$q = \sum_{j} \gamma_j \cdot Q^{\prime\prime}, \forall j \in [1,...,m]$</li>
+<li>$q = \sum_{j} \gamma_j \cdot Q^{\prime\prime}, \forall j \in [1,…,m]$</li>
 </ul>
 </li>
 </ul>
-<h4>2.3 Fusion Functions</h4>
-<ul>
+<h4 id="2-3-Fusion-Functions"><a href="#2-3-Fusion-Functions" class="headerlink" title="2.3 Fusion Functions"></a>2.3 Fusion Functions</h4><ul>
 <li>simple concat：简单讲两个channel的输入进行串联（计算m(·)时）</li>
-<li>Full Projection：heuristic matching，形如
-<ul>
+<li>Full Projection：heuristic matching，形如<ul>
 <li>$[P;\tilde{Q};P\circ\tilde{Q};P-\tilde{Q}]$</li>
 </ul>
 </li>
-<li>Scalar-based fusion：训练一个标量参数
-<ul>
+<li>Scalar-based fusion：训练一个标量参数<ul>
 <li>$g(P,\tilde{Q}) = g_p$</li>
 </ul>
 </li>
-<li>&lt;font color=green&gt;<strong>Vector-based Fusion</strong>&lt;/font&gt;: 效果最好的
-<ul>
+<li><font color="green"><strong>Vector-based Fusion</strong></font>: 效果最好的<ul>
 <li>$g(P,\tilde{Q}) = \sigma(w_g^T \cdot [P;\tilde{Q};P\circ\tilde{Q};P-\tilde{Q}] + b_g)$</li>
 <li>$w_g$是待训练的权重向量</li>
 </ul>
 </li>
-<li>Matrix-based Fusion：
-<ul>
+<li>Matrix-based Fusion：<ul>
 <li>$g(P,\tilde{Q}) = \sigma(W_g^T \cdot [P;\tilde{Q};P\circ\tilde{Q};P-\tilde{Q}] + b_g)$</li>
 <li>$W_g$是待训练的权重矩阵</li>
 </ul>
 </li>
 </ul>
-<h3>3.Output Layer</h3>
-<ul>
-<li>bilinear match function
-<ul>
+<h3 id="3-Output-Layer"><a href="#3-Output-Layer" class="headerlink" title="3.Output Layer"></a>3.Output Layer</h3><ul>
+<li>bilinear match function<ul>
 <li>$P_{start} = softmax(q \cdot W_s^T D^{\prime\prime})$</li>
 <li>$P_{end} = softmax(q \cdot W_e^T D^{\prime\prime})$</li>
 <li>可以看做是对问题的回顾</li>
 </ul>
 </li>
 </ul>
-<h2>Experiments</h2>
-<h2>Summary &amp; Analysis</h2>
-<ul>
+<h2 id="Experiments"><a href="#Experiments" class="headerlink" title="Experiments"></a>Experiments</h2><h2 id="Summary-amp-Analysis"><a href="#Summary-amp-Analysis" class="headerlink" title="Summary &amp; Analysis"></a>Summary &amp; Analysis</h2><ul>
 <li>ELMo 与上下文表示融合的新思路</li>
 <li><strong>原始的context representation可以看做是global level的信息，在fusion中的作用很大</strong>(每一步的fusion都是将attention representation与original context representation进行融合)，利用original context representation对attention之后的表示进行融合，微调带有注意力的表示</li>
 <li>计算attention时，采取 linear + relu 的bilinear的效果最优</li>
-<li>输出层的 &lt;font color=blue&gt;<strong>bilinear match function</strong>&lt;/font&gt; 对结果的提升很大</li>
+<li>输出层的 <font color="blue"><strong>bilinear match function</strong></font> 对结果的提升很大</li>
 </ul>
 
       
@@ -868,7 +824,7 @@ Datasets: SQuAD; TriviaQA</p>
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">Motivation</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-text">This Work</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">Model</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-text">1.Encoder Layer</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-text">2.Hierarchical Attention Fusion Layer</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#undefined"><span class="nav-text">2.1 Co-attention &amp; Fusion</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#undefined"><span class="nav-text">2.2 Self-attention &amp; Fusion</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#undefined"><span class="nav-text">2.3 Fusion Functions</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-text">3.Output Layer</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">Experiments</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">Summary &amp; Analysis</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Motivation"><span class="nav-text">Motivation</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#This-Work"><span class="nav-text">This Work</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Model"><span class="nav-text">Model</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-Encoder-Layer"><span class="nav-text">1.Encoder Layer</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-Hierarchical-Attention-Fusion-Layer"><span class="nav-text">2.Hierarchical Attention Fusion Layer</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#2-1-Co-attention-amp-Fusion"><span class="nav-text">2.1 Co-attention &amp; Fusion</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-2-Self-attention-amp-Fusion"><span class="nav-text">2.2 Self-attention &amp; Fusion</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-3-Fusion-Functions"><span class="nav-text">2.3 Fusion Functions</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-Output-Layer"><span class="nav-text">3.Output Layer</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Experiments"><span class="nav-text">Experiments</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Summary-amp-Analysis"><span class="nav-text">Summary &amp; Analysis</span></a></li></ol></div>
             
 
           </div>

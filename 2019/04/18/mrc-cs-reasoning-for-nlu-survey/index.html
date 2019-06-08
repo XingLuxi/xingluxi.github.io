@@ -86,13 +86,13 @@
 
 
 
-<meta name="description" content="Authors: Shane Storks, Qianzi Gao, Joyce Y. Chai Org.: Department of Computers Science and Engineering, Michigan State University Year: 2019  Abstract Commonsense Knowledge (CS Know.) 和 Commonsense R">
+<meta name="description" content="Authors: Shane Storks, Qianzi Gao, Joyce Y. ChaiOrg.: Department of Computers Science and Engineering, Michigan State UniversityYear: 2019  AbstractCommonsense Knowledge (CS Know.) 和 Commonsense Reas">
 <meta name="keywords" content="nlp,knowledge,mrc,reasoning,commonsense,survey">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Commonsense Reasoning for Natural Language Understanding - A Survey of Benchmarks, Resources, and Approachs">
 <meta property="og:url" content="http://xingluxi.github.io/2019/04/18/mrc-cs-reasoning-for-nlu-survey/index.html">
 <meta property="og:site_name" content="Luxi Xing - Blog">
-<meta property="og:description" content="Authors: Shane Storks, Qianzi Gao, Joyce Y. Chai Org.: Department of Computers Science and Engineering, Michigan State University Year: 2019  Abstract Commonsense Knowledge (CS Know.) 和 Commonsense R">
+<meta property="og:description" content="Authors: Shane Storks, Qianzi Gao, Joyce Y. ChaiOrg.: Department of Computers Science and Engineering, Michigan State UniversityYear: 2019  AbstractCommonsense Knowledge (CS Know.) 和 Commonsense Reas">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://xingluxi.github.io/images/mrc-cs-reasoning-for-nlu-survey/mind.png">
 <meta property="og:image" content="http://xingluxi.github.io/images/mrc-cs-reasoning-for-nlu-survey/overview.png">
@@ -102,7 +102,7 @@
 <meta property="og:updated_time" content="2019-06-05T15:03:48.421Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Commonsense Reasoning for Natural Language Understanding - A Survey of Benchmarks, Resources, and Approachs">
-<meta name="twitter:description" content="Authors: Shane Storks, Qianzi Gao, Joyce Y. Chai Org.: Department of Computers Science and Engineering, Michigan State University Year: 2019  Abstract Commonsense Knowledge (CS Know.) 和 Commonsense R">
+<meta name="twitter:description" content="Authors: Shane Storks, Qianzi Gao, Joyce Y. ChaiOrg.: Department of Computers Science and Engineering, Michigan State UniversityYear: 2019  AbstractCommonsense Knowledge (CS Know.) 和 Commonsense Reas">
 <meta name="twitter:image" content="http://xingluxi.github.io/images/mrc-cs-reasoning-for-nlu-survey/mind.png">
 
 
@@ -376,7 +376,7 @@
                   <span class="post-meta-item-text">Words count in article&#58;</span>
                 
                 <span title="Words count in article">
-                  2.4k
+                  2.3k
                 </span>
               
 
@@ -413,107 +413,81 @@
       
 
       
-        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><blockquote>
-<p>Authors: Shane Storks, Qianzi Gao, Joyce Y. Chai
-Org.: Department of Computers Science and Engineering, Michigan State University
-Year: 2019</p>
+        <blockquote>
+<p>Authors: Shane Storks, Qianzi Gao, Joyce Y. Chai<br>Org.: Department of Computers Science and Engineering, Michigan State University<br>Year: 2019</p>
 </blockquote>
-<h2>Abstract</h2>
-<p>Commonsense Knowledge (CS Know.) 和 Commonsense Reasoning 是机器智能的两大重要瓶颈。</p>
+<h2 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h2><p>Commonsense Knowledge (CS Know.) 和 Commonsense Reasoning 是机器智能的两大重要瓶颈。</p>
 <p>现有的NLP研究中，已经提出了一些需要常识推理的benchmarks和tasks，旨在评估机器获得和学习常识知识的能力。</p>
 <p>这篇文章的主要目的是针对NLU的常识推理，提供关于以下四个方面的一个综述：</p>
 <ul>
-<li>
-<p>现有的任务和benchmarks</p>
+<li>现有的任务和benchmarks</li>
+<li>Knowledge Resources</li>
+<li><p>Learning and Inference Approachs</p>
 </li>
-<li>
-<p>Knowledge Resources</p>
-</li>
-<li>
-<p>Learning and Inference Approachs</p>
-</li>
-<li>
-<p>关于本篇文章的思维导图：</p>
+<li><p>关于本篇文章的思维导图：</p>
 <ul>
 <li><img src="/images/mrc-cs-reasoning-for-nlu-survey/mind.png" alt="mind-note"></li>
 </ul>
 </li>
 </ul>
-<h2>1.Introduction</h2>
-<p>Davis and Marcus (2015)[^davis] 指出常识推理的挑战：spans from difficulties in <strong>understanding and formulating commonsense knowledge for specific or general domains</strong> to complexities in <strong>various forms of reasoning and their integration for problem solving</strong>.</p>
+<h2 id="1-Introduction"><a href="#1-Introduction" class="headerlink" title="1.Introduction"></a>1.Introduction</h2><p>Davis and Marcus (2015)<sup><a href="#fn_davis" id="reffn_davis">davis</a></sup> 指出常识推理的挑战：spans from difficulties in <strong>understanding and formulating commonsense knowledge for specific or general domains</strong> to complexities in <strong>various forms of reasoning and their integration for problem solving</strong>.</p>
 <p>现有的研究主要关注如下图所示的几个方面：(在这篇文章中主要关注文本数据源)</p>
 <p><img src="/images/mrc-cs-reasoning-for-nlu-survey/overview.png" alt="image-overview"></p>
-<h2>2.Benchmarks and Tasks</h2>
-<p>这章主要介绍一些需要常识推理的benchmarks，以及对构建这类benchmarks的重要要求进行一个总结。</p>
+<h2 id="2-Benchmarks-and-Tasks"><a href="#2-Benchmarks-and-Tasks" class="headerlink" title="2.Benchmarks and Tasks"></a>2.Benchmarks and Tasks</h2><p>这章主要介绍一些需要常识推理的benchmarks，以及对构建这类benchmarks的重要要求进行一个总结。</p>
 <ul>
-<li>benchmarks数据集的发展：
-<ul>
+<li>benchmarks数据集的发展：<ul>
 <li><img src="/images/mrc-cs-reasoning-for-nlu-survey/benchmark-trend.png" alt="benchmark-trend"></li>
 </ul>
 </li>
 </ul>
-<h3>2.1 Overivew of ExistingBenchmarks</h3>
-<p>很多常识benchmark数据集都是基于classic language processing问题建立起的，从focused task (共指消解、命名实体识别) 到更理解性的任务和应用。</p>
+<h3 id="2-1-Overivew-of-ExistingBenchmarks"><a href="#2-1-Overivew-of-ExistingBenchmarks" class="headerlink" title="2.1 Overivew of ExistingBenchmarks"></a>2.1 Overivew of ExistingBenchmarks</h3><p>很多常识benchmark数据集都是基于classic language processing问题建立起的，从focused task (共指消解、命名实体识别) 到更理解性的任务和应用。</p>
 <p>Benchmarks不应该局限于需要 language processing 能力提升性能的类型，应该更有针对性，更关注某类的常识知识和推理 (或是某几类的混合) 。</p>
 <p>将Benchmarks分为6类，分别展开介绍</p>
-<h4>2.1.1 Coreference Resolution</h4>
-<p>共指消解是NLU中的一个基本任务，在句子中出现<strong>多个代名词或明显复杂的过程</strong>时，需要常识知识确定决策。</p>
+<h4 id="2-1-1-Coreference-Resolution"><a href="#2-1-1-Coreference-Resolution" class="headerlink" title="2.1.1 Coreference Resolution"></a>2.1.1 Coreference Resolution</h4><p>共指消解是NLU中的一个基本任务，在句子中出现<strong>多个代名词或明显复杂的过程</strong>时，需要常识知识确定决策。</p>
 <ul>
 <li>代表数据集：Winograd Schema Challenge (<a href="http://commonsensereasoning.org/winograd.html" target="_blank" rel="noopener">link</a>)</li>
 </ul>
-<h4>2.1.2 Question Answering</h4>
-<p>相比于只关注某些特定的语言处理或是推理的任务，QA提供了一种在单个任务中更全面地混合语言处理和推理技巧的benchmark。</p>
+<h4 id="2-1-2-Question-Answering"><a href="#2-1-2-Question-Answering" class="headerlink" title="2.1.2 Question Answering"></a>2.1.2 Question Answering</h4><p>相比于只关注某些特定的语言处理或是推理的任务，QA提供了一种在单个任务中更全面地混合语言处理和推理技巧的benchmark。</p>
 <blockquote>
 <p>contain questions requiring commonsense knowledge alongside question requiring comprehension of a given text.</p>
 </blockquote>
 <ul>
-<li>代表数据集：ARC、MCScript、ProPara、MultiRC、SQuADv2、CoQA、OpenBookQA、CommonsenseQA
-<ul>
+<li>代表数据集：ARC、MCScript、ProPara、MultiRC、SQuADv2、CoQA、OpenBookQA、CommonsenseQA<ul>
 <li>ProPara：面向过程性文本，旨在学习目标的追踪和状态变化</li>
 </ul>
 </li>
 </ul>
-<h4>2.1.3 Textual Entailment</h4>
-<p>文本推理任务旨在推理两个句子之间的关系，需要多种语言处理能力（paraphrase）以及object tracking、causal reasoning和常识知识。</p>
+<h4 id="2-1-3-Textual-Entailment"><a href="#2-1-3-Textual-Entailment" class="headerlink" title="2.1.3 Textual Entailment"></a>2.1.3 Textual Entailment</h4><p>文本推理任务旨在推理两个句子之间的关系，需要多种语言处理能力（paraphrase）以及object tracking、causal reasoning和常识知识。</p>
 <ul>
 <li>代表数据集：RTE challenges、SICK、SNLI、SciTail</li>
-<li>RTE knowledge resources: https://aclweb.org/aclwiki/RTE_Knowledge_Resources</li>
+<li>RTE knowledge resources: <a href="https://aclweb.org/aclwiki/RTE_Knowledge_Resources" target="_blank" rel="noopener">https://aclweb.org/aclwiki/RTE_Knowledge_Resources</a></li>
 </ul>
-<h4>2.1.4 Plausible Inference</h4>
-<p>似然推理：require hypothetical, intermediate or uncertain conclusions defined as plausible inference.</p>
+<h4 id="2-1-4-Plausible-Inference"><a href="#2-1-4-Plausible-Inference" class="headerlink" title="2.1.4 Plausible Inference"></a>2.1.4 Plausible Inference</h4><p>似然推理：require hypothetical, intermediate or uncertain conclusions defined as plausible inference.</p>
 <p>这类数据集关注的是everyday events和interactions，包含各种的实际的常识关系。</p>
 <ul>
 <li>代表数据集：COPA、CBT、ROCStories、JOCI、CLOTH、SWAG、ReCoRD</li>
 </ul>
-<h4>2.1.5 Psychological Reasoning</h4>
-<p>心理推理：关于情绪（情感）和意图的推理，需要社会心理学的常识知识</p>
+<h4 id="2-1-5-Psychological-Reasoning"><a href="#2-1-5-Psychological-Reasoning" class="headerlink" title="2.1.5 Psychological Reasoning"></a>2.1.5 Psychological Reasoning</h4><p>心理推理：关于情绪（情感）和意图的推理，需要社会心理学的常识知识</p>
 <ul>
-<li>代表数据集：Triangle-COPA、Story Commonsense、Event2Mind
-<ul>
-<li>StoryCommonsense[^rashkin-2018a]：要求预测Motivation和Emotions，以及Maslow (human need)、Reiss (human motives)、Plutchik (emotions)
-<ul>
-<li>link：http://uwnlp.github.io/storycommonsense</li>
+<li>代表数据集：Triangle-COPA、Story Commonsense、Event2Mind<ul>
+<li>StoryCommonsense<sup><a href="#fn_rashkin-2018a" id="reffn_rashkin-2018a">rashkin-2018a</a></sup>：要求预测Motivation和Emotions，以及Maslow (human need)、Reiss (human motives)、Plutchik (emotions)<ul>
+<li>link：<a href="http://uwnlp.github.io/storycommonsense" target="_blank" rel="noopener">http://uwnlp.github.io/storycommonsense</a></li>
 <li>Theories of Motivation (Maslow and Reiss) and Emotional Reaction (Plutchik): <img src="/images/mrc-cs-reasoning-for-nlu-survey/MaslowReissPlutchik.png" alt="png"></li>
 </ul>
 </li>
-<li>Event2Mind[^rashkin-2018b]：推理关于事件的intentions和reactions，每个事件都有1到2个参与者，三个任务：预测主要参与者的意图和反应，并预测其他人的反应
-<ul>
-<li>link：http://uwnlp.github.io/event2mind</li>
+<li>Event2Mind<sup><a href="#fn_rashkin-2018b" id="reffn_rashkin-2018b">rashkin-2018b</a></sup>：推理关于事件的intentions和reactions，每个事件都有1到2个参与者，三个任务：预测主要参与者的意图和反应，并预测其他人的反应<ul>
+<li>link：<a href="http://uwnlp.github.io/event2mind" target="_blank" rel="noopener">http://uwnlp.github.io/event2mind</a></li>
 </ul>
 </li>
 </ul>
 </li>
 </ul>
-<h4>2.1.6 Multiple Tasks</h4>
-<p>consist of several focused language processing or reasoning tasks so that reading comprehension skills can be learned one by one in a consistent format</p>
+<h4 id="2-1-6-Multiple-Tasks"><a href="#2-1-6-Multiple-Tasks" class="headerlink" title="2.1.6 Multiple Tasks"></a>2.1.6 Multiple Tasks</h4><p>consist of several focused language processing or reasoning tasks so that reading comprehension skills can be learned one by one in a consistent format</p>
 <ul>
-<li>代表数据集：bAbI、IIE、GLUE、DNC
-<ul>
+<li>代表数据集：bAbI、IIE、GLUE、DNC<ul>
 <li>IIE：Inference is Everything，RTE的形式</li>
-<li>DNC [^poliak]：Diverse Natural Language Inference Collection，包含9个NLI任务需要7中不同类型的推理
-<ul>
-<li>recast from：
-<ul>
+<li>DNC <sup><a href="#fn_poliak" id="reffn_poliak">poliak</a></sup>：Diverse Natural Language Inference Collection，包含9个NLI任务需要7中不同类型的推理<ul>
+<li>recast from：<ul>
 <li>Event Factuality, recast from UW (Lee, Artzi, Choi, &amp; Zettlemoyer, 2015), MEANTIME (Minard, Speranza, Urizar, Altuna, van Erp, Schoen, &amp; van Son, 2016), and (Rudinger, White, &amp; Van Durme, 2018b)</li>
 <li>Named Entity Recognition, recast from the Groningen Meaning Bank (Bos, Basile, Evang, Venhuizen, &amp; Bjerva, 2017) and the ConLL-2003 shared task (Tjong Kim Sang &amp; De Meulder, 2003)</li>
 <li>Gendered Anaphora Resolution, recast from the Winogender dataset (Rudinger et al., 2018a)</li>
@@ -523,34 +497,29 @@ Year: 2019</p>
 <li>Subjectivity, recast from Kotzias, Denil, De Freitas, and Smyth (2015)</li>
 </ul>
 </li>
-<li>link：http://github.com/decompositional-semantics-initiative/DNC</li>
+<li>link：<a href="http://github.com/decompositional-semantics-initiative/DNC" target="_blank" rel="noopener">http://github.com/decompositional-semantics-initiative/DNC</a></li>
 </ul>
 </li>
 </ul>
 </li>
 </ul>
-<h3>2.2 Criteria and Consideration for Creating Benchmarks</h3>
-<h4>2.2.1 Task Format</h4>
-<p>决定任务形式对于Benchmarks的创建是重要的一步，现有的任务形式有三类：</p>
+<h3 id="2-2-Criteria-and-Consideration-for-Creating-Benchmarks"><a href="#2-2-Criteria-and-Consideration-for-Creating-Benchmarks" class="headerlink" title="2.2 Criteria and Consideration for Creating Benchmarks"></a>2.2 Criteria and Consideration for Creating Benchmarks</h3><h4 id="2-2-1-Task-Format"><a href="#2-2-1-Task-Format" class="headerlink" title="2.2.1 Task Format"></a>2.2.1 Task Format</h4><p>决定任务形式对于Benchmarks的创建是重要的一步，现有的任务形式有三类：</p>
 <ul>
-<li>Classification Task：有三种形式
-<ul>
+<li>Classification Task：有三种形式<ul>
 <li>Textual Entailment Task</li>
 <li>Cloze Task</li>
 <li>Traditional Multiple-Choice Task</li>
 </ul>
 </li>
-<li>Open-ended Task：开放式任务
-<ul>
+<li>Open-ended Task：开放式任务<ul>
 <li>Span</li>
 <li>Subset of category labels：Story Commonsense</li>
 <li>Purely open-ended：Event2Mind、bAbI</li>
-<li><s>Generative</s></li>
+<li><del>Generative</del></li>
 </ul>
 </li>
 </ul>
-<h4>2.2.2 Evaluation Schemes</h4>
-<p>评测形式</p>
+<h4 id="2-2-2-Evaluation-Schemes"><a href="#2-2-2-Evaluation-Schemes" class="headerlink" title="2.2.2 Evaluation Schemes"></a>2.2.2 Evaluation Schemes</h4><p>评测形式</p>
 <p>现有的评测结果都是直接给出是否通过(pass or fail grade)，没有任何反馈</p>
 <p>理想的评测形式应该考虑有信息的指标，可以比较不同的方法，比较机器和人之间性能表现的差异</p>
 <ul>
@@ -558,47 +527,39 @@ Year: 2019</p>
 <li>Comparison of Approaches</li>
 <li>Human Performance Measurement</li>
 </ul>
-<h4>2.2.3 Data Biases</h4>
-<p>数据分布的平衡</p>
+<h4 id="2-2-3-Data-Biases"><a href="#2-2-3-Data-Biases" class="headerlink" title="2.2.3 Data Biases"></a>2.2.3 Data Biases</h4><p>数据分布的平衡</p>
 <ul>
 <li>Label Distribution Bias</li>
 <li>Question Type Bias</li>
 <li>Superficial Correlation Bias：gender bias</li>
 </ul>
-<h4>2.2.4 Collection Methods</h4>
-<p>[Not Focus]</p>
+<h4 id="2-2-4-Collection-Methods"><a href="#2-2-4-Collection-Methods" class="headerlink" title="2.2.4 Collection Methods"></a>2.2.4 Collection Methods</h4><p>[Not Focus]</p>
 <ul>
 <li>Manual versus Automatic Generation</li>
 <li>Automatic Generation versus Text Mining</li>
 <li>Crowsourcing Considerations</li>
 </ul>
-<h2>3.Knowledge Resources</h2>
-<h3>3.1 Overview of Knowledge Resources for NLU</h3>
-<p>为了理解自然语言，通常需要语言学知识来却确定文本的句法、语义结构，再进一步使用通识、常识知识来增强对结构的理解，以达到更全面的理解</p>
-<h4>3.1.1 Linguistic Knowledge Resources</h4>
-<p>带标记的句法、语义、篇章结构资源</p>
+<h2 id="3-Knowledge-Resources"><a href="#3-Knowledge-Resources" class="headerlink" title="3.Knowledge Resources"></a>3.Knowledge Resources</h2><h3 id="3-1-Overview-of-Knowledge-Resources-for-NLU"><a href="#3-1-Overview-of-Knowledge-Resources-for-NLU" class="headerlink" title="3.1 Overview of Knowledge Resources for NLU"></a>3.1 Overview of Knowledge Resources for NLU</h3><p>为了理解自然语言，通常需要语言学知识来却确定文本的句法、语义结构，再进一步使用通识、常识知识来增强对结构的理解，以达到更全面的理解</p>
+<h4 id="3-1-1-Linguistic-Knowledge-Resources"><a href="#3-1-1-Linguistic-Knowledge-Resources" class="headerlink" title="3.1.1 Linguistic Knowledge Resources"></a>3.1.1 Linguistic Knowledge Resources</h4><p>带标记的句法、语义、篇章结构资源</p>
 <ul>
-<li>Annotated Linguistic Corpora
-<ul>
+<li>Annotated Linguistic Corpora<ul>
 <li>Penn TreeBank：POS tags &amp; syntactic structures based on context-free grammar</li>
 <li>PropBank：predicate-argument structures</li>
 <li>Penn Discourse TreeBank</li>
 <li>Abstract Meaning Representation (AMR)</li>
 </ul>
 </li>
-<li>Lexical Resources
-<ul>
+<li>Lexical Resources<ul>
 <li>WordNet</li>
 <li>VerbNet：hierarchical English Verb lexicon</li>
 <li>FrameNet：frame semantics for a set of verbs</li>
 </ul>
 </li>
 </ul>
-<h4>3.1.2 Common Knowledge Resources</h4>
-<blockquote>
-<p><strong>&lt;font color=blue&gt;Common knowledge refers to speciﬁc facts about the world that are often explicitly stated.&lt;/font&gt;</strong></p>
+<h4 id="3-1-2-Common-Knowledge-Resources"><a href="#3-1-2-Common-Knowledge-Resources" class="headerlink" title="3.1.2 Common Knowledge Resources"></a>3.1.2 Common Knowledge Resources</h4><blockquote>
+<p><strong><font color="blue">Common knowledge refers to speciﬁc facts about the world that are often explicitly stated.</font></strong></p>
 </blockquote>
-<p>与Commonsense Knowledge的不同是[^cambria-2011]：CS Know. required to achieve a deep understanding of both the low- and high-level concepts found in language.</p>
+<p>与Commonsense Knowledge的不同是<sup><a href="#fn_cambria-2011" id="reffn_cambria-2011">cambria-2011</a></sup>：CS Know. required to achieve a deep understanding of both the low- and high-level concepts found in language.</p>
 <ul>
 <li>Yet Another Great Ontology (YAGO): with common knowledge facts extracted from Wikipedia, converting WordNet from a primarily linguistic resource to a common knowledge base.</li>
 <li>DBpedia: Wikipedia-based knowledge base originally consisting of structured knowledge from more than 1.95 million Wikipedia articles.</li>
@@ -607,36 +568,31 @@ Year: 2019</p>
 <li>NELL</li>
 <li>Probase</li>
 </ul>
-<h4>3.1.3 Commonsense Knowledge Resources</h4>
-<blockquote>
-<p><strong>&lt;font color=blue&gt;Commonsense knowledge, on the other hand, is considered obvious to most humans, and not so likely to be explicitly stated&lt;/font&gt;</strong></p>
+<h4 id="3-1-3-Commonsense-Knowledge-Resources"><a href="#3-1-3-Commonsense-Knowledge-Resources" class="headerlink" title="3.1.3 Commonsense Knowledge Resources"></a>3.1.3 Commonsense Knowledge Resources</h4><blockquote>
+<p><strong><font color="blue">Commonsense knowledge, on the other hand, is considered obvious to most humans, and not so likely to be explicitly stated</font></strong></p>
 <p>Cambria, E., Song, Y., Wang, H., &amp; Hussain, A. (2011). Isanette: A Common and Common Sense Knowledge Base for Opinion Mining. In 2011 IEEE 11th International Conference on Data Mining Workshops, pp. 315–322, Vancouver, BC, Canada. IEEE.</p>
 </blockquote>
 <ul>
 <li>Cyc</li>
 <li>ConceptNet</li>
-<li>AnalogySpace
-<ul>
+<li>AnalogySpace<ul>
 <li>is an algorithm for reducing the dimensionality of commonsense knowledge so that knowledge bases can be more efﬁciently and accurately reasoned over.</li>
 </ul>
 </li>
 <li>SenticNet: intended for sentiment analysis</li>
-<li>IsaCore: a set of &quot;is a&quot; relationships and conﬁdences.
-<ul>
-<li>http://sentic.net/downloads</li>
+<li>IsaCore: a set of “is a” relationships and conﬁdences.<ul>
+<li><a href="http://sentic.net/downloads" target="_blank" rel="noopener">http://sentic.net/downloads</a></li>
 </ul>
 </li>
 <li>COGBASE</li>
 <li>WebChild</li>
 <li>LocatedNear</li>
-<li>Atlas of Machine Commonsense (ATOMIC)
-<ul>
-<li>about 300,000 nodes corresponding to short textual descriptions of events, and about 877,000 &quot;if-event-then&quot; triples representing if-then relationships between everyday events.</li>
+<li>Atlas of Machine Commonsense (ATOMIC)<ul>
+<li>about 300,000 nodes corresponding to short textual descriptions of events, and about 877,000 “if-event-then” triples representing if-then relationships between everyday events.</li>
 </ul>
 </li>
 </ul>
-<h3>3.2 Approaches to Creating Knowledge Resources</h3>
-<blockquote>
+<h3 id="3-2-Approaches-to-Creating-Knowledge-Resources"><a href="#3-2-Approaches-to-Creating-Knowledge-Resources" class="headerlink" title="3.2 Approaches to Creating Knowledge Resources"></a>3.2 Approaches to Creating Knowledge Resources</h3><blockquote>
 <p>The goal is to create general knowledge bases to <strong>provide inductive bias for a variety of learning and reasoning tasks</strong></p>
 </blockquote>
 <ul>
@@ -644,87 +600,66 @@ Year: 2019</p>
 <li>Text Mining</li>
 <li>Crowdsourcing</li>
 </ul>
-<h2>4.Learning and Inference Approaches</h2>
-<h3>4.1 Symbolic and Statistical Approaches</h3>
-<h3>4.2 Neural Approaches</h3>
-<ul>
-<li>common components in neural models:
-<ul>
+<h2 id="4-Learning-and-Inference-Approaches"><a href="#4-Learning-and-Inference-Approaches" class="headerlink" title="4.Learning and Inference Approaches"></a>4.Learning and Inference Approaches</h2><h3 id="4-1-Symbolic-and-Statistical-Approaches"><a href="#4-1-Symbolic-and-Statistical-Approaches" class="headerlink" title="4.1 Symbolic and Statistical Approaches"></a>4.1 Symbolic and Statistical Approaches</h3><h3 id="4-2-Neural-Approaches"><a href="#4-2-Neural-Approaches" class="headerlink" title="4.2 Neural Approaches"></a>4.2 Neural Approaches</h3><ul>
+<li>common components in neural models: <ul>
 <li><img src="/images/mrc-cs-reasoning-for-nlu-survey/neural-approachs.png" alt="neural"></li>
 </ul>
 </li>
 </ul>
-<h4>4.2.1 Memory Augmentation</h4>
-<p>针对需要理解状态变化或是具有多个支撑事实来进行文本理解的任务</p>
-<h5>Memory Network</h5>
-<ul>
+<h4 id="4-2-1-Memory-Augmentation"><a href="#4-2-1-Memory-Augmentation" class="headerlink" title="4.2.1 Memory Augmentation"></a>4.2.1 Memory Augmentation</h4><p>针对需要理解状态变化或是具有多个支撑事实来进行文本理解的任务</p>
+<h5 id="Memory-Network"><a href="#Memory-Network" class="headerlink" title="Memory Network"></a>Memory Network</h5><ul>
 <li>add a long-term memory component to track the world state and context</li>
-<li>MemNet can efficiently leverage a wider context in making inferences
-<ul>
+<li>MemNet can efficiently leverage a wider context in making inferences<ul>
 <li>outperform primarily RNN and LSTM based models</li>
 </ul>
 </li>
 </ul>
-<h5>Recurrent Entity Networks (ENTENT)</h5>
-<blockquote>
-<p>Henaff, M., Weston, J., Szlam, A., Bordes, A., &amp; LeCun, Y. (2017).
-Tracking the World State with Recurrent Entity Networks. In Proceedings of the 5th International Conference on Learning Representations.
-ICLR,2017.</p>
+<h5 id="Recurrent-Entity-Networks-ENTENT"><a href="#Recurrent-Entity-Networks-ENTENT" class="headerlink" title="Recurrent Entity Networks (ENTENT)"></a>Recurrent Entity Networks (ENTENT)</h5><blockquote>
+<p>Henaff, M., Weston, J., Szlam, A., Bordes, A., &amp; LeCun, Y. (2017).<br>Tracking the World State with Recurrent Entity Networks. In Proceedings of the 5th International Conference on Learning Representations.<br>ICLR,2017.</p>
 </blockquote>
 <ul>
-<li>composed of several dynamic memory cell
-<ul>
+<li>composed of several dynamic memory cell<ul>
 <li>each cell learns to represent the <strong>state</strong> or <strong>properties</strong> concerning entities mentioned in the input.</li>
 <li>each cell is a Gated-RNN, only updates its content when new information relevant to the particular entity is received</li>
 <li>run in parallel, allow multiple locations of memory to be updated at the same time.</li>
 </ul>
 </li>
-<li>unlike MemNet:
-<ul>
+<li>unlike MemNet:<ul>
 <li>MemNet only preform reasoning when the entire supporting text and the question are processed and loaded to the memory.</li>
-<li>when given a supporting text with multiple questions:
-<ul>
+<li>when given a supporting text with multiple questions:<ul>
 <li>ENTENT do not need to process the input text multiple times to answer these question.</li>
 <li>MemNet need to re-process the whole input for each question.</li>
 </ul>
 </li>
 </ul>
 </li>
-<li>drawbacks
-<ul>
+<li>drawbacks<ul>
 <li>perform well in bAbI, but not in ProPara</li>
 <li>maintain memory registers for entities, it has no separate embedding for individual states of entities over time</li>
 <li>do not explicitly update coreferences in memory</li>
 </ul>
 </li>
 </ul>
-<h5>KG-MRC</h5>
-<blockquote>
-<p>Das, R., Munkhdalai, T., Yuan, X., Trischler, A., &amp; McCallum, A.
-Building Dynamic Knowledge Graphs from Text using Machine Reading Comprehension.
-ICLR, 2019</p>
+<h5 id="KG-MRC"><a href="#KG-MRC" class="headerlink" title="KG-MRC"></a>KG-MRC</h5><blockquote>
+<p>Das, R., Munkhdalai, T., Yuan, X., Trischler, A., &amp; McCallum, A.<br>Building Dynamic Knowledge Graphs from Text using Machine Reading Comprehension.<br>ICLR, 2019</p>
 </blockquote>
 <p>Knowledge Graph Machine Reading Comprehension</p>
 <ul>
-<li>maintain a dynamic memory
-<ul>
+<li>maintain a dynamic memory<ul>
 <li>memory is in the form of knowledge graphs generated after every sentence of procedural text.</li>
 </ul>
 </li>
-<li>generated knowledge graphs:
-<ul>
+<li>generated knowledge graphs:<ul>
 <li>are bipartite, connecting entities in the paragraph with their locations (currently, only capture the location relation)</li>
 <li>connections between entities and locations are updated to generate a new graph after each sentence</li>
 </ul>
 </li>
-<li>KG-MRC learns some commonsense constraints automatically.
-<ul>
+<li>KG-MRC learns some commonsense constraints automatically.<ul>
 <li>recurrent graph representations help.</li>
 </ul>
 </li>
 </ul>
-<h4>4.2.2 Attention Mechanism</h4>
-<ul>
+<h4 id="4-2-2-Attention-Mechanism"><a href="#4-2-2-Attention-Mechanism" class="headerlink" title="4.2.2 Attention Mechanism"></a>4.2.2 Attention Mechanism</h4><ul>
 <li>automatically provides an alignment between inputs and outputs</li>
 <li>have limitations when the alignment between inputs and outputs is not straightforward.</li>
 <li>sequentail attention</li>
@@ -732,85 +667,81 @@ ICLR, 2019</p>
 <li>multi-head</li>
 <li>comparison score function</li>
 </ul>
-<h4>4.2.3 Pre-Trained Models and Representations</h4>
-<ul>
+<h4 id="4-2-3-Pre-Trained-Models-and-Representations"><a href="#4-2-3-Pre-Trained-Models-and-Representations" class="headerlink" title="4.2.3 Pre-Trained Models and Representations"></a>4.2.3 Pre-Trained Models and Representations</h4><ul>
 <li>ELMO</li>
 <li>GPT</li>
-<li>BERT
-<ul>
-<li>still far from human: <s>SciTail</s>、ReCoRD、OpenBookQA</li>
+<li>BERT<ul>
+<li>still far from human: <del>SciTail</del>、ReCoRD、OpenBookQA</li>
 </ul>
 </li>
-<li>When to fine-tune
-<ul>
+<li>When to fine-tune<ul>
 <li>sentence pair tasks</li>
 </ul>
 </li>
 </ul>
-<h3>4.3 Incorporating External Knowledge</h3>
-<ul>
+<h3 id="4-3-Incorporating-External-Knowledge"><a href="#4-3-Incorporating-External-Knowledge" class="headerlink" title="4.3 Incorporating External Knowledge"></a>4.3 Incorporating External Knowledge</h3><ul>
 <li>WordNet in Textual Entailment</li>
 <li>ConceptNet in Commonsense Task</li>
-<li>Main Problems：
-<ul>
+<li>Main Problems：<ul>
 <li>how to incorporate external knowledge in modern neural approaches</li>
 <li>how to acquire relevant external knowledge</li>
 </ul>
 </li>
 </ul>
-<h2>5.Other Related Benchmarks</h2>
-<ul>
+<h2 id="5-Other-Related-Benchmarks"><a href="#5-Other-Related-Benchmarks" class="headerlink" title="5.Other Related Benchmarks"></a>5.Other Related Benchmarks</h2><ul>
 <li>language-related tasks</li>
-<li>visual benchmarks
-<ul>
+<li>visual benchmarks<ul>
 <li>perception</li>
 </ul>
 </li>
 </ul>
-<h2>6.Discussion and Conclusion</h2>
-<ul>
-<li>
-<p>two types of commonsense knowledge are considered fundamental for human reasoning and decision making:</p>
+<h2 id="6-Discussion-and-Conclusion"><a href="#6-Discussion-and-Conclusion" class="headerlink" title="6.Discussion and Conclusion"></a>6.Discussion and Conclusion</h2><ul>
+<li><p>two types of commonsense knowledge are considered fundamental for human reasoning and decision making:</p>
 <ul>
 <li>intuitive psychology：心理</li>
 <li>intuitive physics：物理</li>
 </ul>
 </li>
-<li>
-<p>Challenges</p>
+<li><p>Challenges</p>
 <ul>
 <li>relation with humans: understanding <strong>how much Commonsense Knowledge is developed and acquire in humans</strong> and how they related to human Language Production and Comprehension may shed light on computational models for NLP</li>
 <li>difficult to identify and formalize Commonsense Knowledge</li>
-<li>disconnect between Commonsense Knowledge resources and approaches to tackle these benchmarks
-<ul>
-<li>One likely reason is that these knowledge bases do not cover the kind of knowledge that is required to solve those tasks
-<ul>
+<li>disconnect between Commonsense Knowledge resources and approaches to tackle these benchmarks<ul>
+<li>One likely reason is that these knowledge bases do not cover the kind of knowledge that is required to solve those tasks<ul>
 <li>To address this problem, several methods have been proposed for <strong>leveraging incomplete knowledge bases</strong></li>
 <li>Eg1 <strong>AnalogySpace</strong>：uses principle component analysis to make analogies to smooth missing commonsense axioms</li>
 <li>Eg2 <strong>Memory Comparison Networks</strong>：allow machines to generalize over existing temporal relations in Knowledge Sources in order to acquire new relations</li>
 </ul>
 </li>
-<li>jointly develop benchmark tasks and construct knowledge bases
-<ul>
+<li>jointly develop benchmark tasks and construct knowledge bases<ul>
 <li>Event2Mind &amp; ATOMIC</li>
 <li>CommonsenseQA &amp; ConceptNet</li>
 </ul>
 </li>
 </ul>
 </li>
-<li>only learning superficial artifacts from the dataset
-<ul>
+<li>only learning superficial artifacts from the dataset<ul>
 <li>obscure statistical biases — high preformance, but not actual reasoning</li>
 </ul>
 </li>
 </ul>
 </li>
 </ul>
-<p>[^davis]: Commonsense reasoning and commonsense knowledge in artiﬁcial intelligence. Commun. ACM, 58(9), 92–103.
-[^rashkin-2018a]: Modeling Naive Psychology of Characters in Simple Commonsense Stories. ACL,2018.
-[^rashkin-2018b]: Event2Mind: Commonsense Inference on Events, Intents, and Reactions. ACL,2018.
-[^poliak]: Collecting Diverse Natural Language Inference Problems for Sentence Representation Evaluation. EMNLP, 2018.
-[^cambria-2011]: Isanette: A Common and Common Sense Knowledge Base for Opinion Mining. In 2011 IEEE 11th International Conference on Data Mining Workshops, pp. 315–322, Vancouver, BC, Canada. IEEE.</p>
+<blockquote id="fn_davis">
+<sup>davis</sup>. Commonsense reasoning and commonsense knowledge in artiﬁcial intelligence. Commun. ACM, 58(9), 92–103.<a href="#reffn_davis" title="Jump back to footnote [davis] in the text."> &#8617;</a>
+</blockquote>
+<blockquote id="fn_rashkin-2018a">
+<sup>rashkin-2018a</sup>. Modeling Naive Psychology of Characters in Simple Commonsense Stories. ACL,2018.<a href="#reffn_rashkin-2018a" title="Jump back to footnote [rashkin-2018a] in the text."> &#8617;</a>
+</blockquote>
+<blockquote id="fn_rashkin-2018b">
+<sup>rashkin-2018b</sup>. Event2Mind: Commonsense Inference on Events, Intents, and Reactions. ACL,2018.<a href="#reffn_rashkin-2018b" title="Jump back to footnote [rashkin-2018b] in the text."> &#8617;</a>
+</blockquote>
+<blockquote id="fn_poliak">
+<sup>poliak</sup>. Collecting Diverse Natural Language Inference Problems for Sentence Representation Evaluation. EMNLP, 2018.<a href="#reffn_poliak" title="Jump back to footnote [poliak] in the text."> &#8617;</a>
+</blockquote>
+<blockquote id="fn_cambria-2011">
+<sup>cambria-2011</sup>. Isanette: A Common and Common Sense Knowledge Base for Opinion Mining. In 2011 IEEE 11th International Conference on Data Mining Workshops, pp. 315–322, Vancouver, BC, Canada. IEEE.<a href="#reffn_cambria-2011" title="Jump back to footnote [cambria-2011] in the text."> &#8617;</a>
+</blockquote>
 
       
     </div>
@@ -1055,7 +986,7 @@ ICLR, 2019</p>
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">Abstract</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">1.Introduction</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">2.Benchmarks and Tasks</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-text">2.1 Overivew of ExistingBenchmarks</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#undefined"><span class="nav-text">2.1.1 Coreference Resolution</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#undefined"><span class="nav-text">2.1.2 Question Answering</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#undefined"><span class="nav-text">2.1.3 Textual Entailment</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#undefined"><span class="nav-text">2.1.4 Plausible Inference</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#undefined"><span class="nav-text">2.1.5 Psychological Reasoning</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#undefined"><span class="nav-text">2.1.6 Multiple Tasks</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-text">2.2 Criteria and Consideration for Creating Benchmarks</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#undefined"><span class="nav-text">2.2.1 Task Format</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#undefined"><span class="nav-text">2.2.2 Evaluation Schemes</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#undefined"><span class="nav-text">2.2.3 Data Biases</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#undefined"><span class="nav-text">2.2.4 Collection Methods</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">3.Knowledge Resources</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-text">3.1 Overview of Knowledge Resources for NLU</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#undefined"><span class="nav-text">3.1.1 Linguistic Knowledge Resources</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#undefined"><span class="nav-text">3.1.2 Common Knowledge Resources</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#undefined"><span class="nav-text">3.1.3 Commonsense Knowledge Resources</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-text">3.2 Approaches to Creating Knowledge Resources</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">4.Learning and Inference Approaches</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-text">4.1 Symbolic and Statistical Approaches</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-text">4.2 Neural Approaches</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#undefined"><span class="nav-text">4.2.1 Memory Augmentation</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#undefined"><span class="nav-text">Memory Network</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#undefined"><span class="nav-text">Recurrent Entity Networks (ENTENT)</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#undefined"><span class="nav-text">KG-MRC</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#undefined"><span class="nav-text">4.2.2 Attention Mechanism</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#undefined"><span class="nav-text">4.2.3 Pre-Trained Models and Representations</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-text">4.3 Incorporating External Knowledge</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">5.Other Related Benchmarks</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">6.Discussion and Conclusion</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Abstract"><span class="nav-text">Abstract</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-Introduction"><span class="nav-text">1.Introduction</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-Benchmarks-and-Tasks"><span class="nav-text">2.Benchmarks and Tasks</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-Overivew-of-ExistingBenchmarks"><span class="nav-text">2.1 Overivew of ExistingBenchmarks</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#2-1-1-Coreference-Resolution"><span class="nav-text">2.1.1 Coreference Resolution</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-1-2-Question-Answering"><span class="nav-text">2.1.2 Question Answering</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-1-3-Textual-Entailment"><span class="nav-text">2.1.3 Textual Entailment</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-1-4-Plausible-Inference"><span class="nav-text">2.1.4 Plausible Inference</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-1-5-Psychological-Reasoning"><span class="nav-text">2.1.5 Psychological Reasoning</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-1-6-Multiple-Tasks"><span class="nav-text">2.1.6 Multiple Tasks</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-Criteria-and-Consideration-for-Creating-Benchmarks"><span class="nav-text">2.2 Criteria and Consideration for Creating Benchmarks</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#2-2-1-Task-Format"><span class="nav-text">2.2.1 Task Format</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-2-2-Evaluation-Schemes"><span class="nav-text">2.2.2 Evaluation Schemes</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-2-3-Data-Biases"><span class="nav-text">2.2.3 Data Biases</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-2-4-Collection-Methods"><span class="nav-text">2.2.4 Collection Methods</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-Knowledge-Resources"><span class="nav-text">3.Knowledge Resources</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-Overview-of-Knowledge-Resources-for-NLU"><span class="nav-text">3.1 Overview of Knowledge Resources for NLU</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#3-1-1-Linguistic-Knowledge-Resources"><span class="nav-text">3.1.1 Linguistic Knowledge Resources</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-1-2-Common-Knowledge-Resources"><span class="nav-text">3.1.2 Common Knowledge Resources</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-1-3-Commonsense-Knowledge-Resources"><span class="nav-text">3.1.3 Commonsense Knowledge Resources</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-Approaches-to-Creating-Knowledge-Resources"><span class="nav-text">3.2 Approaches to Creating Knowledge Resources</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-Learning-and-Inference-Approaches"><span class="nav-text">4.Learning and Inference Approaches</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#4-1-Symbolic-and-Statistical-Approaches"><span class="nav-text">4.1 Symbolic and Statistical Approaches</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-2-Neural-Approaches"><span class="nav-text">4.2 Neural Approaches</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#4-2-1-Memory-Augmentation"><span class="nav-text">4.2.1 Memory Augmentation</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Memory-Network"><span class="nav-text">Memory Network</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Recurrent-Entity-Networks-ENTENT"><span class="nav-text">Recurrent Entity Networks (ENTENT)</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#KG-MRC"><span class="nav-text">KG-MRC</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-2-2-Attention-Mechanism"><span class="nav-text">4.2.2 Attention Mechanism</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-2-3-Pre-Trained-Models-and-Representations"><span class="nav-text">4.2.3 Pre-Trained Models and Representations</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-3-Incorporating-External-Knowledge"><span class="nav-text">4.3 Incorporating External Knowledge</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-Other-Related-Benchmarks"><span class="nav-text">5.Other Related Benchmarks</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-Discussion-and-Conclusion"><span class="nav-text">6.Discussion and Conclusion</span></a></li></ol></div>
             
 
           </div>
