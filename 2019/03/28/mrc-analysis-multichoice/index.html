@@ -75,7 +75,7 @@
 
 
 
-  <meta name="keywords" content="nlp,paper,mrc,research,">
+  <meta name="keywords" content="nlp,mrc,paper,research,">
 
 
 
@@ -87,7 +87,7 @@
 
 
 <meta name="description" content="focus on the strategy of matching processing between (P, Q, Ans) target datasets: RACE, MCScripts  Reference papers on multi-choice MRC task, especially toward matching processing.   Hierarchical Att">
-<meta name="keywords" content="nlp,paper,mrc,research">
+<meta name="keywords" content="nlp,mrc,paper,research">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Analysis of Multi-Choice RC Task">
 <meta property="og:url" content="http://xingluxi.github.io/2019/03/28/mrc-analysis-multichoice/index.html">
@@ -372,7 +372,7 @@
                   <span class="post-meta-item-text">Words count in article&#58;</span>
                 
                 <span title="Words count in article">
-                  2.3k
+                  2.2k
                 </span>
               
 
@@ -426,32 +426,42 @@
 <li>HFL-RC System at SemEval-2018 Task 11: Hybrid Multi-Aspects Model for Commonsense Reading Comprehension. 2018.</li>
 </ol>
 </blockquote>
-<h2 id="Co-Match-Network-HCM"><a href="#Co-Match-Network-HCM" class="headerlink" title="Co-Match Network (HCM)"></a>Co-Match Network (HCM)</h2><h3 id="Motivation"><a href="#Motivation" class="headerlink" title="Motivation"></a>Motivation</h3><ul>
-<li><p>previous works: 之前的MRC的工作通常是基于句对的序列匹配（Pair-Wise Sequence Matching)，有如下情况：</p>
+<h2>Co-Match Network (HCM)</h2>
+<h3>Motivation</h3>
+<ul>
+<li>
+<p>previous works: 之前的MRC的工作通常是基于句对的序列匹配（Pair-Wise Sequence Matching)，有如下情况：</p>
 <ul>
 <li>passage 与 question 和 candidate answer 的串联进行比较；</li>
 <li>passage 先与 question 进行比较，计算出 matching 结果，再使结果与 candidate answer 进行比较；</li>
 </ul>
 </li>
-<li><p>这样的计算方式不适用于多选型RC任务，具体存在以下几点问题：</p>
+<li>
+<p>这样的计算方式不适用于多选型RC任务，具体存在以下几点问题：</p>
 <ul>
-<li>1、仅将 passage 和 question 进行匹配，得到的结果可能没有意义并且会导致原始 passage 的信息丢失；<ul>
+<li>1、仅将 passage 和 question 进行匹配，得到的结果可能没有意义并且会导致原始 passage 的信息丢失；
+<ul>
 <li>例如：问题 Which statement of the following is true？</li>
 </ul>
 </li>
 <li>若将 question 和 candidate answer 串联成为一个序列，损失了 question 和 candidate answer 的交互信息；</li>
 </ul>
 </li>
-<li><p>基于此，多选RC任务需要解决<strong>匹配序列三元组 (matching sequence triplets)</strong>的问题；</p>
+<li>
+<p>基于此，多选RC任务需要解决**匹配序列三元组 (matching sequence triplets)**的问题；</p>
 </li>
-<li><p>本文的方法：</p>
+<li>
+<p>本文的方法：</p>
 <ul>
-<li>match a question-answer pair to a given passage；<ul>
+<li>match a question-answer pair to a given passage；
+<ul>
 <li>explicitly treat the question and the candidate answer as two sequences and jointly match them to the given passage；</li>
 </ul>
 </li>
-<li>对P中的每个位置，都计算两个attention权重，构成两个匹配表示，形成一个co-match状态（同时计算P和Q/A的匹配），然后再用一个层次LSTM框架（2个LSTM）对passage进行编码；<ul>
-<li>层次汇聚信息：<ul>
+<li>对P中的每个位置，都计算两个attention权重，构成两个匹配表示，形成一个co-match状态（同时计算P和Q/A的匹配），然后再用一个层次LSTM框架（2个LSTM）对passage进行编码；
+<ul>
+<li>层次汇聚信息：
+<ul>
 <li>在passage中的每个句子内部，信息从word-level汇聚在sentence-level</li>
 <li>在passage中的句子序列维度上，再从sentence-level汇聚到document-level；</li>
 </ul>
@@ -462,32 +472,42 @@
 </ul>
 </li>
 </ul>
-<h3 id="Model-Details"><a href="#Model-Details" class="headerlink" title="Model Details"></a>Model Details</h3><p>Notation:<br>&nbsp;&nbsp;&nbsp;&nbsp;(one sentence in) Passage: $P\in \mathbb{R}^{d\times P}$<br>&nbsp;&nbsp;&nbsp;&nbsp;Question: $Q \in \mathbb{R}^{d\times Q}$<br>&nbsp;&nbsp;&nbsp;&nbsp;(one candidate answer in) Answer: $A \in \mathbb{R}^{d\times A}$</p>
+<h3>Model Details</h3>
+<p>Notation:
+    (one sentence in) Passage: $P\in \mathbb{R}^{d\times P}$
+    Question: $Q \in \mathbb{R}^{d\times Q}$
+    (one candidate answer in) Answer: $A \in \mathbb{R}^{d\times A}$</p>
 <ul>
-<li><p>architecture</p>
+<li>
+<p>architecture</p>
 <ul>
 <li><img src="/.io//co-match.png" alt="co-match"></li>
 </ul>
 </li>
-<li><p>co-matching</p>
+<li>
+<p>co-matching</p>
 <ul>
-<li>encoding: the same BiLSTM<ul>
+<li>encoding: the same BiLSTM
+<ul>
 <li>$H^p\in \mathbb{R}^{l\times P}$, 每个句子分别计算</li>
 <li>$H^q\in \mathbb{R}^{l\times Q}$,</li>
 <li>$H^a\in \mathbb{R}^{l\times A}$, 每个候选分别计算</li>
 </ul>
 </li>
-<li>attention:<ul>
+<li>attention:
+<ul>
 <li>$G^q = softmax( (W^gH^q + b^g \otimes e_Q)^T H^p ) \in \mathbb{R}^{Q\times P}$</li>
 <li>$G^a = softmax( (W^gH^a + b^g \otimes e_Q)^T H^p ) \in \mathbb{R}^{A\times P}$</li>
 </ul>
 </li>
-<li>aggregation: attentive passage representation<ul>
+<li>aggregation: attentive passage representation
+<ul>
 <li>$\bar{H}^q = H^q G^q \in \mathbb{R}^{l \times P}$</li>
 <li>$\bar{H}^a = H^q G^a \in \mathbb{R}^{l \times P}$</li>
 </ul>
 </li>
-<li>co-match passage state: concurrently matches a passage state with both the question and the candidate answer. It represent how each P state can be matched with the Q and Candidate A.<ul>
+<li>co-match passage state: concurrently matches a passage state with both the question and the candidate answer. It represent how each P state can be matched with the Q and Candidate A.
+<ul>
 <li>$M^q = ReLU(W^m[\bar{H}^q \ominus H^p; \bar{H}^q \otimes H^p]) + b^m \in \mathbb{R}^{l\times P}$</li>
 <li>$M^a = ReLU(W^m[\bar{H}^a \ominus H^p; \bar{H}^a \otimes H^p]) + b^m \in \mathbb{R}^{l\times P}$</li>
 <li>$W^m \in \mathbb{R}^{l\times 2l}$</li>
@@ -496,30 +516,35 @@
 </li>
 </ul>
 </li>
-<li><p>hierarchical aggregation</p>
+<li>
+<p>hierarchical aggregation</p>
 <ul>
 <li>for each triplet ${P_n, Q, A}, n\in [1,N]$, get $C_n$ through co-match</li>
-<li>sentence-level aggregation of the co-matching states:<ul>
+<li>sentence-level aggregation of the co-matching states:
+<ul>
 <li>sentence sequence representation merge into a single vector</li>
 <li>$h_n^s = MaxPooling(BiLSTM(C_n)) \in \mathbb{R}^l$</li>
 <li>$MaxPooling$： row-wise max pooling</li>
 </ul>
 </li>
-<li>final triplet matching representation:<ul>
-<li>$H^s=[h_1^s, h_2^s,…,h_N^s]$</li>
+<li>final triplet matching representation:
+<ul>
+<li>$H^s=[h_1^s, h_2^s,...,h_N^s]$</li>
 <li>$h^t = MaxPooling (BiLSTM (H^s)) \in \mathbb{R}^{l}$</li>
 </ul>
 </li>
 </ul>
 </li>
-<li><p>Output Layer</p>
+<li>
+<p>Output Layer</p>
 <ul>
 <li>for each candidate answer $A_i$, get $h_i^t \in \mathbb{R}^{l} $</li>
 <li>$L(A_i|P,Q) = -log \frac{exp(w^Th_i^t)}{\sum_{j=1}^4 exp(w^T h_j^t)}$</li>
 </ul>
 </li>
 </ul>
-<h3 id="Model-Parameters"><a href="#Model-Parameters" class="headerlink" title="Model Parameters"></a>Model Parameters</h3><ul>
+<h3>Model Parameters</h3>
+<ul>
 <li>word emb dim: 300</li>
 <li>rnn hidden dim: 150</li>
 <li>optimizer: Adamax, lr=0.002</li>
@@ -527,50 +552,63 @@
 <li>epochs：30</li>
 <li>dropout：0.2</li>
 </ul>
-<h2 id="Dual-Co-Matching-Network"><a href="#Dual-Co-Matching-Network" class="headerlink" title="Dual Co-Matching Network"></a>Dual Co-Matching Network</h2><h3 id="Motivation-1"><a href="#Motivation-1" class="headerlink" title="Motivation"></a>Motivation</h3><ul>
-<li>previous work: <ul>
+<h2>Dual Co-Matching Network</h2>
+<h3>Motivation</h3>
+<ul>
+<li>previous work:
+<ul>
 <li>只计算了question-aware P表示和 option-aware P表示；</li>
 <li>一些pretrainLM的做法是将P和Q串联成为一个句子，A单独作为另一个句子；</li>
 </ul>
 </li>
-<li>本文：<ul>
+<li>本文：
+<ul>
 <li>model the relationship among passage，question and answer <strong>bidirectionally</strong></li>
 <li>在计算question-aware P表示和 option-aware P表示的同时，计算passage-aware Q表示和passage-aware O表示</li>
 </ul>
 </li>
 </ul>
-<h3 id="Model-Details-1"><a href="#Model-Details-1" class="headerlink" title="Model Details"></a>Model Details</h3><ul>
-<li>Encoding<ul>
+<h3>Model Details</h3>
+<ul>
+<li>Encoding
+<ul>
 <li>$H^p = Bert(P) \in \mathbb{R}^{P\times l}$</li>
 <li>$H^q = Bert(Q) \in \mathbb{R}^{Q\times l}$</li>
 <li>$H^a = Bert(A) \in \mathbb{R}^{A\times l}$</li>
 <li>$l$: Bert hidden state dimension</li>
 </ul>
 </li>
-<li>Matching Layer<ul>
-<li>attention between P and A:<ul>
-<li>$W = softmax(H^p(H^a G+b)^T) \in \mathbb{R}^{P\times A}$<ul>
+<li>Matching Layer
+<ul>
+<li>attention between P and A:
+<ul>
+<li>$W = softmax(H^p(H^a G+b)^T) \in \mathbb{R}^{P\times A}$
+<ul>
 <li>$G \in \mathbb{R}^{l\times l}$</li>
 </ul>
 </li>
 <li>$M^p = WH^a \in \mathbb{R}^{P\times l}$</li>
-<li>$M^a = W^TH^p \in \mathbb{R}^{A\times l}$<ul>
+<li>$M^a = W^TH^p \in \mathbb{R}^{A\times l}$
+<ul>
 <li>$W \in \mathbb{R}^{P\times A}$</li>
 </ul>
 </li>
 </ul>
 </li>
-<li>attention  between P and Q in the same method, get:<ul>
+<li>attention  between P and Q in the same method, get:
+<ul>
 <li>$M^q \in\mathbb{R}^{Q\times l}$</li>
 <li>$W^\prime \in \mathbb{R}^{P\times Q}$</li>
-<li><font color="blue">问题：为什么P和Q进行attention，不计算question-aware的passage表示？</font></li>
+<li>&lt;font color=blue&gt;问题：为什么P和Q进行attention，不计算question-aware的passage表示？&lt;/font&gt;</li>
 </ul>
 </li>
-<li>integration original contextual representation<ul>
+<li>integration original contextual representation
+<ul>
 <li>$S^a = F([M^a - H^a;M^a \cdot H^a]W_1 + b_1) \in \mathbb{R}^{P \times l}$</li>
 <li>$S^p = F([M^p - H^p;M^p \cdot H^p]W_2 + b_2)\in \mathbb{R}^{A \times l}$</li>
 <li>$F()$ is activation function $ReLU$</li>
-<li>in the question side:<ul>
+<li>in the question side:
+<ul>
 <li>$S^{p^\prime} \in \mathbb{R}^{P\times l}$</li>
 <li>$S^q \in \mathbb{R}^{Q\times l}$</li>
 </ul>
@@ -579,8 +617,10 @@
 </li>
 </ul>
 </li>
-<li>Aggregation Layer<ul>
-<li>get final representation for each candidate answer<ul>
+<li>Aggregation Layer
+<ul>
+<li>get final representation for each candidate answer
+<ul>
 <li>row-wise max pooling</li>
 <li>$C^p = Pooling(S^p) \in \mathbb{R}^{l}$</li>
 <li>$C^a = Pooling(S^a) \in \mathbb{R}^{l}$</li>
@@ -591,51 +631,65 @@
 </li>
 </ul>
 </li>
-<li>Output Layer<ul>
+<li>Output Layer
+<ul>
 <li>$L(A_i|P,Q)=-log\frac{exp(V^TC_i)}{\sum_{j=1}^N exp(V^TC_j)}$</li>
 </ul>
 </li>
 </ul>
-<h3 id="Model-Parameters-1"><a href="#Model-Parameters-1" class="headerlink" title="Model Parameters"></a>Model Parameters</h3><p> No description</p>
-<h2 id="Option-Comparison-Network-OCN"><a href="#Option-Comparison-Network-OCN" class="headerlink" title="Option Comparison Network (OCN)"></a>Option Comparison Network (OCN)</h2><h3 id="Motivation-2"><a href="#Motivation-2" class="headerlink" title="Motivation"></a>Motivation</h3><ul>
-<li>previous work:<ul>
+<h3>Model Parameters</h3>
+<p>No description</p>
+<h2>Option Comparison Network (OCN)</h2>
+<h3>Motivation</h3>
+<ul>
+<li>previous work:
+<ul>
 <li>read each option independently.</li>
 <li>compute a fixed-length representation for each option before comparing them.</li>
 </ul>
 </li>
-<li>ideas:<ul>
+<li>ideas:
+<ul>
 <li>humans typically compare the options at multiple-granularity level before reading the article in detail and make reasoning more efficient.</li>
 <li>人解决多选RC任务的策略，通常在仔细阅读文章之前会在不同粒度上比较候选答案。</li>
 <li>通过比较候选答案，可以定位答案选项间的相互关系，在读文章时只关注与选项相互关系有关的文章信息。（更高效？more efﬁciently and effectively）</li>
 </ul>
 </li>
-<li>本文：<ul>
+<li>本文：
+<ul>
 <li>explicitly compare options at word-level to better identify their correlations to help reasoning</li>
-<li><ol>
+<li>
+<ol>
 <li>首先使用一个skimmer network对每个option进行独立编码；</li>
 </ol>
 </li>
-<li><ol start="2">
+<li>
+<ol start="2">
 <li>然后对每个option，将其与其他的options使用attention进行word-level的比较，来建立option之间的相互比较；</li>
 </ol>
 </li>
-<li><ol start="3">
+<li>
+<ol start="3">
 <li>最后，带着聚集之后的option间的相关性，重读文章，进行推理和答案选择</li>
 </ol>
 </li>
 </ul>
 </li>
-<li>Analysis:<ul>
+<li>Analysis:
+<ul>
 <li>这篇文章的主要更新的是option的表示</li>
 </ul>
 </li>
 </ul>
-<h3 id="Model-Details-2"><a href="#Model-Details-2" class="headerlink" title="Model Details"></a>Model Details</h3><p>Notation:<br>&nbsp;&nbsp;&nbsp;&nbsp;Passage: $P={w_1^p,…,w_m^p}$
-&nbsp;&nbsp;&nbsp;&nbsp;Question: $Q= {w_1^q,…,w_n^q}$
-&nbsp;&nbsp;&nbsp;&nbsp;Answer set: $O={O_1,…,O_K}$
-&nbsp;&nbsp;&nbsp;&nbsp;Each option: $O_k = {w_1^o,…,w_{n_k}^o}$</p>
+<h3>Model Details</h3>
+<p>Notation:
+    Passage: $P={w_1^p,...,w_m^p}$
+    Question: $Q= {w_1^q,...,w_n^q}$
+    Answer set: $O={O_1,...,O_K}$
+    Each option: $O_k = {w_1^o,...,w_{n_k}^o}$</p>
 <ul>
-<li><p>Overall: 4 stages</p>
+<li>
+<p>Overall: 4 stages</p>
 <ol>
 <li>concatenate each (article, question, option) triple into a sequence and use a skimmer to encode them into vector sequences.</li>
 <li>attention-based mechanism is leveraged to compare the options.</li>
@@ -643,10 +697,13 @@
 <li>compute the probabilities for each option.</li>
 </ol>
 </li>
-<li><p>Option Feature Extraction</p>
+<li>
+<p>Option Feature Extraction</p>
 <ul>
-<li>skimmer encoding: 将每个option与P和Q串联构成一个句子，使用BERT进行编码<ul>
-<li>$[P^{enc};Q^{enc};O^{enc}_k] = BERT(&lt;P;Q;O_k&gt;)$<ul>
+<li>skimmer encoding: 将每个option与P和Q串联构成一个句子，使用BERT进行编码
+<ul>
+<li>$[P^{enc};Q^{enc};O^{enc}_k] = BERT(&lt;P;Q;O_k&gt;)$
+<ul>
 <li>$P^{enc} \in \mathbb{R}^{d\times m}$</li>
 <li>$Q^{enc} \in \mathbb{R}^{d\times n}$</li>
 <li>$O^{enc}_k \in \mathbb{R}^{d\times n_k}$</li>
@@ -654,8 +711,10 @@
 </li>
 </ul>
 </li>
-<li>由于Q和option的关联紧密，将两者串联，作为option的特征<ul>
-<li>$O_k^q=[Q^{enc}|O^{enc}_k] \in \mathbb{R}^{d\times n_k^\prime}$<ul>
+<li>由于Q和option的关联紧密，将两者串联，作为option的特征
+<ul>
+<li>$O_k^q=[Q^{enc}|O^{enc}_k] \in \mathbb{R}^{d\times n_k^\prime}$
+<ul>
 <li>$n_k^\prime = n+n_k$</li>
 </ul>
 </li>
@@ -663,72 +722,86 @@
 </li>
 </ul>
 </li>
-<li><p>Option Correlation Features Extraction</p>
+<li>
+<p>Option Correlation Features Extraction</p>
 <ul>
-<li>$Att(\cdot)$的计算方式：假设输入为$U\in \mathbb{R}^{d\times N}$和 $V\in \mathbb{R}^{d\times M}$<ul>
+<li>$Att(\cdot)$的计算方式：假设输入为$U\in \mathbb{R}^{d\times N}$和 $V\in \mathbb{R}^{d\times M}$
+<ul>
 <li>$v \in \mathbb{R}^{3d}$ 是参数</li>
 <li>$s_{ij}=v^T[U_{:i};V_{:j};U_{:i}\circ V_{:j}]$</li>
 <li>$A= Att(U,V;v)=[\frac{exp(s_{ij})}{\sum_i exp(s_{ij})}]_{ij} \in \mathbb{R}^{N\times M}$</li>
 </ul>
 </li>
-<li>option correlation feature extraction 分3步进行<ul>
-<li><ol>
-<li>option $O_k$ 与其他options进行one-by-one比较，收集 pair-wise correlation信息<ul>
+<li>option correlation feature extraction 分3步进行
+<ul>
+<li>
+<ol>
+<li>option $O_k$ 与其他options进行one-by-one比较，收集 pair-wise correlation信息</li>
+</ol>
+<ul>
 <li>$\bar{O}_k^{(l)}=O^q_l Att(O^q_l,O_k^q;v_o)$</li>
 <li>$\tilde{O}_k^{(l)}=[O_k^q-\bar{O}_k^{(l)};O_k^q \circ \bar{O}_k^{(l)}] \in \mathbb{R}^{2d\times n_k^\prime}$</li>
 </ul>
 </li>
+<li>
+<ol start="2">
+<li>gather pair-wise correlation information</li>
 </ol>
-</li>
-<li><ol start="2">
-<li>gather pair-wise correlation information<ul>
-<li>$\tilde{O}<em>k^c=tanh(W_c [O_k^q;{\tilde{O}_k^{(l)}}</em>{l\neq k} ])$<ul>
+<ul>
+<li>$\tilde{O}_k^c=tanh(W_c [O_k^q;{\tilde{O}<em>k^{(l)}}</em>{l\neq k} ])$
+<ul>
 <li>$W_c \in \mathbb{R}^{d\times (d+2d(|O|-1))}$</li>
 </ul>
 </li>
 </ul>
 </li>
+<li>
+<ol start="3">
+<li>element-wise gating 机制控制option feature和option-wise correlation information的融合，以产生option correlation features $O_k^c$</li>
 </ol>
-</li>
-<li><ol start="3">
-<li>element-wise gating 机制控制option feature和option-wise correlation information的融合，以产生option correlation features $O_k^c$<ul>
-<li>$g_k \in \mathbb{R}^{d\times n_k^\prime}$<ul>
+<ul>
+<li>$g_k \in \mathbb{R}^{d\times n_k^\prime}$
+<ul>
 <li>$g_{k,:i}=\sigma (W_g [Q_{K,:i}^q; \tilde{O}_{k,:i}^c; \tilde{O}]+b_g)$</li>
 <li>$g_{k,:i}$ 表示 g 向量的第i列</li>
 </ul>
 </li>
-<li>$\tilde{O}$ 的计算：关于 Q 的attention pooling<ul>
+<li>$\tilde{O}$ 的计算：关于 Q 的attention pooling
+<ul>
 <li>$A_q = softmax(v_a^T Q^{enc})^T, v_a \in \mathbb{R}^d$</li>
 <li>$\tilde{O}=Q^{enc}A^q \in \mathbb{R}^{d}$</li>
 </ul>
 </li>
-<li>option correlation features: $O_k^c\in \mathbb{R}^{d\times n_k^\prime}$<ul>
+<li>option correlation features: $O_k^c\in \mathbb{R}^{d\times n_k^\prime}$
+<ul>
 <li>$O_{k,:i}^c = g_{k,:i} \circ O_{k,:i}^q + (1-g_{k,:i}) \circ \tilde{O}_{k,:i}^c$</li>
 <li>Note: $O_k^c$ 不被压缩成fixed-length向量，文中的解释为-这样可以使我们的模型更灵活的使用correlation信息。</li>
 </ul>
 </li>
 </ul>
 </li>
-</ol>
-</li>
 </ul>
 </li>
 </ul>
 </li>
-<li><p>Article ReReading</p>
+<li>
+<p>Article ReReading</p>
 <ul>
 <li>co-attention + self-attention</li>
-<li>对于每个option $O_k$ 计算 co-attention:<ul>
+<li>对于每个option $O_k$ 计算 co-attention:
+<ul>
 <li>$A_k^c = Att(O_k^c,P^{enc};v_p) \in \mathbb{R}^{n_k^\prime \times m}$</li>
 <li>$A_k^p = Att(P^{enc},O_k^c;v_p) \in \mathbb{R}^{m\times n_k^\prime}$</li>
 <li>$\hat{O}_k^p = [P^{enc};O_k^c A_k^c]A_k^p \in \mathbb{R}^{2d\times n_k^\prime}$</li>
 </ul>
 </li>
-<li>fused with correlation information<ul>
+<li>fused with correlation information
+<ul>
 <li>$\tilde{O}_k^p = ReLU(W_p[O_k^c;\hat{O}_k^p]+b_p) \in \mathbb{R}^{d\times n_k^\prime}$</li>
 </ul>
 </li>
-<li>self-attention to get full-info option representation $O_k^f\in \mathbb{R}^{d\times n_k^\prime}$<ul>
+<li>self-attention to get full-info option representation $O_k^f\in \mathbb{R}^{d\times n_k^\prime}$
+<ul>
 <li>$\tilde{O}_k^s = \tilde{O}_k^p Att(\tilde{O}_k^p, \tilde{O}_k^p;v_r)$</li>
 <li>$\tilde{O}_k^f = [\tilde{O}_k^p;\tilde{O}_k^s;\tilde{O}_k^p-\tilde{O}_k^s;\tilde{O}_k^p \circ \tilde{O}_k^s]$</li>
 <li>$O_k^f = ReLU(W_f\tilde{O}_k^f +b_f)$</li>
@@ -736,39 +809,47 @@
 </li>
 </ul>
 </li>
-<li><p>Answer prediciton</p>
+<li>
+<p>Answer prediciton</p>
 <ul>
-<li>score $s_k = v_s^T MaxPooling(O_k^f)$<ul>
+<li>score $s_k = v_s^T MaxPooling(O_k^f)$
+<ul>
 <li>MaxPooling: row-wise</li>
 <li>$v_s \in \mathbb{R}^d$</li>
 </ul>
 </li>
-<li>probability：<ul>
+<li>probability：
+<ul>
 <li>$P(K|Q,P,O)=\frac{exp(s_k)}{\sum_i exp(s_i)}$</li>
 </ul>
 </li>
-<li>loss:<ul>
+<li>loss:
+<ul>
 <li>$J(\theta)=-\frac{1}{N}\sum_i log(P(\hat{k}_i | Q_i,P_i,O_i)) + \lambda||\theta||_2^2$</li>
 </ul>
 </li>
 </ul>
 </li>
 </ul>
-<h3 id="Model-Parameters-2"><a href="#Model-Parameters-2" class="headerlink" title="Model Parameters"></a>Model Parameters</h3><ul>
-<li>for BERT base:<ul>
+<h3>Model Parameters</h3>
+<ul>
+<li>for BERT base:
+<ul>
 <li>batch:12</li>
 <li>epochs:3</li>
-<li>lr: $3\times 10^{-5}$ </li>
+<li>lr: $3\times 10^{-5}$</li>
 </ul>
 </li>
-<li>for BERT large:<ul>
+<li>for BERT large:
+<ul>
 <li>batch:24</li>
 <li>epochs:5</li>
-<li>lr: $1.5\times 10^{-5}$ </li>
+<li>lr: $1.5\times 10^{-5}$</li>
 </ul>
 </li>
 <li>$\lambda$: 0.01</li>
-<li>lengths:<ul>
+<li>lengths:
+<ul>
 <li>P: 400</li>
 <li>Q: 30</li>
 <li>A: 16</li>
@@ -825,9 +906,9 @@
           
             <a href="/tags/nlp/" rel="tag"><i class="fa fa-tag"></i> nlp</a>
           
-            <a href="/tags/paper/" rel="tag"><i class="fa fa-tag"></i> paper</a>
-          
             <a href="/tags/mrc/" rel="tag"><i class="fa fa-tag"></i> mrc</a>
+          
+            <a href="/tags/paper/" rel="tag"><i class="fa fa-tag"></i> paper</a>
           
             <a href="/tags/research/" rel="tag"><i class="fa fa-tag"></i> research</a>
           
@@ -1015,7 +1096,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Co-Match-Network-HCM"><span class="nav-text">Co-Match Network (HCM)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Motivation"><span class="nav-text">Motivation</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Model-Details"><span class="nav-text">Model Details</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Model-Parameters"><span class="nav-text">Model Parameters</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Dual-Co-Matching-Network"><span class="nav-text">Dual Co-Matching Network</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Motivation-1"><span class="nav-text">Motivation</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Model-Details-1"><span class="nav-text">Model Details</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Model-Parameters-1"><span class="nav-text">Model Parameters</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Option-Comparison-Network-OCN"><span class="nav-text">Option Comparison Network (OCN)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Motivation-2"><span class="nav-text">Motivation</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Model-Details-2"><span class="nav-text">Model Details</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Model-Parameters-2"><span class="nav-text">Model Parameters</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">Co-Match Network (HCM)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-text">Motivation</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-text">Model Details</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-text">Model Parameters</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">Dual Co-Matching Network</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-text">Motivation</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-text">Model Details</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-text">Model Parameters</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">Option Comparison Network (OCN)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-text">Motivation</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-text">Model Details</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-text">Model Parameters</span></a></li></ol></li></ol></div>
             
 
           </div>

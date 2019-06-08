@@ -86,18 +86,18 @@
 
 
 
-<meta name="description" content="Reading Comprehension Skills An Analysis of Prerequisite Skills for Reading Comprehension.^1Prerequisite skills for reading comprehension: Multi-perspective analysis of mctest datasets and systems. AA">
+<meta name="description" content="Reading Comprehension Skills  An Analysis of Prerequisite Skills for Reading Comprehension.^1 Prerequisite skills for reading comprehension: Multi-perspective analysis of mctest datasets and systems.">
 <meta name="keywords" content="nlp,mrc,research,metric">
 <meta property="og:type" content="article">
 <meta property="og:title" content="MRC 的评测与所需能力">
 <meta property="og:url" content="http://xingluxi.github.io/2019/01/14/mrc-measure-skills/index.html">
 <meta property="og:site_name" content="Luxi Xing - Blog">
-<meta property="og:description" content="Reading Comprehension Skills An Analysis of Prerequisite Skills for Reading Comprehension.^1Prerequisite skills for reading comprehension: Multi-perspective analysis of mctest datasets and systems. AA">
+<meta property="og:description" content="Reading Comprehension Skills  An Analysis of Prerequisite Skills for Reading Comprehension.^1 Prerequisite skills for reading comprehension: Multi-perspective analysis of mctest datasets and systems.">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:updated_time" content="2019-02-21T14:39:02.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="MRC 的评测与所需能力">
-<meta name="twitter:description" content="Reading Comprehension Skills An Analysis of Prerequisite Skills for Reading Comprehension.^1Prerequisite skills for reading comprehension: Multi-perspective analysis of mctest datasets and systems. AA">
+<meta name="twitter:description" content="Reading Comprehension Skills  An Analysis of Prerequisite Skills for Reading Comprehension.^1 Prerequisite skills for reading comprehension: Multi-perspective analysis of mctest datasets and systems.">
 
 
 
@@ -370,7 +370,7 @@
                   <span class="post-meta-item-text">Words count in article&#58;</span>
                 
                 <span title="Words count in article">
-                  618
+                  643
                 </span>
               
 
@@ -407,62 +407,79 @@
       
 
       
-        <h2 id="Reading-Comprehension-Skills"><a href="#Reading-Comprehension-Skills" class="headerlink" title="Reading Comprehension Skills"></a>Reading Comprehension Skills</h2><blockquote>
-<p>An Analysis of Prerequisite Skills for Reading Comprehension.<a href="https://aclweb.org/anthology/W16-6001" target="_blank" rel="noopener">^1</a><br>Prerequisite skills for reading comprehension: Multi-perspective analysis of mctest datasets and systems. AAAI,2017.<a href="http://www.aaai.org/Conferences/AAAI/2017/PreliminaryPapers/14-Sugawara-14614.pdf" target="_blank" rel="noopener">^2</a><br>Evaluation Metrics for Machine Reading Comprehension: Prerequisite Skills and Readability. ACL,2017.<a href="https://aclanthology.info/papers/P17-1075/p17-1075" target="_blank" rel="noopener">^3</a></p>
+        <h2>Reading Comprehension Skills</h2>
+<blockquote>
+<p>An Analysis of Prerequisite Skills for Reading Comprehension.<a href="https://aclweb.org/anthology/W16-6001" target="_blank" rel="noopener">^1</a>
+Prerequisite skills for reading comprehension: Multi-perspective analysis of mctest datasets and systems. AAAI,2017.<a href="http://www.aaai.org/Conferences/AAAI/2017/PreliminaryPapers/14-Sugawara-14614.pdf" target="_blank" rel="noopener">^2</a>
+Evaluation Metrics for Machine Reading Comprehension: Prerequisite Skills and Readability. ACL,2017.<a href="https://aclanthology.info/papers/P17-1075/p17-1075" target="_blank" rel="noopener">^3</a></p>
 </blockquote>
-<p>(从数据的角度)将阅读理解所需要的能力分为两类: <span id="inline-blue">认知能力(prerequisite skill)</span> 和 <span id="inline-blue">语言能力(readability)</span></p>
-<h3 id="1-prerequisite-skills"><a href="#1-prerequisite-skills" class="headerlink" title="1.prerequisite skills"></a>1.prerequisite skills</h3><p>认知能力: measure different types of reasoning and knowledge required to answer the question</p>
-<p>定义了 13 种认知能力<a href="王炳宁《A_Cognitive_Perspective_of_Machine_Comprehension_And_Recent_Advances》">^4</a>, 如下:</p>
+<p>(从数据的角度)将阅读理解所需要的能力分为两类: &lt;span id=&quot;inline-blue&quot;&gt;认知能力(prerequisite skill)&lt;/span&gt; 和 &lt;span id=&quot;inline-blue&quot;&gt;语言能力(readability)&lt;/span&gt;</p>
+<h3>1.prerequisite skills</h3>
+<p>认知能力: measure different types of reasoning and knowledge required to answer the question</p>
+<p>定义了 13 种认知能力<a href="%E7%8E%8B%E7%82%B3%E5%AE%81%E3%80%8AA_Cognitive_Perspective_of_Machine_Comprehension_And_Recent_Advances%E3%80%8B">^4</a>, 如下:</p>
 <ol>
-<li>object tracking 目标跟踪<ul>
+<li>object tracking 目标跟踪
+<ul>
 <li>同时锁定和跟踪多个目标，如集合或个体，也被称为列举或枚举</li>
 </ul>
 </li>
-<li>mathematical reasoning 数学推理<ul>
+<li>mathematical reasoning 数学推理
+<ul>
 <li>能够完成统计或者量化操作</li>
 </ul>
 </li>
-<li>coreference resolution 指代消解<ul>
+<li>coreference resolution 指代消解
+<ul>
 <li>将指代词映射到相应的实体上</li>
 </ul>
 </li>
-<li>logical reasoning 逻辑推理<ul>
+<li>logical reasoning 逻辑推理
+<ul>
 <li>逻辑操作，例如对量词、否定、条件以及转移推理</li>
 </ul>
 </li>
-<li>analogy 类比<ul>
+<li>analogy 类比
+<ul>
 <li>能够了解一些隐喻，如转喻和提喻</li>
 </ul>
 </li>
-<li>causal relation 因果关系<ul>
+<li>causal relation 因果关系
+<ul>
 <li>理解文本中的因果关系</li>
 </ul>
 </li>
-<li>spatiotemporal relation 空间关系<ul>
+<li>spatiotemporal relation 空间关系
+<ul>
 <li>理解空间或者时间上的关系</li>
 </ul>
 </li>
-<li>ellipsis 省略<ul>
+<li>ellipsis 省略
+<ul>
 <li>识别出文章中隐含或者忽略的信息，如参数、谓词、量词、时间等等</li>
 </ul>
 </li>
-<li>bridging 间接引用<ul>
+<li>bridging 间接引用
+<ul>
 <li>能够根据词法或者句法的信息进行推理</li>
 </ul>
 </li>
-<li>elaboration 阐述<ul>
+<li>elaboration 阐述
+<ul>
 <li>能够根据已有事实/常识进行推理</li>
 </ul>
 </li>
-<li>meta-knowledge 元知识<ul>
+<li>meta-knowledge 元知识
+<ul>
 <li>理解读者、作者或者文体信息（如：谁是这个故事的主人公）</li>
 </ul>
 </li>
-<li>schematic clause relation 短语关系<ul>
+<li>schematic clause relation 短语关系
+<ul>
 <li>理解包含有并列、从句或者关系子句的复杂句子</li>
 </ul>
 </li>
-<li>punctuation 标点符号<ul>
+<li>punctuation 标点符号
+<ul>
 <li>理解文章中标点符号代表的意义</li>
 </ul>
 </li>
@@ -474,13 +491,16 @@
 <li>8到11是对Commonsense reasoning的细致分类</li>
 <li>1-11是涉及到多句的，12-13涉及单句</li>
 </ul>
-<h3 id="2-readability"><a href="#2-readability" class="headerlink" title="2.readability"></a>2.readability</h3><p>语言能力: 如何将低层次的文本符号（字、词）组合为高层次的含义的能力<br>measures the text ease of processing and a wide range of linguistic features/human readability measurements are used.</p>
+<h3>2.readability</h3>
+<p>语言能力: 如何将低层次的文本符号（字、词）组合为高层次的含义的能力
+measures the text ease of processing and a wide range of linguistic features/human readability measurements are used.</p>
 <ul>
 <li>词义辨析：正确理解和区分词的意思。</li>
 <li>句法识别：识别出文本的句法信息，使推理过程不受句法 变化的影响。</li>
 <li>语义组合：根据句法信息将基本单元（字、词）的语义组 合成高等单元（句子，篇章）的语义。</li>
 </ul>
-<h2 id="Metrics-Evaluation"><a href="#Metrics-Evaluation" class="headerlink" title="Metrics/Evaluation"></a>Metrics/Evaluation</h2><p>如何评价一个example的难度？</p>
+<h2>Metrics/Evaluation</h2>
+<p>如何评价一个example的难度？</p>
 
       
     </div>
@@ -721,7 +741,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Reading-Comprehension-Skills"><span class="nav-text">Reading Comprehension Skills</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-prerequisite-skills"><span class="nav-text">1.prerequisite skills</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-readability"><span class="nav-text">2.readability</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Metrics-Evaluation"><span class="nav-text">Metrics/Evaluation</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">Reading Comprehension Skills</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-text">1.prerequisite skills</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-text">2.readability</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">Metrics/Evaluation</span></a></li></ol></div>
             
 
           </div>

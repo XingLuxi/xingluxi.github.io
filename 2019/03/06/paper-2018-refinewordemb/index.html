@@ -75,7 +75,7 @@
 
 
 
-  <meta name="keywords" content="nlp,paper,knowledge,mrc,nli,">
+  <meta name="keywords" content="nlp,mrc,paper,knowledge,nli,">
 
 
 
@@ -86,19 +86,19 @@
 
 
 
-<meta name="description" content="Dynamic Integration of Background Knowledge in Neural NLU SystemsICLR,2018. RejectDirk Weissenborn, et.al.Datasets: SQuAD, TriviaQA, SNLI, MNLI  Motivation the requisite background knowledge is indir">
-<meta name="keywords" content="nlp,paper,knowledge,mrc,nli">
+<meta name="description" content="Dynamic Integration of Background Knowledge in Neural NLU Systems ICLR,2018. Reject Dirk Weissenborn, et.al. Datasets: SQuAD, TriviaQA, SNLI, MNLI  Motivation  the requisite background knowledge is i">
+<meta name="keywords" content="nlp,mrc,paper,knowledge,nli">
 <meta property="og:type" content="article">
 <meta property="og:title" content="2018 | Dynamic Integration of Background Knowledge in Neural NLU Systems">
 <meta property="og:url" content="http://xingluxi.github.io/2019/03/06/paper-2018-refinewordemb/index.html">
 <meta property="og:site_name" content="Luxi Xing - Blog">
-<meta property="og:description" content="Dynamic Integration of Background Knowledge in Neural NLU SystemsICLR,2018. RejectDirk Weissenborn, et.al.Datasets: SQuAD, TriviaQA, SNLI, MNLI  Motivation the requisite background knowledge is indir">
+<meta property="og:description" content="Dynamic Integration of Background Knowledge in Neural NLU Systems ICLR,2018. Reject Dirk Weissenborn, et.al. Datasets: SQuAD, TriviaQA, SNLI, MNLI  Motivation  the requisite background knowledge is i">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://xingluxi.github.io/.io//fig-1.png">
 <meta property="og:updated_time" content="2019-03-08T08:00:22.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="2018 | Dynamic Integration of Background Knowledge in Neural NLU Systems">
-<meta name="twitter:description" content="Dynamic Integration of Background Knowledge in Neural NLU SystemsICLR,2018. RejectDirk Weissenborn, et.al.Datasets: SQuAD, TriviaQA, SNLI, MNLI  Motivation the requisite background knowledge is indir">
+<meta name="twitter:description" content="Dynamic Integration of Background Knowledge in Neural NLU Systems ICLR,2018. Reject Dirk Weissenborn, et.al. Datasets: SQuAD, TriviaQA, SNLI, MNLI  Motivation  the requisite background knowledge is i">
 <meta name="twitter:image" content="http://xingluxi.github.io/.io//fig-1.png">
 
 
@@ -410,12 +410,17 @@
 
       
         <blockquote>
-<p><em>Dynamic Integration of Background Knowledge in Neural NLU Systems</em><br><em>ICLR,2018. Reject</em><br><em>Dirk Weissenborn, et.al.</em><br><em>Datasets: SQuAD, TriviaQA, SNLI, MNLI</em></p>
+<p><em>Dynamic Integration of Background Knowledge in Neural NLU Systems</em>
+<em>ICLR,2018. Reject</em>
+<em>Dirk Weissenborn, et.al.</em>
+<em>Datasets: SQuAD, TriviaQA, SNLI, MNLI</em></p>
 </blockquote>
-<h2 id="Motivation"><a href="#Motivation" class="headerlink" title="Motivation"></a>Motivation</h2><ul>
+<h2>Motivation</h2>
+<ul>
 <li>the requisite background knowledge is indirectly acquired from static corpora.</li>
 <li>background knowledge learned from task supervision and also by pre-training word embeddings.</li>
-<li>从静态的训练数据中获取背景知识有两点缺陷:<ul>
+<li>从静态的训练数据中获取背景知识有两点缺陷:
+<ul>
 <li>1/不是所有的对解决NLU任务重要的背景知识都可以从有限量的训练数据中抽取出来；</li>
 <li>2/随着时间的变化，对于理解文本有帮助的事实也会发生变化；</li>
 </ul>
@@ -426,16 +431,23 @@
 <li>develop a new reading architecture for the <strong>dynamic integration</strong> of <strong>explicit background knowledge</strong> in NLU models.</li>
 <li>a new <strong>task-agnostic(任务无关)</strong> reading module provides <strong>reﬁned word representations</strong> to a task-speciﬁc NLU architecture by processing background knowledge in the form of free-text statements, together with the task-speciﬁc inputs.</li>
 </ul>
-<h2 id="Model"><a href="#Model" class="headerlink" title="Model"></a>Model</h2><p>输入是：待理解的文本，即context，和抽取出的相关知识的assertions.<br>然后，使用 word embedding refinement 的策略，增量式地读入context和assertions，最初使用上下文无关的词向量仅初始化.<br>这种 contextually refined word embedding <strong>可以看成是一种动态记忆，用来存储新结合的知识</strong>. </p>
-<h3 id="External-Knowledge-as-Supplementary-Text-Inputs"><a href="#External-Knowledge-as-Supplementary-Text-Inputs" class="headerlink" title="External Knowledge as Supplementary Text Inputs"></a>External Knowledge as Supplementary Text Inputs</h3><ul>
-<li>结合知识的形式：<ul>
+<h2>Model</h2>
+<p>输入是：待理解的文本，即context，和抽取出的相关知识的assertions.
+然后，使用 word embedding refinement 的策略，增量式地读入context和assertions，最初使用上下文无关的词向量仅初始化.
+这种 contextually refined word embedding <strong>可以看成是一种动态记忆，用来存储新结合的知识</strong>.</p>
+<h3>External Knowledge as Supplementary Text Inputs</h3>
+<ul>
+<li>结合知识的形式：
+<ul>
 <li>本文中并不限制外部信息的形式：无结构/结构化知识都可以作为补充信息</li>
 </ul>
 </li>
-<li>结合何种知识：<ul>
+<li>结合何种知识：
+<ul>
 <li>从知识源中抽取上下文相关的信息本身就是个复杂的研究，并且依赖于知识库的形式</li>
 <li>全面抽取所有潜在的assertions，然后依赖于我们的阅读结构来学习抽取相关的信息</li>
-<li>Assertion Retrieval<ul>
+<li>Assertion Retrieval
+<ul>
 <li>抽取知识是为了获得句子之间的关联</li>
 <li>抽取出连接头/尾实体在text中，尾/头实体在question中的知识</li>
 <li>由于抽取出的assertion过多，使用排序分数对assertions进行打分（类似于tf-idf的打分方式，针对的是罕见但是重要的知识，选择top-k个）</li>
@@ -444,8 +456,10 @@
 </ul>
 </li>
 </ul>
-<h3 id="Refine-Word-Embeddings-by-Reading"><a href="#Refine-Word-Embeddings-by-Reading" class="headerlink" title="Refine Word Embeddings by Reading"></a>Refine Word Embeddings by Reading</h3><p>将词向量看做一种记忆，不仅包含通用的知识，还包含上下文信息和抽取的知识信息.</p>
-<p>本文提出的增量式 refinement 过程编码输入文本，然后使用多个阅读步得到的编码输入来更新词向量矩阵.<br>过程如图：</p>
+<h3>Refine Word Embeddings by Reading</h3>
+<p>将词向量看做一种记忆，不仅包含通用的知识，还包含上下文信息和抽取的知识信息.</p>
+<p>本文提出的增量式 refinement 过程编码输入文本，然后使用多个阅读步得到的编码输入来更新词向量矩阵.
+过程如图：</p>
 <ul>
 <li><img src="/.io//fig-1.png" alt="refinement"></li>
 </ul>
@@ -456,41 +470,49 @@
 <li>$X^\ell$: 第$\ell$步的上下文信息</li>
 <li>$FC(z)=W z + b, W\in \mathbb{R}^{n \times m}, b\in \mathbb{R}^{n}, z\in \mathbb{R}^m$</li>
 </ul>
-<h4 id="1-Unrefined-Word-Embeddings"><a href="#1-Unrefined-Word-Embeddings" class="headerlink" title="1.Unrefined Word Embeddings"></a>1.Unrefined Word Embeddings</h4><p>这一步的目标是根据预训练词向量$e_w^p \in \mathbb{R}^{n^\prime}$得到初始的non-contextual词表示，计算如下：</p>
+<h4>1.Unrefined Word Embeddings</h4>
+<p>这一步的目标是根据预训练词向量$e_w^p \in \mathbb{R}^{n^\prime}$得到初始的non-contextual词表示，计算如下：</p>
 <ul>
 <li>$e_w^{p^\prime} = ReLU(FC(e_w^p))$</li>
 <li>$g_w = \sigma(FC([e_w^{p^\prime} ; e_w^{char}]))$</li>
-<li>$e_w^0 = g_w \cdot e_w^{p^\prime} + (1-g_w) \cdot e_w^{char}$<br>其中，$e_w^{char}$是通过cnn编码（n convolutional ﬁlters w of width 5 followed by a max-pooling operation over time.）得到</li>
+<li>$e_w^0 = g_w \cdot e_w^{p^\prime} + (1-g_w) \cdot e_w^{char}$
+其中，$e_w^{char}$是通过cnn编码（n convolutional ﬁlters w of width 5 followed by a max-pooling operation over time.）得到</li>
 </ul>
-<h4 id="2-Contextually-Refined-Word-Representation"><a href="#2-Contextually-Refined-Word-Representation" class="headerlink" title="2.Contextually Refined Word Representation"></a>2.Contextually Refined Word Representation</h4><p>在编码输入文本时，</p>
+<h4>2.Contextually Refined Word Representation</h4>
+<p>在编码输入文本时，</p>
 <ul>
 <li>给每个词concatenate一个长度为L(即进行refienment处理的次数)的one-hot向量表示对应的位($\ell$)置1，</li>
 <li>得到输入文本$X_i^{\ell} \in \mathbb{R}^{d\times |x_i^l|}$</li>
 <li>经过lstm进行context编码: $\hat{X}_i^{\ell} = ReLU(FC(BiLSTM(X_i^{\ell})))$</li>
-<li>在任务中：$X^1$相当于是Passage(Premise)文本的表示，$X^2$相当于是Question(Hypothesis)的表示，额外的知识assertions是$X^3$<ul>
+<li>在任务中：$X^1$相当于是Passage(Premise)文本的表示，$X^2$相当于是Question(Hypothesis)的表示，额外的知识assertions是$X^3$
+<ul>
 <li>在实验中，p\q的顺序对最终的结果没有显著的影响</li>
 </ul>
 </li>
 </ul>
 <p>更新词向量：</p>
 <ul>
-<li>首先对所有在文本中与此词的lemma相同的词进行一个maxpool: <ul>
+<li>首先对所有在文本中与此词的lemma相同的词进行一个maxpool:
+<ul>
 <li>$\hat{e}_w^{\ell} = max{\hat{x}_k^{\ell} | x^{\ell} \in X^{\ell}, lemma(x_k^{\ell}) = lemma(w) }$</li>
 </ul>
 </li>
-<li>然后，用context-independent的表示去计算一个context-sensitive的表示<ul>
+<li>然后，用context-independent的表示去计算一个context-sensitive的表示
+<ul>
 <li>通过门控机制，是模型决定利用多少新读入的信息来改写词向量</li>
 <li>$u_w^{\ell} = \sigma(FC( [e_w^{\ell -1}; \hat{e}_w^{\ell}] ))$</li>
 <li>$e_w^{\ell} = u_w^{\ell} \cdot e_w^{\ell -1} + (1- u_w^{\ell})\cdot \hat{e}_w^{\ell}$</li>
 </ul>
 </li>
-<li>关于pooling操作：在具有相同lemma的词上面进行pooling操作<ul>
+<li>关于pooling操作：在具有相同lemma的词上面进行pooling操作
+<ul>
 <li>有效的联系可以缓解长距离依赖问题</li>
 <li>更充分的利用输入作为相关背景知识</li>
 </ul>
 </li>
 </ul>
-<h2 id="Experiments"><a href="#Experiments" class="headerlink" title="Experiments"></a>Experiments</h2><p>这篇文章的实验是在NLI（SNLI）和DQA（SQuAD）的任务上进行。</p>
+<h2>Experiments</h2>
+<p>这篇文章的实验是在NLI（SNLI）和DQA（SQuAD）的任务上进行。</p>
 <p>对NLI任务上：</p>
 <ul>
 <li>使用全部的数据进行训练时的提升不是很大</li>
@@ -546,11 +568,11 @@
           
             <a href="/tags/nlp/" rel="tag"><i class="fa fa-tag"></i> nlp</a>
           
+            <a href="/tags/mrc/" rel="tag"><i class="fa fa-tag"></i> mrc</a>
+          
             <a href="/tags/paper/" rel="tag"><i class="fa fa-tag"></i> paper</a>
           
             <a href="/tags/knowledge/" rel="tag"><i class="fa fa-tag"></i> knowledge</a>
-          
-            <a href="/tags/mrc/" rel="tag"><i class="fa fa-tag"></i> mrc</a>
           
             <a href="/tags/nli/" rel="tag"><i class="fa fa-tag"></i> nli</a>
           
@@ -738,7 +760,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Motivation"><span class="nav-text">Motivation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Model"><span class="nav-text">Model</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#External-Knowledge-as-Supplementary-Text-Inputs"><span class="nav-text">External Knowledge as Supplementary Text Inputs</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Refine-Word-Embeddings-by-Reading"><span class="nav-text">Refine Word Embeddings by Reading</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-Unrefined-Word-Embeddings"><span class="nav-text">1.Unrefined Word Embeddings</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-Contextually-Refined-Word-Representation"><span class="nav-text">2.Contextually Refined Word Representation</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Experiments"><span class="nav-text">Experiments</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">Motivation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">Model</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-text">External Knowledge as Supplementary Text Inputs</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-text">Refine Word Embeddings by Reading</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#undefined"><span class="nav-text">1.Unrefined Word Embeddings</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#undefined"><span class="nav-text">2.Contextually Refined Word Representation</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">Experiments</span></a></li></ol></div>
             
 
           </div>

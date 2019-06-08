@@ -86,18 +86,18 @@
 
 
 
-<meta name="description" content="NLI IntroductionChallenges 词语匹配的多元性（同义词、一词多义）lexical gap、lexical variant； 短语匹配的结构性、多粒度计算语义； 文本匹配的层次性； 利用不相似部分的信息； 自然语言的基础现象：Variability of Semantic expression 是语言歧义的对偶问题； 语义表达的多变性、语言结构的多样性；    Approac">
+<meta name="description" content="NLI Introduction Challenges  词语匹配的多元性（同义词、一词多义）lexical gap、lexical variant； 短语匹配的结构性、多粒度计算语义； 文本匹配的层次性； 利用不相似部分的信息； 自然语言的基础现象：Variability of Semantic expression  是语言歧义的对偶问题； 语义表达的多变性、语言结构的多样性；    Appr">
 <meta name="keywords" content="nlp,paper,research,nli">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Natural Language Inference | Analysis and Paper List">
 <meta property="og:url" content="http://xingluxi.github.io/2019/01/16/nli-paper-info/index.html">
 <meta property="og:site_name" content="Luxi Xing - Blog">
-<meta property="og:description" content="NLI IntroductionChallenges 词语匹配的多元性（同义词、一词多义）lexical gap、lexical variant； 短语匹配的结构性、多粒度计算语义； 文本匹配的层次性； 利用不相似部分的信息； 自然语言的基础现象：Variability of Semantic expression 是语言歧义的对偶问题； 语义表达的多变性、语言结构的多样性；    Approac">
+<meta property="og:description" content="NLI Introduction Challenges  词语匹配的多元性（同义词、一词多义）lexical gap、lexical variant； 短语匹配的结构性、多粒度计算语义； 文本匹配的层次性； 利用不相似部分的信息； 自然语言的基础现象：Variability of Semantic expression  是语言歧义的对偶问题； 语义表达的多变性、语言结构的多样性；    Appr">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:updated_time" content="2019-04-04T01:30:04.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Natural Language Inference | Analysis and Paper List">
-<meta name="twitter:description" content="NLI IntroductionChallenges 词语匹配的多元性（同义词、一词多义）lexical gap、lexical variant； 短语匹配的结构性、多粒度计算语义； 文本匹配的层次性； 利用不相似部分的信息； 自然语言的基础现象：Variability of Semantic expression 是语言歧义的对偶问题； 语义表达的多变性、语言结构的多样性；    Approac">
+<meta name="twitter:description" content="NLI Introduction Challenges  词语匹配的多元性（同义词、一词多义）lexical gap、lexical variant； 短语匹配的结构性、多粒度计算语义； 文本匹配的层次性； 利用不相似部分的信息； 自然语言的基础现象：Variability of Semantic expression  是语言歧义的对偶问题； 语义表达的多变性、语言结构的多样性；    Appr">
 
 
 
@@ -370,7 +370,7 @@
                   <span class="post-meta-item-text">Words count in article&#58;</span>
                 
                 <span title="Words count in article">
-                  212
+                  215
                 </span>
               
 
@@ -407,29 +407,37 @@
       
 
       
-        <h2 id="NLI-Introduction"><a href="#NLI-Introduction" class="headerlink" title="NLI Introduction"></a>NLI Introduction</h2><h3 id="Challenges"><a href="#Challenges" class="headerlink" title="Challenges"></a>Challenges</h3><ul>
+        <h2>NLI Introduction</h2>
+<h3>Challenges</h3>
+<ul>
 <li>词语匹配的多元性（同义词、一词多义）lexical gap、lexical variant；</li>
 <li>短语匹配的结构性、多粒度计算语义；</li>
 <li>文本匹配的层次性；</li>
 <li>利用不相似部分的信息；</li>
-<li>自然语言的基础现象：Variability of Semantic expression<ul>
+<li>自然语言的基础现象：Variability of Semantic expression
+<ul>
 <li>是语言歧义的对偶问题；</li>
 <li>语义表达的多变性、语言结构的多样性；</li>
 </ul>
 </li>
 </ul>
-<h3 id="Approachs"><a href="#Approachs" class="headerlink" title="Approachs"></a>Approachs</h3><p>models on NLI(Natural Language Infernce), concluded as: <strong>sentence-encoding-based</strong> vs. <strong>interaction-based</strong></p>
+<h3>Approachs</h3>
+<p>models on NLI(Natural Language Infernce), concluded as: <strong>sentence-encoding-based</strong> vs. <strong>interaction-based</strong></p>
 <ul>
-<li>基于encoding的基本框架：<ul>
-<li>input encoding –&gt;concat vector –&gt;vector &amp; element-wise difference/product–&gt; prediction</li>
+<li>基于encoding的基本框架：
+<ul>
+<li>input encoding --&gt;concat vector --&gt;vector &amp; element-wise difference/product--&gt; prediction</li>
 </ul>
 </li>
-<li>基于交互的基本框架：<ul>
-<li>input encoding –&gt; inference(interaction) –&gt; composition –&gt; prediction</li>
+<li>基于交互的基本框架：
+<ul>
+<li>input encoding --&gt; inference(interaction) --&gt; composition --&gt; prediction</li>
 </ul>
 </li>
 </ul>
-<h3 id="Measure-of-Similarity"><a href="#Measure-of-Similarity" class="headerlink" title="Measure of Similarity"></a>Measure of Similarity</h3><h2 id="Models-of-Sentence-Encoding-Based"><a href="#Models-of-Sentence-Encoding-Based" class="headerlink" title="Models of Sentence Encoding Based"></a>Models of Sentence Encoding Based</h2><ul>
+<h3>Measure of Similarity</h3>
+<h2>Models of Sentence Encoding Based</h2>
+<ul>
 <li>BiLSTM-Max</li>
 <li>NSE</li>
 <li>Deep Gated Attn. BiLSTM</li>
@@ -439,7 +447,8 @@
 <li>Hierarchical BiLSTM with Max Pooling</li>
 <li>Dynamic Self-Attention Model</li>
 </ul>
-<h2 id="Models-of-Interaction-Based"><a href="#Models-of-Interaction-Based" class="headerlink" title="Models of Interaction Based"></a>Models of Interaction Based</h2><ul>
+<h2>Models of Interaction Based</h2>
+<ul>
 <li>Decomposable Attention</li>
 <li>ESIM</li>
 <li>KIM</li>
@@ -693,7 +702,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#NLI-Introduction"><span class="nav-text">NLI Introduction</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Challenges"><span class="nav-text">Challenges</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Approachs"><span class="nav-text">Approachs</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Measure-of-Similarity"><span class="nav-text">Measure of Similarity</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Models-of-Sentence-Encoding-Based"><span class="nav-text">Models of Sentence Encoding Based</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Models-of-Interaction-Based"><span class="nav-text">Models of Interaction Based</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">NLI Introduction</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-text">Challenges</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-text">Approachs</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-text">Measure of Similarity</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">Models of Sentence Encoding Based</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">Models of Interaction Based</span></a></li></ol></div>
             
 
           </div>

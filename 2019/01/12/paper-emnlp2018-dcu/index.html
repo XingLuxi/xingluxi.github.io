@@ -75,7 +75,7 @@
 
 
 
-  <meta name="keywords" content="nlp,paper,mrc,reasoning,">
+  <meta name="keywords" content="nlp,mrc,paper,reasoning,">
 
 
 
@@ -86,13 +86,13 @@
 
 
 
-<meta name="description" content="Multi-Granular Sequence Encoding via Dilated Compositional Units for Reading ComprehensionEMNLP 2018Yi Tay et al.多粒度/尺度序列编码; 膨胀组合单元  Motivation Sequence encoder是MRC中的重要部件: helps to model compositiona">
-<meta name="keywords" content="nlp,paper,mrc,reasoning">
+<meta name="description" content="Multi-Granular Sequence Encoding via Dilated Compositional Units for Reading Comprehension EMNLP 2018 Yi Tay et al. 多粒度/尺度序列编码; 膨胀组合单元  Motivation  Sequence encoder是MRC中的重要部件: helps to model composit">
+<meta name="keywords" content="nlp,mrc,paper,reasoning">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Multi-Granular Sequence Encoding via Dilated Compositional Units for Reading Comprehension">
 <meta property="og:url" content="http://xingluxi.github.io/2019/01/12/paper-emnlp2018-dcu/index.html">
 <meta property="og:site_name" content="Luxi Xing - Blog">
-<meta property="og:description" content="Multi-Granular Sequence Encoding via Dilated Compositional Units for Reading ComprehensionEMNLP 2018Yi Tay et al.多粒度/尺度序列编码; 膨胀组合单元  Motivation Sequence encoder是MRC中的重要部件: helps to model compositiona">
+<meta property="og:description" content="Multi-Granular Sequence Encoding via Dilated Compositional Units for Reading Comprehension EMNLP 2018 Yi Tay et al. 多粒度/尺度序列编码; 膨胀组合单元  Motivation  Sequence encoder是MRC中的重要部件: helps to model composit">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://xingluxi.github.io/.io//dcu-1-overall.png">
 <meta property="og:image" content="http://xingluxi.github.io/.io//dcu-2-op.png">
@@ -101,7 +101,7 @@
 <meta property="og:updated_time" content="2019-01-13T07:51:56.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Multi-Granular Sequence Encoding via Dilated Compositional Units for Reading Comprehension">
-<meta name="twitter:description" content="Multi-Granular Sequence Encoding via Dilated Compositional Units for Reading ComprehensionEMNLP 2018Yi Tay et al.多粒度/尺度序列编码; 膨胀组合单元  Motivation Sequence encoder是MRC中的重要部件: helps to model compositiona">
+<meta name="twitter:description" content="Multi-Granular Sequence Encoding via Dilated Compositional Units for Reading Comprehension EMNLP 2018 Yi Tay et al. 多粒度/尺度序列编码; 膨胀组合单元  Motivation  Sequence encoder是MRC中的重要部件: helps to model composit">
 <meta name="twitter:image" content="http://xingluxi.github.io/.io//dcu-1-overall.png">
 
 
@@ -413,26 +413,34 @@
 
       
         <blockquote>
-<p>Multi-Granular Sequence Encoding via Dilated Compositional Units for Reading Comprehension<br>EMNLP 2018<br>Yi Tay et al.<br>多粒度/尺度序列编码; 膨胀组合单元</p>
+<p>Multi-Granular Sequence Encoding via Dilated Compositional Units for Reading Comprehension
+EMNLP 2018
+Yi Tay et al.
+多粒度/尺度序列编码; 膨胀组合单元</p>
 </blockquote>
-<h2 id="Motivation"><a href="#Motivation" class="headerlink" title="Motivation"></a>Motivation</h2><ul>
+<h2>Motivation</h2>
+<ul>
 <li>Sequence encoder是MRC中的重要部件: helps to model compositionality of words, capturing rich and complex linguistic and syntactic structure in language</li>
-<li>Sequence encoder的问题:<ul>
+<li>Sequence encoder的问题:
+<ul>
 <li>文档较长，文档数多时计算开销大;</li>
 <li>限制获取长距离上下文;</li>
 <li>限制了多句和文档内部的推理;</li>
 </ul>
 </li>
-<li>本文工作: 采取组合式编码方式<ul>
+<li>本文工作: 采取组合式编码方式
+<ul>
 <li>主要思路是将多个尺度的信息组合在一起进行编码，利用多尺度 n 元语法信息来实现语义融合，得到更好的文档表达，用于后续的推理和Attention操作.</li>
-<li>设计了一种 dilated compositions 机制来建模多个尺度之间的关系，相当于通过门控的方式决定要保留多少信息<ul>
+<li>设计了一种 dilated compositions 机制来建模多个尺度之间的关系，相当于通过门控的方式决定要保留多少信息
+<ul>
 <li>多尺度 包括：word-level、phrase-level、sentence-level、paragraph-level etc.</li>
 <li>一种 divide-and-conquer 的序列编码方式</li>
 </ul>
 </li>
 </ul>
 </li>
-<li>本文贡献:<ul>
+<li>本文贡献:
+<ul>
 <li>提出了一个 compositional encoder DCU (Dilated Compositional Units), DCU 既可以进行独立编码，也可以以RNN-style的方式进行更有表示能力的编码；</li>
 <li>DCU 可以加速序列编码速度，并且保持相邻词之间的交互关系；</li>
 <li>建模长句子时，模型可以获得前方更多的信息，是对所有上下文的全局概览；</li>
@@ -440,22 +448,28 @@
 </ul>
 </li>
 </ul>
-<h2 id="Model"><a href="#Model" class="headerlink" title="Model"></a>Model</h2><ul>
-<li>DCU用于MRC时的整体结构，左侧为DCU Encoder，右侧为DCU分别用于span prediction model和Multiple choice model的结构:<br><img src="/.io//dcu-1-overall.png" alt="dcu-model"></li>
+<h2>Model</h2>
+<ul>
+<li>DCU用于MRC时的整体结构，左侧为DCU Encoder，右侧为DCU分别用于span prediction model和Multiple choice model的结构:
+<img src="/.io//dcu-1-overall.png" alt="dcu-model"></li>
 </ul>
 <p>本节只介绍 DCU 的操作和 encoding 操作，不对整体的mrc模型进行介绍</p>
-<h3 id="Dilated-Compositional-Mechanism"><a href="#Dilated-Compositional-Mechanism" class="headerlink" title="Dilated Compositional Mechanism"></a>Dilated Compositional Mechanism</h3><p>Notations:</p>
+<h3>Dilated Compositional Mechanism</h3>
+<p>Notations:</p>
 <ul>
-<li>Input Sequence: $S=[w_1, w_2, …, w_l]$</li>
-<li>Range list: $R={r_1, r_2, …, r_k}$<ul>
+<li>Input Sequence: $S=[w_1, w_2, ..., w_l]$</li>
+<li>Range list: $R={r_1, r_2, ..., r_k}$
+<ul>
 <li>$k$ 表示进行 $k$ 次 fold/unfold 操作</li>
 </ul>
 </li>
 </ul>
-<h4 id="1-Fold"><a href="#1-Fold" class="headerlink" title="1.Fold"></a>1.Fold</h4><p>对于每个 $r_j$:</p>
+<h4>1.Fold</h4>
+<p>对于每个 $r_j$:</p>
 <ul>
 <li>将$S$中的每 $r_j$ 个词进行串接(concat, neural bag-of-words 表示), 原输入长度缩减为 $l/r_j$</li>
-<li>对于新得到的、包含 $l/r_j$ 个 tokens/blocks 的序列中的每个表示进行如下计算:<ul>
+<li>对于新得到的、包含 $l/r_j$ 个 tokens/blocks 的序列中的每个表示进行如下计算:
+<ul>
 <li>$\bar{w}_t = \sigma_r(W_a(w_t)) + b_a$</li>
 <li>$W_a \in \mathbb{R}^{d\times d}, b\in \mathbb{R}^d$</li>
 </ul>
@@ -463,36 +477,48 @@
 <li>Fold 的操作次数等于 range list 的大小</li>
 <li>对于 range list 中不同的 $r$ 值, 参数 $W_a$ 和 $b_a$ 不共享</li>
 </ul>
-<h4 id="2-Unfold"><a href="#2-Unfold" class="headerlink" title="2.Unfold"></a>2.Unfold</h4><p>将transformed之后的序列展开为原长</p>
+<h4>2.Unfold</h4>
+<p>将transformed之后的序列展开为原长</p>
 <ul>
-<li>下图中为 $r_j=2$ 时的 Fold-Unfold 操作:<br><img src="/.io//dcu-2-op.png" alt="dcu-fold-unfold"></li>
+<li>下图中为 $r_j=2$ 时的 Fold-Unfold 操作:
+<img src="/.io//dcu-2-op.png" alt="dcu-fold-unfold"></li>
 </ul>
-<h4 id="3-Multi-Granular-Reasoning"><a href="#3-Multi-Granular-Reasoning" class="headerlink" title="3.Multi-Granular Reasoning"></a>3.Multi-Granular Reasoning</h4><p>多尺度推理</p>
+<h4>3.Multi-Granular Reasoning</h4>
+<p>多尺度推理</p>
 <ul>
-<li>将不同尺度的unfold之后的token表示进行串接，然后通过两层前馈神经网络得到一个门向量<ul>
-<li>$g_t = F_2(F_1([w_1^t,w_2^t,…,w_t^k]))$</li>
+<li>将不同尺度的unfold之后的token表示进行串接，然后通过两层前馈神经网络得到一个门向量
+<ul>
+<li>$g_t = F_2(F_1([w_1^t,w_2^t,...,w_t^k]))$</li>
 <li>$F(\cdot) = ReLU(Wx+b)$</li>
 </ul>
 </li>
 <li>$g_t$ 相当于一个从多尺度中学习的门控向量，尺度值最低的那些词会拥有相同的 $g_t$ 值</li>
 </ul>
-<h3 id="Encoding-Operation"><a href="#Encoding-Operation" class="headerlink" title="Encoding Operation"></a>Encoding Operation</h3><h4 id="1-Simple-Encoding"><a href="#1-Simple-Encoding" class="headerlink" title="1.Simple Encoding"></a>1.Simple Encoding</h4><ul>
+<h3>Encoding Operation</h3>
+<h4>1.Simple Encoding</h4>
+<ul>
 <li>$z_t = tanh(W_p w_t) + b_p$</li>
 <li>$y_t = \sigma(g_t) \ast w_t + (1-\sigma(g_t))z_t$</li>
 </ul>
-<h4 id="2-Recurrent-Encoding"><a href="#2-Recurrent-Encoding" class="headerlink" title="2.Recurrent Encoding"></a>2.Recurrent Encoding</h4><p>DCU 相当于循环神经网络中的 cell</p>
+<h4>2.Recurrent Encoding</h4>
+<p>DCU 相当于循环神经网络中的 cell</p>
 <ul>
 <li>$c_t = g_t \odot c_{t-1} + (1-g_t)\odot z_t$</li>
 <li>$o_t = W_o(w_t) + b_o$</li>
 <li>$h_t = o_t \odot c_t$</li>
 </ul>
 <blockquote>
-<p>问题：<br>此处有一点疑问是，为什么通过DCU得到的门控向量 $g_t$ 没有参与到后续的编码过程, 而只是作为了控制初始 $w_t$ 词向量的门控输入</p>
+<p>问题：
+此处有一点疑问是，为什么通过DCU得到的门控向量 $g_t$ 没有参与到后续的编码过程, 而只是作为了控制初始 $w_t$ 词向量的门控输入</p>
 </blockquote>
-<h2 id="Experiment"><a href="#Experiment" class="headerlink" title="Experiment"></a>Experiment</h2><h3 id="Implementation-Details"><a href="#Implementation-Details" class="headerlink" title="Implementation Details"></a>Implementation Details</h3><ul>
-<li>Multi-Choice 模型:<ul>
+<h2>Experiment</h2>
+<h3>Implementation Details</h3>
+<ul>
+<li>Multi-Choice 模型:
+<ul>
 <li>数据输入: include the standard EM (exact match) binary feature to each word. In this case, we use a three-way EM adaptation, i.e., EM(P, Q), EM(Q, A) and EM(P, A). The projected embeddings are then passed into a single layered highway network</li>
-<li>输出(答案选择层): 将每个候选答案的答案向量转化为标量<ul>
+<li>输出(答案选择层): 将每个候选答案的答案向量转化为标量
+<ul>
 <li>$a_j^f=softmax(W_2(\sigma_r(W_1([a_j])+b_1)+b_2))$</li>
 </ul>
 </li>
@@ -501,11 +527,16 @@
 <li>range valuse: ${1,2,4,10,25}$</li>
 <li>最大序列长度 (RACE/SearchQA/NarrativeQA): $500/200/1100$</li>
 </ul>
-<h3 id="Results"><a href="#Results" class="headerlink" title="Results"></a>Results</h3><p>只关注了一下RACE和NarrativeQA上的结果，在没有使用RNN-based编码器的情况下，取得了不错的效果，在论文完成时(2018.03)是RACE上的top-1</p>
-<h4 id="RACE"><a href="#RACE" class="headerlink" title="RACE"></a>RACE</h4><p><img src="/.io//dcu-results-race.png" alt="results-race"></p>
-<h4 id="NarrativeQA"><a href="#NarrativeQA" class="headerlink" title="NarrativeQA"></a>NarrativeQA</h4><p><img src="/.io//dcu-results-narrativeqa.png" alt="results-nqa"></p>
-<h2 id="Summary-amp-Analysis"><a href="#Summary-amp-Analysis" class="headerlink" title="Summary &amp; Analysis"></a>Summary &amp; Analysis</h2><ul>
-<li>对于长文本的编码问题是MRC中的重点问题之一【–&gt;表示问题】<ul>
+<h3>Results</h3>
+<p>只关注了一下RACE和NarrativeQA上的结果，在没有使用RNN-based编码器的情况下，取得了不错的效果，在论文完成时(2018.03)是RACE上的top-1</p>
+<h4>RACE</h4>
+<p><img src="/.io//dcu-results-race.png" alt="results-race"></p>
+<h4>NarrativeQA</h4>
+<p><img src="/.io//dcu-results-narrativeqa.png" alt="results-nqa"></p>
+<h2>Summary &amp; Analysis</h2>
+<ul>
+<li>对于长文本的编码问题是MRC中的重点问题之一【--&gt;表示问题】
+<ul>
 <li>长文本和多篇文本</li>
 </ul>
 </li>
@@ -561,9 +592,9 @@
           
             <a href="/tags/nlp/" rel="tag"><i class="fa fa-tag"></i> nlp</a>
           
-            <a href="/tags/paper/" rel="tag"><i class="fa fa-tag"></i> paper</a>
-          
             <a href="/tags/mrc/" rel="tag"><i class="fa fa-tag"></i> mrc</a>
+          
+            <a href="/tags/paper/" rel="tag"><i class="fa fa-tag"></i> paper</a>
           
             <a href="/tags/reasoning/" rel="tag"><i class="fa fa-tag"></i> reasoning</a>
           
@@ -751,7 +782,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Motivation"><span class="nav-text">Motivation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Model"><span class="nav-text">Model</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Dilated-Compositional-Mechanism"><span class="nav-text">Dilated Compositional Mechanism</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-Fold"><span class="nav-text">1.Fold</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-Unfold"><span class="nav-text">2.Unfold</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-Multi-Granular-Reasoning"><span class="nav-text">3.Multi-Granular Reasoning</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Encoding-Operation"><span class="nav-text">Encoding Operation</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-Simple-Encoding"><span class="nav-text">1.Simple Encoding</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-Recurrent-Encoding"><span class="nav-text">2.Recurrent Encoding</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Experiment"><span class="nav-text">Experiment</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Implementation-Details"><span class="nav-text">Implementation Details</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Results"><span class="nav-text">Results</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#RACE"><span class="nav-text">RACE</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#NarrativeQA"><span class="nav-text">NarrativeQA</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Summary-amp-Analysis"><span class="nav-text">Summary &amp; Analysis</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">Motivation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">Model</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-text">Dilated Compositional Mechanism</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#undefined"><span class="nav-text">1.Fold</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#undefined"><span class="nav-text">2.Unfold</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#undefined"><span class="nav-text">3.Multi-Granular Reasoning</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-text">Encoding Operation</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#undefined"><span class="nav-text">1.Simple Encoding</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#undefined"><span class="nav-text">2.Recurrent Encoding</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">Experiment</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-text">Implementation Details</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-text">Results</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#undefined"><span class="nav-text">RACE</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#undefined"><span class="nav-text">NarrativeQA</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">Summary &amp; Analysis</span></a></li></ol></div>
             
 
           </div>

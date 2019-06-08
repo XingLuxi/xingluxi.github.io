@@ -75,7 +75,7 @@
 
 
 
-  <meta name="keywords" content="nlp,paper,mrc,nlu,reasoning,">
+  <meta name="keywords" content="nlp,mrc,paper,nlu,reasoning,">
 
 
 
@@ -86,18 +86,18 @@
 
 
 
-<meta name="description" content="[Under reading]  On the Capabilities and Limitations of Reasoning for Natural Language UnderstandingKhashabi et al.作者来自 University of Pennsylvania, Indiana University 和 AllennAI题目: 论自然语言理解推理的能力与局限  Ab">
-<meta name="keywords" content="nlp,paper,mrc,nlu,reasoning">
+<meta name="description" content="[Under reading]  On the Capabilities and Limitations of Reasoning for Natural Language Understanding Khashabi et al. 作者来自 University of Pennsylvania, Indiana University 和 AllennAI 题目: 论自然语言理解推理的能力与局限">
+<meta name="keywords" content="nlp,mrc,paper,nlu,reasoning">
 <meta property="og:type" content="article">
 <meta property="og:title" content="WIP| On the Capabilities and Limitations of Reasoning for Natural Language Understanding">
 <meta property="og:url" content="http://xingluxi.github.io/2019/01/11/paper-1901-02522/index.html">
 <meta property="og:site_name" content="Luxi Xing - Blog">
-<meta property="og:description" content="[Under reading]  On the Capabilities and Limitations of Reasoning for Natural Language UnderstandingKhashabi et al.作者来自 University of Pennsylvania, Indiana University 和 AllennAI题目: 论自然语言理解推理的能力与局限  Ab">
+<meta property="og:description" content="[Under reading]  On the Capabilities and Limitations of Reasoning for Natural Language Understanding Khashabi et al. 作者来自 University of Pennsylvania, Indiana University 和 AllennAI 题目: 论自然语言理解推理的能力与局限">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:updated_time" content="2019-01-12T02:23:32.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="WIP| On the Capabilities and Limitations of Reasoning for Natural Language Understanding">
-<meta name="twitter:description" content="[Under reading]  On the Capabilities and Limitations of Reasoning for Natural Language UnderstandingKhashabi et al.作者来自 University of Pennsylvania, Indiana University 和 AllennAI题目: 论自然语言理解推理的能力与局限  Ab">
+<meta name="twitter:description" content="[Under reading]  On the Capabilities and Limitations of Reasoning for Natural Language Understanding Khashabi et al. 作者来自 University of Pennsylvania, Indiana University 和 AllennAI 题目: 论自然语言理解推理的能力与局限">
 
 
 
@@ -370,7 +370,7 @@
                   <span class="post-meta-item-text">Words count in article&#58;</span>
                 
                 <span title="Words count in article">
-                  411
+                  478
                 </span>
               
 
@@ -386,7 +386,7 @@
                   <span class="post-meta-item-text">Reading time &asymp;</span>
                 
                 <span title="Reading time">
-                  1
+                  2
                 </span>
               
             </div>
@@ -409,33 +409,42 @@
       
         <p>[Under reading]</p>
 <blockquote>
-<p>On the Capabilities and Limitations of Reasoning for Natural Language Understanding<br>Khashabi et al.<br>作者来自 University of Pennsylvania, Indiana University 和 AllennAI<br>题目: 论自然语言理解推理的能力与局限</p>
+<p>On the Capabilities and Limitations of Reasoning for Natural Language Understanding
+Khashabi et al.
+作者来自 University of Pennsylvania, Indiana University 和 AllennAI
+题目: 论自然语言理解推理的能力与局限</p>
 </blockquote>
-<h2 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h2><ul>
-<li>一些NLU系统在克服查找 Style Reasoning 的语言可变性(linguistic variability)方面具有很强的实力, 但是他们的准确率会随着推理步数的增加而下降.<ul>
+<h2>Abstract</h2>
+<ul>
+<li>一些NLU系统在克服查找 Style Reasoning 的语言可变性(linguistic variability)方面具有很强的实力, 但是他们的准确率会随着推理步数的增加而下降.
+<ul>
 <li>key: style reasoning; linguistic variability; reasoning step;</li>
 </ul>
 </li>
-<li>本文基于上述观察第一次提出了一个正式框架, 旨在解决<strong>使用语言表示隐藏概念空间时引入的</strong>:<ul>
-<li><span id="inline-blue">1.模糊性(ambiguity) </span></li>
-<li><span id="inline-blue">2.冗余性(redundancy) </span></li>
-<li><span id="inline-blue">3.不完整性(incompleteness) </span></li>
-<li><span id="inline-blue">4.不准确性(inaccuracy) </span></li>
+<li>本文基于上述观察第一次提出了一个正式框架, 旨在解决<strong>使用语言表示隐藏概念空间时引入的</strong>:
+<ul>
+<li>&lt;span id=&quot;inline-blue&quot;&gt;1.模糊性(ambiguity) &lt;/span&gt;</li>
+<li>&lt;span id=&quot;inline-blue&quot;&gt;2.冗余性(redundancy) &lt;/span&gt;</li>
+<li>&lt;span id=&quot;inline-blue&quot;&gt;3.不完整性(incompleteness) &lt;/span&gt;</li>
+<li>&lt;span id=&quot;inline-blue&quot;&gt;4.不准确性(inaccuracy) &lt;/span&gt;</li>
 </ul>
 </li>
-<li>模型使用了两个相互关联的(interrelated)空间:<ul>
-<li><span id="inline-green">conceptual meaning space</span>: unambiguous and complete but hidden.</li>
-<li><span id="inline-yellow">linguistic symbol space</span>: captures a noisy grounding of the meaning space in the symbols or words of a language.</li>
+<li>模型使用了两个相互关联的(interrelated)空间:
+<ul>
+<li>&lt;span id=&quot;inline-green&quot;&gt;conceptual meaning space&lt;/span&gt;: unambiguous and complete but hidden.</li>
+<li>&lt;span id=&quot;inline-yellow&quot;&gt;linguistic symbol space&lt;/span&gt;: captures a noisy grounding of the meaning space in the symbols or words of a language.</li>
 </ul>
 </li>
-<li>本文引用此框架来研究无向图中的连通性(connectivity)问题: 是构成更复杂的多步推理的基础核心推理问题<ul>
+<li>本文引用此框架来研究无向图中的连通性(connectivity)问题: 是构成更复杂的多步推理的基础核心推理问题
+<ul>
 <li>证明了构建高质量算法来检测 latent meaning graph 中的连通性是可能的, 前提: 基于一个可观察的 noisy symbol graph, 并且这些噪声低于我们定量的噪声等级.</li>
 <li>此外, 证明了一个不可能的结果: 如果一个query需要大量的推理步数, no reasoning system operating over the symbol graph is likely to recover any useful property of the meaning graph.</li>
 <li>这一点同时强调了对于推理问题和系统，<strong>需要的是限制两个空间的距离</strong>，而不是投入更多的推理步数(hops)</li>
 </ul>
 </li>
 </ul>
-<h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><ul>
+<h2>Introduction</h2>
+<ul>
 <li>Reasoning的定义: the process of combining facts(事实) and beliefs(信念), in order to make decisions.</li>
 </ul>
 
@@ -488,9 +497,9 @@
           
             <a href="/tags/nlp/" rel="tag"><i class="fa fa-tag"></i> nlp</a>
           
-            <a href="/tags/paper/" rel="tag"><i class="fa fa-tag"></i> paper</a>
-          
             <a href="/tags/mrc/" rel="tag"><i class="fa fa-tag"></i> mrc</a>
+          
+            <a href="/tags/paper/" rel="tag"><i class="fa fa-tag"></i> paper</a>
           
             <a href="/tags/nlu/" rel="tag"><i class="fa fa-tag"></i> nlu</a>
           
@@ -680,7 +689,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Abstract"><span class="nav-text">Abstract</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Introduction"><span class="nav-text">Introduction</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">Abstract</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">Introduction</span></a></li></ol></div>
             
 
           </div>

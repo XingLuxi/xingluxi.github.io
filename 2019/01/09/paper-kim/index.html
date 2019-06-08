@@ -86,19 +86,19 @@
 
 
 
-<meta name="description" content="Neural Natural Language Inference Models Enhanced with External KnowledgeACL,2018.Qian Chen, et al.offical code link: here.  Motivation作者针对NLI任务提出了一个问题：  是否可以从数据中学习NLI所需要的所有知识？ 如果不能，如何使外部知识帮助神经网络模型？如">
+<meta name="description" content="Neural Natural Language Inference Models Enhanced with External Knowledge ACL,2018. Qian Chen, et al. offical code link: here.  Motivation 作者针对NLI任务提出了一个问题：  是否可以从数据中学习NLI所需要的所有知识？ 如果不能，如何使外部知识帮助神经网络">
 <meta name="keywords" content="nlp,paper,knowledge,nli,wordnet">
 <meta property="og:type" content="article">
 <meta property="og:title" content="KIM">
 <meta property="og:url" content="http://xingluxi.github.io/2019/01/09/paper-kim/index.html">
 <meta property="og:site_name" content="Luxi Xing - Blog">
-<meta property="og:description" content="Neural Natural Language Inference Models Enhanced with External KnowledgeACL,2018.Qian Chen, et al.offical code link: here.  Motivation作者针对NLI任务提出了一个问题：  是否可以从数据中学习NLI所需要的所有知识？ 如果不能，如何使外部知识帮助神经网络模型？如">
+<meta property="og:description" content="Neural Natural Language Inference Models Enhanced with External Knowledge ACL,2018. Qian Chen, et al. offical code link: here.  Motivation 作者针对NLI任务提出了一个问题：  是否可以从数据中学习NLI所需要的所有知识？ 如果不能，如何使外部知识帮助神经网络">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://xingluxi.github.io/.io//kim.png">
 <meta property="og:updated_time" content="2019-03-04T07:41:24.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="KIM">
-<meta name="twitter:description" content="Neural Natural Language Inference Models Enhanced with External KnowledgeACL,2018.Qian Chen, et al.offical code link: here.  Motivation作者针对NLI任务提出了一个问题：  是否可以从数据中学习NLI所需要的所有知识？ 如果不能，如何使外部知识帮助神经网络模型？如">
+<meta name="twitter:description" content="Neural Natural Language Inference Models Enhanced with External Knowledge ACL,2018. Qian Chen, et al. offical code link: here.  Motivation 作者针对NLI任务提出了一个问题：  是否可以从数据中学习NLI所需要的所有知识？ 如果不能，如何使外部知识帮助神经网络">
 <meta name="twitter:image" content="http://xingluxi.github.io/.io//kim.png">
 
 
@@ -372,7 +372,7 @@
                   <span class="post-meta-item-text">Words count in article&#58;</span>
                 
                 <span title="Words count in article">
-                  943
+                  948
                 </span>
               
 
@@ -410,16 +410,22 @@
 
       
         <blockquote>
-<p>Neural Natural Language Inference Models Enhanced with External Knowledge<br>ACL,2018.<br>Qian Chen, et al.<br>offical code link: <a href="https://github.com/lukecq1231/kim" target="_blank" rel="noopener">here</a>.</p>
+<p>Neural Natural Language Inference Models Enhanced with External Knowledge
+ACL,2018.
+Qian Chen, et al.
+offical code link: <a href="https://github.com/lukecq1231/kim" target="_blank" rel="noopener">here</a>.</p>
 </blockquote>
-<h2 id="Motivation"><a href="#Motivation" class="headerlink" title="Motivation"></a>Motivation</h2><p>作者针对NLI任务提出了一个问题：</p>
+<h2>Motivation</h2>
+<p>作者针对NLI任务提出了一个问题：</p>
 <ul>
 <li>是否可以从数据中学习NLI所需要的所有知识？</li>
 <li>如果不能，如何使外部知识帮助神经网络模型？如何构建NLI模型利用外部知识？</li>
 </ul>
 <p>本文的工作是作者基于其ESIM模型之上完成的</p>
-<h2 id="Model-Framework"><a href="#Model-Framework" class="headerlink" title="Model Framework"></a>Model Framework</h2><ul>
-<li>模型整体结构分为四部分:<ul>
+<h2>Model Framework</h2>
+<ul>
+<li>模型整体结构分为四部分:
+<ul>
 <li><img src="/.io//kim.png" alt="kim"></li>
 <li>1、representing</li>
 <li>2、collecting local inference information</li>
@@ -429,46 +435,57 @@
 </ul>
 </li>
 </ul>
-<h3 id="External-Knowledge"><a href="#External-Knowledge" class="headerlink" title="External Knowledge"></a>External Knowledge</h3><p>首先确定需要哪些知识来帮助NLI任务</p>
+<h3>External Knowledge</h3>
+<p>首先确定需要哪些知识来帮助NLI任务</p>
 <ul>
 <li>external, inference-related knowledge</li>
-<li>intuitively Knowledge: <strong>synonymy(同义)</strong>、<strong>antonymy(反义)</strong>、<strong>hypernymy(上位)</strong>、<strong>hyponymy(下位)</strong><ul>
+<li>intuitively Knowledge: <strong>synonymy(同义)</strong>、<strong>antonymy(反义)</strong>、<strong>hypernymy(上位)</strong>、<strong>hyponymy(下位)</strong>
+<ul>
 <li>上下位的关系可以帮助捕捉 entailment 信息</li>
 <li>反义和co-hyponymy(共享相同上位词)的关系可以更好的建模 contradiction 关系</li>
 </ul>
 </li>
-<li>这篇文章主要是引入了基础的词汇级的语义知识<ul>
+<li>这篇文章主要是引入了基础的词汇级的语义知识
+<ul>
 <li>建模词$w_i$和$w_j$知识为 $r_{ij}$</li>
 <li>重点是：如何构建 $r_ij$</li>
 </ul>
 </li>
 </ul>
-<h3 id="M1-Encoding-Premise-and-Hypothesis"><a href="#M1-Encoding-Premise-and-Hypothesis" class="headerlink" title="M1.Encoding Premise and Hypothesis"></a>M1.Encoding Premise and Hypothesis</h3><ul>
-<li>premise: $a=(a_1,…,a_m)$</li>
-<li>hypothesis: $b=(b_1,…,b_n)$</li>
-<li>通过BiLSTM进行编码，得到context-dependent 隐藏状态：<ul>
+<h3>M1.Encoding Premise and Hypothesis</h3>
+<ul>
+<li>premise: $a=(a_1,...,a_m)$</li>
+<li>hypothesis: $b=(b_1,...,b_n)$</li>
+<li>通过BiLSTM进行编码，得到context-dependent 隐藏状态：
+<ul>
 <li>$a_i^s = Encoder(E(a),i)$</li>
 <li>$b_j^s = Encoder(E(b),j)$</li>
 </ul>
 </li>
 </ul>
-<h3 id="M2-Knowledge-Enriched-Co-Attention"><a href="#M2-Knowledge-Enriched-Co-Attention" class="headerlink" title="M2.Knowledge-Enriched Co-Attention"></a>M2.Knowledge-Enriched Co-Attention</h3><ul>
+<h3>M2.Knowledge-Enriched Co-Attention</h3>
+<ul>
 <li>知识关系特征：$r_{ij} \in \mathbb{R}^{d_r}$</li>
-<li>Co-attention:<ul>
+<li>Co-attention:
+<ul>
 <li>$e_{ij} = (a^s_i)^T b_j^s + F(r_{ij})$</li>
-<li>$F(r_{ij}) = \lambda \mathbb{1}(r_{ij})$<ul>
+<li>$F(r_{ij}) = \lambda \mathbb{1}(r_{ij})$
+<ul>
 <li>$\mathbb{1}(r_{ij})$ 判断 $r_{ij}$ 是否为0向量</li>
 </ul>
 </li>
 <li>得到的 co-attention 矩阵 $e \in \mathbb{R}^{m\times n}$</li>
 </ul>
 </li>
-<li>根据co-attention对premise和hypothesis的表示进行更新：<ul>
-<li>$$a_i^c=\sum_{j=1}^n \alpha _{ij} b_j^s$$<ul>
+<li>根据co-attention对premise和hypothesis的表示进行更新：
+<ul>
+<li>$$a_i^c=\sum_{j=1}^n \alpha _{ij} b_j^s$$
+<ul>
 <li>$$\alpha_{ij} = exp(e_{ij}) / \sum_{k=1}^n exp(e_{ik})$$</li>
 </ul>
 </li>
-<li>$$b_j^c=\sum_{i=1}^m \beta _{ij} a_i^s$$<ul>
+<li>$$b_j^c=\sum_{i=1}^m \beta _{ij} a_i^s$$
+<ul>
 <li>$$\beta_{ij} = exp(e_{ij}) / \sum_{k=1}^m exp(e_{kj})$$</li>
 </ul>
 </li>
@@ -476,13 +493,16 @@
 </ul>
 </li>
 </ul>
-<h3 id="M3-Local-inference-Collection-with-External-Knowledge"><a href="#M3-Local-inference-Collection-with-External-Knowledge" class="headerlink" title="M3.Local inference Collection with External Knowledge"></a>M3.Local inference Collection with External Knowledge</h3><ul>
+<h3>M3.Local inference Collection with External Knowledge</h3>
+<ul>
 <li>通过比较$a_i^s$、$a_i^c$ 和 他们的关系（从外部知识获得），可以获得词级的推理信息</li>
-<li>Knowledge-enriched local inference:<ul>
+<li>Knowledge-enriched local inference:
+<ul>
 <li>$$a_i^m = G([a_i^s; a_i^c; a_i^s - a_i^c; a_i^s \circ a_i^c; \sum_{j=1}^n \alpha_{ij}r_{ij}])$$</li>
 <li>$$b_j^m = G([b_j^s; b_j^c; b_j^s - b_j^c; b_j^s \circ b_j^c; \sum_{i=1}^m \beta_{ij}r_{ji}])$$</li>
 <li>最后一项的目的是：收集对齐词之间的关系特征，是从外部知识获得的word-level inference information</li>
-<li>$G$ 是非线性映射，用于降维，relu + shortcut connection<ul>
+<li>$G$ 是非线性映射，用于降维，relu + shortcut connection
+<ul>
 <li>$$a_i^m + \sum_{j=1}^n \alpha_{ij}r_{ij}$$</li>
 <li>$$b_j^m + \sum_{i=1}^m \beta_{ij}r_{ij}$$</li>
 </ul>
@@ -490,14 +510,18 @@
 </ul>
 </li>
 </ul>
-<h3 id="M4-Knowledge-Enhanced-Inference-Composition"><a href="#M4-Knowledge-Enhanced-Inference-Composition" class="headerlink" title="M4.Knowledge-Enhanced Inference Composition"></a>M4.Knowledge-Enhanced Inference Composition</h3><ul>
-<li>决定总体的推理关系：BiLSTM –&gt; mean;max;weighted Pooling，得到定长向量<ul>
-<li>Composition = BiLSTM<ul>
+<h3>M4.Knowledge-Enhanced Inference Composition</h3>
+<ul>
+<li>决定总体的推理关系：BiLSTM --&gt; mean;max;weighted Pooling，得到定长向量
+<ul>
+<li>Composition = BiLSTM
+<ul>
 <li>$a_i^v = Composition(a^m,i)$</li>
 <li>$b_j^v = Composition(b^m,j)$</li>
 </ul>
 </li>
-<li>Weighted Pooling<ul>
+<li>Weighted Pooling
+<ul>
 <li>$$a^w = \sum_{i=1}^m \left( \frac{exp(H(\sum_{j=1}^n \alpha_{ij}r_{ij}))}{\sum_{i=1}^m exp(H(\sum_{j=1}^n\alpha_{ij}r_{ij}))} \right) a_i^v$$</li>
 <li>$$b^w = \sum_{j=1}^n \left( \frac{exp(H(\sum_{i=1}^m \beta_{ij}r_{ji}))}{\sum_{j=1}^n exp(H(\sum_{i=1}^m\beta_{ij}r_{ji}))} \right) b_j^v $$</li>
 <li>$H$ 函数是 1层的前馈神经网络，激活函数是relu</li>
@@ -507,11 +531,16 @@
 </li>
 <li>最后得到定长向量之后，再过一层MLP，激活函数为tanh，和一层 softmax，得到分类结果</li>
 </ul>
-<h2 id="Experiment-Settings"><a href="#Experiment-Settings" class="headerlink" title="Experiment Settings"></a>Experiment Settings</h2><h3 id="Representation-of-External-Knowledge"><a href="#Representation-of-External-Knowledge" class="headerlink" title="Representation of External Knowledge"></a>Representation of External Knowledge</h3><h4 id="Lexical-Semantic-Relations"><a href="#Lexical-Semantic-Relations" class="headerlink" title="Lexical Semantic Relations"></a>Lexical Semantic Relations</h4><ul>
-<li>relations of lexical pairs: 检索范围是wordnet<ul>
+<h2>Experiment Settings</h2>
+<h3>Representation of External Knowledge</h3>
+<h4>Lexical Semantic Relations</h4>
+<ul>
+<li>relations of lexical pairs: 检索范围是wordnet
+<ul>
 <li>synonymy: 如果词对是同义词，使值为1，否则为0</li>
 <li>antonymy: 如果词对是反义词，使值为1，否则为0</li>
-<li>hypernymy: 如果一个词是另一个词的上位词，取值 $1-\frac{n}{8}$，否则为0<ul>
+<li>hypernymy: 如果一个词是另一个词的上位词，取值 $1-\frac{n}{8}$，否则为0
+<ul>
 <li>其中 $n$ 是两个词在层次上的边数</li>
 <li>忽略边数超过8的</li>
 </ul>
@@ -522,7 +551,8 @@
 <li>在 wordnet 中还有额外的一些（15种）关系，但是对结果的提升没有贡献</li>
 </ul>
 </li>
-<li>relation embeddings<ul>
+<li>relation embeddings
+<ul>
 <li>pretrain based on wordnet</li>
 <li>TransE</li>
 </ul>
@@ -770,7 +800,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Motivation"><span class="nav-text">Motivation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Model-Framework"><span class="nav-text">Model Framework</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#External-Knowledge"><span class="nav-text">External Knowledge</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#M1-Encoding-Premise-and-Hypothesis"><span class="nav-text">M1.Encoding Premise and Hypothesis</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#M2-Knowledge-Enriched-Co-Attention"><span class="nav-text">M2.Knowledge-Enriched Co-Attention</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#M3-Local-inference-Collection-with-External-Knowledge"><span class="nav-text">M3.Local inference Collection with External Knowledge</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#M4-Knowledge-Enhanced-Inference-Composition"><span class="nav-text">M4.Knowledge-Enhanced Inference Composition</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Experiment-Settings"><span class="nav-text">Experiment Settings</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Representation-of-External-Knowledge"><span class="nav-text">Representation of External Knowledge</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Lexical-Semantic-Relations"><span class="nav-text">Lexical Semantic Relations</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">Motivation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">Model Framework</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-text">External Knowledge</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-text">M1.Encoding Premise and Hypothesis</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-text">M2.Knowledge-Enriched Co-Attention</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-text">M3.Local inference Collection with External Knowledge</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-text">M4.Knowledge-Enhanced Inference Composition</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">Experiment Settings</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-text">Representation of External Knowledge</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#undefined"><span class="nav-text">Lexical Semantic Relations</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>

@@ -75,7 +75,7 @@
 
 
 
-  <meta name="keywords" content="nlp,paper,mrc,dataset,">
+  <meta name="keywords" content="nlp,mrc,paper,dataset,">
 
 
 
@@ -86,18 +86,18 @@
 
 
 
-<meta name="description" content="Contributed by Luxi Xing and Yuqiang Xie. IIE, CAS. IntroductionBased on the style of the ANSWER for each datasets, we split the datasets into several category and we will give details for each datase">
-<meta name="keywords" content="nlp,paper,mrc,dataset">
+<meta name="description" content="Contributed by Luxi Xing and Yuqiang Xie. IIE, CAS. Introduction Based on the style of the ANSWER for each datasets, we split the datasets into several category and we will give details for each datas">
+<meta name="keywords" content="nlp,mrc,paper,dataset">
 <meta property="og:type" content="article">
 <meta property="og:title" content="机器阅读理解数据集">
 <meta property="og:url" content="http://xingluxi.github.io/2019/01/12/mrc-dataset-info/index.html">
 <meta property="og:site_name" content="Luxi Xing - Blog">
-<meta property="og:description" content="Contributed by Luxi Xing and Yuqiang Xie. IIE, CAS. IntroductionBased on the style of the ANSWER for each datasets, we split the datasets into several category and we will give details for each datase">
+<meta property="og:description" content="Contributed by Luxi Xing and Yuqiang Xie. IIE, CAS. Introduction Based on the style of the ANSWER for each datasets, we split the datasets into several category and we will give details for each datas">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:updated_time" content="2019-04-19T03:11:20.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="机器阅读理解数据集">
-<meta name="twitter:description" content="Contributed by Luxi Xing and Yuqiang Xie. IIE, CAS. IntroductionBased on the style of the ANSWER for each datasets, we split the datasets into several category and we will give details for each datase">
+<meta name="twitter:description" content="Contributed by Luxi Xing and Yuqiang Xie. IIE, CAS. Introduction Based on the style of the ANSWER for each datasets, we split the datasets into several category and we will give details for each datas">
 
 
 
@@ -370,7 +370,7 @@
                   <span class="post-meta-item-text">Words count in article&#58;</span>
                 
                 <span title="Words count in article">
-                  896
+                  1k
                 </span>
               
 
@@ -386,7 +386,7 @@
                   <span class="post-meta-item-text">Reading time &asymp;</span>
                 
                 <span title="Reading time">
-                  4
+                  5
                 </span>
               
             </div>
@@ -408,36 +408,40 @@
 
       
         <p>Contributed by Luxi Xing and Yuqiang Xie. IIE, CAS.</p>
-<h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><p>Based on the style of the ANSWER for each datasets, we split the datasets into several category and we will give details for each datasets.</p>
+<h2>Introduction</h2>
+<p>Based on the style of the ANSWER for each datasets, we split the datasets into several category and we will give details for each datasets.</p>
 <blockquote>
 <ol>
 <li><a href="#Extractive">Extractive</a></li>
 <li><a href="#Multi-Choice">Multi-Choice</a></li>
 <li><a href="#Generative">Generative</a></li>
 <li><a href="#Sequential">Sequential</a></li>
-<li><a href="#Others">Others</a><br><del>Cloze-Style</del></li>
+<li><a href="#Others">Others</a>
+<s>Cloze-Style</s></li>
 </ol>
 </blockquote>
-<h2 id="Extractive"><a href="#Extractive" class="headerlink" title="Extractive"></a>Extractive</h2><table>
+<h2>Extractive</h2>
+<table>
 <thead>
 <tr>
 <th>Dataset</th>
 <th>Language</th>
 <th>Domain</th>
-<th>#Train<br>#Doc</th>
+<th>#Train&lt;br&gt;#Doc</th>
 <th>#Dev</th>
 <th>#Test</th>
 <th>Year</th>
 <th>Features</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>SQuADv1</td>
 <td>English</td>
 <td>Wikipedia</td>
-<td>87599<br>442</td>
-<td>10570<br>48</td>
-<td>9533<br>46</td>
+<td>87599&lt;br&gt;442</td>
+<td>10570&lt;br&gt;48</td>
+<td>9533&lt;br&gt;46</td>
 <td>2016</td>
 <td></td>
 </tr>
@@ -445,19 +449,19 @@
 <td>SQuADv2</td>
 <td>English</td>
 <td>Wikipedia</td>
-<td>130319<br>442</td>
-<td>11873<br>35</td>
-<td>8862<br>28</td>
+<td>130319&lt;br&gt;442</td>
+<td>11873&lt;br&gt;35</td>
+<td>8862&lt;br&gt;28</td>
 <td>2018</td>
 <td>have no answer</td>
 </tr>
 <tr>
 <td>TriviaQA</td>
 <td>English</td>
-<td>Web<br>Wikipedia</td>
-<td>528979<br>61888</td>
-<td>68621<br>9951</td>
-<td>65059<br>9509</td>
+<td>Web&lt;br&gt;Wikipedia</td>
+<td>528979&lt;br&gt;61888</td>
+<td>68621&lt;br&gt;9951</td>
+<td>65059&lt;br&gt;9509</td>
 <td>2017</td>
 <td>avg. length is 2895</td>
 </tr>
@@ -479,39 +483,42 @@
 <td>8k</td>
 <td>8k</td>
 <td>2019</td>
-<td>whole wikipedia article;<br>long answer</td>
+<td>whole wikipedia article;&lt;br&gt;long answer</td>
 </tr>
-</tbody></table>
-<h2 id="Multi-Choice"><a href="#Multi-Choice" class="headerlink" title="Multi-Choice"></a>Multi-Choice</h2><table>
+</tbody>
+</table>
+<h2>Multi-Choice</h2>
+<table>
 <thead>
 <tr>
 <th>Dataset</th>
 <th>Language</th>
 <th>Domain</th>
-<th>#Train<br>#Doc</th>
+<th>#Train&lt;br&gt;#Doc</th>
 <th>#Dev</th>
 <th>#Test</th>
 <th>Year</th>
 <th>Features</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>RACE</td>
 <td>English</td>
 <td>Multi</td>
-<td>87866<br>25137</td>
-<td>4887<br>1389</td>
-<td>4934<br>1407</td>
+<td>87866&lt;br&gt;25137</td>
+<td>4887&lt;br&gt;1389</td>
+<td>4934&lt;br&gt;1407</td>
 <td>2017</td>
-<td>high<br>middle</td>
+<td>high&lt;br&gt;middle</td>
 </tr>
 <tr>
 <td>MCScript</td>
 <td>English</td>
 <td>InScript</td>
-<td>9731<br>1470</td>
-<td>1411<br>219</td>
-<td>2797<br>430</td>
+<td>9731&lt;br&gt;1470</td>
+<td>1411&lt;br&gt;219</td>
+<td>2797&lt;br&gt;430</td>
 <td>2018</td>
 <td></td>
 </tr>
@@ -533,27 +540,27 @@
 <td>500</td>
 <td>500</td>
 <td>2018</td>
-<td>multi-hop;<br>commonsense;<br>science fact</td>
+<td>multi-hop;&lt;br&gt;commonsense;&lt;br&gt;science fact</td>
 </tr>
 <tr>
 <td>MultiRC</td>
 <td>English</td>
 <td>7 domain</td>
-<td>9872<br>871</td>
+<td>9872&lt;br&gt;871</td>
 <td></td>
 <td></td>
 <td>2018</td>
 <td>multi correct answers</td>
 </tr>
 <tr>
-<td>QAngaroo<br>wikihop</td>
+<td>QAngaroo&lt;br&gt;wikihop</td>
 <td>English</td>
 <td></td>
 <td>43738</td>
 <td>5129</td>
 <td>2451</td>
 <td>2017</td>
-<td>multi evidence pieces;<br>multi options</td>
+<td>multi evidence pieces;&lt;br&gt;multi options</td>
 </tr>
 <tr>
 <td>DREAM</td>
@@ -565,8 +572,10 @@
 <td>2019</td>
 <td>dialogue-based multi-choice</td>
 </tr>
-</tbody></table>
-<h2 id="Generative"><a href="#Generative" class="headerlink" title="Generative"></a>Generative</h2><p>Free-form answer generation</p>
+</tbody>
+</table>
+<h2>Generative</h2>
+<p>Free-form answer generation</p>
 <table>
 <thead>
 <tr>
@@ -580,8 +589,9 @@
 <th>Features</th>
 </tr>
 </thead>
-<tbody><tr>
-<td>MSMARCO<br>v1</td>
+<tbody>
+<tr>
+<td>MSMARCO&lt;br&gt;v1</td>
 <td>English</td>
 <td>Web</td>
 <td></td>
@@ -591,7 +601,7 @@
 <td></td>
 </tr>
 <tr>
-<td>MSMARCO<br>v2</td>
+<td>MSMARCO&lt;br&gt;v2</td>
 <td>English</td>
 <td>Web</td>
 <td></td>
@@ -603,7 +613,7 @@
 <tr>
 <td>NarrativeQA</td>
 <td>English</td>
-<td>book/moive<br>(wikipedia)</td>
+<td>book/moive&lt;br&gt;(wikipedia)</td>
 <td>32747</td>
 <td>3461</td>
 <td>10557</td>
@@ -620,21 +630,26 @@
 <td>2017</td>
 <td></td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
 <ul>
 <li>Metric for evaluate the Generative-style QA dataset is: ROUGE-L/BLEU</li>
 </ul>
-<h3 id="MS-MARCO"><a href="#MS-MARCO" class="headerlink" title="MS MARCO"></a>MS MARCO</h3><ul>
+<h3>MS MARCO</h3>
+<ul>
 <li>More details about MSMARCO, please reference to <a href="https://github.com/IndexFziQ/MSMARCO-MRC-Analysis" target="_blank" rel="noopener">this REPO</a></li>
 </ul>
-<h3 id="Narrative-QA"><a href="#Narrative-QA" class="headerlink" title="Narrative QA"></a>Narrative QA</h3><ul>
-<li>dataset consists of two settings:<ul>
+<h3>Narrative QA</h3>
+<ul>
+<li>dataset consists of two settings:
+<ul>
 <li>based on the summary： average 659 tokens</li>
 <li>based on the full book/movie script: average 62528 tokens</li>
 </ul>
 </li>
 </ul>
-<h2 id="Sequential"><a href="#Sequential" class="headerlink" title="Sequential"></a>Sequential</h2><table>
+<h2>Sequential</h2>
+<table>
 <thead>
 <tr>
 <th>Dataset</th>
@@ -642,12 +657,13 @@
 <th>Domain</th>
 <th>Document</th>
 <th>Question</th>
-<th>Size<br>(Train/Dev/Test)</th>
+<th>Size&lt;br&gt;(Train/Dev/Test)</th>
 <th>Year</th>
 <th>Features</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>QuAC</td>
 <td>English</td>
 <td>Wikipedia</td>
@@ -675,48 +691,60 @@
 <td>10197</td>
 <td></td>
 <td>2019</td>
-<td>dialogue-based multi-choice;<br>multi-turn multi-party</td>
+<td>dialogue-based multi-choice;&lt;br&gt;multi-turn multi-party</td>
 </tr>
-</tbody></table>
-<h2 id="Others"><a href="#Others" class="headerlink" title="Others"></a>Others</h2><h3 id="Chinese-Datasets"><a href="#Chinese-Datasets" class="headerlink" title="Chinese Datasets"></a>Chinese Datasets</h3><ul>
-<li>People Daily &amp; Children’s Fairy Tale (PD&amp;CFT): <a href="https://github.com/ymcui/Chinese-RC-Dataset" target="_blank" rel="noopener">https://github.com/ymcui/Chinese-RC-Dataset</a><ul>
+</tbody>
+</table>
+<h2>Others</h2>
+<h3>Chinese Datasets</h3>
+<ul>
+<li>People Daily &amp; Children's Fairy Tale (PD&amp;CFT): https://github.com/ymcui/Chinese-RC-Dataset
+<ul>
 <li>cloze-style</li>
 </ul>
 </li>
-<li>dureader: <a href="https://github.com/baidu/DuReader" target="_blank" rel="noopener">https://github.com/baidu/DuReader</a><ul>
+<li>dureader: https://github.com/baidu/DuReader
+<ul>
 <li>generative</li>
 </ul>
 </li>
-<li>cmrc2018: <a href="https://github.com/ymcui/cmrc2018" target="_blank" rel="noopener">https://github.com/ymcui/cmrc2018</a><ul>
+<li>cmrc2018: https://github.com/ymcui/cmrc2018
+<ul>
 <li>extractive</li>
 </ul>
 </li>
 </ul>
-<h3 id="Multi-Documents-Datasets"><a href="#Multi-Documents-Datasets" class="headerlink" title="Multi-Documents Datasets"></a>Multi-Documents Datasets</h3><ul>
+<h3>Multi-Documents Datasets</h3>
+<ul>
 <li>TriviaQA: A large scale distantly supervised challenge dataset for reading comprehension.</li>
 <li>SearchQA: A new Q&amp;A dataset augmented with context from a search engine.</li>
 <li>HotpotQA: A Dataset for Diverse, Explainable Multi-hop Question Answering.</li>
 </ul>
-<h3 id="Commonsense-Reasoning"><a href="#Commonsense-Reasoning" class="headerlink" title="Commonsense Reasoning"></a>Commonsense Reasoning</h3><ul>
-<li>Winograd Schema Challenge. <a href="https://cs.nyu.edu/faculty/davise/papers/WinogradSchemas/WS.html" target="_blank" rel="noopener">https://cs.nyu.edu/faculty/davise/papers/WinogradSchemas/WS.html</a></li>
-<li>COPA: Choice of Plausible Alternatives. <a href="https://www.cs.york.ac.uk/semeval-2012/task7/index.html" target="_blank" rel="noopener">https://www.cs.york.ac.uk/semeval-2012/task7/index.html</a></li>
+<h3>Commonsense Reasoning</h3>
+<ul>
+<li>Winograd Schema Challenge. https://cs.nyu.edu/faculty/davise/papers/WinogradSchemas/WS.html</li>
+<li>COPA: Choice of Plausible Alternatives. https://www.cs.york.ac.uk/semeval-2012/task7/index.html</li>
 <li>ReCoRD: Bridging the Gap between Human and Machine Commonsense Reading Comprehension</li>
 <li>CommonsenseQA</li>
 </ul>
-<h3 id="FEVER-Fact-Extraction-and-VERification"><a href="#FEVER-Fact-Extraction-and-VERification" class="headerlink" title="FEVER: Fact Extraction and VERification"></a>FEVER: Fact Extraction and VERification</h3><ul>
+<h3>FEVER: Fact Extraction and VERification</h3>
+<ul>
 <li>FEVER data: <a href="http://fever.ai/resources.html" target="_blank" rel="noopener">link</a></li>
 <li>FEVER shared Task(with NAACL 2018) info: <a href="http://fever.ai/task.html" target="_blank" rel="noopener">details here</a></li>
 <li>FEVER official baseline code: <a href="https://github.com/sheffieldnlp/fever-naacl-2018" target="_blank" rel="noopener">github repo</a></li>
 <li>my note and analysis of FEVER: <a href="/2019/01/15/mrc-analysis-fever/" title="fever-note">fever-note</a></li>
 </ul>
-<h3 id="Google-Natural-Questions"><a href="#Google-Natural-Questions" class="headerlink" title="Google Natural Questions"></a>Google Natural Questions</h3><p>official details: <a href="https://ai.googleblog.com/2019/01/natural-questions-new-corpus-and.html" target="_blank" rel="noopener">https://ai.googleblog.com/2019/01/natural-questions-new-corpus-and.html</a><br>github: <a href="https://github.com/google-research-datasets/natural-questions" target="_blank" rel="noopener">https://github.com/google-research-datasets/natural-questions</a></p>
+<h3>Google Natural Questions</h3>
+<p>official details: https://ai.googleblog.com/2019/01/natural-questions-new-corpus-and.html
+github: https://github.com/google-research-datasets/natural-questions</p>
 <p>自然问题数据集(NQ)是一个公开的自然发生问题(即由寻求信息的人提出的问题)</p>
 <ul>
 <li>用于训练和评估开放领域问答系统的新的、大规模语料库;</li>
 <li>也是第一个复制人类查找问题答案的端到端流程的语料库;</li>
 <li>专注于通过阅读整个页面来查找答案，而不是从一个短段落中提取答案;</li>
 <li>来源于Wikipedia;</li>
-<li>人工注释答案:<ul>
+<li>人工注释答案:
+<ul>
 <li>要求注释者通过通读整个维基百科页面来找到答案，就好像这个问题是他们自己提出的一样。</li>
 <li>注释者需要找到一个长答案和一个短答案，长答案涵盖推断问题所需的所有信息，短答案需要用一个或多个实体的名称简洁地回答问题</li>
 </ul>
@@ -725,7 +753,8 @@
 <p><strong>自然语言理解挑战：</strong></p>
 <ul>
 <li>NQ的目的是使QA系统能够阅读和理解完整的维基百科文章，其中可能包含问题的答案，也可能不包含问题的答案。</li>
-<li>系统首先需要确定这个问题的定义是否足够充分，是否可以回答<ul>
+<li>系统首先需要确定这个问题的定义是否足够充分，是否可以回答
+<ul>
 <li>许多问题本身基于错误的假设，或者过于模糊，无法简明扼要地回答。</li>
 </ul>
 </li>
@@ -793,9 +822,9 @@
           
             <a href="/tags/nlp/" rel="tag"><i class="fa fa-tag"></i> nlp</a>
           
-            <a href="/tags/paper/" rel="tag"><i class="fa fa-tag"></i> paper</a>
-          
             <a href="/tags/mrc/" rel="tag"><i class="fa fa-tag"></i> mrc</a>
+          
+            <a href="/tags/paper/" rel="tag"><i class="fa fa-tag"></i> paper</a>
           
             <a href="/tags/dataset/" rel="tag"><i class="fa fa-tag"></i> dataset</a>
           
@@ -983,7 +1012,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Introduction"><span class="nav-text">Introduction</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Extractive"><span class="nav-text">Extractive</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Multi-Choice"><span class="nav-text">Multi-Choice</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Generative"><span class="nav-text">Generative</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#MS-MARCO"><span class="nav-text">MS MARCO</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Narrative-QA"><span class="nav-text">Narrative QA</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Sequential"><span class="nav-text">Sequential</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Others"><span class="nav-text">Others</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Chinese-Datasets"><span class="nav-text">Chinese Datasets</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Multi-Documents-Datasets"><span class="nav-text">Multi-Documents Datasets</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Commonsense-Reasoning"><span class="nav-text">Commonsense Reasoning</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#FEVER-Fact-Extraction-and-VERification"><span class="nav-text">FEVER: Fact Extraction and VERification</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Google-Natural-Questions"><span class="nav-text">Google Natural Questions</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">Introduction</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">Extractive</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">Multi-Choice</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">Generative</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-text">MS MARCO</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-text">Narrative QA</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">Sequential</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">Others</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-text">Chinese Datasets</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-text">Multi-Documents Datasets</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-text">Commonsense Reasoning</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-text">FEVER: Fact Extraction and VERification</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-text">Google Natural Questions</span></a></li></ol></li></ol></div>
             
 
           </div>

@@ -75,7 +75,7 @@
 
 
 
-  <meta name="keywords" content="nlp,paper,mrc,multi-hop,reasoning,commonsense,">
+  <meta name="keywords" content="nlp,mrc,paper,reasoning,multi-hop,commonsense,">
 
 
 
@@ -86,20 +86,20 @@
 
 
 
-<meta name="description" content="Commonsense for Generative Multi-Hop Question Answering TasksEMNLP 2018Lisa Bauer et al. UNC.Multi-Hop reasoning; generative-mrc; commmonsense knowledgeDatasets: NarrativeQA; QAngaroo-WikiHopSource c">
-<meta name="keywords" content="nlp,paper,mrc,multi-hop,reasoning,commonsense">
+<meta name="description" content="Commonsense for Generative Multi-Hop Question Answering Tasks EMNLP 2018 Lisa Bauer et al. UNC. Multi-Hop reasoning; generative-mrc; commmonsense knowledge Datasets: NarrativeQA; QAngaroo-WikiHop Sou">
+<meta name="keywords" content="nlp,mrc,paper,reasoning,multi-hop,commonsense">
 <meta property="og:type" content="article">
 <meta property="og:title" content="EMNLP2018 | Commonsense for Generative Multi-Hop Question Answering Tasks">
 <meta property="og:url" content="http://xingluxi.github.io/2019/02/21/paper-emnlp2018-mhpgm/index.html">
 <meta property="og:site_name" content="Luxi Xing - Blog">
-<meta property="og:description" content="Commonsense for Generative Multi-Hop Question Answering TasksEMNLP 2018Lisa Bauer et al. UNC.Multi-Hop reasoning; generative-mrc; commmonsense knowledgeDatasets: NarrativeQA; QAngaroo-WikiHopSource c">
+<meta property="og:description" content="Commonsense for Generative Multi-Hop Question Answering Tasks EMNLP 2018 Lisa Bauer et al. UNC. Multi-Hop reasoning; generative-mrc; commmonsense knowledge Datasets: NarrativeQA; QAngaroo-WikiHop Sou">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://xingluxi.github.io/.io//mhpgm-1-overview.png">
 <meta property="og:image" content="http://xingluxi.github.io/.io//mhpgm-2-path.png">
 <meta property="og:updated_time" content="2019-04-11T08:12:57.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="EMNLP2018 | Commonsense for Generative Multi-Hop Question Answering Tasks">
-<meta name="twitter:description" content="Commonsense for Generative Multi-Hop Question Answering TasksEMNLP 2018Lisa Bauer et al. UNC.Multi-Hop reasoning; generative-mrc; commmonsense knowledgeDatasets: NarrativeQA; QAngaroo-WikiHopSource c">
+<meta name="twitter:description" content="Commonsense for Generative Multi-Hop Question Answering Tasks EMNLP 2018 Lisa Bauer et al. UNC. Multi-Hop reasoning; generative-mrc; commmonsense knowledge Datasets: NarrativeQA; QAngaroo-WikiHop Sou">
 <meta name="twitter:image" content="http://xingluxi.github.io/.io//mhpgm-1-overview.png">
 
 
@@ -411,20 +411,29 @@
 
       
         <blockquote>
-<p>Commonsense for Generative Multi-Hop Question Answering Tasks<br>EMNLP 2018<br>Lisa Bauer et al. UNC.<br>Multi-Hop reasoning; generative-mrc; commmonsense knowledge<br>Datasets: NarrativeQA; QAngaroo-WikiHop<br>Source code: <a href="https://github.com/yicheng-w/CommonSenseMultiHopQA" target="_blank" rel="noopener">https://github.com/yicheng-w/CommonSenseMultiHopQA</a></p>
+<p>Commonsense for Generative Multi-Hop Question Answering Tasks
+EMNLP 2018
+Lisa Bauer et al. UNC.
+Multi-Hop reasoning; generative-mrc; commmonsense knowledge
+Datasets: NarrativeQA; QAngaroo-WikiHop
+Source code: https://github.com/yicheng-w/CommonSenseMultiHopQA</p>
 </blockquote>
-<h2 id="Motivation"><a href="#Motivation" class="headerlink" title="Motivation"></a>Motivation</h2><ul>
+<h2>Motivation</h2>
+<ul>
 <li>Multi-Hop Generative Task (<em>e.g. NarrativeQA</em>) requires models to <strong>reasong, gather and synthesize disjoint pieces of information</strong> within the context to generate an answer.</li>
 <li>This type of multi-step reasoning requires understanding <strong>implicit relations</strong> (<em>external, background commonsense knowledge</em>).</li>
-<li>Related work:<ul>
+<li>Related work:
+<ul>
 <li>some <strong>fact-based</strong> datasets (e.g. SQuAD) do not need to place heavy emphasis on multi-step reasoning capabilities.</li>
-<li>some multi-hop datasets (e.g. QAngaroo) prompt a strong focus on multi-hop reasoning in very long texts.<ul>
+<li>some multi-hop datasets (e.g. QAngaroo) prompt a strong focus on multi-hop reasoning in very long texts.
+<ul>
 <li>QAngaroo is an extractive dataset where answers are guaranteed to be spans within the context, thus, it more focuse on <strong>fact finding</strong> and <strong>linking</strong>.</li>
 </ul>
 </li>
 </ul>
 </li>
-<li>This work:<ul>
+<li>This work:
+<ul>
 <li>a. a strong generative baseline, <strong>Multi-Hop Pointer-Generator Model</strong>, uses a <strong>multi-attention</strong> to perform multiple hops of reasoning and a pointer-generator decoder to synthesize the answer.</li>
 <li>b. a novel system for <strong>selecting grounded multi-hop relational commonsense information</strong> from ConceptNet via a <strong>pointwise mutual information</strong> and <strong>term-frequency</strong> based scoring function.</li>
 <li>c. a <strong>selectively gated attention</strong> mechanism to insert <strong>selected commonsense paths</strong> between the hops of document-context reasoning.</li>
@@ -433,44 +442,54 @@
 </ul>
 </li>
 </ul>
-<h2 id="Model"><a href="#Model" class="headerlink" title="Model"></a>Model</h2><ul>
-<li>Model Overview:<ul>
+<h2>Model</h2>
+<ul>
+<li>Model Overview:
+<ul>
 <li><img src="/.io//mhpgm-1-overview.png" alt="MHPGM"></li>
 </ul>
 </li>
 </ul>
-<h3 id="1-Multi-Hop-Pointer-Generator-Baseline"><a href="#1-Multi-Hop-Pointer-Generator-Baseline" class="headerlink" title="1.Multi-Hop Pointer-Generator Baseline"></a>1.Multi-Hop Pointer-Generator Baseline</h3><p>模型的输入:</p>
+<h3>1.Multi-Hop Pointer-Generator Baseline</h3>
+<p>模型的输入:</p>
 <ul>
-<li>context: $X^C={w_1^C, w_2^C,…,w_n^C}$</li>
-<li>query: $X^Q = {w_q^Q, w_2^Q,…,w_m^Q}$</li>
+<li>context: $X^C={w_1^C, w_2^C,...,w_n^C}$</li>
+<li>query: $X^Q = {w_q^Q, w_2^Q,...,w_m^Q}$</li>
 </ul>
 <p>模型的输出:</p>
 <ul>
-<li>answer tokens: $X^a = {w_1^a,w_2^a,…,w_p^a}$</li>
+<li>answer tokens: $X^a = {w_1^a,w_2^a,...,w_p^a}$</li>
 </ul>
-<h4 id="1-1-Embedding-Layer"><a href="#1-1-Embedding-Layer" class="headerlink" title="1.1.Embedding Layer"></a>1.1.Embedding Layer</h4><p>pretrained word embeddings with ELMO: $e_i^Q$/$e_i^C$ $\in \mathbb{R}^{d+1024}$</p>
-<h4 id="1-2-Reasoning-Layer"><a href="#1-2-Reasoning-Layer" class="headerlink" title="1.2.Reasoning Layer"></a>1.2.Reasoning Layer</h4><p>$k$ 个 reasoning cell 增量式地更新 context representation.</p>
+<h4>1.1.Embedding Layer</h4>
+<p>pretrained word embeddings with ELMO: $e_i^Q$/$e_i^C$ $\in \mathbb{R}^{d+1024}$</p>
+<h4>1.2.Reasoning Layer</h4>
+<p>$k$ 个 reasoning cell 增量式地更新 context representation.</p>
 <p>第 $t$ 个reasoning cell的计算过程:</p>
 <ul>
 <li>输入: 前一时刻的输出 $\lbrace c_i^{t-1} \rbrace _{i=1}^n$ 和 query 的向量 $\lbrace e_i^Q \rbrace _{i=1}^m$</li>
-<li>a.通过 cell-specific Bi-LSTM 计算一个 step-specific 的 context 和 query 的编码<ul>
+<li>a.通过 cell-specific Bi-LSTM 计算一个 step-specific 的 context 和 query 的编码
+<ul>
 <li>$u^t=BiLSTM(c^{t-1})$; $v_t=BiLSTM(e^Q)$</li>
 </ul>
 </li>
-<li>b.通过bi-attention 计算 context 中的相关方面 来模拟一个hop的推理:<ul>
-<li>context-to-query attention:<ul>
+<li>b.通过bi-attention 计算 context 中的相关方面 来模拟一个hop的推理:
+<ul>
+<li>context-to-query attention:
+<ul>
 <li>$S_{ij}^t = W_1^t u_i^t + W_2^t v_j^t + W_3^t (u_i^t \odot v_j^t)$</li>
 <li>$$p_{ij}^t = \frac{exp(S_{ij}^t)}{\sum_{k=1}^m exp(S_{ik}^t)}$$</li>
 <li>$$(c_q)^t_i = \sum_{j=1}^m p_{ij}^t v_j^t \in \mathbb{R}^{n \times dim}$$</li>
 </ul>
 </li>
-<li>query-to-context attention vector:<ul>
+<li>query-to-context attention vector:
+<ul>
 <li>$m_i^t = \max_{1 \leq j\leq m} S_{ij}^t$</li>
 <li>$$p_i^t = \frac{exp(m_i^t)}{\sum_{j=1}^n exp(m_j^t)}$$</li>
 <li>$$q_c^t = \sum_{i=1}^n p_i^t u_i^t \in \mathbb{R}^{dim}$$</li>
 </ul>
 </li>
-<li>更新的context representation:<ul>
+<li>更新的context representation:
+<ul>
 <li>$c_i^t = [u_i^t; (c_q)_i^t; u_i^t \odot (c_q)_i^t; q_c^t \odot (c_q)_i^t]$</li>
 </ul>
 </li>
@@ -479,11 +498,14 @@
 </ul>
 </li>
 </ul>
-<h4 id="1-3-Self-Attention-Layer"><a href="#1-3-Self-Attention-Layer" class="headerlink" title="1.3.Self-Attention Layer"></a>1.3.Self-Attention Layer</h4><ul>
+<h4>1.3.Self-Attention Layer</h4>
+<ul>
 <li>帮助模型处理long context中的长期依赖</li>
 <li>输入是 reasoning 层最后一时刻的输出 经过 一个BiLSTM之后的表示 $c^{SA}$</li>
-<li>计算流程：<ul>
-<li>$S_{ij}^{SA} = W_4 c_i^{SA} + W_5 c_j^{SA} + W_6(c_i^{SA}\odot c_j^{SA})$<!-- * $$p_{ij}^{SA} = \frac{exp(S_{ij}^{SA})}{\sum_{k=1}^n exp(S_{ij}^{SA})}$$ --></li>
+<li>计算流程：
+<ul>
+<li>$S_{ij}^{SA} = W_4 c_i^{SA} + W_5 c_j^{SA} + W_6(c_i^{SA}\odot c_j^{SA})$
+&lt;!-- * $$p_{ij}^{SA} = \frac{exp(S_{ij}^{SA})}{\sum_{k=1}^n exp(S_{ij}^{SA})}$$ --&gt;</li>
 <li>$p_{ij}^{SA} = exp(S_{ij}^{SA}) / \left( \sum_{k=1}^n exp(S_{ij}^{SA}) \right)$</li>
 <li>$c^\prime = \sum_{j=1}^n p_{ij}^{SA} c_j^{SA}$</li>
 <li>$c^{\prime\prime} = BiLSTM([c^\prime;c^{SA};c^\prime \odot c^{SA}])$</li>
@@ -491,132 +513,164 @@
 </ul>
 </li>
 </ul>
-<h4 id="1-4-Pointer-Generator-Decoding-Layer"><a href="#1-4-Pointer-Generator-Decoding-Layer" class="headerlink" title="1.4.Pointer-Generator Decoding Layer"></a>1.4.Pointer-Generator Decoding Layer</h4><ul>
-<li><p>输入: </p>
+<h4>1.4.Pointer-Generator Decoding Layer</h4>
+<ul>
+<li>
+<p>输入:</p>
 <ul>
 <li>$x_t$, 前一时刻解码出的词向量表示</li>
 <li>$s_{t-1}$, 前一时刻的隐藏层状态</li>
 <li>$a_{t-1}$, 上下文向量</li>
 </ul>
 </li>
-<li><p>计算:</p>
+<li>
+<p>计算:</p>
 <ul>
-<li>当前时刻的隐藏层状态:<ul>
+<li>当前时刻的隐藏层状态:
+<ul>
 <li>$s_t = LSTM([x_t; a_{t-1}], s_{t-1})$</li>
 </ul>
 </li>
-<li>计算在生成词典上的概率分布:<ul>
+<li>计算在生成词典上的概率分布:
+<ul>
 <li>$P_{gen} = softmax(W_{gen}s_t + b_{gen})$</li>
 </ul>
 </li>
-<li>计算 attention (使用 Bahdanau 的attention计算过程):<ul>
+<li>计算 attention (使用 Bahdanau 的attention计算过程):
+<ul>
 <li>$$\alpha_i = v^\intercal tanh(W_c c_i + W_s s_t + b_{attn})$$</li>
 <li>$$\hat{\alpha}<em>i = \frac{exp(\alpha_i)}{\sum</em>{j=1}^n exp(\alpha_j)}$$</li>
 <li>$$ \mathbf{a}<em>i = \sum</em>{i=1}^n \hat{\alpha}_i c_i $$</li>
 </ul>
 </li>
-<li>计算选择生成还是复制的概率:<ul>
+<li>计算选择生成还是复制的概率:
+<ul>
 <li>$\mathbf{o} = \sigma(W_a \mathbf{a}<em>t + W_x x</em>{t} + W_s s_t + b_{ptr})$</li>
 <li>$\mathbf{p}^{sel} = softmax(\mathbf{o}) \in \mathbb{R}^2$</li>
 </ul>
 </li>
-<li>最终 $t$ 时刻输出的分布为:<ul>
+<li>最终 $t$ 时刻输出的分布为:
+<ul>
 <li>$$ P_t(w) = p_1^{sel} P_{gen}(w) + p_2^{sel} \sum_{i:w_i^C=w} \hat{\alpha}_i$$</li>
 </ul>
 </li>
 </ul>
 </li>
 </ul>
-<h3 id="2-Commonsense-Selection-and-Representation"><a href="#2-Commonsense-Selection-and-Representation" class="headerlink" title="2.Commonsense Selection and Representation"></a>2.Commonsense Selection and Representation</h3><p>为什么需要常识知识：知识关系有时候没有直接在文本中指出</p>
+<h3>2.Commonsense Selection and Representation</h3>
+<p>为什么需要常识知识：知识关系有时候没有直接在文本中指出</p>
 <p>由于语义网络/知识图谱的规模较大，包含很多无关信息，需要设计有效的选择算法来确定需要的信息 (有用的知识且可以在context-query对中落地(<em>grounded</em>:在context-query中出现) )</p>
 <ul>
-<li><p>常识知识选择策略：包含两方面</p>
+<li>
+<p>常识知识选择策略：包含两方面</p>
 <ul>
 <li>1.通过<strong>树结构</strong>，收集潜在的相关知识，目的是选择出具有high recall的候选推理路径；</li>
-<li>2.通过<strong>三步</strong>打分策略对候选路径进行排序和过滤，以确保加入信息的质量和多样性；<ul>
+<li>2.通过<strong>三步</strong>打分策略对候选路径进行排序和过滤，以确保加入信息的质量和多样性；
+<ul>
 <li>Initial Node Scoring, Cumulative Node Scoring, Path Selection</li>
 </ul>
 </li>
 </ul>
 </li>
-<li><p>图: Commonsense selection approach</p>
+<li>
+<p>图: Commonsense selection approach</p>
 <ul>
 <li><img src="/.io//mhpgm-2-path.png" alt="Commonsense selection approach"></li>
 </ul>
 </li>
 </ul>
-<h4 id="2-1-Tree-Construction"><a href="#2-1-Tree-Construction" class="headerlink" title="2.1.Tree Construction"></a>2.1.Tree Construction</h4><p>树的根节点为query中的一个词, 通过一些分支操作来构建多步推理路径.针对问题中的一个词/concept $c_1$, 进行如下操作:</p>
+<h4>2.1.Tree Construction</h4>
+<p>树的根节点为query中的一个词, 通过一些分支操作来构建多步推理路径.针对问题中的一个词/concept $c_1$, 进行如下操作:</p>
 <ol>
-<li>Direct Interaction:方向交互<ul>
+<li>Direct Interaction:方向交互
+<ul>
 <li>从ConceptNet中选择与$c_1$和文本上下文中concept( $c_2 \in C$ )有直接链接的关系$r_1$(多个)</li>
 <li>例如图中的第一列</li>
 </ul>
 </li>
-<li>Multi-Hop<ul>
+<li>Multi-Hop
+<ul>
 <li>继续在ConceptNet中选择文本中另外的concept($c_3 \in C$)与$c_2$有链接的关系$r_2$</li>
 </ul>
 </li>
-<li>Outside Knowledge<ul>
+<li>Outside Knowledge
+<ul>
 <li>无文本上下文的约束,寻找收集外部知识</li>
-<li>在ConceptNet中通过关系$r_3$寻找$c_3$的邻居(one-hop)得到 $c_4 \in nbh(c_3)$</li>
 </ul>
 </li>
-<li>Context-Grounding<ul>
+</ol>
+<ul>
+<li>在ConceptNet中通过关系$r_3$寻找$c_3$的邻居(one-hop)得到 $c_4 \in nbh(c_3)$</li>
+</ul>
+<ol start="4">
+<li>Context-Grounding
+<ul>
 <li>再次利用context进行约束, 来确保3中额外的知识是对任务有帮助的</li>
 <li>即, 使$c_3$通过$c_4$可找到的二阶邻居$c_5 \in C$是在文本中出现的</li>
 </ul>
 </li>
 </ol>
 <ul>
-<li>这构建路径的过程中，有几点疑问:<ul>
+<li>这构建路径的过程中，有几点疑问:
+<ul>
 <li>a. 如果针对一个query中的concept无法查找到这么长的路径如何处理？</li>
 </ul>
 </li>
 </ul>
-<h4 id="2-2-Rank-and-Filter"><a href="#2-2-Rank-and-Filter" class="headerlink" title="2.2.Rank and Filter"></a>2.2.Rank and Filter</h4><p>在构建树的过程中, 会收集大量的潜在相关路径, 相应地会引入很多噪声以及与问题无关的路径, 所以需要对2.1中收集到的知识路径进行排序过滤掉噪音.</p>
+<h4>2.2.Rank and Filter</h4>
+<p>在构建树的过程中, 会收集大量的潜在相关路径, 相应地会引入很多噪声以及与问题无关的路径, 所以需要对2.1中收集到的知识路径进行排序过滤掉噪音.</p>
 <ol>
-<li>Initial Node Scoring:<ul>
+<li>Initial Node Scoring:
+<ul>
 <li>初始化节点分数</li>
 <li>选择有节点可以提供对context的理解的重要信息的路径</li>
-<li>使用 tf 来估计context中concept的重要度和显著度:<ul>
+<li>使用 tf 来估计context中concept的重要度和显著度:
+<ul>
 <li>$score(c) = \frac{count(c)}{|C|}, c \in \lbrace c_2,c_3,c_5 \rbrace$</li>
 </ul>
 </li>
-<li>对于outside Knowledge选择出来的节点$c_4$, 希望它与推理路径中的$c_1$到$c_3$保持<strong>逻辑一致性</strong><ul>
+<li>对于outside Knowledge选择出来的节点$c_4$, 希望它与推理路径中的$c_1$到$c_3$保持<strong>逻辑一致性</strong>
+<ul>
 <li>利用点互信息</li>
 <li>$$PMI(c_4,c_{1-3}) = log(\frac{\mathbb{P}(c_4,c_{1-3})}{\mathbb{P}(c_4) \mathbb{P}(c_{1-3})})$$</li>
 <li>$$\mathbb{P}(c_4,c_{1-3}) = \frac{Num.\ of\ paths\ connecting\ c_1,c_2,c_3,c_4}{Num.\ of\ distinct\ paths\ of\ length\ 4}$$</li>
 <li>$$\mathbb{P}(c_4) = \frac{Num.\ of\ nodes\ that\ can\ reach\ c_4}{|ConceptNet|}$$</li>
 <li>$$\mathbb{P}(c_{1-3}) = \frac{Num.\ of\ paths\ connecting\ c_1,c_2,c_3}{Num.\ of\ paths\ of\ length\ 3}$$</li>
-<li>由于PMI对low-frequency敏感, 改进为 normalized PMI<ul>
+<li>由于PMI对low-frequency敏感, 改进为 normalized PMI
+<ul>
 <li>$score(c_4) = PMI(c_4, c_{1-3}) / (-log\mathbb{P}(c_4,c_{1-3}))$</li>
 </ul>
 </li>
 </ul>
 </li>
-<li>由于每个连接分支代表了one-hop，所以不同层级的hops或者是拥有不同父节点的nodes无法与其他节点相比较, 最终对每个节点的打分进行归一化:<ul>
+<li>由于每个连接分支代表了one-hop，所以不同层级的hops或者是拥有不同父节点的nodes无法与其他节点相比较, 最终对每个节点的打分进行归一化:
+<ul>
 <li>在同级(siblings)节点中进行归一化</li>
 <li>$n-socre(c) = softmax_{siblings(c)}(score(c))$</li>
 </ul>
 </li>
 </ul>
 </li>
-<li>Cumulative Node Scoring<ul>
+<li>Cumulative Node Scoring
+<ul>
 <li>累积节点打分</li>
 <li>选择多跳的Commonsense路径中有相关信息的,根据节点以其子节点的相关性和显著性对节点进行再次打分</li>
 <li>采取bottom-up的累积计算方式</li>
-<li>对于叶子节点(leaf node):<ul>
+<li>对于叶子节点(leaf node):
+<ul>
 <li>$c-socre = n-score$</li>
 </ul>
 </li>
-<li>对于非叶子节点<ul>
+<li>对于非叶子节点
+<ul>
 <li>$c-score(c_l) = n-socre(c_l) + f(c_l)$</li>
 <li>$f(c_l)$是该节点的$c-socre$打分top-2的子节点的$c-score$平均分值</li>
 </ul>
 </li>
 </ul>
 </li>
-<li>Path Selection<ul>
+<li>Path Selection
+<ul>
 <li>路径选择</li>
 <li>采取top-down breath-first(广度优先)的方式选择路径</li>
 <li>从根节点(回顾: query中的一个concept)开始, 递归的选择其两个具有最高累计得分的子节点, 直到选择到叶子节点.</li>
@@ -625,30 +679,38 @@
 </ul>
 </li>
 </ol>
-<h3 id="3-Commonsense-Model-Incorporation"><a href="#3-Commonsense-Model-Incorporation" class="headerlink" title="3.Commonsense Model Incorporation"></a>3.Commonsense Model Incorporation</h3><p>有选择性的结合需要的知识，使用常识知识来弥补推理步之间的gaps.<br>提出 Necessary and Optional Information Cell (NOIC) 一种 selectively gated 注意力机制。</p>
+<h3>3.Commonsense Model Incorporation</h3>
+<p>有选择性的结合需要的知识，使用常识知识来弥补推理步之间的gaps.
+提出 Necessary and Optional Information Cell (NOIC) 一种 selectively gated 注意力机制。</p>
 <ul>
-<li><p>输入:以词序列的形式表示给定的 list of commonsense logic paths:</p>
+<li>
+<p>输入:以词序列的形式表示给定的 list of commonsense logic paths:</p>
 <ul>
-<li>$X^{CS} = {w_1^{CS}, w_2^{CS},…,w_l^{CS}}$</li>
+<li>$X^{CS} = {w_1^{CS}, w_2^{CS},...,w_l^{CS}}$</li>
 <li>$w_l^{CS}$表示构成一条路径的token序列</li>
 <li>使用词向量表示: $e_{ij}^{CS}\in \mathbb{R}^d$</li>
 </ul>
 </li>
-<li><p>NOIC 是基于 Baseline Reasoning Cell 的扩展:</p>
+<li>
+<p>NOIC 是基于 Baseline Reasoning Cell 的扩展:</p>
 <ul>
-<li>在第 $t$ 个推理步, 得到 baseline reasoning cell 的输出之后, 为Commonsense信息计算cell-specific表示:<ul>
+<li>在第 $t$ 个推理步, 得到 baseline reasoning cell 的输出之后, 为Commonsense信息计算cell-specific表示:
+<ul>
 <li>将Commonsense paths上的所有向量串接, 每条路径得到一个表示向量$u_i^{CS}$</li>
-<li>通过映射进行降维, 使维度与 $c_i^t$ 的维度相等<ul>
+<li>通过映射进行降维, 使维度与 $c_i^t$ 的维度相等
+<ul>
 <li>$v_i^{CS} = ReLU(W u_i^{CS} + b)$</li>
 </ul>
 </li>
-<li>利用attention机制使Commonsense与context之间进行交互:<ul>
+<li>利用attention机制使Commonsense与context之间进行交互:
+<ul>
 <li>$$S_i^{CS}=W_1^{CS}c_i^t + W_2^{CS} v_j^{CS} + W_3^{CS} (c_i^t \odot v_j^{CS})$$</li>
 <li>$$p_{ij}^{CS} = \frac{exp(S_{ij}^{CS})}{\sum_{k=1}^l exp(S_{ij}^{CS})}$$</li>
 <li>$$c_i^{CS} = \sum_{j=1}^l p_{ij}^{CS} v_j^{CS}$$</li>
 </ul>
 </li>
-<li>最后, 将Commonsense-aware的context表示和baseline reasoning cell的结果进行组合得到NOIC的输出<ul>
+<li>最后, 将Commonsense-aware的context表示和baseline reasoning cell的结果进行组合得到NOIC的输出
+<ul>
 <li>$$z_i = \sigma(W_z [c_i^{CS}; c_i^t] + b_z)$$</li>
 <li>$$(c_o)_i^t = z_i \odot c_i^t + (1-z_i) \odot c_i^{CS}$$</li>
 </ul>
@@ -659,12 +721,16 @@
 </ul>
 </li>
 </ul>
-<h2 id="Experiments"><a href="#Experiments" class="headerlink" title="Experiments"></a>Experiments</h2><h3 id="Results"><a href="#Results" class="headerlink" title="Results"></a>Results</h3><h3 id="Ablations"><a href="#Ablations" class="headerlink" title="Ablations"></a>Ablations</h3><ol>
+<h2>Experiments</h2>
+<h3>Results</h3>
+<h3>Ablations</h3>
+<ol>
 <li>Model Ablations</li>
 <li>Commonsense Ablations</li>
 <li>Commonsense Selection</li>
 </ol>
-<h2 id="Summary-amp-Analysis"><a href="#Summary-amp-Analysis" class="headerlink" title="Summary &amp; Analysis"></a>Summary &amp; Analysis</h2><p>TBA</p>
+<h2>Summary &amp; Analysis</h2>
+<p>TBA</p>
 
       
     </div>
@@ -715,13 +781,13 @@
           
             <a href="/tags/nlp/" rel="tag"><i class="fa fa-tag"></i> nlp</a>
           
-            <a href="/tags/paper/" rel="tag"><i class="fa fa-tag"></i> paper</a>
-          
             <a href="/tags/mrc/" rel="tag"><i class="fa fa-tag"></i> mrc</a>
           
-            <a href="/tags/multi-hop/" rel="tag"><i class="fa fa-tag"></i> multi-hop</a>
+            <a href="/tags/paper/" rel="tag"><i class="fa fa-tag"></i> paper</a>
           
             <a href="/tags/reasoning/" rel="tag"><i class="fa fa-tag"></i> reasoning</a>
+          
+            <a href="/tags/multi-hop/" rel="tag"><i class="fa fa-tag"></i> multi-hop</a>
           
             <a href="/tags/commonsense/" rel="tag"><i class="fa fa-tag"></i> commonsense</a>
           
@@ -909,7 +975,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Motivation"><span class="nav-text">Motivation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Model"><span class="nav-text">Model</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-Multi-Hop-Pointer-Generator-Baseline"><span class="nav-text">1.Multi-Hop Pointer-Generator Baseline</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-1-Embedding-Layer"><span class="nav-text">1.1.Embedding Layer</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-2-Reasoning-Layer"><span class="nav-text">1.2.Reasoning Layer</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-3-Self-Attention-Layer"><span class="nav-text">1.3.Self-Attention Layer</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-4-Pointer-Generator-Decoding-Layer"><span class="nav-text">1.4.Pointer-Generator Decoding Layer</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-Commonsense-Selection-and-Representation"><span class="nav-text">2.Commonsense Selection and Representation</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#2-1-Tree-Construction"><span class="nav-text">2.1.Tree Construction</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-2-Rank-and-Filter"><span class="nav-text">2.2.Rank and Filter</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-Commonsense-Model-Incorporation"><span class="nav-text">3.Commonsense Model Incorporation</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Experiments"><span class="nav-text">Experiments</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Results"><span class="nav-text">Results</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Ablations"><span class="nav-text">Ablations</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Summary-amp-Analysis"><span class="nav-text">Summary &amp; Analysis</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">Motivation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">Model</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-text">1.Multi-Hop Pointer-Generator Baseline</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#undefined"><span class="nav-text">1.1.Embedding Layer</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#undefined"><span class="nav-text">1.2.Reasoning Layer</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#undefined"><span class="nav-text">1.3.Self-Attention Layer</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#undefined"><span class="nav-text">1.4.Pointer-Generator Decoding Layer</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-text">2.Commonsense Selection and Representation</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#undefined"><span class="nav-text">2.1.Tree Construction</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#undefined"><span class="nav-text">2.2.Rank and Filter</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-text">3.Commonsense Model Incorporation</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">Experiments</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-text">Results</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-text">Ablations</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-text">Summary &amp; Analysis</span></a></li></ol></div>
             
 
           </div>
