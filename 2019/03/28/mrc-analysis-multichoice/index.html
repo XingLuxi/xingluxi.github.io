@@ -495,7 +495,7 @@
 </ul>
 </li>
 <li>hierarchical aggregation<ul>
-<li>for each triplet ${P_n, Q, A}, n\in [1,N]$, get $C_n$ through co-match</li>
+<li>for each triplet $\{P_n, Q, A\}, n\in [1,N]$, get $C_n$ through co-match</li>
 <li>sentence-level aggregation of the co-matching states:<ul>
 <li>sentence sequence representation merge into a single vector</li>
 <li>$h_n^s = MaxPooling(BiLSTM(C_n)) \in \mathbb{R}^l$</li>
@@ -511,7 +511,7 @@
 </li>
 <li>Output Layer<ul>
 <li>for each candidate answer $A_i$, get $h_i^t \in \mathbb{R}^{l} $</li>
-<li>$L(A<em>i|P,Q) = -log \frac{exp(w^Th_i^t)}{\sum</em>{j=1}^4 exp(w^T h_j^t)}$</li>
+<li>$L(A_i|P,Q) = -log \frac{exp(w^Th_i^t)}{\sum_{j=1}^4 exp(w^T h_j^t)}$</li>
 </ul>
 </li>
 </ul>
@@ -588,7 +588,7 @@
 </ul>
 </li>
 <li>Output Layer<ul>
-<li>$L(A<em>i|P,Q)=-log\frac{exp(V^TC_i)}{\sum</em>{j=1}^N exp(V^TC_j)}$</li>
+<li>$L(A_i|P,Q)=-log\frac{exp(V^TC_i)}{\sum_{j=1}^N exp(V^TC_j)}$</li>
 </ul>
 </li>
 </ul>
@@ -626,7 +626,7 @@
 </ul>
 </li>
 </ul>
-<h3 id="Model-Details-2"><a href="#Model-Details-2" class="headerlink" title="Model Details"></a>Model Details</h3><p>Notation:<br>&nbsp;&nbsp;&nbsp;&nbsp;Passage: $P={w<em>1^p,…,w_m^p}$<br>&nbsp;&nbsp;&nbsp;&nbsp;Question: $Q= {w_1^q,…,w_n^q}$<br>&nbsp;&nbsp;&nbsp;&nbsp;Answer set: $O={O_1,…,O_K}$<br>&nbsp;&nbsp;&nbsp;&nbsp;Each option: $O_k = {w_1^o,…,w</em>{n_k}^o}$</p>
+<h3 id="Model-Details-2"><a href="#Model-Details-2" class="headerlink" title="Model Details"></a>Model Details</h3><p>Notation:<br>&nbsp;&nbsp;&nbsp;&nbsp;Passage: $P=\{w_1^p,…,w_m^p\}$<br>&nbsp;&nbsp;&nbsp;&nbsp;Question: $Q= \{w_1^q,…,w_n^q\}$<br>&nbsp;&nbsp;&nbsp;&nbsp;Answer set: $O=\{O_1,…,O_K\}$<br>&nbsp;&nbsp;&nbsp;&nbsp;Each option: $O_k = \{w_1^o,…,w_{n_k}^o\}$</p>
 <ul>
 <li><p>Overall: 4 stages</p>
 <ol>
@@ -659,8 +659,8 @@
 <li>Option Correlation Features Extraction<ul>
 <li>$Att(\cdot)$的计算方式：假设输入为$U\in \mathbb{R}^{d\times N}$和 $V\in \mathbb{R}^{d\times M}$<ul>
 <li>$v \in \mathbb{R}^{3d}$ 是参数</li>
-<li>$s<em>{ij}=v^T[U</em>{:i};V<em>{:j};U</em>{:i}\circ V_{:j}]$</li>
-<li>$A= Att(U,V;v)=[\frac{exp(s<em>{ij})}{\sum_i exp(s</em>{ij})}]_{ij} \in \mathbb{R}^{N\times M}$</li>
+<li>$s_{ij}=v^T[U_{:i};V_{:j};U_{:i}\circ V_{:j}]$</li>
+<li>$A= Att(U,V;v)=[\frac{exp(s_{ij})}{\sum_i exp(s_{ij})}]_{ij} \in \mathbb{R}^{N\times M}$</li>
 </ul>
 </li>
 <li>option correlation feature extraction 分3步进行<ul>
@@ -674,7 +674,7 @@
 </li>
 <li><ol>
 <li>gather pair-wise correlation information<ul>
-<li>$\tilde{O}<em>k^c=tanh(W_c [O_k^q;{\tilde{O}_k^{(l)}}</em>{l\neq k} ])$<ul>
+<li>$\tilde{O}_k^c=tanh(W_c [O_k^q;\{\tilde{O}_k^{(l)}\}_{l\neq k} ])$<ul>
 <li>$W_c \in \mathbb{R}^{d\times (d+2d(|O|-1))}$</li>
 </ul>
 </li>
@@ -685,7 +685,7 @@
 <li><ol>
 <li>element-wise gating 机制控制option feature和option-wise correlation information的融合，以产生option correlation features $O_k^c$<ul>
 <li>$g_k \in \mathbb{R}^{d\times n_k^\prime}$<ul>
-<li>$g<em>{k,:i}=\sigma (W_g [Q</em>{K,:i}^q; \tilde{O}_{k,:i}^c; \tilde{O}]+b_g)$</li>
+<li>$g_{k,:i}=\sigma (W_g [Q_{K,:i}^q; \tilde{O}_{k,:i}^c; \tilde{O}]+b_g)$</li>
 <li>$g_{k,:i}$ 表示 g 向量的第i列</li>
 </ul>
 </li>
@@ -695,7 +695,7 @@
 </ul>
 </li>
 <li>option correlation features: $O_k^c\in \mathbb{R}^{d\times n_k^\prime}$<ul>
-<li>$O<em>{k,:i}^c = g</em>{k,:i} \circ O<em>{k,:i}^q + (1-g</em>{k,:i}) \circ \tilde{O}_{k,:i}^c$</li>
+<li>$O_{k,:i}^c = g_{k,:i} \circ O_{k,:i}^q + (1-g_{k,:i}) \circ \tilde{O}_{k,:i}^c$</li>
 <li>Note: $O_k^c$ 不被压缩成fixed-length向量，文中的解释为-这样可以使我们的模型更灵活的使用correlation信息。</li>
 </ul>
 </li>

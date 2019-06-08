@@ -475,7 +475,7 @@
 <p>更新词向量：</p>
 <ul>
 <li>首先对所有在文本中与此词的lemma相同的词进行一个maxpool: <ul>
-<li>$\hat{e}_w^{\ell} = max{\hat{x}_k^{\ell} | x^{\ell} \in X^{\ell}, lemma(x_k^{\ell}) = lemma(w) }$</li>
+<li>$\hat{e}_w^{\ell} = max\{\hat{x}_k^{\ell} | x^{\ell} \in X^{\ell}, lemma(x_k^{\ell}) = lemma(w) \}$</li>
 </ul>
 </li>
 <li>然后，用context-independent的表示去计算一个context-sensitive的表示<ul>

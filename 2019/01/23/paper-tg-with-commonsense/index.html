@@ -435,11 +435,11 @@
 <p>模型的整体结构: <img src="/.io//tg-ccm-architecture.png" alt="CCM-overview"></p>
 <h3 id="Task-Definition-and-Overview"><a href="#Task-Definition-and-Overview" class="headerlink" title="Task Definition and Overview"></a>Task Definition and Overview</h3><ul>
 <li>user post(input): $X=x_1 x_2 … x_n$</li>
-<li>some commonsense knowledge graphs: $G={g<em>1, g_2, …, g</em>{N_G}}$</li>
+<li>some commonsense knowledge graphs: $G={g_1, g_2, …, g_{N_G}}$</li>
 <li>desired response(output): $Y=y_1 y_2 … y_m$</li>
 <li>使用 post 中的每个词作为查询，去常识知识库中 为每个词抽取出一个对应的子图:<ul>
-<li>eg: 对于 post $X=x<em>1 x_2 … x_n$, 其对应的抽取出来的图是 $G={g_1, g_2,…,g</em>{N_G}}$</li>
-<li>每个子图由一个三元组集合构成: $g<em>i = {\tau_1, \tau_2, …, \tau</em>{N_{g_i}}}$</li>
+<li>eg: 对于 post $X=x_1 x_2 … x_n$, 其对应的抽取出来的图是 $G={g_1, g_2,…,g_{N_G}}$</li>
+<li>每个子图由一个三元组集合构成: $g_i = {\tau_1, \tau_2, …, \tau_{N_{g_i}}}$</li>
 <li>每个三元组(head entity, relation, tail entity): $\tau = (h,r,t)$</li>
 <li>使用 TransE 来表示 KG 中的实体和关系;</li>
 <li>最终每个三元组 $\tau$ 表示为: <ul>
@@ -513,14 +513,14 @@
 </ul>
 <p>本文提出的增量编码模式：编码当前句子 $X_i$ 中的第j个位置的隐状态计算如下</p>
 <ul>
-<li>$h<em>j^{(i)} = LSTM(h</em>{j-1}^{(i)}, e(x<em>j^{(i)}), c</em>{lj}^{(i)}), i&gt;2$<ul>
-<li>其中，$e(\cdot)是词向量$， $c<em>{lj}^{(i)}$ 是关于前一个句子的上下文向量（基于隐状态$h</em>{j-1}^{(i)}$）</li>
+<li>$h_j^{(i)} = LSTM(h_{j-1}^{(i)}, e(x_j^{(i)}), c_{lj}^{(i)}), i&gt;2$<ul>
+<li>其中，$e(\cdot)是词向量$， $c_{lj}^{(i)}$ 是关于前一个句子的上下文向量（基于隐状态$h_{j-1}^{(i)}$）</li>
 </ul>
 </li>
 </ul>
 <h3 id="Multi-Source-Attention"><a href="#Multi-Source-Attention" class="headerlink" title="Multi-Source Attention"></a>Multi-Source Attention</h3><p>通过多源Attention来获取上下文向量表示文本线索信息，由两部分组成：</p>
 <ul>
-<li>$c<em>{lj}^{(i)} = W_l( [c</em>{hj}^{(i)} ; c_{xj}^{(i)}] ) + b_l$</li>
+<li>$c_{lj}^{(i)} = W_l( [c_{hj}^{(i)} ; c_{xj}^{(i)}] ) + b_l$</li>
 <li>$c_{hj}^{(i)}$ 是 state context vector，即前一个句子隐状态的权重和<ul>
 <li><script type="math/tex; mode=display">c_{hj}^{(i)}  = \sum_{k=1}^{l_{i-1}} \alpha_{hk}^{(i)} h_k^{(i-1)}</script></li>
 <li><script type="math/tex; mode=display">\alpha_{hk}^{(i)} = \frac{ exp( \beta_{h_{k,j}}^{(i)} ) }{ \sum_{m=1}^{l_{i-1}} exp( \beta_{h_{m,j}}^{(i)} ) }</script></li>
@@ -542,7 +542,7 @@
 <li>graph attention</li>
 <li>contextual attention (knowledgeable-reader)</li>
 </ul>
-<p>针对词$x$抽取（以$x$为头实体）出的图: $G(x) = {R<em>1,R_2, …,R</em>{N_x}}$</p>
+<p>针对词$x$抽取（以$x$为头实体）出的图: $G(x) = {R_1,R_2, …,R_{N_x}}$</p>
 <p>$R_i$ 为知识三元组 $(h,r,t)$， 用词向量表示h/t， r向量作为参数进行学习；<br>$N_x$ 为 $x$ 的邻居数量；</p>
 <h4 id="Graph-Attention-的图表示方式"><a href="#Graph-Attention-的图表示方式" class="headerlink" title="Graph Attention 的图表示方式"></a>Graph Attention 的图表示方式</h4><ul>
 <li><script type="math/tex; mode=display">g(x) = \sum_{i=1}^{N_x} \alpha_{R_i} [h_i；t_i]</script></li>

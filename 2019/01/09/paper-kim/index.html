@@ -438,7 +438,7 @@
 </ul>
 </li>
 <li>这篇文章主要是引入了基础的词汇级的语义知识<ul>
-<li>建模词$w<em>i$和$w_j$知识为 $r</em>{ij}$</li>
+<li>建模词$w_i$和$w_j$知识为 $r_{ij}$</li>
 <li>重点是：如何构建 $r_ij$</li>
 </ul>
 </li>
@@ -455,9 +455,9 @@
 <h3 id="M2-Knowledge-Enriched-Co-Attention"><a href="#M2-Knowledge-Enriched-Co-Attention" class="headerlink" title="M2.Knowledge-Enriched Co-Attention"></a>M2.Knowledge-Enriched Co-Attention</h3><ul>
 <li>知识关系特征：$r_{ij} \in \mathbb{R}^{d_r}$</li>
 <li>Co-attention:<ul>
-<li>$e<em>{ij} = (a^s_i)^T b_j^s + F(r</em>{ij})$</li>
-<li>$F(r<em>{ij}) = \lambda \mathbb{1}(r</em>{ij})$<ul>
-<li>$\mathbb{1}(r<em>{ij})$ 判断 $r</em>{ij}$ 是否为0向量</li>
+<li>$e_{ij} = (a^s_i)^T b_j^s + F(r_{ij})$</li>
+<li>$F(r_{ij}) = \lambda \mathbb{1}(r_{ij})$<ul>
+<li>$\mathbb{1}(r_{ij})$ 判断 $r_{ij}$ 是否为0向量</li>
 </ul>
 </li>
 <li>得到的 co-attention 矩阵 $e \in \mathbb{R}^{m\times n}$</li>
