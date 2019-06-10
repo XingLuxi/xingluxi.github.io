@@ -75,7 +75,7 @@
 
 
 
-  <meta name="keywords" content="nlp,paper,mrc,multi-hop,gnn,">
+  <meta name="keywords" content="nlp,mrc,paper,multi-hop,gnn,">
 
 
 
@@ -87,14 +87,14 @@
 
 
 <meta name="description" content="WikiHop in QAngaroo benchmark is a dataset for Multi-hop Reading Comprehension Across Documents.Style: Multiple-Choice Reference papers on WikiHop task:   Neural models for reasoning over multiple men">
-<meta name="keywords" content="nlp,paper,mrc,multi-hop,gnn">
+<meta name="keywords" content="nlp,mrc,paper,multi-hop,gnn">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Recent Advances on Multi-Hop RC - WikiHop">
 <meta property="og:url" content="http://xingluxi.github.io/2019/06/06/paper-wikihop-1/index.html">
 <meta property="og:site_name" content="Luxi Xing - Blog">
 <meta property="og:description" content="WikiHop in QAngaroo benchmark is a dataset for Multi-hop Reading Comprehension Across Documents.Style: Multiple-Choice Reference papers on WikiHop task:   Neural models for reasoning over multiple men">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-06-10T07:13:36.576Z">
+<meta property="og:updated_time" content="2019-06-10T07:15:02.664Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Recent Advances on Multi-Hop RC - WikiHop">
 <meta name="twitter:description" content="WikiHop in QAngaroo benchmark is a dataset for Multi-hop Reading Comprehension Across Documents.Style: Multiple-Choice Reference papers on WikiHop task:   Neural models for reasoning over multiple men">
@@ -315,7 +315,7 @@
               
                 <span class="post-meta-item-text">Post modified&#58;</span>
               
-              <time title="Post modified" itemprop="dateModified" datetime="2019-06-10T15:13:36+08:00">
+              <time title="Post modified" itemprop="dateModified" datetime="2019-06-10T15:15:02+08:00">
                 2019-06-10
               </time>
             
@@ -370,7 +370,7 @@
                   <span class="post-meta-item-text">Words count in article&#58;</span>
                 
                 <span title="Words count in article">
-                  247
+                  251
                 </span>
               
 
@@ -422,9 +422,12 @@
 </blockquote>
 <h2 id="Task-Definition"><a href="#Task-Definition" class="headerlink" title="Task Definition"></a>Task Definition</h2><p>Input: $\<q, d, c_q\>$</q,></p>
 <ul>
-<li>query: $q$ in the form of tuple without tail entity $<h_e, r, ?>$</h_e,></li>
+<li>query: $q$ in the form of tuple without tail entity $\lesssim h_e, r, ? \gtrsim$</li>
 <li>a set of supporting documents: $P = {P_1, …, P_M}$</li>
-<li>a set of candidate answers (all of which are entities mentioned in $P$): $C_q = {C_1,…,C_N}$<br>Goal:</li>
+<li>a set of candidate answers (all of which are entities mentioned in $P$): $C_q = {C_1,…,C_N}$</li>
+</ul>
+<p>Goal:</p>
+<ul>
 <li>select $a^{\star} \in C_q$, which is the entity that correctly answers the question</li>
 </ul>
 <h2 id="Coref-GRU"><a href="#Coref-GRU" class="headerlink" title="Coref-GRU"></a>Coref-GRU</h2><h3 id="1-Motivation"><a href="#1-Motivation" class="headerlink" title="1.Motivation"></a>1.Motivation</h3><h3 id="2-Model-Details"><a href="#2-Model-Details" class="headerlink" title="2.Model Details"></a>2.Model Details</h3><h2 id="MHQA-GCN-GRN"><a href="#MHQA-GCN-GRN" class="headerlink" title="MHQA-GCN/GRN"></a>MHQA-GCN/GRN</h2><h3 id="1-Motivation-1"><a href="#1-Motivation-1" class="headerlink" title="1.Motivation"></a>1.Motivation</h3><h3 id="2-Model-Details-1"><a href="#2-Model-Details-1" class="headerlink" title="2.Model Details"></a>2.Model Details</h3><h2 id="Path-based-Kundu-2018"><a href="#Path-based-Kundu-2018" class="headerlink" title="Path-based(Kundu.2018.)"></a>Path-based(Kundu.2018.)</h2><h3 id="1-Motivation-2"><a href="#1-Motivation-2" class="headerlink" title="1.Motivation"></a>1.Motivation</h3><h3 id="2-Model-Details-2"><a href="#2-Model-Details-2" class="headerlink" title="2.Model Details"></a>2.Model Details</h3><h2 id="BAG"><a href="#BAG" class="headerlink" title="BAG"></a>BAG</h2><h2 id="Entity-GCN"><a href="#Entity-GCN" class="headerlink" title="Entity-GCN"></a>Entity-GCN</h2><h3 id="1-Motivation-3"><a href="#1-Motivation-3" class="headerlink" title="1.Motivation"></a>1.Motivation</h3><h3 id="2-Model-Details-3"><a href="#2-Model-Details-3" class="headerlink" title="2.Model Details"></a>2.Model Details</h3><h2 id="Heterogeneous-Document-Entity"><a href="#Heterogeneous-Document-Entity" class="headerlink" title="Heterogeneous Document-Entity"></a>Heterogeneous Document-Entity</h2><h3 id="1-Motivation-4"><a href="#1-Motivation-4" class="headerlink" title="1.Motivation"></a>1.Motivation</h3><h3 id="2-Model-Details-4"><a href="#2-Model-Details-4" class="headerlink" title="2.Model Details"></a>2.Model Details</h3><h2 id="Summary"><a href="#Summary" class="headerlink" title="Summary"></a>Summary</h2><ul>
@@ -558,9 +561,9 @@
           
             <a href="/tags/nlp/" rel="tag"><i class="fa fa-tag"></i> nlp</a>
           
-            <a href="/tags/paper/" rel="tag"><i class="fa fa-tag"></i> paper</a>
-          
             <a href="/tags/mrc/" rel="tag"><i class="fa fa-tag"></i> mrc</a>
+          
+            <a href="/tags/paper/" rel="tag"><i class="fa fa-tag"></i> paper</a>
           
             <a href="/tags/multi-hop/" rel="tag"><i class="fa fa-tag"></i> multi-hop</a>
           
