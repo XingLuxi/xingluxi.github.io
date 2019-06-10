@@ -75,7 +75,7 @@
 
 
 
-  <meta name="keywords" content="nlp,paper,mrc,multi-hop,gnn,">
+  <meta name="keywords" content="nlp,mrc,paper,multi-hop,gnn,">
 
 
 
@@ -87,14 +87,14 @@
 
 
 <meta name="description" content="WikiHop in QAngaroo benchmark is a dataset for Multi-hop Reading Comprehension Across Documents.Style: Multiple-Choice Reference papers on WikiHop task:   Neural models for reasoning over multiple men">
-<meta name="keywords" content="nlp,paper,mrc,multi-hop,gnn">
+<meta name="keywords" content="nlp,mrc,paper,multi-hop,gnn">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Recent Advances on Multi-Hop RC - WikiHop">
 <meta property="og:url" content="http://xingluxi.github.io/2019/06/06/paper-wikihop-1/index.html">
 <meta property="og:site_name" content="Luxi Xing - Blog">
 <meta property="og:description" content="WikiHop in QAngaroo benchmark is a dataset for Multi-hop Reading Comprehension Across Documents.Style: Multiple-Choice Reference papers on WikiHop task:   Neural models for reasoning over multiple men">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-06-10T08:44:24.192Z">
+<meta property="og:updated_time" content="2019-06-10T08:54:57.669Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Recent Advances on Multi-Hop RC - WikiHop">
 <meta name="twitter:description" content="WikiHop in QAngaroo benchmark is a dataset for Multi-hop Reading Comprehension Across Documents.Style: Multiple-Choice Reference papers on WikiHop task:   Neural models for reasoning over multiple men">
@@ -315,7 +315,7 @@
               
                 <span class="post-meta-item-text">Post modified&#58;</span>
               
-              <time title="Post modified" itemprop="dateModified" datetime="2019-06-10T16:44:24+08:00">
+              <time title="Post modified" itemprop="dateModified" datetime="2019-06-10T16:54:57+08:00">
                 2019-06-10
               </time>
             
@@ -370,7 +370,7 @@
                   <span class="post-meta-item-text">Words count in article&#58;</span>
                 
                 <span title="Words count in article">
-                  966
+                  986
                 </span>
               
 
@@ -504,7 +504,10 @@
 <li>Path Extraction: for each candidate<ul>
 <li>step #1: find a passage $P_1$ contains $h_e$ of the query</li>
 <li>step #2: find intermediate entities: all Named Entities and Noun Phrases that appear in the same sentence with $h_e$ or in the subsequent sentence</li>
-<li>step #3: find another passage $P_2$ containes any of the intermediate entities found in step#3</li>
+<li>step #3: find another passage $P_2$ containes any of the intermediate entities found in step#3<ul>
+<li>for distinguishing the $e_1$ in different passage，use $e_1^{\prime}$ to stand for the same mention in the second passage</li>
+</ul>
+</li>
 <li>step #4: check if passage $P_2$ contains any of the candidate answer choices</li>
 </ul>
 </li>
@@ -729,9 +732,9 @@
           
             <a href="/tags/nlp/" rel="tag"><i class="fa fa-tag"></i> nlp</a>
           
-            <a href="/tags/paper/" rel="tag"><i class="fa fa-tag"></i> paper</a>
-          
             <a href="/tags/mrc/" rel="tag"><i class="fa fa-tag"></i> mrc</a>
+          
+            <a href="/tags/paper/" rel="tag"><i class="fa fa-tag"></i> paper</a>
           
             <a href="/tags/multi-hop/" rel="tag"><i class="fa fa-tag"></i> multi-hop</a>
           
