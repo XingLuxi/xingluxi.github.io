@@ -75,7 +75,7 @@
 
 
 
-  <meta name="keywords" content="nlp,paper,mrc,multi-hop,gnn,">
+  <meta name="keywords" content="nlp,mrc,paper,multi-hop,gnn,">
 
 
 
@@ -87,14 +87,14 @@
 
 
 <meta name="description" content="WikiHop in QAngaroo benchmark is a dataset for Multi-hop Reading Comprehension Across Documents.Style: Multiple-Choice Reference papers on WikiHop task:   Neural models for reasoning over multiple men">
-<meta name="keywords" content="nlp,paper,mrc,multi-hop,gnn">
+<meta name="keywords" content="nlp,mrc,paper,multi-hop,gnn">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Recent Advances on Multi-Hop RC - WikiHop">
 <meta property="og:url" content="http://xingluxi.github.io/2019/06/06/paper-wikihop-1/index.html">
 <meta property="og:site_name" content="Luxi Xing - Blog">
 <meta property="og:description" content="WikiHop in QAngaroo benchmark is a dataset for Multi-hop Reading Comprehension Across Documents.Style: Multiple-Choice Reference papers on WikiHop task:   Neural models for reasoning over multiple men">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-06-10T07:18:27.123Z">
+<meta property="og:updated_time" content="2019-06-10T07:34:50.979Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Recent Advances on Multi-Hop RC - WikiHop">
 <meta name="twitter:description" content="WikiHop in QAngaroo benchmark is a dataset for Multi-hop Reading Comprehension Across Documents.Style: Multiple-Choice Reference papers on WikiHop task:   Neural models for reasoning over multiple men">
@@ -315,7 +315,7 @@
               
                 <span class="post-meta-item-text">Post modified&#58;</span>
               
-              <time title="Post modified" itemprop="dateModified" datetime="2019-06-10T15:18:27+08:00">
+              <time title="Post modified" itemprop="dateModified" datetime="2019-06-10T15:34:50+08:00">
                 2019-06-10
               </time>
             
@@ -370,7 +370,7 @@
                   <span class="post-meta-item-text">Words count in article&#58;</span>
                 
                 <span title="Words count in article">
-                  256
+                  344
                 </span>
               
 
@@ -386,7 +386,7 @@
                   <span class="post-meta-item-text">Reading time &asymp;</span>
                 
                 <span title="Reading time">
-                  1
+                  2
                 </span>
               
             </div>
@@ -422,12 +422,30 @@
 </blockquote>
 <h2 id="Task-Definition"><a href="#Task-Definition" class="headerlink" title="Task Definition"></a>Task Definition</h2><p>Input: $&lt; q, D, C_q &gt;$</p>
 <ul>
-<li>query: $q$ in the form of tuple without tail entity $&lt; h_e, r, ? &gt;$</li>
+<li>query: $q$ in the form of triple without tail entity $&lt; h_e, r, ? &gt;$</li>
 <li>a set of supporting documents: $P = \{P_1, …, P_M\}$</li>
 <li>a set of candidate answers (all of which are entities mentioned in $P$): $C_q = \{C_1,…,C_N\}$</li>
 </ul>
-<p>Goal: select $a^{\star} \in C_q$, which is the entity that correctly answers the question</p>
-<h2 id="Coref-GRU"><a href="#Coref-GRU" class="headerlink" title="Coref-GRU"></a>Coref-GRU</h2><h3 id="1-Motivation"><a href="#1-Motivation" class="headerlink" title="1.Motivation"></a>1.Motivation</h3><h3 id="2-Model-Details"><a href="#2-Model-Details" class="headerlink" title="2.Model Details"></a>2.Model Details</h3><h2 id="MHQA-GCN-GRN"><a href="#MHQA-GCN-GRN" class="headerlink" title="MHQA-GCN/GRN"></a>MHQA-GCN/GRN</h2><h3 id="1-Motivation-1"><a href="#1-Motivation-1" class="headerlink" title="1.Motivation"></a>1.Motivation</h3><h3 id="2-Model-Details-1"><a href="#2-Model-Details-1" class="headerlink" title="2.Model Details"></a>2.Model Details</h3><h2 id="Path-based-Kundu-2018"><a href="#Path-based-Kundu-2018" class="headerlink" title="Path-based(Kundu.2018.)"></a>Path-based(Kundu.2018.)</h2><h3 id="1-Motivation-2"><a href="#1-Motivation-2" class="headerlink" title="1.Motivation"></a>1.Motivation</h3><h3 id="2-Model-Details-2"><a href="#2-Model-Details-2" class="headerlink" title="2.Model Details"></a>2.Model Details</h3><h2 id="BAG"><a href="#BAG" class="headerlink" title="BAG"></a>BAG</h2><h2 id="Entity-GCN"><a href="#Entity-GCN" class="headerlink" title="Entity-GCN"></a>Entity-GCN</h2><h3 id="1-Motivation-3"><a href="#1-Motivation-3" class="headerlink" title="1.Motivation"></a>1.Motivation</h3><h3 id="2-Model-Details-3"><a href="#2-Model-Details-3" class="headerlink" title="2.Model Details"></a>2.Model Details</h3><h2 id="Heterogeneous-Document-Entity"><a href="#Heterogeneous-Document-Entity" class="headerlink" title="Heterogeneous Document-Entity"></a>Heterogeneous Document-Entity</h2><h3 id="1-Motivation-4"><a href="#1-Motivation-4" class="headerlink" title="1.Motivation"></a>1.Motivation</h3><h3 id="2-Model-Details-4"><a href="#2-Model-Details-4" class="headerlink" title="2.Model Details"></a>2.Model Details</h3><h2 id="Summary"><a href="#Summary" class="headerlink" title="Summary"></a>Summary</h2><ul>
+<p>Goal: </p>
+<ul>
+<li>select $a^{\star} \in C_q$, which is the entity that correctly answers the question</li>
+<li>need to aggregate information from multiple evidences across documents</li>
+</ul>
+<h2 id="Coref-GRU"><a href="#Coref-GRU" class="headerlink" title="Coref-GRU"></a>Coref-GRU</h2><blockquote>
+<p> Neural models for reasoning over multiple mentions using coreference. NAACL,2018.</p>
+</blockquote>
+<h3 id="1-Motivation"><a href="#1-Motivation" class="headerlink" title="1.Motivation"></a>1.Motivation</h3><ul>
+<li>existing RNN layer are biased towards short-term dependencies</li>
+<li>adapt a standard RNN layer by introducing a bias towards <strong>coreferent recency</strong></li>
+</ul>
+<h3 id="2-Model-Details"><a href="#2-Model-Details" class="headerlink" title="2.Model Details"></a>2.Model Details</h3><ul>
+<li>coreference relationships between words</li>
+<li>introduce a term in the update equations for GRU which depends on the hidden state of the coreferent antecedent of the current token/word<ul>
+<li>hidden states are propagated along coreference chains and the original sequence in parallel</li>
+</ul>
+</li>
+</ul>
+<h2 id="MHQA-GCN-GRN"><a href="#MHQA-GCN-GRN" class="headerlink" title="MHQA-GCN/GRN"></a>MHQA-GCN/GRN</h2><h3 id="1-Motivation-1"><a href="#1-Motivation-1" class="headerlink" title="1.Motivation"></a>1.Motivation</h3><h3 id="2-Model-Details-1"><a href="#2-Model-Details-1" class="headerlink" title="2.Model Details"></a>2.Model Details</h3><h2 id="Path-based-Kundu-2018"><a href="#Path-based-Kundu-2018" class="headerlink" title="Path-based(Kundu.2018.)"></a>Path-based(Kundu.2018.)</h2><h3 id="1-Motivation-2"><a href="#1-Motivation-2" class="headerlink" title="1.Motivation"></a>1.Motivation</h3><h3 id="2-Model-Details-2"><a href="#2-Model-Details-2" class="headerlink" title="2.Model Details"></a>2.Model Details</h3><h2 id="BAG"><a href="#BAG" class="headerlink" title="BAG"></a>BAG</h2><h3 id="1-Motivation-3"><a href="#1-Motivation-3" class="headerlink" title="1.Motivation"></a>1.Motivation</h3><h3 id="2-Model-Details-3"><a href="#2-Model-Details-3" class="headerlink" title="2.Model Details"></a>2.Model Details</h3><h2 id="Entity-GCN"><a href="#Entity-GCN" class="headerlink" title="Entity-GCN"></a>Entity-GCN</h2><h3 id="1-Motivation-4"><a href="#1-Motivation-4" class="headerlink" title="1.Motivation"></a>1.Motivation</h3><h3 id="2-Model-Details-4"><a href="#2-Model-Details-4" class="headerlink" title="2.Model Details"></a>2.Model Details</h3><h2 id="Heterogeneous-Document-Entity"><a href="#Heterogeneous-Document-Entity" class="headerlink" title="Heterogeneous Document-Entity"></a>Heterogeneous Document-Entity</h2><h3 id="1-Motivation-5"><a href="#1-Motivation-5" class="headerlink" title="1.Motivation"></a>1.Motivation</h3><h3 id="2-Model-Details-5"><a href="#2-Model-Details-5" class="headerlink" title="2.Model Details"></a>2.Model Details</h3><h2 id="Summary"><a href="#Summary" class="headerlink" title="Summary"></a>Summary</h2><ul>
 <li>official leaderboard: <a href="http://qangaroo.cs.ucl.ac.uk/leaderboard.html" target="_blank" rel="noopener">http://qangaroo.cs.ucl.ac.uk/leaderboard.html</a></li>
 </ul>
 <div class="table-container">
@@ -558,9 +576,9 @@
           
             <a href="/tags/nlp/" rel="tag"><i class="fa fa-tag"></i> nlp</a>
           
-            <a href="/tags/paper/" rel="tag"><i class="fa fa-tag"></i> paper</a>
-          
             <a href="/tags/mrc/" rel="tag"><i class="fa fa-tag"></i> mrc</a>
+          
+            <a href="/tags/paper/" rel="tag"><i class="fa fa-tag"></i> paper</a>
           
             <a href="/tags/multi-hop/" rel="tag"><i class="fa fa-tag"></i> multi-hop</a>
           
@@ -746,7 +764,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Task-Definition"><span class="nav-text">Task Definition</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Coref-GRU"><span class="nav-text">Coref-GRU</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-Motivation"><span class="nav-text">1.Motivation</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-Model-Details"><span class="nav-text">2.Model Details</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#MHQA-GCN-GRN"><span class="nav-text">MHQA-GCN/GRN</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-Motivation-1"><span class="nav-text">1.Motivation</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-Model-Details-1"><span class="nav-text">2.Model Details</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Path-based-Kundu-2018"><span class="nav-text">Path-based(Kundu.2018.)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-Motivation-2"><span class="nav-text">1.Motivation</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-Model-Details-2"><span class="nav-text">2.Model Details</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#BAG"><span class="nav-text">BAG</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Entity-GCN"><span class="nav-text">Entity-GCN</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-Motivation-3"><span class="nav-text">1.Motivation</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-Model-Details-3"><span class="nav-text">2.Model Details</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Heterogeneous-Document-Entity"><span class="nav-text">Heterogeneous Document-Entity</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-Motivation-4"><span class="nav-text">1.Motivation</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-Model-Details-4"><span class="nav-text">2.Model Details</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Summary"><span class="nav-text">Summary</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Task-Definition"><span class="nav-text">Task Definition</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Coref-GRU"><span class="nav-text">Coref-GRU</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-Motivation"><span class="nav-text">1.Motivation</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-Model-Details"><span class="nav-text">2.Model Details</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#MHQA-GCN-GRN"><span class="nav-text">MHQA-GCN/GRN</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-Motivation-1"><span class="nav-text">1.Motivation</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-Model-Details-1"><span class="nav-text">2.Model Details</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Path-based-Kundu-2018"><span class="nav-text">Path-based(Kundu.2018.)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-Motivation-2"><span class="nav-text">1.Motivation</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-Model-Details-2"><span class="nav-text">2.Model Details</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#BAG"><span class="nav-text">BAG</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-Motivation-3"><span class="nav-text">1.Motivation</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-Model-Details-3"><span class="nav-text">2.Model Details</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Entity-GCN"><span class="nav-text">Entity-GCN</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-Motivation-4"><span class="nav-text">1.Motivation</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-Model-Details-4"><span class="nav-text">2.Model Details</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Heterogeneous-Document-Entity"><span class="nav-text">Heterogeneous Document-Entity</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-Motivation-5"><span class="nav-text">1.Motivation</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-Model-Details-5"><span class="nav-text">2.Model Details</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Summary"><span class="nav-text">Summary</span></a></li></ol></div>
             
 
           </div>
