@@ -75,7 +75,7 @@
 
 
 
-  <meta name="keywords" content="nlp,paper,mrc,multi-hop,gnn,">
+  <meta name="keywords" content="nlp,mrc,paper,multi-hop,gnn,">
 
 
 
@@ -87,14 +87,14 @@
 
 
 <meta name="description" content="WikiHop in QAngaroo benchmark is a dataset for Multi-hop Reading Comprehension Across Documents.Style: Multiple-Choice Reference papers on WikiHop task:   Neural models for reasoning over multiple men">
-<meta name="keywords" content="nlp,paper,mrc,multi-hop,gnn">
+<meta name="keywords" content="nlp,mrc,paper,multi-hop,gnn">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Recent Advances on Multi-Hop RC - WikiHop">
 <meta property="og:url" content="http://xingluxi.github.io/2019/06/06/paper-wikihop-1/index.html">
 <meta property="og:site_name" content="Luxi Xing - Blog">
 <meta property="og:description" content="WikiHop in QAngaroo benchmark is a dataset for Multi-hop Reading Comprehension Across Documents.Style: Multiple-Choice Reference papers on WikiHop task:   Neural models for reasoning over multiple men">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-06-10T11:56:07.441Z">
+<meta property="og:updated_time" content="2019-06-10T11:58:04.659Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Recent Advances on Multi-Hop RC - WikiHop">
 <meta name="twitter:description" content="WikiHop in QAngaroo benchmark is a dataset for Multi-hop Reading Comprehension Across Documents.Style: Multiple-Choice Reference papers on WikiHop task:   Neural models for reasoning over multiple men">
@@ -315,7 +315,7 @@
               
                 <span class="post-meta-item-text">Post modified&#58;</span>
               
-              <time title="Post modified" itemprop="dateModified" datetime="2019-06-10T19:56:07+08:00">
+              <time title="Post modified" itemprop="dateModified" datetime="2019-06-10T19:58:04+08:00">
                 2019-06-10
               </time>
             
@@ -621,7 +621,7 @@
 </li>
 <li>Graph Encoding: Relational GCN to model message passing process<ul>
 <li>at layer $l$:</li>
-<li>aggregation<ul>
+<li>aggregation: aggregate information from neighbors of each node<ul>
 <li><script type="math/tex; mode=display">z_i^l = \frac{1}{|N_i|} \sum_{j\in N_i} \sum_{r \in R_{ij}} f_r(h_j^l)</script></li>
 <li>$N_i$ is the set of indices of nodes neighbouring $i$-th node</li>
 <li>$R_{ij}$ is the set of edge annotations between $i$ and $j$</li>
@@ -631,7 +631,7 @@
 <li><script type="math/tex; mode=display">u_i^l = f_s(h_i^l) + z_i^l</script></li>
 </ul>
 </li>
-<li>updating<ul>
+<li>updating: how much of the update message propagates to the next step<ul>
 <li><script type="math/tex; mode=display">g_i^l = sigmoid(f_g ( [z_i^l; h_i^l] ))</script></li>
 <li><script type="math/tex; mode=display">h_i^{l+1} = tanh(u_i^l) \odot g_i^l + h_i^l \odot (1-g_i^l)</script></li>
 </ul>
@@ -838,9 +838,9 @@
           
             <a href="/tags/nlp/" rel="tag"><i class="fa fa-tag"></i> nlp</a>
           
-            <a href="/tags/paper/" rel="tag"><i class="fa fa-tag"></i> paper</a>
-          
             <a href="/tags/mrc/" rel="tag"><i class="fa fa-tag"></i> mrc</a>
+          
+            <a href="/tags/paper/" rel="tag"><i class="fa fa-tag"></i> paper</a>
           
             <a href="/tags/multi-hop/" rel="tag"><i class="fa fa-tag"></i> multi-hop</a>
           
