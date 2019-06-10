@@ -96,7 +96,7 @@
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://xingluxi.github.io/images/mrc-paper-hotpotqa/DFGN-graph.png">
 <meta property="og:image" content="http://xingluxi.github.io/images/mrc-paper-hotpotqa/DFGN-model.png">
-<meta property="og:updated_time" content="2019-06-10T16:40:08.890Z">
+<meta property="og:updated_time" content="2019-06-10T16:44:49.626Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Recent Advances on Multi-Hop RC - HotpotQA">
 <meta name="twitter:description" content="HotpotQA is a dataset for Diverse, Explainable Multi-hop Question Answering.Style: Extractive-based HotpotQA has 4 features, which can also be seen as challenges:  questions require finding and reason">
@@ -318,7 +318,7 @@
               
                 <span class="post-meta-item-text">Post modified&#58;</span>
               
-              <time title="Post modified" itemprop="dateModified" datetime="2019-06-11T00:40:08+08:00">
+              <time title="Post modified" itemprop="dateModified" datetime="2019-06-11T00:44:49+08:00">
                 2019-06-11
               </time>
             
@@ -373,7 +373,7 @@
                   <span class="post-meta-item-text">Words count in article&#58;</span>
                 
                 <span title="Words count in article">
-                  629
+                  665
                 </span>
               
 
@@ -389,7 +389,7 @@
                   <span class="post-meta-item-text">Reading time &asymp;</span>
                 
                 <span title="Reading time">
-                  3
+                  4
                 </span>
               
             </div>
@@ -495,8 +495,8 @@
 <ul>
 <li>use BERT encoding concatenating of query and context performs better</li>
 <li>output:<ul>
-<li>query $Q_0 \in \mathbb{R}^{L\time d_2}$</li>
-<li>context $C_0 \in \mathbb{R}^{M\time d_2}$</li>
+<li>query $Q_0 \in \mathbb{R}^{L\times d_2}$</li>
+<li>context $C_0 \in \mathbb{R}^{M\times d_2}$</li>
 </ul>
 </li>
 </ul>
@@ -518,7 +518,12 @@
 </ul>
 </li>
 <li>propagate information in graph by GAT (the more relevant to the query, the neighbor nodes receive more information from nearby)<ul>
-<li>$e^t_i = ReLu( \sum_{j\in B_i} \alpha_{j,i}^t h_j^t)$</li>
+<li><script type="math/tex; mode=display">e^t_i = ReLu( \sum_{j\in B_i} \alpha_{j,i}^t h_j^t)</script><ul>
+<li><script type="math/tex; mode=display">h_i^t = U_t^ \tilde{e}_i^{t-1} + b_t</script></li>
+<li><script type="math/tex; mode=display">\beta_{i,j}^t = LeakyReLu(W_t^T [h_i^t, h_j^t])</script></li>
+<li><script type="math/tex; mode=display">\alpha_{i,j}^t = \frac{exp(\beta_{i,j}^t)}{\sum_k exp(\beta_{i,k}^t)}</script></li>
+</ul>
+</li>
 <li>$E_t = [e_1^t,…,e_N^t]$</li>
 </ul>
 </li>
