@@ -22,9 +22,9 @@
             
             <tag> nlp </tag>
             
-            <tag> mrc </tag>
-            
             <tag> paper </tag>
+            
+            <tag> mrc </tag>
             
             <tag> multi-hop </tag>
             
@@ -41,7 +41,7 @@
       <link href="/2019/05/30/mrc-paper-hotpotqa/"/>
       <url>/2019/05/30/mrc-paper-hotpotqa/</url>
       
-        <content type="html"><![CDATA[<p><strong>HotpotQA</strong> is a dataset for <strong>Diverse</strong>, <strong>Explainable</strong> <strong>Multi-hop</strong> Question Answering.<br>Style: Extractive-based</p><p>HotpotQA has 4 features, which can also be seen as challenges:</p><ul><li>questions require finding and reasoning over multiple supporting documents to answer</li><li>questions are diverse and not constrained to any pre-existing knowledge</li><li>contains two types of questions: 1.<strong>bridge</strong> and 2.<strong>comparison</strong> (factoid comparision questions)</li><li>provides sentence-level supporting facts required for reasoning<ul><li>introduces the <strong>strong supervision</strong> for reasoning and make the final predictions <strong>explainable</strong></li></ul></li><li>(can form a reasoning chain through the support facts)</li></ul><p>Reference papers on HotpotQA task:</p><blockquote><ol><li>Cognitive Graph for Multi-Hop Reading Comprehension at Scale. ACL, 2019.</li><li>Dynamically Fused Graph Network for Multi-Hop Reasoning. ACL, 2019.</li><li>Answering while Summarizing: Multi-task Learning for Multi-Hop QA with Evidence Extraction. ACL, 2019.</li><li>Compositional Questions Do Not Necessitate Multi-hop Reasoning. ACL,2019. (short)</li></ol></blockquote><h2 id="Task-Defination"><a href="#Task-Defination" class="headerlink" title="Task Defination"></a>Task Defination</h2><p>Input:</p><ul><li>query</li><li>$N_p = 10$ paragraphs</li></ul><p>Output</p><ul><li>answer span</li><li>supprot facts (sentence), which can be regarded as the supervised signal during training</li></ul><h2 id="Cognitive-Graph-QA"><a href="#Cognitive-Graph-QA" class="headerlink" title="Cognitive Graph QA"></a>Cognitive Graph QA</h2><blockquote><p>Cognitive Graph for Multi-Hop Reading Comprehension at Scale.<br>ACL, 2019.<br>Ming Ding (Chang Zhou)<br>THU (DAMO, Alibaba)</p></blockquote><h3 id="1-Motivation"><a href="#1-Motivation" class="headerlink" title="1.Motivation"></a>1.Motivation</h3><p>Dual Process Theory</p><h3 id="2-Model-Details"><a href="#2-Model-Details" class="headerlink" title="2.Model Details"></a>2.Model Details</h3><h3 id="3-Experiments"><a href="#3-Experiments" class="headerlink" title="3.Experiments"></a>3.Experiments</h3><h2 id="Dynamically-Fused-Graph-Network"><a href="#Dynamically-Fused-Graph-Network" class="headerlink" title="Dynamically Fused Graph Network"></a>Dynamically Fused Graph Network</h2><blockquote><p>Dynamically Fused Graph Network for Multi-Hop Reasoning.<br>ACL,2019.<br>Yunxuan Xiao<br>Shanghai Jiao Tong University. (ByteDance AT Lab)</p></blockquote><h3 id="1-Motivation-1"><a href="#1-Motivation-1" class="headerlink" title="1.Motivation"></a>1.Motivation</h3><p><i class="fas fa-thumbtack"></i>Challenges:</p><ul><li>1) filtering out noises from multiple paragraphs and extracting useful information<ul><li>previous work: build entity graph from input paragraphs and apply GNN to aggregate the information</li><li>shortcomings: </li></ul></li><li>2) aggregate document information to an entity graph and answers are then <strong>directly</strong> selected on entities of the entity graph<ul><li>shortcomings: answers may not reside in entities of the extracted entity graph</li></ul></li></ul><p><i class="fas fa-highlighter"></i>This work:</p><h3 id="2-Model-Details-1"><a href="#2-Model-Details-1" class="headerlink" title="2.Model Details"></a>2.Model Details</h3><h3 id="3-Experiments-1"><a href="#3-Experiments-1" class="headerlink" title="3.Experiments"></a>3.Experiments</h3><h2 id="Query-Focused-Extractor"><a href="#Query-Focused-Extractor" class="headerlink" title="Query Focused Extractor"></a>Query Focused Extractor</h2><blockquote><p>Answering while Summarizaing: Multi-task Learning for Multi-hop QA with Evidence Extraction<br>ACL,2019.<br>Kosuke Nishida.<br>NTT Media Intelligence Laboratories.</p></blockquote><h3 id="1-Motivation-2"><a href="#1-Motivation-2" class="headerlink" title="1.Motivation"></a>1.Motivation</h3><h3 id="2-Model-Details-2"><a href="#2-Model-Details-2" class="headerlink" title="2.Model Details"></a>2.Model Details</h3><h3 id="3-Experiments-2"><a href="#3-Experiments-2" class="headerlink" title="3.Experiments"></a>3.Experiments</h3><h2 id="Summary"><a href="#Summary" class="headerlink" title="Summary"></a>Summary</h2>]]></content>
+        <content type="html"><![CDATA[<p><strong>HotpotQA</strong> is a dataset for <strong>Diverse</strong>, <strong>Explainable</strong> <strong>Multi-hop</strong> Question Answering.<br>Style: Extractive-based</p><p>HotpotQA has 4 features, which can also be seen as challenges:</p><ul><li>questions require finding and reasoning over multiple supporting documents to answer</li><li>questions are diverse and not constrained to any pre-existing knowledge</li><li>contains two types of questions: 1.<strong>bridge</strong> and 2.<strong>comparison</strong> (factoid comparision questions)</li><li>provides sentence-level supporting facts required for reasoning<ul><li>introduces the <strong>strong supervision</strong> for reasoning and make the final predictions <strong>explainable</strong></li></ul></li><li>(can form a reasoning chain through the support facts)</li></ul><p>Reference papers on HotpotQA task:</p><blockquote><ol><li>Cognitive Graph for Multi-Hop Reading Comprehension at Scale. ACL, 2019.</li><li>Dynamically Fused Graph Network for Multi-Hop Reasoning. ACL, 2019.</li><li>Answering while Summarizing: Multi-task Learning for Multi-Hop QA with Evidence Extraction. ACL, 2019.</li><li>Compositional Questions Do Not Necessitate Multi-hop Reasoning. ACL,2019. (short)</li></ol></blockquote><h2 id="Task-Defination"><a href="#Task-Defination" class="headerlink" title="Task Defination"></a>Task Defination</h2><p>Input:</p><ul><li>query</li><li>$N_p = 10$ paragraphs</li></ul><p>Output</p><ul><li>answer span</li><li>supprot facts (sentence), which can be regarded as the supervised signal during training</li></ul><h2 id="Cognitive-Graph-QA"><a href="#Cognitive-Graph-QA" class="headerlink" title="Cognitive Graph QA"></a>Cognitive Graph QA</h2><blockquote><p>Cognitive Graph for Multi-Hop Reading Comprehension at Scale.<br>ACL, 2019.<br>Ming Ding (Chang Zhou)<br>THU (DAMO, Alibaba)</p></blockquote><h3 id="1-Motivation"><a href="#1-Motivation" class="headerlink" title="1.Motivation"></a>1.Motivation</h3><p>Dual Process Theory</p><h3 id="2-Model-Details"><a href="#2-Model-Details" class="headerlink" title="2.Model Details"></a>2.Model Details</h3><h3 id="3-Experiments"><a href="#3-Experiments" class="headerlink" title="3.Experiments"></a>3.Experiments</h3><h2 id="Dynamically-Fused-Graph-Network"><a href="#Dynamically-Fused-Graph-Network" class="headerlink" title="Dynamically Fused Graph Network"></a>Dynamically Fused Graph Network</h2><blockquote><p>Dynamically Fused Graph Network for Multi-Hop Reasoning.<br>ACL,2019.<br>Yunxuan Xiao<br>Shanghai Jiao Tong University. (ByteDance AT Lab)</p></blockquote><h3 id="1-Motivation-1"><a href="#1-Motivation-1" class="headerlink" title="1.Motivation"></a>1.Motivation</h3><p><i class="fa fa-thumbtack"></i>Challenges:</p><ul><li>1) filtering out noises from multiple paragraphs and extracting useful information<ul><li>previous work: build entity graph from input paragraphs and apply GNN to aggregate the information</li><li>shortcomings: static global entity graph of each QA pair —&gt; <strong>implicit reasoning, lack of explainability</strong></li></ul></li><li>2) aggregate document information to an entity graph and answers are then <strong>directly</strong> selected on entities of the entity graph<ul><li>shortcomings: answers may not reside in entities of the extracted entity graph</li></ul></li></ul><p><i class="fa fa-highlighter"></i>This work:</p><ul><li>intuition: mimic human reasoning process in multi-hop QA</li><li>start from an entity of interest in the query</li><li>focus on the words surrounding the start entities</li><li>connect to some related entity in the neighborhood guided by the question</li><li>repeat the step to form a reasoning chain, and lands on some entity or snippets likely to be answer.</li></ul><h3 id="2-Model-Details-1"><a href="#2-Model-Details-1" class="headerlink" title="2.Model Details"></a>2.Model Details</h3><h3 id="3-Experiments-1"><a href="#3-Experiments-1" class="headerlink" title="3.Experiments"></a>3.Experiments</h3><h2 id="Query-Focused-Extractor"><a href="#Query-Focused-Extractor" class="headerlink" title="Query Focused Extractor"></a>Query Focused Extractor</h2><blockquote><p>Answering while Summarizaing: Multi-task Learning for Multi-hop QA with Evidence Extraction<br>ACL,2019.<br>Kosuke Nishida.<br>NTT Media Intelligence Laboratories.</p></blockquote><h3 id="1-Motivation-2"><a href="#1-Motivation-2" class="headerlink" title="1.Motivation"></a>1.Motivation</h3><h3 id="2-Model-Details-2"><a href="#2-Model-Details-2" class="headerlink" title="2.Model Details"></a>2.Model Details</h3><h3 id="3-Experiments-2"><a href="#3-Experiments-2" class="headerlink" title="3.Experiments"></a>3.Experiments</h3><h2 id="Summary"><a href="#Summary" class="headerlink" title="Summary"></a>Summary</h2>]]></content>
       
       
       <categories>
@@ -55,9 +55,9 @@
             
             <tag> nlp </tag>
             
-            <tag> mrc </tag>
-            
             <tag> paper </tag>
+            
+            <tag> mrc </tag>
             
             <tag> multi-hop </tag>
             
@@ -88,9 +88,9 @@
             
             <tag> nlp </tag>
             
-            <tag> mrc </tag>
-            
             <tag> knowledge </tag>
+            
+            <tag> mrc </tag>
             
             <tag> reasoning </tag>
             
@@ -154,9 +154,9 @@
             
             <tag> nlp </tag>
             
-            <tag> mrc </tag>
-            
             <tag> paper </tag>
+            
+            <tag> mrc </tag>
             
         </tags>
       
@@ -183,9 +183,9 @@
             
             <tag> nlp </tag>
             
-            <tag> mrc </tag>
-            
             <tag> paper </tag>
+            
+            <tag> mrc </tag>
             
             <tag> research </tag>
             
@@ -214,9 +214,9 @@
             
             <tag> nlp </tag>
             
-            <tag> mrc </tag>
-            
             <tag> paper </tag>
+            
+            <tag> mrc </tag>
             
             <tag> research </tag>
             
@@ -276,11 +276,11 @@
             
             <tag> nlp </tag>
             
-            <tag> mrc </tag>
-            
             <tag> paper </tag>
             
             <tag> knowledge </tag>
+            
+            <tag> mrc </tag>
             
         </tags>
       
@@ -307,11 +307,11 @@
             
             <tag> nlp </tag>
             
-            <tag> mrc </tag>
-            
             <tag> paper </tag>
             
             <tag> knowledge </tag>
+            
+            <tag> mrc </tag>
             
             <tag> nli </tag>
             
@@ -340,9 +340,9 @@
             
             <tag> nlp </tag>
             
-            <tag> mrc </tag>
-            
             <tag> paper </tag>
+            
+            <tag> mrc </tag>
             
             <tag> model </tag>
             
@@ -371,9 +371,9 @@
             
             <tag> nlp </tag>
             
-            <tag> mrc </tag>
-            
             <tag> paper </tag>
+            
+            <tag> mrc </tag>
             
             <tag> multi-hop </tag>
             
@@ -441,9 +441,9 @@
             
             <tag> research </tag>
             
-            <tag> note </tag>
-            
             <tag> cs-know </tag>
+            
+            <tag> note </tag>
             
         </tags>
       
@@ -534,9 +534,9 @@
             
             <tag> nlp </tag>
             
-            <tag> mrc </tag>
-            
             <tag> paper </tag>
+            
+            <tag> mrc </tag>
             
             <tag> research </tag>
             
@@ -596,9 +596,9 @@
             
             <tag> nlp </tag>
             
-            <tag> mrc </tag>
-            
             <tag> paper </tag>
+            
+            <tag> mrc </tag>
             
             <tag> dataset </tag>
             
@@ -627,9 +627,9 @@
             
             <tag> nlp </tag>
             
-            <tag> mrc </tag>
-            
             <tag> paper </tag>
+            
+            <tag> mrc </tag>
             
             <tag> reasoning </tag>
             
@@ -658,9 +658,9 @@
             
             <tag> nlp </tag>
             
-            <tag> mrc </tag>
-            
             <tag> paper </tag>
+            
+            <tag> mrc </tag>
             
             <tag> nlu </tag>
             
@@ -815,11 +815,11 @@
             
             <tag> nlp </tag>
             
-            <tag> mrc </tag>
-            
             <tag> paper </tag>
             
             <tag> knowledge </tag>
+            
+            <tag> mrc </tag>
             
         </tags>
       
