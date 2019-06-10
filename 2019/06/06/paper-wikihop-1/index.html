@@ -75,7 +75,7 @@
 
 
 
-  <meta name="keywords" content="nlp,mrc,paper,multi-hop,gnn,">
+  <meta name="keywords" content="nlp,paper,mrc,multi-hop,gnn,">
 
 
 
@@ -87,14 +87,14 @@
 
 
 <meta name="description" content="WikiHop in QAngaroo benchmark is a dataset for Multi-hop Reading Comprehension Across Documents.Style: Multiple-Choice Reference papers on WikiHop task:   Neural models for reasoning over multiple men">
-<meta name="keywords" content="nlp,mrc,paper,multi-hop,gnn">
+<meta name="keywords" content="nlp,paper,mrc,multi-hop,gnn">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Recent Advances on Multi-Hop RC - WikiHop">
 <meta property="og:url" content="http://xingluxi.github.io/2019/06/06/paper-wikihop-1/index.html">
 <meta property="og:site_name" content="Luxi Xing - Blog">
 <meta property="og:description" content="WikiHop in QAngaroo benchmark is a dataset for Multi-hop Reading Comprehension Across Documents.Style: Multiple-Choice Reference papers on WikiHop task:   Neural models for reasoning over multiple men">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-06-10T08:12:25.363Z">
+<meta property="og:updated_time" content="2019-06-10T08:44:24.192Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Recent Advances on Multi-Hop RC - WikiHop">
 <meta name="twitter:description" content="WikiHop in QAngaroo benchmark is a dataset for Multi-hop Reading Comprehension Across Documents.Style: Multiple-Choice Reference papers on WikiHop task:   Neural models for reasoning over multiple men">
@@ -315,7 +315,7 @@
               
                 <span class="post-meta-item-text">Post modified&#58;</span>
               
-              <time title="Post modified" itemprop="dateModified" datetime="2019-06-10T16:12:25+08:00">
+              <time title="Post modified" itemprop="dateModified" datetime="2019-06-10T16:44:24+08:00">
                 2019-06-10
               </time>
             
@@ -370,7 +370,7 @@
                   <span class="post-meta-item-text">Words count in article&#58;</span>
                 
                 <span title="Words count in article">
-                  593
+                  966
                 </span>
               
 
@@ -386,7 +386,7 @@
                   <span class="post-meta-item-text">Reading time &asymp;</span>
                 
                 <span title="Reading time">
-                  3
+                  6
                 </span>
               
             </div>
@@ -467,20 +467,108 @@
 </li>
 </ul>
 <h3 id="2-Model-Details-1"><a href="#2-Model-Details-1" class="headerlink" title="2.Model Details"></a>2.Model Details</h3><ul>
-<li>evidence integration with graph network<ul>
+<li>Encoding: evidence integration with graph network<ul>
 <li>graph recurren network</li>
 <li>graph convolutional network</li>
 </ul>
 </li>
-<li>prediction: summing the probabilities over all occurrences of the same entity mention<ul>
-<li>$Pr_{\epsilon}=\frac{\sum_{k\in{C_q}}\alpha_k}{\sum_{k^{\prime} \in {C_q}} \alpha_{k^{\prime}}}$</li>
-<li>$\alpha_k = \frac{exp(e^k)}{\sum_{k^{\prime} \in C_q} exp(e^{k^{\prime}})}$</li>
+<li>Prediction: summing the probabilities over all occurrences of the same entity mention<ul>
+<li><script type="math/tex; mode=display">Pr_{\epsilon}=\frac{\sum_{k\in{C_q}}\alpha_k}{\sum_{k^{\prime} \in {C_q}} \alpha_{k^{\prime}}}</script></li>
+<li><script type="math/tex; mode=display">\alpha_k = \frac{exp(e^k)}{\sum_{k^{\prime} \in C_q} exp(e^{k^{\prime}})}</script></li>
 <li>$e^k$ is the representation of entity mention of $\epsilon_k$</li>
 </ul>
 </li>
 </ul>
-<h2 id="Path-based-Kundu-2018"><a href="#Path-based-Kundu-2018" class="headerlink" title="Path-based(Kundu.2018.)"></a>Path-based(Kundu.2018.)</h2><h3 id="1-Motivation-2"><a href="#1-Motivation-2" class="headerlink" title="1.Motivation"></a>1.Motivation</h3><h3 id="2-Model-Details-2"><a href="#2-Model-Details-2" class="headerlink" title="2.Model Details"></a>2.Model Details</h3><h2 id="BAG"><a href="#BAG" class="headerlink" title="BAG"></a>BAG</h2><h3 id="1-Motivation-3"><a href="#1-Motivation-3" class="headerlink" title="1.Motivation"></a>1.Motivation</h3><h3 id="2-Model-Details-3"><a href="#2-Model-Details-3" class="headerlink" title="2.Model Details"></a>2.Model Details</h3><ul>
-<li>graph construction<ul>
+<h2 id="Path-based-Kundu-2018"><a href="#Path-based-Kundu-2018" class="headerlink" title="Path-based(Kundu.2018.)"></a>Path-based(Kundu.2018.)</h2><h3 id="1-Motivation-2"><a href="#1-Motivation-2" class="headerlink" title="1.Motivation"></a>1.Motivation</h3><ul>
+<li>graph-based models only <strong>implicitly</strong> <strong>combine</strong> knowledge from all the passages<ul>
+<li>unable to provide explicit reasoning paths for the selected answer.</li>
+</ul>
+</li>
+</ul>
+<p>This work</p>
+<ul>
+<li>present a path-based reasoning approach for textual reading comprehension<ul>
+<li>generating potential paths across multiple passages</li>
+<li>extracting implicit relations along this path</li>
+<li>composing relations to encode each path</li>
+</ul>
+</li>
+</ul>
+<h3 id="2-Model-Details-2"><a href="#2-Model-Details-2" class="headerlink" title="2.Model Details"></a>2.Model Details</h3><ul>
+<li>Path Define:<ul>
+<li>only consider <strong>two-hop</strong> path: eg: $path_{kj}=h_e \rightarrow e_1 \rightarrow c_k$</li>
+<li>$e_1$: intermediate entity and can be extended to multi-hop</li>
+<li>an extracted path is <strong>a set of entity sequences</strong></li>
+</ul>
+</li>
+<li>Path Extraction: for each candidate<ul>
+<li>step #1: find a passage $P_1$ contains $h_e$ of the query</li>
+<li>step #2: find intermediate entities: all Named Entities and Noun Phrases that appear in the same sentence with $h_e$ or in the subsequent sentence</li>
+<li>step #3: find another passage $P_2$ containes any of the intermediate entities found in step#3</li>
+<li>step #4: check if passage $P_2$ contains any of the candidate answer choices</li>
+</ul>
+</li>
+<li>Path Encoding:<ul>
+<li>context-based path encoding<ul>
+<li>use the concatenation of the boundary vectors of the passage encoding as the location encoding vector of entity<ul>
+<li>$g_{e} = [s_{p_1,i_1};s_{p_1,i_2}]$</li>
+</ul>
+</li>
+<li>extract implicit relation with a feed forward layer<ul>
+<li>$r_{h_e,e_1}=FFL(g_{h_e}, g_{e_1})$</li>
+<li>as well as $r_{e_1^{\prime}, c_k}$</li>
+</ul>
+</li>
+<li>compose implicit relation vector with a feed forward layer<ul>
+<li>$x_{ctx}=FFL(r_{h_e,e_1}, r_{e_1^{\prime},c_k})$</li>
+</ul>
+</li>
+<li>feed forward layer $FFL(a,b)=tanh(aW_a + bW_b + bias)$</li>
+</ul>
+</li>
+<li>passage-based path encoding<ul>
+<li>question-weighted passage representation<ul>
+<li>query-aware passage representation: $S_p^1$ and $S_p^2$</li>
+</ul>
+</li>
+<li>aggregate passage representation: get single passage vector<ul>
+<li>self-attention</li>
+<li>$\tilde{s}_{p_1}$ and $\tilde{s}_{p_2}$ </li>
+</ul>
+</li>
+<li>$x_{psg} = FFL(\tilde{s}_{p_1}, \tilde{s}_{p_2})$</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Path Scorer:<ul>
+<li>context-based path scoring<ul>
+<li>$\tilde{q}=([q_0;q_L])W_q$</li>
+<li>$y_{ctx,q}=FFL(x_{ctx},\tilde{q})$</li>
+<li>$z_{ctx}=y_{ctx,q}W_{ctx}^T$</li>
+</ul>
+</li>
+<li>passage-based path scoring<ul>
+<li>self attention get single candidate answer choice vector $\tilde{c}_k$</li>
+<li>$z_{psg}=\tilde{c}_k x_{psg}^T$</li>
+</ul>
+</li>
+<li>unormalized score $z = z_{ctx} + z_{psg}$<ul>
+<li>softmax over all the paths and candidates get $score(path_{kj})$</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Prediction<ul>
+<li>$prob(c_k)=\sum_j score(path_{kj})$</li>
+</ul>
+</li>
+</ul>
+<h2 id="BAG"><a href="#BAG" class="headerlink" title="BAG"></a>BAG</h2><h3 id="1-Motivation-3"><a href="#1-Motivation-3" class="headerlink" title="1.Motivation"></a>1.Motivation</h3><ul>
+<li>comprehend the relationships of entities across documents before answering questions</li>
+</ul>
+<h3 id="2-Model-Details-3"><a href="#2-Model-Details-3" class="headerlink" title="2.Model Details"></a>2.Model Details</h3><ul>
+<li>Graph Construction<ul>
 <li>node: all mentions of candidates</li>
 <li>edge: undirected<ul>
 <li>1)cross-document edge</li>
@@ -505,7 +593,7 @@
 <li>directional computation is the same with BiDAF</li>
 </ul>
 </li>
-<li>prediction: the probability of each node becoming answer.<ul>
+<li>Prediction: the probability of each node becoming answer.<ul>
 <li>the probability of each candidate is the sum of all corresponding nodes.</li>
 </ul>
 </li>
@@ -641,9 +729,9 @@
           
             <a href="/tags/nlp/" rel="tag"><i class="fa fa-tag"></i> nlp</a>
           
-            <a href="/tags/mrc/" rel="tag"><i class="fa fa-tag"></i> mrc</a>
-          
             <a href="/tags/paper/" rel="tag"><i class="fa fa-tag"></i> paper</a>
+          
+            <a href="/tags/mrc/" rel="tag"><i class="fa fa-tag"></i> mrc</a>
           
             <a href="/tags/multi-hop/" rel="tag"><i class="fa fa-tag"></i> multi-hop</a>
           
