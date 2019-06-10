@@ -96,7 +96,7 @@
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://xingluxi.github.io/images/mrc-paper-hotpotqa/DFGN-graph.png">
 <meta property="og:image" content="http://xingluxi.github.io/images/mrc-paper-hotpotqa/DFGN-model.png">
-<meta property="og:updated_time" content="2019-06-10T16:47:14.557Z">
+<meta property="og:updated_time" content="2019-06-10T16:48:31.014Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Recent Advances on Multi-Hop RC - HotpotQA">
 <meta name="twitter:description" content="HotpotQA is a dataset for Diverse, Explainable Multi-hop Question Answering.Style: Extractive-based HotpotQA has 4 features, which can also be seen as challenges:  questions require finding and reason">
@@ -318,7 +318,7 @@
               
                 <span class="post-meta-item-text">Post modified&#58;</span>
               
-              <time title="Post modified" itemprop="dateModified" datetime="2019-06-11T00:47:14+08:00">
+              <time title="Post modified" itemprop="dateModified" datetime="2019-06-11T00:48:31+08:00">
                 2019-06-11
               </time>
             
@@ -518,8 +518,8 @@
 </ul>
 </li>
 <li>propagate information in graph by GAT (the more relevant to the query, the neighbor nodes receive more information from nearby)<ul>
-<li><script type="math/tex; mode=display">e^t_i = ReLu( \sum_{j\in B_i} \alpha_{j,i}^t h_j^t)</script><ul>
-<li><script type="math/tex; mode=display">h_i^t = U_t^ \tilde{e}_i^{t-1} + b_t</script></li>
+<li>$e^t_i = ReLu( \sum_{j\in B_i} \alpha_{j,i}^t h_j^t)$<ul>
+<li><script type="math/tex; mode=display">h_i^t = U_t \tilde{e}_i^{t-1} + b_t</script></li>
 <li><script type="math/tex; mode=display">\beta_{i,j}^t = LeakyReLu(W_t^T [h_i^t, h_j^t])</script></li>
 <li><script type="math/tex; mode=display">\alpha_{i,j}^t = \frac{exp(\beta_{i,j}^t)}{\sum_k exp(\beta_{i,k}^t)}</script></li>
 </ul>
