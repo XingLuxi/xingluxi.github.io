@@ -96,7 +96,7 @@
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://xingluxi.github.io/images/mrc-paper-hotpotqa/DFGN-graph.png">
 <meta property="og:image" content="http://xingluxi.github.io/images/mrc-paper-hotpotqa/DFGN-model.png">
-<meta property="og:updated_time" content="2019-06-10T16:49:27.376Z">
+<meta property="og:updated_time" content="2019-06-10T16:51:45.937Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Recent Advances on Multi-Hop RC - HotpotQA">
 <meta name="twitter:description" content="HotpotQA is a dataset for Diverse, Explainable Multi-hop Question Answering.Style: Extractive-based HotpotQA has 4 features, which can also be seen as challenges:  questions require finding and reason">
@@ -318,7 +318,7 @@
               
                 <span class="post-meta-item-text">Post modified&#58;</span>
               
-              <time title="Post modified" itemprop="dateModified" datetime="2019-06-11T00:49:27+08:00">
+              <time title="Post modified" itemprop="dateModified" datetime="2019-06-11T00:51:45+08:00">
                 2019-06-11
               </time>
             
@@ -373,7 +373,7 @@
                   <span class="post-meta-item-text">Words count in article&#58;</span>
                 
                 <span title="Words count in article">
-                  732
+                  780
                 </span>
               
 
@@ -551,6 +551,14 @@
 <li>start position of answer span</li>
 <li>end position of answer span</li>
 <li>answer type</li>
+</ul>
+</li>
+<li>use four LSTMs to get final representation<ul>
+<li>$O_{sup} = F_0 (C^t)$</li>
+<li>$O_{start} = F_1([C^t, O_{sup}])$</li>
+<li>$O_{end} = F_2([C^t, O_{sup}, O_{start}])$</li>
+<li>$O_{type} = F_3([C^t, O_{sup}, O_{end}])$</li>
+<li>$L = L_{start} + L_{end} + \lambda_s L_{sup} + \lambda_t L_{type}$</li>
 </ul>
 </li>
 </ul>
