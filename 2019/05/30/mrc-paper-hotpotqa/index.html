@@ -75,7 +75,7 @@
 
 
 
-  <meta name="keywords" content="nlp,mrc,paper,multi-hop,gnn,">
+  <meta name="keywords" content="nlp,paper,mrc,multi-hop,gnn,">
 
 
 
@@ -87,7 +87,7 @@
 
 
 <meta name="description" content="HotpotQA is a dataset for Diverse, Explainable Multi-hop Question Answering.Style: Extractive-based HotpotQA has 4 features, which can also be seen as challenges:  questions require finding and reason">
-<meta name="keywords" content="nlp,mrc,paper,multi-hop,gnn">
+<meta name="keywords" content="nlp,paper,mrc,multi-hop,gnn">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Recent Advances on Multi-Hop RC - HotpotQA">
 <meta property="og:url" content="http://xingluxi.github.io/2019/05/30/mrc-paper-hotpotqa/index.html">
@@ -96,7 +96,7 @@
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://xingluxi.github.io/images/mrc-paper-hotpotqa/DFGN-graph.png">
 <meta property="og:image" content="http://xingluxi.github.io/images/mrc-paper-hotpotqa/DFGN-model.png">
-<meta property="og:updated_time" content="2019-06-10T16:38:40.710Z">
+<meta property="og:updated_time" content="2019-06-10T16:40:08.890Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Recent Advances on Multi-Hop RC - HotpotQA">
 <meta name="twitter:description" content="HotpotQA is a dataset for Diverse, Explainable Multi-hop Question Answering.Style: Extractive-based HotpotQA has 4 features, which can also be seen as challenges:  questions require finding and reason">
@@ -318,7 +318,7 @@
               
                 <span class="post-meta-item-text">Post modified&#58;</span>
               
-              <time title="Post modified" itemprop="dateModified" datetime="2019-06-11T00:38:40+08:00">
+              <time title="Post modified" itemprop="dateModified" datetime="2019-06-11T00:40:08+08:00">
                 2019-06-11
               </time>
             
@@ -373,7 +373,7 @@
                   <span class="post-meta-item-text">Words count in article&#58;</span>
                 
                 <span title="Words count in article">
-                  609
+                  629
                 </span>
               
 
@@ -510,7 +510,11 @@
 <li>dynamic graph attention<ul>
 <li>soft-mask: signify the start entities in the t-th reasoning step<ul>
 <li>query vector $\tilde{q}^{t-1} = MeanPooling(Q^{t-1})$</li>
-<li>masked entity $\tilde{E}^{t-1} = [m_1^t e_1^{t-1},…]$</li>
+<li>masked entity $\tilde{E}^{t-1} = [m_1^t e_1^{t-1},…]$<ul>
+<li><script type="math/tex; mode=display">\gamma_i^t = \tilde{q}^{t-1} V^t e_t^{t-1} / \sqrt{d_2}</script></li>
+<li><script type="math/tex; mode=display">m^t = \sigma([\gamma_1^t,...,\gamma_N^t])</script></li>
+</ul>
+</li>
 </ul>
 </li>
 <li>propagate information in graph by GAT (the more relevant to the query, the neighbor nodes receive more information from nearby)<ul>
@@ -577,9 +581,9 @@
           
             <a href="/tags/nlp/" rel="tag"><i class="fa fa-tag"></i> nlp</a>
           
-            <a href="/tags/mrc/" rel="tag"><i class="fa fa-tag"></i> mrc</a>
-          
             <a href="/tags/paper/" rel="tag"><i class="fa fa-tag"></i> paper</a>
+          
+            <a href="/tags/mrc/" rel="tag"><i class="fa fa-tag"></i> mrc</a>
           
             <a href="/tags/multi-hop/" rel="tag"><i class="fa fa-tag"></i> multi-hop</a>
           
