@@ -75,7 +75,7 @@
 
 
 
-  <meta name="keywords" content="nlp,paper,mrc,multi-hop,gnn,">
+  <meta name="keywords" content="nlp,mrc,paper,multi-hop,gnn,">
 
 
 
@@ -87,17 +87,19 @@
 
 
 <meta name="description" content="HotpotQA is a dataset for Diverse, Explainable Multi-hop Question Answering.Style: Extractive-based HotpotQA has 4 features, which can also be seen as challenges:  questions require finding and reason">
-<meta name="keywords" content="nlp,paper,mrc,multi-hop,gnn">
+<meta name="keywords" content="nlp,mrc,paper,multi-hop,gnn">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Recent Advances on Multi-Hop RC - HotpotQA">
 <meta property="og:url" content="http://xingluxi.github.io/2019/05/30/mrc-paper-hotpotqa/index.html">
 <meta property="og:site_name" content="Luxi Xing - Blog">
 <meta property="og:description" content="HotpotQA is a dataset for Diverse, Explainable Multi-hop Question Answering.Style: Extractive-based HotpotQA has 4 features, which can also be seen as challenges:  questions require finding and reason">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-06-10T16:10:05.555Z">
+<meta property="og:image" content="http://xingluxi.github.io/images/mrc-paper-hotpotqa/DFGN-graph.png">
+<meta property="og:updated_time" content="2019-06-10T16:23:46.093Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Recent Advances on Multi-Hop RC - HotpotQA">
 <meta name="twitter:description" content="HotpotQA is a dataset for Diverse, Explainable Multi-hop Question Answering.Style: Extractive-based HotpotQA has 4 features, which can also be seen as challenges:  questions require finding and reason">
+<meta name="twitter:image" content="http://xingluxi.github.io/images/mrc-paper-hotpotqa/DFGN-graph.png">
 
 
 
@@ -315,7 +317,7 @@
               
                 <span class="post-meta-item-text">Post modified&#58;</span>
               
-              <time title="Post modified" itemprop="dateModified" datetime="2019-06-11T00:10:05+08:00">
+              <time title="Post modified" itemprop="dateModified" datetime="2019-06-11T00:23:46+08:00">
                 2019-06-11
               </time>
             
@@ -370,7 +372,7 @@
                   <span class="post-meta-item-text">Words count in article&#58;</span>
                 
                 <span title="Words count in article">
-                  378
+                  413
                 </span>
               
 
@@ -445,7 +447,7 @@
 <h3 id="2-Model-Details"><a href="#2-Model-Details" class="headerlink" title="2.Model Details"></a>2.Model Details</h3><h3 id="3-Experiments"><a href="#3-Experiments" class="headerlink" title="3.Experiments"></a>3.Experiments</h3><h2 id="Dynamically-Fused-Graph-Network"><a href="#Dynamically-Fused-Graph-Network" class="headerlink" title="Dynamically Fused Graph Network"></a>Dynamically Fused Graph Network</h2><blockquote>
 <p>Dynamically Fused Graph Network for Multi-Hop Reasoning.<br>ACL,2019.<br>Yunxuan Xiao<br>Shanghai Jiao Tong University. (ByteDance AT Lab)</p>
 </blockquote>
-<h3 id="1-Motivation-1"><a href="#1-Motivation-1" class="headerlink" title="1.Motivation"></a>1.Motivation</h3><p><i class="fa fa-thumbtack"></i>Challenges:</p>
+<h3 id="1-Motivation-1"><a href="#1-Motivation-1" class="headerlink" title="1.Motivation"></a>1.Motivation</h3><p><i class="fa fa-thumbtack"></i> Challenges:</p>
 <ul>
 <li>1) filtering out noises from multiple paragraphs and extracting useful information<ul>
 <li>previous work: build entity graph from input paragraphs and apply GNN to aggregate the information</li>
@@ -457,15 +459,27 @@
 </ul>
 </li>
 </ul>
-<p><i class="fa fa-highlighter"></i>This work:</p>
+<p><i class="fa fa-highlighter"></i> This work:</p>
 <ul>
-<li>intuition: mimic human reasoning process in multi-hop QA</li>
+<li>intuition: mimic human reasoning process in multi-hop QA<ul>
 <li>start from an entity of interest in the query</li>
 <li>focus on the words surrounding the start entities</li>
 <li>connect to some related entity in the neighborhood guided by the question</li>
 <li>repeat the step to form a reasoning chain, and lands on some entity or snippets likely to be answer.</li>
 </ul>
-<h3 id="2-Model-Details-1"><a href="#2-Model-Details-1" class="headerlink" title="2.Model Details"></a>2.Model Details</h3><h3 id="3-Experiments-1"><a href="#3-Experiments-1" class="headerlink" title="3.Experiments"></a>3.Experiments</h3><h2 id="Query-Focused-Extractor"><a href="#Query-Focused-Extractor" class="headerlink" title="Query Focused Extractor"></a>Query Focused Extractor</h2><blockquote>
+</li>
+<li>consturcts <strong>dynamic</strong> entity graph</li>
+<li>propagating information on dynamic entity graph under soft-mask constraint</li>
+<li><strong>bidirectional fusion</strong>:<ul>
+<li>aggregate information from document to the entity graph and entity graph to document</li>
+</ul>
+</li>
+</ul>
+<h3 id="2-Model-Details-1"><a href="#2-Model-Details-1" class="headerlink" title="2.Model Details"></a>2.Model Details</h3><h3 id="2-1-Graph-Constructing"><a href="#2-1-Graph-Constructing" class="headerlink" title="2.1 Graph Constructing"></a>2.1 Graph Constructing</h3><p>node:<br>edge:</p>
+<ul>
+<li><img src="/../images/mrc-paper-hotpotqa/DFGN-graph.png" alt="dfgn-graph"></li>
+</ul>
+<h3 id="3-Experiments-1"><a href="#3-Experiments-1" class="headerlink" title="3.Experiments"></a>3.Experiments</h3><h2 id="Query-Focused-Extractor"><a href="#Query-Focused-Extractor" class="headerlink" title="Query Focused Extractor"></a>Query Focused Extractor</h2><blockquote>
 <p>Answering while Summarizaing: Multi-task Learning for Multi-hop QA with Evidence Extraction<br>ACL,2019.<br>Kosuke Nishida.<br>NTT Media Intelligence Laboratories.</p>
 </blockquote>
 <h3 id="1-Motivation-2"><a href="#1-Motivation-2" class="headerlink" title="1.Motivation"></a>1.Motivation</h3><h3 id="2-Model-Details-2"><a href="#2-Model-Details-2" class="headerlink" title="2.Model Details"></a>2.Model Details</h3><h3 id="3-Experiments-2"><a href="#3-Experiments-2" class="headerlink" title="3.Experiments"></a>3.Experiments</h3><h2 id="Summary"><a href="#Summary" class="headerlink" title="Summary"></a>Summary</h2>
@@ -518,9 +532,9 @@
           
             <a href="/tags/nlp/" rel="tag"><i class="fa fa-tag"></i> nlp</a>
           
-            <a href="/tags/paper/" rel="tag"><i class="fa fa-tag"></i> paper</a>
-          
             <a href="/tags/mrc/" rel="tag"><i class="fa fa-tag"></i> mrc</a>
+          
+            <a href="/tags/paper/" rel="tag"><i class="fa fa-tag"></i> paper</a>
           
             <a href="/tags/multi-hop/" rel="tag"><i class="fa fa-tag"></i> multi-hop</a>
           
@@ -710,7 +724,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Task-Defination"><span class="nav-text">Task Defination</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Cognitive-Graph-QA"><span class="nav-text">Cognitive Graph QA</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-Motivation"><span class="nav-text">1.Motivation</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-Model-Details"><span class="nav-text">2.Model Details</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-Experiments"><span class="nav-text">3.Experiments</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Dynamically-Fused-Graph-Network"><span class="nav-text">Dynamically Fused Graph Network</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-Motivation-1"><span class="nav-text">1.Motivation</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-Model-Details-1"><span class="nav-text">2.Model Details</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-Experiments-1"><span class="nav-text">3.Experiments</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Query-Focused-Extractor"><span class="nav-text">Query Focused Extractor</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-Motivation-2"><span class="nav-text">1.Motivation</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-Model-Details-2"><span class="nav-text">2.Model Details</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-Experiments-2"><span class="nav-text">3.Experiments</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Summary"><span class="nav-text">Summary</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Task-Defination"><span class="nav-text">Task Defination</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Cognitive-Graph-QA"><span class="nav-text">Cognitive Graph QA</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-Motivation"><span class="nav-text">1.Motivation</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-Model-Details"><span class="nav-text">2.Model Details</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-Experiments"><span class="nav-text">3.Experiments</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Dynamically-Fused-Graph-Network"><span class="nav-text">Dynamically Fused Graph Network</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-Motivation-1"><span class="nav-text">1.Motivation</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-Model-Details-1"><span class="nav-text">2.Model Details</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-Graph-Constructing"><span class="nav-text">2.1 Graph Constructing</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-Experiments-1"><span class="nav-text">3.Experiments</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Query-Focused-Extractor"><span class="nav-text">Query Focused Extractor</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-Motivation-2"><span class="nav-text">1.Motivation</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-Model-Details-2"><span class="nav-text">2.Model Details</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-Experiments-2"><span class="nav-text">3.Experiments</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Summary"><span class="nav-text">Summary</span></a></li></ol></div>
             
 
           </div>
