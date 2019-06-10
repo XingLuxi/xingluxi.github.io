@@ -94,7 +94,7 @@
 <meta property="og:site_name" content="Luxi Xing - Blog">
 <meta property="og:description" content="WikiHop in QAngaroo benchmark is a dataset for Multi-hop Reading Comprehension Across Documents.Style: Multiple-Choice Reference papers on WikiHop task:   Neural models for reasoning over multiple men">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-06-10T07:40:32.069Z">
+<meta property="og:updated_time" content="2019-06-10T07:58:47.925Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Recent Advances on Multi-Hop RC - WikiHop">
 <meta name="twitter:description" content="WikiHop in QAngaroo benchmark is a dataset for Multi-hop Reading Comprehension Across Documents.Style: Multiple-Choice Reference papers on WikiHop task:   Neural models for reasoning over multiple men">
@@ -315,7 +315,7 @@
               
                 <span class="post-meta-item-text">Post modified&#58;</span>
               
-              <time title="Post modified" itemprop="dateModified" datetime="2019-06-10T15:40:32+08:00">
+              <time title="Post modified" itemprop="dateModified" datetime="2019-06-10T15:58:47+08:00">
                 2019-06-10
               </time>
             
@@ -370,7 +370,7 @@
                   <span class="post-meta-item-text">Words count in article&#58;</span>
                 
                 <span title="Words count in article">
-                  374
+                  500
                 </span>
               
 
@@ -386,7 +386,7 @@
                   <span class="post-meta-item-text">Reading time &asymp;</span>
                 
                 <span title="Reading time">
-                  2
+                  3
                 </span>
               
             </div>
@@ -436,10 +436,13 @@
 </blockquote>
 <h3 id="1-Motivation"><a href="#1-Motivation" class="headerlink" title="1.Motivation"></a>1.Motivation</h3><ul>
 <li>existing RNN layer are biased towards short-term dependencies</li>
+</ul>
+<p>This work:</p>
+<ul>
 <li>adapt a standard RNN layer by introducing a bias towards <strong>coreferent recency</strong></li>
 </ul>
 <h3 id="2-Model-Details"><a href="#2-Model-Details" class="headerlink" title="2.Model Details"></a>2.Model Details</h3><ul>
-<li>coreference relationships between words</li>
+<li>coreference relationships between words (Directed acyclic graph(DAG) style graph)</li>
 <li>introduce a term in the update equations for GRU which depends on the hidden state of the coreferent antecedent of the current token/word<ul>
 <li>hidden states are propagated along coreference chains and the original sequence in parallel</li>
 </ul>
@@ -448,7 +451,35 @@
 <h2 id="MHQA-GCN-GRN"><a href="#MHQA-GCN-GRN" class="headerlink" title="MHQA-GCN/GRN"></a>MHQA-GCN/GRN</h2><blockquote>
 <p>Exploring graph-structured passage representation for multihop reading comprehension with graph neural networks.<br>2018.<br>Linfeng Song. (Yue Zhang)<br>University of Rochester. (Westlake University)</p>
 </blockquote>
-<h3 id="1-Motivation-1"><a href="#1-Motivation-1" class="headerlink" title="1.Motivation"></a>1.Motivation</h3><h3 id="2-Model-Details-1"><a href="#2-Model-Details-1" class="headerlink" title="2.Model Details"></a>2.Model Details</h3><h2 id="Path-based-Kundu-2018"><a href="#Path-based-Kundu-2018" class="headerlink" title="Path-based(Kundu.2018.)"></a>Path-based(Kundu.2018.)</h2><h3 id="1-Motivation-2"><a href="#1-Motivation-2" class="headerlink" title="1.Motivation"></a>1.Motivation</h3><h3 id="2-Model-Details-2"><a href="#2-Model-Details-2" class="headerlink" title="2.Model Details"></a>2.Model Details</h3><h2 id="BAG"><a href="#BAG" class="headerlink" title="BAG"></a>BAG</h2><h3 id="1-Motivation-3"><a href="#1-Motivation-3" class="headerlink" title="1.Motivation"></a>1.Motivation</h3><h3 id="2-Model-Details-3"><a href="#2-Model-Details-3" class="headerlink" title="2.Model Details"></a>2.Model Details</h3><h2 id="Entity-GCN"><a href="#Entity-GCN" class="headerlink" title="Entity-GCN"></a>Entity-GCN</h2><h3 id="1-Motivation-4"><a href="#1-Motivation-4" class="headerlink" title="1.Motivation"></a>1.Motivation</h3><h3 id="2-Model-Details-4"><a href="#2-Model-Details-4" class="headerlink" title="2.Model Details"></a>2.Model Details</h3><h2 id="Heterogeneous-Document-Entity"><a href="#Heterogeneous-Document-Entity" class="headerlink" title="Heterogeneous Document-Entity"></a>Heterogeneous Document-Entity</h2><h3 id="1-Motivation-5"><a href="#1-Motivation-5" class="headerlink" title="1.Motivation"></a>1.Motivation</h3><h3 id="2-Model-Details-5"><a href="#2-Model-Details-5" class="headerlink" title="2.Model Details"></a>2.Model Details</h3><h2 id="Summary"><a href="#Summary" class="headerlink" title="Summary"></a>Summary</h2><ul>
+<h3 id="1-Motivation-1"><a href="#1-Motivation-1" class="headerlink" title="1.Motivation"></a>1.Motivation</h3><ul>
+<li>local coreference information is limited in providing information for rich inference and global evidence</li>
+</ul>
+<p>This work:</p>
+<ul>
+<li>form more complex graphs to better connecting global evidence</li>
+<li>considering two more types of edges in addition to coreference<ul>
+<li>same entity mentions (<strong>cross-document</strong>)</li>
+<li>window-typed (<strong>within-document</strong>)<ul>
+<li>two mentions of different entities within a context window</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="2-Model-Details-1"><a href="#2-Model-Details-1" class="headerlink" title="2.Model Details"></a>2.Model Details</h3><ul>
+<li>evidence integration with graph network<ul>
+<li>graph recurren network</li>
+<li>graph convolutional network</li>
+</ul>
+</li>
+<li>prediction: summing the probabilities over all occurrences of the same entity mention<ul>
+<li>$Pr_{\epsilon}=\frac{\sum_{k\in{C_q}}\alpha_k}{\sum_{k^{\prime} \in {C_q}} \alpha_{k^{\prime}}}$</li>
+<li>$\alpha_k = \frac{exp(e^k)}{\sum_{k^{\prime} \in C_q} exp(e^{k^{\prime}})}$</li>
+<li>$e^k$ is the representation of entity mention of $\epsilon_k$</li>
+</ul>
+</li>
+</ul>
+<h2 id="Path-based-Kundu-2018"><a href="#Path-based-Kundu-2018" class="headerlink" title="Path-based(Kundu.2018.)"></a>Path-based(Kundu.2018.)</h2><h3 id="1-Motivation-2"><a href="#1-Motivation-2" class="headerlink" title="1.Motivation"></a>1.Motivation</h3><h3 id="2-Model-Details-2"><a href="#2-Model-Details-2" class="headerlink" title="2.Model Details"></a>2.Model Details</h3><h2 id="BAG"><a href="#BAG" class="headerlink" title="BAG"></a>BAG</h2><h3 id="1-Motivation-3"><a href="#1-Motivation-3" class="headerlink" title="1.Motivation"></a>1.Motivation</h3><h3 id="2-Model-Details-3"><a href="#2-Model-Details-3" class="headerlink" title="2.Model Details"></a>2.Model Details</h3><h2 id="Entity-GCN"><a href="#Entity-GCN" class="headerlink" title="Entity-GCN"></a>Entity-GCN</h2><h3 id="1-Motivation-4"><a href="#1-Motivation-4" class="headerlink" title="1.Motivation"></a>1.Motivation</h3><h3 id="2-Model-Details-4"><a href="#2-Model-Details-4" class="headerlink" title="2.Model Details"></a>2.Model Details</h3><h2 id="Heterogeneous-Document-Entity"><a href="#Heterogeneous-Document-Entity" class="headerlink" title="Heterogeneous Document-Entity"></a>Heterogeneous Document-Entity</h2><h3 id="1-Motivation-5"><a href="#1-Motivation-5" class="headerlink" title="1.Motivation"></a>1.Motivation</h3><h3 id="2-Model-Details-5"><a href="#2-Model-Details-5" class="headerlink" title="2.Model Details"></a>2.Model Details</h3><h2 id="Summary"><a href="#Summary" class="headerlink" title="Summary"></a>Summary</h2><ul>
 <li>official leaderboard: <a href="http://qangaroo.cs.ucl.ac.uk/leaderboard.html" target="_blank" rel="noopener">http://qangaroo.cs.ucl.ac.uk/leaderboard.html</a></li>
 </ul>
 <div class="table-container">
