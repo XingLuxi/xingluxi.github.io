@@ -22,9 +22,9 @@
             
             <tag> nlp </tag>
             
-            <tag> mrc </tag>
-            
             <tag> paper </tag>
+            
+            <tag> mrc </tag>
             
             <tag> multi-hop </tag>
             
@@ -41,7 +41,7 @@
       <link href="/2019/05/30/mrc-paper-hotpotqa/"/>
       <url>/2019/05/30/mrc-paper-hotpotqa/</url>
       
-        <content type="html"><![CDATA[<p><strong>HotpotQA</strong> is a dataset for <strong>Diverse</strong>, <strong>Explainable</strong> <strong>Multi-hop</strong> Question Answering.<br>Style: Extractive-based</p><p>HotpotQA has 4 features, which can also be seen as challenges:</p><ul><li>questions require finding and reasoning over multiple supporting documents to answer</li><li>questions are diverse and not constrained to any pre-existing knowledge</li><li>contains two types of questions: <ul><li>1.<strong>bridge</strong></li><li>2.<strong>comparison</strong> (factoid comparision questions)</li></ul></li><li>provides sentence-level supporting facts required for reasoning<ul><li>introduces the <strong>strong supervision</strong> for reasoning and make the final predictions <strong>explainable</strong></li><li>(can form a reasoning chain through the support facts)</li></ul></li></ul><p>Reference papers on HotpotQA task:</p><blockquote><ol><li>Cognitive Graph for Multi-Hop Reading Comprehension at Scale. ACL, 2019.</li><li>Dynamically Fused Graph Network for Multi-Hop Reasoning. ACL, 2019.</li><li>Answering while Summarizing: Multi-task Learning for Multi-Hop QA with Evidence Extraction. ACL, 2019.</li><li>Compositional Questions Do Not Necessitate Multi-hop Reasoning. ACL,2019. (short)</li><li>Multi-hop Reading Comprehension through Question Decomposition and Rescoring. ACL,2019.</li></ol></blockquote><h2 id="Task-Defination"><a href="#Task-Defination" class="headerlink" title="Task Defination"></a>Task Defination</h2><p>Input:</p><ul><li>query</li><li>$N_p = 10$ paragraphs</li></ul><p>Output</p><ul><li>answer span</li><li>supprot facts (sentence), which can be regarded as the supervised signal during training</li></ul><h2 id="Cognitive-Graph-QA"><a href="#Cognitive-Graph-QA" class="headerlink" title="Cognitive Graph QA"></a>Cognitive Graph QA</h2><blockquote><p>Cognitive Graph for Multi-Hop Reading Comprehension at Scale.<br>ACL, 2019.<br>Ming Ding (Chang Zhou)<br>THU (DAMO, Alibaba)</p></blockquote><h3 id="1-Motivation"><a href="#1-Motivation" class="headerlink" title="1.Motivation"></a>1.Motivation</h3><p>Dual Process Theory from the cognitive process of humans:</p><ul><li>System1 first retrieve relevant information following attention via an <strong>implicit, unconscious, intuitive</strong> process<ul><li>efficiently provides resources according to requests</li></ul></li><li>System2 conduct <strong>explicit, conscious, controllable</strong> reasoning process based on the result of System1<ul><li>enable diving deeper into relational information by performing sequential thinking in the working memory</li><li>slower but human-unique rationality</li></ul></li><li>For complex reasoning, two systems are coordinated to perform fast and slow thinking iteratively</li></ul><p>This work:</p><ul><li>System1 extracts question-relevant entities and answer candidates from paragraphs and encodes their semantic information<ul><li>Extracted entities are organized as a cognitive graph —&gt; working memory</li></ul></li><li>System2 conducts the reasoning procedure over the graph, and collects clues to guide System 1 to better extract next-hop entities.</li><li>iterate until all possible answers are found, and then the final answer is chosen based on reasoning results from System 2.</li></ul><h3 id="2-Model-Details"><a href="#2-Model-Details" class="headerlink" title="2.Model Details"></a>2.Model Details</h3><p>Algorithm of Cognitive Graph QA</p><ul><li><img src="/images/mrc-paper-hotpotqa/Cog-algo.png" alt="alog"></li></ul><p>Model Overview</p><ul><li><img src="/images/mrc-paper-hotpotqa/Cog-model.png" alt="model"></li><li><img src="/images/mrc-paper-hotpotqa/Cog-model.png" alt="model"></li></ul><h3 id="3-Experiments"><a href="#3-Experiments" class="headerlink" title="3.Experiments"></a>3.Experiments</h3><p>case study</p><ul><li><img src="/images/mrc-paper-hotpotqa/Cog-case.png" alt="case-study"></li></ul><h2 id="Dynamically-Fused-Graph-Network"><a href="#Dynamically-Fused-Graph-Network" class="headerlink" title="Dynamically Fused Graph Network"></a>Dynamically Fused Graph Network</h2><blockquote><p>Dynamically Fused Graph Network for Multi-Hop Reasoning.<br>ACL,2019.<br>Yunxuan Xiao<br>Shanghai Jiao Tong University. (ByteDance AT Lab)</p></blockquote><h3 id="1-Motivation-1"><a href="#1-Motivation-1" class="headerlink" title="1.Motivation"></a>1.Motivation</h3><p><i class="fa fa-thumbtack"></i> Challenges:</p><ul><li>1) filtering out noises from multiple paragraphs and extracting useful information<ul><li>previous work: build entity graph from input paragraphs and apply GNN to aggregate the information</li><li>shortcomings: static global entity graph of each QA pair —&gt; <strong>implicit reasoning, lack of explainability</strong></li></ul></li><li>2) aggregate document information to an entity graph and answers are then <strong>directly</strong> selected on entities of the entity graph<ul><li>shortcomings: answers may not reside in entities of the extracted entity graph</li></ul></li></ul><p><i class="fa fa-highlighter"></i> This work:</p><ul><li>intuition: mimic human reasoning process in multi-hop QA<ul><li>start from an entity of interest in the query</li><li>focus on the words surrounding the start entities</li><li>connect to some related entity in the neighborhood guided by the question</li><li>repeat the step to form a reasoning chain, and lands on some entity or snippets likely to be answer.</li></ul></li><li>consturcts <strong>dynamic</strong> entity graph</li><li>propagating information on dynamic entity graph under soft-mask constraint</li><li><strong>bidirectional fusion</strong>:<ul><li>aggregate information from document to the entity graph and entity graph to document</li></ul></li></ul><h3 id="2-Model-Details-1"><a href="#2-Model-Details-1" class="headerlink" title="2.Model Details"></a>2.Model Details</h3><h3 id="2-1-Graph-Constructing"><a href="#2-1-Graph-Constructing" class="headerlink" title="2.1 Graph Constructing"></a>2.1 Graph Constructing</h3><p>node: POL (<code>Persion</code>, <code>Organization</code>, <code>Location</code>) entities<br>edge:</p><ul><li>1) sentence-level: co-occurence</li><li>2) context-level: coreference</li><li>3) paragraph-level: link with central entities extracted from title sentence of each paragraph</li></ul><p><img src="/images/mrc-paper-hotpotqa/DFGN-graph.png" alt="dfgn-graph"></p><h3 id="2-2-Model"><a href="#2-2-Model" class="headerlink" title="2.2 Model"></a>2.2 Model</h3><p><img src="/images/mrc-paper-hotpotqa/DFGN-model.png" alt="dfgn-model"></p><p>Paragraph Selector</p><ul><li>use BERT sentence classification: [Q , Pi]</li><li>concat all selected Pi —&gt; C</li></ul><p>Encoder</p><ul><li>use BERT encoding concatenating of query and context performs better</li><li>output:<ul><li>query $Q_0 \in \mathbb{R}^{L\times d_2}$</li><li>context $C_0 \in \mathbb{R}^{M\times d_2}$</li></ul></li></ul><p><strong>Fusion Block</strong></p><ul><li>document to graph<ul><li>binary Matrix $M \in \mathbb{R}^{M \times N}$ : get text span associated with an entity</li><li>entity embedding: mean-max pooling $E_{t-1} = [e_{t-1,1},…,e_{t-1,N}] \in \mathbb{R}^{2d_2 \times N}$</li></ul></li><li>dynamic graph attention<ul><li>soft-mask: signify the start entities in the t-th reasoning step<ul><li>query vector $\tilde{q}^{t-1} = MeanPooling(Q^{t-1})$</li><li>masked entity $\tilde{E}^{t-1} = [m_1^t e_1^{t-1},…]$<ul><li><script type="math/tex; mode=display">\gamma_i^t = \tilde{q}^{t-1} V^t e_t^{t-1} / \sqrt{d_2}</script></li><li><script type="math/tex; mode=display">m^t = \sigma([\gamma_1^t,...,\gamma_N^t])</script></li></ul></li></ul></li><li>propagate information in graph by GAT (the more relevant to the query, the neighbor nodes receive more information from nearby)<ul><li>$e^t_i = ReLu( \sum_{j\in B_i} \alpha_{j,i}^t h_j^t)$<ul><li><script type="math/tex; mode=display">h_i^t = U_t \tilde{e}_i^{t-1} + b_t</script></li><li><script type="math/tex; mode=display">\beta_{i,j}^t = LeakyReLu(W_t^T [h_i^t, h_j^t])</script></li><li><script type="math/tex; mode=display">\alpha_{i,j}^t = \frac{exp(\beta_{i,j}^t)}{\sum_k exp(\beta_{i,k}^t)}</script></li></ul></li><li>$E_t = [e_1^t,…,e_N^t]$</li></ul></li></ul></li><li>updating query<ul><li>$Q^t = BiAttention(Q^{t-1}, E^t)$</li></ul></li><li>graph to document<ul><li>issue: the unrestricted answer still cannot be back traced</li><li>keep information flowing from entity back to tokens in the context<ul><li>the same matrix $M$</li><li>update the context embedding</li></ul></li><li>$C^t = LSTM( [C^{t-1}, {ME^t}^T] ) \in \mathbb{R}^{M\times d_2}$</li></ul></li></ul><p>Prediction Layer</p><ul><li>4 targets<ul><li>supporting sentences</li><li>start position of answer span</li><li>end position of answer span</li><li>answer type</li></ul></li><li>use four LSTMs to get final representation<ul><li>$O_{sup} = F_0 (C^t)$</li><li>$O_{start} = F_1([C^t, O_{sup}])$</li><li>$O_{end} = F_2([C^t, O_{sup}, O_{start}])$</li><li>$O_{type} = F_3([C^t, O_{sup}, O_{end}])$</li><li>$L = L_{start} + L_{end} + \lambda_s L_{sup} + \lambda_t L_{type}$</li></ul></li></ul><h3 id="3-Experiments-1"><a href="#3-Experiments-1" class="headerlink" title="3.Experiments"></a>3.Experiments</h3><h2 id="Query-Focused-Extractor"><a href="#Query-Focused-Extractor" class="headerlink" title="Query Focused Extractor"></a>Query Focused Extractor</h2><blockquote><p>Answering while Summarizaing: Multi-task Learning for Multi-hop QA with Evidence Extraction<br>ACL,2019.<br>Kosuke Nishida.<br>NTT Media Intelligence Laboratories.</p></blockquote><h3 id="1-Motivation-2"><a href="#1-Motivation-2" class="headerlink" title="1.Motivation"></a>1.Motivation</h3><h3 id="2-Model-Details-2"><a href="#2-Model-Details-2" class="headerlink" title="2.Model Details"></a>2.Model Details</h3><h3 id="3-Experiments-2"><a href="#3-Experiments-2" class="headerlink" title="3.Experiments"></a>3.Experiments</h3><h2 id="DecompRC"><a href="#DecompRC" class="headerlink" title="DecompRC"></a>DecompRC</h2><blockquote><p>Multi-hop Reading Comprehension through Question Decomposition and Rescoring<br>ACL,2019.<br>Sewon Min.<br>University of Washington. AI2.</p></blockquote><h3 id="1-Motivation-3"><a href="#1-Motivation-3" class="headerlink" title="1.Motivation"></a>1.Motivation</h3><ul><li>decomposes a compositional question into simpler sub-questions that can be answered by off-the-shelf single-hop RC models<ul><li>inspired by the idea of compositionality from semantic parsing</li></ul></li></ul><h3 id="2-Model-Details-3"><a href="#2-Model-Details-3" class="headerlink" title="2.Model Details"></a>2.Model Details</h3><p>3 step process:</p><ul><li>decomposes the original, multi-hop question into several single-hop sub-questions according to a few reasoning types in parallel, based on span predictions.</li><li>for every reasoning types D ECOMP RC leverages a single-hop reading comprehension model to answer each sub-question, and combines the answers according to the reasoning type.</li><li>leverages a decomposition scorer to judge which decomposition is the most suitable, and outputs the answer from that decomposition as the ﬁnal answer.</li></ul><h2 id="Summary"><a href="#Summary" class="headerlink" title="Summary"></a>Summary</h2>]]></content>
+        <content type="html"><![CDATA[<p><strong>HotpotQA</strong> is a dataset for <strong>Diverse</strong>, <strong>Explainable</strong> <strong>Multi-hop</strong> Question Answering.<br>Style: Extractive-based</p><p>HotpotQA has 4 features, which can also be seen as challenges:</p><ul><li>questions require finding and reasoning over multiple supporting documents to answer</li><li>questions are diverse and not constrained to any pre-existing knowledge</li><li>contains two types of questions: <ul><li>1.<strong>bridge</strong></li><li>2.<strong>comparison</strong> (factoid comparision questions)</li></ul></li><li>provides sentence-level supporting facts required for reasoning<ul><li>introduces the <strong>strong supervision</strong> for reasoning and make the final predictions <strong>explainable</strong></li><li>(can form a reasoning chain through the support facts)</li></ul></li></ul><p>Reference papers on HotpotQA task:</p><blockquote><ol><li>Cognitive Graph for Multi-Hop Reading Comprehension at Scale. ACL, 2019.</li><li>Dynamically Fused Graph Network for Multi-Hop Reasoning. ACL, 2019.</li><li>Answering while Summarizing: Multi-task Learning for Multi-Hop QA with Evidence Extraction. ACL, 2019.</li><li>Compositional Questions Do Not Necessitate Multi-hop Reasoning. ACL,2019. (short)</li><li>Multi-hop Reading Comprehension through Question Decomposition and Rescoring. ACL,2019.</li></ol></blockquote><h2 id="Task-Defination"><a href="#Task-Defination" class="headerlink" title="Task Defination"></a>Task Defination</h2><p>Input:</p><ul><li>query</li><li>$N_p = 10$ paragraphs</li></ul><p>Output</p><ul><li>answer span</li><li>supprot facts (sentence), which can be regarded as the supervised signal during training</li></ul><h2 id="Cognitive-Graph-QA"><a href="#Cognitive-Graph-QA" class="headerlink" title="Cognitive Graph QA"></a>Cognitive Graph QA</h2><blockquote><p>Cognitive Graph for Multi-Hop Reading Comprehension at Scale.<br>ACL, 2019.<br>Ming Ding (Chang Zhou)<br>THU (DAMO, Alibaba)</p></blockquote><h3 id="1-Motivation"><a href="#1-Motivation" class="headerlink" title="1.Motivation"></a>1.Motivation</h3><p>Dual Process Theory from the cognitive process of humans:</p><ul><li>System1 first retrieve relevant information following attention via an <strong>implicit, unconscious, intuitive</strong> process<ul><li>efficiently provides resources according to requests</li></ul></li><li>System2 conduct <strong>explicit, conscious, controllable</strong> reasoning process based on the result of System1<ul><li>enable diving deeper into relational information by performing sequential thinking in the working memory</li><li>slower but human-unique rationality</li></ul></li><li>For complex reasoning, two systems are coordinated to perform fast and slow thinking iteratively</li></ul><p>This work:</p><ul><li>System1 extracts question-relevant entities and answer candidates from paragraphs and encodes their semantic information<ul><li>Extracted entities are organized as a cognitive graph —&gt; working memory</li></ul></li><li>System2 conducts the reasoning procedure over the graph, and collects clues to guide System 1 to better extract next-hop entities.</li><li>iterate until all possible answers are found, and then the final answer is chosen based on reasoning results from System 2.</li></ul><h3 id="2-Model-Details"><a href="#2-Model-Details" class="headerlink" title="2.Model Details"></a>2.Model Details</h3><p>Algorithm of Cognitive Graph QA</p><ul><li><img src="/images/mrc-paper-hotpotqa/Cog-algo.png" alt="alog"></li></ul><p>Model Overview</p><ul><li><img src="/images/mrc-paper-hotpotqa/Cog-model.png" alt="model"></li></ul><h3 id="3-Experiments"><a href="#3-Experiments" class="headerlink" title="3.Experiments"></a>3.Experiments</h3><p>case study</p><ul><li><img src="/images/mrc-paper-hotpotqa/Cog-case.png" alt="case-study"></li></ul><h2 id="Dynamically-Fused-Graph-Network"><a href="#Dynamically-Fused-Graph-Network" class="headerlink" title="Dynamically Fused Graph Network"></a>Dynamically Fused Graph Network</h2><blockquote><p>Dynamically Fused Graph Network for Multi-Hop Reasoning.<br>ACL,2019.<br>Yunxuan Xiao<br>Shanghai Jiao Tong University. (ByteDance AT Lab)</p></blockquote><h3 id="1-Motivation-1"><a href="#1-Motivation-1" class="headerlink" title="1.Motivation"></a>1.Motivation</h3><p><i class="fa fa-thumbtack"></i> Challenges:</p><ul><li>1) filtering out noises from multiple paragraphs and extracting useful information<ul><li>previous work: build entity graph from input paragraphs and apply GNN to aggregate the information</li><li>shortcomings: static global entity graph of each QA pair —&gt; <strong>implicit reasoning, lack of explainability</strong></li></ul></li><li>2) aggregate document information to an entity graph and answers are then <strong>directly</strong> selected on entities of the entity graph<ul><li>shortcomings: answers may not reside in entities of the extracted entity graph</li></ul></li></ul><p><i class="fa fa-highlighter"></i> This work:</p><ul><li>intuition: mimic human reasoning process in multi-hop QA<ul><li>start from an entity of interest in the query</li><li>focus on the words surrounding the start entities</li><li>connect to some related entity in the neighborhood guided by the question</li><li>repeat the step to form a reasoning chain, and lands on some entity or snippets likely to be answer.</li></ul></li><li>consturcts <strong>dynamic</strong> entity graph</li><li>propagating information on dynamic entity graph under soft-mask constraint</li><li><strong>bidirectional fusion</strong>:<ul><li>aggregate information from document to the entity graph and entity graph to document</li></ul></li></ul><h3 id="2-Model-Details-1"><a href="#2-Model-Details-1" class="headerlink" title="2.Model Details"></a>2.Model Details</h3><h3 id="2-1-Graph-Constructing"><a href="#2-1-Graph-Constructing" class="headerlink" title="2.1 Graph Constructing"></a>2.1 Graph Constructing</h3><p>node: POL (<code>Persion</code>, <code>Organization</code>, <code>Location</code>) entities<br>edge:</p><ul><li>1) sentence-level: co-occurence</li><li>2) context-level: coreference</li><li>3) paragraph-level: link with central entities extracted from title sentence of each paragraph</li></ul><p><img src="/images/mrc-paper-hotpotqa/DFGN-graph.png" alt="dfgn-graph"></p><h3 id="2-2-Model"><a href="#2-2-Model" class="headerlink" title="2.2 Model"></a>2.2 Model</h3><p><img src="/images/mrc-paper-hotpotqa/DFGN-model.png" alt="dfgn-model"></p><p>Paragraph Selector</p><ul><li>use BERT sentence classification: [Q , Pi]</li><li>concat all selected Pi —&gt; C</li></ul><p>Encoder</p><ul><li>use BERT encoding concatenating of query and context performs better</li><li>output:<ul><li>query $Q_0 \in \mathbb{R}^{L\times d_2}$</li><li>context $C_0 \in \mathbb{R}^{M\times d_2}$</li></ul></li></ul><p><strong>Fusion Block</strong></p><ul><li>document to graph<ul><li>binary Matrix $M \in \mathbb{R}^{M \times N}$ : get text span associated with an entity</li><li>entity embedding: mean-max pooling $E_{t-1} = [e_{t-1,1},…,e_{t-1,N}] \in \mathbb{R}^{2d_2 \times N}$</li></ul></li><li>dynamic graph attention<ul><li>soft-mask: signify the start entities in the t-th reasoning step<ul><li>query vector $\tilde{q}^{t-1} = MeanPooling(Q^{t-1})$</li><li>masked entity $\tilde{E}^{t-1} = [m_1^t e_1^{t-1},…]$<ul><li><script type="math/tex; mode=display">\gamma_i^t = \tilde{q}^{t-1} V^t e_t^{t-1} / \sqrt{d_2}</script></li><li><script type="math/tex; mode=display">m^t = \sigma([\gamma_1^t,...,\gamma_N^t])</script></li></ul></li></ul></li><li>propagate information in graph by GAT (the more relevant to the query, the neighbor nodes receive more information from nearby)<ul><li>$e^t_i = ReLu( \sum_{j\in B_i} \alpha_{j,i}^t h_j^t)$<ul><li><script type="math/tex; mode=display">h_i^t = U_t \tilde{e}_i^{t-1} + b_t</script></li><li><script type="math/tex; mode=display">\beta_{i,j}^t = LeakyReLu(W_t^T [h_i^t, h_j^t])</script></li><li><script type="math/tex; mode=display">\alpha_{i,j}^t = \frac{exp(\beta_{i,j}^t)}{\sum_k exp(\beta_{i,k}^t)}</script></li></ul></li><li>$E_t = [e_1^t,…,e_N^t]$</li></ul></li></ul></li><li>updating query<ul><li>$Q^t = BiAttention(Q^{t-1}, E^t)$</li></ul></li><li>graph to document<ul><li>issue: the unrestricted answer still cannot be back traced</li><li>keep information flowing from entity back to tokens in the context<ul><li>the same matrix $M$</li><li>update the context embedding</li></ul></li><li>$C^t = LSTM( [C^{t-1}, {ME^t}^T] ) \in \mathbb{R}^{M\times d_2}$</li></ul></li></ul><p>Prediction Layer</p><ul><li>4 targets<ul><li>supporting sentences</li><li>start position of answer span</li><li>end position of answer span</li><li>answer type</li></ul></li><li>use four LSTMs to get final representation<ul><li>$O_{sup} = F_0 (C^t)$</li><li>$O_{start} = F_1([C^t, O_{sup}])$</li><li>$O_{end} = F_2([C^t, O_{sup}, O_{start}])$</li><li>$O_{type} = F_3([C^t, O_{sup}, O_{end}])$</li><li>$L = L_{start} + L_{end} + \lambda_s L_{sup} + \lambda_t L_{type}$</li></ul></li></ul><h3 id="3-Experiments-1"><a href="#3-Experiments-1" class="headerlink" title="3.Experiments"></a>3.Experiments</h3><h2 id="Query-Focused-Extractor"><a href="#Query-Focused-Extractor" class="headerlink" title="Query Focused Extractor"></a>Query Focused Extractor</h2><blockquote><p>Answering while Summarizaing: Multi-task Learning for Multi-hop QA with Evidence Extraction<br>ACL,2019.<br>Kosuke Nishida.<br>NTT Media Intelligence Laboratories.</p></blockquote><h3 id="1-Motivation-2"><a href="#1-Motivation-2" class="headerlink" title="1.Motivation"></a>1.Motivation</h3><h3 id="2-Model-Details-2"><a href="#2-Model-Details-2" class="headerlink" title="2.Model Details"></a>2.Model Details</h3><h3 id="3-Experiments-2"><a href="#3-Experiments-2" class="headerlink" title="3.Experiments"></a>3.Experiments</h3><h2 id="DecompRC"><a href="#DecompRC" class="headerlink" title="DecompRC"></a>DecompRC</h2><blockquote><p>Multi-hop Reading Comprehension through Question Decomposition and Rescoring<br>ACL,2019.<br>Sewon Min.<br>University of Washington. AI2.</p></blockquote><h3 id="1-Motivation-3"><a href="#1-Motivation-3" class="headerlink" title="1.Motivation"></a>1.Motivation</h3><ul><li>decomposes a compositional question into simpler sub-questions that can be answered by off-the-shelf single-hop RC models<ul><li>inspired by the idea of compositionality from semantic parsing</li></ul></li></ul><h3 id="2-Model-Details-3"><a href="#2-Model-Details-3" class="headerlink" title="2.Model Details"></a>2.Model Details</h3><p>3 step process:</p><ul><li>decomposes the original, multi-hop question into several single-hop sub-questions according to a few reasoning types in parallel, based on span predictions.</li><li>for every reasoning types D ECOMP RC leverages a single-hop reading comprehension model to answer each sub-question, and combines the answers according to the reasoning type.</li><li>leverages a decomposition scorer to judge which decomposition is the most suitable, and outputs the answer from that decomposition as the ﬁnal answer.</li></ul><h2 id="Summary"><a href="#Summary" class="headerlink" title="Summary"></a>Summary</h2>]]></content>
       
       
       <categories>
@@ -55,9 +55,9 @@
             
             <tag> nlp </tag>
             
-            <tag> mrc </tag>
-            
             <tag> paper </tag>
+            
+            <tag> mrc </tag>
             
             <tag> multi-hop </tag>
             
@@ -88,9 +88,9 @@
             
             <tag> nlp </tag>
             
-            <tag> mrc </tag>
-            
             <tag> knowledge </tag>
+            
+            <tag> mrc </tag>
             
             <tag> reasoning </tag>
             
@@ -154,9 +154,9 @@
             
             <tag> nlp </tag>
             
-            <tag> mrc </tag>
-            
             <tag> paper </tag>
+            
+            <tag> mrc </tag>
             
         </tags>
       
@@ -183,9 +183,9 @@
             
             <tag> nlp </tag>
             
-            <tag> mrc </tag>
-            
             <tag> paper </tag>
+            
+            <tag> mrc </tag>
             
             <tag> research </tag>
             
@@ -214,9 +214,9 @@
             
             <tag> nlp </tag>
             
-            <tag> mrc </tag>
-            
             <tag> paper </tag>
+            
+            <tag> mrc </tag>
             
             <tag> research </tag>
             
@@ -276,11 +276,11 @@
             
             <tag> nlp </tag>
             
-            <tag> mrc </tag>
-            
             <tag> paper </tag>
             
             <tag> knowledge </tag>
+            
+            <tag> mrc </tag>
             
         </tags>
       
@@ -307,11 +307,11 @@
             
             <tag> nlp </tag>
             
-            <tag> mrc </tag>
-            
             <tag> paper </tag>
             
             <tag> knowledge </tag>
+            
+            <tag> mrc </tag>
             
             <tag> nli </tag>
             
@@ -340,9 +340,9 @@
             
             <tag> nlp </tag>
             
-            <tag> mrc </tag>
-            
             <tag> paper </tag>
+            
+            <tag> mrc </tag>
             
             <tag> model </tag>
             
@@ -371,9 +371,9 @@
             
             <tag> nlp </tag>
             
-            <tag> mrc </tag>
-            
             <tag> paper </tag>
+            
+            <tag> mrc </tag>
             
             <tag> multi-hop </tag>
             
@@ -534,9 +534,9 @@
             
             <tag> nlp </tag>
             
-            <tag> mrc </tag>
-            
             <tag> paper </tag>
+            
+            <tag> mrc </tag>
             
             <tag> research </tag>
             
@@ -596,9 +596,9 @@
             
             <tag> nlp </tag>
             
-            <tag> mrc </tag>
-            
             <tag> paper </tag>
+            
+            <tag> mrc </tag>
             
             <tag> dataset </tag>
             
@@ -627,9 +627,9 @@
             
             <tag> nlp </tag>
             
-            <tag> mrc </tag>
-            
             <tag> paper </tag>
+            
+            <tag> mrc </tag>
             
             <tag> reasoning </tag>
             
@@ -658,9 +658,9 @@
             
             <tag> nlp </tag>
             
-            <tag> mrc </tag>
-            
             <tag> paper </tag>
+            
+            <tag> mrc </tag>
             
             <tag> nlu </tag>
             
@@ -815,11 +815,11 @@
             
             <tag> nlp </tag>
             
-            <tag> mrc </tag>
-            
             <tag> paper </tag>
             
             <tag> knowledge </tag>
+            
+            <tag> mrc </tag>
             
         </tags>
       
