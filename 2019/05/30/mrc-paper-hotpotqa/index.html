@@ -99,7 +99,7 @@
 <meta property="og:image" content="http://xingluxi.github.io/images/mrc-paper-hotpotqa/Cog-case.png">
 <meta property="og:image" content="http://xingluxi.github.io/images/mrc-paper-hotpotqa/DFGN-graph.png">
 <meta property="og:image" content="http://xingluxi.github.io/images/mrc-paper-hotpotqa/DFGN-model.png">
-<meta property="og:updated_time" content="2019-06-11T03:07:41.427Z">
+<meta property="og:updated_time" content="2019-06-11T03:30:44.972Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Recent Advances on Multi-Hop RC - HotpotQA">
 <meta name="twitter:description" content="HotpotQA is a dataset for Diverse, Explainable Multi-hop Question Answering.Style: Extractive-based HotpotQA has 4 features, which can also be seen as challenges:  questions require finding and reason">
@@ -321,7 +321,7 @@
               
                 <span class="post-meta-item-text">Post modified&#58;</span>
               
-              <time title="Post modified" itemprop="dateModified" datetime="2019-06-11T11:07:41+08:00">
+              <time title="Post modified" itemprop="dateModified" datetime="2019-06-11T11:30:44+08:00">
                 2019-06-11
               </time>
             
@@ -376,7 +376,7 @@
                   <span class="post-meta-item-text">Words count in article&#58;</span>
                 
                 <span title="Words count in article">
-                  933
+                  1.1k
                 </span>
               
 
@@ -392,7 +392,7 @@
                   <span class="post-meta-item-text">Reading time &asymp;</span>
                 
                 <span title="Reading time">
-                  5
+                  6
                 </span>
               
             </div>
@@ -452,7 +452,28 @@
 <h2 id="Cognitive-Graph-QA"><a href="#Cognitive-Graph-QA" class="headerlink" title="Cognitive Graph QA"></a>Cognitive Graph QA</h2><blockquote>
 <p>Cognitive Graph for Multi-Hop Reading Comprehension at Scale.<br>ACL, 2019.<br>Ming Ding (Chang Zhou)<br>THU (DAMO, Alibaba)</p>
 </blockquote>
-<h3 id="1-Motivation"><a href="#1-Motivation" class="headerlink" title="1.Motivation"></a>1.Motivation</h3><p>Dual Process Theory from the cognitive process of humans</p>
+<h3 id="1-Motivation"><a href="#1-Motivation" class="headerlink" title="1.Motivation"></a>1.Motivation</h3><p>Dual Process Theory from the cognitive process of humans:</p>
+<ul>
+<li>System1 first retrieve relevant information following attention via an <strong>implicit, unconscious, intuitive</strong> process<ul>
+<li>efficiently provides resources according to requests</li>
+</ul>
+</li>
+<li>System2 conduct <strong>explicit, conscious, controllable</strong> reasoning process based on the result of System1<ul>
+<li>enable diving deeper into relational information by performing sequential thinking in the working memory</li>
+<li>slower but human-unique rationality</li>
+</ul>
+</li>
+<li>For complex reasoning, two systems are coordinated to perform fast and slow thinking iteratively</li>
+</ul>
+<p>This work:</p>
+<ul>
+<li>System1 extracts question-relevant entities and answer candidates from paragraphs and encodes their semantic information<ul>
+<li>Extracted entities are organized as a cognitive graph —&gt; working memory</li>
+</ul>
+</li>
+<li>System2 conducts the reasoning procedure over the graph, and collects clues to guide System 1 to better extract next-hop entities.</li>
+<li>iterate until all possible answers are found, and then the final answer is chosen based on reasoning results from System 2.</li>
+</ul>
 <h3 id="2-Model-Details"><a href="#2-Model-Details" class="headerlink" title="2.Model Details"></a>2.Model Details</h3><p>Algorithm of Cognitive Graph QA</p>
 <ul>
 <li><img src="/images/mrc-paper-hotpotqa/Cog-algo.png" alt="alog"></li>
