@@ -22,9 +22,9 @@
             
             <tag> nlp </tag>
             
-            <tag> research </tag>
-            
             <tag> knowledge </tag>
+            
+            <tag> research </tag>
             
             <tag> note </tag>
             
@@ -53,9 +53,9 @@
             
             <tag> nlp </tag>
             
-            <tag> mrc </tag>
-            
             <tag> paper </tag>
+            
+            <tag> mrc </tag>
             
             <tag> multi-hop </tag>
             
@@ -86,9 +86,9 @@
             
             <tag> nlp </tag>
             
-            <tag> mrc </tag>
-            
             <tag> paper </tag>
+            
+            <tag> mrc </tag>
             
             <tag> multi-hop </tag>
             
@@ -119,9 +119,9 @@
             
             <tag> nlp </tag>
             
-            <tag> mrc </tag>
-            
             <tag> knowledge </tag>
+            
+            <tag> mrc </tag>
             
             <tag> reasoning </tag>
             
@@ -185,9 +185,9 @@
             
             <tag> nlp </tag>
             
-            <tag> mrc </tag>
-            
             <tag> paper </tag>
+            
+            <tag> mrc </tag>
             
         </tags>
       
@@ -214,9 +214,9 @@
             
             <tag> nlp </tag>
             
-            <tag> mrc </tag>
-            
             <tag> paper </tag>
+            
+            <tag> mrc </tag>
             
             <tag> research </tag>
             
@@ -245,9 +245,9 @@
             
             <tag> nlp </tag>
             
-            <tag> mrc </tag>
-            
             <tag> paper </tag>
+            
+            <tag> mrc </tag>
             
             <tag> research </tag>
             
@@ -293,7 +293,7 @@
       <link href="/2019/03/10/mrc-knowedge-paper-info/"/>
       <url>/2019/03/10/mrc-knowedge-paper-info/</url>
       
-        <content type="html"><![CDATA[<p>A list of recent papers with respect to Knowledge-based Machine Reading Comprehension.<br><a id="more"></a></p><style>    table th:nth-of-type(2){    width: 60%;    }</style><h2 id="Works-on-Knowledge-aware-MRC"><a href="#Works-on-Knowledge-aware-MRC" class="headerlink" title="Works on Knowledge-aware MRC"></a>Works on Knowledge-aware MRC</h2><!-- aware/based/enhanced --><div class="table-container"><table><thead><tr><th style="text-align:center">Conf.</th><th style="text-align:left">Title</th><th style="text-align:left">Authors/Org.</th><th style="text-align:center">Note</th></tr></thead><tbody><tr><td style="text-align:center">ACL<br>2017</td><td style="text-align:left"><a href="https://doi.org/10.18653/v1/P17-1132" target="_blank" rel="noopener">Leveraging knowledge bases in lstms for improving machine reading</a></td><td style="text-align:left">Yang, et al.<br>CMU</td><td style="text-align:center"></td></tr><tr><td style="text-align:center">ACL<br>2017</td><td style="text-align:left"><a href="https://www.aclweb.org/anthology/D17-1216" target="_blank" rel="noopener">Reasoning with Heterogeneous Knowledge for Commonsense Machine Comprehension</a></td><td style="text-align:left">Hongyu Lin, et al.</td><td style="text-align:center"></td></tr><tr><td style="text-align:center">ACL<br>2017</td><td style="text-align:left"><a href="http://www.aclweb.org/anthology/D17-1086" target="_blank" rel="noopener">World knowledge for reading comprehension: Rare entity prediction with hierarchical lstms using external descriptions</a></td><td style="text-align:left">Long, et al.<br>McGill University</td><td style="text-align:center"></td></tr><tr><td style="text-align:center">ACL<br>2018</td><td style="text-align:left"><a href="http://aclweb.org/anthology/P18-1076" target="_blank" rel="noopener">Knowledgeable Reader: Enhancing Cloze-Style Reading Comprehension with External Commonsense Knowledge</a></td><td style="text-align:left">Mihaylov, et al.<br>Heidelberg University</td><td style="text-align:center"><a href="/2019/01/09/paper-knreader/" title="knreader-note">knreader-note</a></td></tr><tr><td style="text-align:center">2018</td><td style="text-align:left"><a href="https://openreview.net/forum?id=B1twdMCab" target="_blank" rel="noopener">Dynamic Integration of Background Knowledge in Neural NLU Systems</a></td><td style="text-align:left">Dirk Weissenborn, et al.</td><td style="text-align:center"><a href="/2019/03/06/paper-2018-refinewordemb/" title="note">note</a></td></tr><tr><td style="text-align:center">EMNLP<br>2018</td><td style="text-align:left"><a href="http://aclweb.org/anthology/D18-1454" target="_blank" rel="noopener">Commonsense for Generative Multi-Hop Question Answering Tasks</a></td><td style="text-align:left">Lisa Bauer</td><td style="text-align:center"><a href="/2019/02/21/paper-emnlp2018-mhpgm/" title="mhpgm-note">mhpgm-note</a></td></tr><tr><td style="text-align:center">2018</td><td style="text-align:left"><a href="https://arxiv.org/abs/1809.03449" target="_blank" rel="noopener">Exploring Machine Reading Comprehension with Explicit Knowledge</a></td><td style="text-align:left">Emory University</td><td style="text-align:center"></td></tr><tr><td style="text-align:center">ACL<br>2018</td><td style="text-align:left"><a href="https://aclweb.org/anthology/D18-1455" target="_blank" rel="noopener">Open Domain Question Answering Using Early Fusion of Knowledge Bases and Text</a></td><td style="text-align:left">CMU</td><td style="text-align:center"></td></tr><tr><td style="text-align:center">AAAI<br>2018</td><td style="text-align:left"><a href="https://arxiv.org/abs/1811.00625" target="_blank" rel="noopener">Incorporating Structured Commonsense Knowledge in Story Completion</a></td><td style="text-align:left"></td><td style="text-align:center"></td></tr><tr><td style="text-align:center">2019</td><td style="text-align:left"><a href="https://arxiv.org/abs/1902.00993" target="_blank" rel="noopener">Improving Question Answering with External Knowledge</a></td><td style="text-align:left"></td><td style="text-align:center"></td></tr><tr><td style="text-align:center"></td><td style="text-align:left"></td><td style="text-align:left"></td></tr></tbody></table></div><h2 id="MRC-with-Knowledge"><a href="#MRC-with-Knowledge" class="headerlink" title="MRC with Knowledge"></a>MRC with Knowledge</h2><ul><li>how to let the machine obtain Knowledge？</li><li>how to represent knowledge？ in which kind of format？</li><li>how to let the machine to learn Knowledge incrementally？</li><li>how to make the machine can automatically use Knowledge it already knows or it has been told？</li></ul>]]></content>
+        <content type="html"><![CDATA[<p>A list of recent papers with respect to Knowledge-based Machine Reading Comprehension.<br><a id="more"></a></p><style>    table th:nth-of-type(2){    width: 60%;    }</style><h2 id="Works-on-Knowledge-aware-MRC"><a href="#Works-on-Knowledge-aware-MRC" class="headerlink" title="Works on Knowledge-aware MRC"></a>Works on Knowledge-aware MRC</h2><!-- aware/based/enhanced --><div class="table-container"><table><thead><tr><th style="text-align:center">Conf.</th><th style="text-align:left">Title</th><th style="text-align:left">Authors/Org.</th><th style="text-align:center">Note</th></tr></thead><tbody><tr><td style="text-align:center">ACL<br>2017</td><td style="text-align:left"><a href="https://doi.org/10.18653/v1/P17-1132" target="_blank" rel="noopener">Leveraging knowledge bases in lstms for improving machine reading</a></td><td style="text-align:left">Yang, et al.<br>CMU</td><td style="text-align:center"></td></tr><tr><td style="text-align:center">ACL<br>2017</td><td style="text-align:left"><a href="https://www.aclweb.org/anthology/D17-1216" target="_blank" rel="noopener">Reasoning with Heterogeneous Knowledge for Commonsense Machine Comprehension</a></td><td style="text-align:left">Hongyu Lin, et al.</td><td style="text-align:center"></td></tr><tr><td style="text-align:center">ACL<br>2017</td><td style="text-align:left"><a href="http://www.aclweb.org/anthology/D17-1086" target="_blank" rel="noopener">World knowledge for reading comprehension: Rare entity prediction with hierarchical lstms using external descriptions</a></td><td style="text-align:left">Long, et al.<br>McGill University</td><td style="text-align:center"></td></tr><tr><td style="text-align:center">ACL<br>2018</td><td style="text-align:left"><a href="http://aclweb.org/anthology/P18-1076" target="_blank" rel="noopener">Knowledgeable Reader: Enhancing Cloze-Style Reading Comprehension with External Commonsense Knowledge</a></td><td style="text-align:left">Mihaylov, et al.<br>Heidelberg University</td><td style="text-align:center"><a href="/2019/01/09/paper-knreader/" title="knreader-note">knreader-note</a></td></tr><tr><td style="text-align:center">2018</td><td style="text-align:left"><a href="https://openreview.net/forum?id=B1twdMCab" target="_blank" rel="noopener">Dynamic Integration of Background Knowledge in Neural NLU Systems</a></td><td style="text-align:left">Dirk Weissenborn, et al.</td><td style="text-align:center"><a href="/2019/03/06/paper-2018-refinewordemb/" title="note">note</a></td></tr><tr><td style="text-align:center">EMNLP<br>2018</td><td style="text-align:left"><a href="http://aclweb.org/anthology/D18-1454" target="_blank" rel="noopener">Commonsense for Generative Multi-Hop Question Answering Tasks</a></td><td style="text-align:left">Lisa Bauer</td><td style="text-align:center"><a href="/2019/02/21/paper-emnlp2018-mhpgm/" title="mhpgm-note">mhpgm-note</a></td></tr><tr><td style="text-align:center">EMNLP<br>2018</td><td style="text-align:left"><a href="https://aclweb.org/anthology/D18-1455" target="_blank" rel="noopener">Open Domain Question Answering Using Early Fusion of Knowledge Bases and Text</a></td><td style="text-align:left">CMU</td><td style="text-align:center"></td></tr><tr><td style="text-align:center">2018</td><td style="text-align:left"><a href="https://arxiv.org/abs/1809.03449" target="_blank" rel="noopener">Exploring Machine Reading Comprehension with Explicit Knowledge</a></td><td style="text-align:left">Emory University</td><td style="text-align:center"></td></tr><tr><td style="text-align:center">ACL<br>2018</td><td style="text-align:left"><a href="https://aclweb.org/anthology/D18-1455" target="_blank" rel="noopener">Open Domain Question Answering Using Early Fusion of Knowledge Bases and Text</a></td><td style="text-align:left">CMU</td><td style="text-align:center"></td></tr><tr><td style="text-align:center">AAAI<br>2018</td><td style="text-align:left"><a href="https://arxiv.org/abs/1811.00625" target="_blank" rel="noopener">Incorporating Structured Commonsense Knowledge in Story Completion</a></td><td style="text-align:left"></td><td style="text-align:center"></td></tr><tr><td style="text-align:center">2019</td><td style="text-align:left"><a href="https://arxiv.org/abs/1902.00993" target="_blank" rel="noopener">Improving Question Answering with External Knowledge</a></td><td style="text-align:left"></td><td style="text-align:center"></td></tr><tr><td style="text-align:center"></td><td style="text-align:left"></td><td style="text-align:left"></td></tr></tbody></table></div><h2 id="MRC-with-Knowledge"><a href="#MRC-with-Knowledge" class="headerlink" title="MRC with Knowledge"></a>MRC with Knowledge</h2><ul><li>how to let the machine obtain Knowledge？</li><li>how to represent knowledge？ in which kind of format？</li><li>how to let the machine to learn Knowledge incrementally？</li><li>how to make the machine can automatically use Knowledge it already knows or it has been told？</li></ul>]]></content>
       
       
       <categories>
@@ -307,11 +307,11 @@
             
             <tag> nlp </tag>
             
-            <tag> mrc </tag>
-            
             <tag> paper </tag>
             
             <tag> knowledge </tag>
+            
+            <tag> mrc </tag>
             
         </tags>
       
@@ -338,11 +338,11 @@
             
             <tag> nlp </tag>
             
-            <tag> mrc </tag>
-            
             <tag> paper </tag>
             
             <tag> knowledge </tag>
+            
+            <tag> mrc </tag>
             
             <tag> nli </tag>
             
@@ -371,9 +371,9 @@
             
             <tag> nlp </tag>
             
-            <tag> mrc </tag>
-            
             <tag> paper </tag>
+            
+            <tag> mrc </tag>
             
             <tag> model </tag>
             
@@ -402,9 +402,9 @@
             
             <tag> nlp </tag>
             
-            <tag> mrc </tag>
-            
             <tag> paper </tag>
+            
+            <tag> mrc </tag>
             
             <tag> multi-hop </tag>
             
@@ -565,9 +565,9 @@
             
             <tag> nlp </tag>
             
-            <tag> mrc </tag>
-            
             <tag> paper </tag>
+            
+            <tag> mrc </tag>
             
             <tag> research </tag>
             
@@ -627,9 +627,9 @@
             
             <tag> nlp </tag>
             
-            <tag> mrc </tag>
-            
             <tag> paper </tag>
+            
+            <tag> mrc </tag>
             
             <tag> dataset </tag>
             
@@ -658,9 +658,9 @@
             
             <tag> nlp </tag>
             
-            <tag> mrc </tag>
-            
             <tag> paper </tag>
+            
+            <tag> mrc </tag>
             
             <tag> reasoning </tag>
             
@@ -689,9 +689,9 @@
             
             <tag> nlp </tag>
             
-            <tag> mrc </tag>
-            
             <tag> paper </tag>
+            
+            <tag> mrc </tag>
             
             <tag> nlu </tag>
             
@@ -846,11 +846,11 @@
             
             <tag> nlp </tag>
             
-            <tag> mrc </tag>
-            
             <tag> paper </tag>
             
             <tag> knowledge </tag>
+            
+            <tag> mrc </tag>
             
         </tags>
       
