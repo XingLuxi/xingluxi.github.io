@@ -4,6 +4,35 @@
   
     
     <entry>
+      <title>AAAI2019 | Improving Question Answering by Commonsense-Based Pre-Training</title>
+      <link href="/2019/07/06/paper-aaai2019-cs-based-pre-train/"/>
+      <url>/2019/07/06/paper-aaai2019-cs-based-pre-train/</url>
+      
+        <content type="html"><![CDATA[]]></content>
+      
+      
+      <categories>
+          
+          <category> Paper-Note </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> nlp </tag>
+            
+            <tag> mrc </tag>
+            
+            <tag> paper </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Cognition - Primary Research</title>
       <link href="/2019/06/11/mrc-research-cognitive/"/>
       <url>/2019/06/11/mrc-research-cognitive/</url>
@@ -22,9 +51,9 @@
             
             <tag> nlp </tag>
             
-            <tag> knowledge </tag>
-            
             <tag> research </tag>
+            
+            <tag> knowledge </tag>
             
             <tag> note </tag>
             
@@ -53,9 +82,9 @@
             
             <tag> nlp </tag>
             
-            <tag> paper </tag>
-            
             <tag> mrc </tag>
+            
+            <tag> paper </tag>
             
             <tag> multi-hop </tag>
             
@@ -86,9 +115,9 @@
             
             <tag> nlp </tag>
             
-            <tag> paper </tag>
-            
             <tag> mrc </tag>
+            
+            <tag> paper </tag>
             
             <tag> multi-hop </tag>
             
@@ -119,9 +148,9 @@
             
             <tag> nlp </tag>
             
-            <tag> knowledge </tag>
-            
             <tag> mrc </tag>
+            
+            <tag> knowledge </tag>
             
             <tag> reasoning </tag>
             
@@ -185,9 +214,9 @@
             
             <tag> nlp </tag>
             
-            <tag> paper </tag>
-            
             <tag> mrc </tag>
+            
+            <tag> paper </tag>
             
         </tags>
       
@@ -214,9 +243,9 @@
             
             <tag> nlp </tag>
             
-            <tag> paper </tag>
-            
             <tag> mrc </tag>
+            
+            <tag> paper </tag>
             
             <tag> research </tag>
             
@@ -245,9 +274,9 @@
             
             <tag> nlp </tag>
             
-            <tag> paper </tag>
-            
             <tag> mrc </tag>
+            
+            <tag> paper </tag>
             
             <tag> research </tag>
             
@@ -307,11 +336,11 @@
             
             <tag> nlp </tag>
             
+            <tag> mrc </tag>
+            
             <tag> paper </tag>
             
             <tag> knowledge </tag>
-            
-            <tag> mrc </tag>
             
         </tags>
       
@@ -338,11 +367,11 @@
             
             <tag> nlp </tag>
             
+            <tag> mrc </tag>
+            
             <tag> paper </tag>
             
             <tag> knowledge </tag>
-            
-            <tag> mrc </tag>
             
             <tag> nli </tag>
             
@@ -371,9 +400,9 @@
             
             <tag> nlp </tag>
             
-            <tag> paper </tag>
-            
             <tag> mrc </tag>
+            
+            <tag> paper </tag>
             
             <tag> model </tag>
             
@@ -402,9 +431,9 @@
             
             <tag> nlp </tag>
             
-            <tag> paper </tag>
-            
             <tag> mrc </tag>
+            
+            <tag> paper </tag>
             
             <tag> multi-hop </tag>
             
@@ -565,9 +594,9 @@
             
             <tag> nlp </tag>
             
-            <tag> paper </tag>
-            
             <tag> mrc </tag>
+            
+            <tag> paper </tag>
             
             <tag> research </tag>
             
@@ -627,9 +656,9 @@
             
             <tag> nlp </tag>
             
-            <tag> paper </tag>
-            
             <tag> mrc </tag>
+            
+            <tag> paper </tag>
             
             <tag> dataset </tag>
             
@@ -658,9 +687,9 @@
             
             <tag> nlp </tag>
             
-            <tag> paper </tag>
-            
             <tag> mrc </tag>
+            
+            <tag> paper </tag>
             
             <tag> reasoning </tag>
             
@@ -689,9 +718,9 @@
             
             <tag> nlp </tag>
             
-            <tag> paper </tag>
-            
             <tag> mrc </tag>
+            
+            <tag> paper </tag>
             
             <tag> nlu </tag>
             
@@ -846,11 +875,11 @@
             
             <tag> nlp </tag>
             
+            <tag> mrc </tag>
+            
             <tag> paper </tag>
             
             <tag> knowledge </tag>
-            
-            <tag> mrc </tag>
             
         </tags>
       
