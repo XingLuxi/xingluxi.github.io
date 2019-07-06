@@ -94,7 +94,7 @@
 <meta property="og:site_name" content="Luxi Xing - Blog">
 <meta property="og:description" content="AAAI,2019中山大学，微软亚研  Motivation 现有的神经网络模型不能很好的回答常识问题是由于缺乏concepts之间的常识联系 回答有些问题需要模型有能力在常识知识上进行推理 回答这类的问题既需要词本身的知识又需要世界知识  This Work 利用外部常识知识（ConceptNet）提高QA系统的常识推理能力 根据外部关于世界的常识知识预训练一个模型，对concepts之间的直">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-07-06T07:04:21.044Z">
+<meta property="og:updated_time" content="2019-07-06T07:05:25.047Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="AAAI2019 | Improving Question Answering by Commonsense-Based Pre-Training">
 <meta name="twitter:description" content="AAAI,2019中山大学，微软亚研  Motivation 现有的神经网络模型不能很好的回答常识问题是由于缺乏concepts之间的常识联系 回答有些问题需要模型有能力在常识知识上进行推理 回答这类的问题既需要词本身的知识又需要世界知识  This Work 利用外部常识知识（ConceptNet）提高QA系统的常识推理能力 根据外部关于世界的常识知识预训练一个模型，对concepts之间的直">
@@ -315,7 +315,7 @@
               
                 <span class="post-meta-item-text">Post modified&#58;</span>
               
-              <time title="Post modified" itemprop="dateModified" datetime="2019-07-06T15:04:21+08:00">
+              <time title="Post modified" itemprop="dateModified" datetime="2019-07-06T15:05:25+08:00">
                 2019-07-06
               </time>
             
@@ -370,7 +370,7 @@
                   <span class="post-meta-item-text">Words count in article&#58;</span>
                 
                 <span title="Words count in article">
-                  661
+                  816
                 </span>
               
 
@@ -386,7 +386,7 @@
                   <span class="post-meta-item-text">Reading time &asymp;</span>
                 
                 <span title="Reading time">
-                  2
+                  3
                 </span>
               
             </div>
@@ -477,6 +477,25 @@
 </ul>
 </li>
 <li>每个$E$是从知识库中抽取出的三元组</li>
+</ul>
+</li>
+</ul>
+<h2 id="相关工作"><a href="#相关工作" class="headerlink" title="相关工作"></a>相关工作</h2><p>Topic：结合外部知识库或结构知识库的相关工作<br>这方面的工作可以分为两类，大部分属于第一类</p>
+<ul>
+<li>enhance each basic computational unit (word or noun phrase)<ol>
+<li>Leveraging knowledge bases in lstms for improving machine reading</li>
+<li>Knowledgeable reader: Enhancing cloze-style reading comprehension with external commonsense knowledge.</li>
+</ol>
+</li>
+<li>support external signals at the top layer before the model makes the final decision</li>
+</ul>
+<h2 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h2><ul>
+<li>cons:<ul>
+<li>对文本和问题的建模和对知识的建模是分开的，通过最终的打分函数进行关联</li>
+</ul>
+</li>
+<li>pros:<ul>
+<li>通过区分直接关系和间接关系的采样来训练得到的知识表示向量效果更好</li>
 </ul>
 </li>
 </ul>
@@ -714,7 +733,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Motivation"><span class="nav-text">Motivation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#This-Work"><span class="nav-text">This Work</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Approach"><span class="nav-text">Approach</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Commonsense-based-Model"><span class="nav-text">Commonsense-based Model</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Motivation"><span class="nav-text">Motivation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#This-Work"><span class="nav-text">This Work</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Approach"><span class="nav-text">Approach</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Commonsense-based-Model"><span class="nav-text">Commonsense-based Model</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#相关工作"><span class="nav-text">相关工作</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#分析"><span class="nav-text">分析</span></a></li></ol></div>
             
 
           </div>
