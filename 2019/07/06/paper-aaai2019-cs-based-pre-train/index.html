@@ -94,7 +94,7 @@
 <meta property="og:site_name" content="Luxi Xing - Blog">
 <meta property="og:description" content="AAAI,2019中山大学，微软亚研  Motivation 现有的神经网络模型不能很好的回答常识问题是由于缺乏concepts之间的常识联系 回答有些问题需要模型有能力在常识知识上进行推理 回答这类的问题既需要词本身的知识又需要世界知识  This Work 利用外部常识知识（ConceptNet）提高QA系统的常识推理能力 根据外部关于世界的常识知识预训练一个模型，对concepts之间的直">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-07-06T07:04:01.245Z">
+<meta property="og:updated_time" content="2019-07-06T07:04:21.044Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="AAAI2019 | Improving Question Answering by Commonsense-Based Pre-Training">
 <meta name="twitter:description" content="AAAI,2019中山大学，微软亚研  Motivation 现有的神经网络模型不能很好的回答常识问题是由于缺乏concepts之间的常识联系 回答有些问题需要模型有能力在常识知识上进行推理 回答这类的问题既需要词本身的知识又需要世界知识  This Work 利用外部常识知识（ConceptNet）提高QA系统的常识推理能力 根据外部关于世界的常识知识预训练一个模型，对concepts之间的直">
@@ -315,7 +315,7 @@
               
                 <span class="post-meta-item-text">Post modified&#58;</span>
               
-              <time title="Post modified" itemprop="dateModified" datetime="2019-07-06T15:04:01+08:00">
+              <time title="Post modified" itemprop="dateModified" datetime="2019-07-06T15:04:21+08:00">
                 2019-07-06
               </time>
             
@@ -370,7 +370,7 @@
                   <span class="post-meta-item-text">Words count in article&#58;</span>
                 
                 <span title="Words count in article">
-                  511
+                  661
                 </span>
               
 
@@ -443,7 +443,8 @@
 </ul>
 <h3 id="Commonsense-based-Model"><a href="#Commonsense-based-Model" class="headerlink" title="Commonsense-based Model"></a>Commonsense-based Model</h3><ul>
 <li>预训练知识表示的参数：</li>
-<li>关系表示：<ul>
+<li><p>关系表示：</p>
+<ul>
 <li>两个concept之间的关系表示：$f_{cs}(c_1,c_2)=Enc(c_1) \odot Enc(c_2)$</li>
 <li>concept encoder $Enc(\cdot)$ 的计算：<ul>
 <li>$h^w(c) = BiLSTM(Emb(c))$</li>
@@ -462,6 +463,20 @@
 </li>
 </ul>
 </li>
+</ul>
+</li>
+<li><p>$f_{cs}(a_i)$函数是commonsense-based model 的打分函数：</p>
+<ul>
+<li>$f_{cs}(a_i) = \frac{1}{|E_1|} \sum_{x\in E_1} max_{y\in E_2}(f_{cs}(x,y))$<ul>
+<li>max 表示选择$E_1$中最相关的concept</li>
+</ul>
+</li>
+<li>其中<strong>$E_1$和$E_2$分别表示从问题句子Q和候选答案抽取出来的常识事实</strong></li>
+<li>同样还可以计算从文章和候选答案抽取处理的常识事实<ul>
+<li>对于P-Q对，为了保证和候选答案的相关性，去除不在候选答案抽取出来的知识集中的concept</li>
+</ul>
+</li>
+<li>每个$E$是从知识库中抽取出的三元组</li>
 </ul>
 </li>
 </ul>
