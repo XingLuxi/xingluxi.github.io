@@ -94,7 +94,7 @@
 <meta property="og:site_name" content="Luxi Xing - Blog">
 <meta property="og:description" content="AAAI,2019中山大学，微软亚研  Motivation 现有的神经网络模型不能很好的回答常识问题是由于缺乏concepts之间的常识联系 回答有些问题需要模型有能力在常识知识上进行推理 回答这类的问题既需要词本身的知识又需要世界知识  This Work 利用外部常识知识（ConceptNet）提高QA系统的常识推理能力 根据外部关于世界的常识知识预训练一个模型，对concepts之间的直">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-07-06T07:00:34.827Z">
+<meta property="og:updated_time" content="2019-07-06T07:04:01.245Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="AAAI2019 | Improving Question Answering by Commonsense-Based Pre-Training">
 <meta name="twitter:description" content="AAAI,2019中山大学，微软亚研  Motivation 现有的神经网络模型不能很好的回答常识问题是由于缺乏concepts之间的常识联系 回答有些问题需要模型有能力在常识知识上进行推理 回答这类的问题既需要词本身的知识又需要世界知识  This Work 利用外部常识知识（ConceptNet）提高QA系统的常识推理能力 根据外部关于世界的常识知识预训练一个模型，对concepts之间的直">
@@ -315,7 +315,7 @@
               
                 <span class="post-meta-item-text">Post modified&#58;</span>
               
-              <time title="Post modified" itemprop="dateModified" datetime="2019-07-06T15:00:34+08:00">
+              <time title="Post modified" itemprop="dateModified" datetime="2019-07-06T15:04:01+08:00">
                 2019-07-06
               </time>
             
@@ -370,7 +370,7 @@
                   <span class="post-meta-item-text">Words count in article&#58;</span>
                 
                 <span title="Words count in article">
-                  324
+                  511
                 </span>
               
 
@@ -386,7 +386,7 @@
                   <span class="post-meta-item-text">Reading time &asymp;</span>
                 
                 <span title="Reading time">
-                  1
+                  2
                 </span>
               
             </div>
@@ -438,6 +438,30 @@
 <li>$f(a_i) = \alpha f_{doc}(a_i) + \beta f_{cs}(a_i)$</li>
 <li>分别是 document-based model 给出的打分 和 commonsense-based model 给出的打分</li>
 <li>document-based model 同 yuanfudao 的 tri-attention</li>
+</ul>
+</li>
+</ul>
+<h3 id="Commonsense-based-Model"><a href="#Commonsense-based-Model" class="headerlink" title="Commonsense-based Model"></a>Commonsense-based Model</h3><ul>
+<li>预训练知识表示的参数：</li>
+<li>关系表示：<ul>
+<li>两个concept之间的关系表示：$f_{cs}(c_1,c_2)=Enc(c_1) \odot Enc(c_2)$</li>
+<li>concept encoder $Enc(\cdot)$ 的计算：<ul>
+<li>$h^w(c) = BiLSTM(Emb(c))$</li>
+<li>考虑到邻居节点：$h^n(c) = \sum_{c^\prime\in NBR(c)}(W^{r(c,c^\prime)} h^w(c^\prime) + b^{r(c,c^\prime)})$</li>
+<li>$Enc(c) = [h^w(c);h^n(c)]$</li>
+</ul>
+</li>
+<li>基于排序的损失函数：<ul>
+<li>$l(c_1,c_2,c^\prime) = max(0, f_{cs}(c_1, c^\prime) - f_{cs}(c_1,c_2) + mgn)$</li>
+<li>$c_1$和$c_2$是正例</li>
+<li>$c_1$和$c^\prime$是负例</li>
+<li>根据不同的策略对负例进行采样<ul>
+<li>直接关系：直接根据kg中的邻接图进行采样</li>
+<li>间接关系：拥有共同邻节点的作为正例，没有one-hop或two-hop关系的作为负例</li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -675,7 +699,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Motivation"><span class="nav-text">Motivation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#This-Work"><span class="nav-text">This Work</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Approach"><span class="nav-text">Approach</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Motivation"><span class="nav-text">Motivation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#This-Work"><span class="nav-text">This Work</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Approach"><span class="nav-text">Approach</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Commonsense-based-Model"><span class="nav-text">Commonsense-based Model</span></a></li></ol></li></ol></div>
             
 
           </div>
