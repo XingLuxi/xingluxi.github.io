@@ -86,18 +86,18 @@
 
 
 
-<meta name="description" content="AAAI,2019中山大学，微软亚研  Motivation">
+<meta name="description" content="AAAI,2019中山大学，微软亚研  Motivation 现有的神经网络模型不能很好的回答常识问题是由于缺乏concepts之间的常识联系 回答有些问题需要模型有能力在常识知识上进行推理 回答这类的问题既需要词本身的知识又需要世界知识  This Work 利用外部常识知识（ConceptNet）提高QA系统的常识推理能力 根据外部关于世界的常识知识预训练一个模型，对concepts之间的直">
 <meta name="keywords" content="nlp,paper,mrc">
 <meta property="og:type" content="article">
 <meta property="og:title" content="AAAI2019 | Improving Question Answering by Commonsense-Based Pre-Training">
 <meta property="og:url" content="http://xingluxi.github.io/2019/07/06/paper-aaai2019-cs-based-pre-train/index.html">
 <meta property="og:site_name" content="Luxi Xing - Blog">
-<meta property="og:description" content="AAAI,2019中山大学，微软亚研  Motivation">
+<meta property="og:description" content="AAAI,2019中山大学，微软亚研  Motivation 现有的神经网络模型不能很好的回答常识问题是由于缺乏concepts之间的常识联系 回答有些问题需要模型有能力在常识知识上进行推理 回答这类的问题既需要词本身的知识又需要世界知识  This Work 利用外部常识知识（ConceptNet）提高QA系统的常识推理能力 根据外部关于世界的常识知识预训练一个模型，对concepts之间的直">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-07-06T06:58:15.863Z">
+<meta property="og:updated_time" content="2019-07-06T07:00:08.599Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="AAAI2019 | Improving Question Answering by Commonsense-Based Pre-Training">
-<meta name="twitter:description" content="AAAI,2019中山大学，微软亚研  Motivation">
+<meta name="twitter:description" content="AAAI,2019中山大学，微软亚研  Motivation 现有的神经网络模型不能很好的回答常识问题是由于缺乏concepts之间的常识联系 回答有些问题需要模型有能力在常识知识上进行推理 回答这类的问题既需要词本身的知识又需要世界知识  This Work 利用外部常识知识（ConceptNet）提高QA系统的常识推理能力 根据外部关于世界的常识知识预训练一个模型，对concepts之间的直">
 
 
 
@@ -315,7 +315,7 @@
               
                 <span class="post-meta-item-text">Post modified&#58;</span>
               
-              <time title="Post modified" itemprop="dateModified" datetime="2019-07-06T14:58:15+08:00">
+              <time title="Post modified" itemprop="dateModified" datetime="2019-07-06T15:00:08+08:00">
                 2019-07-06
               </time>
             
@@ -370,7 +370,7 @@
                   <span class="post-meta-item-text">Words count in article&#58;</span>
                 
                 <span title="Words count in article">
-                  11
+                  270
                 </span>
               
 
@@ -410,7 +410,30 @@
         <blockquote>
 <p>AAAI,2019<br>中山大学，微软亚研</p>
 </blockquote>
-<h2 id="Motivation"><a href="#Motivation" class="headerlink" title="Motivation"></a>Motivation</h2>
+<h2 id="Motivation"><a href="#Motivation" class="headerlink" title="Motivation"></a>Motivation</h2><ul>
+<li>现有的神经网络模型不能很好的<strong>回答常识问题</strong>是由于<strong>缺乏concepts之间的常识联系</strong></li>
+<li>回答有些问题需要模型有能力在常识知识上进行推理</li>
+<li>回答这类的问题既需要词本身的知识又需要世界知识</li>
+</ul>
+<h2 id="This-Work"><a href="#This-Work" class="headerlink" title="This Work"></a>This Work</h2><ul>
+<li>利用外部常识知识（ConceptNet）提高QA系统的常识推理能力</li>
+<li>根据外部关于世界的常识知识预训练一个模型，对concepts之间的<strong>直接关系和间接关系</strong>进行<strong>预训练</strong><ul>
+<li>预训练的functions可以轻松地加到神经网络中</li>
+</ul>
+</li>
+<li>concept之间的关系可以分为<strong>直接</strong>和<strong>间接</strong><ul>
+<li>可以学习<strong>两个</strong>度量每对concept之间直接和间接关系的functions</li>
+</ul>
+</li>
+<li>好处：<ol>
+<li>模型具有很大的concept/entity覆盖度</li>
+<li>模型常识推理的能力不受限于训练实例的数量和不需要覆盖所有终端任务中需要的推理类型</li>
+<li>易于扩展</li>
+</ol>
+</li>
+<li>实验数据集：ARC / MCScripts</li>
+</ul>
+
       
     </div>
     
@@ -644,7 +667,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Motivation"><span class="nav-text">Motivation</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Motivation"><span class="nav-text">Motivation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#This-Work"><span class="nav-text">This Work</span></a></li></ol></div>
             
 
           </div>
