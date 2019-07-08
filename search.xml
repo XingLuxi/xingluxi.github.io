@@ -43,7 +43,7 @@
       <link href="/2019/07/08/paper-2019-cdm-with-sememe/"/>
       <url>/2019/07/08/paper-2019-cdm-with-sememe/</url>
       
-        <content type="html"><![CDATA[<blockquote><p>Incorporating Sememes into Chinese Definition Modeling<br>2019<br>Linear Yang et al.</p></blockquote><p>Chinese Definition Modeling(CDM) 任务：为给定的中文词产生词典式的定义</p><h2 id="Motivation"><a href="#Motivation" class="headerlink" title="Motivation"></a>Motivation</h2><h2 id="Model"><a href="#Model" class="headerlink" title="Model"></a>Model</h2><h2 id="Experiments"><a href="#Experiments" class="headerlink" title="Experiments"></a>Experiments</h2><h2 id="Summary-amp-Analysis"><a href="#Summary-amp-Analysis" class="headerlink" title="Summary &amp; Analysis"></a>Summary &amp; Analysis</h2>]]></content>
+        <content type="html"><![CDATA[<blockquote><p>Incorporating Sememes into Chinese Definition Modeling<br>2019<br>Linear Yang et al.</p></blockquote><h2 id="Motivation"><a href="#Motivation" class="headerlink" title="Motivation"></a>Motivation</h2><p>Chinese Definition Modeling(CDM) 任务：为给定的中文词产生词典式的中文定义</p><h3 id="This-work"><a href="#This-work" class="headerlink" title="This work"></a>This work</h3><ul><li>为了解决CDM任务，构建了一个CDM数据集，每个example由 <code>&lt;word, sememes, definition&gt;</code> 三元组组成</li><li>两个新模型 <ul><li>1、Adaptive-Attention Model（AAM）：利用adaptive注意力机制结合sememes（义原）信息生成 Definition</li><li>2、Self- and Adaptive-Attention Model（SAAM ）：进一步使用self-attention替代AAM中的recurrent connection，减少word，sememes，definition之间的路径长度</li></ul></li></ul><h2 id="Methodology"><a href="#Methodology" class="headerlink" title="Methodology"></a>Methodology</h2><p>Chinese Definition Modeling Corpus：</p><ul><li>包含 104,517 个条目</li><li>三元组：<code>&lt;a word, the sememes of a speciﬁc word sense, and the deﬁnition in Chinese of the same word sense&gt;</code></li><li>Sememes：义原，是描述词义的最小的语义单位<ul><li>具体信息请参考：HowNet</li><li>为什么要使用义原：可以为生成定义提供额外的语义信息</li></ul></li><li>例子：<img src="/images/paper-2019-cdm-with-sememe/fig-1-corpus.png" alt="cdm-corpus-example"></li></ul><h2 id="Model"><a href="#Model" class="headerlink" title="Model"></a>Model</h2><h3 id="Adaptive-Attention-Model"><a href="#Adaptive-Attention-Model" class="headerlink" title="Adaptive-Attention Model"></a>Adaptive-Attention Model</h3><h3 id="Self-and-Adaptive-Attention-Model"><a href="#Self-and-Adaptive-Attention-Model" class="headerlink" title="Self- and Adaptive-Attention Model"></a>Self- and Adaptive-Attention Model</h3><h2 id="Experiments"><a href="#Experiments" class="headerlink" title="Experiments"></a>Experiments</h2><h2 id="Summary-amp-Analysis"><a href="#Summary-amp-Analysis" class="headerlink" title="Summary &amp; Analysis"></a>Summary &amp; Analysis</h2>]]></content>
       
       
       <categories>
@@ -88,11 +88,11 @@
             
             <tag> nlp </tag>
             
-            <tag> mrc </tag>
-            
             <tag> paper </tag>
             
             <tag> knowledge </tag>
+            
+            <tag> mrc </tag>
             
         </tags>
       
@@ -119,9 +119,9 @@
             
             <tag> nlp </tag>
             
-            <tag> research </tag>
-            
             <tag> knowledge </tag>
+            
+            <tag> research </tag>
             
             <tag> note </tag>
             
@@ -150,9 +150,9 @@
             
             <tag> nlp </tag>
             
-            <tag> mrc </tag>
-            
             <tag> paper </tag>
+            
+            <tag> mrc </tag>
             
             <tag> multi-hop </tag>
             
@@ -183,9 +183,9 @@
             
             <tag> nlp </tag>
             
-            <tag> mrc </tag>
-            
             <tag> paper </tag>
+            
+            <tag> mrc </tag>
             
             <tag> multi-hop </tag>
             
@@ -216,9 +216,9 @@
             
             <tag> nlp </tag>
             
-            <tag> mrc </tag>
-            
             <tag> knowledge </tag>
+            
+            <tag> mrc </tag>
             
             <tag> reasoning </tag>
             
@@ -282,9 +282,9 @@
             
             <tag> nlp </tag>
             
-            <tag> mrc </tag>
-            
             <tag> paper </tag>
+            
+            <tag> mrc </tag>
             
         </tags>
       
@@ -311,9 +311,9 @@
             
             <tag> nlp </tag>
             
-            <tag> mrc </tag>
-            
             <tag> paper </tag>
+            
+            <tag> mrc </tag>
             
             <tag> research </tag>
             
@@ -342,9 +342,9 @@
             
             <tag> nlp </tag>
             
-            <tag> mrc </tag>
-            
             <tag> paper </tag>
+            
+            <tag> mrc </tag>
             
             <tag> research </tag>
             
@@ -404,11 +404,11 @@
             
             <tag> nlp </tag>
             
-            <tag> mrc </tag>
-            
             <tag> paper </tag>
             
             <tag> knowledge </tag>
+            
+            <tag> mrc </tag>
             
         </tags>
       
@@ -435,11 +435,11 @@
             
             <tag> nlp </tag>
             
-            <tag> mrc </tag>
-            
             <tag> paper </tag>
             
             <tag> knowledge </tag>
+            
+            <tag> mrc </tag>
             
             <tag> nli </tag>
             
@@ -468,9 +468,9 @@
             
             <tag> nlp </tag>
             
-            <tag> mrc </tag>
-            
             <tag> paper </tag>
+            
+            <tag> mrc </tag>
             
             <tag> model </tag>
             
@@ -499,9 +499,9 @@
             
             <tag> nlp </tag>
             
-            <tag> mrc </tag>
-            
             <tag> paper </tag>
+            
+            <tag> mrc </tag>
             
             <tag> multi-hop </tag>
             
@@ -662,9 +662,9 @@
             
             <tag> nlp </tag>
             
-            <tag> mrc </tag>
-            
             <tag> paper </tag>
+            
+            <tag> mrc </tag>
             
             <tag> research </tag>
             
@@ -724,9 +724,9 @@
             
             <tag> nlp </tag>
             
-            <tag> mrc </tag>
-            
             <tag> paper </tag>
+            
+            <tag> mrc </tag>
             
             <tag> dataset </tag>
             
@@ -755,9 +755,9 @@
             
             <tag> nlp </tag>
             
-            <tag> mrc </tag>
-            
             <tag> paper </tag>
+            
+            <tag> mrc </tag>
             
             <tag> reasoning </tag>
             
@@ -786,9 +786,9 @@
             
             <tag> nlp </tag>
             
-            <tag> mrc </tag>
-            
             <tag> paper </tag>
+            
+            <tag> mrc </tag>
             
             <tag> nlu </tag>
             
@@ -943,11 +943,11 @@
             
             <tag> nlp </tag>
             
-            <tag> mrc </tag>
-            
             <tag> paper </tag>
             
             <tag> knowledge </tag>
+            
+            <tag> mrc </tag>
             
         </tags>
       
