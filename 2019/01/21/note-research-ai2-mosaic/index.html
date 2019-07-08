@@ -94,10 +94,14 @@
 <meta property="og:site_name" content="Luxi Xing - Blog">
 <meta property="og:description" content="MOSAIC 是 AI2 (ALLEN Institute for Artificial Intelligence) 研究院中进行机器常识智能研究的小组1. 现有的研究项目：  Commonsense Knowledge Graphs: Exploring semi-structured representations of commonsense.2 Visual Commonsense Rea">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-06-22T03:24:29.172Z">
+<meta property="og:image" content="http://xingluxi.github.io/images/note-research-ai2-mosaic/atomic-example.pngs">
+<meta property="og:image" content="http://xingluxi.github.io/images/note-research-ai2-mosaic/atomic-taxonomy-example.png">
+<meta property="og:image" content="http://xingluxi.github.io/images/note-research-ai2-mosaic/atomic-comp.png">
+<meta property="og:updated_time" content="2019-07-08T11:57:20.936Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Survey about Works of MOSAIC">
 <meta name="twitter:description" content="MOSAIC 是 AI2 (ALLEN Institute for Artificial Intelligence) 研究院中进行机器常识智能研究的小组1. 现有的研究项目：  Commonsense Knowledge Graphs: Exploring semi-structured representations of commonsense.2 Visual Commonsense Rea">
+<meta name="twitter:image" content="http://xingluxi.github.io/images/note-research-ai2-mosaic/atomic-example.pngs">
 
 
 
@@ -315,8 +319,8 @@
               
                 <span class="post-meta-item-text">Post modified&#58;</span>
               
-              <time title="Post modified" itemprop="dateModified" datetime="2019-06-22T11:24:29+08:00">
-                2019-06-22
+              <time title="Post modified" itemprop="dateModified" datetime="2019-07-08T19:57:20+08:00">
+                2019-07-08
               </time>
             
           </span>
@@ -370,7 +374,7 @@
                   <span class="post-meta-item-text">Words count in article&#58;</span>
                 
                 <span title="Words count in article">
-                  203
+                  568
                 </span>
               
 
@@ -386,7 +390,7 @@
                   <span class="post-meta-item-text">Reading time &asymp;</span>
                 
                 <span title="Reading time">
-                  1
+                  2
                 </span>
               
             </div>
@@ -429,10 +433,89 @@
 <p>重点关注 <code>Commonsense Knowledge Graphs</code> 这部分的工作</p>
 <h2 id="Commonsense-Knowledge-Graphs"><a href="#Commonsense-Knowledge-Graphs" class="headerlink" title="Commonsense Knowledge Graphs"></a>Commonsense Knowledge Graphs</h2><blockquote>
 <ol>
-<li>ATOMIC: An Atlas of Machine Commonsense for If-Then Reasoning. AAAI,2019.</li>
 <li>Event2Mind: Commonsense Inference on Events, Intents, and Reactions. ACL,2018.</li>
+<li>ATOMIC: An Atlas of Machine Commonsense for If-Then Reasoning. AAAI,2019.</li>
 </ol>
 </blockquote>
+<h2 id="Event2Mind"><a href="#Event2Mind" class="headerlink" title="Event2Mind"></a>Event2Mind</h2><p>常识推理任务</p>
+<p>推理类型：2类（语用推理 pragmatic inference）</p>
+<ul>
+<li><p>intent 意图</p>
+<ul>
+<li>可以解释为什么施事者导致事件发生，是行动或事件的心理前提</li>
+</ul>
+</li>
+<li><p>emotional reaction 情绪反应</p>
+<ul>
+<li>反应定义为解释施事者和参与事件的其他人的心理状态将如何因此改变</li>
+<li>反应可以被认为是一种行为或事件的心理后置条件</li>
+</ul>
+</li>
+</ul>
+<p>任务目标：给定一个 event phrase，预测 X intent / X reaction / Y reaction</p>
+<ul>
+<li>pre-condition: X intent</li>
+<li>post-condition: X/Y reaction</li>
+</ul>
+<h2 id="ATOMIC"><a href="#ATOMIC" class="headerlink" title="ATOMIC"></a>ATOMIC</h2><p>关于 if-then 推理类型的推理知识库（Knowledge base about inferential knowledge on if-then reasoning types）</p>
+<ul>
+<li>例子：<img src="/images/note-research-ai2-mosaic/atomic-example.pngs" alt="atomic-example"></li>
+</ul>
+<p>nine if-then relation types to distinguish: （不同上不全面的刻画维度）</p>
+<ul>
+<li>cause vs. effect<ul>
+<li>[Xintent，Xneed] vs. [Xwant，Xreaction，Effect on X，Effect on Y，Ywant，Yreaction]</li>
+</ul>
+</li>
+<li>agents vs. themes：agent（X，who cause the event），themes（Other）<ul>
+<li>[Xintent，Xneed，Xwant，Xreaction，Effect on X， Xattribute] vs. [Effect on Y，Ywant， Yreaction]</li>
+</ul>
+</li>
+<li>voluntary vs. involuntary events<ul>
+<li>[Xintent，Xneed，Xwant，Ywant] vs. [Xreaction，Effect on X，Effect on Y，Yreaction，Xattribute]</li>
+</ul>
+</li>
+<li>actions vs. mental states<ul>
+<li>[] vs. []</li>
+</ul>
+</li>
+<li>dynamic vs. static<ul>
+<li>[Xintent，Xneed，Xwant，Xreaction，Effect on X，Effect on Y，Ywant，Yreaction] vs. [Xattribute]</li>
+</ul>
+</li>
+</ul>
+<p>taxonomy of if-then reasoning types:</p>
+<ul>
+<li>based on the content being predicted:<ul>
+<li>if-event-then-mental-state<ul>
+<li>mental pre-/post- conditions of an event</li>
+<li>3 relations: X inent/ X reaction/ Other reaction</li>
+</ul>
+</li>
+<li>if event-then event<ul>
+<li>events that constitute probable pre- and postconditions of a given event</li>
+<li>5 relations: X need/ X want/ Effect on X/ Other want/ Effect on Other</li>
+</ul>
+</li>
+<li>if event-then-person<ul>
+<li>a stative relation that describes how the subject of an event is described or perceived</li>
+<li>X attribute</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>based on their causal relations<ul>
+<li>causes（因）</li>
+<li>effect（果）</li>
+<li>stative（状态）</li>
+</ul>
+</li>
+<li>图例：<img src="/images/note-research-ai2-mosaic/atomic-taxonomy-example.png" alt="example"></li>
+</ul>
+<p>与现有knowledge base的对比：</p>
+<ul>
+<li><img src="/images/note-research-ai2-mosaic/atomic-comp.png" alt="kb-comp"></li>
+</ul>
 <div id="footnotes"><hr><div id="footnotelist"><ol style="list-style:none; padding-left: 0;"><li id="fn:1"><span style="display: inline-block; vertical-align: top; padding-right: 10px;">1.</span><span style="display: inline-block; vertical-align: top;">https://mosaic.allenai.org/</span><a href="#fnref:1" rev="footnote"> ↩</a></li><li id="fn:2"><span style="display: inline-block; vertical-align: top; padding-right: 10px;">2.</span><span style="display: inline-block; vertical-align: top;">https://mosaic.allenai.org/projects/commonsense-knowledge-graphs</span><a href="#fnref:2" rev="footnote"> ↩</a></li><li id="fn:3"><span style="display: inline-block; vertical-align: top; padding-right: 10px;">3.</span><span style="display: inline-block; vertical-align: top;">https://visualcommonsense.com/</span><a href="#fnref:3" rev="footnote"> ↩</a></li><li id="fn:4"><span style="display: inline-block; vertical-align: top; padding-right: 10px;">4.</span><span style="display: inline-block; vertical-align: top;">https://mosaic.allenai.org/projects/mosaic-commonsense-benchmarks</span><a href="#fnref:4" rev="footnote"> ↩</a></li></ol></div></div>
       
     </div>
@@ -598,7 +681,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">32</span>
+                  <span class="site-state-item-count">34</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -620,7 +703,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">33</span>
+                  <span class="site-state-item-count">36</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
@@ -675,7 +758,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Commonsense-Knowledge-Graphs"><span class="nav-text">Commonsense Knowledge Graphs</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Commonsense-Knowledge-Graphs"><span class="nav-text">Commonsense Knowledge Graphs</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Event2Mind"><span class="nav-text">Event2Mind</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ATOMIC"><span class="nav-text">ATOMIC</span></a></li></ol></div>
             
 
           </div>
