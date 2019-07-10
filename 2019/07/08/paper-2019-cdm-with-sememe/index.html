@@ -95,7 +95,7 @@
 <meta property="og:description" content="Incorporating Sememes into Chinese Definition Modeling2019Linear Yang et al.  MotivationChinese Definition Modeling(CDM) 任务：为给定的中文词产生词典式的中文定义 This work 为了解决CDM任务，构建了一个CDM数据集，每个example由 &amp;lt;word, seme">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://xingluxi.github.io/images/paper-2019-cdm-with-sememe/fig-1-corpus.png">
-<meta property="og:updated_time" content="2019-07-08T12:15:27.387Z">
+<meta property="og:updated_time" content="2019-07-10T02:12:42.466Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="2019 | Incorporating Sememes into Chinese Definition Modeling">
 <meta name="twitter:description" content="Incorporating Sememes into Chinese Definition Modeling2019Linear Yang et al.  MotivationChinese Definition Modeling(CDM) 任务：为给定的中文词产生词典式的中文定义 This work 为了解决CDM任务，构建了一个CDM数据集，每个example由 &amp;lt;word, seme">
@@ -317,8 +317,8 @@
               
                 <span class="post-meta-item-text">Post modified&#58;</span>
               
-              <time title="Post modified" itemprop="dateModified" datetime="2019-07-08T20:15:27+08:00">
-                2019-07-08
+              <time title="Post modified" itemprop="dateModified" datetime="2019-07-10T10:12:42+08:00">
+                2019-07-10
               </time>
             
           </span>
@@ -372,7 +372,7 @@
                   <span class="post-meta-item-text">Words count in article&#58;</span>
                 
                 <span title="Words count in article">
-                  218
+                  376
                 </span>
               
 
@@ -432,7 +432,25 @@
 </li>
 <li>例子：<img src="/images/paper-2019-cdm-with-sememe/fig-1-corpus.png" alt="cdm-corpus-example"></li>
 </ul>
-<h2 id="Model"><a href="#Model" class="headerlink" title="Model"></a>Model</h2><h3 id="Adaptive-Attention-Model"><a href="#Adaptive-Attention-Model" class="headerlink" title="Adaptive-Attention Model"></a>Adaptive-Attention Model</h3><h3 id="Self-and-Adaptive-Attention-Model"><a href="#Self-and-Adaptive-Attention-Model" class="headerlink" title="Self- and Adaptive-Attention Model"></a>Self- and Adaptive-Attention Model</h3><h2 id="Experiments"><a href="#Experiments" class="headerlink" title="Experiments"></a>Experiments</h2><h2 id="Summary-amp-Analysis"><a href="#Summary-amp-Analysis" class="headerlink" title="Summary &amp; Analysis"></a>Summary &amp; Analysis</h2>
+<h2 id="Model"><a href="#Model" class="headerlink" title="Model"></a>Model</h2><p>RNN-based Seq-to-Seq Model</p>
+<h3 id="Adaptive-Attention-Model"><a href="#Adaptive-Attention-Model" class="headerlink" title="Adaptive-Attention Model"></a>Adaptive-Attention Model</h3><p>引入 Adaptive-Attention 的原因：</p>
+<ul>
+<li>vanilla attention 在每一步都会关于sememes</li>
+<li>在生成definition的过程中，不是所有词都与sememes有关</li>
+</ul>
+<p>Adaptive-Attention</p>
+<ul>
+<li>利用 time-varying sememes 信息作为 sememe context</li>
+<li>LM的信息作为 LM context<ul>
+<li>首先，由 decoder 的 hidden state 和 上一时刻生成的definition词 通过线性映射和sigmoid运算得到 一个 gate 向量</li>
+<li>再，对上一时刻的hidden state 进行tanh激活运算，通过 gated unit，得到 LM context</li>
+</ul>
+</li>
+<li>再根据 context，引入一个新的attention，决定在生成当前时刻词是依赖 sememe context 还是 LM context</li>
+</ul>
+<h3 id="Self-and-Adaptive-Attention-Model"><a href="#Self-and-Adaptive-Attention-Model" class="headerlink" title="Self- and Adaptive-Attention Model"></a>Self- and Adaptive-Attention Model</h3><p>将 AAM 中的 RNN，换成 transformer</p>
+<!-- ## Experiments -->
+<!-- ## Summary & Analysis -->
       
     </div>
     
@@ -672,7 +690,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Motivation"><span class="nav-text">Motivation</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#This-work"><span class="nav-text">This work</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Methodology"><span class="nav-text">Methodology</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Model"><span class="nav-text">Model</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Adaptive-Attention-Model"><span class="nav-text">Adaptive-Attention Model</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Self-and-Adaptive-Attention-Model"><span class="nav-text">Self- and Adaptive-Attention Model</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Experiments"><span class="nav-text">Experiments</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Summary-amp-Analysis"><span class="nav-text">Summary &amp; Analysis</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Motivation"><span class="nav-text">Motivation</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#This-work"><span class="nav-text">This work</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Methodology"><span class="nav-text">Methodology</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Model"><span class="nav-text">Model</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Adaptive-Attention-Model"><span class="nav-text">Adaptive-Attention Model</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Self-and-Adaptive-Attention-Model"><span class="nav-text">Self- and Adaptive-Attention Model</span></a></li></ol></li></ol></div>
             
 
           </div>
