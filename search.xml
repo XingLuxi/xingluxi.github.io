@@ -39,7 +39,7 @@
       <link href="/2019/07/08/paper-emnlp2018-graft-net/"/>
       <url>/2019/07/08/paper-emnlp2018-graft-net/</url>
       
-        <content type="html"><![CDATA[<blockquote><p>Open Domain Question Answering Using Early Fusion of Knowledge Bases and Text<br>EMNLP 2018<br>Haitian Sun, Bhuwan Dhingra et al.<br>CMU</p></blockquote><p>official code: <a href="https://github.com/OceanskySun/GraftNet" target="_blank" rel="noopener">https://github.com/OceanskySun/GraftNet</a></p><h2 id="Motivation"><a href="#Motivation" class="headerlink" title="Motivation"></a>Motivation</h2><h2 id="Model"><a href="#Model" class="headerlink" title="Model"></a>Model</h2><h2 id="Experiments"><a href="#Experiments" class="headerlink" title="Experiments"></a>Experiments</h2><h2 id="Summary-amp-Analysis"><a href="#Summary-amp-Analysis" class="headerlink" title="Summary &amp; Analysis"></a>Summary &amp; Analysis</h2>]]></content>
+        <content type="html"><![CDATA[<blockquote><p>Open Domain Question Answering Using Early Fusion of Knowledge Bases and Text<br>EMNLP 2018<br>Haitian Sun, Bhuwan Dhingra et al.<br>CMU</p></blockquote><p>official code: <a href="https://github.com/OceanskySun/GraftNet" target="_blank" rel="noopener">https://github.com/OceanskySun/GraftNet</a></p><h2 id="Motivation"><a href="#Motivation" class="headerlink" title="Motivation"></a>Motivation</h2><ul><li>大多数 open domain QA 任务都是使用单信息源（要么是text from encyclopedia，或者是 single KB）来回答问题</li><li>判断一个信息源的适用性（suitability），取决于信息源的覆盖度（coverage）和从其中抽取答案的难度（difficulty of extracting answers from it）<ul><li>large text corpus作为信息源：具有很高的覆盖度，但是信息被不同的text pattern表示（这里可以理解为，不同领域/体裁的文本有不同的表现形式），模型还需要学习这些text pattern，导致模型难以泛化到其他领域以及新的推理类型</li><li>KB作为信息源：覆盖度低（由于不可避免的不完全性和有限的模式），但是更易于抽取答案</li></ul></li><li>由于有两种信息源存在，有些问题可被text回答，有些问题更适合用KB回答，但是只使用一种信息源不足以回答问题，一个很自然的问题就是<strong>如何有效地结合多种类型的信息</strong>：有以下两种方式<ul><li><strong>late fusion</strong>：为每种信息源设计SOTA的QA模型，得到他们的预测结果之后，再用一些启发式的方法将得到的答案进行聚合<ul><li>问题：sub-optimal的解决方法，模型受限于从不同的信息源中聚集证据信息</li></ul></li><li><strong>early fusion</strong>：本文所采取的方式<ul><li>只利用一个模型，训练其从一个问题子图中抽取答案</li><li>问题子图，既包含相关的 KB fact 又包含 text</li></ul></li></ul></li></ul><h3 id="This-Work"><a href="#This-Work" class="headerlink" title="This Work"></a>This Work</h3><p>这篇文章进行的是开放域的KBQA任务（incomplete KB），结合图表示学习，提出了一个GRAFT-Net模型，可以从同时包含文本、KB实体与关系的 Question-specific 子图中抽取答案</p><ul><li>为了实现early fusion，提出了一个 Graphs of Relations Among Facts and Text Network（GRAFT-Net）</li><li>基于图卷积神经网络模型，可以在由KB facts和text sentences组成的异构图上进行运算<ul><li>提出了 heterogeneous update rules 来处理KB节点，LSTM-based update rules来更新text节点</li><li>提出了 directed propagation method，启发自Personalized PageRank算法，来限制图中embedding在基于从seed节点链接到question的路径上进行传播</li></ul></li><li>实验数据集：WikiMovies，WebQuestionSP</li></ul><h2 id="Task-Setup"><a href="#Task-Setup" class="headerlink" title="Task Setup"></a>Task Setup</h2><h3 id="Task-Description"><a href="#Task-Description" class="headerlink" title="Task Description"></a>Task Description</h3><h3 id="Question-Subgraph-Retrieval"><a href="#Question-Subgraph-Retrieval" class="headerlink" title="Question Subgraph Retrieval"></a>Question Subgraph Retrieval</h3><h2 id="GRAFT-Net"><a href="#GRAFT-Net" class="headerlink" title="GRAFT-Net"></a>GRAFT-Net</h2><h3 id="1-Node-Initialization"><a href="#1-Node-Initialization" class="headerlink" title="1.Node Initialization"></a>1.Node Initialization</h3><h3 id="2-Heterogeneous-Updates"><a href="#2-Heterogeneous-Updates" class="headerlink" title="2.Heterogeneous Updates"></a>2.Heterogeneous Updates</h3><p>Entities<br>Documents</p><h3 id="3-Conditioning-on-the-Question"><a href="#3-Conditioning-on-the-Question" class="headerlink" title="3.Conditioning on the Question"></a>3.Conditioning on the Question</h3><p>Attention over Relations<br>Directed Propagation</p><h3 id="4-Answer-Selection"><a href="#4-Answer-Selection" class="headerlink" title="4.Answer Selection"></a>4.Answer Selection</h3><h3 id="5-Regularization-via-Fact-Dropout"><a href="#5-Regularization-via-Fact-Dropout" class="headerlink" title="5.Regularization via Fact Dropout"></a>5.Regularization via Fact Dropout</h3><h2 id="Experiments"><a href="#Experiments" class="headerlink" title="Experiments"></a>Experiments</h2><h2 id="Summary-amp-Analysis"><a href="#Summary-amp-Analysis" class="headerlink" title="Summary &amp; Analysis"></a>Summary &amp; Analysis</h2>]]></content>
       
       
       <categories>
@@ -119,11 +119,11 @@
             
             <tag> nlp </tag>
             
+            <tag> mrc </tag>
+            
             <tag> paper </tag>
             
             <tag> knowledge </tag>
-            
-            <tag> mrc </tag>
             
         </tags>
       
@@ -150,9 +150,9 @@
             
             <tag> nlp </tag>
             
-            <tag> knowledge </tag>
-            
             <tag> research </tag>
+            
+            <tag> knowledge </tag>
             
             <tag> note </tag>
             
@@ -181,9 +181,9 @@
             
             <tag> nlp </tag>
             
-            <tag> paper </tag>
-            
             <tag> mrc </tag>
+            
+            <tag> paper </tag>
             
             <tag> multi-hop </tag>
             
@@ -214,9 +214,9 @@
             
             <tag> nlp </tag>
             
-            <tag> paper </tag>
-            
             <tag> mrc </tag>
+            
+            <tag> paper </tag>
             
             <tag> multi-hop </tag>
             
@@ -247,9 +247,9 @@
             
             <tag> nlp </tag>
             
-            <tag> knowledge </tag>
-            
             <tag> mrc </tag>
+            
+            <tag> knowledge </tag>
             
             <tag> reasoning </tag>
             
@@ -313,9 +313,9 @@
             
             <tag> nlp </tag>
             
-            <tag> paper </tag>
-            
             <tag> mrc </tag>
+            
+            <tag> paper </tag>
             
         </tags>
       
@@ -342,9 +342,9 @@
             
             <tag> nlp </tag>
             
-            <tag> paper </tag>
-            
             <tag> mrc </tag>
+            
+            <tag> paper </tag>
             
             <tag> research </tag>
             
@@ -373,9 +373,9 @@
             
             <tag> nlp </tag>
             
-            <tag> paper </tag>
-            
             <tag> mrc </tag>
+            
+            <tag> paper </tag>
             
             <tag> research </tag>
             
@@ -435,11 +435,11 @@
             
             <tag> nlp </tag>
             
+            <tag> mrc </tag>
+            
             <tag> paper </tag>
             
             <tag> knowledge </tag>
-            
-            <tag> mrc </tag>
             
         </tags>
       
@@ -466,11 +466,11 @@
             
             <tag> nlp </tag>
             
+            <tag> mrc </tag>
+            
             <tag> paper </tag>
             
             <tag> knowledge </tag>
-            
-            <tag> mrc </tag>
             
             <tag> nli </tag>
             
@@ -499,9 +499,9 @@
             
             <tag> nlp </tag>
             
-            <tag> paper </tag>
-            
             <tag> mrc </tag>
+            
+            <tag> paper </tag>
             
             <tag> model </tag>
             
@@ -530,9 +530,9 @@
             
             <tag> nlp </tag>
             
-            <tag> paper </tag>
-            
             <tag> mrc </tag>
+            
+            <tag> paper </tag>
             
             <tag> multi-hop </tag>
             
@@ -693,9 +693,9 @@
             
             <tag> nlp </tag>
             
-            <tag> paper </tag>
-            
             <tag> mrc </tag>
+            
+            <tag> paper </tag>
             
             <tag> research </tag>
             
@@ -755,9 +755,9 @@
             
             <tag> nlp </tag>
             
-            <tag> paper </tag>
-            
             <tag> mrc </tag>
+            
+            <tag> paper </tag>
             
             <tag> dataset </tag>
             
@@ -786,9 +786,9 @@
             
             <tag> nlp </tag>
             
-            <tag> paper </tag>
-            
             <tag> mrc </tag>
+            
+            <tag> paper </tag>
             
             <tag> reasoning </tag>
             
@@ -817,9 +817,9 @@
             
             <tag> nlp </tag>
             
-            <tag> paper </tag>
-            
             <tag> mrc </tag>
+            
+            <tag> paper </tag>
             
             <tag> nlu </tag>
             
@@ -974,11 +974,11 @@
             
             <tag> nlp </tag>
             
+            <tag> mrc </tag>
+            
             <tag> paper </tag>
             
             <tag> knowledge </tag>
-            
-            <tag> mrc </tag>
             
         </tags>
       
