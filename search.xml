@@ -4,11 +4,44 @@
   
     
     <entry>
+      <title>ACL2019 | Explicit Utilization of General Knowledge in Machine Reading Comprehension</title>
+      <link href="/2019/07/17/paper-acl2019-kar/"/>
+      <url>/2019/07/17/paper-acl2019-kar/</url>
+      
+        <content type="html"><![CDATA[<blockquote><p>Title: Explicit Utilization of General Knowledge in Machine Reading Comprehension<br>Author: Chao Wang, Hui Jiang<br>Org.: York University<br>Published: ACL,2019<br>Old Version: Exploring Machine Reading Comprehension with Explicit Knowledge. arXiv:1809.03449</p></blockquote><h2 id="Motivation"><a href="#Motivation" class="headerlink" title="Motivation"></a>Motivation</h2><ul><li>MRC模型和人类之间的差距有两方面<ul><li>1、MRC模型需要大量的训练样例来学校</li><li>2、MRC模型对于有意加入噪声数据不鲁棒</li></ul></li><li>造成差距的原因在于目前MRC模型仅利用了给定passage-question对中的信息，而没有像人类一样利用一些general knowledge</li><li>如何利用抽取的知识<ul><li>目前的做法都是隐式地将抽取到的知识的编码用于增强相应词的lexical/contextual表示</li><li>缺点：缺乏解释性和控制性</li></ul></li></ul><h3 id="This-Work"><a href="#This-Work" class="headerlink" title="This Work"></a>This Work</h3><ul><li>本文中提出，词之间的语义联系（<strong>inter-word semantic connections</strong>）可以作为一种general knowledge<ul><li>例如：<img src="/images/paper-acl2019-kar/data-example.png" alt="example"><br>此外，本文</li></ul></li><li>提出了一种 <strong>data enrichment</strong> 方法，利用 <strong>WordNet</strong> 作为知识源，为passage-question对抽取 inter-word semantic connections</li><li>提出了一个 <strong>Knowledge Aided Reader（KAR）</strong> 模型，用于显示地将抽取到的 general knowledge 引入到模型中，并辅助 attention 机制</li></ul><h2 id="Data-Enrichment-Method"><a href="#Data-Enrichment-Method" class="headerlink" title="Data Enrichment Method"></a>Data Enrichment Method</h2><p>本文介绍的基于 WordNet 的数据富集的方法是一个可控的抽取过程</p><h3 id="Semantic-Relation-Chain"><a href="#Semantic-Relation-Chain" class="headerlink" title="Semantic Relation Chain"></a>Semantic Relation Chain</h3><p>WordNet 中的几个要素：</p><ul><li><strong>synset</strong>：同义集合（a set of words expressing the same sense）<ul><li>一个词可以有多个不同的senses，可以属于多个synset</li></ul></li><li><strong>semantic relations</strong>：synset 之间的语义关系<ul><li>在NLTK中，共有16种<ul><li>hypernyms, hyponyms, holonyms, meronyms, attributes, etc.</li></ul></li></ul></li></ul><p>本文根据 synset 和 semantic relation 定义了一个新的概念：<font color="blue"><strong>Semantic Relation Chain</strong></font></p><ul><li>连接一个 synset 与另一个 synset 的一系列 semantic relation（a concatenated sequence of semantic relations）</li><li>semantic relation chain 中的每个 semantic relation 定义为一跳（a hop）</li></ul><h3 id="Inter-word-Semantic-Connection"><a href="#Inter-word-Semantic-Connection" class="headerlink" title="Inter-word Semantic Connection"></a>Inter-word Semantic Connection</h3><p>Data Enrichment 方法的核心问题就是确定两个词之间是否存在 <strong>语义的联系（semantically connections）</strong><br>为了解决这个问题，定义了一个新的概念：<strong>扩展同义词集（the extended synsets of a word）</strong></p><ul><li>定义：通过 semantic relation chain 可以到达的 synset</li><li>定义符号：$S_w$ 表示 synset，$S_w^*$ 表示扩展同义词集</li><li>理论上来看，如果不加以限制的话，WordNet 中所有的 synset 都将属于 $S_w^*$<ul><li>故此，引入了一个超参数 $k \in \mathbb{N}$，表示 semantic relation chain 的最大跳数</li><li>即，只有小于 $k$ 的 chains 才用于构建 $S_w^*$：<ul><li>$S_w^<em>(k) \text{ ( if }k=0, \text{ we will have }S_w^</em>(0)=S_w \text{ )}$</li></ul></li></ul></li></ul><p>构建 inter-word semantic connections，定义：</p><ul><li>当且仅当 $S_{w_1}^*{k} \cap S_{w_2} \neq \emptyset$ 时，$w_1$ 和 $w_2$ 具有语义关联</li></ul><h3 id="General-Knowledge-Extraction"><a href="#General-Knowledge-Extraction" class="headerlink" title="General Knowledge Extraction"></a>General Knowledge Extraction</h3><p>遵循上述的定义，为给定的 passage-question 对抽取任意词与 passage 中的词的 inter-word semantic relation：</p><ul><li>只抽取 positional information</li><li>对词 $w$，抽取一个集合 $E_w$，包含所有 passage 中与 $w$ 有语义关联的词的位置，如果 $w$ 本事是 passage 中的词，去除其本身在 passage 中的位置</li><li>通过上一节定义的超参数 $k$ 就可以控制抽取的 扩展同义词集 的大小，即抽取出来的 general Knowledge 的数量<ul><li>超参数 $k$ 通过在验证集上的效果确定</li></ul></li></ul><h2 id="Knowledge-Aided-Reader"><a href="#Knowledge-Aided-Reader" class="headerlink" title="Knowledge Aided Reader"></a>Knowledge Aided Reader</h2><p>KAR 模型的结构如下图所示：</p><ul><li><img src="/images/paper-acl2019-kar/model-kar.png" alt="model-kar"></li><li>与现有的一些模型相比，主要的改进集中在右侧部分的输入和引入 general Knowledge 之后， attention 计算的改进</li></ul><p>Notation:</p><ul><li>$P = \{p_1, … , p_n\}$</li><li>$Q = \{q_1, … , q_m\}$</li></ul><p>Knowledge Aided Mutual Attention</p><ul><li>利用提起抽取好的 general Knowledge 为每个词 $w$ 构建 增强的上下文表示 $c_w^*$<ul><li>通过 $E_w$ 和 原始上下文向量 $C_p$ 的对应关系 得到 matching context embeddings $Z \in \mathbb{R}^{d\times |E_w|}$</li><li>计算 matching vector $c_w^+$<ul><li>$t_i = v_c^{\top} tanh(W_c x_i + U_c c_w) \in \mathbb{R}$</li><li>$c_w^+ = Z \text{ softmax} ({t_1,…,t_{|E_w|}}) \in \mathbb{R}^{d}$</li></ul></li></ul></li><li>attention 的计算方式 同 BIDAF</li></ul><p>Knowledge Aided Self Attention</p><ul><li>方法同上</li></ul><h2 id="Experiments"><a href="#Experiments" class="headerlink" title="Experiments"></a>Experiments</h2><ul><li>超参数 $k$ 的选择<ul><li><img src="/images/paper-acl2019-kar/exp-k.png" alt="exp-k"></li></ul></li></ul><h2 id="Summary-amp-Analysis"><a href="#Summary-amp-Analysis" class="headerlink" title="Summary &amp; Analysis"></a>Summary &amp; Analysis</h2><ul><li>抽取出来的 general knowledge 相当于为 passage-question 对中的词构建了一个隐式的关联矩阵，通过这个关联矩阵，在两次 attention 中抽取出对应的 contextual representation 和 coarse memory （result of mutal attention）来辅助增强 attention 的输入</li></ul>]]></content>
+      
+      
+      <categories>
+          
+          <category> Paper-Note </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> nlp </tag>
+            
+            <tag> mrc </tag>
+            
+            <tag> paper </tag>
+            
+            <tag> knowledge </tag>
+            
+            <tag> wordnet </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>ACL2019 | Explain Yourself! Leveraging Language Models for Commonsense Reasoning</title>
       <link href="/2019/07/10/paper-acl2019-cos-e/"/>
       <url>/2019/07/10/paper-acl2019-cos-e/</url>
       
-        <content type="html"><![CDATA[<blockquote><p>Explain Yourself! Leveraging Language Models for Commonsense Reasoning<br>ACL 2019<br>Nazneen Fatema Rajani, Bryan McCann, Caiming Xiong, Richard Socher<br>Salesforce Research</p></blockquote><p>official code: <a href="https://github.com/salesforce/cos-e" target="_blank" rel="noopener">https://github.com/salesforce/cos-e</a></p><h2 id="Motivation"><a href="#Motivation" class="headerlink" title="Motivation"></a>Motivation</h2><blockquote><p>Commonsense reasoning that draws upon world knowledge derived from spatial and temporal relations, laws of physics, causes and effects, and social conventions is a feature of human intelligence.<br>However, it is difficult to instill such commonsense reasoning abilities into artificial intelligence implemented by deep neural networks. While neural networks effectively learn from a large number of examples, commonsense reasoning for humans precisely hits upon the kind of reasoning that is in less need of exemplification.<br>Rather, humans pick up the kind of knowledge required to do commonsense reasoning simply by living in the world and doing everyday things.<br>AI models have limited access to the kind of world knowledge that is necessary for commonsense reasoning.</p><p>from official blog: <a href="https://blog.einstein.ai/leveraging-language-models-for-commonsense/" target="_blank" rel="noopener">https://blog.einstein.ai/leveraging-language-models-for-commonsense/</a></p></blockquote><ul><li>DL 模型在需要常识推理的任务上表现不佳，原因可能是往往需要某种形式的世界知识，或是推理的信息未在输入中直接显示出来</li><li>虽然已经有了一些用于检验模型Commonsense推理能力的数据集，但是 it is still unclear how these models perform reasoning and to what extent that reasoning is based on world knowledge.</li></ul><h3 id="This-Work"><a href="#This-Work" class="headerlink" title="This Work"></a>This Work</h3><ul><li>构建了一个Common Sense Explanations（CoS-E）数据集：收集了人类对于常识推理的解释（模拟人类的常识推理过程）以及highlight annotation（针对问句的）</li><li>提出了一个常识自动生成解释（Commonsense Auto-Generate Explanation，CAGE）框架：使用CoS-E数据集来训练语言模型，是LM可以自动的产生解释（这个解释可以在训练和推理过程中使用），证明可以有效地利用语言模型来进行Commonsense Reasoning</li><li>在任务数据集（CommonsenseQA）上取得了10%的提升（Version 1.0）</li><li>还进行了跨领域迁移的实验</li></ul><h3 id="Background-and-Related-Work"><a href="#Background-and-Related-Work" class="headerlink" title="Background and Related Work"></a>Background and Related Work</h3><ul><li>Commonsense reasoning</li><li>Natural language explanations</li><li>Knowledge Transfer in NLP</li></ul><h2 id="CoS-E-Corpus"><a href="#CoS-E-Corpus" class="headerlink" title="CoS-E Corpus"></a>CoS-E Corpus</h2><p>Common Sense Explanations 数据集是在基于CommonsenseQA任务数据集上构建的，包含两种形式的人类解释：</p><ul><li>1、open-ended 自然语言解释 （<em>CoS-E-open-ended</em>）</li><li>2、对于问句，标注了 highlighted span annotations，标注的是对于预测正确答案起到重要作用的词 （<em>CoS-E-selected</em>）</li><li>示例：<ul><li><img src="/images/paper-acl2019-cos-e/cos-e-example.png" alt="cos-e"></li></ul></li></ul><h2 id="Algorithm-and-Model"><a href="#Algorithm-and-Model" class="headerlink" title="Algorithm and Model"></a>Algorithm and Model</h2><p>（在这篇文章中，进行实验时使用的是CommonsenseQA Version 1.0 的数据集，所以只有三个候选答案，在 Version 1.1 中，每个问题对应5个候选答案）</p><p>框架图：</p><ul><li><img src="/images/paper-acl2019-cos-e/framework-overview.png" alt="overview"></li></ul><h3 id="Commonsense-Auto-Generated-Explanations-CAGE"><a href="#Commonsense-Auto-Generated-Explanations-CAGE" class="headerlink" title="Commonsense Auto-Generated Explanations (CAGE)"></a>Commonsense Auto-Generated Explanations (CAGE)</h3><p>在CAGE框架中，使用GPT进行微调。微调部分的框架如上图中的图（a）所示。</p><p>本文提出了两种生成解释（即微调GPT-LM）的方法：</p><ul><li>1、explain-and-then-predict（reasoning）</li><li>2、predict-and-then-explain（rationalization）</li></ul><p>方法一：<strong>Reasoning</strong></p><ul><li>输入：$C_{RE} = q,c_0, c_1, c_2 \text{ ?}\text{ commonsense says} $</li><li>目标：条件式生成 explanations $e$<ul><li>$\sum_i \text{log} P(e_i|e_{i-k},…,e_{i-1}, C_{RE}; \Theta)$</li><li>其中，$k$ 是语言模型生成句子的窗口大小，在本文中，设为大于explanation的长度</li></ul></li><li>称为reasoning的原因：<ul><li>在推理阶段也可以自动的生成explanation，为常识问答提供额外的上下文</li><li>Note：在生成explanation的过程中不知道正确答案的标签</li></ul></li></ul><p>方法二：<strong>Rationalization</strong></p><ul><li>输入：$C_{RA} = q,c_0, c_1, c_2 \text{ ? } a \text{ because} $</li><li>目标：同上</li><li>在这个算法中，在训练时，生成explanation的过程中是已知正确答案的标签的<ul><li>相当于为正确的 q-a 对 产生一个合理的解释</li><li>而不是真正的常识推理</li></ul></li></ul><p>CAGE的参数设置：</p><ul><li>最大序列长度：20</li><li>batch size：36</li><li>train epochs：10</li><li>learning rate：$1e-6$</li><li>warmup linearly with proportion $0.002$</li><li>weight decay：0.01</li><li>模型选择指标：在验证集上的BLEU和perplexity</li></ul><h3 id="Commonsense-Predictions-with-Explanations"><a href="#Commonsense-Predictions-with-Explanations" class="headerlink" title="Commonsense Predictions with Explanations"></a>Commonsense Predictions with Explanations</h3><p>这部分关注的是，给定一个人类生成的解释或是LM推理生成的解释，使模型在CQA任务上进行预测。见上图图（b）</p><p>任务模型采用BERT with multiple choice</p><ul><li>BERT输入：question [SEP] explanation [SEP] candidate answer choice</li><li>微调BERT的参数：<ul><li>batch size：24</li><li>test batch size：12</li><li>train epochs：10</li><li>maximum sequence length：175（baseline=50）</li></ul></li></ul><h2 id="Experiments"><a href="#Experiments" class="headerlink" title="Experiments"></a>Experiments</h2><p>这篇文章的实验部分很充分、很完整，包含以下几个方面：</p><ul><li>使用CoS-E进行CQA任务，在dev上的效果：Table-2<ul><li><em>仅在训练时应用</em> CoS-E-open-ended</li><li>BERT baseline：63.8%</li><li>在BERT中加入CoS-E-open-ended，提升了2个点（65.5%）</li><li>CAGE-reasoning：72.6%</li><li>CQA test set 上的效果见 Table-3</li></ul></li><li>Table-4：在训练和验证时同时应用CoS-E</li><li>Table-5：在CQA v1.1 测试集上的结果</li><li>迁移到域外数据集</li></ul><h2 id="Summary-amp-Analysis"><a href="#Summary-amp-Analysis" class="headerlink" title="Summary &amp; Analysis"></a>Summary &amp; Analysis</h2><p>论文中有意思的几点分析</p><ul><li>explanations可以帮助阐明更长更复合的问题</li><li>CAGE-reasoning 生成的explanations中，有43%的可能性包含答案选项</li></ul>]]></content>
+        <content type="html"><![CDATA[<blockquote><p>Title: Explain Yourself! Leveraging Language Models for Commonsense Reasoning<br>Authors: Nazneen Fatema Rajani, Bryan McCann, Caiming Xiong, Richard Socher<br>Org.: Salesforce Research<br>Published: ACL 2019</p></blockquote><p>official code: <a href="https://github.com/salesforce/cos-e" target="_blank" rel="noopener">https://github.com/salesforce/cos-e</a></p><h2 id="Motivation"><a href="#Motivation" class="headerlink" title="Motivation"></a>Motivation</h2><blockquote><p>Commonsense reasoning that draws upon world knowledge derived from spatial and temporal relations, laws of physics, causes and effects, and social conventions is a feature of human intelligence.<br>However, it is difficult to instill such commonsense reasoning abilities into artificial intelligence implemented by deep neural networks. While neural networks effectively learn from a large number of examples, commonsense reasoning for humans precisely hits upon the kind of reasoning that is in less need of exemplification.<br>Rather, humans pick up the kind of knowledge required to do commonsense reasoning simply by living in the world and doing everyday things.<br>AI models have limited access to the kind of world knowledge that is necessary for commonsense reasoning.</p><p>from official blog: <a href="https://blog.einstein.ai/leveraging-language-models-for-commonsense/" target="_blank" rel="noopener">https://blog.einstein.ai/leveraging-language-models-for-commonsense/</a></p></blockquote><ul><li>DL 模型在需要常识推理的任务上表现不佳，原因可能是往往需要某种形式的世界知识，或是推理的信息未在输入中直接显示出来</li><li>虽然已经有了一些用于检验模型Commonsense推理能力的数据集，但是 it is still unclear how these models perform reasoning and to what extent that reasoning is based on world knowledge.</li></ul><h3 id="This-Work"><a href="#This-Work" class="headerlink" title="This Work"></a>This Work</h3><ul><li>构建了一个Common Sense Explanations（CoS-E）数据集：收集了人类对于常识推理的解释（模拟人类的常识推理过程）以及highlight annotation（针对问句的）</li><li>提出了一个常识自动生成解释（Commonsense Auto-Generate Explanation，CAGE）框架：使用CoS-E数据集来训练语言模型，是LM可以自动的产生解释（这个解释可以在训练和推理过程中使用），证明可以有效地利用语言模型来进行Commonsense Reasoning</li><li>在任务数据集（CommonsenseQA）上取得了10%的提升（Version 1.0）</li><li>还进行了跨领域迁移的实验</li></ul><h3 id="Background-and-Related-Work"><a href="#Background-and-Related-Work" class="headerlink" title="Background and Related Work"></a>Background and Related Work</h3><ul><li>Commonsense reasoning</li><li>Natural language explanations</li><li>Knowledge Transfer in NLP</li></ul><h2 id="CoS-E-Corpus"><a href="#CoS-E-Corpus" class="headerlink" title="CoS-E Corpus"></a>CoS-E Corpus</h2><p>Common Sense Explanations 数据集是在基于CommonsenseQA任务数据集上构建的，包含两种形式的人类解释：</p><ul><li>1、open-ended 自然语言解释 （<em>CoS-E-open-ended</em>）</li><li>2、对于问句，标注了 highlighted span annotations，标注的是对于预测正确答案起到重要作用的词 （<em>CoS-E-selected</em>）</li><li>示例：<ul><li><img src="/images/paper-acl2019-cos-e/cos-e-example.png" alt="cos-e"></li></ul></li></ul><h2 id="Algorithm-and-Model"><a href="#Algorithm-and-Model" class="headerlink" title="Algorithm and Model"></a>Algorithm and Model</h2><p>（在这篇文章中，进行实验时使用的是CommonsenseQA Version 1.0 的数据集，所以只有三个候选答案，在 Version 1.1 中，每个问题对应5个候选答案）</p><p>框架图：</p><ul><li><img src="/images/paper-acl2019-cos-e/framework-overview.png" alt="overview"></li></ul><h3 id="Commonsense-Auto-Generated-Explanations-CAGE"><a href="#Commonsense-Auto-Generated-Explanations-CAGE" class="headerlink" title="Commonsense Auto-Generated Explanations (CAGE)"></a>Commonsense Auto-Generated Explanations (CAGE)</h3><p>在CAGE框架中，使用GPT进行微调。微调部分的框架如上图中的图（a）所示。</p><p>本文提出了两种生成解释（即微调GPT-LM）的方法：</p><ul><li>1、explain-and-then-predict（reasoning）</li><li>2、predict-and-then-explain（rationalization）</li></ul><p>方法一：<strong>Reasoning</strong></p><ul><li>输入：$C_{RE} = q,c_0, c_1, c_2 \text{ ?}\text{ commonsense says} $</li><li>目标：条件式生成 explanations $e$<ul><li>$\sum_i \text{log} P(e_i|e_{i-k},…,e_{i-1}, C_{RE}; \Theta)$</li><li>其中，$k$ 是语言模型生成句子的窗口大小，在本文中，设为大于explanation的长度</li></ul></li><li>称为reasoning的原因：<ul><li>在推理阶段也可以自动的生成explanation，为常识问答提供额外的上下文</li><li>Note：在生成explanation的过程中不知道正确答案的标签</li></ul></li></ul><p>方法二：<strong>Rationalization</strong></p><ul><li>输入：$C_{RA} = q,c_0, c_1, c_2 \text{ ? } a \text{ because} $</li><li>目标：同上</li><li>在这个算法中，在训练时，生成explanation的过程中是已知正确答案的标签的<ul><li>相当于为正确的 q-a 对 产生一个合理的解释</li><li>而不是真正的常识推理</li></ul></li></ul><p>CAGE的参数设置：</p><ul><li>最大序列长度：20</li><li>batch size：36</li><li>train epochs：10</li><li>learning rate：$1e-6$</li><li>warmup linearly with proportion $0.002$</li><li>weight decay：0.01</li><li>模型选择指标：在验证集上的BLEU和perplexity</li></ul><h3 id="Commonsense-Predictions-with-Explanations"><a href="#Commonsense-Predictions-with-Explanations" class="headerlink" title="Commonsense Predictions with Explanations"></a>Commonsense Predictions with Explanations</h3><p>这部分关注的是，给定一个人类生成的解释或是LM推理生成的解释，使模型在CQA任务上进行预测。见上图图（b）</p><p>任务模型采用BERT with multiple choice</p><ul><li>BERT输入：question [SEP] explanation [SEP] candidate answer choice</li><li>微调BERT的参数：<ul><li>batch size：24</li><li>test batch size：12</li><li>train epochs：10</li><li>maximum sequence length：175（baseline=50）</li></ul></li></ul><h2 id="Experiments"><a href="#Experiments" class="headerlink" title="Experiments"></a>Experiments</h2><p>这篇文章的实验部分很充分、很完整，包含以下几个方面：</p><ul><li>使用CoS-E进行CQA任务，在dev上的效果：Table-2<ul><li><em>仅在训练时应用</em> CoS-E-open-ended</li><li>BERT baseline：63.8%</li><li>在BERT中加入CoS-E-open-ended，提升了2个点（65.5%）</li><li>CAGE-reasoning：72.6%</li><li>CQA test set 上的效果见 Table-3</li></ul></li><li>Table-4：在训练和验证时同时应用CoS-E</li><li>Table-5：在CQA v1.1 测试集上的结果</li><li>迁移到域外数据集</li></ul><h2 id="Summary-amp-Analysis"><a href="#Summary-amp-Analysis" class="headerlink" title="Summary &amp; Analysis"></a>Summary &amp; Analysis</h2><p>论文中有意思的几点分析</p><ul><li>explanations可以帮助阐明更长更复合的问题</li><li>CAGE-reasoning 生成的explanations中，有43%的可能性包含答案选项</li></ul>]]></content>
       
       
       <categories>
@@ -39,7 +72,7 @@
       <link href="/2019/07/08/paper-emnlp2018-graft-net/"/>
       <url>/2019/07/08/paper-emnlp2018-graft-net/</url>
       
-        <content type="html"><![CDATA[<blockquote><p>Open Domain Question Answering Using Early Fusion of Knowledge Bases and Text<br>EMNLP 2018<br>Haitian Sun, Bhuwan Dhingra et al.<br>CMU</p></blockquote><p>official code: <a href="https://github.com/OceanskySun/GraftNet" target="_blank" rel="noopener">https://github.com/OceanskySun/GraftNet</a></p><h2 id="Motivation"><a href="#Motivation" class="headerlink" title="Motivation"></a>Motivation</h2><ul><li>大多数 open domain QA 任务都是使用单信息源（要么是text from encyclopedia，或者是 single KB）来回答问题</li><li>判断一个信息源的适用性（suitability），取决于信息源的覆盖度（coverage）和从其中抽取答案的难度（difficulty of extracting answers from it）<ul><li>large text corpus作为信息源：具有很高的覆盖度，但是信息被不同的text pattern表示（这里可以理解为，不同领域/体裁的文本有不同的表现形式），模型还需要学习这些text pattern，导致模型难以泛化到其他领域以及新的推理类型</li><li>KB作为信息源：覆盖度低（由于不可避免的不完全性和有限的模式），但是更易于抽取答案</li></ul></li><li>由于有两种信息源存在，有些问题可被text回答，有些问题更适合用KB回答，但是只使用一种信息源不足以回答问题，一个很自然的问题就是<strong>如何有效地结合多种类型的信息</strong>：有以下两种方式<ul><li><strong>late fusion</strong>：为每种信息源设计SOTA的QA模型，得到他们的预测结果之后，再用一些启发式的方法将得到的答案进行聚合<ul><li>问题：sub-optimal的解决方法，模型受限于从不同的信息源中聚集证据信息</li></ul></li><li><strong>early fusion</strong>：本文所采取的方式<ul><li>只利用一个模型，训练其从一个问题子图中抽取答案</li><li>问题子图，既包含相关的 KB fact 又包含 text</li><li>可以灵活地结合多个信息源的知识</li></ul></li></ul></li></ul><h3 id="This-Work"><a href="#This-Work" class="headerlink" title="This Work"></a>This Work</h3><p>这篇文章进行的是开放域的KBQA任务（incomplete KB），结合图表示学习，提出了一个GRAFT-Net模型，可以从同时包含文本、KB实体与关系的 Question-specific 子图中抽取答案</p><ul><li>为了实现early fusion，提出了一个 Graphs of Relations Among Facts and Text Network（GRAFT-Net）</li><li>基于图卷积神经网络模型，可以在由KB facts和text sentences组成的异构图上进行运算<ul><li>提出了 heterogeneous update rules 来处理KB节点，LSTM-based update rules来更新text节点</li><li>提出了 directed propagation method，启发自Personalized PageRank算法，来限制图中embedding在基于从seed节点链接到question的路径上进行传播</li></ul></li><li>实验数据集：WikiMovies，WebQuestionSP</li></ul><h2 id="Task-Setup"><a href="#Task-Setup" class="headerlink" title="Task Setup"></a>Task Setup</h2><h3 id="Task-Description"><a href="#Task-Description" class="headerlink" title="Task Description"></a>Task Description</h3><h3 id="Question-Subgraph-Retrieval"><a href="#Question-Subgraph-Retrieval" class="headerlink" title="Question Subgraph Retrieval"></a>Question Subgraph Retrieval</h3><h2 id="GRAFT-Net"><a href="#GRAFT-Net" class="headerlink" title="GRAFT-Net"></a>GRAFT-Net</h2><h3 id="1-Node-Initialization"><a href="#1-Node-Initialization" class="headerlink" title="1.Node Initialization"></a>1.Node Initialization</h3><h3 id="2-Heterogeneous-Updates"><a href="#2-Heterogeneous-Updates" class="headerlink" title="2.Heterogeneous Updates"></a>2.Heterogeneous Updates</h3><p>Entities<br>Documents</p><h3 id="3-Conditioning-on-the-Question"><a href="#3-Conditioning-on-the-Question" class="headerlink" title="3.Conditioning on the Question"></a>3.Conditioning on the Question</h3><p>Attention over Relations<br>Directed Propagation</p><h3 id="4-Answer-Selection"><a href="#4-Answer-Selection" class="headerlink" title="4.Answer Selection"></a>4.Answer Selection</h3><h3 id="5-Regularization-via-Fact-Dropout"><a href="#5-Regularization-via-Fact-Dropout" class="headerlink" title="5.Regularization via Fact Dropout"></a>5.Regularization via Fact Dropout</h3><h2 id="Experiments"><a href="#Experiments" class="headerlink" title="Experiments"></a>Experiments</h2><h2 id="Summary-amp-Analysis"><a href="#Summary-amp-Analysis" class="headerlink" title="Summary &amp; Analysis"></a>Summary &amp; Analysis</h2>]]></content>
+        <content type="html"><![CDATA[<blockquote><p>Open Domain Question Answering Using Early Fusion of Knowledge Bases and Text<br>EMNLP 2018<br>Haitian Sun, Bhuwan Dhingra et al.<br>CMU</p></blockquote><p>official code: <a href="https://github.com/OceanskySun/GraftNet" target="_blank" rel="noopener">https://github.com/OceanskySun/GraftNet</a></p><h2 id="Motivation"><a href="#Motivation" class="headerlink" title="Motivation"></a>Motivation</h2><ul><li>大多数 open domain QA 任务都是使用单信息源（要么是text from encyclopedia，或者是 single KB）来回答问题</li><li>判断一个信息源的适用性（suitability），取决于信息源的覆盖度（coverage）和从其中抽取答案的难度（difficulty of extracting answers from it）<ul><li>large text corpus作为信息源：具有很高的覆盖度，但是信息被不同的text pattern表示（这里可以理解为，不同领域/体裁的文本有不同的表现形式），模型还需要学习这些text pattern，导致模型难以泛化到其他领域以及新的推理类型</li><li>KB作为信息源：覆盖度低（由于不可避免的不完全性和有限的模式），但是更易于抽取答案</li></ul></li><li>由于有两种信息源存在，有些问题可被text回答，有些问题更适合用KB回答，但是只使用一种信息源不足以回答问题，一个很自然的问题就是<strong>如何有效地结合多种类型的信息</strong>：有以下两种方式<ul><li><strong>late fusion</strong>：为每种信息源设计SOTA的QA模型，得到他们的预测结果之后，再用一些启发式的方法将得到的答案进行聚合<ul><li>问题：sub-optimal的解决方法，模型受限于从不同的信息源中聚集证据信息</li></ul></li><li><strong>early fusion</strong>：本文所采取的方式<ul><li>只利用一个模型，训练其从一个问题子图中抽取答案</li><li>问题子图，既包含相关的 KB fact 又包含 text</li><li>可以灵活地结合多个信息源的知识</li></ul></li></ul></li></ul><h3 id="This-Work"><a href="#This-Work" class="headerlink" title="This Work"></a>This Work</h3><p>这篇文章进行的是开放域的KBQA任务（incomplete KB），结合图表示学习，提出了一个GRAFT-Net模型，可以从同时包含文本、KB实体与关系的 Question-specific 子图中抽取答案</p><ul><li>为了实现early fusion，提出了一个 Graphs of Relations Among Facts and Text Network（GRAFT-Net）</li><li>基于图卷积神经网络模型，可以在由KB facts和text sentences组成的异构图上进行运算<ul><li>提出了 heterogeneous update rules 来处理KB节点；LSTM-based update rules来更新text节点</li><li>提出了 directed propagation method， 启发自 Personalized PageRank 算法，来限制图中 embedding 在基于从seed节点链接到question的路径上进行传播</li></ul></li><li>实验数据集：WikiMovies，WebQuestionSP</li></ul><h2 id="Task-Setup"><a href="#Task-Setup" class="headerlink" title="Task Setup"></a>Task Setup</h2><h3 id="Task-Description"><a href="#Task-Description" class="headerlink" title="Task Description"></a>Task Description</h3><h3 id="Question-Subgraph-Retrieval"><a href="#Question-Subgraph-Retrieval" class="headerlink" title="Question Subgraph Retrieval"></a>Question Subgraph Retrieval</h3><h2 id="GRAFT-Net"><a href="#GRAFT-Net" class="headerlink" title="GRAFT-Net"></a>GRAFT-Net</h2><h3 id="1-Node-Initialization"><a href="#1-Node-Initialization" class="headerlink" title="1.Node Initialization"></a>1.Node Initialization</h3><h3 id="2-Heterogeneous-Updates"><a href="#2-Heterogeneous-Updates" class="headerlink" title="2.Heterogeneous Updates"></a>2.Heterogeneous Updates</h3><p>Entities<br>Documents</p><h3 id="3-Conditioning-on-the-Question"><a href="#3-Conditioning-on-the-Question" class="headerlink" title="3.Conditioning on the Question"></a>3.Conditioning on the Question</h3><p>Attention over Relations<br>Directed Propagation</p><h3 id="4-Answer-Selection"><a href="#4-Answer-Selection" class="headerlink" title="4.Answer Selection"></a>4.Answer Selection</h3><h3 id="5-Regularization-via-Fact-Dropout"><a href="#5-Regularization-via-Fact-Dropout" class="headerlink" title="5.Regularization via Fact Dropout"></a>5.Regularization via Fact Dropout</h3><h2 id="Experiments"><a href="#Experiments" class="headerlink" title="Experiments"></a>Experiments</h2><h2 id="Summary-amp-Analysis"><a href="#Summary-amp-Analysis" class="headerlink" title="Summary &amp; Analysis"></a>Summary &amp; Analysis</h2>]]></content>
       
       
       <categories>
@@ -119,11 +152,11 @@
             
             <tag> nlp </tag>
             
+            <tag> mrc </tag>
+            
             <tag> paper </tag>
             
             <tag> knowledge </tag>
-            
-            <tag> mrc </tag>
             
         </tags>
       
@@ -150,9 +183,9 @@
             
             <tag> nlp </tag>
             
-            <tag> knowledge </tag>
-            
             <tag> research </tag>
+            
+            <tag> knowledge </tag>
             
             <tag> note </tag>
             
@@ -181,9 +214,9 @@
             
             <tag> nlp </tag>
             
-            <tag> paper </tag>
-            
             <tag> mrc </tag>
+            
+            <tag> paper </tag>
             
             <tag> multi-hop </tag>
             
@@ -214,9 +247,9 @@
             
             <tag> nlp </tag>
             
-            <tag> paper </tag>
-            
             <tag> mrc </tag>
+            
+            <tag> paper </tag>
             
             <tag> multi-hop </tag>
             
@@ -247,9 +280,9 @@
             
             <tag> nlp </tag>
             
-            <tag> knowledge </tag>
-            
             <tag> mrc </tag>
+            
+            <tag> knowledge </tag>
             
             <tag> reasoning </tag>
             
@@ -313,9 +346,9 @@
             
             <tag> nlp </tag>
             
-            <tag> paper </tag>
-            
             <tag> mrc </tag>
+            
+            <tag> paper </tag>
             
         </tags>
       
@@ -342,9 +375,9 @@
             
             <tag> nlp </tag>
             
-            <tag> paper </tag>
-            
             <tag> mrc </tag>
+            
+            <tag> paper </tag>
             
             <tag> research </tag>
             
@@ -373,9 +406,9 @@
             
             <tag> nlp </tag>
             
-            <tag> paper </tag>
-            
             <tag> mrc </tag>
+            
+            <tag> paper </tag>
             
             <tag> research </tag>
             
@@ -421,7 +454,7 @@
       <link href="/2019/03/10/mrc-knowedge-paper-info/"/>
       <url>/2019/03/10/mrc-knowedge-paper-info/</url>
       
-        <content type="html"><![CDATA[<p>A list of recent papers with respect to Knowledge-based Machine Reading Comprehension.<br><a id="more"></a></p><style>    table th:nth-of-type(2){    width: 60%;    }</style><h2 id="Works-on-Knowledge-aware-MRC"><a href="#Works-on-Knowledge-aware-MRC" class="headerlink" title="Works on Knowledge-aware MRC"></a>Works on Knowledge-aware MRC</h2><!-- aware/based/enhanced --><div class="table-container"><table><thead><tr><th style="text-align:center">Conf.</th><th style="text-align:left">Title</th><th style="text-align:left">Authors/Org.</th><th style="text-align:center">Note</th></tr></thead><tbody><tr><td style="text-align:center">ACL<br>2017</td><td style="text-align:left"><a href="https://doi.org/10.18653/v1/P17-1132" target="_blank" rel="noopener">Leveraging knowledge bases in lstms for improving machine reading</a></td><td style="text-align:left">Yang, et al.<br>CMU</td><td style="text-align:center"></td></tr><tr><td style="text-align:center">ACL<br>2017</td><td style="text-align:left"><a href="https://www.aclweb.org/anthology/D17-1216" target="_blank" rel="noopener">Reasoning with Heterogeneous Knowledge for Commonsense Machine Comprehension</a></td><td style="text-align:left">Hongyu Lin, et al.</td><td style="text-align:center"></td></tr><tr><td style="text-align:center">ACL<br>2017</td><td style="text-align:left"><a href="http://www.aclweb.org/anthology/D17-1086" target="_blank" rel="noopener">World knowledge for reading comprehension: Rare entity prediction with hierarchical lstms using external descriptions</a></td><td style="text-align:left">Long, et al.<br>McGill University</td><td style="text-align:center"></td></tr><tr><td style="text-align:center">ACL<br>2018</td><td style="text-align:left"><a href="http://aclweb.org/anthology/P18-1076" target="_blank" rel="noopener">Knowledgeable Reader: Enhancing Cloze-Style Reading Comprehension with External Commonsense Knowledge</a></td><td style="text-align:left">Mihaylov, et al.<br>Heidelberg University</td><td style="text-align:center"><a href="/2019/01/09/paper-knreader/" title="knreader-note">knreader-note</a></td></tr><tr><td style="text-align:center">2018</td><td style="text-align:left"><a href="https://openreview.net/forum?id=B1twdMCab" target="_blank" rel="noopener">Dynamic Integration of Background Knowledge in Neural NLU Systems</a></td><td style="text-align:left">Dirk Weissenborn, et al.</td><td style="text-align:center"><a href="/2019/03/06/paper-2018-refinewordemb/" title="note">note</a></td></tr><tr><td style="text-align:center">EMNLP<br>2018</td><td style="text-align:left"><a href="http://aclweb.org/anthology/D18-1454" target="_blank" rel="noopener">Commonsense for Generative Multi-Hop Question Answering Tasks</a></td><td style="text-align:left">Lisa Bauer</td><td style="text-align:center"><a href="/2019/02/21/paper-emnlp2018-mhpgm/" title="mhpgm-note">mhpgm-note</a></td></tr><tr><td style="text-align:center">EMNLP<br>2018</td><td style="text-align:left"><a href="https://aclweb.org/anthology/D18-1455" target="_blank" rel="noopener">Open Domain Question Answering Using Early Fusion of Knowledge Bases and Text</a></td><td style="text-align:left">CMU</td><td style="text-align:center"></td></tr><tr><td style="text-align:center">2018</td><td style="text-align:left"><a href="https://arxiv.org/abs/1809.03449" target="_blank" rel="noopener">Exploring Machine Reading Comprehension with Explicit Knowledge</a></td><td style="text-align:left">Emory University</td><td style="text-align:center"></td></tr><tr><td style="text-align:center">ACL<br>2018</td><td style="text-align:left"><a href="https://aclweb.org/anthology/D18-1455" target="_blank" rel="noopener">Open Domain Question Answering Using Early Fusion of Knowledge Bases and Text</a></td><td style="text-align:left">CMU</td><td style="text-align:center"></td></tr><tr><td style="text-align:center">AAAI<br>2018</td><td style="text-align:left"><a href="https://arxiv.org/abs/1811.00625" target="_blank" rel="noopener">Incorporating Structured Commonsense Knowledge in Story Completion</a></td><td style="text-align:left"></td><td style="text-align:center"></td></tr><tr><td style="text-align:center">2019</td><td style="text-align:left"><a href="https://arxiv.org/abs/1902.00993" target="_blank" rel="noopener">Improving Question Answering with External Knowledge</a></td><td style="text-align:left"></td><td style="text-align:center"></td></tr><tr><td style="text-align:center"></td><td style="text-align:left"></td><td style="text-align:left"></td></tr></tbody></table></div><h2 id="MRC-with-Knowledge"><a href="#MRC-with-Knowledge" class="headerlink" title="MRC with Knowledge"></a>MRC with Knowledge</h2><ul><li>how to let the machine obtain Knowledge？</li><li>how to represent knowledge？ in which kind of format？</li><li>how to let the machine to learn Knowledge incrementally？</li><li>how to make the machine can automatically use Knowledge it already knows or it has been told？</li></ul>]]></content>
+        <content type="html"><![CDATA[<p>A list of recent papers with respect to Knowledge-based Machine Reading Comprehension.<br><a id="more"></a></p><style>    table th:nth-of-type(2){    width: 60%;    }</style><h2 id="Works-on-Knowledge-aware-MRC"><a href="#Works-on-Knowledge-aware-MRC" class="headerlink" title="Works on Knowledge-aware MRC"></a>Works on Knowledge-aware MRC</h2><!-- aware/based/enhanced --><div class="table-container"><table><thead><tr><th style="text-align:center">Conf.</th><th style="text-align:left">Title</th><th style="text-align:left">Authors/Org.</th><th style="text-align:center">Note</th></tr></thead><tbody><tr><td style="text-align:center">ACL<br>2017</td><td style="text-align:left"><a href="https://doi.org/10.18653/v1/P17-1132" target="_blank" rel="noopener">Leveraging knowledge bases in lstms for improving machine reading</a></td><td style="text-align:left">Yang, et al.<br>CMU</td><td style="text-align:center"></td></tr><tr><td style="text-align:center">ACL<br>2017</td><td style="text-align:left"><a href="https://www.aclweb.org/anthology/D17-1216" target="_blank" rel="noopener">Reasoning with Heterogeneous Knowledge for Commonsense Machine Comprehension</a></td><td style="text-align:left">Hongyu Lin, et al.</td><td style="text-align:center"></td></tr><tr><td style="text-align:center">ACL<br>2017</td><td style="text-align:left"><a href="http://www.aclweb.org/anthology/D17-1086" target="_blank" rel="noopener">World knowledge for reading comprehension: Rare entity prediction with hierarchical lstms using external descriptions</a></td><td style="text-align:left">Long, et al.<br>McGill University</td><td style="text-align:center"></td></tr><tr><td style="text-align:center">ACL<br>2018</td><td style="text-align:left"><a href="http://aclweb.org/anthology/P18-1076" target="_blank" rel="noopener">Knowledgeable Reader: Enhancing Cloze-Style Reading Comprehension with External Commonsense Knowledge</a></td><td style="text-align:left">Mihaylov, et al.<br>Heidelberg University</td><td style="text-align:center"><a href="/2019/01/09/paper-knreader/" title="knreader-note">knreader-note</a></td></tr><tr><td style="text-align:center">2018</td><td style="text-align:left"><a href="https://openreview.net/forum?id=B1twdMCab" target="_blank" rel="noopener">Dynamic Integration of Background Knowledge in Neural NLU Systems</a></td><td style="text-align:left">Dirk Weissenborn, et al.</td><td style="text-align:center"><a href="/2019/03/06/paper-2018-refinewordemb/" title="note">note</a></td></tr><tr><td style="text-align:center">EMNLP<br>2018</td><td style="text-align:left"><a href="http://aclweb.org/anthology/D18-1454" target="_blank" rel="noopener">Commonsense for Generative Multi-Hop Question Answering Tasks</a></td><td style="text-align:left">Lisa Bauer</td><td style="text-align:center"><a href="/2019/02/21/paper-emnlp2018-mhpgm/" title="mhpgm-note">mhpgm-note</a></td></tr><tr><td style="text-align:center">EMNLP<br>2018</td><td style="text-align:left"><a href="https://aclweb.org/anthology/D18-1455" target="_blank" rel="noopener">Open Domain Question Answering Using Early Fusion of Knowledge Bases and Text</a></td><td style="text-align:left">CMU</td><td style="text-align:center"></td></tr><tr><td style="text-align:center">(2018v1)<br>ACL<br>2019</td><td style="text-align:left"><a href="https://arxiv.org/abs/1809.03449" target="_blank" rel="noopener">Exploring Machine Reading Comprehension with Explicit Knowledge</a><br>Explicit Utilization of General Knowledge in Machine Reading Comprehension</td><td style="text-align:left">York University</td><td style="text-align:center"></td></tr><tr><td style="text-align:center">ACL<br>2018</td><td style="text-align:left"><a href="https://aclweb.org/anthology/D18-1455" target="_blank" rel="noopener">Open Domain Question Answering Using Early Fusion of Knowledge Bases and Text</a></td><td style="text-align:left">CMU</td><td style="text-align:center"><a href="/2019/07/08/paper-emnlp2018-graft-net/" title="note">note</a></td></tr><tr><td style="text-align:center">AAAI<br>2018</td><td style="text-align:left"><a href="https://arxiv.org/abs/1811.00625" target="_blank" rel="noopener">Incorporating Structured Commonsense Knowledge in Story Completion</a></td><td style="text-align:left"></td><td style="text-align:center"></td></tr><tr><td style="text-align:center">2019</td><td style="text-align:left"><a href="https://arxiv.org/abs/1902.00993" target="_blank" rel="noopener">Improving Question Answering with External Knowledge</a></td><td style="text-align:left"></td><td style="text-align:center"></td></tr><tr><td style="text-align:center"></td><td style="text-align:left"></td><td style="text-align:left"></td></tr></tbody></table></div><h2 id="MRC-with-Knowledge"><a href="#MRC-with-Knowledge" class="headerlink" title="MRC with Knowledge"></a>MRC with Knowledge</h2><ul><li><del>how to let the machine obtain Knowledge？</del></li><li>how to extract external knowledge?</li><li>how to represent knowledge？ in which kind of format？</li><li>how to fuse the external knowledge?</li><li>how to let the machine to learn Knowledge incrementally？</li><li>how to make the machine can automatically use Knowledge it already knows or it has been told？</li></ul>]]></content>
       
       
       <categories>
@@ -435,11 +468,11 @@
             
             <tag> nlp </tag>
             
+            <tag> mrc </tag>
+            
             <tag> paper </tag>
             
             <tag> knowledge </tag>
-            
-            <tag> mrc </tag>
             
         </tags>
       
@@ -466,11 +499,11 @@
             
             <tag> nlp </tag>
             
+            <tag> mrc </tag>
+            
             <tag> paper </tag>
             
             <tag> knowledge </tag>
-            
-            <tag> mrc </tag>
             
             <tag> nli </tag>
             
@@ -499,9 +532,9 @@
             
             <tag> nlp </tag>
             
-            <tag> paper </tag>
-            
             <tag> mrc </tag>
+            
+            <tag> paper </tag>
             
             <tag> model </tag>
             
@@ -530,9 +563,9 @@
             
             <tag> nlp </tag>
             
-            <tag> paper </tag>
-            
             <tag> mrc </tag>
+            
+            <tag> paper </tag>
             
             <tag> multi-hop </tag>
             
@@ -582,7 +615,7 @@
       <link href="/2019/01/21/note-research-ai2-mosaic/"/>
       <url>/2019/01/21/note-research-ai2-mosaic/</url>
       
-        <content type="html"><![CDATA[<p>MOSAIC 是 AI2 (ALLEN Institute for Artificial Intelligence) 研究院中进行机器常识智能研究的小组<sup id="fnref:1"><a href="#fn:1" rel="footnote">1</a></sup>.</p><p>现有的研究项目：</p><ol><li><strong>Commonsense Knowledge Graphs: Exploring semi-structured representations of commonsense.</strong><sup id="fnref:2"><a href="#fn:2" rel="footnote">2</a></sup></li><li>Visual Commonsense Reasoning: 视觉常识推理项目<sup id="fnref:3"><a href="#fn:3" rel="footnote">3</a></sup></li><li>Mosaic Commonsense Benchmarks: Measuring progress on Machine Common Sense.<sup id="fnref:4"><a href="#fn:4" rel="footnote">4</a></sup></li></ol><p>对应的主要Papers：</p><ol><li>ATOMIC: An Atlas of Machine Commonsense for If-Then Reasoning. AAAI,2019.</li><li>From Recognition to Cognition: Visual Commonsense Reasoning</li><li>SWAG: A Large-Scale Adversarial Dataset for Grounded Commonsense Inference. EMNLP,2018.</li></ol><p>其他Papers:</p><ol><li>Event2Mind: Commonsense Inference on Events, Intents, and Reactions. ACL,2018.</li><li>Modeling Naive Psychology of Characters in Simple Commonsense Stories. ACL,2018.</li><li>Reasoning about Actions and State Changes by Injecting Commonsense Knowledge. EMNLP,2018.</li></ol><p>重点关注 <code>Commonsense Knowledge Graphs</code> 这部分的工作</p><h2 id="Commonsense-Knowledge-Graphs"><a href="#Commonsense-Knowledge-Graphs" class="headerlink" title="Commonsense Knowledge Graphs"></a>Commonsense Knowledge Graphs</h2><blockquote><ol><li>Event2Mind: Commonsense Inference on Events, Intents, and Reactions. ACL,2018.</li><li>ATOMIC: An Atlas of Machine Commonsense for If-Then Reasoning. AAAI,2019.</li></ol></blockquote><h2 id="Event2Mind"><a href="#Event2Mind" class="headerlink" title="Event2Mind"></a>Event2Mind</h2><p>常识推理任务</p><p>推理类型：2类（语用推理 pragmatic inference）</p><ul><li><p>intent 意图</p><ul><li>可以解释为什么施事者导致事件发生，是行动或事件的心理前提</li></ul></li><li><p>emotional reaction 情绪反应</p><ul><li>反应定义为解释施事者和参与事件的其他人的心理状态将如何因此改变</li><li>反应可以被认为是一种行为或事件的心理后置条件</li></ul></li></ul><p>任务目标：给定一个 event phrase，预测 X intent / X reaction / Y reaction</p><ul><li>pre-condition: X intent</li><li>post-condition: X/Y reaction</li></ul><p>例子：</p><ul><li><img src="/images/note-research-ai2-mosaic/event2mind-example.png" alt="event2mind-example"></li></ul><h2 id="ATOMIC"><a href="#ATOMIC" class="headerlink" title="ATOMIC"></a>ATOMIC</h2><p>关于 if-then 推理类型的推理知识库（Knowledge base about inferential knowledge on if-then reasoning types）</p><ul><li>例子：<img src="/images/note-research-ai2-mosaic/atomic-example.png" alt="atomic-example"></li></ul><p>nine if-then relation types to distinguish: （不同上不全面的刻画维度）</p><ul><li>cause vs. effect<ul><li>[Xintent，Xneed] vs. [Xwant，Xreaction，Effect on X，Effect on Y，Ywant，Yreaction]</li></ul></li><li>agents vs. themes：agent（X，who cause the event），themes（Other）<ul><li>[Xintent，Xneed，Xwant，Xreaction，Effect on X， Xattribute] vs. [Effect on Y，Ywant， Yreaction]</li></ul></li><li>voluntary vs. involuntary events<ul><li>[Xintent，Xneed，Xwant，Ywant] vs. [Xreaction，Effect on X，Effect on Y，Yreaction，Xattribute]</li></ul></li><li>actions vs. mental states<ul><li>[] vs. []</li></ul></li><li>dynamic vs. static<ul><li>[Xintent，Xneed，Xwant，Xreaction，Effect on X，Effect on Y，Ywant，Yreaction] vs. [Xattribute]</li></ul></li></ul><p>taxonomy of if-then reasoning types:</p><ul><li>based on the content being predicted:<ul><li>if-event-then-mental-state<ul><li>mental pre-/post- conditions of an event</li><li>3 relations: X inent/ X reaction/ Other reaction</li></ul></li><li>if event-then event<ul><li>events that constitute probable pre- and postconditions of a given event</li><li>5 relations: X need/ X want/ Effect on X/ Other want/ Effect on Other</li></ul></li><li>if event-then-person<ul><li>a stative relation that describes how the subject of an event is described or perceived</li><li>X attribute</li></ul></li></ul></li><li>based on their causal relations<ul><li>causes（因）</li><li>effect（果）</li><li>stative（状态）</li></ul></li><li>图例：<img src="/images/note-research-ai2-mosaic/atomic-taxonomy-example.png" alt="example"></li></ul><p>与现有knowledge base的对比：</p><ul><li><img src="/images/note-research-ai2-mosaic/atomic-comp.png" alt="kb-comp"></li></ul><div id="footnotes"><hr><div id="footnotelist"><ol style="list-style:none; padding-left: 0;"><li id="fn:1"><span style="display: inline-block; vertical-align: top; padding-right: 10px;">1.</span><span style="display: inline-block; vertical-align: top;">https://mosaic.allenai.org/</span><a href="#fnref:1" rev="footnote"> ↩</a></li><li id="fn:2"><span style="display: inline-block; vertical-align: top; padding-right: 10px;">2.</span><span style="display: inline-block; vertical-align: top;">https://mosaic.allenai.org/projects/commonsense-knowledge-graphs</span><a href="#fnref:2" rev="footnote"> ↩</a></li><li id="fn:3"><span style="display: inline-block; vertical-align: top; padding-right: 10px;">3.</span><span style="display: inline-block; vertical-align: top;">https://visualcommonsense.com/</span><a href="#fnref:3" rev="footnote"> ↩</a></li><li id="fn:4"><span style="display: inline-block; vertical-align: top; padding-right: 10px;">4.</span><span style="display: inline-block; vertical-align: top;">https://mosaic.allenai.org/projects/mosaic-commonsense-benchmarks</span><a href="#fnref:4" rev="footnote"> ↩</a></li></ol></div></div>]]></content>
+        <content type="html"><![CDATA[<p>MOSAIC 是 AI2 (ALLEN Institute for Artificial Intelligence) 研究院中进行机器常识智能研究的小组<sup id="fnref:1"><a href="#fn:1" rel="footnote">1</a></sup>.</p><p>现有的研究项目：</p><ol><li><strong>Commonsense Knowledge Graphs: Exploring semi-structured representations of commonsense.</strong><sup id="fnref:2"><a href="#fn:2" rel="footnote">2</a></sup></li><li>Visual Commonsense Reasoning: 视觉常识推理项目<sup id="fnref:3"><a href="#fn:3" rel="footnote">3</a></sup></li><li>Mosaic Commonsense Benchmarks: Measuring progress on Machine Common Sense.<sup id="fnref:4"><a href="#fn:4" rel="footnote">4</a></sup></li></ol><p>对应的主要Papers：</p><ol><li>ATOMIC: An Atlas of Machine Commonsense for If-Then Reasoning. AAAI,2019.</li><li>From Recognition to Cognition: Visual Commonsense Reasoning</li><li>SWAG: A Large-Scale Adversarial Dataset for Grounded Commonsense Inference. EMNLP,2018.</li></ol><p>其他Papers:</p><ol><li>Event2Mind: Commonsense Inference on Events, Intents, and Reactions. ACL,2018.</li><li>Modeling Naive Psychology of Characters in Simple Commonsense Stories. ACL,2018.</li><li>Reasoning about Actions and State Changes by Injecting Commonsense Knowledge. EMNLP,2018.</li></ol><p>重点关注 <code>Commonsense Knowledge Graphs</code> 这部分的工作</p><h2 id="Commonsense-Knowledge-Graphs"><a href="#Commonsense-Knowledge-Graphs" class="headerlink" title="Commonsense Knowledge Graphs"></a>Commonsense Knowledge Graphs</h2><blockquote><ol><li>Event2Mind: Commonsense Inference on Events, Intents, and Reactions. ACL,2018.</li><li>ATOMIC: An Atlas of Machine Commonsense for If-Then Reasoning. AAAI,2019.</li></ol></blockquote><h2 id="Event2Mind"><a href="#Event2Mind" class="headerlink" title="Event2Mind"></a>Event2Mind</h2><p>常识推理任务</p><p>推理类型：2类（语用推理 pragmatic inference）</p><ul><li><p>intent 意图</p><ul><li>可以解释为什么施事者导致事件发生，是行动或事件的心理前提</li></ul></li><li><p>emotional reaction 情绪反应</p><ul><li>反应定义为解释施事者和参与事件的其他人的心理状态将如何因此改变</li><li>反应可以被认为是一种行为或事件的心理后置条件</li></ul></li></ul><p>任务目标：给定一个 event phrase，预测 X intent / X reaction / Y reaction</p><ul><li>pre-condition: X intent</li><li>post-condition: X/Y reaction</li></ul><p>例子：</p><ul><li><img src="/images/note-research-ai2-mosaic/event2mind-example.png" alt="event2mind-example"></li></ul><h2 id="ATOMIC"><a href="#ATOMIC" class="headerlink" title="ATOMIC"></a>ATOMIC</h2><p>关于 if-then 推理类型的推理知识库（Knowledge base about inferential knowledge on if-then reasoning types）</p><ul><li>例子：<img src="/images/note-research-ai2-mosaic/atomic-example.png" alt="atomic-example"></li></ul><p>nine if-then relation types to distinguish: （不同上不全面的刻画维度）</p><ul><li><strong>cause vs. effect</strong><ul><li>[Xintent，Xneed] vs. [Xwant，Xreaction，Effect on X，Effect on Y，Ywant，Yreaction]</li></ul></li><li><strong>agents vs. themes</strong>：agent（X，who cause the event），themes（Other）<ul><li>[Xintent，Xneed，Xwant，Xreaction，Effect on X， Xattribute] vs. [Effect on Y，Ywant， Yreaction]</li></ul></li><li><strong>voluntary vs. involuntary</strong> events<ul><li>[Xintent，Xneed，Xwant，Ywant] vs. [Xreaction，Effect on X，Effect on Y，Yreaction，Xattribute]</li></ul></li><li><strong>actions vs. mental states</strong><ul><li>[] vs. []</li></ul></li><li><strong>dynamic vs. static</strong><ul><li>[Xintent，Xneed，Xwant，Xreaction，Effect on X，Effect on Y，Ywant，Yreaction] vs. [Xattribute]</li></ul></li></ul><p>taxonomy of if-then reasoning types:</p><ul><li>based on the content being predicted:<ul><li><font color="green">**if-event-then-mental-state**</font>* mental pre-/post- conditions of an event* 3 relations: <font color="blue">**X inent/ X reaction/ Other reaction**</font></li><li><font color="green">**if event-then event**</font>* events that constitute probable pre- and postconditions of a given event* 5 relations: <font color="blue">**X need/ X want/ Effect on X/ Other want/ Effect on Other**</font></li><li><font color="green">**if event-then-person**</font>* a stative relation that describes how the subject of an event is described or perceived* 1 relations: <font color="blue">**X attribute**</font></li></ul></li><li>based on their causal relations<ul><li>causes（因）</li><li>effect（果）</li><li>stative（状态）</li></ul></li><li>图例：<img src="/images/note-research-ai2-mosaic/atomic-taxonomy-example.png" alt="example"></li></ul><p>与现有knowledge base的对比：</p><ul><li><img src="/images/note-research-ai2-mosaic/atomic-comp.png" alt="kb-comp"></li></ul><div id="footnotes"><hr><div id="footnotelist"><ol style="list-style:none; padding-left: 0;"><li id="fn:1"><span style="display: inline-block; vertical-align: top; padding-right: 10px;">1.</span><span style="display: inline-block; vertical-align: top;">https://mosaic.allenai.org/</span><a href="#fnref:1" rev="footnote"> ↩</a></li><li id="fn:2"><span style="display: inline-block; vertical-align: top; padding-right: 10px;">2.</span><span style="display: inline-block; vertical-align: top;">https://mosaic.allenai.org/projects/commonsense-knowledge-graphs</span><a href="#fnref:2" rev="footnote"> ↩</a></li><li id="fn:3"><span style="display: inline-block; vertical-align: top; padding-right: 10px;">3.</span><span style="display: inline-block; vertical-align: top;">https://visualcommonsense.com/</span><a href="#fnref:3" rev="footnote"> ↩</a></li><li id="fn:4"><span style="display: inline-block; vertical-align: top; padding-right: 10px;">4.</span><span style="display: inline-block; vertical-align: top;">https://mosaic.allenai.org/projects/mosaic-commonsense-benchmarks</span><a href="#fnref:4" rev="footnote"> ↩</a></li></ol></div></div>]]></content>
       
       
       <categories>
@@ -693,9 +726,9 @@
             
             <tag> nlp </tag>
             
-            <tag> paper </tag>
-            
             <tag> mrc </tag>
+            
+            <tag> paper </tag>
             
             <tag> research </tag>
             
@@ -755,9 +788,9 @@
             
             <tag> nlp </tag>
             
-            <tag> paper </tag>
-            
             <tag> mrc </tag>
+            
+            <tag> paper </tag>
             
             <tag> dataset </tag>
             
@@ -786,9 +819,9 @@
             
             <tag> nlp </tag>
             
-            <tag> paper </tag>
-            
             <tag> mrc </tag>
+            
+            <tag> paper </tag>
             
             <tag> reasoning </tag>
             
@@ -817,9 +850,9 @@
             
             <tag> nlp </tag>
             
-            <tag> paper </tag>
-            
             <tag> mrc </tag>
+            
+            <tag> paper </tag>
             
             <tag> nlu </tag>
             
@@ -974,11 +1007,11 @@
             
             <tag> nlp </tag>
             
+            <tag> mrc </tag>
+            
             <tag> paper </tag>
             
             <tag> knowledge </tag>
-            
-            <tag> mrc </tag>
             
         </tags>
       
