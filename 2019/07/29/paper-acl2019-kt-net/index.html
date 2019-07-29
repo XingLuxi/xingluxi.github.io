@@ -1,0 +1,1020 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon-universe-32.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-universe-32.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-universe-16.ico?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/favicon-universe-32.ico?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="nlp,paper,knowledge,mrc,pre-trained-lm,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="Title: Enhancing Pre-Trained Language Representations with Rich Knowledge for Machine Reading ComprehensionAuthor: An Yang et al.Org.: MOE(PKU), BaiduPublished: ACL,2019  Motivation 预训练语言模型在机器阅读理解任务上">
+<meta name="keywords" content="nlp,paper,knowledge,mrc,pre-trained-lm">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ACL2019 | Enhancing Pre-Trained Language Representations with Rich Knowledge for Machine Reading Comprehension">
+<meta property="og:url" content="http://xingluxi.github.io/2019/07/29/paper-acl2019-kt-net/index.html">
+<meta property="og:site_name" content="Luxi Xing - Blog">
+<meta property="og:description" content="Title: Enhancing Pre-Trained Language Representations with Rich Knowledge for Machine Reading ComprehensionAuthor: An Yang et al.Org.: MOE(PKU), BaiduPublished: ACL,2019  Motivation 预训练语言模型在机器阅读理解任务上">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://xingluxi.github.io/images/paper-acl2019-kt-net/kt-net-example.png">
+<meta property="og:image" content="http://xingluxi.github.io/images/paper-acl2019-kt-net/kt-net-model.png">
+<meta property="og:updated_time" content="2019-07-29T09:03:12.059Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="ACL2019 | Enhancing Pre-Trained Language Representations with Rich Knowledge for Machine Reading Comprehension">
+<meta name="twitter:description" content="Title: Enhancing Pre-Trained Language Representations with Rich Knowledge for Machine Reading ComprehensionAuthor: An Yang et al.Org.: MOE(PKU), BaiduPublished: ACL,2019  Motivation 预训练语言模型在机器阅读理解任务上">
+<meta name="twitter:image" content="http://xingluxi.github.io/images/paper-acl2019-kt-net/kt-net-example.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":true,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://xingluxi.github.io/2019/07/29/paper-acl2019-kt-net/">
+
+
+
+
+
+  <title>ACL2019 | Enhancing Pre-Trained Language Representations with Rich Knowledge for Machine Reading Comprehension | Luxi Xing - Blog</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Luxi Xing - Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Time is In NO Hurry</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            About
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://xingluxi.github.io/2019/07/29/paper-acl2019-kt-net/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Luxi Xing">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Luxi Xing - Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">ACL2019 | Enhancing Pre-Trained Language Representations with Rich Knowledge for Machine Reading Comprehension</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-07-29T14:13:28+08:00">
+                2019-07-29
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Post modified&#58;</span>
+              
+              <time title="Post modified" itemprop="dateModified" datetime="2019-07-29T17:03:12+08:00">
+                2019-07-29
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Paper-Note/" itemprop="url" rel="index">
+                    <span itemprop="name">Paper-Note</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-area-chart"></i> Post Total Visits
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Words count in article&#58;</span>
+                
+                <span title="Words count in article">
+                  1.1k
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Reading time &asymp;</span>
+                
+                <span title="Reading time">
+                  4
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <blockquote>
+<p>Title: Enhancing Pre-Trained Language Representations with Rich Knowledge for Machine Reading Comprehension<br>Author: An Yang et al.<br>Org.: MOE(PKU), Baidu<br>Published: ACL,2019</p>
+</blockquote>
+<h2 id="Motivation"><a href="#Motivation" class="headerlink" title="Motivation"></a>Motivation</h2><ul>
+<li>预训练语言模型在机器阅读理解任务上取得了突破性进展。通过在海量无标注文本数据上对足够deep的网络结构进行预训练而得到的LM，能够捕捉复杂的语言现象，更好地理解语言。</li>
+<li>然而，真正意义上的阅读理解不仅要求机器具备语言理解的能力，还要求机器具备知识以支撑复杂的推理。</li>
+<li>例如：<img src="/images/paper-acl2019-kt-net/kt-net-example.png" alt="example"></li>
+</ul>
+<h3 id="This-Work"><a href="#This-Work" class="headerlink" title="This Work"></a>This Work</h3><ul>
+<li>为了同时利用强大的PLM捕获的语言规律和外部高质量的知识/事实，提出了语言表示与知识表示的深度融合模型 <strong>KT-NET（Knowledge and Text Fusion Net）</strong></li>
+<li>外部知识使用的是 包含词汇知识的WordNet 以及 包含实体信息的NELL<ul>
+<li>没有采取符号化的知识表示，而是使用了KB embedding，文中给出了两点原因：</li>
+<li>1、KB embedding 带有整个KB的全局信息</li>
+<li>2、易于同时融合多个KBs，而不需要过多的task-specific设计</li>
+</ul>
+</li>
+<li>在ReCoRD（<a href="https://sheng-z.github.io/ReCoRD-explorer/）数据集上取得了SOTA" target="_blank" rel="noopener">https://sheng-z.github.io/ReCoRD-explorer/）数据集上取得了SOTA</a></li>
+</ul>
+<h2 id="Model"><a href="#Model" class="headerlink" title="Model"></a>Model</h2><p>模型的整体结构如图所示，主要包含4个模块：</p>
+<ul>
+<li><img src="/images/paper-acl2019-kt-net/kt-net-model.png" alt="model"></li>
+</ul>
+<ol>
+<li>BERT encoding layer</li>
+<li>knowledge integration layer: select desired KB embeddings and integrate KB representation with BERT representation</li>
+<li>self-matching layer: fuse BERT and KB representations</li>
+<li>output layer: predict the final answer</li>
+</ol>
+<p>使用 BERT 进行编码时，将question和passage连在一起输给BERT，question 作为 sentence1，passage 作为 sentence2。<br>使用 BERT 最后一层的输出 $h_i^L \in \mathbb{R}^{d_1}$ 作为 passage 和 question 中每个token的上下文编码。</p>
+<p>下面主要介绍一下KT-NET中最重要的两个模块和KB编码与抽取过程：</p>
+<h3 id="Knowledge-Integration-Layer"><a href="#Knowledge-Integration-Layer" class="headerlink" title="Knowledge Integration Layer"></a>Knowledge Integration Layer</h3><p>对于每个token $s_i$，我们可以得到上下文编码 $h_i^L$，以及检索到的相关KB concepts集合 $C(s_i)$</p>
+<ul>
+<li>$C(s_i)$中的每个 $c_j \in \mathbb{R}^{d_2}$ 是预训练好的KB embedding</li>
+</ul>
+<p>使用Attention机制自适应地选择最相关的KB Concepts，同时引入了一个sentinel向量$\bar{c} \in \mathbb{R}^{d_2}$，来控制检索出来的KB Concepts中没有相关KB的情况：</p>
+<ul>
+<li>concept 相关度：$\alpha_{ij} \propto \text{exp}(c_j^\top W h_i^L)$<ul>
+<li>$W\in \mathbb{R}^{d_2 \times d_1}$</li>
+</ul>
+</li>
+<li>sentinel 相关度：$\beta_i \propto \text{exp}(\bar{c}^\top W h_i^L)$</li>
+</ul>
+<p>经过Attention之后得到该token的 Knowledge State 表示向量：</p>
+<ul>
+<li>$\mathbf{k}_i = \sum_j \alpha_{ij}c_j + \beta_i \bar{c}$</li>
+<li>由于sentinel向量的加入，需要对attention score进行约束：$\sum_j \alpha_{ij} + \beta_{i} = 1$</li>
+</ul>
+<p>最后，将得到是knowledge state向量与上下文编码表示进行串联，得到本模块的输出：</p>
+<ul>
+<li>knowledge-enriched 表示：$u_i = [h_i^L,k_i] \in \mathbb{R}^{d_1 + d_2}$</li>
+</ul>
+<h3 id="Self-Matching-Layer"><a href="#Self-Matching-Layer" class="headerlink" title="Self-Matching Layer"></a>Self-Matching Layer</h3><p>获取了knowledge-enriched表示之后，通过self-attention机制使上下文表示和知识表示进行交互，本文中设计了直接交互和间接交互两种self-attention计算方式</p>
+<p>直接（direct）交互：采用的是BIDAF中的trilinear公式计算attention，计算token $s_j$ 和 token $s_i$ :</p>
+<ul>
+<li>$r_{ij} = w^\top [u_i, u_j, u_i \odot u_j]$<ul>
+<li>$w \in \mathbb{R}^{3d_1 + 3d_2}$</li>
+</ul>
+</li>
+<li>row-wise softmax: $a_{ij}=\frac{\text{exp}(r_{ij})}{\sum_j \text{exp} (r_{ij})}$</li>
+<li>attended vector: $\mathbf{v}_i  = \sum_j a_{ij} u_j$</li>
+<li>$\mathbf{v}_i$ 表示 每个token j与token i的直接交互程度</li>
+</ul>
+<p>间接（indirect）交互：</p>
+<ul>
+<li>间接交互指的是：token i和token j可以通过一个中间token k产生间接的关联，计算间接交互的方式很简单</li>
+<li>attention matrix $\bar{\mathbf{A}} = \mathbf{A}^2$</li>
+<li>$\bar{\mathbf{v}}_i = \sum_j \bar{a}_{ij} u_j$</li>
+</ul>
+<p>最后，将两种交互得到的attended向量表示进行串接，作为本模块的输出：</p>
+<ul>
+<li>$\mathbf{o}_i = [u_i, v_i, u_i - v_i, u_i \cdot v_i, \bar{v}_i, u_i - v_i] \in \mathbb{R}^{6d_1 + 6d_2}$</li>
+</ul>
+<h3 id="Knowledge-Embedding-and-Retrieval"><a href="#Knowledge-Embedding-and-Retrieval" class="headerlink" title="Knowledge Embedding and Retrieval"></a>Knowledge Embedding and Retrieval</h3><p>KB Embedding：</p>
+<ul>
+<li>采用的是 Yang et al. (2015)<sup id="fnref:1"><a href="#fn:1" rel="footnote">1</a></sup> 提出的 BILINEAR 算法</li>
+</ul>
+<p>KB Concepts Retrieval:</p>
+<ul>
+<li>WordNet：给定一个词，返回其在WordNet中的额同义词集（synsets）作为候选的KB Concepts</li>
+<li>NELL：首先对Passage和Question进行NER，通过字符串匹配在NELL找到实体对应的mention，抽取对应的KB作为候选的KB Concepts</li>
+<li>每个KB Concept 其实是在KB中对应的尾实体？</li>
+</ul>
+<h2 id="Experiments"><a href="#Experiments" class="headerlink" title="Experiments"></a>Experiments</h2><ul>
+<li>KT-NET使用的是BERT-Large-Cased版本，输入最大长度限制为 384，学习率 3e-05，batch大小为24</li>
+<li>KB embedding是预训练好的，在训练过程中固定，不进行微调</li>
+</ul>
+<h2 id="Analysis-amp-Summary"><a href="#Analysis-amp-Summary" class="headerlink" title="Analysis &amp; Summary"></a>Analysis &amp; Summary</h2><ul>
+<li>KT-NET 仅在 ReCoRD 数据集上取得了SOTA的成绩，印象中在leaderboard上放了将近半年也没有其他模型可以超越它的成绩，足以证明这个模型的性能</li>
+<li>如何选择预训练KB embedding的方法？</li>
+</ul>
+<div id="footnotes"><hr><div id="footnotelist"><ol style="list-style:none; padding-left: 0;"><li id="fn:1"><span style="display: inline-block; vertical-align: top; padding-right: 10px;">1.</span><span style="display: inline-block; vertical-align: top;">Embedding entities and relations for learning and inference in knowledge bases. ICLR,2015.</span><a href="#fnref:1" rev="footnote"> ↩</a></li></ol></div></div>
+      
+    </div>
+    
+    
+    
+
+    
+      <div>
+        
+    <div style="text-align:center;color: #ccc;font-size:14px;">
+    **** END of This Post. Thank for Your READING ****
+    </div>
+    <div style="text-align:center;color: #ccc;font-size:14px;">
+    If you have any Question, welcome to Email me or leave your comments below.
+    </div>
+
+      </div>
+    
+
+    
+
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>Post author:</strong>
+    Luxi Xing
+  </li>
+  <li class="post-copyright-link">
+    <strong>Post link:</strong>
+    <a href="http://xingluxi.github.io/2019/07/29/paper-acl2019-kt-net/" title="ACL2019 | Enhancing Pre-Trained Language Representations with Rich Knowledge for Machine Reading Comprehension">http://xingluxi.github.io/2019/07/29/paper-acl2019-kt-net/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>Copyright Notice: </strong>
+    All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> unless stating additionally.
+  </li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/nlp/" rel="tag"><i class="fa fa-tag"></i> nlp</a>
+          
+            <a href="/tags/paper/" rel="tag"><i class="fa fa-tag"></i> paper</a>
+          
+            <a href="/tags/knowledge/" rel="tag"><i class="fa fa-tag"></i> knowledge</a>
+          
+            <a href="/tags/mrc/" rel="tag"><i class="fa fa-tag"></i> mrc</a>
+          
+            <a href="/tags/pre-trained-lm/" rel="tag"><i class="fa fa-tag"></i> pre-trained-lm</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/07/17/paper-acl2019-kar/" rel="next" title="ACL2019 | Explicit Utilization of General Knowledge in Machine Reading Comprehension">
+                <i class="fa fa-chevron-left"></i> ACL2019 | Explicit Utilization of General Knowledge in Machine Reading Comprehension
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="lv-container" data-id="city" data-uid="MTAyMC80MjA1OC8xODYwNQ=="></div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.gif" alt="Luxi Xing">
+            
+              <p class="site-author-name" itemprop="name">Luxi Xing</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">37</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">37</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/XingLuxi" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://twitter.com/XingLuxi" target="_blank" title="Twitter">
+                      
+                        <i class="fa fa-fw fa-twitter"></i>Twitter</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:xingluxixlx@gmail.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Motivation"><span class="nav-text">Motivation</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#This-Work"><span class="nav-text">This Work</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Model"><span class="nav-text">Model</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Knowledge-Integration-Layer"><span class="nav-text">Knowledge Integration Layer</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Self-Matching-Layer"><span class="nav-text">Self-Matching Layer</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Knowledge-Embedding-and-Retrieval"><span class="nav-text">Knowledge Embedding and Retrieval</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Experiments"><span class="nav-text">Experiments</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Analysis-amp-Summary"><span class="nav-text">Analysis &amp; Summary</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+            <span id="scrollpercent"><span>0</span>%</span>
+          
+        </div>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-grav"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Luxi Xing</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a></div>
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i> Site Total Visiters
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
+  
+
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  
+
+
+  
+
+  
+
+</body>
+</html>

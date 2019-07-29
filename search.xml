@@ -4,6 +4,39 @@
   
     
     <entry>
+      <title>ACL2019 | Enhancing Pre-Trained Language Representations with Rich Knowledge for Machine Reading Comprehension</title>
+      <link href="/2019/07/29/paper-acl2019-kt-net/"/>
+      <url>/2019/07/29/paper-acl2019-kt-net/</url>
+      
+        <content type="html"><![CDATA[<blockquote><p>Title: Enhancing Pre-Trained Language Representations with Rich Knowledge for Machine Reading Comprehension<br>Author: An Yang et al.<br>Org.: MOE(PKU), Baidu<br>Published: ACL,2019</p></blockquote><h2 id="Motivation"><a href="#Motivation" class="headerlink" title="Motivation"></a>Motivation</h2><ul><li>预训练语言模型在机器阅读理解任务上取得了突破性进展。通过在海量无标注文本数据上对足够deep的网络结构进行预训练而得到的LM，能够捕捉复杂的语言现象，更好地理解语言。</li><li>然而，真正意义上的阅读理解不仅要求机器具备语言理解的能力，还要求机器具备知识以支撑复杂的推理。</li><li>例如：<img src="/images/paper-acl2019-kt-net/kt-net-example.png" alt="example"></li></ul><h3 id="This-Work"><a href="#This-Work" class="headerlink" title="This Work"></a>This Work</h3><ul><li>为了同时利用强大的PLM捕获的语言规律和外部高质量的知识/事实，提出了语言表示与知识表示的深度融合模型 <strong>KT-NET（Knowledge and Text Fusion Net）</strong></li><li>外部知识使用的是 包含词汇知识的WordNet 以及 包含实体信息的NELL<ul><li>没有采取符号化的知识表示，而是使用了KB embedding，文中给出了两点原因：</li><li>1、KB embedding 带有整个KB的全局信息</li><li>2、易于同时融合多个KBs，而不需要过多的task-specific设计</li></ul></li><li>在ReCoRD（<a href="https://sheng-z.github.io/ReCoRD-explorer/）数据集上取得了SOTA" target="_blank" rel="noopener">https://sheng-z.github.io/ReCoRD-explorer/）数据集上取得了SOTA</a></li></ul><h2 id="Model"><a href="#Model" class="headerlink" title="Model"></a>Model</h2><p>模型的整体结构如图所示，主要包含4个模块：</p><ul><li><img src="/images/paper-acl2019-kt-net/kt-net-model.png" alt="model"></li></ul><ol><li>BERT encoding layer</li><li>knowledge integration layer: select desired KB embeddings and integrate KB representation with BERT representation</li><li>self-matching layer: fuse BERT and KB representations</li><li>output layer: predict the final answer</li></ol><p>使用 BERT 进行编码时，将question和passage连在一起输给BERT，question 作为 sentence1，passage 作为 sentence2。<br>使用 BERT 最后一层的输出 $h_i^L \in \mathbb{R}^{d_1}$ 作为 passage 和 question 中每个token的上下文编码。</p><p>下面主要介绍一下KT-NET中最重要的两个模块和KB编码与抽取过程：</p><h3 id="Knowledge-Integration-Layer"><a href="#Knowledge-Integration-Layer" class="headerlink" title="Knowledge Integration Layer"></a>Knowledge Integration Layer</h3><p>对于每个token $s_i$，我们可以得到上下文编码 $h_i^L$，以及检索到的相关KB concepts集合 $C(s_i)$</p><ul><li>$C(s_i)$中的每个 $c_j \in \mathbb{R}^{d_2}$ 是预训练好的KB embedding</li></ul><p>使用Attention机制自适应地选择最相关的KB Concepts，同时引入了一个sentinel向量$\bar{c} \in \mathbb{R}^{d_2}$，来控制检索出来的KB Concepts中没有相关KB的情况：</p><ul><li>concept 相关度：$\alpha_{ij} \propto \text{exp}(c_j^\top W h_i^L)$<ul><li>$W\in \mathbb{R}^{d_2 \times d_1}$</li></ul></li><li>sentinel 相关度：$\beta_i \propto \text{exp}(\bar{c}^\top W h_i^L)$</li></ul><p>经过Attention之后得到该token的 Knowledge State 表示向量：</p><ul><li>$\mathbf{k}_i = \sum_j \alpha_{ij}c_j + \beta_i \bar{c}$</li><li>由于sentinel向量的加入，需要对attention score进行约束：$\sum_j \alpha_{ij} + \beta_{i} = 1$</li></ul><p>最后，将得到是knowledge state向量与上下文编码表示进行串联，得到本模块的输出：</p><ul><li>knowledge-enriched 表示：$u_i = [h_i^L,k_i] \in \mathbb{R}^{d_1 + d_2}$</li></ul><h3 id="Self-Matching-Layer"><a href="#Self-Matching-Layer" class="headerlink" title="Self-Matching Layer"></a>Self-Matching Layer</h3><p>获取了knowledge-enriched表示之后，通过self-attention机制使上下文表示和知识表示进行交互，本文中设计了直接交互和间接交互两种self-attention计算方式</p><p>直接（direct）交互：采用的是BIDAF中的trilinear公式计算attention，计算token $s_j$ 和 token $s_i$ :</p><ul><li>$r_{ij} = w^\top [u_i, u_j, u_i \odot u_j]$<ul><li>$w \in \mathbb{R}^{3d_1 + 3d_2}$</li></ul></li><li>row-wise softmax: $a_{ij}=\frac{\text{exp}(r_{ij})}{\sum_j \text{exp} (r_{ij})}$</li><li>attended vector: $\mathbf{v}_i  = \sum_j a_{ij} u_j$</li><li>$\mathbf{v}_i$ 表示 每个token j与token i的直接交互程度</li></ul><p>间接（indirect）交互：</p><ul><li>间接交互指的是：token i和token j可以通过一个中间token k产生间接的关联，计算间接交互的方式很简单</li><li>attention matrix $\bar{\mathbf{A}} = \mathbf{A}^2$</li><li>$\bar{\mathbf{v}}_i = \sum_j \bar{a}_{ij} u_j$</li></ul><p>最后，将两种交互得到的attended向量表示进行串接，作为本模块的输出：</p><ul><li>$\mathbf{o}_i = [u_i, v_i, u_i - v_i, u_i \cdot v_i, \bar{v}_i, u_i - v_i] \in \mathbb{R}^{6d_1 + 6d_2}$</li></ul><h3 id="Knowledge-Embedding-and-Retrieval"><a href="#Knowledge-Embedding-and-Retrieval" class="headerlink" title="Knowledge Embedding and Retrieval"></a>Knowledge Embedding and Retrieval</h3><p>KB Embedding：</p><ul><li>采用的是 Yang et al. (2015)<sup id="fnref:1"><a href="#fn:1" rel="footnote">1</a></sup> 提出的 BILINEAR 算法</li></ul><p>KB Concepts Retrieval:</p><ul><li>WordNet：给定一个词，返回其在WordNet中的额同义词集（synsets）作为候选的KB Concepts</li><li>NELL：首先对Passage和Question进行NER，通过字符串匹配在NELL找到实体对应的mention，抽取对应的KB作为候选的KB Concepts</li><li>每个KB Concept 其实是在KB中对应的尾实体？</li></ul><h2 id="Experiments"><a href="#Experiments" class="headerlink" title="Experiments"></a>Experiments</h2><ul><li>KT-NET使用的是BERT-Large-Cased版本，输入最大长度限制为 384，学习率 3e-05，batch大小为24</li><li>KB embedding是预训练好的，在训练过程中固定，不进行微调</li></ul><h2 id="Analysis-amp-Summary"><a href="#Analysis-amp-Summary" class="headerlink" title="Analysis &amp; Summary"></a>Analysis &amp; Summary</h2><ul><li>KT-NET 仅在 ReCoRD 数据集上取得了SOTA的成绩，印象中在leaderboard上放了将近半年也没有其他模型可以超越它的成绩，足以证明这个模型的性能</li><li>如何选择预训练KB embedding的方法？</li></ul><div id="footnotes"><hr><div id="footnotelist"><ol style="list-style:none; padding-left: 0;"><li id="fn:1"><span style="display: inline-block; vertical-align: top; padding-right: 10px;">1.</span><span style="display: inline-block; vertical-align: top;">Embedding entities and relations for learning and inference in knowledge bases. ICLR,2015.</span><a href="#fnref:1" rev="footnote"> ↩</a></li></ol></div></div>]]></content>
+      
+      
+      <categories>
+          
+          <category> Paper-Note </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> nlp </tag>
+            
+            <tag> paper </tag>
+            
+            <tag> knowledge </tag>
+            
+            <tag> mrc </tag>
+            
+            <tag> pre-trained-lm </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>ACL2019 | Explicit Utilization of General Knowledge in Machine Reading Comprehension</title>
       <link href="/2019/07/17/paper-acl2019-kar/"/>
       <url>/2019/07/17/paper-acl2019-kar/</url>
@@ -22,11 +55,11 @@
             
             <tag> nlp </tag>
             
-            <tag> mrc </tag>
-            
             <tag> paper </tag>
             
             <tag> knowledge </tag>
+            
+            <tag> mrc </tag>
             
             <tag> wordnet </tag>
             
@@ -152,11 +185,11 @@
             
             <tag> nlp </tag>
             
-            <tag> mrc </tag>
-            
             <tag> paper </tag>
             
             <tag> knowledge </tag>
+            
+            <tag> mrc </tag>
             
         </tags>
       
@@ -183,9 +216,9 @@
             
             <tag> nlp </tag>
             
-            <tag> research </tag>
-            
             <tag> knowledge </tag>
+            
+            <tag> research </tag>
             
             <tag> note </tag>
             
@@ -214,9 +247,9 @@
             
             <tag> nlp </tag>
             
-            <tag> mrc </tag>
-            
             <tag> paper </tag>
+            
+            <tag> mrc </tag>
             
             <tag> multi-hop </tag>
             
@@ -247,9 +280,9 @@
             
             <tag> nlp </tag>
             
-            <tag> mrc </tag>
-            
             <tag> paper </tag>
+            
+            <tag> mrc </tag>
             
             <tag> multi-hop </tag>
             
@@ -280,9 +313,9 @@
             
             <tag> nlp </tag>
             
-            <tag> mrc </tag>
-            
             <tag> knowledge </tag>
+            
+            <tag> mrc </tag>
             
             <tag> reasoning </tag>
             
@@ -346,9 +379,9 @@
             
             <tag> nlp </tag>
             
-            <tag> mrc </tag>
-            
             <tag> paper </tag>
+            
+            <tag> mrc </tag>
             
         </tags>
       
@@ -375,9 +408,9 @@
             
             <tag> nlp </tag>
             
-            <tag> mrc </tag>
-            
             <tag> paper </tag>
+            
+            <tag> mrc </tag>
             
             <tag> research </tag>
             
@@ -406,9 +439,9 @@
             
             <tag> nlp </tag>
             
-            <tag> mrc </tag>
-            
             <tag> paper </tag>
+            
+            <tag> mrc </tag>
             
             <tag> research </tag>
             
@@ -454,7 +487,7 @@
       <link href="/2019/03/10/mrc-knowedge-paper-info/"/>
       <url>/2019/03/10/mrc-knowedge-paper-info/</url>
       
-        <content type="html"><![CDATA[<p>A list of recent papers with respect to Knowledge-based Machine Reading Comprehension.<br><a id="more"></a></p><style>    table th:nth-of-type(2){    width: 60%;    }</style><h2 id="Works-on-Knowledge-aware-MRC"><a href="#Works-on-Knowledge-aware-MRC" class="headerlink" title="Works on Knowledge-aware MRC"></a>Works on Knowledge-aware MRC</h2><!-- aware/based/enhanced --><div class="table-container"><table><thead><tr><th style="text-align:center">Conf.</th><th style="text-align:left">Title</th><th style="text-align:left">Authors/Org.</th><th style="text-align:center">Note</th></tr></thead><tbody><tr><td style="text-align:center">ACL<br>2017</td><td style="text-align:left"><a href="https://doi.org/10.18653/v1/P17-1132" target="_blank" rel="noopener">Leveraging knowledge bases in lstms for improving machine reading</a></td><td style="text-align:left">Yang, et al.<br>CMU</td><td style="text-align:center"></td></tr><tr><td style="text-align:center">ACL<br>2017</td><td style="text-align:left"><a href="https://www.aclweb.org/anthology/D17-1216" target="_blank" rel="noopener">Reasoning with Heterogeneous Knowledge for Commonsense Machine Comprehension</a></td><td style="text-align:left">Hongyu Lin, et al.</td><td style="text-align:center"></td></tr><tr><td style="text-align:center">ACL<br>2017</td><td style="text-align:left"><a href="http://www.aclweb.org/anthology/D17-1086" target="_blank" rel="noopener">World knowledge for reading comprehension: Rare entity prediction with hierarchical lstms using external descriptions</a></td><td style="text-align:left">Long, et al.<br>McGill University</td><td style="text-align:center"></td></tr><tr><td style="text-align:center">ACL<br>2018</td><td style="text-align:left"><a href="http://aclweb.org/anthology/P18-1076" target="_blank" rel="noopener">Knowledgeable Reader: Enhancing Cloze-Style Reading Comprehension with External Commonsense Knowledge</a></td><td style="text-align:left">Mihaylov, et al.<br>Heidelberg University</td><td style="text-align:center"><a href="/2019/01/09/paper-knreader/" title="knreader-note">knreader-note</a></td></tr><tr><td style="text-align:center">2018</td><td style="text-align:left"><a href="https://openreview.net/forum?id=B1twdMCab" target="_blank" rel="noopener">Dynamic Integration of Background Knowledge in Neural NLU Systems</a></td><td style="text-align:left">Dirk Weissenborn, et al.</td><td style="text-align:center"><a href="/2019/03/06/paper-2018-refinewordemb/" title="note">note</a></td></tr><tr><td style="text-align:center">EMNLP<br>2018</td><td style="text-align:left"><a href="http://aclweb.org/anthology/D18-1454" target="_blank" rel="noopener">Commonsense for Generative Multi-Hop Question Answering Tasks</a></td><td style="text-align:left">Lisa Bauer</td><td style="text-align:center"><a href="/2019/02/21/paper-emnlp2018-mhpgm/" title="mhpgm-note">mhpgm-note</a></td></tr><tr><td style="text-align:center">EMNLP<br>2018</td><td style="text-align:left"><a href="https://aclweb.org/anthology/D18-1455" target="_blank" rel="noopener">Open Domain Question Answering Using Early Fusion of Knowledge Bases and Text</a></td><td style="text-align:left">CMU</td><td style="text-align:center"></td></tr><tr><td style="text-align:center">(2018v1)<br>ACL<br>2019</td><td style="text-align:left"><a href="https://arxiv.org/abs/1809.03449" target="_blank" rel="noopener">Exploring Machine Reading Comprehension with Explicit Knowledge</a><br>Explicit Utilization of General Knowledge in Machine Reading Comprehension</td><td style="text-align:left">York University</td><td style="text-align:center"></td></tr><tr><td style="text-align:center">ACL<br>2018</td><td style="text-align:left"><a href="https://aclweb.org/anthology/D18-1455" target="_blank" rel="noopener">Open Domain Question Answering Using Early Fusion of Knowledge Bases and Text</a></td><td style="text-align:left">CMU</td><td style="text-align:center"><a href="/2019/07/08/paper-emnlp2018-graft-net/" title="note">note</a></td></tr><tr><td style="text-align:center">AAAI<br>2018</td><td style="text-align:left"><a href="https://arxiv.org/abs/1811.00625" target="_blank" rel="noopener">Incorporating Structured Commonsense Knowledge in Story Completion</a></td><td style="text-align:left"></td><td style="text-align:center"></td></tr><tr><td style="text-align:center">2019</td><td style="text-align:left"><a href="https://arxiv.org/abs/1902.00993" target="_blank" rel="noopener">Improving Question Answering with External Knowledge</a></td><td style="text-align:left"></td><td style="text-align:center"></td></tr><tr><td style="text-align:center"></td><td style="text-align:left"></td><td style="text-align:left"></td></tr></tbody></table></div><h2 id="MRC-with-Knowledge"><a href="#MRC-with-Knowledge" class="headerlink" title="MRC with Knowledge"></a>MRC with Knowledge</h2><ul><li><del>how to let the machine obtain Knowledge？</del></li><li>how to extract external knowledge?</li><li>how to represent knowledge？ in which kind of format？</li><li>how to fuse the external knowledge?</li><li>how to let the machine to learn Knowledge incrementally？</li><li>how to make the machine can automatically use Knowledge it already knows or it has been told？</li></ul>]]></content>
+        <content type="html"><![CDATA[<p>A list of recent papers with respect to Knowledge-based Machine Reading Comprehension.<br><a id="more"></a></p><style>    table th:nth-of-type(2){    width: 60%;    }</style><h2 id="Works-on-Knowledge-aware-MRC"><a href="#Works-on-Knowledge-aware-MRC" class="headerlink" title="Works on Knowledge-aware MRC"></a>Works on Knowledge-aware MRC</h2><!-- aware/based/enhanced --><div class="table-container"><table><thead><tr><th style="text-align:center">Conf.</th><th style="text-align:left">Title</th><th style="text-align:left">Authors/Org.</th><th style="text-align:center">Note</th></tr></thead><tbody><tr><td style="text-align:center">ACL<br>2017</td><td style="text-align:left"><a href="https://doi.org/10.18653/v1/P17-1132" target="_blank" rel="noopener">Leveraging knowledge bases in lstms for improving machine reading</a></td><td style="text-align:left">Yang, et al.<br>CMU</td><td style="text-align:center"></td></tr><tr><td style="text-align:center">ACL<br>2017</td><td style="text-align:left"><a href="https://www.aclweb.org/anthology/D17-1216" target="_blank" rel="noopener">Reasoning with Heterogeneous Knowledge for Commonsense Machine Comprehension</a></td><td style="text-align:left">Hongyu Lin, et al.</td><td style="text-align:center"></td></tr><tr><td style="text-align:center">ACL<br>2017</td><td style="text-align:left"><a href="http://www.aclweb.org/anthology/D17-1086" target="_blank" rel="noopener">World knowledge for reading comprehension: Rare entity prediction with hierarchical lstms using external descriptions</a></td><td style="text-align:left">Long, et al.<br>McGill University</td><td style="text-align:center"></td></tr><tr><td style="text-align:center">ACL<br>2018</td><td style="text-align:left"><a href="http://aclweb.org/anthology/P18-1076" target="_blank" rel="noopener">Knowledgeable Reader: Enhancing Cloze-Style Reading Comprehension with External Commonsense Knowledge</a></td><td style="text-align:left">Mihaylov, et al.<br>Heidelberg University</td><td style="text-align:center"><a href="/2019/01/09/paper-knreader/" title="knreader-note">knreader-note</a></td></tr><tr><td style="text-align:center">2018</td><td style="text-align:left"><a href="https://openreview.net/forum?id=B1twdMCab" target="_blank" rel="noopener">Dynamic Integration of Background Knowledge in Neural NLU Systems</a></td><td style="text-align:left">Dirk Weissenborn, et al.</td><td style="text-align:center"><a href="/2019/03/06/paper-2018-refinewordemb/" title="note">note</a></td></tr><tr><td style="text-align:center">EMNLP<br>2018</td><td style="text-align:left"><a href="http://aclweb.org/anthology/D18-1454" target="_blank" rel="noopener">Commonsense for Generative Multi-Hop Question Answering Tasks</a></td><td style="text-align:left">Lisa Bauer</td><td style="text-align:center"><a href="/2019/02/21/paper-emnlp2018-mhpgm/" title="mhpgm-note">mhpgm-note</a></td></tr><tr><td style="text-align:center">EMNLP<br>2018</td><td style="text-align:left"><a href="https://aclweb.org/anthology/D18-1455" target="_blank" rel="noopener">Open Domain Question Answering Using Early Fusion of Knowledge Bases and Text</a></td><td style="text-align:left">CMU</td><td style="text-align:center"></td></tr><tr><td style="text-align:center">(2018v1)<br>ACL<br>2019</td><td style="text-align:left"><a href="https://arxiv.org/abs/1809.03449" target="_blank" rel="noopener">Exploring Machine Reading Comprehension with Explicit Knowledge</a><br>Explicit Utilization of General Knowledge in Machine Reading Comprehension</td><td style="text-align:left">York University</td><td style="text-align:center"><a href="/2019/07/17/paper-acl2019-kar/" title="note">note</a></td></tr><tr><td style="text-align:center">ACL<br>2018</td><td style="text-align:left"><a href="https://aclweb.org/anthology/D18-1455" target="_blank" rel="noopener">Open Domain Question Answering Using Early Fusion of Knowledge Bases and Text</a></td><td style="text-align:left">CMU</td><td style="text-align:center"><a href="/2019/07/08/paper-emnlp2018-graft-net/" title="note">note</a></td></tr><tr><td style="text-align:center">AAAI<br>2018</td><td style="text-align:left"><a href="https://arxiv.org/abs/1811.00625" target="_blank" rel="noopener">Incorporating Structured Commonsense Knowledge in Story Completion</a></td><td style="text-align:left"></td><td style="text-align:center"></td></tr><tr><td style="text-align:center">2019</td><td style="text-align:left"><a href="https://arxiv.org/abs/1902.00993" target="_blank" rel="noopener">Improving Question Answering with External Knowledge</a></td><td style="text-align:left"></td><td style="text-align:center"></td></tr><tr><td style="text-align:center">ACL<br>2019</td><td style="text-align:left"><a href="https://www.aclweb.org/anthology/papers/P/P19/P19-1226/" target="_blank" rel="noopener">Enhancing Pre-Trained Language Representations with Rich Knowledge for Machine Reading Comprehension</a></td><td style="text-align:left">PKU<br>Baidu</td><td style="text-align:center"><a href="/2019/07/29/paper-acl2019-kt-net/" title="note">note</a></td></tr><tr><td style="text-align:center"></td><td style="text-align:left"></td><td style="text-align:left"></td></tr></tbody></table></div><h2 id="MRC-with-Knowledge"><a href="#MRC-with-Knowledge" class="headerlink" title="MRC with Knowledge"></a>MRC with Knowledge</h2><ul><li><del>how to let the machine obtain Knowledge？</del></li><li>how to extract external knowledge?</li><li>how to represent knowledge？ in which kind of format？</li><li>how to fuse the external knowledge?</li><li>how to let the machine to learn Knowledge incrementally？</li><li>how to make the machine can automatically use Knowledge it already knows or it has been told？</li></ul>]]></content>
       
       
       <categories>
@@ -468,11 +501,11 @@
             
             <tag> nlp </tag>
             
-            <tag> mrc </tag>
-            
             <tag> paper </tag>
             
             <tag> knowledge </tag>
+            
+            <tag> mrc </tag>
             
         </tags>
       
@@ -499,11 +532,11 @@
             
             <tag> nlp </tag>
             
-            <tag> mrc </tag>
-            
             <tag> paper </tag>
             
             <tag> knowledge </tag>
+            
+            <tag> mrc </tag>
             
             <tag> nli </tag>
             
@@ -532,9 +565,9 @@
             
             <tag> nlp </tag>
             
-            <tag> mrc </tag>
-            
             <tag> paper </tag>
+            
+            <tag> mrc </tag>
             
             <tag> model </tag>
             
@@ -563,9 +596,9 @@
             
             <tag> nlp </tag>
             
-            <tag> mrc </tag>
-            
             <tag> paper </tag>
+            
+            <tag> mrc </tag>
             
             <tag> multi-hop </tag>
             
@@ -615,7 +648,7 @@
       <link href="/2019/01/21/note-research-ai2-mosaic/"/>
       <url>/2019/01/21/note-research-ai2-mosaic/</url>
       
-        <content type="html"><![CDATA[<p>MOSAIC 是 AI2 (ALLEN Institute for Artificial Intelligence) 研究院中进行机器常识智能研究的小组<sup id="fnref:1"><a href="#fn:1" rel="footnote">1</a></sup>.</p><p>现有的研究项目：</p><ol><li><strong>Commonsense Knowledge Graphs: Exploring semi-structured representations of commonsense.</strong><sup id="fnref:2"><a href="#fn:2" rel="footnote">2</a></sup></li><li>Visual Commonsense Reasoning: 视觉常识推理项目<sup id="fnref:3"><a href="#fn:3" rel="footnote">3</a></sup></li><li>Mosaic Commonsense Benchmarks: Measuring progress on Machine Common Sense.<sup id="fnref:4"><a href="#fn:4" rel="footnote">4</a></sup></li></ol><p>对应的主要Papers：</p><ol><li>ATOMIC: An Atlas of Machine Commonsense for If-Then Reasoning. AAAI,2019.</li><li>From Recognition to Cognition: Visual Commonsense Reasoning</li><li>SWAG: A Large-Scale Adversarial Dataset for Grounded Commonsense Inference. EMNLP,2018.</li></ol><p>其他Papers:</p><ol><li>Event2Mind: Commonsense Inference on Events, Intents, and Reactions. ACL,2018.</li><li>Modeling Naive Psychology of Characters in Simple Commonsense Stories. ACL,2018.</li><li>Reasoning about Actions and State Changes by Injecting Commonsense Knowledge. EMNLP,2018.</li></ol><p>重点关注 <code>Commonsense Knowledge Graphs</code> 这部分的工作</p><h2 id="Commonsense-Knowledge-Graphs"><a href="#Commonsense-Knowledge-Graphs" class="headerlink" title="Commonsense Knowledge Graphs"></a>Commonsense Knowledge Graphs</h2><blockquote><ol><li>Event2Mind: Commonsense Inference on Events, Intents, and Reactions. ACL,2018.</li><li>ATOMIC: An Atlas of Machine Commonsense for If-Then Reasoning. AAAI,2019.</li></ol></blockquote><h2 id="Event2Mind"><a href="#Event2Mind" class="headerlink" title="Event2Mind"></a>Event2Mind</h2><p>常识推理任务</p><p>推理类型：2类（语用推理 pragmatic inference）</p><ul><li><p>intent 意图</p><ul><li>可以解释为什么施事者导致事件发生，是行动或事件的心理前提</li></ul></li><li><p>emotional reaction 情绪反应</p><ul><li>反应定义为解释施事者和参与事件的其他人的心理状态将如何因此改变</li><li>反应可以被认为是一种行为或事件的心理后置条件</li></ul></li></ul><p>任务目标：给定一个 event phrase，预测 X intent / X reaction / Y reaction</p><ul><li>pre-condition: X intent</li><li>post-condition: X/Y reaction</li></ul><p>例子：</p><ul><li><img src="/images/note-research-ai2-mosaic/event2mind-example.png" alt="event2mind-example"></li></ul><h2 id="ATOMIC"><a href="#ATOMIC" class="headerlink" title="ATOMIC"></a>ATOMIC</h2><p>关于 if-then 推理类型的推理知识库（Knowledge base about inferential knowledge on if-then reasoning types）</p><ul><li>例子：<img src="/images/note-research-ai2-mosaic/atomic-example.png" alt="atomic-example"></li></ul><p>nine if-then relation types to distinguish: （不同上不全面的刻画维度）</p><ul><li><strong>cause vs. effect</strong><ul><li>[Xintent，Xneed] vs. [Xwant，Xreaction，Effect on X，Effect on Y，Ywant，Yreaction]</li></ul></li><li><strong>agents vs. themes</strong>：agent（X，who cause the event），themes（Other）<ul><li>[Xintent，Xneed，Xwant，Xreaction，Effect on X， Xattribute] vs. [Effect on Y，Ywant， Yreaction]</li></ul></li><li><strong>voluntary vs. involuntary</strong> events<ul><li>[Xintent，Xneed，Xwant，Ywant] vs. [Xreaction，Effect on X，Effect on Y，Yreaction，Xattribute]</li></ul></li><li><strong>actions vs. mental states</strong><ul><li>[] vs. []</li></ul></li><li><strong>dynamic vs. static</strong><ul><li>[Xintent，Xneed，Xwant，Xreaction，Effect on X，Effect on Y，Ywant，Yreaction] vs. [Xattribute]</li></ul></li></ul><p>taxonomy of if-then reasoning types:</p><ul><li>based on the content being predicted:<ul><li><font color="green">**if-event-then-mental-state**</font>* mental pre-/post- conditions of an event* 3 relations: <font color="blue">**X inent/ X reaction/ Other reaction**</font></li><li><font color="green">**if event-then event**</font>* events that constitute probable pre- and postconditions of a given event* 5 relations: <font color="blue">**X need/ X want/ Effect on X/ Other want/ Effect on Other**</font></li><li><font color="green">**if event-then-person**</font>* a stative relation that describes how the subject of an event is described or perceived* 1 relations: <font color="blue">**X attribute**</font></li></ul></li><li>based on their causal relations<ul><li>causes（因）</li><li>effect（果）</li><li>stative（状态）</li></ul></li><li>图例：<img src="/images/note-research-ai2-mosaic/atomic-taxonomy-example.png" alt="example"></li></ul><p>与现有knowledge base的对比：</p><ul><li><img src="/images/note-research-ai2-mosaic/atomic-comp.png" alt="kb-comp"></li></ul><div id="footnotes"><hr><div id="footnotelist"><ol style="list-style:none; padding-left: 0;"><li id="fn:1"><span style="display: inline-block; vertical-align: top; padding-right: 10px;">1.</span><span style="display: inline-block; vertical-align: top;">https://mosaic.allenai.org/</span><a href="#fnref:1" rev="footnote"> ↩</a></li><li id="fn:2"><span style="display: inline-block; vertical-align: top; padding-right: 10px;">2.</span><span style="display: inline-block; vertical-align: top;">https://mosaic.allenai.org/projects/commonsense-knowledge-graphs</span><a href="#fnref:2" rev="footnote"> ↩</a></li><li id="fn:3"><span style="display: inline-block; vertical-align: top; padding-right: 10px;">3.</span><span style="display: inline-block; vertical-align: top;">https://visualcommonsense.com/</span><a href="#fnref:3" rev="footnote"> ↩</a></li><li id="fn:4"><span style="display: inline-block; vertical-align: top; padding-right: 10px;">4.</span><span style="display: inline-block; vertical-align: top;">https://mosaic.allenai.org/projects/mosaic-commonsense-benchmarks</span><a href="#fnref:4" rev="footnote"> ↩</a></li></ol></div></div>]]></content>
+        <content type="html"><![CDATA[<p>MOSAIC 是 AI2 (ALLEN Institute for Artificial Intelligence) 研究院中进行机器常识智能研究的小组<sup id="fnref:1"><a href="#fn:1" rel="footnote">1</a></sup>.</p><p>现有的研究项目：(Update at July, 2019)</p><ol><li><strong>Commonsense Knowledge Graphs: Exploring semi-structured representations of commonsense.</strong><sup id="fnref:2"><a href="#fn:2" rel="footnote">2</a></sup></li><li>Visual Commonsense Reasoning: 视觉常识推理项目<sup id="fnref:3"><a href="#fn:3" rel="footnote">3</a></sup></li><li>Mosaic Commonsense Benchmarks: Measuring progress on Machine Common Sense.<sup id="fnref:4"><a href="#fn:4" rel="footnote">4</a></sup></li></ol><p>对应的主要Papers：</p><ol><li>ATOMIC: An Atlas of Machine Commonsense for If-Then Reasoning. AAAI,2019.</li><li>From Recognition to Cognition: Visual Commonsense Reasoning</li><li>SWAG: A Large-Scale Adversarial Dataset for Grounded Commonsense Inference. EMNLP,2018.</li></ol><p>其他Papers:</p><ol><li>Event2Mind: Commonsense Inference on Events, Intents, and Reactions. ACL,2018.</li><li>Modeling Naive Psychology of Characters in Simple Commonsense Stories. ACL,2018.</li><li>Reasoning about Actions and State Changes by Injecting Commonsense Knowledge. EMNLP,2018.</li></ol><p>重点关注 <code>Commonsense Knowledge Graphs</code> 这部分的工作</p><h2 id="Commonsense-Knowledge-Graphs"><a href="#Commonsense-Knowledge-Graphs" class="headerlink" title="Commonsense Knowledge Graphs"></a>Commonsense Knowledge Graphs</h2><blockquote><ol><li>Event2Mind: Commonsense Inference on Events, Intents, and Reactions. ACL,2018.</li><li>ATOMIC: An Atlas of Machine Commonsense for If-Then Reasoning. AAAI,2019.</li></ol></blockquote><h3 id="Event2Mind"><a href="#Event2Mind" class="headerlink" title="Event2Mind"></a>Event2Mind</h3><p>常识推理任务</p><p>推理类型：2类（语用推理 pragmatic inference）</p><ul><li><p>intent 意图</p><ul><li>可以解释为什么施事者导致事件发生，是行动或事件的心理前提</li></ul></li><li><p>emotional reaction 情绪反应</p><ul><li>反应定义为解释施事者和参与事件的其他人的心理状态将如何因此改变</li><li>反应可以被认为是一种行为或事件的心理后置条件</li></ul></li></ul><p>任务目标：给定一个 event phrase，预测 X intent / X reaction / Y reaction</p><ul><li>pre-condition: X intent</li><li>post-condition: X/Y reaction</li></ul><p>例子：</p><ul><li><img src="/images/note-research-ai2-mosaic/event2mind-example.png" alt="event2mind-example"></li></ul><h3 id="ATOMIC"><a href="#ATOMIC" class="headerlink" title="ATOMIC"></a>ATOMIC</h3><p>关于 if-then 推理类型的推理知识库（Knowledge base about inferential knowledge on if-then reasoning types）</p><ul><li>例子：<img src="/images/note-research-ai2-mosaic/atomic-example.png" alt="atomic-example"></li></ul><p>nine if-then relation types to distinguish: （不同上不全面的刻画维度）</p><ul><li><strong>cause vs. effect</strong><ul><li>[Xintent，Xneed] vs. [Xwant，Xreaction，Effect on X，Effect on Y，Ywant，Yreaction]</li></ul></li><li><strong>agents vs. themes</strong>：agent（X，who cause the event），themes（Other）<ul><li>[Xintent，Xneed，Xwant，Xreaction，Effect on X， Xattribute] vs. [Effect on Y，Ywant， Yreaction]</li></ul></li><li><strong>voluntary vs. involuntary</strong> events<ul><li>[Xintent，Xneed，Xwant，Ywant] vs. [Xreaction，Effect on X，Effect on Y，Yreaction，Xattribute]</li></ul></li><li><strong>actions vs. mental states</strong><ul><li>[] vs. []</li></ul></li><li><strong>dynamic vs. static</strong><ul><li>[Xintent，Xneed，Xwant，Xreaction，Effect on X，Effect on Y，Ywant，Yreaction] vs. [Xattribute]</li></ul></li></ul><p>taxonomy of if-then reasoning types:</p><ul><li>based on the content being predicted:<ul><li><font color="green">**if-event-then-mental-state**</font>* mental pre-/post- conditions of an event* 3 relations: <font color="blue">**X inent/ X reaction/ Other reaction**</font></li><li><font color="green">**if event-then event**</font>* events that constitute probable pre- and postconditions of a given event* 5 relations: <font color="blue">**X need/ X want/ Effect on X/ Other want/ Effect on Other**</font></li><li><font color="green">**if event-then-person**</font>* a stative relation that describes how the subject of an event is described or perceived* 1 relations: <font color="blue">**X attribute**</font></li></ul></li><li>based on their causal relations<ul><li>causes（因）</li><li>effect（果）</li><li>stative（状态）</li></ul></li><li>图例：<img src="/images/note-research-ai2-mosaic/atomic-taxonomy-example.png" alt="example"></li></ul><p>与现有knowledge base的对比：</p><ul><li><img src="/images/note-research-ai2-mosaic/atomic-comp.png" alt="kb-comp"></li></ul><h2 id="DARPA-Leaderboards"><a href="#DARPA-Leaderboards" class="headerlink" title="DARPA Leaderboards"></a>DARPA Leaderboards</h2><h3 id="Abductive-Natural-Language-inference-alpha-NLI"><a href="#Abductive-Natural-Language-inference-alpha-NLI" class="headerlink" title="Abductive Natural Language inference (alpha NLI)"></a>Abductive Natural Language inference (alpha NLI)</h3><h3 id="HellaSwag-Can-a-Machine-Really-Finish-Your-Sentence"><a href="#HellaSwag-Can-a-Machine-Really-Finish-Your-Sentence" class="headerlink" title="HellaSwag: Can a Machine Really Finish Your Sentence?"></a>HellaSwag: Can a Machine Really Finish Your Sentence?</h3><h3 id="Physical-IQa-Pyhsical-Interaction-QA"><a href="#Physical-IQa-Pyhsical-Interaction-QA" class="headerlink" title="Physical IQa: Pyhsical Interaction QA"></a>Physical IQa: Pyhsical Interaction QA</h3><h3 id="Social-IQA-Social-Interaction-QA"><a href="#Social-IQA-Social-Interaction-QA" class="headerlink" title="Social IQA: Social Interaction QA"></a>Social IQA: Social Interaction QA</h3><div id="footnotes"><hr><div id="footnotelist"><ol style="list-style:none; padding-left: 0;"><li id="fn:1"><span style="display: inline-block; vertical-align: top; padding-right: 10px;">1.</span><span style="display: inline-block; vertical-align: top;">https://mosaic.allenai.org/</span><a href="#fnref:1" rev="footnote"> ↩</a></li><li id="fn:2"><span style="display: inline-block; vertical-align: top; padding-right: 10px;">2.</span><span style="display: inline-block; vertical-align: top;">https://mosaic.allenai.org/projects/commonsense-knowledge-graphs</span><a href="#fnref:2" rev="footnote"> ↩</a></li><li id="fn:3"><span style="display: inline-block; vertical-align: top; padding-right: 10px;">3.</span><span style="display: inline-block; vertical-align: top;">https://visualcommonsense.com/</span><a href="#fnref:3" rev="footnote"> ↩</a></li><li id="fn:4"><span style="display: inline-block; vertical-align: top; padding-right: 10px;">4.</span><span style="display: inline-block; vertical-align: top;">https://mosaic.allenai.org/projects/mosaic-commonsense-benchmarks</span><a href="#fnref:4" rev="footnote"> ↩</a></li></ol></div></div>]]></content>
       
       
       <categories>
@@ -726,9 +759,9 @@
             
             <tag> nlp </tag>
             
-            <tag> mrc </tag>
-            
             <tag> paper </tag>
+            
+            <tag> mrc </tag>
             
             <tag> research </tag>
             
@@ -788,9 +821,9 @@
             
             <tag> nlp </tag>
             
-            <tag> mrc </tag>
-            
             <tag> paper </tag>
+            
+            <tag> mrc </tag>
             
             <tag> dataset </tag>
             
@@ -819,9 +852,9 @@
             
             <tag> nlp </tag>
             
-            <tag> mrc </tag>
-            
             <tag> paper </tag>
+            
+            <tag> mrc </tag>
             
             <tag> reasoning </tag>
             
@@ -850,9 +883,9 @@
             
             <tag> nlp </tag>
             
-            <tag> mrc </tag>
-            
             <tag> paper </tag>
+            
+            <tag> mrc </tag>
             
             <tag> nlu </tag>
             
@@ -1007,11 +1040,11 @@
             
             <tag> nlp </tag>
             
-            <tag> mrc </tag>
-            
             <tag> paper </tag>
             
             <tag> knowledge </tag>
+            
+            <tag> mrc </tag>
             
         </tags>
       
