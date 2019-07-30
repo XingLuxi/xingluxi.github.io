@@ -96,7 +96,7 @@
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://xingluxi.github.io/images/paper-acl2019-kt-net/kt-net-example.png">
 <meta property="og:image" content="http://xingluxi.github.io/images/paper-acl2019-kt-net/kt-net-model.png">
-<meta property="og:updated_time" content="2019-07-29T13:01:57.708Z">
+<meta property="og:updated_time" content="2019-07-30T07:51:35.535Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="ACL2019 | Enhancing Pre-Trained Language Representations with Rich Knowledge for Machine Reading Comprehension">
 <meta name="twitter:description" content="Title: Enhancing Pre-Trained Language Representations with Rich Knowledge for Machine Reading ComprehensionAuthor: An Yang et al.Org.: MOE(PKU), BaiduPublished: ACL,2019  Motivation 预训练语言模型在机器阅读理解任务上">
@@ -318,8 +318,8 @@
               
                 <span class="post-meta-item-text">Post modified&#58;</span>
               
-              <time title="Post modified" itemprop="dateModified" datetime="2019-07-29T21:01:57+08:00">
-                2019-07-29
+              <time title="Post modified" itemprop="dateModified" datetime="2019-07-30T15:51:35+08:00">
+                2019-07-30
               </time>
             
           </span>
@@ -373,7 +373,7 @@
                   <span class="post-meta-item-text">Words count in article&#58;</span>
                 
                 <span title="Words count in article">
-                  1.4k
+                  1.5k
                 </span>
               
 
@@ -389,7 +389,7 @@
                   <span class="post-meta-item-text">Reading time &asymp;</span>
                 
                 <span title="Reading time">
-                  5
+                  6
                 </span>
               
             </div>
@@ -507,8 +507,13 @@
 </li>
 </ul>
 <h2 id="Experiments"><a href="#Experiments" class="headerlink" title="Experiments"></a>Experiments</h2><ul>
-<li>KT-NET使用的是BERT-Large-Cased版本，输入最大长度限制为 384，学习率 3e-05，batch大小为24</li>
+<li>KT-NET中的encoder使用的是BERT-Large-Cased版本，输入最大长度限制为 384，学习率 3e-05，batch大小为24</li>
 <li>KB embedding是预训练好的，在训练过程中固定，不进行微调</li>
+<li>实验数据集为：ReCoRD 和 SQuAD</li>
+<li>case study<ul>
+<li>从例子的热力图中，可以明显看出与BERT相比，KT-Net可以使不同的question词对passage中的词赋予不同的相关性，并且具有KB信息的支持，而BERT中，不同的question词对同一个passage中的词的相关性是相近的，也就是说，question中的每个词对于passage中的词的相关性相等，</li>
+</ul>
+</li>
 </ul>
 <h2 id="Analysis-amp-Summary"><a href="#Analysis-amp-Summary" class="headerlink" title="Analysis &amp; Summary"></a>Analysis &amp; Summary</h2><ul>
 <li>KT-NET 仅在 ReCoRD 数据集上取得了SOTA的成绩，印象中在leaderboard上放了将近半年也没有其他模型可以超越它的成绩，足以证明这个模型的性能</li>
