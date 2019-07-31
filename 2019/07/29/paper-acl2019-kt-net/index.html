@@ -97,7 +97,7 @@
 <meta property="og:image" content="http://xingluxi.github.io/images/paper-acl2019-kt-net/kt-net-example.png">
 <meta property="og:image" content="http://xingluxi.github.io/images/paper-acl2019-kt-net/kt-net-model.png">
 <meta property="og:image" content="http://xingluxi.github.io/images/paper-acl2019-kt-net/kt-net-case.png">
-<meta property="og:updated_time" content="2019-07-30T07:53:15.245Z">
+<meta property="og:updated_time" content="2019-07-31T03:59:04.039Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="ACL2019 | Enhancing Pre-Trained Language Representations with Rich Knowledge for Machine Reading Comprehension">
 <meta name="twitter:description" content="Title: Enhancing Pre-Trained Language Representations with Rich Knowledge for Machine Reading ComprehensionAuthor: An Yang et al.Org.: MOE(PKU), BaiduPublished: ACL,2019  Motivation 预训练语言模型在机器阅读理解任务上">
@@ -319,8 +319,8 @@
               
                 <span class="post-meta-item-text">Post modified&#58;</span>
               
-              <time title="Post modified" itemprop="dateModified" datetime="2019-07-30T15:53:15+08:00">
-                2019-07-30
+              <time title="Post modified" itemprop="dateModified" datetime="2019-07-31T11:59:04+08:00">
+                2019-07-31
               </time>
             
           </span>
@@ -417,7 +417,15 @@
 <h2 id="Motivation"><a href="#Motivation" class="headerlink" title="Motivation"></a>Motivation</h2><ul>
 <li>预训练语言模型在机器阅读理解任务上取得了突破性进展。通过在海量无标注文本数据上对足够deep的网络结构进行预训练而得到的LM，能够捕捉复杂的语言现象，更好地理解语言。</li>
 <li>然而，真正意义上的阅读理解不仅要求机器具备语言理解的能力，还要求机器具备知识以支撑复杂的推理。</li>
-<li>例如：<img src="/images/paper-acl2019-kt-net/kt-net-example.png" alt="example"></li>
+<li>例如：<img src="/images/paper-acl2019-kt-net/kt-net-example.png" alt="example"><ul>
+<li>这个例子需要用到下面的知识<ul>
+<li>world knowledge：<em>Trump is the person who leads US</em></li>
+<li>word knowledge：<em>sanctions has a common hypernym with ban</em></li>
+</ul>
+</li>
+<li>BERT在不知道额外知识的情况下无法正确地判断出结果</li>
+</ul>
+</li>
 </ul>
 <h3 id="This-Work"><a href="#This-Work" class="headerlink" title="This Work"></a>This Work</h3><ul>
 <li>为了同时利用强大的PLM捕获的语言规律和外部高质量的知识/事实，提出了语言表示与知识表示的深度融合模型 <strong>KT-NET（Knowledge and Text Fusion Net）</strong></li>
@@ -458,7 +466,7 @@
 <li>$\mathbf{k}_i = \sum_j \alpha_{ij}c_j + \beta_i \bar{c}$</li>
 <li>由于sentinel向量的加入，需要对attention score进行约束：$\sum_j \alpha_{ij} + \beta_{i} = 1$</li>
 </ul>
-<p>最后，将得到是knowledge state向量与上下文编码表示进行串联，得到本模块的输出：</p>
+<p>最后，将得到是knowledge state向量与上下文编码表示进行<strong>串联</strong>，得到本模块的输出：</p>
 <ul>
 <li>knowledge-enriched 表示：$u_i = [h_i^L,k_i] \in \mathbb{R}^{d_1 + d_2}$</li>
 </ul>
@@ -495,12 +503,12 @@
 </ul>
 <p>在这一部分最后，文中还列举了自身的几点Advantages：</p>
 <ul>
-<li>之前的一些结合knowledge的MRC工作，都可以算作是一种 <strong>retrieve-then-encode</strong> 范式，这部分工作只对抽取出来的相关知识进行编码与整合，获得的是局部的、与文本相关的知识信息<ul>
-<li>本文的工作首先是在整个KB上预选练出kb embedding，可以捕获全局的信息</li>
+<li>之前的一些结合knowledge的MRC工作，都可以算作是一种 <strong>retrieve-then-encode</strong> 范式，这部分工作只对抽取出来的相关知识进行编码（参考另一篇blog<a href="/2019/01/09/paper-knreader/" title="note">note</a>）与整合，获得的是局部的、与文本相关的知识信息<ul>
+<li>本文的工作首先是在整个KB上预训练出kb embedding，可以捕获全局的信息</li>
 <li>基于使用的KB Embedding方法来说，是全局的表示</li>
 </ul>
 </li>
-<li>易于扩展至融合多个KB的信息<ul>
+<li><strong>易于扩展至融合多个KB的信息</strong><ul>
 <li>对于每个token可以从不同的KB中抽取出不同的KB Concepts集合 $C^j(s_i)$</li>
 <li>通过不同的KB Concepts集合 $C^j(s_i)$ 计算出不同的 Knowledge State 向量 $k_i^j$</li>
 <li>直接将多个 $k^j_i$ 与 $h_i^L$ 串联获得融合多个KB的knowledge-enriched表示：$u_i = [h_i^L, k_i^1, k_i^2,…]$</li>
