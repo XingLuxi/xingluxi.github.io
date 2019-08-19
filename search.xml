@@ -3,7 +3,7 @@
   <entry>
     <title><![CDATA[2019 | SenseBERT - Driving Some Sense into BERT]]></title>
     <url>%2F2019%2F08%2F18%2Fpaper-2019-sense-bert%2F</url>
-    <content type="text"><![CDATA[Title: SenseBERT: Driving Some Sense into BERTAuthors: Yoav Levine, Barak Lenz, Or Dagan, Dan Padnos, Or Sharir, Shai Shalev-Shwartz, Amnon Shashua, Yoav ShohamOrg: AI21 Labs, Tel Aviv, IsraelPublished: unpublished?PDF link: https://arxiv.org/abs/1908.05646 Motivation 现有的工作通过应用自监督学习，使神经网络语言模型在NLU上取得了很大的进步 但是，目前自监督技术主要在 word-form level 上进行操作（即在word-form level上提取自监督信号指导模型进行学习） 这种 word-form 级别的监督只是本质的语义内容信号的一种替代。 从词汇语义 (lexical semantic) 的角度来看，word-form 可以看做是词汇的 surface-level 的表现形式 一词多义是自然语言处理中的一个常见现象，一个词具有多种不同的含义（文中举的例子是 ‘bass’，既可以指一种鲈鱼，低音吉他，还可以指低音歌唱家） 一个词，其本身的形式，仅仅是在给定上下文/特定语境中的实际意义的一个替代。 一词多义现象所带来的一个重要挑战就是自然语言理解中的歧义问题 BERT中的MLM只是对word-form进行的mask，无法捕捉word-sense信息，即缺乏对 lexical semantic 的建模 This Work这篇文章对于BERT的改进，正如其题目所说，drive some sense into BERT： 除了基础的预测 masked word 任务，还引入了一类 explicit word-sense 作为 BERT的 semantic-level 的自监督信号 explicit word-sense 信息指的是 每个词在 WordNet 中所对应的 supersense （共有45个supersense分类，具体参见论文Appendix） 相应的增加了一个预测 masked word-sense 任务，即预测被mask的词所对应的supersense 外部语言学知识的引入，还可以提高模型对于词汇语义（lexical semantics）的归纳偏置。 Experiments本文通过两种实验来证明所提出的SenseBERT的有效性: Lexical Semantics 实验和通用的GLUE评测 Lexical Semantics实验数据集为：SemEval WSD 和 WiC(Word in Context) Analysis &amp; Summary 一词多义是自然语言处理中普遍存在的现象之一 而传统的词向量训练方法得到的 Word Embedding 都是静态的向量表示，无法准确的表示一个 word-form 的多种不同 词义 这两年以来，GPT、ELMO、BERT等一系列预训练语言模型，通过在大规模的无监督语料上进行预训练，从而使PLM产生 dynamic contextual word/token representation ，可以认为间接的缓解了 一词多义 问题。 对于下游任务来说，使用PLM产生了更符合当前语境或上下文的词表示，使词表示更加准确 但还是从 word surface level 进行词义的学习，缺乏直接针对 lexical semantic 的监督信号 相比于过去一些工作，使用 WordNet 中的 lexical semantic 信息作为词级别的特征输入，SenseBERT 使用 lexical semantic 信息作为监督信号参与到PLM中的训练中，还可以使模型具有区分 lexical semantic 信息的能力，增加了PLM对 word-sense 的建模能力。]]></content>
+    <content type="text"><![CDATA[Title: SenseBERT: Driving Some Sense into BERTAuthors: Yoav Levine, Barak Lenz, Or Dagan, Dan Padnos, Or Sharir, Shai Shalev-Shwartz, Amnon Shashua, Yoav ShohamOrg: AI21 Labs, Tel Aviv, IsraelPublished: unpublished Motivation 现有的工作通过应用自监督学习，使神经网络语言模型在NLU上取得了很大的进步 但是，目前自监督技术主要在 word-form level 上进行操作（即在word-form level上提取自监督信号指导模型进行学习） 这种 word-form 级别的监督只是本质的语义内容信号的一种替代。 从词汇语义 (lexical semantic) 的角度来看，word-form 可以看做是词汇的 surface-level 的表现形式 一词多义是自然语言处理中的一个常见现象，一个词具有多种不同的含义（文中举的例子是 ‘bass’，既可以指一种鲈鱼，低音吉他，还可以指低音歌唱家） 一个词，其本身的形式，仅仅是在给定上下文/特定语境中的实际意义的一个替代。 一词多义现象所带来的一个重要挑战就是自然语言理解中的歧义问题 BERT中的MLM只是对word-form进行的mask，无法捕捉word-sense信息，即缺乏对 lexical semantic 的建模 This Work这篇文章对于BERT的改进，正如其题目所说，drive some sense into BERT： 除了基础的预测 masked word 任务，还引入了一类 explicit word-sense 作为 BERT的 semantic-level 的自监督信号 explicit word-sense 信息指的是 每个词在 WordNet 中所对应的 supersense （共有45个supersense分类，具体参见论文Appendix） 相应的增加了一个预测 masked word-sense 任务，即预测被mask的词所对应的supersense 外部语言学知识的引入，还可以提高模型对于词汇语义（lexical semantics）的归纳偏置。 Experiments本文通过两种实验来证明所提出的SenseBERT的有效性: Lexical Semantics 实验和通用的GLUE评测 Lexical Semantics实验数据集为：SemEval WSD 和 WiC(Word in Context) Analysis &amp; Summary 一词多义是自然语言处理中普遍存在的现象之一 而传统的词向量训练方法得到的 Word Embedding 都是静态的向量表示，无法准确的表示一个 word-form 的多种不同 词义 这两年以来，GPT、ELMO、BERT等一系列预训练语言模型，通过在大规模的无监督语料上进行预训练，从而使PLM产生 dynamic contextual word/token representation ，可以认为间接的缓解了 一词多义 问题。 对于下游任务来说，使用PLM产生了更符合当前语境或上下文的词表示，使词表示更加准确 但还是从 word surface level 进行词义的学习，缺乏直接针对 lexical semantic 的监督信号 相比于过去一些工作，使用 WordNet 中的 lexical semantic 信息作为词级别的特征输入，SenseBERT 使用 lexical semantic 信息作为监督信号参与到PLM中的训练中，还可以使模型具有区分 lexical semantic 信息的能力，增加了PLM对 word-sense 的建模能力。]]></content>
       <categories>
         <category>Paper-Note</category>
       </categories>
@@ -24,8 +24,8 @@
       </categories>
       <tags>
         <tag>nlp</tag>
-        <tag>knowledge</tag>
         <tag>mrc</tag>
+        <tag>knowledge</tag>
         <tag>note</tag>
         <tag>pre-trained-lm</tag>
       </tags>
@@ -39,8 +39,8 @@
       </categories>
       <tags>
         <tag>nlp</tag>
-        <tag>knowledge</tag>
         <tag>mrc</tag>
+        <tag>knowledge</tag>
         <tag>note</tag>
         <tag>wordnet</tag>
       </tags>
@@ -98,8 +98,8 @@
       </categories>
       <tags>
         <tag>nlp</tag>
-        <tag>knowledge</tag>
         <tag>mrc</tag>
+        <tag>knowledge</tag>
         <tag>note</tag>
       </tags>
   </entry>
@@ -112,8 +112,8 @@
       </categories>
       <tags>
         <tag>nlp</tag>
-        <tag>knowledge</tag>
         <tag>research</tag>
+        <tag>knowledge</tag>
         <tag>note</tag>
       </tags>
   </entry>
@@ -156,8 +156,8 @@
       </categories>
       <tags>
         <tag>nlp</tag>
-        <tag>knowledge</tag>
         <tag>mrc</tag>
+        <tag>knowledge</tag>
         <tag>reasoning</tag>
         <tag>commonsense</tag>
         <tag>survey</tag>
@@ -241,9 +241,9 @@
       </categories>
       <tags>
         <tag>nlp</tag>
-        <tag>knowledge</tag>
-        <tag>paper</tag>
         <tag>mrc</tag>
+        <tag>paper</tag>
+        <tag>knowledge</tag>
       </tags>
   </entry>
   <entry>
@@ -255,8 +255,8 @@
       </categories>
       <tags>
         <tag>nlp</tag>
-        <tag>knowledge</tag>
         <tag>mrc</tag>
+        <tag>knowledge</tag>
         <tag>note</tag>
         <tag>nli</tag>
       </tags>
@@ -357,8 +357,8 @@
       </categories>
       <tags>
         <tag>nlp</tag>
-        <tag>paper</tag>
         <tag>mrc</tag>
+        <tag>paper</tag>
         <tag>research</tag>
       </tags>
   </entry>
@@ -385,8 +385,8 @@
       </categories>
       <tags>
         <tag>nlp</tag>
-        <tag>paper</tag>
         <tag>mrc</tag>
+        <tag>paper</tag>
         <tag>dataset</tag>
       </tags>
   </entry>
@@ -413,8 +413,8 @@
       </categories>
       <tags>
         <tag>nlp</tag>
-        <tag>paper</tag>
         <tag>mrc</tag>
+        <tag>paper</tag>
         <tag>nlu</tag>
         <tag>reasoning</tag>
       </tags>
@@ -484,8 +484,8 @@
       </categories>
       <tags>
         <tag>nlp</tag>
-        <tag>knowledge</tag>
         <tag>mrc</tag>
+        <tag>knowledge</tag>
         <tag>note</tag>
       </tags>
   </entry>
@@ -498,8 +498,8 @@
       </categories>
       <tags>
         <tag>nlp</tag>
-        <tag>knowledge</tag>
         <tag>paper</tag>
+        <tag>knowledge</tag>
         <tag>text-generation</tag>
       </tags>
   </entry>
