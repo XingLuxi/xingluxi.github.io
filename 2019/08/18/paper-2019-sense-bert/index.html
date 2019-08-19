@@ -75,7 +75,7 @@
 
 
 
-  <meta name="keywords" content="nlp,knowledge,note,nli,wordnet,">
+  <meta name="keywords" content="nlp,knowledge,note,wordnet,pre-trained-lm,">
 
 
 
@@ -86,20 +86,18 @@
 
 
 
-<meta name="description" content="Neural Natural Language Inference Models Enhanced with External KnowledgeACL,2018.Qian Chen, et al.offical code link: here.  Motivation作者针对NLI任务提出了一个问题：  是否可以从数据中学习NLI所需要的所有知识？ 如果不能，如何使外部知识帮助神经网络模型？如">
-<meta name="keywords" content="nlp,knowledge,note,nli,wordnet">
+<meta name="description" content="Title: SenseBERT: Driving Some Sense into BERTAuthors: Yoav Levine, Barak Lenz, Or Dagan, Dan Padnos, Or Sharir, Shai Shalev-Shwartz, Amnon Shashua, Yoav ShohamOrg: AI21 Labs, Tel Aviv, IsraelPublish">
+<meta name="keywords" content="nlp,knowledge,note,wordnet,pre-trained-lm">
 <meta property="og:type" content="article">
-<meta property="og:title" content="KIM">
-<meta property="og:url" content="http://xingluxi.github.io/2019/01/09/paper-kim/index.html">
+<meta property="og:title" content="2019 | SenseBERT - Driving Some Sense into BERT">
+<meta property="og:url" content="http://xingluxi.github.io/2019/08/18/paper-2019-sense-bert/index.html">
 <meta property="og:site_name" content="Luxi Xing - Blog">
-<meta property="og:description" content="Neural Natural Language Inference Models Enhanced with External KnowledgeACL,2018.Qian Chen, et al.offical code link: here.  Motivation作者针对NLI任务提出了一个问题：  是否可以从数据中学习NLI所需要的所有知识？ 如果不能，如何使外部知识帮助神经网络模型？如">
+<meta property="og:description" content="Title: SenseBERT: Driving Some Sense into BERTAuthors: Yoav Levine, Barak Lenz, Or Dagan, Dan Padnos, Or Sharir, Shai Shalev-Shwartz, Amnon Shashua, Yoav ShohamOrg: AI21 Labs, Tel Aviv, IsraelPublish">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="http://xingluxi.github.io/images/paper-kim/kim.png">
-<meta property="og:updated_time" content="2019-08-18T07:59:45.782Z">
+<meta property="og:updated_time" content="2019-08-19T02:35:05.304Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="KIM">
-<meta name="twitter:description" content="Neural Natural Language Inference Models Enhanced with External KnowledgeACL,2018.Qian Chen, et al.offical code link: here.  Motivation作者针对NLI任务提出了一个问题：  是否可以从数据中学习NLI所需要的所有知识？ 如果不能，如何使外部知识帮助神经网络模型？如">
-<meta name="twitter:image" content="http://xingluxi.github.io/images/paper-kim/kim.png">
+<meta name="twitter:title" content="2019 | SenseBERT - Driving Some Sense into BERT">
+<meta name="twitter:description" content="Title: SenseBERT: Driving Some Sense into BERTAuthors: Yoav Levine, Barak Lenz, Or Dagan, Dan Padnos, Or Sharir, Shai Shalev-Shwartz, Amnon Shashua, Yoav ShohamOrg: AI21 Labs, Tel Aviv, IsraelPublish">
 
 
 
@@ -129,13 +127,13 @@
 
 
 
-  <link rel="canonical" href="http://xingluxi.github.io/2019/01/09/paper-kim/">
+  <link rel="canonical" href="http://xingluxi.github.io/2019/08/18/paper-2019-sense-bert/">
 
 
 
 
 
-  <title>KIM | Luxi Xing - Blog</title>
+  <title>2019 | SenseBERT - Driving Some Sense into BERT | Luxi Xing - Blog</title>
   
 
 
@@ -304,7 +302,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://xingluxi.github.io/2019/01/09/paper-kim/">
+    <link itemprop="mainEntityOfPage" href="http://xingluxi.github.io/2019/08/18/paper-2019-sense-bert/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Luxi Xing">
@@ -321,7 +319,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">KIM</h1>
+          <h1 class="post-title" itemprop="name headline">2019 | SenseBERT - Driving Some Sense into BERT</h1>
         
 
         <div class="post-meta">
@@ -333,8 +331,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-01-09T13:35:53+08:00">
-                2019-01-09
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-08-18T15:47:20+08:00">
+                2019-08-18
               </time>
             
 
@@ -349,8 +347,8 @@
               
                 <span class="post-meta-item-text">Post modified&#58;</span>
               
-              <time title="Post modified" itemprop="dateModified" datetime="2019-08-18T15:59:45+08:00">
-                2019-08-18
+              <time title="Post modified" itemprop="dateModified" datetime="2019-08-19T10:35:05+08:00">
+                2019-08-19
               </time>
             
           </span>
@@ -404,7 +402,7 @@
                   <span class="post-meta-item-text">Words count in article&#58;</span>
                 
                 <span title="Words count in article">
-                  943
+                  781
                 </span>
               
 
@@ -420,7 +418,7 @@
                   <span class="post-meta-item-text">Reading time &asymp;</span>
                 
                 <span title="Reading time">
-                  4
+                  2
                 </span>
               
             </div>
@@ -442,123 +440,42 @@
 
       
         <blockquote>
-<p>Neural Natural Language Inference Models Enhanced with External Knowledge<br>ACL,2018.<br>Qian Chen, et al.<br>offical code link: <a href="https://github.com/lukecq1231/kim" target="_blank" rel="noopener">here</a>.</p>
+<p>Title: SenseBERT: Driving Some Sense into BERT<br>Authors: Yoav Levine, Barak Lenz, Or Dagan, Dan Padnos, Or Sharir, Shai Shalev-Shwartz, Amnon Shashua, Yoav Shoham<br>Org: AI21 Labs, Tel Aviv, Israel<br>Published: unpublished?<br>PDF link: <a href="https://arxiv.org/abs/1908.05646" target="_blank" rel="noopener">https://arxiv.org/abs/1908.05646</a></p>
 </blockquote>
-<h2 id="Motivation"><a href="#Motivation" class="headerlink" title="Motivation"></a>Motivation</h2><p>作者针对NLI任务提出了一个问题：</p>
+<h2 id="Motivation"><a href="#Motivation" class="headerlink" title="Motivation"></a>Motivation</h2><ul>
+<li>现有的工作通过应用自监督学习，使神经网络语言模型在NLU上取得了很大的进步</li>
+<li>但是，目前自监督技术主要在 <strong>word-form level</strong> 上进行操作（即在word-form level上提取自监督信号指导模型进行学习）<ul>
+<li>这种 <strong>word-form</strong> 级别的监督只是本质的语义内容信号的一种替代。</li>
+<li>从词汇语义 (lexical semantic) 的角度来看，word-form 可以看做是词汇的 surface-level 的表现形式</li>
+</ul>
+</li>
+<li>一词多义是自然语言处理中的一个常见现象，一个词具有多种不同的含义（文中举的例子是 ‘bass’，既可以指一种鲈鱼，低音吉他，还可以指低音歌唱家）<ul>
+<li>一个词，其本身的形式，仅仅是在给定上下文/特定语境中的实际意义的一个替代。</li>
+<li>一词多义现象所带来的一个重要挑战就是自然语言理解中的歧义问题</li>
+</ul>
+</li>
+<li>BERT中的MLM只是对word-form进行的mask，无法捕捉word-sense信息，即缺乏对 lexical semantic 的建模</li>
+</ul>
+<h2 id="This-Work"><a href="#This-Work" class="headerlink" title="This Work"></a>This Work</h2><p>这篇文章对于BERT的改进，正如其题目所说，drive some sense into BERT：</p>
 <ul>
-<li>是否可以从数据中学习NLI所需要的所有知识？</li>
-<li>如果不能，如何使外部知识帮助神经网络模型？如何构建NLI模型利用外部知识？</li>
-</ul>
-<p>本文的工作是作者基于其ESIM模型之上完成的</p>
-<h2 id="Model-Framework"><a href="#Model-Framework" class="headerlink" title="Model Framework"></a>Model Framework</h2><ul>
-<li>模型整体结构分为四部分:<ul>
-<li><img src="/images/paper-kim/kim.png" alt="kim"></li>
-<li>1、representing</li>
-<li>2、collecting local inference information</li>
-<li>3、aggregating and composing local information</li>
-<li>4、make global decision at sentence level</li>
-<li>其中，将外部知识加入到了: co-attention、local inference collection、inference composition 模块中</li>
+<li>除了基础的预测 masked word 任务，还引入了一类 <strong>explicit word-sense</strong> 作为 BERT的 <strong>semantic-level</strong> 的自监督信号<ul>
+<li><strong>explicit word-sense</strong> 信息指的是 每个词在 WordNet 中所对应的 <strong>supersense</strong> （共有45个supersense分类，具体参见论文Appendix）</li>
+<li>相应的增加了一个预测 masked word-sense 任务，即预测被mask的词所对应的supersense</li>
 </ul>
 </li>
+<li>外部语言学知识的引入，还可以提高模型对于词汇语义（lexical semantics）的归纳偏置。</li>
 </ul>
-<h3 id="External-Knowledge"><a href="#External-Knowledge" class="headerlink" title="External Knowledge"></a>External Knowledge</h3><p>首先确定需要哪些知识来帮助NLI任务</p>
-<ul>
-<li>external, inference-related knowledge</li>
-<li>intuitively Knowledge: <strong>synonymy(同义)</strong>、<strong>antonymy(反义)</strong>、<strong>hypernymy(上位)</strong>、<strong>hyponymy(下位)</strong><ul>
-<li>上下位的关系可以帮助捕捉 entailment 信息</li>
-<li>反义和co-hyponymy(共享相同上位词)的关系可以更好的建模 contradiction 关系</li>
-</ul>
-</li>
-<li>这篇文章主要是引入了基础的词汇级的语义知识<ul>
-<li>建模词$w_i$和$w_j$知识为 $r_{ij}$</li>
-<li>重点是：如何构建 $r_ij$</li>
+<h2 id="Experiments"><a href="#Experiments" class="headerlink" title="Experiments"></a>Experiments</h2><p>本文通过两种实验来证明所提出的SenseBERT的有效性: <strong>Lexical Semantics 实验</strong>和通用的<strong>GLUE</strong>评测</p>
+<p>Lexical Semantics实验数据集为：SemEval WSD 和 WiC(Word in Context)</p>
+<h2 id="Analysis-amp-Summary"><a href="#Analysis-amp-Summary" class="headerlink" title="Analysis &amp; Summary"></a>Analysis &amp; Summary</h2><ul>
+<li>一词多义是自然语言处理中普遍存在的现象之一</li>
+<li>而传统的词向量训练方法得到的 Word Embedding 都是静态的向量表示，无法准确的表示一个 word-form 的多种不同 <strong>词义</strong></li>
+<li>这两年以来，GPT、ELMO、BERT等一系列预训练语言模型，通过在大规模的无监督语料上进行预训练，从而使PLM产生 dynamic contextual word/token representation ，可以认为间接的缓解了 一词多义 问题。<ul>
+<li>对于下游任务来说，使用PLM产生了更符合当前语境或上下文的词表示，使词表示更加准确</li>
+<li>但还是从 word surface level 进行词义的学习，缺乏直接针对 lexical semantic 的监督信号</li>
 </ul>
 </li>
-</ul>
-<h3 id="M1-Encoding-Premise-and-Hypothesis"><a href="#M1-Encoding-Premise-and-Hypothesis" class="headerlink" title="M1.Encoding Premise and Hypothesis"></a>M1.Encoding Premise and Hypothesis</h3><ul>
-<li>premise: $a=(a_1,…,a_m)$</li>
-<li>hypothesis: $b=(b_1,…,b_n)$</li>
-<li>通过BiLSTM进行编码，得到context-dependent 隐藏状态：<ul>
-<li>$a_i^s = Encoder(E(a),i)$</li>
-<li>$b_j^s = Encoder(E(b),j)$</li>
-</ul>
-</li>
-</ul>
-<h3 id="M2-Knowledge-Enriched-Co-Attention"><a href="#M2-Knowledge-Enriched-Co-Attention" class="headerlink" title="M2.Knowledge-Enriched Co-Attention"></a>M2.Knowledge-Enriched Co-Attention</h3><ul>
-<li>知识关系特征：$r_{ij} \in \mathbb{R}^{d_r}$</li>
-<li>Co-attention:<ul>
-<li>$e_{ij} = (a^s_i)^T b_j^s + F(r_{ij})$</li>
-<li>$F(r_{ij}) = \lambda \mathbb{1}(r_{ij})$<ul>
-<li>$\mathbb{1}(r_{ij})$ 判断 $r_{ij}$ 是否为0向量</li>
-</ul>
-</li>
-<li>得到的 co-attention 矩阵 $e \in \mathbb{R}^{m\times n}$</li>
-</ul>
-</li>
-<li>根据co-attention对premise和hypothesis的表示进行更新：<ul>
-<li><script type="math/tex; mode=display">a_i^c=\sum_{j=1}^n \alpha _{ij} b_j^s</script><ul>
-<li><script type="math/tex; mode=display">\alpha_{ij} = exp(e_{ij}) / \sum_{k=1}^n exp(e_{ik})</script></li>
-</ul>
-</li>
-<li><script type="math/tex; mode=display">b_j^c=\sum_{i=1}^m \beta _{ij} a_i^s</script><ul>
-<li><script type="math/tex; mode=display">\beta_{ij} = exp(e_{ij}) / \sum_{k=1}^m exp(e_{kj})</script></li>
-</ul>
-</li>
-<li>$\alpha \in \mathbb{R}^{m\times n}$、$\beta \in \mathbb{R}^{m\times n}$</li>
-</ul>
-</li>
-</ul>
-<h3 id="M3-Local-inference-Collection-with-External-Knowledge"><a href="#M3-Local-inference-Collection-with-External-Knowledge" class="headerlink" title="M3.Local inference Collection with External Knowledge"></a>M3.Local inference Collection with External Knowledge</h3><ul>
-<li>通过比较$a_i^s$、$a_i^c$ 和 他们的关系（从外部知识获得），可以获得词级的推理信息</li>
-<li>Knowledge-enriched local inference:<ul>
-<li><script type="math/tex; mode=display">a_i^m = G([a_i^s; a_i^c; a_i^s - a_i^c; a_i^s \circ a_i^c; \sum_{j=1}^n \alpha_{ij}r_{ij}])</script></li>
-<li><script type="math/tex; mode=display">b_j^m = G([b_j^s; b_j^c; b_j^s - b_j^c; b_j^s \circ b_j^c; \sum_{i=1}^m \beta_{ij}r_{ji}])</script></li>
-<li>最后一项的目的是：收集对齐词之间的关系特征，是从外部知识获得的word-level inference information</li>
-<li>$G$ 是非线性映射，用于降维，relu + shortcut connection<ul>
-<li><script type="math/tex; mode=display">a_i^m + \sum_{j=1}^n \alpha_{ij}r_{ij}</script></li>
-<li><script type="math/tex; mode=display">b_j^m + \sum_{i=1}^m \beta_{ij}r_{ij}</script></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h3 id="M4-Knowledge-Enhanced-Inference-Composition"><a href="#M4-Knowledge-Enhanced-Inference-Composition" class="headerlink" title="M4.Knowledge-Enhanced Inference Composition"></a>M4.Knowledge-Enhanced Inference Composition</h3><ul>
-<li>决定总体的推理关系：BiLSTM —&gt; mean;max;weighted Pooling，得到定长向量<ul>
-<li>Composition = BiLSTM<ul>
-<li>$a_i^v = Composition(a^m,i)$</li>
-<li>$b_j^v = Composition(b^m,j)$</li>
-</ul>
-</li>
-<li>Weighted Pooling<ul>
-<li><script type="math/tex; mode=display">a^w = \sum_{i=1}^m \left( \frac{exp(H(\sum_{j=1}^n \alpha_{ij}r_{ij}))}{\sum_{i=1}^m exp(H(\sum_{j=1}^n\alpha_{ij}r_{ij}))} \right) a_i^v</script></li>
-<li><script type="math/tex; mode=display">b^w = \sum_{j=1}^n \left( \frac{exp(H(\sum_{i=1}^m \beta_{ij}r_{ji}))}{\sum_{j=1}^n exp(H(\sum_{i=1}^m\beta_{ij}r_{ji}))} \right) b_j^v</script></li>
-<li>$H$ 函数是 1层的前馈神经网络，激活函数是relu</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>最后得到定长向量之后，再过一层MLP，激活函数为tanh，和一层 softmax，得到分类结果</li>
-</ul>
-<h2 id="Experiment-Settings"><a href="#Experiment-Settings" class="headerlink" title="Experiment Settings"></a>Experiment Settings</h2><h3 id="Representation-of-External-Knowledge"><a href="#Representation-of-External-Knowledge" class="headerlink" title="Representation of External Knowledge"></a>Representation of External Knowledge</h3><h4 id="Lexical-Semantic-Relations"><a href="#Lexical-Semantic-Relations" class="headerlink" title="Lexical Semantic Relations"></a>Lexical Semantic Relations</h4><ul>
-<li>relations of lexical pairs: 检索范围是wordnet<ul>
-<li>synonymy: 如果词对是同义词，使值为1，否则为0</li>
-<li>antonymy: 如果词对是反义词，使值为1，否则为0</li>
-<li>hypernymy: 如果一个词是另一个词的上位词，取值 $1-\frac{n}{8}$，否则为0<ul>
-<li>其中 $n$ 是两个词在层次上的边数</li>
-<li>忽略边数超过8的</li>
-</ul>
-</li>
-<li>hyponymy: inverse of the hypernymy feature</li>
-<li>co-hyponymys: 如果两个词有相同的上位词且不是同义词，取值为1，否则为0</li>
-<li>向量 $r$ 的维度为 $d_r = 5$</li>
-<li>在 wordnet 中还有额外的一些（15种）关系，但是对结果的提升没有贡献</li>
-</ul>
-</li>
-<li>relation embeddings<ul>
-<li>pretrain based on wordnet</li>
-<li>TransE</li>
-</ul>
-</li>
+<li>相比于过去一些工作，使用 WordNet 中的 lexical semantic 信息作为词级别的特征输入，SenseBERT 使用 lexical semantic 信息作为监督信号参与到PLM中的训练中，还可以使模型具有区分 lexical semantic 信息的能力，增加了PLM对 word-sense 的建模能力。</li>
 </ul>
 
       
@@ -593,7 +510,7 @@
   </li>
   <li class="post-copyright-link">
     <strong>Post link:</strong>
-    <a href="http://xingluxi.github.io/2019/01/09/paper-kim/" title="KIM">http://xingluxi.github.io/2019/01/09/paper-kim/</a>
+    <a href="http://xingluxi.github.io/2019/08/18/paper-2019-sense-bert/" title="2019 | SenseBERT - Driving Some Sense into BERT">http://xingluxi.github.io/2019/08/18/paper-2019-sense-bert/</a>
   </li>
   <li class="post-copyright-license">
     <strong>Copyright Notice: </strong>
@@ -614,9 +531,9 @@
           
             <a href="/tags/note/" rel="tag"><i class="fa fa-tag"></i> note</a>
           
-            <a href="/tags/nli/" rel="tag"><i class="fa fa-tag"></i> nli</a>
-          
             <a href="/tags/wordnet/" rel="tag"><i class="fa fa-tag"></i> wordnet</a>
+          
+            <a href="/tags/pre-trained-lm/" rel="tag"><i class="fa fa-tag"></i> pre-trained-lm</a>
           
         </div>
       
@@ -629,8 +546,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/01/09/paper-knreader/" rel="next" title="Knowledgeable Reader Enhancing Cloze-Style Reading Comprehension with External Commonsense Knowledge">
-                <i class="fa fa-chevron-left"></i> Knowledgeable Reader Enhancing Cloze-Style Reading Comprehension with External Commonsense Knowledge
+              <a href="/2019/07/29/paper-acl2019-kt-net/" rel="next" title="ACL2019 | Enhancing Pre-Trained Language Representations with Rich Knowledge for Machine Reading Comprehension">
+                <i class="fa fa-chevron-left"></i> ACL2019 | Enhancing Pre-Trained Language Representations with Rich Knowledge for Machine Reading Comprehension
               </a>
             
           </div>
@@ -638,10 +555,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/01/09/schedule-2019/" rel="prev" title="2019年讨论组日程记录">
-                2019年讨论组日程记录 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -802,7 +715,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Motivation"><span class="nav-text">Motivation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Model-Framework"><span class="nav-text">Model Framework</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#External-Knowledge"><span class="nav-text">External Knowledge</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#M1-Encoding-Premise-and-Hypothesis"><span class="nav-text">M1.Encoding Premise and Hypothesis</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#M2-Knowledge-Enriched-Co-Attention"><span class="nav-text">M2.Knowledge-Enriched Co-Attention</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#M3-Local-inference-Collection-with-External-Knowledge"><span class="nav-text">M3.Local inference Collection with External Knowledge</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#M4-Knowledge-Enhanced-Inference-Composition"><span class="nav-text">M4.Knowledge-Enhanced Inference Composition</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Experiment-Settings"><span class="nav-text">Experiment Settings</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Representation-of-External-Knowledge"><span class="nav-text">Representation of External Knowledge</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Lexical-Semantic-Relations"><span class="nav-text">Lexical Semantic Relations</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Motivation"><span class="nav-text">Motivation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#This-Work"><span class="nav-text">This Work</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Experiments"><span class="nav-text">Experiments</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Analysis-amp-Summary"><span class="nav-text">Analysis &amp; Summary</span></a></li></ol></div>
             
 
           </div>
