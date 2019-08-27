@@ -1,0 +1,1436 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon-universe-32.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-universe-32.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-universe-16.ico?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/favicon-universe-32.ico?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="nlp,knowledge,chinese,sememe,hownet,semantic-compositionality,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="Title: Modeling Semantic Compositionality with Sememe KnowledgeAuthors: Fanchao Qi, Junjie Huang, Chenghao Yang, Zhiyuan Liu, Xiao Chen, Qun Liu, Maosong SunOrg: Tsinghua University, Beihang Universi">
+<meta name="keywords" content="nlp,knowledge,chinese,sememe,hownet,semantic-compositionality">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ACL2019 | Modeling Semantic Compositionality with Sememe Knowledge">
+<meta property="og:url" content="http://xingluxi.github.io/2019/08/27/paper-acl2019-sc-with-sememe/index.html">
+<meta property="og:site_name" content="Luxi Xing - Blog">
+<meta property="og:description" content="Title: Modeling Semantic Compositionality with Sememe KnowledgeAuthors: Fanchao Qi, Junjie Huang, Chenghao Yang, Zhiyuan Liu, Xiao Chen, Qun Liu, Maosong SunOrg: Tsinghua University, Beihang Universi">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://xingluxi.github.io/images/paper-acl2019-sc-with-sememe/scd.png">
+<meta property="og:image" content="http://xingluxi.github.io/images/paper-acl2019-sc-with-sememe/m1-scas.png">
+<meta property="og:image" content="http://xingluxi.github.io/images/paper-acl2019-sc-with-sememe/m2-scmsa.png">
+<meta property="og:updated_time" content="2019-08-27T15:45:12.089Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="ACL2019 | Modeling Semantic Compositionality with Sememe Knowledge">
+<meta name="twitter:description" content="Title: Modeling Semantic Compositionality with Sememe KnowledgeAuthors: Fanchao Qi, Junjie Huang, Chenghao Yang, Zhiyuan Liu, Xiao Chen, Qun Liu, Maosong SunOrg: Tsinghua University, Beihang Universi">
+<meta name="twitter:image" content="http://xingluxi.github.io/images/paper-acl2019-sc-with-sememe/scd.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":true,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://xingluxi.github.io/2019/08/27/paper-acl2019-sc-with-sememe/">
+
+
+
+
+
+  <title>ACL2019 | Modeling Semantic Compositionality with Sememe Knowledge | Luxi Xing - Blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Luxi Xing - Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Time is In NO Hurry</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            About
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            Search
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="Searching..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://xingluxi.github.io/2019/08/27/paper-acl2019-sc-with-sememe/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Luxi Xing">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Luxi Xing - Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">ACL2019 | Modeling Semantic Compositionality with Sememe Knowledge</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-08-27T23:45:12+08:00">
+                2019-08-27
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Post modified&#58;</span>
+              
+              <time title="Post modified" itemprop="dateModified" datetime="2019-08-27T23:45:12+08:00">
+                2019-08-27
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Paper-Note/" itemprop="url" rel="index">
+                    <span itemprop="name">Paper-Note</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-area-chart"></i> Post Total Visits
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Words count in article&#58;</span>
+                
+                <span title="Words count in article">
+                  1.4k
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Reading time &asymp;</span>
+                
+                <span title="Reading time">
+                  6
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <blockquote>
+<p>Title: Modeling Semantic Compositionality with Sememe Knowledge<br>Authors: Fanchao Qi, Junjie Huang, Chenghao Yang, Zhiyuan Liu, Xiao Chen, Qun Liu, Maosong Sun<br>Org: Tsinghua University, Beihang University, Huawei Noah’s Ark Lab<br>Published: ACL 2018</p>
+</blockquote>
+<p>official code: <a href="https://github.com/thunlp/Sememe-SC" target="_blank" rel="noopener">https://github.com/thunlp/Sememe-SC</a></p>
+<h2 id="Task-Definition"><a href="#Task-Definition" class="headerlink" title="Task Definition"></a>Task Definition</h2><ul>
+<li><p>Semantic Compositionality (SC, 语义组合):</p>
+<ul>
+<li>is deﬁned as the linguistic phenomenon that the meaning of a syntactically complex unit is a function of meanings of the complex unit’s constituents and their combination rule <sup id="fnref:1"><a href="#fn:1" rel="footnote">1</a></sup></li>
+</ul>
+</li>
+<li><p>Multiword Expressions (MWE, 多字/词表达):</p>
+<ul>
+<li>大多数关于 SC 的工作都是集中在 基于向量的分布式语义模型来学习 多字/词构成的 短语、成分的表示</li>
+<li>基本框架（公式1），以两个词为例：<ul>
+<li><script type="math/tex; mode=display">\mathbf{p} = f(\mathbf{w}_1, \mathbf{w}_2, R, K)</script></li>
+<li>其中: <ul>
+<li>$f$ 是组合函数</li>
+<li>$\mathbf{p}$ 是MWE的embedding</li>
+<li>$\mathbf{w}_1$ 和 $\mathbf{w}_2$ 表示 MWE 成分的embedding，也就是 组成 MWE 的词的表示</li>
+<li>$R$ 是 <strong>组合规则（Combination Rule）</strong></li>
+<li>$K$ 指在构建MWE语义时需要的额外的知识</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>Sememe (义原)：</p>
+<ul>
+<li>the minimum Semantic units of human language</li>
+<li><strong>all the words can be composed of a limited set of sememes</strong>, which is similar to the idea of <em>semantic primes</em> (语义启动)<sup id="fnref:2"><a href="#fn:2" rel="footnote">2</a></sup></li>
+<li>HowNet：义原知识库</li>
+</ul>
+</li>
+</ul>
+<h2 id="Motivation"><a href="#Motivation" class="headerlink" title="Motivation"></a>Motivation</h2><ul>
+<li>之前的工作：利用复杂的组合函数，而很少考虑外部知识</li>
+</ul>
+<h3 id="This-Work"><a href="#This-Work" class="headerlink" title="This Work"></a>This Work</h3><ul>
+<li>1、设计了一个简单的 Semantic Compositionality Degree (SCD，语义组合程度) 测量实验：<ul>
+<li>通过实验发现 MWE 的 SCD 可以通过简单的基于义原的公式计算，并且和人类的判断高度相关</li>
+<li>义原可以很好的刻画 MWE 的含义和 MWE 的组成成分，并且可以捕捉这两者之间的语义关联</li>
+<li>证实：义原适用于建模 SC，并且可以提高 SC 相关任务的效果，如 MWE 表示学习</li>
+</ul>
+</li>
+<li>2、提出了两个结合义原的SC模型同于学习 MWE embedding，同时将公式1中的组合规则也结合到了两个模型中:<ul>
+<li>模型1：Semantic Compositionality with Aggregated Sememe model (SCAS)</li>
+<li>模型2：Semantic Compositionality with Mutual Sememe Attention model (SCMSA)</li>
+</ul>
+</li>
+<li>Note: 在这篇文章中，主要关注<strong>两个词组成的中文 MWE 的语义组合建模</strong></li>
+</ul>
+<h2 id="Measuring-SC-Degree-with-Sememes"><a href="#Measuring-SC-Degree-with-Sememes" class="headerlink" title="Measuring SC Degree with Sememes"></a>Measuring SC Degree with Sememes</h2><p>这一部分的主要工作是通过一个SCD验证实验来证明义原适用于建模语义组合</p>
+<h3 id="Sememe-based-SCD-Computation-Formulae"><a href="#Sememe-based-SCD-Computation-Formulae" class="headerlink" title="Sememe-based SCD Computation Formulae"></a>Sememe-based SCD Computation Formulae</h3><p>基于义原的SCD计算规则</p>
+<p>基本原则：</p>
+<ul>
+<li>不同的MWE具有不同的 SC degrees</li>
+<li>一个词的所有义原可以准确的描述一个词的意思</li>
+</ul>
+<p>启发式的设计了SCD的计算规则集合，见下图：</p>
+<ul>
+<li><img src="/images/paper-acl2019-sc-with-sememe/scd.png" alt="scd"></li>
+<li>数字越大表示SCD值越高</li>
+<li>$S_p$, $S_{w_1}$, $S_{w_2}$ 分别表示 MWE 的义原集合 和 MWE 两个组成成分(词)的义原集合</li>
+<li>SCD = 3:<ul>
+<li>MWE 的义原集合为两个组成成分义原集合的的并集（union）相同</li>
+<li>也就是说，MWE 的含义正好是两个成分含义的组合</li>
+<li>the MWE is <strong>fully semantically compositional</strong></li>
+</ul>
+</li>
+<li>SCD = 2:<ul>
+<li>MWE 的义原集合为两个组成成分义原集合的的并集（union）的一个适合的子集</li>
+<li>组成成分的语义有覆盖 MWE 语义的部分，但是不能准确的推出 MWE 的语义</li>
+</ul>
+</li>
+<li>SCD = 1:<ul>
+<li>MWE 与 组成成分共享一部分义原，但是他们分别具有各自私有的义原</li>
+</ul>
+</li>
+<li>SCD = 0:<ul>
+<li>MWE 的含义与其组成成分的含义完全不同</li>
+<li>无法从组成成分的含义中推出 MWE 的语义</li>
+<li>the MWE is <strong>completely</strong> <strong>non-compositional</strong></li>
+</ul>
+</li>
+</ul>
+<h3 id="Evaluation"><a href="#Evaluation" class="headerlink" title="Evaluation"></a>Evaluation</h3><p>构建了一个人工标注的SCD数据集</p>
+<p>评测人工标注的与规则预测的SCD之间的相关系数 (Pearson 和 Spearman)</p>
+<h2 id="Sememe-incorporated-SC-Models"><a href="#Sememe-incorporated-SC-Models" class="headerlink" title="Sememe-incorporated SC Models"></a>Sememe-incorporated SC Models</h2><h3 id="Incorporating-Sememes-Only"><a href="#Incorporating-Sememes-Only" class="headerlink" title="Incorporating Sememes Only"></a>Incorporating Sememes Only</h3><p>仅结合义原计算 MWE 的情况对应于公式1的一个简化：</p>
+<ul>
+<li>$\mathbf{p} = f(w_1, w_2, K)$</li>
+<li>使用 $S$ 表示所有的义原集合，词w的义原集合为 $S_w = \{s_1, …, s_{|S_w|}\} \subset S$</li>
+<li>$w$ 和 $\mathbf{s}$ 的 embedding 维度都是 $\mathbb{R}^d$</li>
+</ul>
+<h4 id="Semantic-Compositionality-with-Aggregated-Sememe-model-SCAS"><a href="#Semantic-Compositionality-with-Aggregated-Sememe-model-SCAS" class="headerlink" title="Semantic Compositionality with Aggregated Sememe model (SCAS)"></a>Semantic Compositionality with Aggregated Sememe model (SCAS)</h4><p>SCAS 的结构如下图所示：</p>
+<ul>
+<li><img src="/images/paper-acl2019-sc-with-sememe/m1-scas.png" alt="scad"></li>
+<li>SCAS 模型仅仅串联了MWE组成成分和他们的义原的embedding</li>
+<li>$\mathbf{p} = \text{tanh} (W_c [w_1 + w_2; w_1^\prime + w_2^\prime] + b_c)$<ul>
+<li>$w_1^\prime = \sum_{s_i \in S_{w_1}} \mathbf{s}_i$</li>
+<li>$w_2^\prime = \sum_{s_j \in S_{w_2}} \mathbf{s}_j$</li>
+</ul>
+</li>
+</ul>
+<h4 id="Semantic-Compositionality-with-Mutual-Sememe-Attention-model-SCMSA"><a href="#Semantic-Compositionality-with-Mutual-Sememe-Attention-model-SCMSA" class="headerlink" title="Semantic Compositionality with Mutual Sememe Attention model (SCMSA)"></a>Semantic Compositionality with Mutual Sememe Attention model (SCMSA)</h4><p>SCMSA 的结构如下图所示：</p>
+<ul>
+<li><img src="/images/paper-acl2019-sc-with-sememe/m2-scmsa.png" alt="scmsa"></li>
+<li>SCMSA 模型 计算了 一个组成成分的义原的 Mutual Attention 以及 与其他成分的义原集合的 Mutual Attention<ul>
+<li>动机：组成成分之间的义原互不相同，在进行义原组合的时候，MWE 的义原应对组成成分的义原应该分配不同的权重</li>
+</ul>
+</li>
+<li>$\mathbf{p}$ 的计算与SCAS相同，不同的是 $w^\prime$的计算：<ul>
+<li>$\mathbf{e}_1 = \text{tanh} (W_a w_1 +b_a)$</li>
+<li>$a_{2,i} = \frac{\text{exp}(\mathbf{s}_i \cdot \mathbf{e}_1)}{\sum_{s_j \in S_{w_2}} \text{exp}(\mathbf{s}_j \cdot \mathbf{e}_1) }$</li>
+<li>$w_2^\prime = \sum_{s_i \in S_{w_2}} a_{2,i} \mathbf{s}_i$</li>
+</ul>
+</li>
+</ul>
+<h3 id="Integrating-Combination-Rules"><a href="#Integrating-Combination-Rules" class="headerlink" title="Integrating Combination Rules"></a>Integrating Combination Rules</h3><p>根据原始的公式1：</p>
+<ul>
+<li>使用不同的MWE组合矩阵来表示不同的组合规则，即：<ul>
+<li>$W_c = W_c^r, r\in R_s$<ul>
+<li>$W_c^r \in \mathbb{R}^{d \times 2d}$</li>
+</ul>
+</li>
+<li>$R_s$ refers to combination rule set containing syntax rules of MWE<ul>
+<li>e.g., adjective-noun, noun-noun</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>考虑到组合矩阵的稀疏性，以及组合矩阵之间会存在通用的组合信息，将上述矩阵进行拆分：<ul>
+<li>$W_c = U^rV^r + W_c^c$<ul>
+<li>$U^r \in \mathbb{R}^{d \times h_r}$</li>
+<li>$V^r \in \mathbb{R}^{d \times h_r}$</li>
+<li>$h_r \in \mathbb{N}_+$ 为超参数，根据组合规则变化</li>
+<li>$W_c^c \in \mathbb{R}^{d\times 2d}$</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="Training-Objective"><a href="#Training-Objective" class="headerlink" title="Training Objective"></a>Training Objective</h3><ul>
+<li><p>training for MWE similarity computation</p>
+<ul>
+<li>squared Euclidean distance</li>
+</ul>
+</li>
+<li><p>training for MWE sememe prediction</p>
+<ul>
+<li>weighted cross-entropy loss</li>
+</ul>
+</li>
+</ul>
+<h2 id="Experiments"><a href="#Experiments" class="headerlink" title="Experiments"></a>Experiments</h2><h2 id="Analysis-amp-Summary"><a href="#Analysis-amp-Summary" class="headerlink" title="Analysis &amp; Summary"></a>Analysis &amp; Summary</h2><div id="footnotes"><hr><div id="footnotelist"><ol style="list-style:none; padding-left: 0;"><li id="fn:1"><span style="display: inline-block; vertical-align: top; padding-right: 10px;">1.</span><span style="display: inline-block; vertical-align: top;">Francis Jeffry Pelletier. 1994. The Principle of Semantic Compositionality. Topoi, 13(1):11–24.</span><a href="#fnref:1" rev="footnote"> ↩</a></li><li id="fn:2"><span style="display: inline-block; vertical-align: top; padding-right: 10px;">2.</span><span style="display: inline-block; vertical-align: top;">Anna Wierzbicka. 1996. Semantics: Primes and Universals: Primes and Universals. Oxford University Press, UK.</span><a href="#fnref:2" rev="footnote"> ↩</a></li></ol></div></div>
+      
+    </div>
+    
+    
+    
+
+    
+      <div>
+        
+    <div style="text-align:center;color: #ccc;font-size:14px;">
+    **** END of This Post. Thank for Your READING ****
+    </div>
+    <div style="text-align:center;color: #ccc;font-size:14px;">
+    If you have any Question, welcome to Email me or leave your comments below.
+    </div>
+
+      </div>
+    
+
+    
+
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>Post author:</strong>
+    Luxi Xing
+  </li>
+  <li class="post-copyright-link">
+    <strong>Post link:</strong>
+    <a href="http://xingluxi.github.io/2019/08/27/paper-acl2019-sc-with-sememe/" title="ACL2019 | Modeling Semantic Compositionality with Sememe Knowledge">http://xingluxi.github.io/2019/08/27/paper-acl2019-sc-with-sememe/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>Copyright Notice: </strong>
+    All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> unless stating additionally.
+  </li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/nlp/" rel="tag"><i class="fa fa-tag"></i> nlp</a>
+          
+            <a href="/tags/knowledge/" rel="tag"><i class="fa fa-tag"></i> knowledge</a>
+          
+            <a href="/tags/chinese/" rel="tag"><i class="fa fa-tag"></i> chinese</a>
+          
+            <a href="/tags/sememe/" rel="tag"><i class="fa fa-tag"></i> sememe</a>
+          
+            <a href="/tags/hownet/" rel="tag"><i class="fa fa-tag"></i> hownet</a>
+          
+            <a href="/tags/semantic-compositionality/" rel="tag"><i class="fa fa-tag"></i> semantic-compositionality</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/08/26/paper-2019-edl-md/" rel="next" title="2019 | Improving Question Answering with External Knowledge">
+                <i class="fa fa-chevron-left"></i> 2019 | Improving Question Answering with External Knowledge
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="lv-container" data-id="city" data-uid="MTAyMC80MjA1OC8xODYwNQ=="></div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.gif" alt="Luxi Xing">
+            
+              <p class="site-author-name" itemprop="name">Luxi Xing</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">40</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">42</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/XingLuxi" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://twitter.com/XingLuxi" target="_blank" title="Twitter">
+                      
+                        <i class="fa fa-fw fa-twitter"></i>Twitter</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:xingluxixlx@gmail.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Task-Definition"><span class="nav-text">Task Definition</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Motivation"><span class="nav-text">Motivation</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#This-Work"><span class="nav-text">This Work</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Measuring-SC-Degree-with-Sememes"><span class="nav-text">Measuring SC Degree with Sememes</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Sememe-based-SCD-Computation-Formulae"><span class="nav-text">Sememe-based SCD Computation Formulae</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Evaluation"><span class="nav-text">Evaluation</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Sememe-incorporated-SC-Models"><span class="nav-text">Sememe-incorporated SC Models</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Incorporating-Sememes-Only"><span class="nav-text">Incorporating Sememes Only</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Semantic-Compositionality-with-Aggregated-Sememe-model-SCAS"><span class="nav-text">Semantic Compositionality with Aggregated Sememe model (SCAS)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Semantic-Compositionality-with-Mutual-Sememe-Attention-model-SCMSA"><span class="nav-text">Semantic Compositionality with Mutual Sememe Attention model (SCMSA)</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Integrating-Combination-Rules"><span class="nav-text">Integrating Combination Rules</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Training-Objective"><span class="nav-text">Training Objective</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Experiments"><span class="nav-text">Experiments</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Analysis-amp-Summary"><span class="nav-text">Analysis &amp; Summary</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+            <span id="scrollpercent"><span>0</span>%</span>
+          
+        </div>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-grav"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Luxi Xing</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a></div>
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i> Site Total Visiters
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
+  
+
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+</body>
+</html>
