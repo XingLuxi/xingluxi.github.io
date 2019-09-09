@@ -143,8 +143,8 @@
       <tags>
         <tag>nlp</tag>
         <tag>knowledge</tag>
-        <tag>research</tag>
         <tag>note</tag>
+        <tag>research</tag>
       </tags>
   </entry>
   <entry>
@@ -230,8 +230,8 @@
       <tags>
         <tag>nlp</tag>
         <tag>mrc</tag>
-        <tag>research</tag>
         <tag>note</tag>
+        <tag>research</tag>
       </tags>
   </entry>
   <entry>
@@ -244,8 +244,8 @@
       <tags>
         <tag>nlp</tag>
         <tag>mrc</tag>
-        <tag>research</tag>
         <tag>note</tag>
+        <tag>research</tag>
       </tags>
   </entry>
   <entry>
@@ -272,8 +272,8 @@
       <tags>
         <tag>nlp</tag>
         <tag>knowledge</tag>
-        <tag>mrc</tag>
         <tag>paper</tag>
+        <tag>mrc</tag>
       </tags>
   </entry>
   <entry>
@@ -330,8 +330,8 @@
       </categories>
       <tags>
         <tag>nlp</tag>
-        <tag>note</tag>
         <tag>text-generation</tag>
+        <tag>note</tag>
         <tag>commonsense</tag>
       </tags>
   </entry>
@@ -345,8 +345,8 @@
       <tags>
         <tag>nlp</tag>
         <tag>mrc</tag>
-        <tag>research</tag>
         <tag>note</tag>
+        <tag>research</tag>
         <tag>cs-know</tag>
       </tags>
   </entry>
@@ -387,8 +387,8 @@
       </categories>
       <tags>
         <tag>nlp</tag>
-        <tag>mrc</tag>
         <tag>paper</tag>
+        <tag>mrc</tag>
         <tag>research</tag>
       </tags>
   </entry>
@@ -415,8 +415,8 @@
       </categories>
       <tags>
         <tag>nlp</tag>
-        <tag>mrc</tag>
         <tag>paper</tag>
+        <tag>mrc</tag>
         <tag>dataset</tag>
       </tags>
   </entry>
@@ -443,8 +443,8 @@
       </categories>
       <tags>
         <tag>nlp</tag>
-        <tag>mrc</tag>
         <tag>paper</tag>
+        <tag>mrc</tag>
         <tag>nlu</tag>
         <tag>reasoning</tag>
       </tags>
@@ -522,7 +522,7 @@
   <entry>
     <title><![CDATA[Knowledge-based NLU-Papers]]></title>
     <url>%2F2019%2F01%2F09%2Fkmrc-paper-info%2F</url>
-    <content type="text"><![CDATA[A list of recent papers on knowledge-based Natural Language Understand. Contributed by Luxi Xing and Yuqiang Xie, National Engineering Laboratory for Information Security Technologies, Institute of Information Engineering, Chinese Academy of Sciences, Beijing, China. table th:nth-of-type(2){ width: 60%; } NLI with Knowledge Conf. Title Authors/Org. Note ACL2018 Neural Natural Language Inference Models Enhanced with External Knowledge Qian Chen KIM-note 2018 Improving Natural Language Inference Using External Knowledge in the Science Questions Domain Xiaoyan Wang MRC with Knowledge Conf. Title Authors/Org. Note ACL2017 Leveraging knowledge bases in lstms for improving machine reading Yang, et al.CMU ACL2017 World knowledge for reading comprehension: Rare entity prediction with hierarchical lstms using external descriptions Long, et al.McGill University ACL2018 Knowledgeable Reader: Enhancing Cloze-Style Reading Comprehension with External Commonsense Knowledge Mihaylov, et al.Heidelberg University knreader-note EMNLP2018 Commonsense for Generative Multi-Hop Question Answering Tasks Lisa Bauer mhpgm-note Dialog with Knowledge Conf. Title Authors/Org. Note ACL2017 Learning Symmetric Collaborative Dialogue Agents with Dynamic Knowledge Graph Embeddings He, et al.Stanford IJCAI18 Commonsense Knowledge Aware Conversation Generation with Graph Attention Zhou, et al.THU note AAAI2018 A Knowledge-Grounded Neural Conversation Model Ghazvininejad, et al.Microsoft Research AAAI2018 Flexible End-to-End Dialogue System for Knowledge Grounded Conversation Zhu, et al.HKUST 2019 Learning to Select Knowledge for Response Generation in Dialog Systems Baidu Text Generation with Knowledge Conf. Title Authors/Org. Note AAAI2019 Story Ending Generation with Incremental Encoding and Commonsense Knowledge Jian Guan, et al.THU note Representation with Knowledge Conf. Title Authors/Org. Note ICLR2017 A Neural Knowledge Language Model Ahn.et al.Université de Montréal ACL2017 Improved Word Representation Learning with Sememes Niu, et al.THU ACL2018 Cross-lingual Lexical Sememe Prediction Qi, et al.THU AAAI2018 Improving Neural Fine-Grained Entity Typing with Knowledge Attention Xin, et al.THU Level: KMRC area. Relevant research area. Heuristic. Review. Field: KMRC: Knowledge-based Machine Reading Comprehension; KDS: Knowledge-based Dialogue System; KIR: Knowledge-based Information Retrieval; SC: Sememe Computation; NKLM: Neural Knowledge Language Model.]]></content>
+    <content type="text"><![CDATA[A list of recent papers on knowledge-based Natural Language Understand. Contributed by Luxi Xing and Yuqiang Xie, National Engineering Laboratory for Information Security Technologies, Institute of Information Engineering, Chinese Academy of Sciences, Beijing, China. table th:nth-of-type(2){ width: 60%; } NLI with Knowledge Conf. Title Authors/Org. Note ACL2018 Neural Natural Language Inference Models Enhanced with External Knowledge Qian Chen KIM-note 2018 Improving Natural Language Inference Using External Knowledge in the Science Questions Domain Xiaoyan Wang MRC with Knowledge Conf. Title Authors/Org. Note ACL2017 Leveraging knowledge bases in lstms for improving machine reading Yang, et al.CMU ACL2017 World knowledge for reading comprehension: Rare entity prediction with hierarchical lstms using external descriptions Long, et al.McGill University ACL2018 Knowledgeable Reader: Enhancing Cloze-Style Reading Comprehension with External Commonsense Knowledge Mihaylov, et al.Heidelberg University knreader-note EMNLP2018 Commonsense for Generative Multi-Hop Question Answering Tasks Lisa Bauer mhpgm-note Dialog with Knowledge Conf. Title Authors/Org. Note ACL2017 Learning Symmetric Collaborative Dialogue Agents with Dynamic Knowledge Graph Embeddings He, et al.Stanford IJCAI18 Commonsense Knowledge Aware Conversation Generation with Graph Attention Zhou, et al.THU note AAAI2018 A Knowledge-Grounded Neural Conversation Model Ghazvininejad, et al.Microsoft Research AAAI2018 Flexible End-to-End Dialogue System for Knowledge Grounded Conversation Zhu, et al.HKUST 2019 Learning to Select Knowledge for Response Generation in Dialog Systems Baidu Text Generation with Knowledge Conf. Title Authors/Org. Note AAAI2019 Story Ending Generation with Incremental Encoding and Commonsense Knowledge Jian Guan, et al.THU note Representation with Knowledge Conf. Title Authors/Org. Note ICLR2017 A Neural Knowledge Language Model Ahn.et al.Université de Montréal ACL2017 Improved Word Representation Learning with Sememes Niu, et al.THU ACL2018 Cross-lingual Lexical Sememe Prediction Qi, et al.THU AAAI2018 Improving Neural Fine-Grained Entity Typing with Knowledge Attention Xin, et al.THU ACL2019 Modeling Semantic Compositionality with Sememe Knowledge Qi, et al.THU note 2019 SenseBERT: Driving Some Sense into BERT AI21 Labs note Level: KMRC area. Relevant research area. Heuristic. Review. Field: KMRC: Knowledge-based Machine Reading Comprehension; KDS: Knowledge-based Dialogue System; KIR: Knowledge-based Information Retrieval; SC: Sememe Computation; NKLM: Neural Knowledge Language Model.]]></content>
       <categories>
         <category>MRC-Paper-Intro</category>
       </categories>
