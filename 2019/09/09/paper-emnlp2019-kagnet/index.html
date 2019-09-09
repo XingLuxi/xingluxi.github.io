@@ -98,7 +98,7 @@
 <meta property="og:image" content="http://xingluxi.github.io/images/paper-emnlp2019-kagnet/2-overview.png">
 <meta property="og:image" content="http://xingluxi.github.io/images/paper-emnlp2019-kagnet/3-module.png">
 <meta property="og:image" content="http://xingluxi.github.io/images/paper-emnlp2019-kagnet/4-showcase.png">
-<meta property="og:updated_time" content="2019-09-09T16:06:29.783Z">
+<meta property="og:updated_time" content="2019-09-09T16:21:08.165Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="EMNLP2019 | KagNet - Knowledge-Aware Graph Networks for Commonsense Reasoning">
 <meta name="twitter:description" content="Title: Enhancing Pre-Trained Language Representations with Rich Knowledge for Machine Reading ComprehensionAuthor: Bill Yuchen Lin, Xinyue Chen, Jamin Chen, Xiang RenOrg.: University of Southern Cali">
@@ -352,7 +352,7 @@
               
                 <span class="post-meta-item-text">Post modified&#58;</span>
               
-              <time title="Post modified" itemprop="dateModified" datetime="2019-09-10T00:06:29+08:00">
+              <time title="Post modified" itemprop="dateModified" datetime="2019-09-10T00:21:08+08:00">
                 2019-09-10
               </time>
             
@@ -407,7 +407,7 @@
                   <span class="post-meta-item-text">Words count in article&#58;</span>
                 
                 <span title="Words count in article">
-                  1.3k
+                  1.4k
                 </span>
               
 
@@ -454,6 +454,8 @@
 <li>reasoning is the process of combining facts and beliefs to make new decisions <sup id="fnref:1"><a href="#fn:1" rel="footnote">1</a></sup>.</li>
 <li>reasoning is the ability to manipulate knowledge to draw inferences <sup id="fnref:2"><a href="#fn:2" rel="footnote">2</a></sup>.</li>
 <li>commonsense reasoning utilizes the basic knowledge that reflects our natural understanding of the world and human behaviors, which is common to all humans.</li>
+<li>Naive <strong>Physics</strong>: Humans’ natural understanding of the physical world</li>
+<li>Folk <strong>Psychology</strong>: Humans’ innate ability to reason about people’s behavior and intentions</li>
 </ul>
 </li>
 <li>gap between baselines and human performance</li>
@@ -465,6 +467,11 @@
 <li>knowledge-aware models can explicitly incorporate external knowledge as <strong>relational inductive biases</strong><ul>
 <li>enhance reasoning capacity</li>
 <li>increase the transparency of model behaviors for more interpretable results</li>
+</ul>
+</li>
+<li>challenges<ul>
+<li>How can we ﬁnd the most relevant paths in KG? ( noisy )</li>
+<li>What if the best path is not existent in the KG? ( incomplete )</li>
 </ul>
 </li>
 </ul>
@@ -591,7 +598,7 @@
 </ul>
 </li>
 </ul>
-<h2 id="Experiments"><a href="#Experiments" class="headerlink" title="Experiments"></a>Experiments</h2><h3 id="Case-Study-on-Interpretibility"><a href="#Case-Study-on-Interpretibility" class="headerlink" title="Case Study on Interpretibility"></a>Case Study on Interpretibility</h3><p><img src="/../images/paper-emnlp2019-kagnet/4-showcase.png" alt="exp"></p>
+<h2 id="Experiments"><a href="#Experiments" class="headerlink" title="Experiments"></a>Experiments</h2><h3 id="Transferability"><a href="#Transferability" class="headerlink" title="Transferability"></a>Transferability</h3><h3 id="Case-Study-on-Interpretibility"><a href="#Case-Study-on-Interpretibility" class="headerlink" title="Case Study on Interpretibility"></a>Case Study on Interpretibility</h3><p><img src="/../images/paper-emnlp2019-kagnet/4-showcase.png" alt="exp"></p>
 <h3 id="Error-Analysis"><a href="#Error-Analysis" class="headerlink" title="Error Analysis"></a>Error Analysis</h3><ul>
 <li>negative reasoning<ul>
 <li>graph grounding 对否定词不敏感</li>
@@ -849,7 +856,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Motivation"><span class="nav-text">Motivation</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#This-work"><span class="nav-text">This work</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Model"><span class="nav-text">Model</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Schema-Graph-Grounding"><span class="nav-text">Schema Graph Grounding</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Concept-Recognition"><span class="nav-text">Concept Recognition</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Schema-Graph-Construction"><span class="nav-text">Schema Graph Construction</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Path-Pruning-via-KG-Embedding"><span class="nav-text">Path Pruning via KG Embedding</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Knowledge-Aware-Graph-Network"><span class="nav-text">Knowledge-Aware Graph Network</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Graph-Convolution-Networks"><span class="nav-text">Graph Convolution Networks</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Relational-Path-Encoding"><span class="nav-text">Relational Path Encoding</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Hierarchical-Attention-Mechanism"><span class="nav-text">Hierarchical Attention Mechanism</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Experiments"><span class="nav-text">Experiments</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Case-Study-on-Interpretibility"><span class="nav-text">Case Study on Interpretibility</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Error-Analysis"><span class="nav-text">Error Analysis</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Analysis-amp-Summary"><span class="nav-text">Analysis &amp; Summary</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Motivation"><span class="nav-text">Motivation</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#This-work"><span class="nav-text">This work</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Model"><span class="nav-text">Model</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Schema-Graph-Grounding"><span class="nav-text">Schema Graph Grounding</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Concept-Recognition"><span class="nav-text">Concept Recognition</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Schema-Graph-Construction"><span class="nav-text">Schema Graph Construction</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Path-Pruning-via-KG-Embedding"><span class="nav-text">Path Pruning via KG Embedding</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Knowledge-Aware-Graph-Network"><span class="nav-text">Knowledge-Aware Graph Network</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Graph-Convolution-Networks"><span class="nav-text">Graph Convolution Networks</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Relational-Path-Encoding"><span class="nav-text">Relational Path Encoding</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Hierarchical-Attention-Mechanism"><span class="nav-text">Hierarchical Attention Mechanism</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Experiments"><span class="nav-text">Experiments</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Transferability"><span class="nav-text">Transferability</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Case-Study-on-Interpretibility"><span class="nav-text">Case Study on Interpretibility</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Error-Analysis"><span class="nav-text">Error Analysis</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Analysis-amp-Summary"><span class="nav-text">Analysis &amp; Summary</span></a></li></ol></div>
             
 
           </div>
