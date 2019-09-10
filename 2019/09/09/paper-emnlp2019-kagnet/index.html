@@ -98,7 +98,7 @@
 <meta property="og:image" content="http://xingluxi.github.io/images/paper-emnlp2019-kagnet/2-overview.png">
 <meta property="og:image" content="http://xingluxi.github.io/images/paper-emnlp2019-kagnet/3-module.png">
 <meta property="og:image" content="http://xingluxi.github.io/images/paper-emnlp2019-kagnet/4-showcase.png">
-<meta property="og:updated_time" content="2019-09-10T01:24:30.413Z">
+<meta property="og:updated_time" content="2019-09-10T02:07:46.715Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="EMNLP2019 | KagNet - Knowledge-Aware Graph Networks for Commonsense Reasoning">
 <meta name="twitter:description" content="Title: KagNet: Knowledge-Aware Graph Networks for Commonsense ReasoningAuthor: Bill Yuchen Lin, Xinyue Chen, Jamin Chen, Xiang RenOrg.: University of Southern California, Shanghai Jiao Tong Universit">
@@ -352,7 +352,7 @@
               
                 <span class="post-meta-item-text">Post modified&#58;</span>
               
-              <time title="Post modified" itemprop="dateModified" datetime="2019-09-10T09:24:30+08:00">
+              <time title="Post modified" itemprop="dateModified" datetime="2019-09-10T10:07:46+08:00">
                 2019-09-10
               </time>
             
@@ -445,15 +445,21 @@
 
       
         <blockquote>
-<p><em>Title</em>: <a href="https://arxiv.org/abs/1909.02151" target="_blank" rel="noopener">KagNet: Knowledge-Aware Graph Networks for Commonsense Reasoning</a><br><em>Author</em>: Bill Yuchen Lin, Xinyue Chen, Jamin Chen, Xiang Ren<br><em>Org.</em>: University of Southern California, Shanghai Jiao Tong University<br><em>Published</em>: EMNLp,2019<br><em>Code</em>: <a href="https://github.com/INK-USC/KagNet" target="_blank" rel="noopener">https://github.com/INK-USC/KagNet</a></p>
+<p><em>Title</em>: <a href="https://arxiv.org/abs/1909.02151" target="_blank" rel="noopener">KagNet: Knowledge-Aware Graph Networks for Commonsense Reasoning</a><br><em>Author</em>: Bill Yuchen Lin, Xinyue Chen, Jamin Chen, Xiang Ren<br><em>Org.</em>: University of Southern California, Shanghai Jiao Tong University<br><em>Published</em>: EMNLP,2019<br><em>Code</em>: <a href="https://github.com/INK-USC/KagNet" target="_blank" rel="noopener">https://github.com/INK-USC/KagNet</a></p>
 </blockquote>
 <h2 id="Motivation"><a href="#Motivation" class="headerlink" title="Motivation"></a>Motivation</h2><p>本文针对的数据集是：<strong>CommonsenseQA</strong></p>
 <p>目标：</p>
 <ul>
-<li>empowering machines with the ability to perform commonsense reasoning/inferences<ul>
+<li><strong>empowering</strong> machines with the ability to perform commonsense reasoning/inferences<ul>
+<li>关于推理的定义：<ul>
 <li>reasoning is the process of combining facts and beliefs to make new decisions <sup id="fnref:1"><a href="#fn:1" rel="footnote">1</a></sup>.</li>
 <li>reasoning is the ability to manipulate knowledge to draw inferences <sup id="fnref:2"><a href="#fn:2" rel="footnote">2</a></sup>.</li>
+</ul>
+</li>
+<li>关于常识推理的定义：<ul>
 <li>commonsense reasoning utilizes the basic knowledge that reflects our natural understanding of the world and human behaviors, which is common to all humans.</li>
+</ul>
+</li>
 <li>Naive <strong>Physics</strong>: Humans’ natural understanding of the physical world</li>
 <li>Folk <strong>Psychology</strong>: Humans’ innate ability to reason about people’s behavior and intentions</li>
 </ul>
@@ -554,7 +560,7 @@
 <ul>
 <li>$P_{i,j}[k]=[(c_i^{(q)}, r_0, t_0), …, (t_{n-1}, r_n, c_j^{(a)})]$<ul>
 <li>relation vector 由 KGE 预训练得到</li>
-<li>concept vectore 是 上一环节 GCN 的顶层输出</li>
+<li>concept vector 是 上一环节 GCN 的顶层输出</li>
 </ul>
 </li>
 <li>每个三元组表示为 三个向量的串联，得到 triple vector</li>
