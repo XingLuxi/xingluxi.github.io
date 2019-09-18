@@ -75,7 +75,7 @@
 
 
 
-  <meta name="keywords" content="nlp,mrc,note,knowledge,commonsense,graph,">
+  <meta name="keywords" content="nlp,knowledge,mrc,note,commonsense,graph,">
 
 
 
@@ -87,7 +87,7 @@
 
 
 <meta name="description" content="Title: Graph-Based Reasoning over Heterogeneous External Knowledge for Commonsense Question AnsweringAuthor: Shangwen Lv, Daya Guo , Jingjing Xu, Duyu Tang, Nan Duan, Ming Gong, Linjun Shou, Daxin Ji">
-<meta name="keywords" content="nlp,mrc,note,knowledge,commonsense,graph">
+<meta name="keywords" content="nlp,knowledge,mrc,note,commonsense,graph">
 <meta property="og:type" content="article">
 <meta property="og:title" content="2019 | Graph-Based Reasoning over Heterogeneous External Knowledge for Commonsense Question Answering">
 <meta property="og:url" content="http://xingluxi.github.io/2019/09/17/paper-csqa-1909-05311/index.html">
@@ -97,7 +97,8 @@
 <meta property="og:image" content="http://xingluxi.github.io/images/paper-csqa-1909-05311/example.png">
 <meta property="og:image" content="http://xingluxi.github.io/images/paper-csqa-1909-05311/overview.png">
 <meta property="og:image" content="http://xingluxi.github.io/images/paper-csqa-1909-05311/module.png">
-<meta property="og:updated_time" content="2019-09-18T01:56:25.468Z">
+<meta property="og:image" content="http://xingluxi.github.io/images/paper-csqa-1909-05311/sort-algo.png">
+<meta property="og:updated_time" content="2019-09-18T05:01:14.317Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="2019 | Graph-Based Reasoning over Heterogeneous External Knowledge for Commonsense Question Answering">
 <meta name="twitter:description" content="Title: Graph-Based Reasoning over Heterogeneous External Knowledge for Commonsense Question AnsweringAuthor: Shangwen Lv, Daya Guo , Jingjing Xu, Duyu Tang, Nan Duan, Ming Gong, Linjun Shou, Daxin Ji">
@@ -351,7 +352,7 @@
               
                 <span class="post-meta-item-text">Post modified&#58;</span>
               
-              <time title="Post modified" itemprop="dateModified" datetime="2019-09-18T09:56:25+08:00">
+              <time title="Post modified" itemprop="dateModified" datetime="2019-09-18T13:01:14+08:00">
                 2019-09-18
               </time>
             
@@ -406,7 +407,7 @@
                   <span class="post-meta-item-text">Words count in article&#58;</span>
                 
                 <span title="Words count in article">
-                  1.2k
+                  2.1k
                 </span>
               
 
@@ -422,7 +423,7 @@
                   <span class="post-meta-item-text">Reading time &asymp;</span>
                 
                 <span title="Reading time">
-                  4
+                  8
                 </span>
               
             </div>
@@ -506,7 +507,7 @@
 <p>3、对于从CN中抽取出来的路径拆分为三元组，将<strong>每个三元组看做一个节点</strong>，融合到图中：</p>
 <ul>
 <li>如果两个三元组中包含相同的实体，就在图中相应的两点之间增加一条边</li>
-<li><i class="far fa-question-circle"></i>问题：为什么将三元组对应为图中的一个点？而不是之间利用CN原生的节点-关系结构</li>
+<li>问题：为什么将三元组对应为图中的一个点？而不是之间利用CN原生的节点-关系结构</li>
 </ul>
 <p>4、为了获取CN中节点的上下文词表示，将三元组根据<strong>关系模板</strong>转化为<strong>自然语言语句</strong></p>
 <h4 id="Knowledge-Extraction-from-Wikipedia"><a href="#Knowledge-Extraction-from-Wikipedia" class="headerlink" title="Knowledge Extraction from Wikipedia"></a>Knowledge Extraction from Wikipedia</h4><p>使用的 Wikipedia 版本信息：version enwiki-20190301</p>
@@ -520,7 +521,91 @@
 </ul>
 <h3 id="Graph-Based-Reasoning"><a href="#Graph-Based-Reasoning" class="headerlink" title="Graph-Based Reasoning"></a>Graph-Based Reasoning</h3><p>基于图的推理模块：<img src="/../images/paper-csqa-1909-05311/module.png" alt="gr"></p>
 <p>由两部分组成，分别是 1. 基于图的上下文表示学习模块 和 2. 基于图的推理模块</p>
-<h4 id="1-Graph-based-Contextual-Representation-Learning-Module"><a href="#1-Graph-based-Contextual-Representation-Learning-Module" class="headerlink" title="1.Graph-based Contextual Representation Learning Module"></a>1.Graph-based Contextual Representation Learning Module</h4><h4 id="2-Graph-based-Inference-Module"><a href="#2-Graph-based-Inference-Module" class="headerlink" title="2.Graph-based Inference Module"></a>2.Graph-based Inference Module</h4><h2 id="Experiments"><a href="#Experiments" class="headerlink" title="Experiments"></a>Experiments</h2><h2 id="Analysis-amp-Summary"><a href="#Analysis-amp-Summary" class="headerlink" title="Analysis &amp; Summary"></a>Analysis &amp; Summary</h2><blockquote id="fn_cose">
+<h4 id="1-Graph-based-Contextual-Representation-Learning-Module"><a href="#1-Graph-based-Contextual-Representation-Learning-Module" class="headerlink" title="1.Graph-based Contextual Representation Learning Module"></a>1.Graph-based Contextual Representation Learning Module</h4><p>本文使用 <strong>XLNet</strong> 作为基本编码器。</p>
+<p>将所有证据信息进行串联，作为 raw input 输入给 XLNet，获得每个词的表示。</p>
+<p>这种方式构成的编码器输入存在一个问题：</p>
+<ul>
+<li>使在不同的知识源中提及的词的距离变远，即便是语义相关的。</li>
+<li>（个人理解，这里是想说同一个词，在不同的证据句中出现的时候，由于仅仅将证据句进行简单串联，而且编码中依然存在长期依赖的问题，所以会造成，在多个证据句中出现的相同词的编码表示是存在较大差异的）</li>
+</ul>
+<p>针对这个问题，提出根据 graph 结构，来re-define证据词之间的相对位置。</p>
+<ul>
+<li>使语义相关的词的相对位置更近一些；</li>
+<li>并用证据的内部关系结构获得更好的 CWR (contextual word representation)；</li>
+<li>采用的方法是：利用排序算法，根据知识抽取部分得到的图结构，对证据句的顺序进行re-order；</li>
+</ul>
+<p>对于 Wikipedia Sentences :</p>
+<ul>
+<li>构建一个句子图（sentence-graph），证据句是图中的节点</li>
+<li>当满足以下条件时，在两个句子 $s_i$ 和 $s_j$ 间建立边：<ul>
+<li>如果在 Wiki-Graph 中的 节点 $p$ 和 $q$ 之间存在一条边，且 $p$ 和 $q$ 分别在句子 $s_i$ 和 $s_j$中。</li>
+</ul>
+</li>
+<li>然后根据 下图（<strong>算法1</strong>） 对证据句进行重排序<ul>
+<li><img src="/../images/paper-csqa-1909-05311/sort-algo.png" alt="algo"></li>
+</ul>
+</li>
+</ul>
+<p>对于结构化知识CN :</p>
+<ul>
+<li>根据关系模板，将 CN 中的三元组转化为自然语句，作为 CN 提供的证据句：<ul>
+<li>E.g.: <code>(mammals, HasA, hair)</code> —&gt; <code>mammals has hair</code></li>
+</ul>
+</li>
+<li>也是根据上图的 <strong>算法1</strong> 对证据句进行重排序</li>
+</ul>
+<p>注：从两个知识源中抽取出的证据句分别排序</p>
+<p>最终，XLNet 的输入格式为：</p>
+<ul>
+<li><code>CN Evidence sentences $S^{\prime}_T$ ; Wiki Evidence sentences ; question $q$ ; choice $c$</code></li>
+<li>四个部分的串接，用 <code>[SEP]</code> 进行分隔</li>
+<li>在实验部分，对choice还增加了一个头部：<code>The answer is</code></li>
+<li>最大长度设为 <code>256</code></li>
+<li>得到 word-level clue</li>
+</ul>
+<h4 id="2-Graph-based-Inference-Module"><a href="#2-Graph-based-Inference-Module" class="headerlink" title="2.Graph-based Inference Module"></a>2.Graph-based Inference Module</h4><p>主要目的：在图级别上聚集、传播证据信息，并在图上进行推理以预测最终的答案</p>
+<p>1、将 两个证据图 CN-graph 和 Wiki-Graph 看做一个图，使用 GCN 进行编码，获得节点的表示</p>
+<ul>
+<li>在使用 GCN 的时候，将图看为无向图进行设置</li>
+<li>节点表示：$i$-th node<ul>
+<li>$h_i^0$ 由证据句的 hidden state 的平均得到<ul>
+<li>$h_i^0 = \sigma(W \sum_{w_j \in s_i} \frac{1}{|s_i|} h_{w_j})$</li>
+<li>$s_j = \{w_0, …, w_t\}$</li>
+<li>$W \in \mathbb{R}^{d \times k}$</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>2、证据传播过程，分为两步：聚集 和 组合<br>（1）从邻居节点聚集信息</p>
+<ul>
+<li>$z_i^l = \sum_{j\in N_i} \frac{1}{|N_i|} V^l h_j^l$<br>（2）组合，更新节点表示</li>
+<li>$h_i^{l+1} = \sigma(W^l h_i^l + z_i^l)$</li>
+</ul>
+<p>（$l$ 表示层数，$L$ 表示最终层）</p>
+<p>3、利用图注意力，聚集图级别表示，进行最终的预测</p>
+<ul>
+<li>使用 multiplicative attention，$h^c$ 表示 XLNet 中对应的 <code>[CLS]</code> 位置的表示</li>
+<li>第 $i$ 个节点的重要程度：<ul>
+<li>$\alpha_i = \frac{h^c \sigma(W_1 h_i^L)}{\sum_{j\in N h^c \sigma(W_1 h_j^L)}}$</li>
+</ul>
+</li>
+<li>最终的图表示<ul>
+<li>$h^g = \sum_{h\in N} \alpha_j^L h_j^L$</li>
+</ul>
+</li>
+</ul>
+<p>4、最终的预测打分</p>
+<ul>
+<li>$score(q,a) = \text{MLP}(h^g)$</li>
+<li>$p(q,a) = \frac{e^{score(q,a)}}{\sum_{a^{\prime}\in A} e^{score(q,a^{\prime})}}$</li>
+</ul>
+<h2 id="Experiments"><a href="#Experiments" class="headerlink" title="Experiments"></a>Experiments</h2><h2 id="Analysis-amp-Summary"><a href="#Analysis-amp-Summary" class="headerlink" title="Analysis &amp; Summary"></a>Analysis &amp; Summary</h2><p>论文中涉及到了多个图，在叙述上有些混乱。</p>
+<p>疑问：</p>
+<ol>
+<li>在CN知识抽取部分，为什么将三元组对应为图中的一个点？而不是之间利用CN原生的节点-关系结构？</li>
+</ol>
+<blockquote id="fn_cose">
 <sup>cose</sup>. Explain Yourself! Leveraging Language Models for Commonsense Reasoning. ACL,2019. <a href="/2019/07/10/paper-acl2019-cos-e/" title="note">note</a><a href="#reffn_cose" title="Jump back to footnote [cose] in the text."> &#8617;</a>
 </blockquote>
 
@@ -573,11 +658,11 @@
           
             <a href="/tags/nlp/" rel="tag"><i class="fa fa-tag"></i> nlp</a>
           
+            <a href="/tags/knowledge/" rel="tag"><i class="fa fa-tag"></i> knowledge</a>
+          
             <a href="/tags/mrc/" rel="tag"><i class="fa fa-tag"></i> mrc</a>
           
             <a href="/tags/note/" rel="tag"><i class="fa fa-tag"></i> note</a>
-          
-            <a href="/tags/knowledge/" rel="tag"><i class="fa fa-tag"></i> knowledge</a>
           
             <a href="/tags/commonsense/" rel="tag"><i class="fa fa-tag"></i> commonsense</a>
           
