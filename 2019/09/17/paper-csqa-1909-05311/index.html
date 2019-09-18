@@ -97,7 +97,7 @@
 <meta property="og:image" content="http://xingluxi.github.io/.io//example.png">
 <meta property="og:image" content="http://xingluxi.github.io/.io//overview.png">
 <meta property="og:image" content="http://xingluxi.github.io/.io//module.png">
-<meta property="og:updated_time" content="2019-09-18T01:40:54.514Z">
+<meta property="og:updated_time" content="2019-09-18T01:54:48.614Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="2019 | Graph-Based Reasoning over Heterogeneous External Knowledge for Commonsense Question Answering">
 <meta name="twitter:description" content="Title: Graph-Based Reasoning over Heterogeneous External Knowledge for Commonsense Question AnsweringAuthor: Shangwen Lv, Daya Guo , Jingjing Xu, Duyu Tang, Nan Duan, Ming Gong, Linjun Shou, Daxin Ji">
@@ -351,7 +351,7 @@
               
                 <span class="post-meta-item-text">Post modified&#58;</span>
               
-              <time title="Post modified" itemprop="dateModified" datetime="2019-09-18T09:40:54+08:00">
+              <time title="Post modified" itemprop="dateModified" datetime="2019-09-18T09:54:48+08:00">
                 2019-09-18
               </time>
             
@@ -506,11 +506,11 @@
 <p>3、对于从CN中抽取出来的路径拆分为三元组，将<strong>每个三元组看做一个节点</strong>，融合到图中：</p>
 <ul>
 <li>如果两个三元组中包含相同的实体，就在图中相应的两点之间增加一条边</li>
-<li>问题：为什么讲三元组对应为图中的一个点？而不是之间利用CN原生的节点-关系结构</li>
+<li><i class="far fa-question-circle"></i>问题：为什么将三元组对应为图中的一个点？而不是之间利用CN原生的节点-关系结构</li>
 </ul>
 <p>4、为了获取CN中节点的上下文词表示，将三元组根据<strong>关系模板</strong>转化为<strong>自然语言语句</strong></p>
 <h4 id="Knowledge-Extraction-from-Wikipedia"><a href="#Knowledge-Extraction-from-Wikipedia" class="headerlink" title="Knowledge Extraction from Wikipedia"></a>Knowledge Extraction from Wikipedia</h4><p>使用的 Wikipedia 版本信息：version enwiki-20190301</p>
-<p>Wikipedia 文本处理</p>
+<p>Wikipedia 文本处理:</p>
 <p>1、使用 Spacy 从中抽取出 107M 个句子， 并用 Elastic Search 工具构建句子索引<br>2、对于每个训练样例，去除问句和候选中的停用词，然后将所有词串联，作为检索查询<br>3、使用 Elastic 搜索引擎 在检索查询和所有句子之间进行排序，选择出 top-K 个句子作为 Wikipedia 提供的证据信息，在实验中 K=10</p>
 <p>构建 Wiki-Graph :</p>
 <p>1、使用SRL抽取出 句子中每个谓词的论元 (主语和宾语)<br>2、将论元和谓词都作为图中的节点，谓词和论元之间的关系作为边<br>3、为了增强图的连通性，基于下述两条规则来在 节点 a 和 节点 b 之间加入边 (首先去除停用词)：</p>
@@ -520,7 +520,7 @@
 </ul>
 <h3 id="Graph-Based-Reasoning"><a href="#Graph-Based-Reasoning" class="headerlink" title="Graph-Based Reasoning"></a>Graph-Based Reasoning</h3><p>基于图的推理模块：<img src="/.io//module.png" alt="gr"></p>
 <p>由两部分组成，分别是 1. 基于图的上下文表示学习模块 和 2. 基于图的推理模块</p>
-<h4 id="1-Graph-based-Contextual-Representation-Learning-Module"><a href="#1-Graph-based-Contextual-Representation-Learning-Module" class="headerlink" title="1. Graph-based Contextual Representation Learning Module"></a>1. Graph-based Contextual Representation Learning Module</h4><h4 id="2-Graph-based-Inference-Module"><a href="#2-Graph-based-Inference-Module" class="headerlink" title="2. Graph-based Inference Module"></a>2. Graph-based Inference Module</h4><h2 id="Experiments"><a href="#Experiments" class="headerlink" title="Experiments"></a>Experiments</h2><h2 id="Analysis-amp-Summary"><a href="#Analysis-amp-Summary" class="headerlink" title="Analysis &amp; Summary"></a>Analysis &amp; Summary</h2><blockquote id="fn_cose">
+<h4 id="1-Graph-based-Contextual-Representation-Learning-Module"><a href="#1-Graph-based-Contextual-Representation-Learning-Module" class="headerlink" title="1.Graph-based Contextual Representation Learning Module"></a>1.Graph-based Contextual Representation Learning Module</h4><h4 id="2-Graph-based-Inference-Module"><a href="#2-Graph-based-Inference-Module" class="headerlink" title="2.Graph-based Inference Module"></a>2.Graph-based Inference Module</h4><h2 id="Experiments"><a href="#Experiments" class="headerlink" title="Experiments"></a>Experiments</h2><h2 id="Analysis-amp-Summary"><a href="#Analysis-amp-Summary" class="headerlink" title="Analysis &amp; Summary"></a>Analysis &amp; Summary</h2><blockquote id="fn_cose">
 <sup>cose</sup>. Explain Yourself! Leveraging Language Models for Commonsense Reasoning. ACL,2019. <a href="/2019/07/10/paper-acl2019-cos-e/" title="note">note</a><a href="#reffn_cose" title="Jump back to footnote [cose] in the text."> &#8617;</a>
 </blockquote>
 
@@ -763,7 +763,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Motivation"><span class="nav-text">Motivation</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#This-Work"><span class="nav-text">This Work</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Model"><span class="nav-text">Model</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Knowledge-Extraction"><span class="nav-text">Knowledge Extraction</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Knowledge-Extraction-from-ConceptNet"><span class="nav-text">Knowledge Extraction from ConceptNet</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Knowledge-Extraction-from-Wikipedia"><span class="nav-text">Knowledge Extraction from Wikipedia</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Graph-Based-Reasoning"><span class="nav-text">Graph-Based Reasoning</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-Graph-based-Contextual-Representation-Learning-Module"><span class="nav-text">1. Graph-based Contextual Representation Learning Module</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-Graph-based-Inference-Module"><span class="nav-text">2. Graph-based Inference Module</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Experiments"><span class="nav-text">Experiments</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Analysis-amp-Summary"><span class="nav-text">Analysis &amp; Summary</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Motivation"><span class="nav-text">Motivation</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#This-Work"><span class="nav-text">This Work</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Model"><span class="nav-text">Model</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Knowledge-Extraction"><span class="nav-text">Knowledge Extraction</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Knowledge-Extraction-from-ConceptNet"><span class="nav-text">Knowledge Extraction from ConceptNet</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Knowledge-Extraction-from-Wikipedia"><span class="nav-text">Knowledge Extraction from Wikipedia</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Graph-Based-Reasoning"><span class="nav-text">Graph-Based Reasoning</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-Graph-based-Contextual-Representation-Learning-Module"><span class="nav-text">1.Graph-based Contextual Representation Learning Module</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-Graph-based-Inference-Module"><span class="nav-text">2.Graph-based Inference Module</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Experiments"><span class="nav-text">Experiments</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Analysis-amp-Summary"><span class="nav-text">Analysis &amp; Summary</span></a></li></ol></div>
             
 
           </div>
