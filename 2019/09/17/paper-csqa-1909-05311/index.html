@@ -75,7 +75,7 @@
 
 
 
-  <meta name="keywords" content="nlp,knowledge,mrc,note,commonsense,graph,">
+  <meta name="keywords" content="nlp,mrc,knowledge,note,commonsense,graph,">
 
 
 
@@ -87,7 +87,7 @@
 
 
 <meta name="description" content="Title: Graph-Based Reasoning over Heterogeneous External Knowledge for Commonsense Question AnsweringAuthor: Shangwen Lv, Daya Guo , Jingjing Xu, Duyu Tang, Nan Duan, Ming Gong, Linjun Shou, Daxin Ji">
-<meta name="keywords" content="nlp,knowledge,mrc,note,commonsense,graph">
+<meta name="keywords" content="nlp,mrc,knowledge,note,commonsense,graph">
 <meta property="og:type" content="article">
 <meta property="og:title" content="2019 | Graph-Based Reasoning over Heterogeneous External Knowledge for Commonsense Question Answering">
 <meta property="og:url" content="http://xingluxi.github.io/2019/09/17/paper-csqa-1909-05311/index.html">
@@ -98,7 +98,10 @@
 <meta property="og:image" content="http://xingluxi.github.io/images/paper-csqa-1909-05311/overview.png">
 <meta property="og:image" content="http://xingluxi.github.io/images/paper-csqa-1909-05311/module.png">
 <meta property="og:image" content="http://xingluxi.github.io/images/paper-csqa-1909-05311/sort-algo.png">
-<meta property="og:updated_time" content="2019-09-18T05:01:14.317Z">
+<meta property="og:image" content="http://xingluxi.github.io/images/paper-csqa-1909-05311/exp-all.png">
+<meta property="og:image" content="http://xingluxi.github.io/images/paper-csqa-1909-05311/exp-ablation.png">
+<meta property="og:image" content="http://xingluxi.github.io/2019/09/17/images/paper-csqa-1909-05311/exp-kn.png">
+<meta property="og:updated_time" content="2019-09-18T05:28:25.820Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="2019 | Graph-Based Reasoning over Heterogeneous External Knowledge for Commonsense Question Answering">
 <meta name="twitter:description" content="Title: Graph-Based Reasoning over Heterogeneous External Knowledge for Commonsense Question AnsweringAuthor: Shangwen Lv, Daya Guo , Jingjing Xu, Duyu Tang, Nan Duan, Ming Gong, Linjun Shou, Daxin Ji">
@@ -352,7 +355,7 @@
               
                 <span class="post-meta-item-text">Post modified&#58;</span>
               
-              <time title="Post modified" itemprop="dateModified" datetime="2019-09-18T13:01:14+08:00">
+              <time title="Post modified" itemprop="dateModified" datetime="2019-09-18T13:28:25+08:00">
                 2019-09-18
               </time>
             
@@ -407,7 +410,7 @@
                   <span class="post-meta-item-text">Words count in article&#58;</span>
                 
                 <span title="Words count in article">
-                  2.1k
+                  2.3k
                 </span>
               
 
@@ -600,7 +603,34 @@
 <li>$score(q,a) = \text{MLP}(h^g)$</li>
 <li>$p(q,a) = \frac{e^{score(q,a)}}{\sum_{a^{\prime}\in A} e^{score(q,a^{\prime})}}$</li>
 </ul>
-<h2 id="Experiments"><a href="#Experiments" class="headerlink" title="Experiments"></a>Experiments</h2><h2 id="Analysis-amp-Summary"><a href="#Analysis-amp-Summary" class="headerlink" title="Analysis &amp; Summary"></a>Analysis &amp; Summary</h2><p>论文中涉及到了多个图，在叙述上有些混乱。</p>
+<h2 id="Experiments"><a href="#Experiments" class="headerlink" title="Experiments"></a>Experiments</h2><p>实验设置：</p>
+<ul>
+<li>batch size = 4</li>
+<li>学习率 = 5e-6</li>
+<li>训练轮数 = 1 epoch (2800 steps)</li>
+</ul>
+<p>主实验结果：<img src="/../images/paper-csqa-1909-05311/exp-all.png" alt="exp-all"></p>
+<ul>
+<li>给leaderboard上公布出的模型划分了四个组，对比的很全面</li>
+</ul>
+<h3 id="Ablation-Study"><a href="#Ablation-Study" class="headerlink" title="Ablation Study"></a>Ablation Study</h3><p>1、对模型组成结构的验证</p>
+<ul>
+<li><img src="/../images/paper-csqa-1909-05311/exp-ablation.png" alt="exp-module"></li>
+</ul>
+<p>2、对使用知识源的验证，证实了加入异构来源的知识对最终的性能提升有很大的帮助</p>
+<ul>
+<li><img src="../images/paper-csqa-1909-05311/exp-kn.png" alt="exp-kn"></li>
+</ul>
+<h3 id="Error-Analysis"><a href="#Error-Analysis" class="headerlink" title="Error Analysis"></a>Error Analysis</h3><p>在验证集中随机选择了50个错误样例，错误类型大致分为三种：</p>
+<ul>
+<li>lack of evidence</li>
+<li>similar evidence</li>
+<li>dataset noise</li>
+</ul>
+<h2 id="Analysis-amp-Summary"><a href="#Analysis-amp-Summary" class="headerlink" title="Analysis &amp; Summary"></a>Analysis &amp; Summary</h2><ul>
+<li>论文中涉及到了多个图，在叙述上有些混乱。</li>
+<li>对于 topology 排序算法的验证，还需要加入一些例子来证明这部分性能提升的缘由，排序之前和排序之后，对于evidence的表示，产生了什么样的影响。</li>
+</ul>
 <p>疑问：</p>
 <ol>
 <li>在CN知识抽取部分，为什么将三元组对应为图中的一个点？而不是之间利用CN原生的节点-关系结构？</li>
@@ -658,9 +688,9 @@
           
             <a href="/tags/nlp/" rel="tag"><i class="fa fa-tag"></i> nlp</a>
           
-            <a href="/tags/knowledge/" rel="tag"><i class="fa fa-tag"></i> knowledge</a>
-          
             <a href="/tags/mrc/" rel="tag"><i class="fa fa-tag"></i> mrc</a>
+          
+            <a href="/tags/knowledge/" rel="tag"><i class="fa fa-tag"></i> knowledge</a>
           
             <a href="/tags/note/" rel="tag"><i class="fa fa-tag"></i> note</a>
           
@@ -848,7 +878,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Motivation"><span class="nav-text">Motivation</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#This-Work"><span class="nav-text">This Work</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Model"><span class="nav-text">Model</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Knowledge-Extraction"><span class="nav-text">Knowledge Extraction</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Knowledge-Extraction-from-ConceptNet"><span class="nav-text">Knowledge Extraction from ConceptNet</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Knowledge-Extraction-from-Wikipedia"><span class="nav-text">Knowledge Extraction from Wikipedia</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Graph-Based-Reasoning"><span class="nav-text">Graph-Based Reasoning</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-Graph-based-Contextual-Representation-Learning-Module"><span class="nav-text">1.Graph-based Contextual Representation Learning Module</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-Graph-based-Inference-Module"><span class="nav-text">2.Graph-based Inference Module</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Experiments"><span class="nav-text">Experiments</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Analysis-amp-Summary"><span class="nav-text">Analysis &amp; Summary</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Motivation"><span class="nav-text">Motivation</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#This-Work"><span class="nav-text">This Work</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Model"><span class="nav-text">Model</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Knowledge-Extraction"><span class="nav-text">Knowledge Extraction</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Knowledge-Extraction-from-ConceptNet"><span class="nav-text">Knowledge Extraction from ConceptNet</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Knowledge-Extraction-from-Wikipedia"><span class="nav-text">Knowledge Extraction from Wikipedia</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Graph-Based-Reasoning"><span class="nav-text">Graph-Based Reasoning</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-Graph-based-Contextual-Representation-Learning-Module"><span class="nav-text">1.Graph-based Contextual Representation Learning Module</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-Graph-based-Inference-Module"><span class="nav-text">2.Graph-based Inference Module</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Experiments"><span class="nav-text">Experiments</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Ablation-Study"><span class="nav-text">Ablation Study</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Error-Analysis"><span class="nav-text">Error Analysis</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Analysis-amp-Summary"><span class="nav-text">Analysis &amp; Summary</span></a></li></ol></div>
             
 
           </div>
