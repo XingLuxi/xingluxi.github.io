@@ -133,8 +133,8 @@
         <tag>knowledge</tag>
         <tag>note</tag>
         <tag>reasoning</tag>
-        <tag>kbqa</tag>
         <tag>graph</tag>
+        <tag>kbqa</tag>
       </tags>
   </entry>
   <entry>
@@ -220,8 +220,8 @@
         <tag>nlp</tag>
         <tag>knowledge</tag>
         <tag>mrc</tag>
-        <tag>reasoning</tag>
         <tag>commonsense</tag>
+        <tag>reasoning</tag>
         <tag>survey</tag>
       </tags>
   </entry>
@@ -349,8 +349,8 @@
         <tag>mrc</tag>
         <tag>note</tag>
         <tag>multi-hop</tag>
-        <tag>reasoning</tag>
         <tag>commonsense</tag>
+        <tag>reasoning</tag>
       </tags>
   </entry>
   <entry>
