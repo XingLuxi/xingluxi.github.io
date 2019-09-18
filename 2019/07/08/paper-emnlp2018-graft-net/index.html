@@ -75,7 +75,7 @@
 
 
 
-  <meta name="keywords" content="nlp,knowledge,note,reasoning,kbqa,graph,">
+  <meta name="keywords" content="nlp,knowledge,note,reasoning,graph,kbqa,">
 
 
 
@@ -86,18 +86,18 @@
 
 
 
-<meta name="description" content="Title: Open Domain Question Answering Using Early Fusion of Knowledge Bases and TextAuthors: Haitian Sun, Bhuwan Dhingra et al.Org: CMUPublished: EMNLP 2018  official code: https://github.com/Oceansk">
-<meta name="keywords" content="nlp,knowledge,note,reasoning,kbqa,graph">
+<meta name="description" content="Title: Open Domain Question Answering Using Early Fusion of Knowledge Bases and TextAuthors: Haitian Sun, Bhuwan Dhingra et al.Org.: CMUPublished: EMNLP 2018  official code: https://github.com/Oceans">
+<meta name="keywords" content="nlp,knowledge,note,reasoning,graph,kbqa">
 <meta property="og:type" content="article">
 <meta property="og:title" content="EMNLP2018 | Open Domain Question Answering Using Early Fusion of Knowledge Bases and Text">
 <meta property="og:url" content="http://xingluxi.github.io/2019/07/08/paper-emnlp2018-graft-net/index.html">
 <meta property="og:site_name" content="Luxi Xing - Blog">
-<meta property="og:description" content="Title: Open Domain Question Answering Using Early Fusion of Knowledge Bases and TextAuthors: Haitian Sun, Bhuwan Dhingra et al.Org: CMUPublished: EMNLP 2018  official code: https://github.com/Oceansk">
+<meta property="og:description" content="Title: Open Domain Question Answering Using Early Fusion of Knowledge Bases and TextAuthors: Haitian Sun, Bhuwan Dhingra et al.Org.: CMUPublished: EMNLP 2018  official code: https://github.com/Oceans">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-08-18T08:02:18.510Z">
+<meta property="og:updated_time" content="2019-09-18T01:22:52.788Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="EMNLP2018 | Open Domain Question Answering Using Early Fusion of Knowledge Bases and Text">
-<meta name="twitter:description" content="Title: Open Domain Question Answering Using Early Fusion of Knowledge Bases and TextAuthors: Haitian Sun, Bhuwan Dhingra et al.Org: CMUPublished: EMNLP 2018  official code: https://github.com/Oceansk">
+<meta name="twitter:description" content="Title: Open Domain Question Answering Using Early Fusion of Knowledge Bases and TextAuthors: Haitian Sun, Bhuwan Dhingra et al.Org.: CMUPublished: EMNLP 2018  official code: https://github.com/Oceans">
 
 
 
@@ -347,8 +347,8 @@
               
                 <span class="post-meta-item-text">Post modified&#58;</span>
               
-              <time title="Post modified" itemprop="dateModified" datetime="2019-08-18T16:02:18+08:00">
-                2019-08-18
+              <time title="Post modified" itemprop="dateModified" datetime="2019-09-18T09:22:52+08:00">
+                2019-09-18
               </time>
             
           </span>
@@ -402,7 +402,7 @@
                   <span class="post-meta-item-text">Words count in article&#58;</span>
                 
                 <span title="Words count in article">
-                  640
+                  647
                 </span>
               
 
@@ -440,22 +440,22 @@
 
       
         <blockquote>
-<p>Title: Open Domain Question Answering Using Early Fusion of Knowledge Bases and Text<br>Authors: Haitian Sun, Bhuwan Dhingra et al.<br>Org: CMU<br>Published: EMNLP 2018</p>
+<p><em>Title</em>: Open Domain Question Answering Using Early Fusion of Knowledge Bases and Text<br><em>Authors</em>: Haitian Sun, Bhuwan Dhingra et al.<br><em>Org.</em>: CMU<br><em>Published</em>: EMNLP 2018</p>
 </blockquote>
 <p>official code: <a href="https://github.com/OceanskySun/GraftNet" target="_blank" rel="noopener">https://github.com/OceanskySun/GraftNet</a></p>
 <h2 id="Motivation"><a href="#Motivation" class="headerlink" title="Motivation"></a>Motivation</h2><ul>
 <li>大多数 open domain QA 任务都是使用单信息源（要么是text from encyclopedia，或者是 single KB）来回答问题</li>
-<li>判断一个信息源的适用性（suitability），取决于信息源的覆盖度（coverage）和从其中抽取答案的难度（difficulty of extracting answers from it）<ul>
-<li>large text corpus作为信息源：具有很高的覆盖度，但是信息被不同的text pattern表示（这里可以理解为，不同领域/体裁的文本有不同的表现形式），模型还需要学习这些text pattern，导致模型难以泛化到其他领域以及新的推理类型</li>
-<li>KB作为信息源：覆盖度低（由于不可避免的不完全性和有限的模式），但是更易于抽取答案</li>
+<li>判断一个信息源的适用性（suitability），取决于<strong>信息源的覆盖度（coverage）</strong>和从其中<strong>抽取答案的难度（difficulty of extracting answers from it）</strong><ul>
+<li>非结构化，large text corpus作为信息源：具有很高的覆盖度，但是信息被不同的text pattern表示（这里可以理解为，不同领域/体裁的文本有不同的表现形式），模型还需要学习这些text pattern，导致模型难以泛化到其他领域以及新的推理类型</li>
+<li>结构化，KB作为信息源：覆盖度低（由于不可避免的不完全性和有限的模式），但是更易于抽取答案</li>
 </ul>
 </li>
-<li>由于有两种信息源存在，有些问题可被text回答，有些问题更适合用KB回答，但是只使用一种信息源不足以回答问题，一个很自然的问题就是<strong>如何有效地结合多种类型的信息</strong>：有以下两种方式<ul>
-<li><strong>late fusion</strong>：为每种信息源设计SOTA的QA模型，得到他们的预测结果之后，再用一些启发式的方法将得到的答案进行聚合<ul>
+<li>由于有两种信息源存在，有些问题可被text回答，有些问题更适合用KB回答，但是只使用一种信息源不足以回答问题，一个很自然的问题就是<strong>如何有效地结合多种类型的信息</strong>，有以下两种方式：<ul>
+<li><font color="blue"><strong>late fusion</strong></font>: 为每种信息源设计SOTA的QA模型，得到他们的预测结果之后，再用一些启发式的方法将得到的答案进行聚合<ul>
 <li>问题：sub-optimal的解决方法，模型受限于从不同的信息源中聚集证据信息</li>
 </ul>
 </li>
-<li><strong>early fusion</strong>：本文所采取的方式<ul>
+<li><font color="green"><strong>early fusion</strong></font>：本文所采取的方式<ul>
 <li>只利用一个模型，训练其从一个问题子图中抽取答案</li>
 <li>问题子图，既包含相关的 KB fact 又包含 text</li>
 <li>可以灵活地结合多个信息源的知识</li>
@@ -532,9 +532,9 @@
           
             <a href="/tags/reasoning/" rel="tag"><i class="fa fa-tag"></i> reasoning</a>
           
-            <a href="/tags/kbqa/" rel="tag"><i class="fa fa-tag"></i> kbqa</a>
-          
             <a href="/tags/graph/" rel="tag"><i class="fa fa-tag"></i> graph</a>
+          
+            <a href="/tags/kbqa/" rel="tag"><i class="fa fa-tag"></i> kbqa</a>
           
         </div>
       
@@ -643,7 +643,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">41</span>
+                  <span class="site-state-item-count">42</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>

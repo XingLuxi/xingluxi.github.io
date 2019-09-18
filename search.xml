@@ -1,6 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[2019 | Graph-Based Reasoning over Heterogeneous External Knowledge for Commonsense Question Answering]]></title>
+    <url>%2F2019%2F09%2F17%2Fpaper-csqa-1909-05311%2F</url>
+    <content type="text"><![CDATA[Title: Graph-Based Reasoning over Heterogeneous External Knowledge for Commonsense Question AnsweringAuthor: Shangwen Lv, Daya Guo , Jingjing Xu, Duyu Tang, Nan Duan, Ming Gong, Linjun Shou, Daxin Jiang, Guihong Cao, Songlin HuOrg.: CAS, Sun Yat-sen University, PKU, MicrosoftPublished: NULLCode: NULL Motivation常识问答任务(Commonsense Question Answering, CSQA) 要求回答需要背景知识的，且背景知识未在问题中提及的一些问题 CSQA 的主要挑战是：如何从外部的知识中抽取证据信息，并给予证据做出预测。 近期的工作主要集中在两个方面： 根据带有人工标注出证据的数据集，学习生成证据 cose. 问题是：标注代价昂贵 仅从结构化知识库或是非结构化知识库，即同构知识源，中抽取证据信息，并没有同时利用不同来源的知识 为什么要同时利用结构化和非结构化的知识库 结构化知识 (Structured Knowledge Source): 包含大量的三元组信息（概念 及其之间的关系），利于推理，但是存在覆盖度低的问题 非结构化知识 (Unstructured Knowledge Source): 即 Plain-Text，包含大量冗余的、覆盖范围广的信息，可以辅助/补充结构化知识 融合异构知识源必要性的例证： 根据结构化知识库ConceptNet，可以挑选出候选 A 和 C 根据Wikipedia文本，可以挑选出候选 C 和 E 结合两类来源的证据，即可得到最终的正确答案 C This Work本文针对的数据集是：CommonsenseQA 本文的主要工作： 自动地从异构知识源中抽取证据，即同时从ConceptNet和Wikipedia文章中抽取知识 为每个知识源构建图，来获取证据间的关系结构 提出了一个基于图的模型，由两个模块组成: 基于图的上下文词表示学习模块 为每个知识源都构建图结构，CN中使用自身的三元组，Wiki中通过语义角色标注来抽取出句子的三元组（谓词，论元） utilize graph structural information to re-define the distance between words for learning better contextual word contextual word representations (利用图结构化信息来 重新定义词之间的距离以学习更好的上下文词表示) 基于图的推理模块 使用GCN编码图信息 使用图注意力机制聚集证据信息 在CommonsenseQA上取得了当前最好的效果 ModelCommonsenseQA 的任务形式：输入：问题 $Q = {q_1, …, q_m}$ 和包含五个选项的候选答案集合 $A = {a_1, a_2, …, a_5}$目标：从候选集合中选出正确答案评价指标：准确率 本文提出的框架： Knowledge Extraction知识抽取，主要是对数据进行预处理的阶段 Knowledge Extraction from ConceptNet构建 Concept-Graph : 1、对于每个问题和选项，在CN中确定其中出现的实体； 2、构建从问题中的实体到候选中的实体的路径： 小于 3 hops 3、对于从CN中抽取出来的路径拆分为三元组，将每个三元组看做一个节点，融合到图中： 如果两个三元组中包含相同的实体，就在图中相应的两点之间增加一条边 问题：为什么讲三元组对应为图中的一个点？而不是之间利用CN原生的节点-关系结构 4、为了获取CN中节点的上下文词表示，将三元组根据关系模板转化为自然语言语句 Knowledge Extraction from Wikipedia使用的 Wikipedia 版本信息：version enwiki-20190301 Wikipedia 文本处理 1、使用 Spacy 从中抽取出 107M 个句子， 并用 Elastic Search 工具构建句子索引2、对于每个训练样例，去除问句和候选中的停用词，然后将所有词串联，作为检索查询3、使用 Elastic 搜索引擎 在检索查询和所有句子之间进行排序，选择出 top-K 个句子作为 Wikipedia 提供的证据信息，在实验中 K=10 构建 Wiki-Graph : 1、使用SRL抽取出 句子中每个谓词的论元 (主语和宾语)2、将论元和谓词都作为图中的节点，谓词和论元之间的关系作为边3、为了增强图的连通性，基于下述两条规则来在 节点 a 和 节点 b 之间加入边 (首先去除停用词)： b 中包含 a 且 a 的词数大于3 a 与 b 仅有一个不同的词，并且 a 和 b 包含的词数都大于3 Graph-Based Reasoning基于图的推理模块： ExperimentsAnalysis &amp; Summary cose. Explain Yourself! Leveraging Language Models for Commonsense Reasoning. ACL,2019. note &#8617;]]></content>
+      <categories>
+        <category>Paper-Note</category>
+      </categories>
+      <tags>
+        <tag>nlp</tag>
+        <tag>knowledge</tag>
+        <tag>mrc</tag>
+        <tag>note</tag>
+        <tag>commonsense</tag>
+        <tag>graph</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[EMNLP2019 | KagNet - Knowledge-Aware Graph Networks for Commonsense Reasoning]]></title>
     <url>%2F2019%2F09%2F09%2Fpaper-emnlp2019-kagnet%2F</url>
     <content type="text"><![CDATA[Title: KagNet: Knowledge-Aware Graph Networks for Commonsense ReasoningAuthor: Bill Yuchen Lin, Xinyue Chen, Jamin Chen, Xiang RenOrg.: University of Southern California, Shanghai Jiao Tong UniversityPublished: EMNLP,2019Code: https://github.com/INK-USC/KagNet Motivation本文针对的数据集是：CommonsenseQA 目标： empowering machines with the ability to perform commonsense reasoning/inferences 关于推理的定义： reasoning is the process of combining facts and beliefs to make new decisions 1. reasoning is the ability to manipulate knowledge to draw inferences 2. 关于常识推理的定义： commonsense reasoning utilizes the basic knowledge that reflects our natural understanding of the world and human behaviors, which is common to all humans. Naive Physics: Humans’ natural understanding of the physical world Folk Psychology: Humans’ innate ability to reason about people’s behavior and intentions gap between baselines and human performance lack of transparency and interpretability how the machines manage to answer commonsense questions and make their inferences. why exploit commonsense knowledge bases knowledge-aware models can explicitly incorporate external knowledge as relational inductive biases enhance reasoning capacity increase the transparency of model behaviors for more interpretable results challenges How can we ﬁnd the most relevant paths in KG? ( noisy ) What if the best path is not existent in the KG? ( incomplete ) This workKnowledge-aware reasoning framework, two major steps: schema graph grounding (see figure below) graph modeling for inference Knowledge-aware graph network module: KAGNET GCN-LSTM-HPA 结构： 由GCN, LSTM, 和一个 hierarchical path-based attention mechanism组成 用于 path-based relational graph representation overall workflow 首先，分别识别出 $q$ 和 $a$ 中提及的 concept ，根据这些 concept ，找到他们之间的路径，构建出 (ground) schema graph； 使用 LM encoder 编码 QA 对，产生 statement vector，作为 GCN-LSTM-HPA 的输入，来计算 graph vector； 最后使用 graph vector 计算最终的QA对的打分 Modelquestion $q$ with $N$ candidate answers $\{a_i\}$ schema graph $g=(V, E)$ Schema Graph GroundingConcept Recognition n-gram 匹配：句子中的 token 和 ConceptNet 的顶点集合进行 n-gram 匹配 Note：从有噪声的知识源中有效地提取上下文相关的知识仍是一个开放问题 Schema Graph Constructionsub-graph matching via path finding 采取一种直接有效的方法：直接在Q和A中提及的Concept ($\mathcal{C}_q \cup \mathcal{C}_a$) 之间查找路径 对于问题中的一个 Concept $\mathcal{c}_i \in \mathcal{C}_q$ 和候选项中的一个 Concept $\mathcal{c}_j \in \mathcal{C}_a$ ，查找他们之间路径长度小于 $k$ 的path，添加到图中 本文中，设置 $k=4$，即3-hop paths Path Pruning via KG Embedding为了从潜在噪声的schema graph中删除无关的path 使用KGE方法，如TransE等，预训练Concept Embedding和Relation Type Embedding（同时可用于KAGNET的初始化） 评价路径的质量 将路径分解为三元组集合，一条路径的打分为每一组三元组的乘积，通过设置一个阈值进行过滤。 三元组的打分通过KGE中的打分函数进行计算（例如，the confidence of triple classification） Knowledge-Aware Graph Network overview: 首先，使用GCN对图进行编码 然后，使用LSTM对 $\mathcal{C}_q$ 和 $\mathcal{C}_a$ 之间的路径进行编码，捕捉multi-hop relational Information 最后，使用 hierarchical path-based attention 计算 relational schema graph 和 QA 之间路径的关系 Graph Convolution Networks使用GCN的目的： contextually refine the concept vector 这里的 context 指节点在图中的上下文，即邻接关系 使用邻居来对预训练的Concept Embedding进行消歧 capture structural patterns of schema graphs for generalization schema graph 的模式为推理提供了潜在的有价值的信息 QA对Concept之间的 更短、更稠密的连接 可能意味着更大的可能性，在特定的上下中。 评价 候选答案 的可能性 $h_i^{(l+1)} = \sigma(W_{self}^{(l)} h_i^{(l)} + \sum_{j \in N_i} \frac{1}{|N_i|} W^{(l)} h_j^{l})$ Relational Path Encoding定义问题中的第 $i$个 concept $c_i^{(q)}$ 和候选答案中的第 $j$ 个 concept $c_j^{(a)}$ 之间的第$k$ 条路径为 $P_{i,j}[k]$ ，路径是三元组序列： $P_{i,j}[k]=[(c_i^{(q)}, r_0, t_0), …, (t_{n-1}, r_n, c_j^{(a)})]$ relation vector 由 KGE 预训练得到 concept vector 是 上一环节 GCN 的顶层输出 每个三元组表示为 三个向量的串联，得到 triple vector 使用LSTM编码三元组向量序列，得到 path vector $R_{i,j} = \frac{1}{|P_{i,j}|} \sum_k LSTM(P_{i,j}[k])$ $R_{i,j}$ 可以视为问题中的concept 和 候选项中的concept 之间的潜在的关系 聚集所有路径的表示，得到最终的 graph vector $g$ 这里使用了 Relation Network 的方法： $T_{i,j} = MLP([s;c_q^{i};c_a^{(j)}])$ statement vector $s$ 为 LM encoder [CLS] 的表示 然后通过mean-pooling：称这种计算方式为 GCN-LSTM-mean g=\frac{\sum_{i,j}[R_{i,j};T_{i,j}]}{|\mathcal{C}_q| \times |\mathcal{C}_a|} 通过这种简单的方式将分别从 symbolic space 和 semantic space 中计算的relational representation 进行融合 候选项的 plausibility 打分： $\text{score}(q,a)=sigmod(MLP(g))$ Hierarchical Attention Mechanism考虑到不同的路径对推理的重要程度不同，采用 mean-pooling 不是一种可取的方式。 基于此，本文提出了 hierarchical path-based attention 机制，有选择地聚集重要的path vector以及更重要的QA concept 对。 使用 path-level 和 concept-pair-level attention 来学习 根据上下文建模图表示 path-level $\alpha_{(i,j,k)} = T_{i,j} W_1 LSTM(P_{i,j}[k])$ $\hat{a}_{(i,j,\cdot)} = softmax(\alpha_{(i,j,k)})$ $\hat{R}_{i,j} = \sum_k \hat{a}_{(i,j,k)} \cdot LSTM(P_{i,j}[k])$ concept-pair level $\beta_{(i,j)} = s W_2 T_{i,j}$ $\hat{\beta}_{(\cdot, \cdot)} = softmax(\beta_{(\cdot, \cdot)})$ $\hat{g} = \sum_{i,j} \hat{\beta}_{(i,j)} [\hat{R}_{(i,j)}; T_{i,j}]$ ExperimentsTransferabilityCase Study on Interpretibility Error Analysis negative reasoning graph grounding 对否定词不敏感 comparative reasoning strategy 没有进行答案之间的比较 subjective reasoning 有些答案是根据带有主观性的推理得到的 Analysis &amp; Summary kAGNET 可以看做是 knowledge-augmented Relation Network (RN) module 1.Philip N Johnson-Laird. 1980. Mental models in cognitive science. Cognitive science, 4(1):71–115. ↩2.Drew A. Hudson and Christopher D. Manning. 2018. Compositional attention networks for machine reasoning. In Proc. of ICLR. ↩]]></content>
@@ -108,7 +124,7 @@
   <entry>
     <title><![CDATA[EMNLP2018 | Open Domain Question Answering Using Early Fusion of Knowledge Bases and Text]]></title>
     <url>%2F2019%2F07%2F08%2Fpaper-emnlp2018-graft-net%2F</url>
-    <content type="text"><![CDATA[Title: Open Domain Question Answering Using Early Fusion of Knowledge Bases and TextAuthors: Haitian Sun, Bhuwan Dhingra et al.Org: CMUPublished: EMNLP 2018 official code: https://github.com/OceanskySun/GraftNet Motivation 大多数 open domain QA 任务都是使用单信息源（要么是text from encyclopedia，或者是 single KB）来回答问题 判断一个信息源的适用性（suitability），取决于信息源的覆盖度（coverage）和从其中抽取答案的难度（difficulty of extracting answers from it） large text corpus作为信息源：具有很高的覆盖度，但是信息被不同的text pattern表示（这里可以理解为，不同领域/体裁的文本有不同的表现形式），模型还需要学习这些text pattern，导致模型难以泛化到其他领域以及新的推理类型 KB作为信息源：覆盖度低（由于不可避免的不完全性和有限的模式），但是更易于抽取答案 由于有两种信息源存在，有些问题可被text回答，有些问题更适合用KB回答，但是只使用一种信息源不足以回答问题，一个很自然的问题就是如何有效地结合多种类型的信息：有以下两种方式 late fusion：为每种信息源设计SOTA的QA模型，得到他们的预测结果之后，再用一些启发式的方法将得到的答案进行聚合 问题：sub-optimal的解决方法，模型受限于从不同的信息源中聚集证据信息 early fusion：本文所采取的方式 只利用一个模型，训练其从一个问题子图中抽取答案 问题子图，既包含相关的 KB fact 又包含 text 可以灵活地结合多个信息源的知识 This Work这篇文章进行的是开放域的KBQA任务（incomplete KB），结合图表示学习，提出了一个GRAFT-Net模型，可以从同时包含文本、KB实体与关系的 Question-specific 子图中抽取答案 为了实现early fusion，提出了一个 Graphs of Relations Among Facts and Text Network（GRAFT-Net） 基于图卷积神经网络模型，可以在由KB facts和text sentences组成的异构图上进行运算 提出了 heterogeneous update rules 来处理KB节点；LSTM-based update rules来更新text节点 提出了 directed propagation method， 启发自 Personalized PageRank 算法，用于限制图中 embedding 在基于从seed节点链接到question的路径上进行传播 实验数据集：WikiMovies，WebQuestionSP Task SetupTask DescriptionQuestion Subgraph RetrievalGRAFT-Net1.Node Initialization2.Heterogeneous UpdatesEntitiesDocuments 3.Conditioning on the QuestionAttention over RelationsDirected Propagation 4.Answer Selection5.Regularization via Fact DropoutExperimentsSummary &amp; Analysis]]></content>
+    <content type="text"><![CDATA[Title: Open Domain Question Answering Using Early Fusion of Knowledge Bases and TextAuthors: Haitian Sun, Bhuwan Dhingra et al.Org.: CMUPublished: EMNLP 2018 official code: https://github.com/OceanskySun/GraftNet Motivation 大多数 open domain QA 任务都是使用单信息源（要么是text from encyclopedia，或者是 single KB）来回答问题 判断一个信息源的适用性（suitability），取决于信息源的覆盖度（coverage）和从其中抽取答案的难度（difficulty of extracting answers from it） 非结构化，large text corpus作为信息源：具有很高的覆盖度，但是信息被不同的text pattern表示（这里可以理解为，不同领域/体裁的文本有不同的表现形式），模型还需要学习这些text pattern，导致模型难以泛化到其他领域以及新的推理类型 结构化，KB作为信息源：覆盖度低（由于不可避免的不完全性和有限的模式），但是更易于抽取答案 由于有两种信息源存在，有些问题可被text回答，有些问题更适合用KB回答，但是只使用一种信息源不足以回答问题，一个很自然的问题就是如何有效地结合多种类型的信息，有以下两种方式： late fusion: 为每种信息源设计SOTA的QA模型，得到他们的预测结果之后，再用一些启发式的方法将得到的答案进行聚合 问题：sub-optimal的解决方法，模型受限于从不同的信息源中聚集证据信息 early fusion：本文所采取的方式 只利用一个模型，训练其从一个问题子图中抽取答案 问题子图，既包含相关的 KB fact 又包含 text 可以灵活地结合多个信息源的知识 This Work这篇文章进行的是开放域的KBQA任务（incomplete KB），结合图表示学习，提出了一个GRAFT-Net模型，可以从同时包含文本、KB实体与关系的 Question-specific 子图中抽取答案 为了实现early fusion，提出了一个 Graphs of Relations Among Facts and Text Network（GRAFT-Net） 基于图卷积神经网络模型，可以在由KB facts和text sentences组成的异构图上进行运算 提出了 heterogeneous update rules 来处理KB节点；LSTM-based update rules来更新text节点 提出了 directed propagation method， 启发自 Personalized PageRank 算法，用于限制图中 embedding 在基于从seed节点链接到question的路径上进行传播 实验数据集：WikiMovies，WebQuestionSP Task SetupTask DescriptionQuestion Subgraph RetrievalGRAFT-Net1.Node Initialization2.Heterogeneous UpdatesEntitiesDocuments 3.Conditioning on the QuestionAttention over RelationsDirected Propagation 4.Answer Selection5.Regularization via Fact DropoutExperimentsSummary &amp; Analysis]]></content>
       <categories>
         <category>Paper-Note</category>
       </categories>
@@ -117,8 +133,8 @@
         <tag>knowledge</tag>
         <tag>note</tag>
         <tag>reasoning</tag>
-        <tag>kbqa</tag>
         <tag>graph</tag>
+        <tag>kbqa</tag>
       </tags>
   </entry>
   <entry>
@@ -159,8 +175,8 @@
       <tags>
         <tag>nlp</tag>
         <tag>knowledge</tag>
-        <tag>note</tag>
         <tag>research</tag>
+        <tag>note</tag>
       </tags>
   </entry>
   <entry>
@@ -246,8 +262,8 @@
       <tags>
         <tag>nlp</tag>
         <tag>mrc</tag>
-        <tag>note</tag>
         <tag>research</tag>
+        <tag>note</tag>
       </tags>
   </entry>
   <entry>
@@ -260,8 +276,8 @@
       <tags>
         <tag>nlp</tag>
         <tag>mrc</tag>
-        <tag>note</tag>
         <tag>research</tag>
+        <tag>note</tag>
       </tags>
   </entry>
   <entry>
@@ -287,8 +303,8 @@
       </categories>
       <tags>
         <tag>nlp</tag>
-        <tag>knowledge</tag>
         <tag>paper</tag>
+        <tag>knowledge</tag>
         <tag>mrc</tag>
       </tags>
   </entry>
@@ -361,8 +377,8 @@
       <tags>
         <tag>nlp</tag>
         <tag>mrc</tag>
-        <tag>note</tag>
         <tag>research</tag>
+        <tag>note</tag>
         <tag>cs-know</tag>
       </tags>
   </entry>
@@ -543,8 +559,8 @@
       </categories>
       <tags>
         <tag>nlp</tag>
-        <tag>knowledge</tag>
         <tag>paper</tag>
+        <tag>knowledge</tag>
         <tag>text-generation</tag>
       </tags>
   </entry>
