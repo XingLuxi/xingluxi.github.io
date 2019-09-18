@@ -220,8 +220,8 @@
         <tag>nlp</tag>
         <tag>knowledge</tag>
         <tag>mrc</tag>
-        <tag>commonsense</tag>
         <tag>reasoning</tag>
+        <tag>commonsense</tag>
         <tag>survey</tag>
       </tags>
   </entry>
@@ -304,8 +304,8 @@
       <tags>
         <tag>nlp</tag>
         <tag>knowledge</tag>
-        <tag>mrc</tag>
         <tag>paper</tag>
+        <tag>mrc</tag>
       </tags>
   </entry>
   <entry>
@@ -349,8 +349,8 @@
         <tag>mrc</tag>
         <tag>note</tag>
         <tag>multi-hop</tag>
-        <tag>commonsense</tag>
         <tag>reasoning</tag>
+        <tag>commonsense</tag>
       </tags>
   </entry>
   <entry>
@@ -419,8 +419,8 @@
       </categories>
       <tags>
         <tag>nlp</tag>
-        <tag>mrc</tag>
         <tag>paper</tag>
+        <tag>mrc</tag>
         <tag>research</tag>
       </tags>
   </entry>
@@ -447,8 +447,8 @@
       </categories>
       <tags>
         <tag>nlp</tag>
-        <tag>mrc</tag>
         <tag>paper</tag>
+        <tag>mrc</tag>
         <tag>dataset</tag>
       </tags>
   </entry>
