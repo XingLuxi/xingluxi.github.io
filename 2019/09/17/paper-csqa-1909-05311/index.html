@@ -75,7 +75,7 @@
 
 
 
-  <meta name="keywords" content="nlp,knowledge,mrc,note,commonsense,graph,">
+  <meta name="keywords" content="nlp,mrc,note,knowledge,commonsense,graph,">
 
 
 
@@ -87,21 +87,21 @@
 
 
 <meta name="description" content="Title: Graph-Based Reasoning over Heterogeneous External Knowledge for Commonsense Question AnsweringAuthor: Shangwen Lv, Daya Guo , Jingjing Xu, Duyu Tang, Nan Duan, Ming Gong, Linjun Shou, Daxin Ji">
-<meta name="keywords" content="nlp,knowledge,mrc,note,commonsense,graph">
+<meta name="keywords" content="nlp,mrc,note,knowledge,commonsense,graph">
 <meta property="og:type" content="article">
 <meta property="og:title" content="2019 | Graph-Based Reasoning over Heterogeneous External Knowledge for Commonsense Question Answering">
 <meta property="og:url" content="http://xingluxi.github.io/2019/09/17/paper-csqa-1909-05311/index.html">
 <meta property="og:site_name" content="Luxi Xing - Blog">
 <meta property="og:description" content="Title: Graph-Based Reasoning over Heterogeneous External Knowledge for Commonsense Question AnsweringAuthor: Shangwen Lv, Daya Guo , Jingjing Xu, Duyu Tang, Nan Duan, Ming Gong, Linjun Shou, Daxin Ji">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="http://xingluxi.github.io/.io//example.png">
-<meta property="og:image" content="http://xingluxi.github.io/.io//overview.png">
-<meta property="og:image" content="http://xingluxi.github.io/.io//module.png">
-<meta property="og:updated_time" content="2019-09-18T01:54:48.614Z">
+<meta property="og:image" content="http://xingluxi.github.io/images/paper-csqa-1909-05311/example.png">
+<meta property="og:image" content="http://xingluxi.github.io/images/paper-csqa-1909-05311/overview.png">
+<meta property="og:image" content="http://xingluxi.github.io/images/paper-csqa-1909-05311/module.png">
+<meta property="og:updated_time" content="2019-09-18T01:56:25.468Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="2019 | Graph-Based Reasoning over Heterogeneous External Knowledge for Commonsense Question Answering">
 <meta name="twitter:description" content="Title: Graph-Based Reasoning over Heterogeneous External Knowledge for Commonsense Question AnsweringAuthor: Shangwen Lv, Daya Guo , Jingjing Xu, Duyu Tang, Nan Duan, Ming Gong, Linjun Shou, Daxin Ji">
-<meta name="twitter:image" content="http://xingluxi.github.io/.io//example.png">
+<meta name="twitter:image" content="http://xingluxi.github.io/images/paper-csqa-1909-05311/example.png">
 
 
 
@@ -351,7 +351,7 @@
               
                 <span class="post-meta-item-text">Post modified&#58;</span>
               
-              <time title="Post modified" itemprop="dateModified" datetime="2019-09-18T09:54:48+08:00">
+              <time title="Post modified" itemprop="dateModified" datetime="2019-09-18T09:56:25+08:00">
                 2019-09-18
               </time>
             
@@ -463,7 +463,7 @@
 </ul>
 </li>
 </ol>
-<p>融合异构知识源必要性的例证：<img src="/.io//example.png" alt="example"></p>
+<p>融合异构知识源必要性的例证：<img src="/../images/paper-csqa-1909-05311/example.png" alt="example"></p>
 <ul>
 <li>根据结构化知识库ConceptNet，可以挑选出候选 A 和 C</li>
 <li>根据Wikipedia文本，可以挑选出候选 C 和 E</li>
@@ -495,7 +495,7 @@
 <li>在CommonsenseQA上取得了当前最好的效果</li>
 </ul>
 <h2 id="Model"><a href="#Model" class="headerlink" title="Model"></a>Model</h2><p>CommonsenseQA 的任务形式：<br>输入：问题 $Q = {q_1, …, q_m}$ 和包含五个选项的候选答案集合 $A = {a_1, a_2, …, a_5}$<br>目标：从候选集合中选出正确答案<br>评价指标：准确率</p>
-<p>本文提出的框架：<img src="/.io//overview.png" alt="overview"></p>
+<p>本文提出的框架：<img src="/../images/paper-csqa-1909-05311/overview.png" alt="overview"></p>
 <h3 id="Knowledge-Extraction"><a href="#Knowledge-Extraction" class="headerlink" title="Knowledge Extraction"></a>Knowledge Extraction</h3><p>知识抽取，主要是对数据进行预处理的阶段</p>
 <h4 id="Knowledge-Extraction-from-ConceptNet"><a href="#Knowledge-Extraction-from-ConceptNet" class="headerlink" title="Knowledge Extraction from ConceptNet"></a>Knowledge Extraction from ConceptNet</h4><p>构建 Concept-Graph :</p>
 <p>1、对于每个问题和选项，在CN中确定其中出现的实体；</p>
@@ -518,7 +518,7 @@
 <li>b 中包含 a 且 a 的词数大于3</li>
 <li>a 与 b 仅有一个不同的词，并且 a 和 b 包含的词数都大于3</li>
 </ul>
-<h3 id="Graph-Based-Reasoning"><a href="#Graph-Based-Reasoning" class="headerlink" title="Graph-Based Reasoning"></a>Graph-Based Reasoning</h3><p>基于图的推理模块：<img src="/.io//module.png" alt="gr"></p>
+<h3 id="Graph-Based-Reasoning"><a href="#Graph-Based-Reasoning" class="headerlink" title="Graph-Based Reasoning"></a>Graph-Based Reasoning</h3><p>基于图的推理模块：<img src="/../images/paper-csqa-1909-05311/module.png" alt="gr"></p>
 <p>由两部分组成，分别是 1. 基于图的上下文表示学习模块 和 2. 基于图的推理模块</p>
 <h4 id="1-Graph-based-Contextual-Representation-Learning-Module"><a href="#1-Graph-based-Contextual-Representation-Learning-Module" class="headerlink" title="1.Graph-based Contextual Representation Learning Module"></a>1.Graph-based Contextual Representation Learning Module</h4><h4 id="2-Graph-based-Inference-Module"><a href="#2-Graph-based-Inference-Module" class="headerlink" title="2.Graph-based Inference Module"></a>2.Graph-based Inference Module</h4><h2 id="Experiments"><a href="#Experiments" class="headerlink" title="Experiments"></a>Experiments</h2><h2 id="Analysis-amp-Summary"><a href="#Analysis-amp-Summary" class="headerlink" title="Analysis &amp; Summary"></a>Analysis &amp; Summary</h2><blockquote id="fn_cose">
 <sup>cose</sup>. Explain Yourself! Leveraging Language Models for Commonsense Reasoning. ACL,2019. <a href="/2019/07/10/paper-acl2019-cos-e/" title="note">note</a><a href="#reffn_cose" title="Jump back to footnote [cose] in the text."> &#8617;</a>
@@ -573,11 +573,11 @@
           
             <a href="/tags/nlp/" rel="tag"><i class="fa fa-tag"></i> nlp</a>
           
-            <a href="/tags/knowledge/" rel="tag"><i class="fa fa-tag"></i> knowledge</a>
-          
             <a href="/tags/mrc/" rel="tag"><i class="fa fa-tag"></i> mrc</a>
           
             <a href="/tags/note/" rel="tag"><i class="fa fa-tag"></i> note</a>
+          
+            <a href="/tags/knowledge/" rel="tag"><i class="fa fa-tag"></i> knowledge</a>
           
             <a href="/tags/commonsense/" rel="tag"><i class="fa fa-tag"></i> commonsense</a>
           
