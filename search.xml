@@ -294,9 +294,9 @@
             
             <tag> reasoning </tag>
             
-            <tag> kbqa </tag>
-            
             <tag> graph </tag>
+            
+            <tag> kbqa </tag>
             
         </tags>
       
@@ -672,9 +672,9 @@
             
             <tag> knowledge </tag>
             
-            <tag> mrc </tag>
-            
             <tag> paper </tag>
+            
+            <tag> mrc </tag>
             
         </tags>
       
@@ -926,9 +926,9 @@
             
             <tag> nlp </tag>
             
-            <tag> mrc </tag>
-            
             <tag> paper </tag>
+            
+            <tag> mrc </tag>
             
             <tag> research </tag>
             
@@ -988,9 +988,9 @@
             
             <tag> nlp </tag>
             
-            <tag> mrc </tag>
-            
             <tag> paper </tag>
+            
+            <tag> mrc </tag>
             
             <tag> dataset </tag>
             
