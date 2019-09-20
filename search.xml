@@ -297,15 +297,15 @@
   <entry>
     <title><![CDATA[Knowledge-based MRC Papers]]></title>
     <url>%2F2019%2F03%2F10%2Fmrc-knowedge-paper-info%2F</url>
-    <content type="text"><![CDATA[A list of recent papers with respect to Knowledge-based Machine Reading Comprehension. table th:nth-of-type(2){ width: 60%; } Works on Knowledge-aware MRC Conf. Title Authors/Org. Note ACL2017 Leveraging knowledge bases in lstms for improving machine reading Yang, et al.CMU ACL2017 Reasoning with Heterogeneous Knowledge for Commonsense Machine Comprehension Hongyu Lin, et al. ACL2017 World knowledge for reading comprehension: Rare entity prediction with hierarchical lstms using external descriptions Long, et al.McGill University ACL2018 Knowledgeable Reader: Enhancing Cloze-Style Reading Comprehension with External Commonsense Knowledge Mihaylov, et al.Heidelberg University knreader-note 2018 Dynamic Integration of Background Knowledge in Neural NLU Systems Dirk Weissenborn, et al. note EMNLP2018 Commonsense for Generative Multi-Hop Question Answering Tasks Lisa Bauer mhpgm-note AAAI2018 Incorporating Structured Commonsense Knowledge in Story Completion EMNLP2018 Open Domain Question Answering Using Early Fusion of Knowledge Bases and Text CMU (2018v1)ACL2019 Exploring Machine Reading Comprehension with Explicit KnowledgeExplicit Utilization of General Knowledge in Machine Reading Comprehension York University note ACL2018 Open Domain Question Answering Using Early Fusion of Knowledge Bases and Text CMU note AAAI2019 Improving Question Answering by Commonsense-Based Pre-Training MSRA note NAACL2019 Improving Machine Reading Comprehension with General Reading Strategies TencentAI Lab 2019 Improving Question Answering with External Knowledge note ACL2019 Enhancing Pre-Trained Language Representations with Rich Knowledge for Machine Reading Comprehension PKUBaidu note EMNLP2019 KagNet: Knowledge-Aware Graph Networks for Commonsense Reasoning note MRC with Knowledge how to let the machine obtain Knowledge？ how to extract external knowledge? how to represent knowledge？ in which kind of format？ how to fuse the external knowledge? how to let the machine to learn Knowledge incrementally？ how to make the machine can automatically use Knowledge it already knows or it has been told？]]></content>
+    <content type="text"><![CDATA[A list of recent papers with respect to Knowledge-based Machine Reading Comprehension. table th:nth-of-type(2){ width: 60%; } Works on Knowledge-aware MRC Conf. Title Authors/Org. Note ACL2017 Leveraging knowledge bases in lstms for improving machine reading Yang, et al.CMU ACL2017 Reasoning with Heterogeneous Knowledge for Commonsense Machine Comprehension Hongyu Lin, et al. ACL2017 World knowledge for reading comprehension: Rare entity prediction with hierarchical lstms using external descriptions Long, et al.McGill University ACL2018 Knowledgeable Reader: Enhancing Cloze-Style Reading Comprehension with External Commonsense Knowledge Mihaylov, et al.Heidelberg University knreader-note 2018 Dynamic Integration of Background Knowledge in Neural NLU Systems Dirk Weissenborn, et al. note EMNLP2018 Commonsense for Generative Multi-Hop Question Answering Tasks Lisa Bauer mhpgm-note AAAI2018 Incorporating Structured Commonsense Knowledge in Story Completion EMNLP2018 Open Domain Question Answering Using Early Fusion of Knowledge Bases and Text CMU note (2018v1)ACL2019 Exploring Machine Reading Comprehension with Explicit KnowledgeExplicit Utilization of General Knowledge in Machine Reading Comprehension York University note ACL2018 Open Domain Question Answering Using Early Fusion of Knowledge Bases and Text CMU note AAAI2019 Improving Question Answering by Commonsense-Based Pre-Training MSRA note NAACL2019 Improving Machine Reading Comprehension with General Reading Strategies TencentAI Lab 2019 Improving Question Answering with External Knowledge note ACL2019 Enhancing Pre-Trained Language Representations with Rich Knowledge for Machine Reading Comprehension PKUBaidu note EMNLP2019 KagNet: Knowledge-Aware Graph Networks for Commonsense Reasoning note MRC with Knowledge how to let the machine obtain Knowledge？ how to extract external knowledge? how to represent knowledge？ in which kind of format？ how to fuse the external knowledge? how to let the machine to learn Knowledge incrementally？ how to make the machine can automatically use Knowledge it already knows or it has been told？]]></content>
       <categories>
         <category>MRC-Paper-Intro</category>
       </categories>
       <tags>
         <tag>nlp</tag>
         <tag>knowledge</tag>
-        <tag>paper</tag>
         <tag>mrc</tag>
+        <tag>paper</tag>
       </tags>
   </entry>
   <entry>
@@ -419,8 +419,8 @@
       </categories>
       <tags>
         <tag>nlp</tag>
-        <tag>paper</tag>
         <tag>mrc</tag>
+        <tag>paper</tag>
         <tag>research</tag>
       </tags>
   </entry>
@@ -447,8 +447,8 @@
       </categories>
       <tags>
         <tag>nlp</tag>
-        <tag>paper</tag>
         <tag>mrc</tag>
+        <tag>paper</tag>
         <tag>dataset</tag>
       </tags>
   </entry>
