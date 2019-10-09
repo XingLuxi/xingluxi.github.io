@@ -101,7 +101,14 @@
 <meta property="og:image" content="http://xingluxi.github.io/images/paper-emnlp2019-miss-fact/gap-q2a.png">
 <meta property="og:image" content="http://xingluxi.github.io/images/paper-emnlp2019-miss-fact/example-kgd.png">
 <meta property="og:image" content="http://xingluxi.github.io/2019/10/06/images/paper-emnlp2019-miss-fact/kgd-stats.png">
-<meta property="og:updated_time" content="2019-10-09T13:32:40.090Z">
+<meta property="og:image" content="http://xingluxi.github.io/images/paper-emnlp2019-miss-fact/model.png">
+<meta property="og:image" content="http://xingluxi.github.io/images/paper-emnlp2019-miss-fact/exp-vis.png">
+<meta property="og:image" content="http://xingluxi.github.io/images/paper-emnlp2019-miss-fact/exp-span.png">
+<meta property="og:image" content="http://xingluxi.github.io/images/paper-emnlp2019-miss-fact/exp-main.png">
+<meta property="og:image" content="http://xingluxi.github.io/images/paper-emnlp2019-miss-fact/exp-k.png">
+<meta property="og:image" content="http://xingluxi.github.io/images/paper-emnlp2019-miss-fact/exp-ablation.png">
+<meta property="og:image" content="http://xingluxi.github.io/images/paper-emnlp2019-miss-fact/exp-error-case.png">
+<meta property="og:updated_time" content="2019-10-09T15:51:43.568Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="EMNLP2019 | What&#39;s Missing? A Knowledge Gap Guided Approach for Multi-hop Question Answering">
 <meta name="twitter:description" content="Title: What’s Missing: A Knowledge Gap Guided Approach for Multi-hop Question AnsweringAuthors: Tushar Khot, Ashish Sabharwal, Peter ClarkOrg.: Allen Institute for Artiﬁcial IntelligencePublished: EM">
@@ -355,7 +362,7 @@
               
                 <span class="post-meta-item-text">Post modified&#58;</span>
               
-              <time title="Post modified" itemprop="dateModified" datetime="2019-10-09T21:32:40+08:00">
+              <time title="Post modified" itemprop="dateModified" datetime="2019-10-09T23:51:43+08:00">
                 2019-10-09
               </time>
             
@@ -410,7 +417,7 @@
                   <span class="post-meta-item-text">Words count in article&#58;</span>
                 
                 <span title="Words count in article">
-                  1.9k
+                  2.5k
                 </span>
               
 
@@ -426,7 +433,7 @@
                   <span class="post-meta-item-text">Reading time &asymp;</span>
                 
                 <span title="Reading time">
-                  8
+                  10
                 </span>
               
             </div>
@@ -516,13 +523,13 @@
 <li>tokens in question stem $q_m$；tokens in fact $f_m$；</li>
 <li>predicted span $\hat{s}$；predicted relations $\hat{r}$</li>
 </ul>
-<h3 id="1-Key-Span-Identification-Model"><a href="#1-Key-Span-Identification-Model" class="headerlink" title="1.Key Span Identification Model"></a>1.Key Span Identification Model</h3><p>模型采用 BIDAF；<br>训练时，模型的输入为：fact（对应于passage），question stem（对应于question），模型的输出是 span 的起止位置；</p>
+<h3 id="1-Key-Span-Identification-Model"><a href="#1-Key-Span-Identification-Model" class="headerlink" title="1.Key Span Identification Model"></a>1.Key Span Identification Model</h3><p>模型采用 BIDAF；<br>训练时，模型的输入为：fact（对应于passage），question stem（对应于question），模型的输出是 key span 的起止位置；</p>
 <h3 id="2-Knowledge-Retrieval-Module"><a href="#2-Knowledge-Retrieval-Module" class="headerlink" title="2.Knowledge Retrieval Module"></a>2.Knowledge Retrieval Module</h3><p><strong>给定一个预测的span</strong>，从两个知识源中抽取知识，用 $K$ 表示所有抽取到的知识：</p>
 <ol>
 <li>ConceptNet 中的三元组，三元组中的relation与gap需要的relation密切相关；</li>
 <li>ARC corpus 中的句子，ARC corpus 包含 14M 科学相关的句子，用来补充 CN，提高recall；</li>
 </ol>
-<p>Tuple Search：</p>
+<p><strong>Tuple Search</strong>：</p>
 <ol>
 <li>选择tuple时，要求subject中至少有一个token 与 $\hat{s}$ 匹配，object中至少有一个词与 $c_i$ 匹配（反之亦然）；</li>
 <li>通过 Jaccard score 对于tuples进行打分，为每个候选选项 $c_i$ 选择出 top-k 个 tuples（在实验中，k=5）<ul>
@@ -532,15 +539,17 @@
 </li>
 <li>为了知识形式的一致性，将三元组也转化为句子的形式；</li>
 </ol>
-<p>Text Search：</p>
+<p><strong>Text Search</strong>：</p>
 <ol>
 <li>使用 ElasticSearch 进行相关句子的检索，查询为：$\hat{s} + c_i$：</li>
 <li>为每个候选选项 $c_i$ 选择出 top-5 个句子</li>
 </ol>
-<h3 id="3-Question-Answering-Module"><a href="#3-Question-Answering-Module" class="headerlink" title="3.Question Answering Module"></a>3.Question Answering Module</h3><p>本模块的输入为：$q_s$, $c$, $f$, $\hat{s}$, $K$；</p>
-<p>Step 1. Embedding: 使用 300维 的glove 词向量表示输入中的每个词</p>
-<p>Step 2. Encoding: 使用 BiLSTM 计算上下文编码，隐藏层维度为100，用 $\mathcal{E}_*$ 表示 BiLSTM 的输出</p>
-<p>Step 3. Fact Relevance:</p>
+<h3 id="3-Question-Answering-Module"><a href="#3-Question-Answering-Module" class="headerlink" title="3.Question Answering Module"></a>3.Question Answering Module</h3><p>模型结构图: <img src="/../images/paper-emnlp2019-miss-fact/model.png" alt="kgg-qa-module"></p>
+<p>本模块的输入为：$q_s$, $c$, $f$, $\hat{s}$, $K$；</p>
+<p>计算过程如下：</p>
+<p><strong>Step 1. Embedding</strong>: 使用 300维 的glove 词向量表示输入中的每个词</p>
+<p><strong>Step 2. Encoding</strong>: 使用 BiLSTM 计算上下文编码，隐藏层维度为100，用 $\mathcal{E}_*$ 表示 BiLSTM 的输出</p>
+<p><strong>Step 3. Fact Relevance</strong>:</p>
 <p>出发点：一个相关 fact 可以捕捉到与问题和正确答案对齐的概念间的关系；</p>
 <ol>
 <li>计算 question-weighted 和 answer-weighted fact表示；<ul>
@@ -567,7 +576,7 @@
 </ul>
 </li>
 </ol>
-<p>Step 4. Filling the Gap:</p>
+<p><strong>Step 4. Filling the Gap</strong>:</p>
 <p>实现上是预测 $\hat{s}$ 和 $c_i$ 之间的关系，并将关系和fact进行组合，为choice进行打分</p>
 <ol>
 <li>计算 span weighted 和 choice weighted KB知识句表示 ($\in \mathbb{R}^{1 \times h}$)，反映知识句中的词分别和 span 以及 choice 的相关程度<ul>
@@ -584,7 +593,7 @@
 </ul>
 </li>
 </ol>
-<p>Step 5. Relation Prediction Score:</p>
+<p><strong>Step 5. Relation Prediction Score</strong>:</p>
 <ol>
 <li>基于问题，确定/预测与fact信息相符合的relation信息<ul>
 <li>$\mathcal{D}(q_s, f) = \bigotimes(\text{max}_{q_m} \mathcal{E}_{q_s}, \text{max}_{f_m} \mathcal{E}_{f}) \in \mathbb{R}^{1 \times 2h}$</li>
@@ -595,8 +604,38 @@
 </ul>
 </li>
 </ol>
-<p>Step 6. Final score for each choice: $\text{score}(c_i) = \text{score}_f(c_i) + \text{score}_r(c_i)$</p>
-<h3 id="4-Model-Training"><a href="#4-Model-Training" class="headerlink" title="4. Model Training"></a>4. Model Training</h3><h2 id="Experiments"><a href="#Experiments" class="headerlink" title="Experiments"></a>Experiments</h2><h2 id="Analysis-amp-Summary"><a href="#Analysis-amp-Summary" class="headerlink" title="Analysis &amp; Summary"></a>Analysis &amp; Summary</h2><div id="footnotes"><hr><div id="footnotelist"><ol style="list-style:none; padding-left: 0;"><li id="fn:1"><span style="display: inline-block; vertical-align: top; padding-right: 10px;">1.</span><span style="display: inline-block; vertical-align: top;">Can a suit of armor conduct electricity? A new dataset for open book question answering. 2018. Todor Mihaylov, Peter Clark, Tushar Khot, and Ashish Sabharwal. In EMNLP.</span><a href="#fnref:1" rev="footnote"> ↩</a></li><li id="fn:2"><span style="display: inline-block; vertical-align: top; padding-right: 10px;">2.</span><span style="display: inline-block; vertical-align: top;">Think you have solved question answering? Try ARC, the AI2 reasoning challenge. 2018. Peter Clark, Isaac Cowhey, Oren Etzioni, Tushar Khot, Ashish Sabharwal, Carissa Schoenick, and Oyvind Tafjord. CoRR, abs/1803.05457.</span><a href="#fnref:2" rev="footnote"> ↩</a></li></ol></div></div>
+<p><strong>Step 6. Final score for each choice</strong>: $\text{score}(c_i) = \text{score}_f(c_i) + \text{score}_r(c_i)$</p>
+<h3 id="4-Model-Training"><a href="#4-Model-Training" class="headerlink" title="4. Model Training"></a>4. Model Training</h3><p>GapQA 中 Question Answering Module 的总训练 loss 由两部分组成：</p>
+<ol>
+<li>模型预测的答案和正确的答案选项之间的交叉熵损失</li>
+<li>模型预测的relation（span 和 候选项之间）与正确relation之间的损失：<ul>
+<li>为了计算这部分的损失，使 $\mathcal{R}(s,c_i)$ 通过一层的ffn，映射为向量 $\hat{r}_i \in \mathbb{R}^{1\times l}$，$l$ 是 relation 的个数；</li>
+<li>由于$(s,c_i)$对之间可能存在多个有效的relation，创建一个 n-hot 向量表示 $\bar{r} \in \mathbb{R}^{1\times l}$，如果 relation $r_k$ 是有效的，则令 $\bar{r}[k] = 1$；</li>
+<li>对于正确的选项（即问题的目标答案），使用 binary cross-entropy 计算预测的 $\hat{r}_i$ 和 $r$ 之间的损失；</li>
+<li>对于不正确的选项，无法确定 span 和选项之间的relation关系（不存在标注信息），但是针对正确答案选择出的 relations set 不应对错误选项有效。故此，使用 binary cross-entropy 计算预测的 $\hat{r}_i$ 和 $1-r$ 之间的损失，并且不考虑未被选中的 relation，即使用 masked binary cross-entropy；</li>
+<li>（这里选中的 relations 指的是：KGD中对 key span 和 correct choice 之间标注的relation集合）</li>
+</ul>
+</li>
+</ol>
+<p>最终，总体的 $loss = ce(\hat{c}, \bar{c}) + \lambda \cdot (bce(\hat{r}_i, \bar{r}) + \sum_{j\neq i} mbec(\hat{r}_j, 1-\bar{r}, \bar{r}) )$</p>
+<p>为了更清晰的理解模型的整体计算流程，附录中给出了一个可视化的示例：<img src="/../images/paper-emnlp2019-miss-fact/exp-vis.png" alt="eg-vis"></p>
+<h2 id="Experiments"><a href="#Experiments" class="headerlink" title="Experiments"></a>Experiments</h2><ol>
+<li>Key Span Identification 效果：<img src="/../images/paper-emnlp2019-miss-fact/exp-span.png" alt="exp-span"></li>
+<li>在 OBQA 数据集上的结果：<img src="/../images/paper-emnlp2019-miss-fact/exp-main.png" alt="exp-main"></li>
+<li>输入知识源的影响：<img src="/../images/paper-emnlp2019-miss-fact/exp-k.png" alt="exp-k"></li>
+<li>模型去除实验：<img src="/../images/paper-emnlp2019-miss-fact/exp-ablation.png" alt="exp-a"></li>
+<li>错例分析：<img src="/../images/paper-emnlp2019-miss-fact/exp-error-case.png" alt="exp-error"></li>
+</ol>
+<p>主要存在三种错误类型：<br>(1) Incorrect predicted spans (25%)<br>(2) Incorrect relation scores (55%)<br>(3) Out-of-Scope Gap relations (20%)</p>
+<h2 id="Analysis-amp-Summary"><a href="#Analysis-amp-Summary" class="headerlink" title="Analysis &amp; Summary"></a>Analysis &amp; Summary</h2><ul>
+<li><p>这篇文章，对于 OBQA 类 partial knowledge multi-hop QA 的任务，引入了一个新颖的问题定义，旨在刻画QA任务中知识缺失的本质问题，并对这个问题进行了细致化的分类。不仅给出了可引入监督信息的标注过程和相应的数据集，同时也提出了有说服力的模型；</p>
+</li>
+<li><p>本文中只对最常见的 Fact-to-Answer Gap 问题进行了研究，针对其余两种 knowledge gap 的解决方案同样值得后续的研究；</p>
+</li>
+<li><p>从解决方法上看，先确定在填充整体上为pipline的形式，在实验部分没有看到使用标注的gold span进行GapQA计算的结果？</p>
+</li>
+</ul>
+<div id="footnotes"><hr><div id="footnotelist"><ol style="list-style:none; padding-left: 0;"><li id="fn:1"><span style="display: inline-block; vertical-align: top; padding-right: 10px;">1.</span><span style="display: inline-block; vertical-align: top;">Can a suit of armor conduct electricity? A new dataset for open book question answering. 2018. Todor Mihaylov, Peter Clark, Tushar Khot, and Ashish Sabharwal. In EMNLP.</span><a href="#fnref:1" rev="footnote"> ↩</a></li><li id="fn:2"><span style="display: inline-block; vertical-align: top; padding-right: 10px;">2.</span><span style="display: inline-block; vertical-align: top;">Think you have solved question answering? Try ARC, the AI2 reasoning challenge. 2018. Peter Clark, Isaac Cowhey, Oren Etzioni, Tushar Khot, Ashish Sabharwal, Carissa Schoenick, and Oyvind Tafjord. CoRR, abs/1803.05457.</span><a href="#fnref:2" rev="footnote"> ↩</a></li></ol></div></div>
       
     </div>
     
