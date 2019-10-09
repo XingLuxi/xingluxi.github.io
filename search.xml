@@ -3,7 +3,7 @@
   <entry>
     <title><![CDATA[EMNLP2019 | What's Missing? A Knowledge Gap Guided Approach for Multi-hop Question Answering]]></title>
     <url>%2F2019%2F10%2F06%2Fpaper-emnlp2019-miss-fact%2F</url>
-    <content type="text"><![CDATA[Title: What’s Missing: A Knowledge Gap Guided Approach for Multi-hop Question AnsweringAuthors: Tushar Khot, Ashish Sabharwal, Peter ClarkOrg.: Allen Institute for Artiﬁcial IntelligencePublished: EMNLP, 2019 Code: https://github.com/allenai/missing-fact MotivationThis WorkKnowledge GapsModelExperimentsAnalysis &amp; Summary]]></content>
+    <content type="text"><![CDATA[Title: What’s Missing: A Knowledge Gap Guided Approach for Multi-hop Question AnsweringAuthors: Tushar Khot, Ashish Sabharwal, Peter ClarkOrg.: Allen Institute for Artiﬁcial IntelligencePublished: EMNLP, 2019 Code: https://github.com/allenai/missing-fact Motivation大多数的RC任务/数据集假设给待测试系统（或模型）提供了回答问题所需要的所有知识。实际上，在处理multi-hop类型的问题时，模型只能接触到部分的知识，那么想要正确地回答数据集中的问题，就必须基于问题和提供的知识，抽取出额外的知识/事实。正是这部分额外的知识的存在，造成了 knowledge gap 问题。 本文对knowledge gap问题展开研究，目标是确定这样的 gap，并且利用额外的知识源填充这个 knowledge gap。 本文主要研究的数据集是 OpenBookQA1，可以看做是一类 提供了部分知识的QA任务。OpenBookQA数据集的主要特点是： 问题的领域是科学事实 回答问题时，不仅需要从一个给定的 small book 中确定相关的核心科学事实（core science fact），还需要从外部的知识源中抽取出额外的常识知识。 这里的core fact就是数据集本身提供的partial knowledge 额外的外部知识相当于 broad external knowledge，用以填充余下的 knowledge gap This Work本文的主要工作： Knowledge GapsModelExperimentsAnalysis &amp; Summary1.Can a suit of armor conduct electricity? A new dataset for open book question answering. 2018. Todor Mihaylov, Peter Clark, Tushar Khot, and Ashish Sabharwal. In EMNLP. ↩]]></content>
       <categories>
         <category>Paper-Note</category>
       </categories>
@@ -219,8 +219,8 @@
       <tags>
         <tag>nlp</tag>
         <tag>knowledge</tag>
-        <tag>note</tag>
         <tag>research</tag>
+        <tag>note</tag>
       </tags>
   </entry>
   <entry>
@@ -306,8 +306,8 @@
       <tags>
         <tag>nlp</tag>
         <tag>mrc</tag>
-        <tag>note</tag>
         <tag>research</tag>
+        <tag>note</tag>
       </tags>
   </entry>
   <entry>
@@ -320,8 +320,8 @@
       <tags>
         <tag>nlp</tag>
         <tag>mrc</tag>
-        <tag>note</tag>
         <tag>research</tag>
+        <tag>note</tag>
       </tags>
   </entry>
   <entry>
@@ -406,8 +406,8 @@
       </categories>
       <tags>
         <tag>nlp</tag>
-        <tag>note</tag>
         <tag>text-generation</tag>
+        <tag>note</tag>
         <tag>commonsense</tag>
       </tags>
   </entry>
@@ -421,8 +421,8 @@
       <tags>
         <tag>nlp</tag>
         <tag>mrc</tag>
-        <tag>note</tag>
         <tag>research</tag>
+        <tag>note</tag>
         <tag>cs-know</tag>
       </tags>
   </entry>
@@ -449,8 +449,8 @@
       </categories>
       <tags>
         <tag>nlp</tag>
-        <tag>research</tag>
         <tag>paper</tag>
+        <tag>research</tag>
         <tag>nli</tag>
       </tags>
   </entry>
@@ -464,8 +464,8 @@
       <tags>
         <tag>nlp</tag>
         <tag>mrc</tag>
-        <tag>research</tag>
         <tag>paper</tag>
+        <tag>research</tag>
       </tags>
   </entry>
   <entry>

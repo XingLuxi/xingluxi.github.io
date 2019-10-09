@@ -94,7 +94,7 @@
 <meta property="og:site_name" content="Luxi Xing - Blog">
 <meta property="og:description" content="Title: What’s Missing: A Knowledge Gap Guided Approach for Multi-hop Question AnsweringAuthors: Tushar Khot, Ashish Sabharwal, Peter ClarkOrg.: Allen Institute for Artiﬁcial IntelligencePublished: EM">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-10-09T08:24:35.501Z">
+<meta property="og:updated_time" content="2019-10-09T09:32:34.354Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="EMNLP2019 | What&#39;s Missing? A Knowledge Gap Guided Approach for Multi-hop Question Answering">
 <meta name="twitter:description" content="Title: What’s Missing: A Knowledge Gap Guided Approach for Multi-hop Question AnsweringAuthors: Tushar Khot, Ashish Sabharwal, Peter ClarkOrg.: Allen Institute for Artiﬁcial IntelligencePublished: EM">
@@ -347,7 +347,7 @@
               
                 <span class="post-meta-item-text">Post modified&#58;</span>
               
-              <time title="Post modified" itemprop="dateModified" datetime="2019-10-09T16:24:35+08:00">
+              <time title="Post modified" itemprop="dateModified" datetime="2019-10-09T17:32:34+08:00">
                 2019-10-09
               </time>
             
@@ -402,7 +402,7 @@
                   <span class="post-meta-item-text">Words count in article&#58;</span>
                 
                 <span title="Words count in article">
-                  40
+                  373
                 </span>
               
 
@@ -443,7 +443,22 @@
 <p><em>Title</em>: <a href="http://arxiv.org/abs/1909.09253" target="_blank" rel="noopener">What’s Missing: A Knowledge Gap Guided Approach for Multi-hop Question Answering</a><br><em>Authors</em>: Tushar Khot, Ashish Sabharwal, Peter Clark<br><em>Org.</em>: Allen Institute for Artiﬁcial Intelligence<br><em>Published</em>: EMNLP, 2019</p>
 </blockquote>
 <p>Code: <a href="https://github.com/allenai/missing-fact" target="_blank" rel="noopener">https://github.com/allenai/missing-fact</a></p>
-<h2 id="Motivation"><a href="#Motivation" class="headerlink" title="Motivation"></a>Motivation</h2><h3 id="This-Work"><a href="#This-Work" class="headerlink" title="This Work"></a>This Work</h3><h2 id="Knowledge-Gaps"><a href="#Knowledge-Gaps" class="headerlink" title="Knowledge Gaps"></a>Knowledge Gaps</h2><h2 id="Model"><a href="#Model" class="headerlink" title="Model"></a>Model</h2><h2 id="Experiments"><a href="#Experiments" class="headerlink" title="Experiments"></a>Experiments</h2><h2 id="Analysis-amp-Summary"><a href="#Analysis-amp-Summary" class="headerlink" title="Analysis &amp; Summary"></a>Analysis &amp; Summary</h2>
+<h2 id="Motivation"><a href="#Motivation" class="headerlink" title="Motivation"></a>Motivation</h2><p>大多数的RC任务/数据集假设给待测试系统（或模型）提供了回答问题所需要的所有知识。<br>实际上，在处理<strong>multi-hop</strong>类型的问题时，模型只能接触到部分的知识，那么想要正确地回答数据集中的问题，就必须基于问题和提供的知识，抽取出额外的知识/事实。<br>正是这部分额外的知识的存在，造成了 <font color="red"><strong>knowledge gap</strong></font> 问题。</p>
+<p>本文对knowledge gap问题展开研究，目标是确定这样的 gap，并且利用额外的知识源填充这个 knowledge gap。</p>
+<p>本文主要研究的数据集是 OpenBookQA<sup id="fnref:1"><a href="#fn:1" rel="footnote">1</a></sup>，可以看做是一类 <strong>提供了部分知识的QA任务</strong>。<br>OpenBookQA数据集的主要特点是：</p>
+<ol>
+<li>问题的领域是科学事实</li>
+<li>回答问题时，不仅需要从一个给定的 <strong>small book</strong> 中确定相关的核心科学事实（core science fact），还需要从外部的知识源中抽取出额外的常识知识。<ol>
+<li>这里的core fact就是数据集本身提供的partial knowledge</li>
+<li>额外的外部知识相当于 <strong>broad</strong> external knowledge，用以填充余下的 knowledge gap</li>
+</ol>
+</li>
+</ol>
+<h3 id="This-Work"><a href="#This-Work" class="headerlink" title="This Work"></a>This Work</h3><p>本文的主要工作：</p>
+<ol>
+<li></li>
+</ol>
+<h2 id="Knowledge-Gaps"><a href="#Knowledge-Gaps" class="headerlink" title="Knowledge Gaps"></a>Knowledge Gaps</h2><h2 id="Model"><a href="#Model" class="headerlink" title="Model"></a>Model</h2><h2 id="Experiments"><a href="#Experiments" class="headerlink" title="Experiments"></a>Experiments</h2><h2 id="Analysis-amp-Summary"><a href="#Analysis-amp-Summary" class="headerlink" title="Analysis &amp; Summary"></a>Analysis &amp; Summary</h2><div id="footnotes"><hr><div id="footnotelist"><ol style="list-style:none; padding-left: 0;"><li id="fn:1"><span style="display: inline-block; vertical-align: top; padding-right: 10px;">1.</span><span style="display: inline-block; vertical-align: top;">Can a suit of armor conduct electricity? A new dataset for open book question answering. 2018. Todor Mihaylov, Peter Clark, Tushar Khot, and Ashish Sabharwal. In EMNLP.</span><a href="#fnref:1" rev="footnote"> ↩</a></li></ol></div></div>
       
     </div>
     
