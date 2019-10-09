@@ -1,6 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[EMNLP2019 | What's Missing? A Knowledge Gap Guided Approach for Multi-hop Question Answering]]></title>
+    <url>%2F2019%2F10%2F06%2Fpaper-emnlp2019-miss-fact%2F</url>
+    <content type="text"><![CDATA[Title: What’s Missing: A Knowledge Gap Guided Approach for Multi-hop Question AnsweringAuthors: Tushar Khot, Ashish Sabharwal, Peter ClarkOrg.: Allen Institute for Artiﬁcial IntelligencePublished: EMNLP, 2019 Code: https://github.com/allenai/missing-fact MotivationThis WorkKnowledge GapsModelExperimentsAnalysis &amp; Summary]]></content>
+      <categories>
+        <category>Paper-Note</category>
+      </categories>
+      <tags>
+        <tag>nlp</tag>
+        <tag>knowledge</tag>
+        <tag>multi-hop</tag>
+        <tag>qa</tag>
+        <tag>dataset</tag>
+        <tag>multiple-choice</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[2019 | Exploring ways to incorporate additional knowledge to improve Natural Language Commonsense Question Answering]]></title>
+    <url>%2F2019%2F09%2F26%2Fpaper-kn-mcqa-1909-08855%2F</url>
+    <content type="text"><![CDATA[Title: Exploring ways to incorporate additional knowledge to improve Natural Language Commonsense Question AnsweringAuthors: Arindam Mitra, Pratyay Banerjee, Kuntal Kumar Pal, Swaroop Mishra, Chitta BaralOrg.: Arizona State UniversityPublished: NULL, 2019 Code: NULL This WorkResearch Background: DARPA 和 Allen AI 提出了一系列数据集来促进 需要 commonsense knowledge (CS-KN) 问答任务的研究； 额外的挑战：常识知识通常不容易以文本形式获取； 近期，BERT/GPT 等预训练语言模型在多个 Multiple Choice Question-Answering (MCQ) 数据集上展示出了相当好的效果； 已经超越了一些针对特定任务精心设计的模型，甚至可以超过人类水平（i.e., SWAG）； 成为了大多数新提出的数据集 baseline； 在需要超越QA对本身知识的question上也表现良好； 一些知识可能借由文本的形式，通过在巨大规模的text语料上训练时，封装在了LM中，由此引出的问题： 如果进一步给 LM 灌注 the needed KN 是否能带来性能的提升？ 进行 KN infusion 的方法是什么？ 这篇文章的目标是：设计将外部（常识）知识结合到 LM-based 模型中的方法，以提高QA模型在MCQ任务上的性能。 本文的具体工作： 确定外部知识源，展示通过 IR 技术抽取出的 fact 集合，在训练和测试阶段，会为性能带来提升； 进一步探索如果 用不同的方式提供 task-specific 知识 或是 用不同的策略使用可用的知识，能否进一步带来提升；具体介绍了： 3种传递知识 (pass knowledge) 的策略； 1\ revision: 在KB中拥有与数据集相关的 knowledge statements 上微调LM； 2\ open-book: 为 Q-A 对从KB中选择一定数量的 knowledge statements (textually similar to Q-A pair) 用来回答问题； 3\ mixture (revision &amp; open-book): 先进行 revision，在进行 open-book； 5种利用知识 (use knowledge) 的模型； concat / max / simple sum / weighted sum / mac ; 提出了一个新的框架，用于处理回答 MCQ 任务中 question 所需要的信息分散在不同的知识句 (knowledge sentences) 中的情况； MCQ Datasets &amp; Knowledge(为了研究如何引入知识，首先要选出需要外部知识的一些数据集作为测试系统的QA任务) MCQ Tasks: Abductive Natural Language Inference1 Physical Interaction QA2 Social Interaction QA3 Parent and Family QA 这个数据集是本文为了对知识有更好的可控性而合成的数据集； 一方面来测试NLM的记忆能力，另一方面测试将分散在多个句子中的知识结合起来的能力； 数据集的来源是DBPedia，抽取其中的亲子关系，构造成多选型数据集； Knowledge Sources (different KBs for different tasks): SCT and RCOStories Corpora4 Wikihow5 ATOMIC6 DBPedia Relevant Knowledge Extraction: 使用IR和Re-ranking等方法抽取出相关的 knowledge paragraph 这里使用的方法参考自ACL 2019的一篇文章7 先使用IR模型，然后通过计算 Information Gain 进行 re-ranking query 通过简单的 heuristic 方法产生（即，question/answer option/context中出现的非停用词） 对于每个数据集，选择 top-10 的知识句子。 示例：每个数据集及其从各自KB中抽取出的知识： Modes of Knowledge Infusion本文中使用的预训练的 BERT-uncased-whole-word-masked model 作为base模型。 本节介绍的5种知识结合方法是在open-book策略下进行的。 模型的输入： question $Q$; $n$ 个候选答案 $a_1, …, a_n$; $n$ 个 premises（每个候选答案对应一个premise） 每个 premise包含 $m$ 个 knowledge passages 使用 $k_{ij}$ 表示 第 $i-th$ 答案选项的第 $j-th$ knowledge passage 模型的输出：为每个候选答案计算一个分数 $score(i)$ , 最终选择分数最高的作为最终的答案 1.Concat 将每个选项的所有的（$m$ 个）knowledge passage 连接起来，形成一个 knowledge passage $k_i$ ； BERT 的输入为: [CLS] K_i [SEP] Q a_i [SEP] ； 选择 BERT 最后一层的 [CLS] 的表示； 计算所有选项，得到 $n$ 个 [CLS] 表示，再经过一个 linear layer 计算得到 $score(i)$ ； 2.Parallel-Max BERT 的输入为: [CLS] K_ij [SEP] Q a_i [SEP] ； 每条知识和QA对分别编码，对每个QA对中涉及的m条知识，计算m个打分选择最大值作为选项的打分 3.Simple Sum simple/weighted sum / MAC 假设信息分散在多个句子中，需要聚集这些分散的信息； BERT 的输入为: [CLS] K_ij [SEP] Q a_i [SEP] ； 将 $m$ 个向量相加，得到最终的 summary vector； 计算所有选项，得到 $n$ 个 summary vector，再经过一个 linear layer 计算得到 $score(i)$ ； 4.Weighted Sum 与simple sum的区别：一些knowledge passage可能更有用; 为一个候选项对应的 $m$ 个 [CLS] 表示计算一个标量权重 $w_{ij}$ （weight layer）, 然后计算 $m$ 个 [CLS] 表示的权重和; 最后通过一个线性映射和 复用 weight layer 来计算 候选项$a_i$的 $score(i)$; 5.MACMAC = Multi-sentence Alighment Classification 第一步同 weighted sum，先为一个候选项对应的 $m$ 个 [CLS] 表示计算一个标量权重 $w_{ij}$ reduce the normalized score $ w_{ij}^{\prime} = w_{ij} - ( 1 - w_{ij}) \ast max_{j\neq l \wedge l \in \{1…m\}} \{link_strength_{ijl}\} $ $link_strength_{ijl} \in [0,1]$ 表示两个 knowledge passage 之间的连接强度 如果两个知识（即 knowledge passage）有更好的 link strength，那么他们可以联合起来推出新的信息 例如： Facebook was launched in Cambridge 和 Cambridge is in MA 的 link strength 更高，可以推出 Facebook was launched in MA Facebook was launched in Cambridge 和 Boston is in MA 的 link strength 较低 weight reduction 的含义是：如果一个知识/knowledge passage，不足够和其他知识进行联合，那么它可能在最终的predicttion阶段也没必要被考虑 link strength 的计算方式可以有很多形式，本文中介绍了一种 memory-efficient 的方式 从BERT输出的表示中抽取出 knowledge passage 对应的 token 表示：$h_{i,j}^1, …, h_{i,j}^p$ link\_strength_{ijl} = \frac{exp(link_{ij}^T link_{il})}{\sum_{x\neq j}^{x=1...m} exp(link_{ij}^T link_{ix})} $link_{ij} = \sum_{t=1}^p s_{ij}^t \ast h_{ij}^t$ $s_{ij}$ 是标量，由 $h_{ij}$ 通过一个线性层得到，表示 $h_{ij}$ 是否可以被纳入 link description $link_{ij}$ Strategies of Knowledge InfusionNotation: $D$ 表示 MCQ 数据集；$T$ 表示 pre-trained LM；$K_D$ 表示知识库，即抽取出来的 knowledge passages/sentences；K 表示 general knowledge base，即用来预训练 $T$ 的语料； $K$ 不一定包含 $K_D$ Revision：在$K_D$上使用与MLM和NSP任务微调$T$ ，然后再在 $D$ 上进行微调 Open-Book：$D$ 中的每个训练样例都有各自的 $K_D$，在扩充了知识的 $D$ 上微调 $T$ Revision along with Open-Book：先进行 Revision，再进行 Open-book Experiments 三种策略及五种知识融合模型在四个数据集上的效果： 知识模型融合性能最好的再测试集上的效果： 对比实验： 对于预测正确的情况，分析 (1) Exact appropriate knowledge is present, (2) A related but relevant knowledge is present, (3) Knowledge is present only in the correct option, and (4) No knowledge is present. 对于预测错误的情况，分析 (1) Is the knowledge insufﬁcient, (2) Is the knowledge present in the wrong answer, (3) Knowledge is appropriate but model fails, and (4) Gold label is questionable. Analysis &amp; Summary 这篇文章较为全面的总结了向LM中引入知识的策略以及计算表示的方法。 方法比较启发性但是很有效，在三个commonsense knowledge的数据集上都取得了SOTA的结果。 虽然已有的KB无法包含所有回答问题所需要的knowledge，但是KB确实能够提供重要的knowledge。 BERT虽然已经具备了一些knowledge，但是仍然存在 给定knowledge但是模型无法回答的情况，或是使用了 irrelevant knowledge 产生了错误预测的情况，这些都是值得进一步研究的问题。 1.Abductive commonsense reasoning. 2019. Bhagavatula, C.; Bras, R. L.; Malaviya, C.; Sakaguchi, K.; Holtzman, A.; Rashkin, H.; Downey, D.; Yih, S. W.-t.; and Choi, Y.. arXiv preprint arXiv:1908.05739. ↩2.https://leaderboard.allenai.org/physicaliqa ↩3.Socialiqa: Commonsense reasoning about social interactions. 2019. Sap, M.; Rashkin, H.; Chen, D.; LeBras, R.; and Choi, Y. arXiv preprint arXiv:1904.09728. ↩4.A corpus and evaluation framework for deeper understanding of commonsense stories. 2016. Mostafazadeh, N.; Chambers, N.; He, X.; Parikh, D.; Batra, D.; Vanderwende, L.; Kohli, P.; and Allen, J.arXiv preprint arXiv:1604.01696. ↩5.Wikihow: A large scale text summarization dataset. 2018. Koupaee, M., and Wang, W. Y. arXiv preprint arXiv:1810.09305. ↩6.Atomic: an atlas of machine commonsense for if-then reasoning. 2019. Sap, M.; Le Bras, R.; Allaway, E.; Bhagavatula, C.; Lourie, N.; Rashkin, H.; Roof, B.; Smith, N. A.; and Choi, Y. In Proceedings of the AAAI Conference on Artiﬁcial Intelligence, volume 33, 3027–3035. ↩7.Careful selection of knowledge to solve open book question answering. 2019. Banerjee, P.; Pal, K. K.; Mitra, A.; and Baral, C. In Proceedings of the 57th Annual Meeting of the Association for Computational Linguistics, 6120–6129. Florence, Italy: Association for Computational Linguistics. ↩]]></content>
+      <categories>
+        <category>Paper-Note</category>
+      </categories>
+      <tags>
+        <tag>nlp</tag>
+        <tag>knowledge</tag>
+        <tag>qa</tag>
+        <tag>multiple-choice</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[ACL2019 | Does It Make Sense? And Why? A Pilot Study for Sense Making and Explanation]]></title>
     <url>%2F2019%2F09%2F22%2Fpaper-acl2019-sense-make%2F</url>
     <content type="text"><![CDATA[Title: Does It Make Sense? And Why? A Pilot Study for Sense Making and ExplanationAuthors: Cunxiang Wang, Shuailong Liang, Yue Zhang, Xiaonan Li, Tian GaoOrg.: Westlake UniversityPublished: ACL 2019 Code: https://github.com/wangcunxiang/Sen-Making-and-Explanation This Work虽然将常识信息引入到自然语言理解系统中受到了越来越多的关注。但是如何评价系统是否具有 sense making 能力，仍是个基础问题。并且现有的 benchmarks 是间接地评估常识知识，而缺乏任何解释。针对这一问题，本文发布了一个 benchmark ，以直接地测试系统是否可以区分有意义的和不合理的自然语言 statement。 与人类相比，大多数 End-to-End 训练的模型在 common sense 上的表现很。例如：人类可以很直观的理解 someone can put a turkey into a fridge but he can never put an elephant into a fridge.，但是机器很难做出区分（non-trivial） 此外，常识推理应该在NLU系统中占据中心位置。 因此，评测模型在 sense making 上的能力是很重要的一件事。 现有数据集的问题： 没有给出直接的评价指标来量化理解的能力； 没有给出理解过程中需要的显示、关键因素； 本文提出的数据集示例： 本文提出的 benchmark 包含两个子任务：每个样例由5个句子组成 $\{s_1, s_2, r_1, r_2, r_3\}$ subtask1 - Sen-Making: choose from two natural language statements ($s_1$, $s_2$) with similar wordings which one makes sense and which one does not make sense； subtask2 - Explanation: find the key reason (choose from $\{r_1, r_2, r_3\}$) why a given statement does not make sense；]]></content>
@@ -9,22 +39,22 @@
       </categories>
       <tags>
         <tag>nlp</tag>
-        <tag>dataset</tag>
         <tag>reasoning</tag>
         <tag>commonsense</tag>
+        <tag>dataset</tag>
       </tags>
   </entry>
   <entry>
     <title><![CDATA[2019 | Graph-Based Reasoning over Heterogeneous External Knowledge for Commonsense Question Answering]]></title>
     <url>%2F2019%2F09%2F17%2Fpaper-csqa-1909-05311%2F</url>
-    <content type="text"><![CDATA[Title: Graph-Based Reasoning over Heterogeneous External Knowledge for Commonsense Question AnsweringAuthor: Shangwen Lv, Daya Guo , Jingjing Xu, Duyu Tang, Nan Duan, Ming Gong, Linjun Shou, Daxin Jiang, Guihong Cao, Songlin HuOrg.: CAS, Sun Yat-sen University, PKU, MicrosoftPublished: NULLCode: NULL Motivation常识问答任务(Commonsense Question Answering, CSQA) 要求回答需要背景知识的，且背景知识未在问题中提及的一些问题 CSQA 的主要挑战是：如何从外部的知识中抽取证据信息，并给予证据做出预测。 近期的工作主要集中在两个方面： 根据带有人工标注出证据的数据集，学习生成证据 cose. 问题是：标注代价昂贵 仅从结构化知识库或是非结构化知识库，即同构知识源，中抽取证据信息，并没有同时利用不同来源的知识 为什么要同时利用结构化和非结构化的知识库? 结构化知识 (Structured Knowledge Source): 包含大量的三元组信息（概念 及其之间的关系），利于推理，但是存在覆盖度低的问题 非结构化知识 (Unstructured Knowledge Source): 即 Plain-Text，包含大量冗余的、覆盖范围广的信息，可以辅助/补充结构化知识 融合异构知识源必要性的例证： 根据结构化知识库ConceptNet，可以挑选出候选 A 和 C 根据Wikipedia文本，可以挑选出候选 C 和 E 结合两类来源的证据，即可得到最终的正确答案 C This Work本文针对的数据集是：CommonsenseQA 本文的主要工作： 自动地从异构知识源中抽取证据，即同时从ConceptNet和Wikipedia文章中抽取知识 为每个知识源构建图，来获取证据间的关系结构 提出了一个基于图的模型，由两个模块组成: 基于图的上下文词表示学习模块 为每个知识源都构建图结构，CN中使用自身的三元组，Wiki中通过语义角色标注来抽取出句子的三元组（谓词，论元） utilize graph structural information to re-define the distance between words for learning better contextual word contextual word representations (利用图结构化信息来 重新定义词之间的距离以学习更好的上下文词表示) 基于图的推理模块 使用GCN编码图信息 使用图注意力机制聚集证据信息 在CommonsenseQA上取得了当前最好的效果 ModelCommonsenseQA 的任务形式：输入：问题 $Q = {q_1, …, q_m}$ 和包含五个选项的候选答案集合 $A = {a_1, a_2, …, a_5}$目标：从候选集合中选出正确答案评价指标：准确率 本文提出的框架： Knowledge Extraction知识抽取，主要是对数据进行预处理的阶段 Knowledge Extraction from ConceptNet构建 Concept-Graph : 1、对于每个问题和选项，在CN中确定其中出现的实体； 2、构建从问题中的实体到候选中的实体的路径： 小于 3 hops 3、对于从CN中抽取出来的路径拆分为三元组，将每个三元组看做一个节点，融合到图中： 如果两个三元组中包含相同的实体，就在图中相应的两点之间增加一条边 问题：为什么将三元组对应为图中的一个点？而不是之间利用CN原生的节点-关系结构 4、为了获取CN中节点的上下文词表示，将三元组根据关系模板转化为自然语言语句 Knowledge Extraction from Wikipedia使用的 Wikipedia 版本信息：version enwiki-20190301 Wikipedia 文本处理: 1、使用 Spacy 从中抽取出 107M 个句子， 并用 Elastic Search 工具构建句子索引2、对于每个训练样例，去除问句和候选中的停用词，然后将所有词串联，作为检索查询3、使用 Elastic 搜索引擎 在检索查询和所有句子之间进行排序，选择出 top-K 个句子作为 Wikipedia 提供的证据信息，在实验中 K=10 构建 Wiki-Graph : 1、使用SRL抽取出 句子中每个谓词的论元 (主语和宾语)2、将论元和谓词都作为图中的节点，谓词和论元之间的关系作为边3、为了增强图的连通性，基于下述两条规则来在 节点 a 和 节点 b 之间加入边 (首先去除停用词)： b 中包含 a 且 a 的词数大于3 a 与 b 仅有一个不同的词，并且 a 和 b 包含的词数都大于3 Graph-Based Reasoning基于图的推理模块： 由两部分组成，分别是 1. 基于图的上下文表示学习模块 和 2. 基于图的推理模块 1.Graph-based Contextual Representation Learning Module本文使用 XLNet 作为基本编码器。 将所有证据信息进行串联，作为 raw input 输入给 XLNet，获得每个词的表示。 这种方式构成的编码器输入存在一个问题： 使在不同的知识源中提及的词的距离变远，即便是语义相关的。 （个人理解，这里是想说同一个词，在不同的证据句中出现的时候，由于仅仅将证据句进行简单串联，而且编码中依然存在长期依赖的问题，所以会造成，在多个证据句中出现的相同词的编码表示是存在较大差异的） 针对这个问题，提出根据 graph 结构，来re-define证据词之间的相对位置。 使语义相关的词的相对位置更近一些； 并用证据的内部关系结构获得更好的 CWR (contextual word representation)； 采用的方法是：利用排序算法，根据知识抽取部分得到的图结构，对证据句的顺序进行re-order； 对于 Wikipedia Sentences : 构建一个句子图（sentence-graph），证据句是图中的节点 当满足以下条件时，在两个句子 $s_i$ 和 $s_j$ 间建立边： 如果在 Wiki-Graph 中的 节点 $p$ 和 $q$ 之间存在一条边，且 $p$ 和 $q$ 分别在句子 $s_i$ 和 $s_j$中。 然后根据 下图（算法1） 对证据句进行重排序 对于结构化知识CN : 根据关系模板，将 CN 中的三元组转化为自然语句，作为 CN 提供的证据句： E.g.: (mammals, HasA, hair) —&gt; mammals has hair 也是根据上图的 算法1 对证据句进行重排序 注：从两个知识源中抽取出的证据句分别排序 最终，XLNet 的输入格式为： CN Evidence sentences $S^{\prime}_T$ ; Wiki Evidence sentences ; question $q$ ; choice $c$ 四个部分的串接，用 [SEP] 进行分隔 在实验部分，对choice还增加了一个头部：The answer is 最大长度设为 256 得到 word-level clue 2.Graph-based Inference Module主要目的：在图级别上聚集、传播证据信息，并在图上进行推理以预测最终的答案 1、将 两个证据图 CN-graph 和 Wiki-Graph 看做一个图，使用 GCN 进行编码，获得节点的表示 在使用 GCN 的时候，将图看为无向图进行设置 节点表示：$i$-th node $h_i^0$ 由证据句的 hidden state 的平均得到 $h_i^0 = \sigma(W \sum_{w_j \in s_i} \frac{1}{|s_i|} h_{w_j})$ $s_j = \{w_0, …, w_t\}$ $W \in \mathbb{R}^{d \times k}$ 2、证据传播过程，分为两步：聚集 和 组合（1）从邻居节点聚集信息 $z_i^l = \sum_{j\in N_i} \frac{1}{|N_i|} V^l h_j^l$（2）组合，更新节点表示 $h_i^{l+1} = \sigma(W^l h_i^l + z_i^l)$ （$l$ 表示层数，$L$ 表示最终层） 3、利用图注意力，聚集图级别表示，进行最终的预测 使用 multiplicative attention，$h^c$ 表示 XLNet 中对应的 [CLS] 位置的表示 第 $i$ 个节点的重要程度： $\alpha_i = \frac{h^c \sigma(W_1 h_i^L)}{\sum_{j\in N h^c \sigma(W_1 h_j^L)}}$ 最终的图表示 $h^g = \sum_{h\in N} \alpha_j^L h_j^L$ 4、最终的预测打分 $score(q,a) = \text{MLP}(h^g)$ $p(q,a) = \frac{e^{score(q,a)}}{\sum_{a^{\prime}\in A} e^{score(q,a^{\prime})}}$ Experiments实验设置： batch size = 4 学习率 = 5e-6 训练轮数 = 1 epoch (2800 steps) 主实验结果： 给leaderboard上公布出的模型划分了四个组，对比的很全面 Ablation Study1、对模型组成结构的验证 2、对使用知识源的验证，证实了加入异构来源的知识对最终的性能提升有很大的帮助 Error Analysis在验证集中随机选择了50个错误样例，错误类型大致分为三种： lack of evidence similar evidence dataset noise Analysis &amp; Summary 论文中涉及到了多个图，在叙述上有些混乱。 对于 topology 排序算法的验证，还需要加入一些例子来证明这部分性能提升的缘由，排序之前和排序之后，对于evidence的表示，产生了什么样的影响。 疑问： 在CN知识抽取部分，为什么将三元组对应为图中的一个点？而不是之间利用CN原生的节点-关系结构？ cose. Explain Yourself! Leveraging Language Models for Commonsense Reasoning. ACL,2019. note &#8617;]]></content>
+    <content type="text"><![CDATA[Title: Graph-Based Reasoning over Heterogeneous External Knowledge for Commonsense Question AnsweringAuthor: Shangwen Lv, Daya Guo , Jingjing Xu, Duyu Tang, Nan Duan, Ming Gong, Linjun Shou, Daxin Jiang, Guihong Cao, Songlin HuOrg.: CAS, Sun Yat-sen University, PKU, MicrosoftPublished: NULLCode: NULL Motivation常识问答任务(Commonsense Question Answering, CSQA) 要求回答需要背景知识的，且背景知识未在问题中提及的一些问题 CSQA 的主要挑战是：如何从外部的知识中抽取证据信息，并给予证据做出预测。 近期的工作主要集中在两个方面： 根据带有人工标注出证据的数据集，学习生成证据 cose. 问题是：标注代价昂贵 仅从结构化知识库或是非结构化知识库，即同构知识源，中抽取证据信息，并没有同时利用不同来源的知识 为什么要同时利用结构化和非结构化的知识库? 结构化知识 (Structured Knowledge Source): 包含大量的三元组信息（概念 及其之间的关系），利于推理，但是存在覆盖度低的问题 非结构化知识 (Unstructured Knowledge Source): 即 Plain-Text，包含大量冗余的、覆盖范围广的信息，可以辅助/补充结构化知识 融合异构知识源必要性的例证： 根据结构化知识库ConceptNet，可以挑选出候选 A 和 C 根据Wikipedia文本，可以挑选出候选 C 和 E 结合两类来源的证据，即可得到最终的正确答案 C This Work本文针对的数据集是：CommonsenseQA 本文的主要工作： 自动地从异构知识源中抽取证据，即同时从ConceptNet和Wikipedia文章中抽取知识 为每个知识源构建图，来获取证据间的关系结构 提出了一个基于图的模型，由两个模块组成: 基于图的上下文词表示学习模块 为每个知识源都构建图结构，CN中使用自身的三元组，Wiki中通过语义角色标注来抽取出句子的三元组（谓词，论元） utilize graph structural information to re-define the distance between words for learning better contextual word contextual word representations (利用图结构化信息来 重新定义词之间的距离以学习更好的上下文词表示) 基于图的推理模块 使用GCN编码图信息 使用图注意力机制聚集证据信息 在CommonsenseQA上取得了当前最好的效果 ModelCommonsenseQA 的任务形式：输入：问题 $Q = {q_1, …, q_m}$ 和包含五个选项的候选答案集合 $A = {a_1, a_2, …, a_5}$目标：从候选集合中选出正确答案评价指标：准确率 本文提出的框架： Knowledge Extraction知识抽取，主要是对数据进行预处理的阶段 Knowledge Extraction from ConceptNet构建 Concept-Graph : 1、对于每个问题和选项，在CN中确定其中出现的实体； 2、构建从问题中的实体到候选中的实体的路径： 小于 3 hops 3、对于从CN中抽取出来的路径拆分为三元组，将每个三元组看做一个节点，融合到图中： 如果两个三元组中包含相同的实体，就在图中相应的两点之间增加一条边 问题：为什么将三元组对应为图中的一个点？而不是之间利用CN原生的节点-关系结构 4、为了获取CN中节点的上下文词表示，将三元组根据关系模板转化为自然语言语句 Knowledge Extraction from Wikipedia使用的 Wikipedia 版本信息：version enwiki-20190301 Wikipedia 文本处理: 1、使用 Spacy 从中抽取出 107M 个句子， 并用 Elastic Search 工具构建句子索引2、对于每个训练样例，去除问句和候选中的停用词，然后将所有词串联，作为检索查询3、使用 Elastic 搜索引擎 在检索查询和所有句子之间进行排序，选择出 top-K 个句子作为 Wikipedia 提供的证据信息，在实验中 K=10 构建 Wiki-Graph : 1、使用SRL抽取出 句子中每个谓词的论元 (主语和宾语)2、将论元和谓词都作为图中的节点，谓词和论元之间的关系作为边3、为了增强图的连通性，基于下述两条规则来在 节点 a 和 节点 b 之间加入边 (首先去除停用词)： b 中包含 a 且 a 的词数大于3 a 与 b 仅有一个不同的词，并且 a 和 b 包含的词数都大于3 Graph-Based Reasoning基于图的推理模块： 由两部分组成，分别是 1. 基于图的上下文表示学习模块 和 2. 基于图的推理模块 1.Graph-based Contextual Representation Learning Module本文使用 XLNet 作为基本编码器。 将所有证据信息进行串联，作为 raw input 输入给 XLNet，获得每个词的表示。 这种方式构成的编码器输入存在一个问题： 使在不同的知识源中提及的词的距离变远，即便是语义相关的。 （个人理解，这里是想说同一个词，在不同的证据句中出现的时候，由于仅仅将证据句进行简单串联，而且编码中依然存在长期依赖的问题，所以会造成，在多个证据句中出现的相同词的编码表示是存在较大差异的） 针对这个问题，提出根据 graph 结构，来re-define证据词之间的相对位置。 使语义相关的词的相对位置更近一些； 并用证据的内部关系结构获得更好的 CWR (contextual word representation)； 采用的方法是：利用排序算法，根据知识抽取部分得到的图结构，对证据句的顺序进行re-order； 对于 Wikipedia Sentences : 构建一个句子图（sentence-graph），证据句是图中的节点 当满足以下条件时，在两个句子 $s_i$ 和 $s_j$ 间建立边： 如果在 Wiki-Graph 中的 节点 $p$ 和 $q$ 之间存在一条边，且 $p$ 和 $q$ 分别在句子 $s_i$ 和 $s_j$中。 然后根据 下图（算法1） 对证据句进行重排序 对于结构化知识CN : 根据关系模板，将 CN 中的三元组转化为自然语句，作为 CN 提供的证据句： E.g.: (mammals, HasA, hair) —&gt; mammals has hair 也是根据上图的 算法1 对证据句进行重排序 注：从两个知识源中抽取出的证据句分别排序 （针对算法1的一些看法：深度优先搜索，构建的句子图是无向图，1、在DFS方法定义中，递归调用DFS时没有传递sorted_sequence参数；2、在每次访问完一个节点之后，都将其插入到sorted_sequence的第0位上；3、排序之后，选取多少个句子？） 最终，XLNet 的输入格式为： CN Evidence sentences $S^{\prime}_T$ ; Wiki Evidence sentences ; question $q$ ; choice $c$ 四个部分的串接，用 [SEP] 进行分隔 在实验部分，对choice还增加了一个头部：The answer is 最大长度设为 256 得到 word-level clue 2.Graph-based Inference Module主要目的：在图级别上聚集、传播证据信息，并在图上进行推理以预测最终的答案 1、将 两个证据图 CN-graph 和 Wiki-Graph 看做一个图，使用 GCN 进行编码，获得节点的表示 在使用 GCN 的时候，将图看为无向图进行设置 节点表示：$i$-th node $h_i^0$ 由证据句的 hidden state 的平均得到 $h_i^0 = \sigma(W \sum_{w_j \in s_i} \frac{1}{|s_i|} h_{w_j})$ $s_j = \{w_0, …, w_t\}$ $W \in \mathbb{R}^{d \times k}$ 2、证据传播过程，分为两步：聚集 和 组合（1）从邻居节点聚集信息 $z_i^l = \sum_{j\in N_i} \frac{1}{|N_i|} V^l h_j^l$（2）组合，更新节点表示 $h_i^{l+1} = \sigma(W^l h_i^l + z_i^l)$ （$l$ 表示层数，$L$ 表示最终层） 3、利用图注意力，聚集图级别表示，进行最终的预测 使用 multiplicative attention，$h^c$ 表示 XLNet 中对应的 [CLS] 位置的表示 第 $i$ 个节点的重要程度： $\alpha_i = \frac{h^c \sigma(W_1 h_i^L)}{\sum_{j\in N h^c \sigma(W_1 h_j^L)}}$ 最终的图表示 $h^g = \sum_{h\in N} \alpha_j^L h_j^L$ 4、最终的预测打分 $score(q,a) = \text{MLP}(h^g)$ $p(q,a) = \frac{e^{score(q,a)}}{\sum_{a^{\prime}\in A} e^{score(q,a^{\prime})}}$ Experiments实验设置： batch size = 4 学习率 = 5e-6 训练轮数 = 1 epoch (2800 steps) 主实验结果： 给leaderboard上公布出的模型划分了四个组，对比的很全面 Ablation Study1、对模型组成结构的验证 2、对使用知识源的验证，证实了加入异构来源的知识对最终的性能提升有很大的帮助 Error Analysis在验证集中随机选择了50个错误样例，错误类型大致分为三种： lack of evidence similar evidence dataset noise Analysis &amp; Summary 论文中涉及到了多个图，在叙述上有些混乱。 对于 topology 排序算法的验证，还需要加入一些例子来证明这部分性能提升的缘由，排序之前和排序之后，对于evidence的表示，产生了什么样的影响。 疑问： 在CN知识抽取部分，为什么将三元组对应为图中的一个点？而不是之间利用CN原生的节点-关系结构？ cose. Explain Yourself! Leveraging Language Models for Commonsense Reasoning. ACL,2019. note &#8617;]]></content>
       <categories>
         <category>Paper-Note</category>
       </categories>
       <tags>
         <tag>nlp</tag>
-        <tag>mrc</tag>
         <tag>knowledge</tag>
+        <tag>mrc</tag>
         <tag>note</tag>
         <tag>commonsense</tag>
         <tag>graph</tag>
@@ -39,8 +69,8 @@
       </categories>
       <tags>
         <tag>nlp</tag>
-        <tag>mrc</tag>
         <tag>knowledge</tag>
+        <tag>mrc</tag>
         <tag>note</tag>
         <tag>commonsense</tag>
         <tag>graph</tag>
@@ -71,8 +101,8 @@
       </categories>
       <tags>
         <tag>nlp</tag>
-        <tag>mrc</tag>
         <tag>knowledge</tag>
+        <tag>mrc</tag>
         <tag>qa</tag>
       </tags>
   </entry>
@@ -100,8 +130,8 @@
       </categories>
       <tags>
         <tag>nlp</tag>
-        <tag>mrc</tag>
         <tag>knowledge</tag>
+        <tag>mrc</tag>
         <tag>note</tag>
         <tag>pre-trained-lm</tag>
       </tags>
@@ -115,8 +145,8 @@
       </categories>
       <tags>
         <tag>nlp</tag>
-        <tag>mrc</tag>
         <tag>knowledge</tag>
+        <tag>mrc</tag>
         <tag>note</tag>
         <tag>wordnet</tag>
       </tags>
@@ -174,8 +204,8 @@
       </categories>
       <tags>
         <tag>nlp</tag>
-        <tag>mrc</tag>
         <tag>knowledge</tag>
+        <tag>mrc</tag>
         <tag>note</tag>
       </tags>
   </entry>
@@ -188,8 +218,8 @@
       </categories>
       <tags>
         <tag>nlp</tag>
-        <tag>research</tag>
         <tag>knowledge</tag>
+        <tag>research</tag>
         <tag>note</tag>
       </tags>
   </entry>
@@ -232,8 +262,8 @@
       </categories>
       <tags>
         <tag>nlp</tag>
-        <tag>mrc</tag>
         <tag>knowledge</tag>
+        <tag>mrc</tag>
         <tag>reasoning</tag>
         <tag>commonsense</tag>
         <tag>survey</tag>
@@ -311,15 +341,15 @@
   <entry>
     <title><![CDATA[Knowledge-based MRC Papers]]></title>
     <url>%2F2019%2F03%2F10%2Fmrc-knowedge-paper-info%2F</url>
-    <content type="text"><![CDATA[A list of recent papers with respect to Knowledge-based Machine Reading Comprehension. table th:nth-of-type(2){ width: 60%; } Works on Knowledge-aware MRC Conf. Title Authors/Org. Note ACL2017 Leveraging knowledge bases in lstms for improving machine reading Yang, et al.CMU ACL2017 Reasoning with Heterogeneous Knowledge for Commonsense Machine Comprehension Hongyu Lin, et al. ACL2017 World knowledge for reading comprehension: Rare entity prediction with hierarchical lstms using external descriptions Long, et al.McGill University ACL2018 Knowledgeable Reader: Enhancing Cloze-Style Reading Comprehension with External Commonsense Knowledge Mihaylov, et al.Heidelberg University knreader-note 2018 Dynamic Integration of Background Knowledge in Neural NLU Systems Dirk Weissenborn, et al. note EMNLP2018 Commonsense for Generative Multi-Hop Question Answering Tasks Lisa Bauer mhpgm-note AAAI2018 Incorporating Structured Commonsense Knowledge in Story Completion EMNLP2018 Open Domain Question Answering Using Early Fusion of Knowledge Bases and Text CMU note (2018v1)ACL2019 Exploring Machine Reading Comprehension with Explicit KnowledgeExplicit Utilization of General Knowledge in Machine Reading Comprehension York University note ACL2018 Open Domain Question Answering Using Early Fusion of Knowledge Bases and Text CMU note AAAI2019 Improving Question Answering by Commonsense-Based Pre-Training MSRA note NAACL2019 Improving Machine Reading Comprehension with General Reading Strategies TencentAI Lab 2019 Improving Question Answering with External Knowledge note CIKM2019 Incorporating Relation Knowledge into Commonsense Reading Comprehension with Multi-task Learning AlibabaDAMO ACL2019 Enhancing Pre-Trained Language Representations with Rich Knowledge for Machine Reading Comprehension PKUBaidu note EMNLP2019 KagNet: Knowledge-Aware Graph Networks for Commonsense Reasoning note 2019 Align, Mask and Select: A Simple Method for Incorporating Commonsense Knowledge into Language Representation Models AlibabaDAMO 2019 Graph-Based Reasoning over Heterogeneous External Knowledge for Commonsense Question Answering MSRA note MRC with Knowledge how to let the machine obtain Knowledge？ how to extract external knowledge? how to represent knowledge？ in which kind of format？ how to fuse the external knowledge? how to let the machine to learn Knowledge incrementally？ how to make the machine can automatically use Knowledge it already knows or it has been told？]]></content>
+    <content type="text"><![CDATA[A list of recent papers with respect to Knowledge-based Machine Reading Comprehension. table th:nth-of-type(2){ width: 60%; } Works on Knowledge-aware MRC Conf. Title Authors/Org. Note ACL2017 Leveraging knowledge bases in lstms for improving machine reading Yang, et al.CMU ACL2017 Reasoning with Heterogeneous Knowledge for Commonsense Machine Comprehension Hongyu Lin, et al. ACL2017 World knowledge for reading comprehension: Rare entity prediction with hierarchical lstms using external descriptions Long, et al.McGill University ACL2018 Knowledgeable Reader: Enhancing Cloze-Style Reading Comprehension with External Commonsense Knowledge Mihaylov, et al.Heidelberg University knreader-note 2018 Dynamic Integration of Background Knowledge in Neural NLU Systems Dirk Weissenborn, et al. note EMNLP2018 Commonsense for Generative Multi-Hop Question Answering Tasks Lisa Bauer mhpgm-note AAAI2018 Incorporating Structured Commonsense Knowledge in Story Completion EMNLP2018 Open Domain Question Answering Using Early Fusion of Knowledge Bases and Text CMU note (2018v1)ACL2019 Exploring Machine Reading Comprehension with Explicit KnowledgeExplicit Utilization of General Knowledge in Machine Reading Comprehension York University note ACL2018 Open Domain Question Answering Using Early Fusion of Knowledge Bases and Text CMU note AAAI2019 Improving Question Answering by Commonsense-Based Pre-Training MSRA note NAACL2019 Improving Machine Reading Comprehension with General Reading Strategies TencentAI Lab 2019 Improving Question Answering with External Knowledge note CIKM2019 Incorporating Relation Knowledge into Commonsense Reading Comprehension with Multi-task Learning AlibabaDAMO ACL2019 Enhancing Pre-Trained Language Representations with Rich Knowledge for Machine Reading Comprehension PKUBaidu note EMNLP2019 KagNet: Knowledge-Aware Graph Networks for Commonsense Reasoning note 2019 Align, Mask and Select: A Simple Method for Incorporating Commonsense Knowledge into Language Representation Models AlibabaDAMO 2019 Graph-Based Reasoning over Heterogeneous External Knowledge for Commonsense Question Answering MSRA note 2019 Exploring ways to incorporate additional knowledge to improve Natural Language Commonsense Question Answering AI2 note MRC with Knowledge how to let the machine obtain Knowledge？ how to extract external knowledge? how to represent knowledge？ in which kind of format？ how to fuse the external knowledge? how to let the machine to learn Knowledge incrementally？ how to make the machine can automatically use Knowledge it already knows or it has been told？]]></content>
       <categories>
         <category>MRC-Paper-Intro</category>
       </categories>
       <tags>
         <tag>nlp</tag>
+        <tag>knowledge</tag>
         <tag>mrc</tag>
         <tag>paper</tag>
-        <tag>knowledge</tag>
       </tags>
   </entry>
   <entry>
@@ -331,8 +361,8 @@
       </categories>
       <tags>
         <tag>nlp</tag>
-        <tag>mrc</tag>
         <tag>knowledge</tag>
+        <tag>mrc</tag>
         <tag>note</tag>
         <tag>nli</tag>
       </tags>
@@ -376,15 +406,15 @@
       </categories>
       <tags>
         <tag>nlp</tag>
-        <tag>text-generation</tag>
         <tag>note</tag>
+        <tag>text-generation</tag>
         <tag>commonsense</tag>
       </tags>
   </entry>
   <entry>
     <title><![CDATA[Survey about Works of MOSAIC]]></title>
     <url>%2F2019%2F01%2F21%2Fnote-research-ai2-mosaic%2F</url>
-    <content type="text"><![CDATA[MOSAIC 是 AI2 (ALLEN Institute for Artificial Intelligence) 研究院中进行机器常识智能研究的小组1. 现有的研究项目：(Update at July, 2019) Commonsense Knowledge Graphs: Exploring semi-structured representations of commonsense.2 Visual Commonsense Reasoning: 视觉常识推理项目3 Mosaic Commonsense Benchmarks: Measuring progress on Machine Common Sense.4 对应的主要Papers： ATOMIC: An Atlas of Machine Commonsense for If-Then Reasoning. AAAI,2019. From Recognition to Cognition: Visual Commonsense Reasoning SWAG: A Large-Scale Adversarial Dataset for Grounded Commonsense Inference. EMNLP,2018. 其他Papers: Event2Mind: Commonsense Inference on Events, Intents, and Reactions. ACL,2018. Modeling Naive Psychology of Characters in Simple Commonsense Stories. ACL,2018. Reasoning about Actions and State Changes by Injecting Commonsense Knowledge. EMNLP,2018. 重点关注 Commonsense Knowledge Graphs 这部分的工作 Commonsense Knowledge Graphs Event2Mind: Commonsense Inference on Events, Intents, and Reactions. ACL,2018. ATOMIC: An Atlas of Machine Commonsense for If-Then Reasoning. AAAI,2019. Event2Mind常识推理任务 推理类型：2类（语用推理 pragmatic inference） intent 意图 可以解释为什么施事者导致事件发生，是行动或事件的心理前提 emotional reaction 情绪反应 反应定义为解释施事者和参与事件的其他人的心理状态将如何因此改变 反应可以被认为是一种行为或事件的心理后置条件 任务目标：给定一个 event phrase，预测 X intent / X reaction / Y reaction pre-condition: X intent post-condition: X/Y reaction 例子： ATOMIC关于 if-then 推理类型的推理知识库（Knowledge base about inferential knowledge on if-then reasoning types） 例子： nine if-then relation types to distinguish: （不同上不全面的刻画维度） cause vs. effect [Xintent，Xneed] vs. [Xwant，Xreaction，Effect on X，Effect on Y，Ywant，Yreaction] agents vs. themes：agent（X，who cause the event），themes（Other） [Xintent，Xneed，Xwant，Xreaction，Effect on X， Xattribute] vs. [Effect on Y，Ywant， Yreaction] voluntary vs. involuntary events [Xintent，Xneed，Xwant，Ywant] vs. [Xreaction，Effect on X，Effect on Y，Yreaction，Xattribute] actions vs. mental states [] vs. [] dynamic vs. static [Xintent，Xneed，Xwant，Xreaction，Effect on X，Effect on Y，Ywant，Yreaction] vs. [Xattribute] taxonomy of if-then reasoning types: based on the content being predicted: **if-event-then-mental-state** * mental pre-/post- conditions of an event * 3 relations: **X inent/ X reaction/ Other reaction** **if event-then event** * events that constitute probable pre- and postconditions of a given event * 5 relations: **X need/ X want/ Effect on X/ Other want/ Effect on Other** **if event-then-person** * a stative relation that describes how the subject of an event is described or perceived * 1 relations: **X attribute** based on their causal relations causes（因） effect（果） stative（状态） 图例： 与现有knowledge base的对比： DARPA LeaderboardsAbductive Natural Language inference (alpha NLI)HellaSwag: Can a Machine Really Finish Your Sentence?Physical IQa: Pyhsical Interaction QASocial IQA: Social Interaction QA1.https://mosaic.allenai.org/ ↩2.https://mosaic.allenai.org/projects/commonsense-knowledge-graphs ↩3.https://visualcommonsense.com/ ↩4.https://mosaic.allenai.org/projects/mosaic-commonsense-benchmarks ↩]]></content>
+    <content type="text"><![CDATA[MOSAIC 是 AI2 (ALLEN Institute for Artificial Intelligence) 研究院中进行机器常识智能研究的小组1. 现有的研究项目：(Update at July, 2019) Commonsense Knowledge Graphs: Exploring semi-structured representations of commonsense.2 Visual Commonsense Reasoning: 视觉常识推理项目3 Mosaic Commonsense Benchmarks: Measuring progress on Machine Common Sense.4 对应的主要Papers： ATOMIC: An Atlas of Machine Commonsense for If-Then Reasoning. AAAI,2019. From Recognition to Cognition: Visual Commonsense Reasoning SWAG: A Large-Scale Adversarial Dataset for Grounded Commonsense Inference. EMNLP,2018. 其他Papers: Event2Mind: Commonsense Inference on Events, Intents, and Reactions. ACL,2018. Modeling Naive Psychology of Characters in Simple Commonsense Stories. ACL,2018. Reasoning about Actions and State Changes by Injecting Commonsense Knowledge. EMNLP,2018. 重点关注 Commonsense Knowledge Graphs 这部分的工作 Commonsense Knowledge Graphs Event2Mind: Commonsense Inference on Events, Intents, and Reactions. ACL,2018. ATOMIC: An Atlas of Machine Commonsense for If-Then Reasoning. AAAI,2019. Event2Mind常识推理任务 推理类型：2类（语用推理 pragmatic inference） intent 意图 可以解释为什么施事者导致事件发生，是行动或事件的心理前提 emotional reaction 情绪反应 反应定义为解释施事者和参与事件的其他人的心理状态将如何因此改变 反应可以被认为是一种行为或事件的心理后置条件 任务目标：给定一个 event phrase，预测 X intent / X reaction / Y reaction pre-condition: X intent post-condition: X/Y reaction 例子： ATOMIC关于 if-then 推理类型的推理知识库（Knowledge base about inferential knowledge on if-then reasoning types） 例子： nine if-then relation types to distinguish: （不同上不全面的刻画维度） cause vs. effect [Xintent，Xneed] vs. [Xwant，Xreaction，Effect on X，Effect on Y，Ywant，Yreaction] agents vs. themes：agent（X，who cause the event），themes（Other） [Xintent，Xneed，Xwant，Xreaction，Effect on X， Xattribute] vs. [Effect on Y，Ywant， Yreaction] voluntary vs. involuntary events [Xintent，Xneed，Xwant，Ywant] vs. [Xreaction，Effect on X，Effect on Y，Yreaction，Xattribute] actions vs. mental states [] vs. [] dynamic vs. static [Xintent，Xneed，Xwant，Xreaction，Effect on X，Effect on Y，Ywant，Yreaction] vs. [Xattribute] taxonomy of if-then reasoning types: based on the content being predicted: **if-event-then-mental-state** * mental pre-/post- conditions of an event * 3 relations: **X inent/ X reaction/ Other reaction** **if event-then event** * events that constitute probable pre- and postconditions of a given event * 5 relations: **X need/ X want/ Effect on X/ Other want/ Effect on Other** **if event-then-person** * a stative relation that describes how the subject of an event is described or perceived * 1 relations: **X attribute** based on their causal relations causes（因） effect（果） stative（状态） 图例： 与现有knowledge base的对比： DARPA LeaderboardsAbductive Natural Language inference (alpha NLI) Abductive Natural Language Inference (αNLI) is a new commonsense benchmark dataset designed to test an AI system’s capability to apply abductive reasoning and common sense to form possible explanations for a given set of observations. Formulated as a binary-classification task, the goal is to pick the most plausible explanatory hypothesis given two observations from narrative contexts. Abduction is the process of inference to the best explanation for a given set of observations Humans often use commonsense knowledge to perform abductive inference For example, if a person observes wet grass, they’d infer that it probably rained. But, with additional knowledge that it has been sunny for many days, the might infer that the sprinklers were probably on. As defined by the philosopher Charles Sanders Peirce(in 1903), abduction is: the process of forming explanatory hypotheses given some observations Several Datasets have been proposed recently to tackle the task of inference in natural language, but they captures deductive inferences i.e. they hypothesis is necessary to have occurred if the premise is true Abductive inference a ampliative in nature and the inferences made acts as one of the possible explanations for the given set of observations, which further need to be explored/tested. Example Each instance in the dataset takes the form of a simple story. Given the beginning and the ending of a story, the task is to choose a more likely hypothesis between two given choices. Obs1: Jenny was addicted to sending text messages. Obs2: Jenny narrowly avoided a car accident. Hyp1: Since her friend’s texting and driving car accident, Jenny keeps her phone off while driving. Hyp2: Jenny was looking at her phone while driving so she wasn’t paying attention. correct: Hyp2 human performance：92.9% HellaSwag: Can a Machine Really Finish Your Sentence? HellaSWAG is a dataset for studying grounded commonsense inference. It consists of 70k multiple choice questions about grounded situations: each question comes from one of two domains — activitynet or wikihow — with four answer choices about what might happen next in the scene. The correct answer is the (real) sentence for the next event; the three incorrect answers are adversarially generated and human verified, so as to fool machines but not humans. Example A woman is outside with a bucket and a dog. The dog is running around trying to avoid a bath. She a) rinses the bucket off with soap and blow dries the dog’s head. b) uses a hose to keep it from getting soapy. c) gets the dog wet, then it runs away again. d) gets into the bath tub with the dog. correct: (c) human performance：95.6% Physical IQa: Pyhsical Interaction QA for naive physics reasoning focusing on how we interact with everyday objects in everyday situations. focuses on affordances of objects, i.e., what actions each physical object affords (e.g., it is possible to use a shoe as a doorstop), and what physical interactions a group of objects afford (e.g., it is possible to place an apple on top of a book, but not the other way around). The dataset requires reasoning about both the prototypical use of objects (e.g., shoes are used for walking) and non-prototypical but practically plausible use of objects (e.g., shoes can be used as a doorstop). The dataset includes 20,000 QA pairs that are either multiple-choice or true/false questions. Example You need to break a window. Which object would you rather use? a) a metal stool b) a giant bear c) a bottle of water correct: (a) human performance：94.9% Social IQA: Social Interaction QA for testing social commonsense intelligence. Contrary to many prior benchmarks that focus on physical or taxonomic knowledge, Social IQa focuses on reasoning about people’s actions and their social implications. For example, given an action like “Jesse saw a concert” and a question like “Why did Jesse do this?”, humans can easily infer that Jesse wanted “to see their favorite performer” or “to enjoy the music”, and not “to see what’s happening inside” or “to see if it works”. The actions in Social IQa span a wide variety of social situations, and answer candidates contain both human-curated answers and adversarially-filtered machine-generated candidates. Social IQa contains over 37,000 QA pairs for evaluating models’ abilities to reason about the social implications of everyday events and situations. Types of reasoning: Motivation What Happens Next Emotional Reaction Example In the school play, Robin played a hero in the struggle to the death with the angry villain. How would others feel as a result? a) sorry for the villain b) hopeful that Robin will succeed c) like Robin should lose the fight correct: (b) human performance：88.1% 1.https://mosaic.allenai.org/ ↩2.https://mosaic.allenai.org/projects/commonsense-knowledge-graphs ↩3.https://visualcommonsense.com/ ↩4.https://mosaic.allenai.org/projects/mosaic-commonsense-benchmarks ↩]]></content>
       <categories>
         <category>MRC-Research</category>
       </categories>
@@ -559,8 +589,8 @@
       </categories>
       <tags>
         <tag>nlp</tag>
-        <tag>mrc</tag>
         <tag>knowledge</tag>
+        <tag>mrc</tag>
         <tag>note</tag>
       </tags>
   </entry>
@@ -573,8 +603,8 @@
       </categories>
       <tags>
         <tag>nlp</tag>
-        <tag>paper</tag>
         <tag>knowledge</tag>
+        <tag>paper</tag>
         <tag>text-generation</tag>
       </tags>
   </entry>

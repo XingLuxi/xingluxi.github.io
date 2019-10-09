@@ -75,7 +75,7 @@
 
 
 
-  <meta name="keywords" content="nlp,mrc,knowledge,note,commonsense,graph,">
+  <meta name="keywords" content="nlp,knowledge,mrc,note,commonsense,graph,">
 
 
 
@@ -87,7 +87,7 @@
 
 
 <meta name="description" content="Title: Graph-Based Reasoning over Heterogeneous External Knowledge for Commonsense Question AnsweringAuthor: Shangwen Lv, Daya Guo , Jingjing Xu, Duyu Tang, Nan Duan, Ming Gong, Linjun Shou, Daxin Ji">
-<meta name="keywords" content="nlp,mrc,knowledge,note,commonsense,graph">
+<meta name="keywords" content="nlp,knowledge,mrc,note,commonsense,graph">
 <meta property="og:type" content="article">
 <meta property="og:title" content="2019 | Graph-Based Reasoning over Heterogeneous External Knowledge for Commonsense Question Answering">
 <meta property="og:url" content="http://xingluxi.github.io/2019/09/17/paper-csqa-1909-05311/index.html">
@@ -101,7 +101,7 @@
 <meta property="og:image" content="http://xingluxi.github.io/images/paper-csqa-1909-05311/exp-all.png">
 <meta property="og:image" content="http://xingluxi.github.io/images/paper-csqa-1909-05311/exp-ablation.png">
 <meta property="og:image" content="http://xingluxi.github.io/images/paper-csqa-1909-05311/exp-kn.png">
-<meta property="og:updated_time" content="2019-09-18T05:50:45.399Z">
+<meta property="og:updated_time" content="2019-10-09T01:48:02.925Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="2019 | Graph-Based Reasoning over Heterogeneous External Knowledge for Commonsense Question Answering">
 <meta name="twitter:description" content="Title: Graph-Based Reasoning over Heterogeneous External Knowledge for Commonsense Question AnsweringAuthor: Shangwen Lv, Daya Guo , Jingjing Xu, Duyu Tang, Nan Duan, Ming Gong, Linjun Shou, Daxin Ji">
@@ -355,8 +355,8 @@
               
                 <span class="post-meta-item-text">Post modified&#58;</span>
               
-              <time title="Post modified" itemprop="dateModified" datetime="2019-09-18T13:50:45+08:00">
-                2019-09-18
+              <time title="Post modified" itemprop="dateModified" datetime="2019-10-09T09:48:02+08:00">
+                2019-10-09
               </time>
             
           </span>
@@ -410,7 +410,7 @@
                   <span class="post-meta-item-text">Words count in article&#58;</span>
                 
                 <span title="Words count in article">
-                  2.3k
+                  2.4k
                 </span>
               
 
@@ -426,7 +426,7 @@
                   <span class="post-meta-item-text">Reading time &asymp;</span>
                 
                 <span title="Reading time">
-                  8
+                  9
                 </span>
               
             </div>
@@ -558,6 +558,7 @@
 <li>也是根据上图的 <strong>算法1</strong> 对证据句进行重排序</li>
 </ul>
 <p>注：从两个知识源中抽取出的证据句分别排序</p>
+<p>（针对算法1的一些看法：深度优先搜索，构建的句子图是无向图，1、在DFS方法定义中，递归调用DFS时没有传递sorted_sequence参数；2、在每次访问完一个节点之后，都将其插入到sorted_sequence的第0位上；3、排序之后，选取多少个句子？）</p>
 <p>最终，XLNet 的输入格式为：</p>
 <ul>
 <li>CN Evidence sentences $S^{\prime}_T$ ; Wiki Evidence sentences ; question $q$ ; choice $c$</li>
@@ -688,9 +689,9 @@
           
             <a href="/tags/nlp/" rel="tag"><i class="fa fa-tag"></i> nlp</a>
           
-            <a href="/tags/mrc/" rel="tag"><i class="fa fa-tag"></i> mrc</a>
-          
             <a href="/tags/knowledge/" rel="tag"><i class="fa fa-tag"></i> knowledge</a>
+          
+            <a href="/tags/mrc/" rel="tag"><i class="fa fa-tag"></i> mrc</a>
           
             <a href="/tags/note/" rel="tag"><i class="fa fa-tag"></i> note</a>
           
@@ -805,7 +806,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">43</span>
+                  <span class="site-state-item-count">45</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -827,7 +828,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">42</span>
+                  <span class="site-state-item-count">43</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>

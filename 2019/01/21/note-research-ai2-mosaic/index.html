@@ -98,7 +98,7 @@
 <meta property="og:image" content="http://xingluxi.github.io/images/note-research-ai2-mosaic/atomic-example.png">
 <meta property="og:image" content="http://xingluxi.github.io/images/note-research-ai2-mosaic/atomic-taxonomy-example.png">
 <meta property="og:image" content="http://xingluxi.github.io/images/note-research-ai2-mosaic/atomic-comp.png">
-<meta property="og:updated_time" content="2019-07-25T06:42:39.753Z">
+<meta property="og:updated_time" content="2019-10-09T02:19:40.989Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Survey about Works of MOSAIC">
 <meta name="twitter:description" content="MOSAIC 是 AI2 (ALLEN Institute for Artificial Intelligence) 研究院中进行机器常识智能研究的小组1. 现有的研究项目：(Update at July, 2019)  Commonsense Knowledge Graphs: Exploring semi-structured representations of commonsense.2">
@@ -352,8 +352,8 @@
               
                 <span class="post-meta-item-text">Post modified&#58;</span>
               
-              <time title="Post modified" itemprop="dateModified" datetime="2019-07-25T14:42:39+08:00">
-                2019-07-25
+              <time title="Post modified" itemprop="dateModified" datetime="2019-10-09T10:19:40+08:00">
+                2019-10-09
               </time>
             
           </span>
@@ -407,7 +407,7 @@
                   <span class="post-meta-item-text">Words count in article&#58;</span>
                 
                 <span title="Words count in article">
-                  599
+                  1.4k
                 </span>
               
 
@@ -423,7 +423,7 @@
                   <span class="post-meta-item-text">Reading time &asymp;</span>
                 
                 <span title="Reading time">
-                  3
+                  8
                 </span>
               
             </div>
@@ -547,7 +547,102 @@
 <ul>
 <li><img src="/images/note-research-ai2-mosaic/atomic-comp.png" alt="kb-comp"></li>
 </ul>
-<h2 id="DARPA-Leaderboards"><a href="#DARPA-Leaderboards" class="headerlink" title="DARPA Leaderboards"></a>DARPA Leaderboards</h2><h3 id="Abductive-Natural-Language-inference-alpha-NLI"><a href="#Abductive-Natural-Language-inference-alpha-NLI" class="headerlink" title="Abductive Natural Language inference (alpha NLI)"></a>Abductive Natural Language inference (alpha NLI)</h3><h3 id="HellaSwag-Can-a-Machine-Really-Finish-Your-Sentence"><a href="#HellaSwag-Can-a-Machine-Really-Finish-Your-Sentence" class="headerlink" title="HellaSwag: Can a Machine Really Finish Your Sentence?"></a>HellaSwag: Can a Machine Really Finish Your Sentence?</h3><h3 id="Physical-IQa-Pyhsical-Interaction-QA"><a href="#Physical-IQa-Pyhsical-Interaction-QA" class="headerlink" title="Physical IQa: Pyhsical Interaction QA"></a>Physical IQa: Pyhsical Interaction QA</h3><h3 id="Social-IQA-Social-Interaction-QA"><a href="#Social-IQA-Social-Interaction-QA" class="headerlink" title="Social IQA: Social Interaction QA"></a>Social IQA: Social Interaction QA</h3><div id="footnotes"><hr><div id="footnotelist"><ol style="list-style:none; padding-left: 0;"><li id="fn:1"><span style="display: inline-block; vertical-align: top; padding-right: 10px;">1.</span><span style="display: inline-block; vertical-align: top;">https://mosaic.allenai.org/</span><a href="#fnref:1" rev="footnote"> ↩</a></li><li id="fn:2"><span style="display: inline-block; vertical-align: top; padding-right: 10px;">2.</span><span style="display: inline-block; vertical-align: top;">https://mosaic.allenai.org/projects/commonsense-knowledge-graphs</span><a href="#fnref:2" rev="footnote"> ↩</a></li><li id="fn:3"><span style="display: inline-block; vertical-align: top; padding-right: 10px;">3.</span><span style="display: inline-block; vertical-align: top;">https://visualcommonsense.com/</span><a href="#fnref:3" rev="footnote"> ↩</a></li><li id="fn:4"><span style="display: inline-block; vertical-align: top; padding-right: 10px;">4.</span><span style="display: inline-block; vertical-align: top;">https://mosaic.allenai.org/projects/mosaic-commonsense-benchmarks</span><a href="#fnref:4" rev="footnote"> ↩</a></li></ol></div></div>
+<h2 id="DARPA-Leaderboards"><a href="#DARPA-Leaderboards" class="headerlink" title="DARPA Leaderboards"></a>DARPA Leaderboards</h2><h3 id="Abductive-Natural-Language-inference-alpha-NLI"><a href="#Abductive-Natural-Language-inference-alpha-NLI" class="headerlink" title="Abductive Natural Language inference (alpha NLI)"></a>Abductive Natural Language inference (alpha NLI)</h3><ul>
+<li>Abductive Natural Language Inference (αNLI) is a new commonsense benchmark dataset designed to test an AI system’s capability to apply abductive reasoning and common sense to form possible explanations for a given set of observations. </li>
+<li>Formulated as a binary-classification task, the goal is to <strong>pick the most plausible explanatory hypothesis given two observations from narrative contexts</strong>.</li>
+<li>Abduction is the process of inference to the best explanation for a given set of observations<ul>
+<li>Humans often use commonsense knowledge to perform abductive inference</li>
+<li>For example, if a person observes wet grass, they’d infer that it probably rained. But, with additional knowledge that it has been sunny for many days, the might infer that the sprinklers were probably on.</li>
+<li>As defined by the philosopher Charles Sanders Peirce(in 1903), abduction is:<ul>
+<li>the process of forming explanatory hypotheses given some observations</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Several Datasets have been proposed recently to tackle the task of inference in natural language, but they captures deductive inferences<ul>
+<li>i.e. they hypothesis is necessary to have occurred if the premise is true</li>
+</ul>
+</li>
+<li>Abductive inference a ampliative in nature and the inferences made acts as one of the possible explanations for the given set of observations, which further need to be explored/tested.</li>
+</ul>
+<blockquote>
+<p>Example</p>
+<p>Each instance in the dataset takes the form of a simple story. Given the beginning and the ending of a story, the task is to choose a more likely hypothesis between two given choices.</p>
+<p><em>Obs1: Jenny was addicted to sending text messages.</em></p>
+<p><em>Obs2: Jenny narrowly avoided a car accident.</em></p>
+<p><em>Hyp1:</em> Since her friend’s texting and driving car accident, Jenny keeps her phone off while driving.</p>
+<p><em>Hyp2:</em> <strong>Jenny was looking at her phone while driving so she wasn’t paying attention.</strong></p>
+<p>correct: Hyp2</p>
+</blockquote>
+<ul>
+<li>human performance：92.9%</li>
+</ul>
+<h3 id="HellaSwag-Can-a-Machine-Really-Finish-Your-Sentence"><a href="#HellaSwag-Can-a-Machine-Really-Finish-Your-Sentence" class="headerlink" title="HellaSwag: Can a Machine Really Finish Your Sentence?"></a>HellaSwag: Can a Machine Really Finish Your Sentence?</h3><ul>
+<li>HellaSWAG is a dataset for studying grounded commonsense inference. </li>
+<li>It consists of 70k multiple choice questions about grounded situations: each question comes from one of two domains — activitynet or wikihow — with four answer choices about <strong>what might happen next in the scene</strong>. The correct answer is the (real) sentence for the next event; the three incorrect answers are adversarially generated and human verified, so as to fool machines but not humans.</li>
+</ul>
+<blockquote>
+<p>Example</p>
+<p>A woman is outside with a bucket and a dog. The dog is running around trying to avoid a bath. She</p>
+<ul>
+<li>a) rinses the bucket off with soap and blow dries the dog’s head.</li>
+<li>b) uses a hose to keep it from getting soapy.</li>
+<li><strong>c) gets the dog wet, then it runs away again.</strong></li>
+<li>d) gets into the bath tub with the dog.</li>
+</ul>
+<p>correct: (c)</p>
+</blockquote>
+<ul>
+<li>human performance：95.6%</li>
+</ul>
+<h3 id="Physical-IQa-Pyhsical-Interaction-QA"><a href="#Physical-IQa-Pyhsical-Interaction-QA" class="headerlink" title="Physical IQa: Pyhsical Interaction QA"></a>Physical IQa: Pyhsical Interaction QA</h3><ul>
+<li>for naive physics reasoning focusing on how we interact with everyday objects in everyday situations.</li>
+<li>focuses on affordances of objects, i.e., what actions each physical object affords (e.g., it is possible to use a shoe as a doorstop), and what physical interactions a group of objects afford (e.g., it is possible to place an apple on top of a book, but not the other way around).</li>
+<li>The dataset requires reasoning about both the prototypical use of objects (e.g., shoes are used for walking) and non-prototypical but practically plausible use of objects (e.g., shoes can be used as a doorstop). </li>
+<li>The dataset includes 20,000 QA pairs that are either multiple-choice or true/false questions.</li>
+</ul>
+<blockquote>
+<p>Example</p>
+<p>You need to break a window. Which object would you rather use?</p>
+<ul>
+<li><strong>a) a metal stool</strong></li>
+<li>b) a giant bear</li>
+<li>c) a bottle of water</li>
+</ul>
+<p>correct: (a)</p>
+</blockquote>
+<ul>
+<li>human performance：94.9%</li>
+</ul>
+<h3 id="Social-IQA-Social-Interaction-QA"><a href="#Social-IQA-Social-Interaction-QA" class="headerlink" title="Social IQA: Social Interaction QA"></a>Social IQA: Social Interaction QA</h3><ul>
+<li>for testing social commonsense intelligence. </li>
+<li>Contrary to many prior benchmarks that focus on physical or taxonomic knowledge, Social IQa focuses on reasoning about people’s actions and their social implications. </li>
+<li>For example, given an action like “Jesse saw a concert” and a question like “Why did Jesse do this?”, humans can easily infer that Jesse wanted “to see their favorite performer” or “to enjoy the music”, and not “to see what’s happening inside” or “to see if it works”. </li>
+<li>The actions in Social IQa span a wide variety of social situations, and answer candidates contain both human-curated answers and adversarially-filtered machine-generated candidates. </li>
+<li><p>Social IQa contains over 37,000 QA pairs for evaluating models’ abilities to reason about the social implications of everyday events and situations.</p>
+</li>
+<li><p>Types of reasoning:</p>
+<ul>
+<li><strong>Motivation</strong></li>
+<li><strong>What Happens Next</strong></li>
+<li><strong>Emotional Reaction</strong></li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>Example</p>
+<p>In the school play, Robin played a hero in the struggle to the death with the angry villain. How would others feel as a result?</p>
+<ul>
+<li>a) sorry for the villain</li>
+<li><strong>b) hopeful that Robin will succeed</strong></li>
+<li>c) like Robin should lose the fight</li>
+</ul>
+<p>correct: (b)</p>
+</blockquote>
+<ul>
+<li>human performance：88.1%</li>
+</ul>
+<div id="footnotes"><hr><div id="footnotelist"><ol style="list-style:none; padding-left: 0;"><li id="fn:1"><span style="display: inline-block; vertical-align: top; padding-right: 10px;">1.</span><span style="display: inline-block; vertical-align: top;">https://mosaic.allenai.org/</span><a href="#fnref:1" rev="footnote"> ↩</a></li><li id="fn:2"><span style="display: inline-block; vertical-align: top; padding-right: 10px;">2.</span><span style="display: inline-block; vertical-align: top;">https://mosaic.allenai.org/projects/commonsense-knowledge-graphs</span><a href="#fnref:2" rev="footnote"> ↩</a></li><li id="fn:3"><span style="display: inline-block; vertical-align: top; padding-right: 10px;">3.</span><span style="display: inline-block; vertical-align: top;">https://visualcommonsense.com/</span><a href="#fnref:3" rev="footnote"> ↩</a></li><li id="fn:4"><span style="display: inline-block; vertical-align: top; padding-right: 10px;">4.</span><span style="display: inline-block; vertical-align: top;">https://mosaic.allenai.org/projects/mosaic-commonsense-benchmarks</span><a href="#fnref:4" rev="footnote"> ↩</a></li></ol></div></div>
       
     </div>
     
@@ -712,7 +807,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">43</span>
+                  <span class="site-state-item-count">45</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -734,7 +829,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">42</span>
+                  <span class="site-state-item-count">43</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>

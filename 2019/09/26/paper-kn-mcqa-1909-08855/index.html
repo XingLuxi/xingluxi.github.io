@@ -1,0 +1,1443 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon-universe-32.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-universe-32.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-universe-16.ico?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/favicon-universe-32.ico?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="nlp,knowledge,qa,multiple-choice,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="Title: Exploring ways to incorporate additional knowledge to improve Natural Language Commonsense Question AnsweringAuthors: Arindam Mitra, Pratyay Banerjee, Kuntal Kumar Pal, Swaroop Mishra, Chitta">
+<meta name="keywords" content="nlp,knowledge,qa,multiple-choice">
+<meta property="og:type" content="article">
+<meta property="og:title" content="2019 | Exploring ways to incorporate additional knowledge to improve Natural Language Commonsense Question Answering">
+<meta property="og:url" content="http://xingluxi.github.io/2019/09/26/paper-kn-mcqa-1909-08855/index.html">
+<meta property="og:site_name" content="Luxi Xing - Blog">
+<meta property="og:description" content="Title: Exploring ways to incorporate additional knowledge to improve Natural Language Commonsense Question AnsweringAuthors: Arindam Mitra, Pratyay Banerjee, Kuntal Kumar Pal, Swaroop Mishra, Chitta">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://xingluxi.github.io/images/paper-kn-mcqa-1909-08855/dataset-with-kn.png">
+<meta property="og:image" content="http://xingluxi.github.io/images/paper-kn-mcqa-1909-08855/exp-1.png">
+<meta property="og:image" content="http://xingluxi.github.io/images/paper-kn-mcqa-1909-08855/exp-2.png">
+<meta property="og:image" content="http://xingluxi.github.io/images/paper-kn-mcqa-1909-08855/exp-other.png">
+<meta property="og:updated_time" content="2019-10-09T07:43:47.541Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="2019 | Exploring ways to incorporate additional knowledge to improve Natural Language Commonsense Question Answering">
+<meta name="twitter:description" content="Title: Exploring ways to incorporate additional knowledge to improve Natural Language Commonsense Question AnsweringAuthors: Arindam Mitra, Pratyay Banerjee, Kuntal Kumar Pal, Swaroop Mishra, Chitta">
+<meta name="twitter:image" content="http://xingluxi.github.io/images/paper-kn-mcqa-1909-08855/dataset-with-kn.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":true,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://xingluxi.github.io/2019/09/26/paper-kn-mcqa-1909-08855/">
+
+
+
+
+
+  <title>2019 | Exploring ways to incorporate additional knowledge to improve Natural Language Commonsense Question Answering | Luxi Xing - Blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Luxi Xing - Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Time is In NO Hurry</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            About
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            Search
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="Searching..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://xingluxi.github.io/2019/09/26/paper-kn-mcqa-1909-08855/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Luxi Xing">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Luxi Xing - Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">2019 | Exploring ways to incorporate additional knowledge to improve Natural Language Commonsense Question Answering</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-09-26T13:50:04+08:00">
+                2019-09-26
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Post modified&#58;</span>
+              
+              <time title="Post modified" itemprop="dateModified" datetime="2019-10-09T15:43:47+08:00">
+                2019-10-09
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Paper-Note/" itemprop="url" rel="index">
+                    <span itemprop="name">Paper-Note</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-area-chart"></i> Post Total Visits
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Words count in article&#58;</span>
+                
+                <span title="Words count in article">
+                  2.2k
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Reading time &asymp;</span>
+                
+                <span title="Reading time">
+                  9
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <blockquote>
+<p><em>Title</em>: <a href="https://arxiv.org/abs/1909.08855" target="_blank" rel="noopener">Exploring ways to incorporate additional knowledge to improve Natural Language Commonsense Question Answering</a><br><em>Authors</em>: Arindam Mitra, Pratyay Banerjee, Kuntal Kumar Pal, Swaroop Mishra, Chitta Baral<br><em>Org.</em>: Arizona State University<br><em>Published</em>: NULL, 2019</p>
+</blockquote>
+<p>Code: NULL </p>
+<h2 id="This-Work"><a href="#This-Work" class="headerlink" title="This Work"></a>This Work</h2><p>Research Background:</p>
+<ul>
+<li>DARPA 和 Allen AI 提出了一系列数据集来促进 需要 commonsense knowledge (CS-KN) 问答任务的研究；<ul>
+<li>额外的挑战：常识知识通常不容易以文本形式获取；</li>
+</ul>
+</li>
+<li>近期，BERT/GPT 等预训练语言模型在多个 Multiple Choice Question-Answering (MCQ) 数据集上展示出了相当好的效果；<ul>
+<li>已经超越了一些针对特定任务精心设计的模型，甚至可以超过人类水平（i.e., SWAG）；</li>
+<li>成为了大多数新提出的数据集 baseline；</li>
+<li>在需要超越QA对本身知识的question上也表现良好；<ul>
+<li>一些知识可能借由文本的形式，通过在巨大规模的text语料上训练时，封装在了LM中，由此引出的问题：<ul>
+<li>如果进一步给 LM 灌注 the needed KN 是否能带来性能的提升？</li>
+<li>进行 KN infusion 的方法是什么？</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>这篇文章的目标是：<strong>设计将外部（常识）知识结合到 LM-based 模型中的方法</strong>，以提高QA模型在<strong>MCQ</strong>任务上的性能。</p>
+<p>本文的具体工作：</p>
+<ul>
+<li>确定外部知识源，展示通过 IR 技术抽取出的 fact 集合，在训练和测试阶段，会为性能带来提升；</li>
+<li>进一步探索如果 用不同的方式提供 task-specific 知识 或是 用不同的策略使用可用的知识，能否进一步带来提升；具体介绍了：<ul>
+<li>3种传递知识 (pass knowledge) 的策略；<ul>
+<li>1\ <strong>revision</strong>: 在KB中拥有与数据集相关的 knowledge statements 上微调LM；</li>
+<li>2\ <strong>open-book</strong>: 为 Q-A 对从KB中选择一定数量的 knowledge statements (textually similar to Q-A pair) 用来回答问题；</li>
+<li>3\ <strong>mixture</strong> (<strong>revision &amp; open-book</strong>): 先进行 revision，在进行 open-book；</li>
+</ul>
+</li>
+<li>5种利用知识 (use knowledge) 的模型；<ul>
+<li><strong>concat</strong> / <strong>max</strong> / <strong>simple sum</strong> / <strong>weighted sum</strong> / <strong>mac</strong> ;</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>提出了一个新的框架，用于处理回答 MCQ 任务中 question 所需要的信息分散在不同的知识句 (knowledge sentences) 中的情况；</li>
+</ul>
+<h2 id="MCQ-Datasets-amp-Knowledge"><a href="#MCQ-Datasets-amp-Knowledge" class="headerlink" title="MCQ Datasets &amp; Knowledge"></a>MCQ Datasets &amp; Knowledge</h2><p>(为了研究如何引入知识，首先要选出需要外部知识的一些数据集作为测试系统的QA任务)</p>
+<p>MCQ Tasks:</p>
+<ol>
+<li>Abductive Natural Language Inference<sup id="fnref:1"><a href="#fn:1" rel="footnote">1</a></sup></li>
+<li>Physical Interaction QA<sup id="fnref:2"><a href="#fn:2" rel="footnote">2</a></sup></li>
+<li>Social Interaction QA<sup id="fnref:3"><a href="#fn:3" rel="footnote">3</a></sup></li>
+<li>Parent and Family QA<ul>
+<li>这个数据集是本文为了对知识有更好的可控性而合成的数据集；</li>
+<li>一方面来测试NLM的记忆能力，另一方面测试将分散在多个句子中的知识结合起来的能力；</li>
+<li>数据集的来源是DBPedia，抽取其中的亲子关系，构造成多选型数据集；</li>
+</ul>
+</li>
+</ol>
+<p>Knowledge Sources (different KBs for different tasks):</p>
+<ol>
+<li>SCT and RCOStories Corpora<sup id="fnref:4"><a href="#fn:4" rel="footnote">4</a></sup></li>
+<li>Wikihow<sup id="fnref:5"><a href="#fn:5" rel="footnote">5</a></sup></li>
+<li>ATOMIC<sup id="fnref:6"><a href="#fn:6" rel="footnote">6</a></sup></li>
+<li>DBPedia</li>
+</ol>
+<p>Relevant Knowledge Extraction:</p>
+<ul>
+<li>使用IR和Re-ranking等方法抽取出相关的 knowledge paragraph</li>
+<li>这里使用的方法参考自ACL 2019的一篇文章<sup id="fnref:7"><a href="#fn:7" rel="footnote">7</a></sup><ul>
+<li>先使用IR模型，然后通过计算 Information Gain 进行 re-ranking</li>
+<li>query 通过简单的 heuristic 方法产生（即，question/answer option/context中出现的非停用词）</li>
+<li>对于每个数据集，选择 top-10 的知识句子。</li>
+</ul>
+</li>
+</ul>
+<p>示例：每个数据集及其从各自KB中抽取出的知识：<br><img src="/../images/paper-kn-mcqa-1909-08855/dataset-with-kn.png" alt="example"></p>
+<h2 id="Modes-of-Knowledge-Infusion"><a href="#Modes-of-Knowledge-Infusion" class="headerlink" title="Modes of Knowledge Infusion"></a>Modes of Knowledge Infusion</h2><p>本文中使用的预训练的 BERT-uncased-whole-word-masked model 作为base模型。</p>
+<p>本节介绍的5种知识结合方法是在open-book策略下进行的。</p>
+<p>模型的输入：</p>
+<ol>
+<li>question $Q$;</li>
+<li>$n$ 个候选答案 $a_1, …, a_n$;</li>
+<li>$n$ 个 premises（每个候选答案对应一个premise）<ol>
+<li>每个 premise包含 $m$ 个 knowledge passages</li>
+<li>使用 $k_{ij}$ 表示 第 $i-th$ 答案选项的第 $j-th$ knowledge passage</li>
+</ol>
+</li>
+</ol>
+<p>模型的输出：为每个候选答案计算一个分数 $score(i)$ , 最终选择分数最高的作为最终的答案</p>
+<h3 id="1-Concat"><a href="#1-Concat" class="headerlink" title="1.Concat"></a>1.Concat</h3><ul>
+<li>将每个选项的所有的（$m$ 个）knowledge passage 连接起来，形成一个 knowledge passage $k_i$ ；</li>
+<li>BERT 的输入为: <code>[CLS] K_i [SEP] Q a_i [SEP]</code> ；</li>
+<li>选择 BERT 最后一层的 <code>[CLS]</code> 的表示；</li>
+<li>计算所有选项，得到 $n$ 个 <code>[CLS]</code> 表示，再经过一个 linear layer 计算得到 $score(i)$ ；</li>
+</ul>
+<h3 id="2-Parallel-Max"><a href="#2-Parallel-Max" class="headerlink" title="2.Parallel-Max"></a>2.Parallel-Max</h3><ul>
+<li>BERT 的输入为: <code>[CLS] K_ij [SEP] Q a_i [SEP]</code> ；</li>
+<li>每条知识和QA对分别编码，对每个QA对中涉及的m条知识，计算m个打分选择最大值作为选项的打分</li>
+</ul>
+<h3 id="3-Simple-Sum"><a href="#3-Simple-Sum" class="headerlink" title="3.Simple Sum"></a>3.Simple Sum</h3><ul>
+<li><strong>simple/weighted sum / MAC 假设信息分散在多个句子中，需要聚集这些分散的信息</strong>；</li>
+<li>BERT 的输入为: <code>[CLS] K_ij [SEP] Q a_i [SEP]</code> ；</li>
+<li>将 $m$ 个向量相加，得到最终的 summary vector；</li>
+<li>计算所有选项，得到 $n$ 个 summary vector，再经过一个 linear layer 计算得到 $score(i)$ ；</li>
+</ul>
+<h3 id="4-Weighted-Sum"><a href="#4-Weighted-Sum" class="headerlink" title="4.Weighted Sum"></a>4.Weighted Sum</h3><ul>
+<li>与simple sum的区别：一些knowledge passage可能更有用;</li>
+<li>为一个候选项对应的 $m$ 个 <code>[CLS]</code> 表示计算一个标量权重 $w_{ij}$ （weight layer）, 然后计算 $m$ 个 <code>[CLS]</code> 表示的权重和;</li>
+<li>最后通过一个线性映射和 复用 weight layer 来计算 候选项$a_i$的 $score(i)$;</li>
+</ul>
+<h3 id="5-MAC"><a href="#5-MAC" class="headerlink" title="5.MAC"></a>5.MAC</h3><p>MAC = Multi-sentence Alighment Classification</p>
+<ul>
+<li>第一步同 weighted sum，先为一个候选项对应的 $m$ 个 <code>[CLS]</code> 表示计算一个标量权重 $w_{ij}$</li>
+<li>reduce the normalized score<ul>
+<li>$ w_{ij}^{\prime} = w_{ij} - ( 1 - w_{ij}) \ast max_{j\neq l \wedge l \in \{1…m\}} \{link_strength_{ijl}\} $</li>
+<li>$link_strength_{ijl} \in [0,1]$ 表示两个 knowledge passage 之间的连接强度<ul>
+<li>如果两个知识（即 knowledge passage）有更好的 link strength，那么他们可以联合起来推出新的信息</li>
+<li>例如：<ul>
+<li><code>Facebook was launched in Cambridge</code> 和 <code>Cambridge is in MA</code> 的 link strength 更高，可以推出 <code>Facebook was launched in MA</code></li>
+<li><code>Facebook was launched in Cambridge</code> 和 <code>Boston is in MA</code> 的 link strength 较低</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>weight reduction 的含义是：如果一个知识/knowledge passage，不足够和其他知识进行联合，那么它可能在最终的predicttion阶段也没必要被考虑</li>
+</ul>
+</li>
+<li>link strength 的计算方式可以有很多形式，本文中介绍了一种 memory-efficient 的方式<ul>
+<li>从BERT输出的表示中抽取出 knowledge passage 对应的 token 表示：$h_{i,j}^1, …, h_{i,j}^p$</li>
+<li><script type="math/tex; mode=display">link\_strength_{ijl} = \frac{exp(link_{ij}^T link_{il})}{\sum_{x\neq j}^{x=1...m} exp(link_{ij}^T link_{ix})}</script></li>
+<li>$link_{ij} = \sum_{t=1}^p s_{ij}^t \ast h_{ij}^t$<ul>
+<li>$s_{ij}$ 是标量，由 $h_{ij}$ 通过一个线性层得到，表示 $h_{ij}$ 是否可以被纳入 link description $link_{ij}$</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="Strategies-of-Knowledge-Infusion"><a href="#Strategies-of-Knowledge-Infusion" class="headerlink" title="Strategies of Knowledge Infusion"></a>Strategies of Knowledge Infusion</h2><p>Notation:</p>
+<ul>
+<li>$D$ 表示 MCQ 数据集；$T$ 表示 pre-trained LM；$K_D$ 表示知识库，即抽取出来的 knowledge passages/sentences；K 表示 general knowledge base，即用来预训练 $T$ 的语料；</li>
+<li>$K$ 不一定包含 $K_D$</li>
+</ul>
+<ol>
+<li><strong>Revision：在</strong>$K_D$上使用与MLM和NSP任务微调$T$ ，然后再在 $D$ 上进行微调</li>
+<li><strong>Open-Book</strong>：$D$ 中的每个训练样例都有各自的 $K_D$，在扩充了知识的 $D$ 上微调 $T$</li>
+<li><strong>Revision along with Open-Book</strong>：先进行 Revision，再进行 Open-book</li>
+</ol>
+<h2 id="Experiments"><a href="#Experiments" class="headerlink" title="Experiments"></a>Experiments</h2><ol>
+<li>三种策略及五种知识融合模型在四个数据集上的效果：<img src="/../images/paper-kn-mcqa-1909-08855/exp-1.png" alt="exp-1"></li>
+<li>知识模型融合性能最好的再测试集上的效果：<img src="/../images/paper-kn-mcqa-1909-08855/exp-2.png" alt="exp-2"></li>
+<li>对比实验：<img src="/../images/paper-kn-mcqa-1909-08855/exp-other.png" alt="exp-other"><ol>
+<li>对于预测正确的情况，分析 (1) Exact appropriate knowledge is present, (2) A related but relevant knowledge is present, (3) Knowledge is present only in the correct option, and (4) No knowledge is present.</li>
+<li>对于预测错误的情况，分析 (1) Is the knowledge insufﬁcient, (2) Is the knowledge present in the wrong answer, (3) Knowledge is appropriate but model fails, and (4) Gold label is questionable.</li>
+</ol>
+</li>
+</ol>
+<h2 id="Analysis-amp-Summary"><a href="#Analysis-amp-Summary" class="headerlink" title="Analysis &amp; Summary"></a>Analysis &amp; Summary</h2><ul>
+<li>这篇文章较为全面的总结了向LM中引入知识的策略以及计算表示的方法。</li>
+<li>方法比较启发性但是很有效，在三个commonsense knowledge的数据集上都取得了SOTA的结果。</li>
+<li>虽然已有的KB无法包含所有回答问题所需要的knowledge，但是KB确实能够提供重要的knowledge。</li>
+<li>BERT虽然已经具备了一些knowledge，但是仍然存在 <strong>给定knowledge但是模型无法回答的情况</strong>，或是<strong>使用了 irrelevant knowledge 产生了错误预测的情况</strong>，这些都是值得进一步研究的问题。</li>
+</ul>
+<div id="footnotes"><hr><div id="footnotelist"><ol style="list-style:none; padding-left: 0;"><li id="fn:1"><span style="display: inline-block; vertical-align: top; padding-right: 10px;">1.</span><span style="display: inline-block; vertical-align: top;">Abductive commonsense reasoning. 2019. Bhagavatula, C.; Bras, R. L.; Malaviya, C.; Sakaguchi, K.; Holtzman, A.; Rashkin, H.; Downey, D.; Yih, S. W.-t.; and Choi, Y.. arXiv preprint arXiv:1908.05739.</span><a href="#fnref:1" rev="footnote"> ↩</a></li><li id="fn:2"><span style="display: inline-block; vertical-align: top; padding-right: 10px;">2.</span><span style="display: inline-block; vertical-align: top;">https://leaderboard.allenai.org/physicaliqa</span><a href="#fnref:2" rev="footnote"> ↩</a></li><li id="fn:3"><span style="display: inline-block; vertical-align: top; padding-right: 10px;">3.</span><span style="display: inline-block; vertical-align: top;">Socialiqa: Commonsense reasoning about social interactions. 2019. Sap, M.; Rashkin, H.; Chen, D.; LeBras, R.; and Choi, Y. arXiv preprint arXiv:1904.09728.</span><a href="#fnref:3" rev="footnote"> ↩</a></li><li id="fn:4"><span style="display: inline-block; vertical-align: top; padding-right: 10px;">4.</span><span style="display: inline-block; vertical-align: top;">A corpus and evaluation framework for deeper understanding of commonsense stories. 2016. Mostafazadeh, N.; Chambers, N.; He, X.; Parikh, D.; Batra, D.; Vanderwende, L.; Kohli, P.; and Allen, J.arXiv preprint arXiv:1604.01696.</span><a href="#fnref:4" rev="footnote"> ↩</a></li><li id="fn:5"><span style="display: inline-block; vertical-align: top; padding-right: 10px;">5.</span><span style="display: inline-block; vertical-align: top;">Wikihow: A large scale text summarization dataset. 2018. Koupaee, M., and Wang, W. Y. arXiv preprint arXiv:1810.09305.</span><a href="#fnref:5" rev="footnote"> ↩</a></li><li id="fn:6"><span style="display: inline-block; vertical-align: top; padding-right: 10px;">6.</span><span style="display: inline-block; vertical-align: top;">Atomic: an atlas of machine commonsense for if-then reasoning. 2019. Sap, M.; Le Bras, R.; Allaway, E.; Bhagavatula, C.; Lourie, N.; Rashkin, H.; Roof, B.; Smith, N. A.; and Choi, Y.  In Proceedings of the AAAI Conference on Artiﬁcial Intelligence, volume 33, 3027–3035.</span><a href="#fnref:6" rev="footnote"> ↩</a></li><li id="fn:7"><span style="display: inline-block; vertical-align: top; padding-right: 10px;">7.</span><span style="display: inline-block; vertical-align: top;">Careful selection of knowledge to solve open book question answering. 2019. Banerjee, P.; Pal, K. K.; Mitra, A.; and Baral, C. In Proceedings of the 57th Annual Meeting of the Association for Computational Linguistics, 6120–6129. Florence, Italy: Association for Computational Linguistics.</span><a href="#fnref:7" rev="footnote"> ↩</a></li></ol></div></div>
+      
+    </div>
+    
+    
+    
+
+    
+      <div>
+        
+    <div style="text-align:center;color: #ccc;font-size:14px;">
+    **** END of This Post. Thank for Your READING ****
+    </div>
+    <div style="text-align:center;color: #ccc;font-size:14px;">
+    If you have any Question, welcome to Email me or leave your comments below.
+    </div>
+
+      </div>
+    
+
+    
+
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>Post author:</strong>
+    Luxi Xing
+  </li>
+  <li class="post-copyright-link">
+    <strong>Post link:</strong>
+    <a href="http://xingluxi.github.io/2019/09/26/paper-kn-mcqa-1909-08855/" title="2019 | Exploring ways to incorporate additional knowledge to improve Natural Language Commonsense Question Answering">http://xingluxi.github.io/2019/09/26/paper-kn-mcqa-1909-08855/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>Copyright Notice: </strong>
+    All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> unless stating additionally.
+  </li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/nlp/" rel="tag"><i class="fa fa-tag"></i> nlp</a>
+          
+            <a href="/tags/knowledge/" rel="tag"><i class="fa fa-tag"></i> knowledge</a>
+          
+            <a href="/tags/qa/" rel="tag"><i class="fa fa-tag"></i> qa</a>
+          
+            <a href="/tags/multiple-choice/" rel="tag"><i class="fa fa-tag"></i> multiple-choice</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/09/22/paper-acl2019-sense-make/" rel="next" title="ACL2019 | Does It Make Sense? And Why? A Pilot Study for Sense Making and Explanation">
+                <i class="fa fa-chevron-left"></i> ACL2019 | Does It Make Sense? And Why? A Pilot Study for Sense Making and Explanation
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/10/06/paper-emnlp2019-miss-fact/" rel="prev" title="EMNLP2019 | What's Missing? A Knowledge Gap Guided Approach for Multi-hop Question Answering">
+                EMNLP2019 | What's Missing? A Knowledge Gap Guided Approach for Multi-hop Question Answering <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="lv-container" data-id="city" data-uid="MTAyMC80MjA1OC8xODYwNQ=="></div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.gif" alt="Luxi Xing">
+            
+              <p class="site-author-name" itemprop="name">Luxi Xing</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">45</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">43</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/XingLuxi" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://twitter.com/XingLuxi" target="_blank" title="Twitter">
+                      
+                        <i class="fa fa-fw fa-twitter"></i>Twitter</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:xingluxixlx@gmail.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#This-Work"><span class="nav-text">This Work</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#MCQ-Datasets-amp-Knowledge"><span class="nav-text">MCQ Datasets &amp; Knowledge</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Modes-of-Knowledge-Infusion"><span class="nav-text">Modes of Knowledge Infusion</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-Concat"><span class="nav-text">1.Concat</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-Parallel-Max"><span class="nav-text">2.Parallel-Max</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-Simple-Sum"><span class="nav-text">3.Simple Sum</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-Weighted-Sum"><span class="nav-text">4.Weighted Sum</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-MAC"><span class="nav-text">5.MAC</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Strategies-of-Knowledge-Infusion"><span class="nav-text">Strategies of Knowledge Infusion</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Experiments"><span class="nav-text">Experiments</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Analysis-amp-Summary"><span class="nav-text">Analysis &amp; Summary</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+            <span id="scrollpercent"><span>0</span>%</span>
+          
+        </div>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-grav"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Luxi Xing</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a></div>
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i> Site Total Visiters
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
+  
+
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+</body>
+</html>
