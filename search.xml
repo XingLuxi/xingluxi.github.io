@@ -177,8 +177,8 @@
         <tag>knowledge</tag>
         <tag>note</tag>
         <tag>reasoning</tag>
-        <tag>kbqa</tag>
         <tag>graph</tag>
+        <tag>kbqa</tag>
       </tags>
   </entry>
   <entry>
@@ -406,8 +406,8 @@
       </categories>
       <tags>
         <tag>nlp</tag>
-        <tag>note</tag>
         <tag>text-generation</tag>
+        <tag>note</tag>
         <tag>commonsense</tag>
       </tags>
   </entry>
