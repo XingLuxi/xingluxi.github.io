@@ -10,8 +10,8 @@
       <tags>
         <tag>nlp</tag>
         <tag>knowledge</tag>
-        <tag>dataset</tag>
         <tag>multi-hop</tag>
+        <tag>dataset</tag>
         <tag>qa</tag>
         <tag>multiple-choice</tag>
       </tags>
@@ -117,8 +117,8 @@
         <tag>nlp</tag>
         <tag>knowledge</tag>
         <tag>note</tag>
-        <tag>wordnet</tag>
         <tag>pre-trained-lm</tag>
+        <tag>wordnet</tag>
       </tags>
   </entry>
   <entry>
@@ -177,8 +177,8 @@
         <tag>knowledge</tag>
         <tag>note</tag>
         <tag>reasoning</tag>
-        <tag>kbqa</tag>
         <tag>graph</tag>
+        <tag>kbqa</tag>
       </tags>
   </entry>
   <entry>
@@ -348,8 +348,8 @@
       <tags>
         <tag>nlp</tag>
         <tag>knowledge</tag>
-        <tag>paper</tag>
         <tag>mrc</tag>
+        <tag>paper</tag>
       </tags>
   </entry>
   <entry>
@@ -463,8 +463,8 @@
       </categories>
       <tags>
         <tag>nlp</tag>
-        <tag>paper</tag>
         <tag>mrc</tag>
+        <tag>paper</tag>
         <tag>research</tag>
       </tags>
   </entry>
@@ -491,8 +491,8 @@
       </categories>
       <tags>
         <tag>nlp</tag>
-        <tag>paper</tag>
         <tag>mrc</tag>
+        <tag>paper</tag>
         <tag>dataset</tag>
       </tags>
   </entry>
