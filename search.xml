@@ -10,8 +10,8 @@
       <tags>
         <tag>nlp</tag>
         <tag>knowledge</tag>
-        <tag>multi-hop</tag>
         <tag>dataset</tag>
+        <tag>multi-hop</tag>
         <tag>qa</tag>
         <tag>multiple-choice</tag>
       </tags>
@@ -406,8 +406,8 @@
       </categories>
       <tags>
         <tag>nlp</tag>
-        <tag>note</tag>
         <tag>text-generation</tag>
+        <tag>note</tag>
         <tag>commonsense</tag>
       </tags>
   </entry>
