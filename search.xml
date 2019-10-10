@@ -33,7 +33,7 @@
   <entry>
     <title><![CDATA[ACL2019 | Does It Make Sense? And Why? A Pilot Study for Sense Making and Explanation]]></title>
     <url>%2F2019%2F09%2F22%2Fpaper-acl2019-sense-make%2F</url>
-    <content type="text"><![CDATA[Title: Does It Make Sense? And Why? A Pilot Study for Sense Making and ExplanationAuthors: Cunxiang Wang, Shuailong Liang, Yue Zhang, Xiaonan Li, Tian GaoOrg.: Westlake UniversityPublished: ACL 2019 Code: https://github.com/wangcunxiang/Sen-Making-and-Explanation This Work虽然将常识信息引入到自然语言理解系统中受到了越来越多的关注。但是如何评价系统是否具有 sense making 能力，仍是个基础问题。并且现有的 benchmarks 是间接地评估常识知识，而缺乏任何解释。针对这一问题，本文发布了一个 benchmark ，以直接地测试系统是否可以区分有意义的和不合理的自然语言 statement。 与人类相比，大多数 End-to-End 训练的模型在 common sense 上的表现很。例如：人类可以很直观的理解 someone can put a turkey into a fridge but he can never put an elephant into a fridge.，但是机器很难做出区分（non-trivial） 此外，常识推理应该在NLU系统中占据中心位置。 因此，评测模型在 sense making 上的能力是很重要的一件事。 现有数据集的问题： 没有给出直接的评价指标来量化理解的能力； 没有给出理解过程中需要的显示、关键因素； 本文提出的数据集示例： 本文提出的 benchmark 包含两个子任务：每个样例由5个句子组成 $\{s_1, s_2, r_1, r_2, r_3\}$ subtask1 - Sen-Making: choose from two natural language statements ($s_1$, $s_2$) with similar wordings which one makes sense and which one does not make sense； subtask2 - Explanation: find the key reason (choose from $\{r_1, r_2, r_3\}$) why a given statement does not make sense；]]></content>
+    <content type="text"><![CDATA[Title: Does It Make Sense? And Why? A Pilot Study for Sense Making and ExplanationAuthors: Cunxiang Wang, Shuailong Liang, Yue Zhang, Xiaonan Li, Tian GaoOrg.: Westlake UniversityPublished: ACL 2019 Code: https://github.com/wangcunxiang/Sen-Making-and-Explanation This Work虽然将常识信息引入到自然语言理解系统中受到了越来越多的关注。但是如何评价系统是否具有 sense making 能力，仍是个基础问题。并且现有的 benchmarks 是间接地评估常识知识，而缺乏任何解释。针对这一问题，本文发布了一个 benchmark ，以直接地测试系统是否可以区分有意义的和不合理的自然语言 statement。 与人类相比，大多数 End-to-End 训练的模型在 common sense 上的表现很弱。例如：人类可以很直观的理解 someone can put a turkey into a fridge but he can never put an elephant into a fridge.，但是机器很难做出区分（non-trivial） 此外，常识推理应该在NLU系统中占据中心位置。 因此，评测模型在 sense making 上的能力是很重要的一件事。 现有数据集的问题： 没有给出直接的评价指标来量化理解的能力； 没有给出理解过程中需要的显示、关键因素； 本文提出的数据集示例： 本文提出的 benchmark 包含两个子任务：每个样例由5个句子组成 $\{s_1, s_2, r_1, r_2, r_3\}$ subtask1 - Sen-Making: choose from two natural language statements ($s_1$, $s_2$) with similar wordings which one makes sense and which one does not make sense； subtask2 - Explanation: find the key reason (choose from $\{r_1, r_2, r_3\}$) why a given statement does not make sense；]]></content>
       <categories>
         <category>Paper-Note</category>
       </categories>
@@ -177,8 +177,8 @@
         <tag>knowledge</tag>
         <tag>note</tag>
         <tag>reasoning</tag>
-        <tag>kbqa</tag>
         <tag>graph</tag>
+        <tag>kbqa</tag>
       </tags>
   </entry>
   <entry>
@@ -348,8 +348,8 @@
       <tags>
         <tag>nlp</tag>
         <tag>knowledge</tag>
-        <tag>mrc</tag>
         <tag>paper</tag>
+        <tag>mrc</tag>
       </tags>
   </entry>
   <entry>
@@ -406,8 +406,8 @@
       </categories>
       <tags>
         <tag>nlp</tag>
-        <tag>note</tag>
         <tag>text-generation</tag>
+        <tag>note</tag>
         <tag>commonsense</tag>
       </tags>
   </entry>
@@ -449,8 +449,8 @@
       </categories>
       <tags>
         <tag>nlp</tag>
-        <tag>research</tag>
         <tag>paper</tag>
+        <tag>research</tag>
         <tag>nli</tag>
       </tags>
   </entry>
@@ -463,9 +463,9 @@
       </categories>
       <tags>
         <tag>nlp</tag>
+        <tag>paper</tag>
         <tag>mrc</tag>
         <tag>research</tag>
-        <tag>paper</tag>
       </tags>
   </entry>
   <entry>
@@ -491,8 +491,8 @@
       </categories>
       <tags>
         <tag>nlp</tag>
-        <tag>mrc</tag>
         <tag>paper</tag>
+        <tag>mrc</tag>
         <tag>dataset</tag>
       </tags>
   </entry>
