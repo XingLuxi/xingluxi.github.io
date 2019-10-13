@@ -98,7 +98,7 @@
 <meta property="og:image" content="http://xingluxi.github.io/images/paper-kn-mcqa-1909-08855/exp-1.png">
 <meta property="og:image" content="http://xingluxi.github.io/images/paper-kn-mcqa-1909-08855/exp-2.png">
 <meta property="og:image" content="http://xingluxi.github.io/images/paper-kn-mcqa-1909-08855/exp-other.png">
-<meta property="og:updated_time" content="2019-10-09T07:43:47.541Z">
+<meta property="og:updated_time" content="2019-10-13T07:25:35.166Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="2019 | Exploring ways to incorporate additional knowledge to improve Natural Language Commonsense Question Answering">
 <meta name="twitter:description" content="Title: Exploring ways to incorporate additional knowledge to improve Natural Language Commonsense Question AnsweringAuthors: Arindam Mitra, Pratyay Banerjee, Kuntal Kumar Pal, Swaroop Mishra, Chitta">
@@ -352,8 +352,8 @@
               
                 <span class="post-meta-item-text">Post modified&#58;</span>
               
-              <time title="Post modified" itemprop="dateModified" datetime="2019-10-09T15:43:47+08:00">
-                2019-10-09
+              <time title="Post modified" itemprop="dateModified" datetime="2019-10-13T15:25:35+08:00">
+                2019-10-13
               </time>
             
           </span>
@@ -556,7 +556,7 @@
 <ul>
 <li>第一步同 weighted sum，先为一个候选项对应的 $m$ 个 <code>[CLS]</code> 表示计算一个标量权重 $w_{ij}$</li>
 <li>reduce the normalized score<ul>
-<li>$ w_{ij}^{\prime} = w_{ij} - ( 1 - w_{ij}) \ast max_{j\neq l \wedge l \in \{1…m\}} \{link_strength_{ijl}\} $</li>
+<li>$ w_{ij}^{\prime} = w_{ij} - ( 1 - w_{ij}) \ast max_{j\neq l \wedge l \in \{1…m\}} \{link_ strength_{ijl}\} $</li>
 <li>$link_strength_{ijl} \in [0,1]$ 表示两个 knowledge passage 之间的连接强度<ul>
 <li>如果两个知识（即 knowledge passage）有更好的 link strength，那么他们可以联合起来推出新的信息</li>
 <li>例如：<ul>
