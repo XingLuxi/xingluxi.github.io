@@ -98,7 +98,7 @@
 <meta property="og:image" content="http://xingluxi.github.io/images/paper-kn-mcqa-1909-08855/exp-1.png">
 <meta property="og:image" content="http://xingluxi.github.io/images/paper-kn-mcqa-1909-08855/exp-2.png">
 <meta property="og:image" content="http://xingluxi.github.io/images/paper-kn-mcqa-1909-08855/exp-other.png">
-<meta property="og:updated_time" content="2019-10-13T07:34:21.472Z">
+<meta property="og:updated_time" content="2019-10-13T07:36:41.637Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="2019 | Exploring ways to incorporate additional knowledge to improve Natural Language Commonsense Question Answering">
 <meta name="twitter:description" content="Title: Exploring ways to incorporate additional knowledge to improve Natural Language Commonsense Question AnsweringAuthors: Arindam Mitra, Pratyay Banerjee, Kuntal Kumar Pal, Swaroop Mishra, Chitta">
@@ -352,7 +352,7 @@
               
                 <span class="post-meta-item-text">Post modified&#58;</span>
               
-              <time title="Post modified" itemprop="dateModified" datetime="2019-10-13T15:34:21+08:00">
+              <time title="Post modified" itemprop="dateModified" datetime="2019-10-13T15:36:41+08:00">
                 2019-10-13
               </time>
             
@@ -599,7 +599,10 @@
 </li>
 </ol>
 <h2 id="Analysis-amp-Summary"><a href="#Analysis-amp-Summary" class="headerlink" title="Analysis &amp; Summary"></a>Analysis &amp; Summary</h2><ul>
-<li>这篇文章较为全面的总结了向LM中引入知识的策略以及计算表示的方法。</li>
+<li><p>遗留问题：5种知识结合方法的计算中，标量权重值通过什么NN得到？标量的范围是否有限制？比如，需要在$[0,1]$之间？</p>
+</li>
+<li><p>这篇文章较为全面的总结了向LM中引入知识的策略以及计算表示的方法。</p>
+</li>
 <li>方法比较启发性但是很有效，在三个commonsense knowledge的数据集上都取得了SOTA的结果。</li>
 <li>虽然已有的KB无法包含所有回答问题所需要的knowledge，但是KB确实能够提供重要的knowledge。</li>
 <li>BERT虽然已经具备了一些knowledge，但是仍然存在 <strong>给定knowledge但是模型无法回答的情况</strong>，或是<strong>使用了 irrelevant knowledge 产生了错误预测的情况</strong>，这些都是值得进一步研究的问题。</li>
