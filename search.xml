@@ -1,6 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[EMNLP2019 | Incorporating External Knowledge into Machine Reading for Generative Question Answering]]></title>
+    <url>%2F2019%2F10%2F13%2Fpaper-emnlp2019-keag%2F</url>
+    <content type="text"><![CDATA[Title: Incorporating External Knowledge into Machine Reading for Generative Question AnsweringAuthors: Bin Bi, Chen Wu, Ming Yan, Wei Wang, Jiangnan Xia, Chenliang LiOrg.: Alibaba DAMOPublished: EMNLP 2019code: NULL This Work与其他 Knowledge-aware QA 的工作不同，本文的研究重心是：在MRC中使用外部知识来生成自然语言语句答案。 与抽取式阅读理解不同，生成式阅读理解所产生的自然语言形式的答案片段不一定在给定的 passage 中出现。 目前大多数工作，把给定的 passage 作为唯一的信息源，来生成答案。由于缺少一些常识知识或背景知识，例如词汇知识或关系型知识，无法正确理解某些片段或正确回答某些问题（尤其是 non-trivial question）。这些知识虽然未在文本中显式出现，但是却可以在 外部KB 中找到。 基于上述，本文提出了一个 Knowledge-Enriched 答案生成模型（KEAG）: 利用从4个信息源聚集得到的证据信息来生成答案，即在生成每个答案词时，从多个信息源中选定某一个作为生成答案词的源； 4个信息源分别是：question，passage，vocabulary，knowledge (ConceptNet) 设计了一个 source selector 用于选择用于生成词的知识源； 注：知识在答案的某些部分起着关键作用，而在一些情况下，文本上下文提供的信息应优先于上下文无关的通用知识； KEAG 自适应地决定何时利用符号化知识，以及哪些知识是有用的。使模型能够利用没有显式地在文本中给出的、但是对回答问题有帮助的外部知识。 通过可微分的采样方法向模型中引入离散隐变量，并进行训练； 使用的数据集是：MS-MARCO数据集中的 Q&amp;A + Natural Language Generation 任务。 Model: Knowledge-Enriched Answer GeneratorKEAG 的整体模型结构如下图所示: 模型的输入： question $q = {w_1^q,w_2^q,…,w_{N_q}^q}$ passage $p = {w_1^p,w_2^p,…,w_{N_p}^p}$ 知识库 $K$, 由一系列三元组组成，每个三元组 $f = (subject, relation, object)$模型的输出： answer $r = {w_1^r, …, w_{N_r}^r}$ 4个知识源： question $q$ passage $p$ global vocabulary $V$ knowledge $K$ 1.Seq2Seq本文的主体模型是基于 seq-to-seq attention 模型的扩展； 在编码端，question 和 passage 分别通过两个不同的 encoder 进行编码，每个编码器都是 BiLSTM ; 编码端的输出为 encoder 的隐藏层状态: question $E_q$ passage $E^p$ 在解码端，使用 unidirectional-LSTM，输出的隐藏层状态为 $s_t^r$; 分别计算 question 和 passage 的注意力分布： $a_t^q = \text(softmax)(g^{q\top} \text{tanh}(W^q E^q + U^qs_t^r + b^q))$ $a_t^p = \text(softmax)(g^{p\top} \text{tanh}(W^p E^p + U^p s_t^r + V^p c^q+ b^p))$ $g^q$, $W^q$, $U^q$, $b^q$, $g^p$, $W^p$, $U^p$, $b^p$ 是训练参数； 注意力分布可以认为是 source words 上的概率分布； 为了避免生成重复，本文也采用了 coverage 机制： $c_t^q = \sum_i a_{ti}^q \cdot e_i^q$ $c_t^p = \sum_i a_{ti}^p \cdot e_i^p$ 其中 $e_i^q$ 和 $e_i^p$ 分别是 question 和 passage 的 encoder 隐状态； 计算得到的 上下文向量 $c_t^$, 注意力分布 $a_t^$ 以及 decoder 状态 $s_t^r$ 在后续步骤中用于决定 下个词 的生成来源； 2.Source Selector在答案生成过程中，在每个时刻，先使用 source selector 选择一个词源； 在 第 $t$ 时刻，为了决定在哪个源中进行待生成词概率的计算，引入一个离散隐变量 $y_t \in \{1,2,3,4\}$，作为源指示器： 如果选择 question 作为 source，$y_t = 1$ ： 待生成词将从下面的分布中选取：$a_t^q \in \mathbb{R}^{N_q}$ $P(w_{t+1}|y_t) = \sum_{i:w_i=w_{t+1}} a_{ti}^q$ 如果选择 passage 作为 source，$y_t = 2$ ： 待生成词将从下面的分布中选取：$a_t^p \in \mathbb{R}^{N_p}$ $P(w_{t+1}|y_t) = \sum_{i:w_i=w_{t+1}} a_{ti}^p$ 如果选择 vocabulary 作为 source，$y_t = 3$ ： 待生成词将从下面的分布中选取：$P_v(w|c_t^q, c_t^p, s_t^r) = \text{softmax}(W^v \cdot [c_t^q, c_t^p, s_t^r] + b^v)$ $P(w_{t+1}|y_t) = P_v(w|c_t^q, c_t^p, s_t^r)$ 如果选择 知识 作为 source，$y_t = 4$： 需要使用 fact selector，在下一节中介绍； 3.Knowledge Integration首先从KB中抽取相关的facts，然后从中选择最相关的fact用于生成答案 3.1 Related Fact Extraction抽取出与question和passage相关的候选facts集合，对于一个 $(q,p)$ 对，抽取出 facts 中的 subject 或是 object 出现在 question 或 passage 中的三元组，对三元组的打分规则如下： score+4 : subject 在 question 中出现，且 object 在 passage 中出现； score+2 : subject 和 object 都在 passage 中出现； score+1 : subject 在 question 或 passage 中出现； 最终，选择分数排序 top - $N_f$ 个 facts 用于后续操作； 3.2 Fact SelectionFact Selection 模块的结构如下图所示: Fact Embedding： 每个 fact 的编码由 subject、relation、object的 Embedding 串联得到 subject、relation、object的 Embedding 由 Glove 进行初始化 $f = W^e \cdot [e^s, e^r, e^o] + b^e$ Facts 集合的表示：$F = \{f_1, f_2, …, f_{N_f}\}$ 选择 最相关的 Facts： 引入 离散随机隐变量 $z_t \in [1, N_f]$ 用以指示哪条 fact 被选中； $z_t$ 通过从 离散分布 $P(z_t | F, s_t^r)$ 中采样得到： $P(z_t | F, s_t^r) = \frac{1}{Z}\cdot \text{exp}(g^{f\top} \text{tanh}(W^f f_{z_t} + U^f s_t^r + b^f))$ $Z = \sum_{i=1}^{N_f} \text{exp}(g^{f\top} \text{tanh}(W^f f_{i} + U^f s_t^r + b^f))$ 在这里使用了 Gumbel-Softmax 技巧； $z_t$ 表示 第 $z_t$ 个 fact 在 $t$ 时刻被 decoder 选中，当模型决定从知识源中生成词是，将 选中fact 中的 object 词作为将要生成的答案词； Experiments 主实验： 和加知识模型的对比： 人工评测： 去除实验： 可视化例子： Related Works generate natural answers in QA 在抽取式模型上面增加一个decoder，使用抽取得到的evidence用于答案生成1； 缺点：依赖于抽取部分，需要抽取位置的标注 使用 seq2seq 模型学习 question 和 passage 之间的对齐，产生丰富的 question 感知 passage 表示，直接用于生成答案2； natural answer generation 可以被定义为 query-focused 摘要3； 知识在 QA 任务中的作用： Knowledgeable reader: Enhancing cloze-style reading comprehension with external commonsense knowledge. Improving question answering by commonsense-based pre-training. World knowledge for reading comprehension: Rare entity prediction with hierarchical lstms using external descriptions. incorporating knowledge into QA models without passage reading： Neural generative question answering. combines knowledge retrieval and seq2seq learning to produce ﬂuent answers, but it only deals with simple questions containing one single fact. Generating natural answers by incorporating copying and retrieving mechanisms in sequence-tosequence learning. extends it with a copy mechanism to learn to copy words from a given question Natural answer generation with heterogeneous memory. introduced a new attention mechanism that attends across the generated history and memory to explicitly avoid repetition, and incorporated knowledge to enrich generated answers. knowledge-enhanced natural language (NLU) understanding： Dynamic integration of background knowledge in neural NLU systems. dynamically integrates background knowledge in a NLU model in the form of free-text statements, and yields reﬁned word representations to a task-speciﬁc NLU architecture that reprocesses the task inputs with these representations. Leveraging knowledge bases in LSTMs for improving machine reading. leverages continuous representations of knowledge bases to enhance the learning of recurrent neural networks for machine reading. Commonsense for generative multi-hop question answering tasks. a QA architecture that ﬁlls in the gaps of inference with commonsense knowledge. The model, however, does not allow an answer word to come directly from knowledge. Analysis &amp; Summary 可视化实验中缺少了fact selector的结果； 1.Chuanqi Tan, Furu Wei, Nan Yang, Bowen Du, Weifeng Lv, and Ming Zhou. 2018. S-net: From answer extraction to answer synthesis for machine reading comprehension. In AAAI. ↩2.Rajarshee Mitra. 2017. An abstractive approach to question answering. CoRR, abs/1711.06238. ↩3.Preksha Nema, Mitesh M. Khapra, Anirban Laha, and Balaraman Ravindran. 2017. Diversity driven attention model for query-based abstractive summarization. In Proceedings of the 55th Annual Meeting of the Association for Computational Linguistics, pages 1063–1072. Association for Computational Linguistics. ↩]]></content>
+      <categories>
+        <category>Paper-Note</category>
+      </categories>
+      <tags>
+        <tag>nlp</tag>
+        <tag>knowledge</tag>
+        <tag>mrc</tag>
+        <tag>note</tag>
+        <tag>text-generation</tag>
+        <tag>ml</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[EMNLP2019 | What's Missing? A Knowledge Gap Guided Approach for Multi-hop Question Answering]]></title>
     <url>%2F2019%2F10%2F06%2Fpaper-emnlp2019-miss-fact%2F</url>
     <content type="text"><![CDATA[Title: What’s Missing: A Knowledge Gap Guided Approach for Multi-hop Question AnsweringAuthors: Tushar Khot, Ashish Sabharwal, Peter ClarkOrg.: Allen Institute for Artiﬁcial IntelligencePublished: EMNLP, 2019 Code: https://github.com/allenai/missing-fact Motivation大多数的RC任务/数据集假设给待测试系统（或模型）提供了回答问题所需要的所有知识。实际上，在处理multi-hop类型的问题时，模型只能接触到部分的知识，那么想要正确地回答数据集中的问题，就必须基于问题和提供的知识，抽取出额外的知识/事实。正是这部分额外的知识的存在，造成了 knowledge gap 问题。 本文对knowledge gap问题展开研究，目标是确定这样的 gap，并且利用额外的知识源填充这个 knowledge gap。 本文主要研究的数据集是 OpenBookQA1，可以看做是一类 提供了部分知识的QA任务。OpenBookQA数据集的主要特点是： 问题的领域是科学事实 回答问题时，不仅需要从一个给定的 small book 中确定相关的核心科学事实（core science fact），还需要从外部的知识源中抽取出额外的常识知识。 这里的core fact就是数据集本身提供的partial knowledge 额外的外部知识 (broad external knowledge)，用以填充余下的 knowledge gap OpenBookQA（OBQA） 中的 Knowledge Gap 示例： This Work本文的主要工作： 在 OBQA 的基础上对 Knowledge Gap 进行了分析和标注，并发布了带标注的数据集； 提出了一个 two-step 方法，即先确定再填充（Knowledge Gap）的方法解决 Multi-hop QA 任务； 第一步，确定 knowledge gap：在 core fact 中预测一个 key span； 这一步实际上是阅读理解中 span extraction 类型任务，本文中使用了 BIDAF 模型； 第二步，填充 knowledge gap：确定 key span 和候选项之间的关系，然后回答问题； 具体分为3个子步骤：(a) 从 ConceptNet/text corpora2 中抽取相关知识；(b) 预测 key span 和 候选答案之间的潜在关系；(c) 组合 core fact 和 抽取的外部知识来填充gap； 这一步中，采取multi-task学习，联合学习 gap 的关系预测 和 最终的答案预测； 提出了一个模型，同时学习使用抽取得到的 external knowledge，并与 partial knowledge 组合来填充 knowledge gap； Knowledge GapsUnderstanding Gaps针对 OBQA 任务，可以将 Knowledge Gap 分为三类（见下面的 Figure-2），这种分类也适用于其他的multi-hop QA数据集。 注：OBQA中的核心组成部分：数据集中显示给出的1、Question；2、Answer Choices；3、Fact；以及未在数据集中出现但是对回答问题重要的4、external knowledge； Question-to-Fact : 存在于问题中的概念（concept）和 core fact 之间； 例如: Fact-to-Answer : Gap 捕捉的是 core fact 中的概念和候选答案之间的关系； 例如: fact 中的概念可能和不正确的选项之间也存在关系 Question-to-Answer (Fact) : 基于 core fact，问题中的概念和候选答案需要额外的知识（gap）来建立联系； 例如: 根据抽样统计，在OBQA中 Q2F（44%） 和 F2A（86%） 这两种Gap比较常见，Q2A（&lt;20%） 类型比较罕见，一些问题可能存在多种gaps。 本文只关注 Fact-to-Answer gap，并且假设所需的 core fact 已经给定。 Knowledge Gap Dataset: KGD（文章中介绍了采取众包对数据集中每个样例的knowledge gap进行标注的细节，具体细节请参考文章的 Section 3.2 以及 Appendix A。这里直接介绍标注得到的数据集KGD） 在KGD中，包含了 Key Span 和 relation label 的标注，用以表示knowledge gap。 span 是 fact 的子串，relations 是 span 和正确答案之间的关系集合 KGD示例： KGD数据统计： Knowledge-Gap Guided QA: GapQA模型介绍中涉及的符合及其含义： question $q$；fact $f$；selected span $s$；set of relations between span and correct choice $r$；answer choices $c$；question stem $q_s$ 其中：$q=q_s c$ tokens in question stem $q_m$；tokens in fact $f_m$； predicted span $\hat{s}$；predicted relations $\hat{r}$ 1.Key Span Identification Model模型采用 BIDAF；训练时，模型的输入为：fact（对应于passage），question stem（对应于question），模型的输出是 key span 的起止位置； 2.Knowledge Retrieval Module给定一个预测的span，从两个知识源中抽取知识，用 $K$ 表示所有抽取到的知识： ConceptNet 中的三元组，三元组中的relation与gap需要的relation密切相关； ARC corpus 中的句子，ARC corpus 包含 14M 科学相关的句子，用来补充 CN，提高recall； Tuple Search： 选择tuple时，要求subject中至少有一个token 与 $\hat{s}$ 匹配，object中至少有一个词与 $c_i$ 匹配（反之亦然）； 通过 Jaccard score 对于tuples进行打分，为每个候选选项 $c_i$ 选择出 top-k 个 tuples（在实验中，k=5） $\text{Jaccard score}(t) = \text{jacc}(\text{tokens}(t), \text{tokens}(\hat{s} + c_i))$ $\text{jacc}(w_1, w_2) = \frac{w_1 \cap w_2}{w_1 \cup w_2}$ 为了知识形式的一致性，将三元组也转化为句子的形式； Text Search： 使用 ElasticSearch 进行相关句子的检索，查询为：$\hat{s} + c_i$： 为每个候选选项 $c_i$ 选择出 top-5 个句子 3.Question Answering Module模型结构图: 本模块的输入为：$q_s$, $c$, $f$, $\hat{s}$, $K$； 计算过程如下： Step 1. Embedding: 使用 300维 的glove 词向量表示输入中的每个词 Step 2. Encoding: 使用 BiLSTM 计算上下文编码，隐藏层维度为100，用 $\mathcal{E}_*$ 表示 BiLSTM 的输出 Step 3. Fact Relevance: 出发点：一个相关 fact 可以捕捉到与问题和正确答案对齐的概念间的关系； 计算 question-weighted 和 answer-weighted fact表示； question-weighted fact repr. $\mathcal{A}_{q_s,f} = \mathcal{E}_{q_s} \cdot \mathcal{E}_f \in \mathbb{R}^{q_m \times f_m}$ $\mathcal{V}_{q_s}(f) = \text{softmax}_{f_m}(\text{max}_{q_m} \mathcal{A}_{q_s,f}) \in \mathbb{R}^{1 \times f_m} $ $\mathcal{S}_{q_s}(f) = \mathcal{V}_{q_s}(f) \cdot \mathcal{E}_f \in \mathbb{R}^{1 \times h}$ choice-weighted fact repr. $\mathcal{S}_{c_i}(f)$ 同样的计算方式，将 $q_s$ 的表示替换为 $c_i$ 组合计算的 fact-based 表示，确定 fact 对 choice 的支持程度； 组合两种 fact 表示：$\mathcal{S}_{q_s c_i}(f) = (\mathcal{S}_{q_s}(f) + \mathcal{S}_{c_i}(f))/2$ 计算候选答案的打分: $\text{score}_f(c_i) = \text{FF}(\bigotimes( \mathcal{S}_{q_s c_i}(f) , \text{avg} \mathcal{E}_f))$ $\bigotimes(x,y) = [x-y; x \ast y] \in \mathbb{R}^{1 \times 2h}$ $\text{FF}$ 是 前馈神经网络，输出一个标量值； Step 4. Filling the Gap: 实现上是预测 $\hat{s}$ 和 $c_i$ 之间的关系，并将关系和fact进行组合，为choice进行打分 计算 span weighted 和 choice weighted KB知识句表示 ($\in \mathbb{R}^{1 \times h}$)，反映知识句中的词分别和 span 以及 choice 的相关程度 $\mathcal{S}_{\hat{s}}(k_j) = \mathcal{V}_{\hat{s}}(k_j) \cdot \mathcal{E}_{k_j}$ $\mathcal{S}_{c_i}(k_j) = \mathcal{V}_{c_i}(k_j) \cdot \mathcal{E}_{k_j}$ kb-based relation repr.： $\mathcal{R}_j (\hat{s}, c_i) = \text{FF}(\bigotimes(\mathcal{S}_{\hat{s}}(k_j), \mathcal{S}_{c_i}(k_j)) ) \in \mathbb{R}^{1 \times h}$ 聚集所有KB知识句的relation repr.: $\mathcal{R}(\hat{s}, c_i) = \text{avg}_j \mathcal{R}_j (\hat{s}, c_i)$ Step 5. Relation Prediction Score: 基于问题，确定/预测与fact信息相符合的relation信息 (通过聚集问题和fact的表示来捕获这个信息) $\mathcal{D}(q_s, f) = \bigotimes(\text{max}_{q_m} \mathcal{E}_{q_s}, \text{max}_{f_m} \mathcal{E}_{f}) \in \mathbb{R}^{1 \times 2h}$ 基于fact信息和relation表示，对每个候选项进行打分 $\text{score}_r(c_i) = \text{FF}([\mathcal{D}(q_s, f); \mathcal{R}(\hat{s}, c_i)])$ Step 6. Final score for each choice: $\text{score}(c_i) = \text{score}_f(c_i) + \text{score}_r(c_i)$ 4. Model TrainingGapQA 中 Question Answering Module 的总训练 loss 由两部分组成： 模型预测的答案和正确的答案选项之间的交叉熵损失 模型预测的relation（span 和 候选项之间）与正确relation之间的损失： 为了计算这部分的损失，使 $\mathcal{R}(s,c_i)$ 通过一层的ffn，映射为向量 $\hat{r}_i \in \mathbb{R}^{1\times l}$，$l$ 是 relation 的个数； 由于$(s,c_i)$对之间可能存在多个有效的relation，创建一个 n-hot 向量表示 $\bar{r} \in \mathbb{R}^{1\times l}$，如果 relation $r_k$ 是有效的，则令 $\bar{r}[k] = 1$； 对于正确的选项（即问题的目标答案），使用 binary cross-entropy 计算预测的 $\hat{r}_i$ 和 $r$ 之间的损失； 对于不正确的选项，无法确定 span 和选项之间的relation关系（不存在标注信息），但是针对正确答案选择出的 relations set 不应对错误选项有效。故此，使用 binary cross-entropy 计算预测的 $\hat{r}_i$ 和 $1-r$ 之间的损失，并且不考虑未被选中的 relation，即使用 masked binary cross-entropy； （这里选中的 relations 指的是：KGD中对 key span 和 correct choice 之间标注的relation集合） 最终，总体的 $loss = ce(\hat{c}, \bar{c}) + \lambda \cdot (bce(\hat{r}_i, \bar{r}) + \sum_{j\neq i} mbec(\hat{r}_j, 1-\bar{r}, \bar{r}) )$ 为了更清晰的理解模型的整体计算流程，附录中给出了一个可视化的示例： Experiments Key Span Identification 效果： 在 OBQA 数据集上的结果： 输入知识源的影响： 模型去除实验： 错例分析： 主要存在三种错误类型：(1) Incorrect predicted spans (25%)(2) Incorrect relation scores (55%)(3) Out-of-Scope Gap relations (20%) Analysis &amp; Summary 这篇文章，对于 OBQA 类 partial knowledge multi-hop QA 的任务，引入了一个新颖的问题定义，旨在刻画QA任务中知识缺失的本质问题，并对这个问题进行了细致化的分类。不仅给出了可引入监督信息的标注过程和相应的数据集，同时也提出了有说服力的模型； 本文中只对最常见的 Fact-to-Answer Gap 问题进行了研究，针对其余两种 knowledge gap 的解决方案同样值得后续的研究； 针对MCQ类任务，才会存在涉及到 Answer 的 Gap，那么如果在任务中未给出候选答案的情况下， 从解决方法上看，先确定在填充整体上为pipline的形式，在实验部分没有看到使用标注的gold span进行GapQA计算的结果？ 1.Can a suit of armor conduct electricity? A new dataset for open book question answering. 2018. Todor Mihaylov, Peter Clark, Tushar Khot, and Ashish Sabharwal. In EMNLP. ↩2.Think you have solved question answering? Try ARC, the AI2 reasoning challenge. 2018. Peter Clark, Isaac Cowhey, Oren Etzioni, Tushar Khot, Ashish Sabharwal, Carissa Schoenick, and Oyvind Tafjord. CoRR, abs/1803.05457. ↩]]></content>
@@ -219,8 +235,8 @@
       <tags>
         <tag>nlp</tag>
         <tag>knowledge</tag>
-        <tag>note</tag>
         <tag>research</tag>
+        <tag>note</tag>
       </tags>
   </entry>
   <entry>
@@ -306,8 +322,8 @@
       <tags>
         <tag>nlp</tag>
         <tag>mrc</tag>
-        <tag>note</tag>
         <tag>research</tag>
+        <tag>note</tag>
       </tags>
   </entry>
   <entry>
@@ -320,8 +336,8 @@
       <tags>
         <tag>nlp</tag>
         <tag>mrc</tag>
-        <tag>note</tag>
         <tag>research</tag>
+        <tag>note</tag>
       </tags>
   </entry>
   <entry>
@@ -348,8 +364,8 @@
       <tags>
         <tag>nlp</tag>
         <tag>knowledge</tag>
-        <tag>paper</tag>
         <tag>mrc</tag>
+        <tag>paper</tag>
       </tags>
   </entry>
   <entry>
@@ -406,8 +422,8 @@
       </categories>
       <tags>
         <tag>nlp</tag>
-        <tag>text-generation</tag>
         <tag>note</tag>
+        <tag>text-generation</tag>
         <tag>commonsense</tag>
       </tags>
   </entry>
@@ -421,8 +437,8 @@
       <tags>
         <tag>nlp</tag>
         <tag>mrc</tag>
-        <tag>note</tag>
         <tag>research</tag>
+        <tag>note</tag>
         <tag>cs-know</tag>
       </tags>
   </entry>
@@ -463,8 +479,8 @@
       </categories>
       <tags>
         <tag>nlp</tag>
-        <tag>paper</tag>
         <tag>mrc</tag>
+        <tag>paper</tag>
         <tag>research</tag>
       </tags>
   </entry>
@@ -491,8 +507,8 @@
       </categories>
       <tags>
         <tag>nlp</tag>
-        <tag>paper</tag>
         <tag>mrc</tag>
+        <tag>paper</tag>
         <tag>dataset</tag>
       </tags>
   </entry>

@@ -1,0 +1,1461 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon-universe-32.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-universe-32.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-universe-16.ico?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/favicon-universe-32.ico?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="nlp,knowledge,mrc,note,text-generation,ml,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="Title: Incorporating External Knowledge into Machine Reading for Generative Question AnsweringAuthors: Bin Bi, Chen Wu, Ming Yan, Wei Wang, Jiangnan Xia, Chenliang LiOrg.: Alibaba DAMOPublished: EMNL">
+<meta name="keywords" content="nlp,knowledge,mrc,note,text-generation,ml">
+<meta property="og:type" content="article">
+<meta property="og:title" content="EMNLP2019 | Incorporating External Knowledge into Machine Reading for Generative Question Answering">
+<meta property="og:url" content="http://xingluxi.github.io/2019/10/13/paper-emnlp2019-keag/index.html">
+<meta property="og:site_name" content="Luxi Xing - Blog">
+<meta property="og:description" content="Title: Incorporating External Knowledge into Machine Reading for Generative Question AnsweringAuthors: Bin Bi, Chen Wu, Ming Yan, Wei Wang, Jiangnan Xia, Chenliang LiOrg.: Alibaba DAMOPublished: EMNL">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://xingluxi.github.io/images/paper-emnlp2019-keag/model.png">
+<meta property="og:image" content="http://xingluxi.github.io/images/paper-emnlp2019-keag/fact-selector.png">
+<meta property="og:image" content="http://xingluxi.github.io/images/paper-emnlp2019-keag/exp-main.png">
+<meta property="og:image" content="http://xingluxi.github.io/images/paper-emnlp2019-keag/exp-main-with-kn.png">
+<meta property="og:image" content="http://xingluxi.github.io/images/paper-emnlp2019-keag/exp-human-eval.png">
+<meta property="og:image" content="http://xingluxi.github.io/images/paper-emnlp2019-keag/exp-ablation.png">
+<meta property="og:image" content="http://xingluxi.github.io/images/paper-emnlp2019-keag/exp-vis.png">
+<meta property="og:updated_time" content="2019-10-21T16:13:44.385Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="EMNLP2019 | Incorporating External Knowledge into Machine Reading for Generative Question Answering">
+<meta name="twitter:description" content="Title: Incorporating External Knowledge into Machine Reading for Generative Question AnsweringAuthors: Bin Bi, Chen Wu, Ming Yan, Wei Wang, Jiangnan Xia, Chenliang LiOrg.: Alibaba DAMOPublished: EMNL">
+<meta name="twitter:image" content="http://xingluxi.github.io/images/paper-emnlp2019-keag/model.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":true,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://xingluxi.github.io/2019/10/13/paper-emnlp2019-keag/">
+
+
+
+
+
+  <title>EMNLP2019 | Incorporating External Knowledge into Machine Reading for Generative Question Answering | Luxi Xing - Blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Luxi Xing - Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Time is In NO Hurry</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            About
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            Search
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="Searching..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://xingluxi.github.io/2019/10/13/paper-emnlp2019-keag/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Luxi Xing">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Luxi Xing - Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">EMNLP2019 | Incorporating External Knowledge into Machine Reading for Generative Question Answering</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-10-13T18:13:45+08:00">
+                2019-10-13
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Post modified&#58;</span>
+              
+              <time title="Post modified" itemprop="dateModified" datetime="2019-10-22T00:13:44+08:00">
+                2019-10-22
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Paper-Note/" itemprop="url" rel="index">
+                    <span itemprop="name">Paper-Note</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-area-chart"></i> Post Total Visits
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Words count in article&#58;</span>
+                
+                <span title="Words count in article">
+                  1.9k
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Reading time &asymp;</span>
+                
+                <span title="Reading time">
+                  8
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <blockquote>
+<p><em>Title</em>: <a href="http://arxiv.org/abs/1909.02745" target="_blank" rel="noopener">Incorporating External Knowledge into Machine Reading for Generative Question Answering</a><br><em>Authors</em>: Bin Bi, Chen Wu, Ming Yan, Wei Wang, Jiangnan Xia, Chenliang Li<br><em>Org.</em>: Alibaba DAMO<br><em>Published</em>: EMNLP 2019<br><em>code</em>: NULL</p>
+</blockquote>
+<h2 id="This-Work"><a href="#This-Work" class="headerlink" title="This Work"></a>This Work</h2><p>与其他 Knowledge-aware QA 的工作不同，本文的研究重心是：在MRC中使用外部知识来<strong>生成自然语言语句答案</strong>。</p>
+<ol>
+<li><p>与抽取式阅读理解不同，生成式阅读理解所产生的自然语言形式的答案片段不一定在给定的 passage 中出现。</p>
+</li>
+<li><p>目前大多数工作，把给定的 passage 作为<strong>唯一的信息源</strong>，来生成答案。由于缺少一些常识知识或背景知识，例如词汇知识或关系型知识，无法正确理解某些片段或正确回答某些问题（尤其是 non-trivial question）。这些知识虽然未在文本中显式出现，但是却可以在 外部KB 中找到。</p>
+</li>
+</ol>
+<p>基于上述，本文提出了一个 Knowledge-Enriched 答案生成模型（<strong>KEAG</strong>）:</p>
+<ul>
+<li>利用从<strong>4个信息源</strong>聚集得到的证据信息来生成答案，即在生成每个答案词时，从多个信息源中选定某一个作为生成答案词的源；<ul>
+<li>4个信息源分别是：question，passage，vocabulary，knowledge (ConceptNet)</li>
+<li>设计了一个 source selector 用于选择用于生成词的知识源；<ul>
+<li>注：知识在答案的某些部分起着关键作用，而在一些情况下，文本上下文提供的信息应优先于上下文无关的通用知识；</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>KEAG 自适应地决定何时利用符号化知识，以及哪些知识是有用的。使模型能够利用没有显式地在文本中给出的、但是对回答问题有帮助的外部知识。</li>
+<li>通过可微分的采样方法向模型中引入离散隐变量，并进行训练；</li>
+</ul>
+<p>使用的数据集是：MS-MARCO数据集中的 Q&amp;A + Natural Language Generation 任务。</p>
+<h2 id="Model-Knowledge-Enriched-Answer-Generator"><a href="#Model-Knowledge-Enriched-Answer-Generator" class="headerlink" title="Model: Knowledge-Enriched Answer Generator"></a>Model: Knowledge-Enriched Answer Generator</h2><p>KEAG 的整体模型结构如下图所示: <img src="/../images/paper-emnlp2019-keag/model.png" alt="model"></p>
+<p>模型的输入：</p>
+<ul>
+<li>question $q = {w_1^q,w_2^q,…,w_{N_q}^q}$ </li>
+<li>passage $p = {w_1^p,w_2^p,…,w_{N_p}^p}$ </li>
+<li>知识库 $K$, 由一系列三元组组成，每个三元组 $f = (subject, relation, object)$<br>模型的输出：</li>
+<li>answer $r = {w_1^r, …, w_{N_r}^r}$</li>
+</ul>
+<p><strong>4个知识源</strong>：</p>
+<ol>
+<li>question $q$</li>
+<li>passage $p$</li>
+<li>global vocabulary $V$</li>
+<li>knowledge $K$</li>
+</ol>
+<h3 id="1-Seq2Seq"><a href="#1-Seq2Seq" class="headerlink" title="1.Seq2Seq"></a>1.Seq2Seq</h3><p>本文的主体模型是基于 seq-to-seq attention 模型的扩展；</p>
+<p>在编码端，question 和 passage 分别通过两个不同的 encoder 进行编码，每个编码器都是 BiLSTM ;</p>
+<p>编码端的输出为 encoder 的隐藏层状态:</p>
+<ul>
+<li>question $E_q$</li>
+<li>passage $E^p$</li>
+</ul>
+<p>在解码端，使用 unidirectional-LSTM，输出的隐藏层状态为 $s_t^r$;</p>
+<p>分别计算 question 和 passage 的注意力分布：</p>
+<ul>
+<li>$a_t^q = \text(softmax)(g^{q\top} \text{tanh}(W^q E^q + U^qs_t^r + b^q))$</li>
+<li>$a_t^p = \text(softmax)(g^{p\top} \text{tanh}(W^p E^p + U^p s_t^r + V^p c^q+ b^p))$</li>
+<li>$g^q$, $W^q$, $U^q$, $b^q$, $g^p$, $W^p$, $U^p$, $b^p$ 是训练参数；</li>
+<li>注意力分布可以认为是 source words 上的概率分布；</li>
+</ul>
+<p>为了避免生成重复，本文也采用了 coverage 机制：</p>
+<ul>
+<li>$c_t^q = \sum_i a_{ti}^q \cdot e_i^q$</li>
+<li>$c_t^p = \sum_i a_{ti}^p \cdot e_i^p$</li>
+<li>其中 $e_i^q$ 和 $e_i^p$ 分别是 question 和 passage 的 encoder 隐状态；</li>
+</ul>
+<p>计算得到的 上下文向量 $c_t^<em>$, 注意力分布 $a_t^</em>$ 以及 decoder 状态 $s_t^r$ 在后续步骤中用于决定 下个词 的生成来源；</p>
+<h3 id="2-Source-Selector"><a href="#2-Source-Selector" class="headerlink" title="2.Source Selector"></a>2.Source Selector</h3><p>在答案生成过程中，在每个时刻，先使用 source selector 选择一个词源；</p>
+<p>在 第 $t$ 时刻，为了决定在哪个源中进行待生成词概率的计算，引入一个离散隐变量 $y_t \in \{1,2,3,4\}$，作为源指示器：</p>
+<ol>
+<li>如果选择 question 作为 source，$y_t = 1$ ：<ul>
+<li>待生成词将从下面的分布中选取：$a_t^q \in \mathbb{R}^{N_q}$</li>
+<li>$P(w_{t+1}|y_t) = \sum_{i:w_i=w_{t+1}} a_{ti}^q$</li>
+</ul>
+</li>
+<li>如果选择 passage 作为 source，$y_t = 2$ ：<ul>
+<li>待生成词将从下面的分布中选取：$a_t^p \in \mathbb{R}^{N_p}$</li>
+<li>$P(w_{t+1}|y_t) = \sum_{i:w_i=w_{t+1}} a_{ti}^p$</li>
+</ul>
+</li>
+<li>如果选择 vocabulary 作为 source，$y_t = 3$ ：<ul>
+<li>待生成词将从下面的分布中选取：$P_v(w|c_t^q, c_t^p, s_t^r) = \text{softmax}(W^v \cdot [c_t^q, c_t^p, s_t^r] + b^v)$</li>
+<li>$P(w_{t+1}|y_t) = P_v(w|c_t^q, c_t^p, s_t^r)$</li>
+</ul>
+</li>
+<li>如果选择 知识 作为 source，$y_t = 4$：<ul>
+<li>需要使用 fact selector，在下一节中介绍；</li>
+</ul>
+</li>
+</ol>
+<h3 id="3-Knowledge-Integration"><a href="#3-Knowledge-Integration" class="headerlink" title="3.Knowledge Integration"></a>3.Knowledge Integration</h3><p>首先从KB中抽取相关的facts，然后从中选择最相关的fact用于生成答案</p>
+<h4 id="3-1-Related-Fact-Extraction"><a href="#3-1-Related-Fact-Extraction" class="headerlink" title="3.1 Related Fact Extraction"></a>3.1 Related Fact Extraction</h4><p>抽取出与question和passage相关的候选facts集合，对于一个 $(q,p)$ 对，抽取出 facts 中的 subject 或是 object 出现在 question 或 passage 中的三元组，对三元组的打分规则如下：</p>
+<ul>
+<li>score+4 : subject 在 question 中出现，且 object 在 passage 中出现；</li>
+<li>score+2 : subject 和 object 都在 passage 中出现；</li>
+<li>score+1 : subject 在 question 或 passage 中出现；</li>
+</ul>
+<p>最终，选择分数排序 top - $N_f$ 个 facts 用于后续操作；</p>
+<h4 id="3-2-Fact-Selection"><a href="#3-2-Fact-Selection" class="headerlink" title="3.2 Fact Selection"></a>3.2 Fact Selection</h4><p>Fact Selection 模块的结构如下图所示: <img src="/../images/paper-emnlp2019-keag/fact-selector.png" alt="module"></p>
+<ol>
+<li>Fact Embedding：<ul>
+<li>每个 fact 的编码由 subject、relation、object的 Embedding 串联得到</li>
+<li>subject、relation、object的 Embedding 由 Glove 进行初始化</li>
+<li>$f = W^e \cdot [e^s, e^r, e^o] + b^e$</li>
+<li>Facts 集合的表示：$F = \{f_1, f_2, …, f_{N_f}\}$</li>
+</ul>
+</li>
+<li>选择 最相关的 Facts：<ul>
+<li>引入 离散随机隐变量 $z_t \in [1, N_f]$ 用以指示哪条 fact 被选中；</li>
+<li>$z_t$ 通过从 离散分布 $P(z_t | F, s_t^r)$ 中采样得到：<ul>
+<li>$P(z_t | F, s_t^r) = \frac{1}{Z}\cdot \text{exp}(g^{f\top} \text{tanh}(W^f f_{z_t} + U^f s_t^r + b^f))$</li>
+<li>$Z = \sum_{i=1}^{N_f} \text{exp}(g^{f\top} \text{tanh}(W^f f_{i} + U^f s_t^r + b^f))$</li>
+</ul>
+</li>
+<li>在这里使用了 Gumbel-Softmax 技巧；</li>
+<li>$z_t$ 表示 第 $z_t$ 个 fact 在 $t$ 时刻被 decoder 选中，当模型决定从知识源中生成词是，将 选中fact 中的 object 词作为将要生成的答案词；</li>
+</ul>
+</li>
+</ol>
+<h2 id="Experiments"><a href="#Experiments" class="headerlink" title="Experiments"></a>Experiments</h2><ul>
+<li><p>主实验：<img src="/../images/paper-emnlp2019-keag/exp-main.png" alt="exp-main"></p>
+</li>
+<li><p>和加知识模型的对比：<img src="/../images/paper-emnlp2019-keag/exp-main-with-kn.png" alt="exp-main-kn"></p>
+</li>
+<li><p>人工评测：<img src="/../images/paper-emnlp2019-keag/exp-human-eval.png" alt="exp-human"></p>
+</li>
+<li><p>去除实验：<img src="/../images/paper-emnlp2019-keag/exp-ablation.png" alt="exp-ab"></p>
+</li>
+<li><p>可视化例子：<img src="/../images/paper-emnlp2019-keag/exp-vis.png" alt="exp-vis"></p>
+</li>
+</ul>
+<h2 id="Related-Works"><a href="#Related-Works" class="headerlink" title="Related Works"></a>Related Works</h2><ul>
+<li>generate natural answers in QA<ul>
+<li>在抽取式模型上面增加一个decoder，使用抽取得到的evidence用于答案生成<sup id="fnref:1"><a href="#fn:1" rel="footnote">1</a></sup>；<ul>
+<li>缺点：依赖于抽取部分，需要抽取位置的标注</li>
+</ul>
+</li>
+<li>使用 seq2seq 模型学习 question 和 passage 之间的对齐，产生丰富的 question 感知 passage 表示，直接用于生成答案<sup id="fnref:2"><a href="#fn:2" rel="footnote">2</a></sup>；</li>
+<li>natural answer generation 可以被定义为 query-focused 摘要<sup id="fnref:3"><a href="#fn:3" rel="footnote">3</a></sup>；</li>
+</ul>
+</li>
+<li>知识在 QA 任务中的作用：<ul>
+<li>Knowledgeable reader: Enhancing cloze-style reading comprehension with external commonsense knowledge. </li>
+<li>Improving question answering by commonsense-based pre-training.</li>
+<li>World knowledge for reading comprehension: Rare entity prediction with hierarchical lstms using external descriptions.</li>
+</ul>
+</li>
+<li>incorporating knowledge into QA models without passage reading：<ul>
+<li>Neural generative question answering.<ul>
+<li>combines knowledge retrieval and seq2seq learning to produce ﬂuent answers, but it only deals with simple questions containing one single fact.</li>
+</ul>
+</li>
+<li>Generating natural answers by incorporating copying and retrieving mechanisms in sequence-tosequence learning.<ul>
+<li>extends it with a copy mechanism to learn to copy words from a given question</li>
+</ul>
+</li>
+<li>Natural answer generation with heterogeneous memory.<ul>
+<li>introduced a new attention mechanism that attends across the generated history and memory to explicitly avoid repetition, and incorporated knowledge to enrich generated answers.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>knowledge-enhanced natural language (NLU) understanding：<ul>
+<li>Dynamic integration of background knowledge in neural NLU systems.<ul>
+<li>dynamically integrates background knowledge in a NLU model in the form of free-text statements, and yields reﬁned word representations to a task-speciﬁc NLU architecture that reprocesses the task inputs with these representations.</li>
+</ul>
+</li>
+<li>Leveraging knowledge bases in LSTMs for improving machine reading.<ul>
+<li>leverages continuous representations of knowledge bases to enhance the learning of recurrent neural networks for machine reading.</li>
+</ul>
+</li>
+<li>Commonsense for generative multi-hop question answering tasks.<ul>
+<li>a QA architecture that ﬁlls in the gaps of inference with commonsense knowledge. The model, however, does not allow an answer word to come directly from knowledge.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="Analysis-amp-Summary"><a href="#Analysis-amp-Summary" class="headerlink" title="Analysis &amp; Summary"></a>Analysis &amp; Summary</h2><ul>
+<li>可视化实验中缺少了fact selector的结果；</li>
+</ul>
+<div id="footnotes"><hr><div id="footnotelist"><ol style="list-style:none; padding-left: 0;"><li id="fn:1"><span style="display: inline-block; vertical-align: top; padding-right: 10px;">1.</span><span style="display: inline-block; vertical-align: top;">Chuanqi Tan, Furu Wei, Nan Yang, Bowen Du, Weifeng Lv, and Ming Zhou. 2018. S-net: From answer extraction to answer synthesis for machine reading comprehension. In AAAI.</span><a href="#fnref:1" rev="footnote"> ↩</a></li><li id="fn:2"><span style="display: inline-block; vertical-align: top; padding-right: 10px;">2.</span><span style="display: inline-block; vertical-align: top;">Rajarshee Mitra. 2017. An abstractive approach to question answering. CoRR, abs/1711.06238.</span><a href="#fnref:2" rev="footnote"> ↩</a></li><li id="fn:3"><span style="display: inline-block; vertical-align: top; padding-right: 10px;">3.</span><span style="display: inline-block; vertical-align: top;">Preksha Nema, Mitesh M. Khapra, Anirban Laha, and Balaraman Ravindran. 2017. Diversity driven attention model for query-based abstractive summarization. In Proceedings of the 55th Annual Meeting of the Association for Computational Linguistics, pages 1063–1072. Association for Computational Linguistics.</span><a href="#fnref:3" rev="footnote"> ↩</a></li></ol></div></div>
+      
+    </div>
+    
+    
+    
+
+    
+      <div>
+        
+    <div style="text-align:center;color: #ccc;font-size:14px;">
+    **** END of This Post. Thank for Your READING ****
+    </div>
+    <div style="text-align:center;color: #ccc;font-size:14px;">
+    If you have any Question, welcome to Email me or leave your comments below.
+    </div>
+
+      </div>
+    
+
+    
+
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>Post author:</strong>
+    Luxi Xing
+  </li>
+  <li class="post-copyright-link">
+    <strong>Post link:</strong>
+    <a href="http://xingluxi.github.io/2019/10/13/paper-emnlp2019-keag/" title="EMNLP2019 | Incorporating External Knowledge into Machine Reading for Generative Question Answering">http://xingluxi.github.io/2019/10/13/paper-emnlp2019-keag/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>Copyright Notice: </strong>
+    All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> unless stating additionally.
+  </li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/nlp/" rel="tag"><i class="fa fa-tag"></i> nlp</a>
+          
+            <a href="/tags/knowledge/" rel="tag"><i class="fa fa-tag"></i> knowledge</a>
+          
+            <a href="/tags/mrc/" rel="tag"><i class="fa fa-tag"></i> mrc</a>
+          
+            <a href="/tags/note/" rel="tag"><i class="fa fa-tag"></i> note</a>
+          
+            <a href="/tags/text-generation/" rel="tag"><i class="fa fa-tag"></i> text-generation</a>
+          
+            <a href="/tags/ml/" rel="tag"><i class="fa fa-tag"></i> ml</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/10/06/paper-emnlp2019-miss-fact/" rel="next" title="EMNLP2019 | What's Missing? A Knowledge Gap Guided Approach for Multi-hop Question Answering">
+                <i class="fa fa-chevron-left"></i> EMNLP2019 | What's Missing? A Knowledge Gap Guided Approach for Multi-hop Question Answering
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="lv-container" data-id="city" data-uid="MTAyMC80MjA1OC8xODYwNQ=="></div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.gif" alt="Luxi Xing">
+            
+              <p class="site-author-name" itemprop="name">Luxi Xing</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">46</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">44</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/XingLuxi" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://twitter.com/XingLuxi" target="_blank" title="Twitter">
+                      
+                        <i class="fa fa-fw fa-twitter"></i>Twitter</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:xingluxixlx@gmail.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#This-Work"><span class="nav-text">This Work</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Model-Knowledge-Enriched-Answer-Generator"><span class="nav-text">Model: Knowledge-Enriched Answer Generator</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-Seq2Seq"><span class="nav-text">1.Seq2Seq</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-Source-Selector"><span class="nav-text">2.Source Selector</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-Knowledge-Integration"><span class="nav-text">3.Knowledge Integration</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#3-1-Related-Fact-Extraction"><span class="nav-text">3.1 Related Fact Extraction</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-2-Fact-Selection"><span class="nav-text">3.2 Fact Selection</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Experiments"><span class="nav-text">Experiments</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Related-Works"><span class="nav-text">Related Works</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Analysis-amp-Summary"><span class="nav-text">Analysis &amp; Summary</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+            <span id="scrollpercent"><span>0</span>%</span>
+          
+        </div>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-grav"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Luxi Xing</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a></div>
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i> Site Total Visiters
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
+  
+
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+</body>
+</html>
