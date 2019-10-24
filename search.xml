@@ -9,9 +9,9 @@
       </categories>
       <tags>
         <tag>nlp</tag>
-        <tag>knowledge</tag>
         <tag>mrc</tag>
         <tag>paper</tag>
+        <tag>knowledge</tag>
       </tags>
   </entry>
   <entry>
@@ -23,9 +23,9 @@
       </categories>
       <tags>
         <tag>nlp</tag>
-        <tag>knowledge</tag>
         <tag>mrc</tag>
         <tag>note</tag>
+        <tag>knowledge</tag>
         <tag>text-generation</tag>
         <tag>ml</tag>
       </tags>
@@ -40,8 +40,8 @@
       <tags>
         <tag>nlp</tag>
         <tag>knowledge</tag>
-        <tag>dataset</tag>
         <tag>multi-hop</tag>
+        <tag>dataset</tag>
         <tag>qa</tag>
         <tag>multiple-choice</tag>
       </tags>
@@ -83,9 +83,9 @@
       </categories>
       <tags>
         <tag>nlp</tag>
-        <tag>knowledge</tag>
         <tag>mrc</tag>
         <tag>note</tag>
+        <tag>knowledge</tag>
         <tag>commonsense</tag>
         <tag>graph</tag>
       </tags>
@@ -99,9 +99,9 @@
       </categories>
       <tags>
         <tag>nlp</tag>
-        <tag>knowledge</tag>
         <tag>mrc</tag>
         <tag>note</tag>
+        <tag>knowledge</tag>
         <tag>commonsense</tag>
         <tag>graph</tag>
       </tags>
@@ -131,8 +131,8 @@
       </categories>
       <tags>
         <tag>nlp</tag>
-        <tag>knowledge</tag>
         <tag>mrc</tag>
+        <tag>knowledge</tag>
         <tag>qa</tag>
       </tags>
   </entry>
@@ -145,8 +145,8 @@
       </categories>
       <tags>
         <tag>nlp</tag>
-        <tag>knowledge</tag>
         <tag>note</tag>
+        <tag>knowledge</tag>
         <tag>wordnet</tag>
         <tag>pre-trained-lm</tag>
       </tags>
@@ -160,9 +160,9 @@
       </categories>
       <tags>
         <tag>nlp</tag>
-        <tag>knowledge</tag>
         <tag>mrc</tag>
         <tag>note</tag>
+        <tag>knowledge</tag>
         <tag>pre-trained-lm</tag>
       </tags>
   </entry>
@@ -175,9 +175,9 @@
       </categories>
       <tags>
         <tag>nlp</tag>
-        <tag>knowledge</tag>
         <tag>mrc</tag>
         <tag>note</tag>
+        <tag>knowledge</tag>
         <tag>wordnet</tag>
       </tags>
   </entry>
@@ -190,8 +190,8 @@
       </categories>
       <tags>
         <tag>nlp</tag>
-        <tag>knowledge</tag>
         <tag>note</tag>
+        <tag>knowledge</tag>
         <tag>commonsense</tag>
       </tags>
   </entry>
@@ -204,8 +204,8 @@
       </categories>
       <tags>
         <tag>nlp</tag>
-        <tag>knowledge</tag>
         <tag>note</tag>
+        <tag>knowledge</tag>
         <tag>reasoning</tag>
         <tag>kbqa</tag>
         <tag>graph</tag>
@@ -220,8 +220,8 @@
       </categories>
       <tags>
         <tag>nlp</tag>
-        <tag>knowledge</tag>
         <tag>note</tag>
+        <tag>knowledge</tag>
         <tag>tg</tag>
       </tags>
   </entry>
@@ -234,9 +234,9 @@
       </categories>
       <tags>
         <tag>nlp</tag>
-        <tag>knowledge</tag>
         <tag>mrc</tag>
         <tag>note</tag>
+        <tag>knowledge</tag>
       </tags>
   </entry>
   <entry>
@@ -248,9 +248,9 @@
       </categories>
       <tags>
         <tag>nlp</tag>
-        <tag>knowledge</tag>
         <tag>research</tag>
         <tag>note</tag>
+        <tag>knowledge</tag>
       </tags>
   </entry>
   <entry>
@@ -292,8 +292,8 @@
       </categories>
       <tags>
         <tag>nlp</tag>
-        <tag>knowledge</tag>
         <tag>mrc</tag>
+        <tag>knowledge</tag>
         <tag>reasoning</tag>
         <tag>commonsense</tag>
         <tag>survey</tag>
@@ -371,15 +371,15 @@
   <entry>
     <title><![CDATA[Knowledge-based MRC Papers]]></title>
     <url>%2F2019%2F03%2F10%2Fmrc-knowedge-paper-info%2F</url>
-    <content type="text"><![CDATA[A list of recent papers with respect to Knowledge-based Machine Reading Comprehension. table th:nth-of-type(2){ width: 60%; } Works on Knowledge-aware MRC Conf. Title Authors/Org. Note ACL2017 Leveraging knowledge bases in lstms for improving machine reading Yang, et al.CMU ACL2017 Reasoning with Heterogeneous Knowledge for Commonsense Machine Comprehension Hongyu Lin, et al. ACL2017 World knowledge for reading comprehension: Rare entity prediction with hierarchical lstms using external descriptions Long, et al.McGill University ACL2018 Knowledgeable Reader: Enhancing Cloze-Style Reading Comprehension with External Commonsense Knowledge Mihaylov, et al.Heidelberg University knreader-note 2018 Dynamic Integration of Background Knowledge in Neural NLU Systems Dirk Weissenborn, et al. note EMNLP2018 Commonsense for Generative Multi-Hop Question Answering Tasks Lisa Bauer mhpgm-note AAAI2018 Incorporating Structured Commonsense Knowledge in Story Completion (2018v1)ACL2019 Exploring Machine Reading Comprehension with Explicit KnowledgeExplicit Utilization of General Knowledge in Machine Reading Comprehension York University note ACL2018 Open Domain Question Answering Using Early Fusion of Knowledge Bases and Text CMU note AAAI2019 Improving Question Answering by Commonsense-Based Pre-Training MSRA note NAACL2019 Improving Machine Reading Comprehension with General Reading Strategies TencentAI Lab 2019 Improving Question Answering with External Knowledge note CIKM2019 Incorporating Relation Knowledge into Commonsense Reading Comprehension with Multi-task Learning AlibabaDAMO ACL2019 Enhancing Pre-Trained Language Representations with Rich Knowledge for Machine Reading Comprehension PKUBaidu note EMNLP2019 KagNet: Knowledge-Aware Graph Networks for Commonsense Reasoning note 2019 Align, Mask and Select: A Simple Method for Incorporating Commonsense Knowledge into Language Representation Models AlibabaDAMO 2019 Graph-Based Reasoning over Heterogeneous External Knowledge for Commonsense Question Answering MSRA note 2019 Exploring ways to incorporate additional knowledge to improve Natural Language Commonsense Question Answering Arizona State University note EMNLP2019 What’s Missing: A Knowledge Gap Guided Approach for Multi-hop Question Answering AI2 note MRC with Knowledge how to let the machine obtain Knowledge？ how to extract external knowledge? how to represent knowledge？ in which kind of format？ how to fuse the external knowledge? how to let the machine to learn Knowledge incrementally？ how to make the machine can automatically use Knowledge it already knows or it has been told？]]></content>
+    <content type="text"><![CDATA[A list of recent papers with respect to Knowledge-based Machine Reading Comprehension. This is the old collection version, please go to link for the latest version. table th:nth-of-type(2){ width: 60%; } Works on Knowledge-aware MRC Conf. Title Authors/Org. Note ACL2017 Leveraging knowledge bases in lstms for improving machine reading Yang, et al.CMU ACL2017 Reasoning with Heterogeneous Knowledge for Commonsense Machine Comprehension Hongyu Lin, et al. ACL2017 World knowledge for reading comprehension: Rare entity prediction with hierarchical lstms using external descriptions Long, et al.McGill University ACL2018 Knowledgeable Reader: Enhancing Cloze-Style Reading Comprehension with External Commonsense Knowledge Mihaylov, et al.Heidelberg University knreader-note 2018 Dynamic Integration of Background Knowledge in Neural NLU Systems Dirk Weissenborn, et al. note EMNLP2018 Commonsense for Generative Multi-Hop Question Answering Tasks Lisa Bauer mhpgm-note AAAI2018 Incorporating Structured Commonsense Knowledge in Story Completion (2018v1)ACL2019 Exploring Machine Reading Comprehension with Explicit KnowledgeExplicit Utilization of General Knowledge in Machine Reading Comprehension York University note ACL2018 Open Domain Question Answering Using Early Fusion of Knowledge Bases and Text CMU note AAAI2019 Improving Question Answering by Commonsense-Based Pre-Training MSRA note NAACL2019 Improving Machine Reading Comprehension with General Reading Strategies TencentAI Lab 2019 Improving Question Answering with External Knowledge note CIKM2019 Incorporating Relation Knowledge into Commonsense Reading Comprehension with Multi-task Learning AlibabaDAMO ACL2019 Enhancing Pre-Trained Language Representations with Rich Knowledge for Machine Reading Comprehension PKUBaidu note EMNLP2019 KagNet: Knowledge-Aware Graph Networks for Commonsense Reasoning note 2019 Align, Mask and Select: A Simple Method for Incorporating Commonsense Knowledge into Language Representation Models AlibabaDAMO 2019 Graph-Based Reasoning over Heterogeneous External Knowledge for Commonsense Question Answering MSRA note 2019 Exploring ways to incorporate additional knowledge to improve Natural Language Commonsense Question Answering Arizona State University note EMNLP2019 What’s Missing: A Knowledge Gap Guided Approach for Multi-hop Question Answering AI2 note MRC with Knowledge how to let the machine obtain Knowledge？ how to extract external knowledge? how to represent knowledge？ in which kind of format？ how to fuse the external knowledge? how to let the machine to learn Knowledge incrementally？ how to make the machine can automatically use Knowledge it already knows or it has been told？]]></content>
       <categories>
         <category>MRC-Paper-Intro</category>
       </categories>
       <tags>
         <tag>nlp</tag>
-        <tag>knowledge</tag>
         <tag>mrc</tag>
         <tag>paper</tag>
+        <tag>knowledge</tag>
       </tags>
   </entry>
   <entry>
@@ -391,9 +391,9 @@
       </categories>
       <tags>
         <tag>nlp</tag>
-        <tag>knowledge</tag>
         <tag>mrc</tag>
         <tag>note</tag>
+        <tag>knowledge</tag>
         <tag>nli</tag>
       </tags>
   </entry>
@@ -604,8 +604,8 @@
       </categories>
       <tags>
         <tag>nlp</tag>
-        <tag>knowledge</tag>
         <tag>note</tag>
+        <tag>knowledge</tag>
         <tag>nli</tag>
         <tag>wordnet</tag>
       </tags>
@@ -619,9 +619,9 @@
       </categories>
       <tags>
         <tag>nlp</tag>
-        <tag>knowledge</tag>
         <tag>mrc</tag>
         <tag>note</tag>
+        <tag>knowledge</tag>
       </tags>
   </entry>
   <entry>
@@ -633,8 +633,8 @@
       </categories>
       <tags>
         <tag>nlp</tag>
-        <tag>knowledge</tag>
         <tag>paper</tag>
+        <tag>knowledge</tag>
         <tag>text-generation</tag>
       </tags>
   </entry>
