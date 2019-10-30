@@ -3,15 +3,15 @@
   <entry>
     <title><![CDATA[Papers on Knowledge-based Machine Reading Comprehension]]></title>
     <url>%2F2019%2F10%2F23%2Fmrc-knowledge-paper-list%2F</url>
-    <content type="text"><![CDATA[A list of recent papers about Knowledge-based Machine Reading Comprehension (KMRC). Contributed by Luxi Xing and Yuqiang Xie. Institute of Information Engineering, Chinese Academy of Sciences, Beijing, China. Update on Oct. 23, 2019.(the current version only contains the works published on the conferences or journals, we will continuously update this list.) Content Survey Papers Benchmark-Datasets Cloze-Style-Tasks Span-Extraction-Tasks Multiple-Choice-Tasks Generation-Tasks Note: papers about KBQA will be not included in this list. table th:nth-of-type(1){ width: 60%; } Survey Papers Commonsense Reasoning for Natural Language Understanding: A Survey of Benchmarks, Resources, and Approaches. 2019. [paper / note] Authors: Shane Storks, Qianzi Gao, Joyce Y. Chai Neural Machine Reading Comprehension: Methods and Trends. 2019. [paper] Authors: Shanshan Liu, Xin Zhang, Sheng Zhang, Hui Wang, Weiming Zhang Machine Reading Comprehension: a Literature Review. 2019. [paper] Authors: Xin Zhang, An Yang, Sujian Li, Yizhong Wang Cloze Style Tasks Title Publish Tasks Links Reasoning with Heterogeneous Knowledge for Commonsense Machine Comprehension ACL2017 SCT paper World Knowledge for Reading Comprehension: Rare Entity Prediction with Hierarchical LSTMs Using External Descriptions EMNLP2017 Rare Entity Prediction paper Knowledgeable Reader: Enhancing Cloze-Style Reading Comprehension with External Commonsense Knowledge ACL2018 Common Nouns paper note A Multi-Attention based Neural Network with External Knowledge for Story Ending Predicting Task COLING2018 SCT paper Incorporating Structured Commonsense Knowledge in Story Completion AAAI2018 SCT paper Story Ending Prediction by Transferable BERT IJCAI2019 SCT paper Span Extraction Tasks Title Publish Tasks Links Dynamic Integration of Background Knowledge in Neural NLU Systems 2018 SQuAD/TriviaQA papernote Explicit Utilization of General Knowledge in Machine Reading Comprehension ACL2019 SQuAD paper note Enhancing Pre-Trained Language Representations with Rich Knowledge for Machine Reading Comprehension ACL2019 SQuAD/ReCoRD paper note Multiple Choice Tasks Title Publish Tasks Links Yuanfudao at SemEval-2018 Task 11: Three-way Attention and Relational Knowledge for Commonsense Machine Comprehension SemEval2018 SemEval-2018 Task 11 paper code Improving Question Answering by Commonsense-Based Pre-Training AAAI2019 ARC/OBQA/SemEval-2018 Task 11 paper Improving Machine Reading Comprehension with General Reading Strategies NAACL2019 ARC/ OBQA/ MCTest/SemEval-2018 Task 11/ SCT/ MultiRC paper code Ranking and Selecting Multi-Hop Knowledge Paths to Better Predict Human Needs NAACL2019 story commonsense paper code Incorporating Relation Knowledge into Commonsense Reading Comprehension with Multi-task Learning CIKM2019 SemEval-2018 Task 11 / SCT paper Explain Yourself! Leveraging Language Models for Commonsense Reasoning ACL2019 CSQA paper code note Careful Selection of Knowledge to solve Open Book Question Answering ACL2019 OBQA paper Improving Question Answering with External Knowledge EMNLPMRQA2019 ARC/OBQA paper note KagNet: Knowledge-Aware Graph Networks for Commonsense Reasoning EMNLP2019 CSQA paper code note What’s Missing: A Knowledge Gap Guided Approach for Multi-hop Question Answering EMNLP2019 OBQA paper note BIG MOOD: Relating Transformers to Explicit Commonsense Knowledge EMNLPCOIN2019 MCScripts v2 paper Generation TasksAlso known as Free-form Answer Tasks Title Publish Tasks Links Commonsense for Generative Multi-Hop Question Answering Tasks EMNLP2018 NarrativeQA/WikiHop paper code note COMET: Commonsense Transformers for Automatic Knowledge Graph Construction ACL2019 Atomic papercodenote Incorporating External Knowledge into Machine Reading for Generative Question Answering EMNLP2019 MS MARCO papernote Benchmark Datasets [COPA] Choice of Plausible Alternatives: An Evaluation of Commonsense Causal Reasoning. AAAI,2011. [paper / data] Authors: Melissa Roemmele, Cosmin Adrian Bejan, Andrew S. Gordon Type: Multiple-Choice; [WSC] The Winograd Schema Challenge. AAAI,2011. [paper /data] Authors: Hector J. Levesque, Ernest Davis, Leora Morgenstern Type: Multiple-Choice; [ROCStories; SCT] A Corpus and Cloze Evaluation for Deeper Understanding of Commonsense Stories. NAACL,2016. [paper / data] Authors: Nasrin Mostafazadeh, Nathanael Chambers, Xiaodong He, Devi Parikh, Dhruv Batra, Lucy Vanderwende, Pushmeet Kohli, James Allen Type: Cloze; [NarrativeQA] The NarrativeQA Reading Comprehension Challenge. TACL,2018. [paper / data] Authors: Tomáš Kočiský, Jonathan Schwarz, Phil Blunsom, Chris Dyer, Karl Moritz Hermann, Gábor Melis, Edward Grefenstette Type: Generation; [SemEval-2018 Task 11] MCScript: A Novel Dataset for Assessing Machine Comprehension Using Script Knowledge. LERC,2018. [paper / data] Authors: Simon Ostermann, Ashutosh Modi, Michael Roth, Stefan Thater, Manfred Pinkal Type: Multiple-Choice; [story-commonsense] Modeling Naive Psychology of Characters in Simple Commonsense Stories. ACL,2018. [paper / data] Authors: Hannah Rashkin, Antoine Bosselut, Maarten Sap, Kevin Knight, Yejin Choi Type: Multiple-Choice; Event2Mind: Commonsense Inference on Events, Intents, and Reactions. ACL,2018. [paper / data] Authors: Hannah Rashkin, Maarten Sap, Emily Allaway, Noah A. Smith, Yejin Choi Types: Generation; ATOMIC: An Atlas of Machine Commonsense for If-Then Reasoning. AAAI,2019. [paper / data] Authors: Maarten Sap, Ronan LeBras, Emily Allaway, Chandra Bhagavatula, Nicholas Lourie, Hannah Rashkin, Brendan Roof, Noah A. Smith, Yejin Choi Types: Generation; [ARC] Think you have Solved Question Answering? Try ARC, the AI2 Reasoning Challenge. 2018. [paper / data] Authors: Peter Clark, Isaac Cowhey, Oren Etzioni, Tushar Khot, Ashish Sabharwal, Carissa Schoenick, Oyvind Tafjord Type: Multiple-Choice; [OpenBookQA] Can a Suit of Armor Conduct Electricity? A New Dataset for Open Book Question Answering. EMNLP,2018. [paper / data] Authors: Todor Mihaylov, Peter Clark, Tushar Khot, Ashish Sabharwal Type: Multiple-Choice; ReCoRD: Bridging the Gap between Human and Machine Commonsense Reading Comprehension. 2018. [paper / data] Authors: Sheng Zhang, Xiaodong Liu, Jingjing Liu, Jianfeng Gao, Kevin Duh, Benjamin Van Durme Type: Cloze; CommonsenseQA: A Question Answering Challenge Targeting Commonsense Knowledge. NAACL,2019. [paper / data] Authors: Alon Talmor, Jonathan Herzig, Nicholas Lourie, Jonathan Berant Type: Multiple-Choice; ChID: A Large-scale Chinese IDiom Dataset for Cloze Test. ACL,2019. [paper / data] Authors: Chujie Zheng, Minlie Huang, Aixin Sun Type: Cloze; [sense-making] Does it Make Sense? And Why? A Pilot Study for Sense Making and Explanation. ACL,2019. [paper / data] Authors: Cunxiang Wang, Shuailong Liang, Yue Zhang, Xiaonan Li, Tian Gao Type: Multiple-Choice; HellaSwag: Can a Machine Really Finish Your Sentence? ACL,2019. [paper / data] Authors: Rowan Zellers, Ari Holtzman, Yonatan Bisk, Ali Farhadi, Yejin Choi Type: Multiple-Choice; SocialIQA: Commonsense Reasoning about Social Interactions. EMNLP,2019. [paper / data] Authors: Maarten Sap, Hannah Rashkin, Derek Chen, Ronan LeBras, Yejin Choi Type: Multiple-Choice; [ANLI] Abductive Commonsense Reasoning. 2019. [paper / data] Authors: Chandra Bhagavatula, Ronan Le Bras, Chaitanya Malaviya, Keisuke Sakaguchi, Ari Holtzman, Hannah Rashkin, Doug Downey, Scott Wen-tau Yih, Yejin Choi Type: Multiple-Choice; Cosmos QA: Machine Reading Comprehension with Contextual Commonsense Reasoning. EMNLP,2019. [paper / data] Authors: Lifu Huang, Ronan Le Bras, Chandra Bhagavatula, Yejin Choi Type: Multiple-Choice; Note: Only consider the benchmark datasets/tasks which require knowledge to complete. Other Paper List About MRCthunlp/RCPapers]]></content>
+    <content type="text"><![CDATA[A list of recent papers about Knowledge-based Machine Reading Comprehension (KMRC). Contributed by Luxi Xing and Yuqiang Xie. Institute of Information Engineering, Chinese Academy of Sciences, Beijing, China. Update on Oct. 23, 2019.(the current version only contains the works published on the conferences or journals, we will continuously update this list.) Content Survey Papers Benchmark-Datasets Cloze-Style-Tasks Span-Extraction-Tasks Multiple-Choice-Tasks Generation-Tasks Note: papers about KBQA will be not included in this list. table th:nth-of-type(1){ width: 60%; } Survey Papers Commonsense Reasoning for Natural Language Understanding: A Survey of Benchmarks, Resources, and Approaches. 2019. [paper / note] Authors: Shane Storks, Qianzi Gao, Joyce Y. Chai Neural Machine Reading Comprehension: Methods and Trends. 2019. [paper] Authors: Shanshan Liu, Xin Zhang, Sheng Zhang, Hui Wang, Weiming Zhang Machine Reading Comprehension: a Literature Review. 2019. [paper] Authors: Xin Zhang, An Yang, Sujian Li, Yizhong Wang Cloze Style Tasks Title Publish Tasks Links Reasoning with Heterogeneous Knowledge for Commonsense Machine Comprehension ACL2017 SCT paper World Knowledge for Reading Comprehension: Rare Entity Prediction with Hierarchical LSTMs Using External Descriptions EMNLP2017 Rare Entity Prediction paper Knowledgeable Reader: Enhancing Cloze-Style Reading Comprehension with External Commonsense Knowledge ACL2018 Common Nouns paper note A Multi-Attention based Neural Network with External Knowledge for Story Ending Predicting Task COLING2018 SCT paper Incorporating Structured Commonsense Knowledge in Story Completion AAAI2018 SCT paper Story Ending Prediction by Transferable BERT IJCAI2019 SCT paper Span Extraction Tasks Title Publish Tasks Links Dynamic Integration of Background Knowledge in Neural NLU Systems 2018 SQuAD/TriviaQA papernote Explicit Utilization of General Knowledge in Machine Reading Comprehension ACL2019 SQuAD paper note Enhancing Pre-Trained Language Representations with Rich Knowledge for Machine Reading Comprehension ACL2019 SQuAD/ReCoRD paper note Multiple Choice Tasks Title Publish Tasks Links Yuanfudao at SemEval-2018 Task 11: Three-way Attention and Relational Knowledge for Commonsense Machine Comprehension SemEval2018 SemEval-2018 Task 11 paper code Improving Question Answering by Commonsense-Based Pre-Training AAAI2019 ARC/OBQA/SemEval-2018 Task 11 paper Improving Machine Reading Comprehension with General Reading Strategies NAACL2019 ARC/ OBQA/ MCTest/SemEval-2018 Task 11/ SCT/ MultiRC paper code Ranking and Selecting Multi-Hop Knowledge Paths to Better Predict Human Needs NAACL2019 story commonsense paper code Incorporating Relation Knowledge into Commonsense Reading Comprehension with Multi-task Learning CIKM2019 SemEval-2018 Task 11 / SCT paper Explain Yourself! Leveraging Language Models for Commonsense Reasoning ACL2019 CSQA paper code note Careful Selection of Knowledge to solve Open Book Question Answering ACL2019 OBQA paper Improving Question Answering with External Knowledge EMNLPMRQA2019 ARC/OBQA paper note KagNet: Knowledge-Aware Graph Networks for Commonsense Reasoning EMNLP2019 CSQA paper code note What’s Missing: A Knowledge Gap Guided Approach for Multi-hop Question Answering EMNLP2019 OBQA paper note BIG MOOD: Relating Transformers to Explicit Commonsense Knowledge EMNLPCOIN2019 MCScripts v2 paper Exploring ways to incorporate additional knowledge to improve Natural Language Commonsense Question Answering 2019 ANLI/SocialIQA papernote Graph-Based Reasoning over Heterogeneous External Knowledge for Commonsense Question Answering 2019 CSQA papernote Generation TasksAlso known as Free-form Answer Tasks Title Publish Tasks Links Commonsense for Generative Multi-Hop Question Answering Tasks EMNLP2018 NarrativeQA/WikiHop paper code note COMET: Commonsense Transformers for Automatic Knowledge Graph Construction ACL2019 Atomic papercodenote Incorporating External Knowledge into Machine Reading for Generative Question Answering EMNLP2019 MS MARCO papernote Benchmark Datasets [COPA] Choice of Plausible Alternatives: An Evaluation of Commonsense Causal Reasoning. AAAI,2011. [paper / data] Authors: Melissa Roemmele, Cosmin Adrian Bejan, Andrew S. Gordon Type: Multiple-Choice; [WSC] The Winograd Schema Challenge. AAAI,2011. [paper /data] Authors: Hector J. Levesque, Ernest Davis, Leora Morgenstern Type: Multiple-Choice; [ROCStories; SCT] A Corpus and Cloze Evaluation for Deeper Understanding of Commonsense Stories. NAACL,2016. [paper / data] Authors: Nasrin Mostafazadeh, Nathanael Chambers, Xiaodong He, Devi Parikh, Dhruv Batra, Lucy Vanderwende, Pushmeet Kohli, James Allen Type: Cloze; [NarrativeQA] The NarrativeQA Reading Comprehension Challenge. TACL,2018. [paper / data] Authors: Tomáš Kočiský, Jonathan Schwarz, Phil Blunsom, Chris Dyer, Karl Moritz Hermann, Gábor Melis, Edward Grefenstette Type: Generation; [SemEval-2018 Task 11] MCScript: A Novel Dataset for Assessing Machine Comprehension Using Script Knowledge. LERC,2018. [paper / data] Authors: Simon Ostermann, Ashutosh Modi, Michael Roth, Stefan Thater, Manfred Pinkal Type: Multiple-Choice; [story-commonsense] Modeling Naive Psychology of Characters in Simple Commonsense Stories. ACL,2018. [paper / data] Authors: Hannah Rashkin, Antoine Bosselut, Maarten Sap, Kevin Knight, Yejin Choi Type: Multiple-Choice; Event2Mind: Commonsense Inference on Events, Intents, and Reactions. ACL,2018. [paper / data] Authors: Hannah Rashkin, Maarten Sap, Emily Allaway, Noah A. Smith, Yejin Choi Types: Generation; ATOMIC: An Atlas of Machine Commonsense for If-Then Reasoning. AAAI,2019. [paper / data] Authors: Maarten Sap, Ronan LeBras, Emily Allaway, Chandra Bhagavatula, Nicholas Lourie, Hannah Rashkin, Brendan Roof, Noah A. Smith, Yejin Choi Types: Generation; [ARC] Think you have Solved Question Answering? Try ARC, the AI2 Reasoning Challenge. 2018. [paper / data] Authors: Peter Clark, Isaac Cowhey, Oren Etzioni, Tushar Khot, Ashish Sabharwal, Carissa Schoenick, Oyvind Tafjord Type: Multiple-Choice; [OpenBookQA] Can a Suit of Armor Conduct Electricity? A New Dataset for Open Book Question Answering. EMNLP,2018. [paper / data] Authors: Todor Mihaylov, Peter Clark, Tushar Khot, Ashish Sabharwal Type: Multiple-Choice; ReCoRD: Bridging the Gap between Human and Machine Commonsense Reading Comprehension. 2018. [paper / data] Authors: Sheng Zhang, Xiaodong Liu, Jingjing Liu, Jianfeng Gao, Kevin Duh, Benjamin Van Durme Type: Cloze; CommonsenseQA: A Question Answering Challenge Targeting Commonsense Knowledge. NAACL,2019. [paper / data] Authors: Alon Talmor, Jonathan Herzig, Nicholas Lourie, Jonathan Berant Type: Multiple-Choice; ChID: A Large-scale Chinese IDiom Dataset for Cloze Test. ACL,2019. [paper / data] Authors: Chujie Zheng, Minlie Huang, Aixin Sun Type: Cloze; [sense-making] Does it Make Sense? And Why? A Pilot Study for Sense Making and Explanation. ACL,2019. [paper / data] Authors: Cunxiang Wang, Shuailong Liang, Yue Zhang, Xiaonan Li, Tian Gao Type: Multiple-Choice; HellaSwag: Can a Machine Really Finish Your Sentence? ACL,2019. [paper / data] Authors: Rowan Zellers, Ari Holtzman, Yonatan Bisk, Ali Farhadi, Yejin Choi Type: Multiple-Choice; SocialIQA: Commonsense Reasoning about Social Interactions. EMNLP,2019. [paper / data] Authors: Maarten Sap, Hannah Rashkin, Derek Chen, Ronan LeBras, Yejin Choi Type: Multiple-Choice; [ANLI] Abductive Commonsense Reasoning. 2019. [paper / data] Authors: Chandra Bhagavatula, Ronan Le Bras, Chaitanya Malaviya, Keisuke Sakaguchi, Ari Holtzman, Hannah Rashkin, Doug Downey, Scott Wen-tau Yih, Yejin Choi Type: Multiple-Choice; Cosmos QA: Machine Reading Comprehension with Contextual Commonsense Reasoning. EMNLP,2019. [paper / data] Authors: Lifu Huang, Ronan Le Bras, Chandra Bhagavatula, Yejin Choi Type: Multiple-Choice; Note: Only consider the benchmark datasets/tasks which require knowledge to complete. Other Paper List About MRCthunlp/RCPapers]]></content>
       <categories>
         <category>MRC-Paper-Intro</category>
       </categories>
       <tags>
         <tag>nlp</tag>
+        <tag>knowledge</tag>
         <tag>mrc</tag>
         <tag>paper</tag>
-        <tag>knowledge</tag>
       </tags>
   </entry>
   <entry>
@@ -23,9 +23,9 @@
       </categories>
       <tags>
         <tag>nlp</tag>
+        <tag>knowledge</tag>
         <tag>mrc</tag>
         <tag>note</tag>
-        <tag>knowledge</tag>
         <tag>text-generation</tag>
         <tag>ml</tag>
       </tags>
@@ -83,9 +83,9 @@
       </categories>
       <tags>
         <tag>nlp</tag>
+        <tag>knowledge</tag>
         <tag>mrc</tag>
         <tag>note</tag>
-        <tag>knowledge</tag>
         <tag>commonsense</tag>
         <tag>graph</tag>
       </tags>
@@ -99,9 +99,9 @@
       </categories>
       <tags>
         <tag>nlp</tag>
+        <tag>knowledge</tag>
         <tag>mrc</tag>
         <tag>note</tag>
-        <tag>knowledge</tag>
         <tag>commonsense</tag>
         <tag>graph</tag>
       </tags>
@@ -131,8 +131,8 @@
       </categories>
       <tags>
         <tag>nlp</tag>
-        <tag>mrc</tag>
         <tag>knowledge</tag>
+        <tag>mrc</tag>
         <tag>qa</tag>
       </tags>
   </entry>
@@ -145,8 +145,8 @@
       </categories>
       <tags>
         <tag>nlp</tag>
-        <tag>note</tag>
         <tag>knowledge</tag>
+        <tag>note</tag>
         <tag>wordnet</tag>
         <tag>pre-trained-lm</tag>
       </tags>
@@ -160,9 +160,9 @@
       </categories>
       <tags>
         <tag>nlp</tag>
+        <tag>knowledge</tag>
         <tag>mrc</tag>
         <tag>note</tag>
-        <tag>knowledge</tag>
         <tag>pre-trained-lm</tag>
       </tags>
   </entry>
@@ -175,9 +175,9 @@
       </categories>
       <tags>
         <tag>nlp</tag>
+        <tag>knowledge</tag>
         <tag>mrc</tag>
         <tag>note</tag>
-        <tag>knowledge</tag>
         <tag>wordnet</tag>
       </tags>
   </entry>
@@ -190,8 +190,8 @@
       </categories>
       <tags>
         <tag>nlp</tag>
-        <tag>note</tag>
         <tag>knowledge</tag>
+        <tag>note</tag>
         <tag>commonsense</tag>
       </tags>
   </entry>
@@ -204,11 +204,11 @@
       </categories>
       <tags>
         <tag>nlp</tag>
-        <tag>note</tag>
         <tag>knowledge</tag>
+        <tag>note</tag>
         <tag>reasoning</tag>
-        <tag>kbqa</tag>
         <tag>graph</tag>
+        <tag>kbqa</tag>
       </tags>
   </entry>
   <entry>
@@ -220,8 +220,8 @@
       </categories>
       <tags>
         <tag>nlp</tag>
-        <tag>note</tag>
         <tag>knowledge</tag>
+        <tag>note</tag>
         <tag>tg</tag>
       </tags>
   </entry>
@@ -234,9 +234,9 @@
       </categories>
       <tags>
         <tag>nlp</tag>
+        <tag>knowledge</tag>
         <tag>mrc</tag>
         <tag>note</tag>
-        <tag>knowledge</tag>
       </tags>
   </entry>
   <entry>
@@ -248,9 +248,9 @@
       </categories>
       <tags>
         <tag>nlp</tag>
+        <tag>knowledge</tag>
         <tag>research</tag>
         <tag>note</tag>
-        <tag>knowledge</tag>
       </tags>
   </entry>
   <entry>
@@ -292,8 +292,8 @@
       </categories>
       <tags>
         <tag>nlp</tag>
-        <tag>mrc</tag>
         <tag>knowledge</tag>
+        <tag>mrc</tag>
         <tag>reasoning</tag>
         <tag>commonsense</tag>
         <tag>survey</tag>
@@ -377,9 +377,9 @@
       </categories>
       <tags>
         <tag>nlp</tag>
+        <tag>knowledge</tag>
         <tag>mrc</tag>
         <tag>paper</tag>
-        <tag>knowledge</tag>
       </tags>
   </entry>
   <entry>
@@ -391,9 +391,9 @@
       </categories>
       <tags>
         <tag>nlp</tag>
+        <tag>knowledge</tag>
         <tag>mrc</tag>
         <tag>note</tag>
-        <tag>knowledge</tag>
         <tag>nli</tag>
       </tags>
   </entry>
@@ -604,8 +604,8 @@
       </categories>
       <tags>
         <tag>nlp</tag>
-        <tag>note</tag>
         <tag>knowledge</tag>
+        <tag>note</tag>
         <tag>nli</tag>
         <tag>wordnet</tag>
       </tags>
@@ -619,9 +619,9 @@
       </categories>
       <tags>
         <tag>nlp</tag>
+        <tag>knowledge</tag>
         <tag>mrc</tag>
         <tag>note</tag>
-        <tag>knowledge</tag>
       </tags>
   </entry>
   <entry>
@@ -633,8 +633,8 @@
       </categories>
       <tags>
         <tag>nlp</tag>
-        <tag>paper</tag>
         <tag>knowledge</tag>
+        <tag>paper</tag>
         <tag>text-generation</tag>
       </tags>
   </entry>
