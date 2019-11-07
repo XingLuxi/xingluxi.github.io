@@ -10,8 +10,8 @@
       <tags>
         <tag>nlp</tag>
         <tag>knowledge</tag>
-        <tag>mrc</tag>
         <tag>paper</tag>
+        <tag>mrc</tag>
       </tags>
   </entry>
   <entry>
@@ -24,8 +24,8 @@
       <tags>
         <tag>nlp</tag>
         <tag>knowledge</tag>
-        <tag>mrc</tag>
         <tag>text-generation</tag>
+        <tag>mrc</tag>
         <tag>note</tag>
         <tag>ml</tag>
       </tags>
@@ -378,8 +378,8 @@
       <tags>
         <tag>nlp</tag>
         <tag>knowledge</tag>
-        <tag>mrc</tag>
         <tag>paper</tag>
+        <tag>mrc</tag>
       </tags>
   </entry>
   <entry>
@@ -493,8 +493,8 @@
       </categories>
       <tags>
         <tag>nlp</tag>
-        <tag>mrc</tag>
         <tag>paper</tag>
+        <tag>mrc</tag>
         <tag>research</tag>
       </tags>
   </entry>
@@ -521,8 +521,8 @@
       </categories>
       <tags>
         <tag>nlp</tag>
-        <tag>mrc</tag>
         <tag>paper</tag>
+        <tag>mrc</tag>
         <tag>dataset</tag>
       </tags>
   </entry>
@@ -613,7 +613,7 @@
   <entry>
     <title><![CDATA[Knowledgeable Reader Enhancing Cloze-Style Reading Comprehension with External Commonsense Knowledge]]></title>
     <url>%2F2019%2F01%2F09%2Fpaper-knreader%2F</url>
-    <content type="text"><![CDATA[Knowledgeable Reader: Enhancing Cloze-Style Reading Comprehension with External Commonsense Knowledge ACL,2018. Todor Mihaylov, et al. Motivation Model Framework Experiments]]></content>
+    <content type="text"><![CDATA[Title: Knowledgeable Reader: Enhancing Cloze-Style Reading Comprehension with External Commonsense KnowledgeAuthors: Todor Mihaylov, et al.Published: ACL,2019 Motivation Model Framework Experiments]]></content>
       <categories>
         <category>Paper-Note</category>
       </categories>
@@ -622,6 +622,7 @@
         <tag>knowledge</tag>
         <tag>mrc</tag>
         <tag>note</tag>
+        <tag>cloze</tag>
       </tags>
   </entry>
   <entry>
