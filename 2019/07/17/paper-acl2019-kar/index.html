@@ -75,7 +75,7 @@
 
 
 
-  <meta name="keywords" content="nlp,knowledge,mrc,note,wordnet,">
+  <meta name="keywords" content="nlp,mrc,note,knowledge,wordnet,">
 
 
 
@@ -87,7 +87,7 @@
 
 
 <meta name="description" content="Title: Explicit Utilization of General Knowledge in Machine Reading ComprehensionAuthor: Chao Wang, Hui JiangOrg.: York UniversityPublished: ACL,2019Old Version: Exploring Machine Reading Comprehensi">
-<meta name="keywords" content="nlp,knowledge,mrc,note,wordnet">
+<meta name="keywords" content="nlp,mrc,note,knowledge,wordnet">
 <meta property="og:type" content="article">
 <meta property="og:title" content="ACL2019 | Explicit Utilization of General Knowledge in Machine Reading Comprehension">
 <meta property="og:url" content="http://xingluxi.github.io/2019/07/17/paper-acl2019-kar/index.html">
@@ -97,7 +97,7 @@
 <meta property="og:image" content="http://xingluxi.github.io/images/paper-acl2019-kar/data-example.png">
 <meta property="og:image" content="http://xingluxi.github.io/images/paper-acl2019-kar/model-kar.png">
 <meta property="og:image" content="http://xingluxi.github.io/images/paper-acl2019-kar/exp-k.png">
-<meta property="og:updated_time" content="2019-09-16T12:23:26.713Z">
+<meta property="og:updated_time" content="2019-11-11T02:46:37.467Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="ACL2019 | Explicit Utilization of General Knowledge in Machine Reading Comprehension">
 <meta name="twitter:description" content="Title: Explicit Utilization of General Knowledge in Machine Reading ComprehensionAuthor: Chao Wang, Hui JiangOrg.: York UniversityPublished: ACL,2019Old Version: Exploring Machine Reading Comprehensi">
@@ -351,8 +351,8 @@
               
                 <span class="post-meta-item-text">Post modified&#58;</span>
               
-              <time title="Post modified" itemprop="dateModified" datetime="2019-09-16T20:23:26+08:00">
-                2019-09-16
+              <time title="Post modified" itemprop="dateModified" datetime="2019-11-11T10:46:37+08:00">
+                2019-11-11
               </time>
             
           </span>
@@ -406,7 +406,7 @@
                   <span class="post-meta-item-text">Words count in article&#58;</span>
                 
                 <span title="Words count in article">
-                  992
+                  999
                 </span>
               
 
@@ -529,13 +529,14 @@
 </ul>
 <p>Knowledge Aided Mutual Attention</p>
 <ul>
-<li>利用提起抽取好的 general Knowledge 为每个词 $w$ 构建 增强的上下文表示 $c_w^*$<ul>
+<li>利用提前抽取好的 general Knowledge 为每个词 $w$ 构建 增强的上下文表示 $c_w^*$<ul>
 <li>通过 $E_w$ 和 原始上下文向量 $C_p$ 的对应关系 得到 matching context embeddings $Z \in \mathbb{R}^{d\times |E_w|}$</li>
 <li>计算 matching vector $c_w^+$<ul>
 <li>$t_i = v_c^{\top} tanh(W_c x_i + U_c c_w) \in \mathbb{R}$</li>
 <li>$c_w^+ = Z \text{ softmax} ({t_1,…,t_{|E_w|}}) \in \mathbb{R}^{d}$</li>
 </ul>
 </li>
+<li>$c_w^* = \text{ReLU}( \text{MLP}([c_w ; c_w^+]) )$ </li>
 </ul>
 </li>
 <li>attention 的计算方式 同 BIDAF</li>
@@ -603,11 +604,11 @@
           
             <a href="/tags/nlp/" rel="tag"><i class="fa fa-tag"></i> nlp</a>
           
-            <a href="/tags/knowledge/" rel="tag"><i class="fa fa-tag"></i> knowledge</a>
-          
             <a href="/tags/mrc/" rel="tag"><i class="fa fa-tag"></i> mrc</a>
           
             <a href="/tags/note/" rel="tag"><i class="fa fa-tag"></i> note</a>
+          
+            <a href="/tags/knowledge/" rel="tag"><i class="fa fa-tag"></i> knowledge</a>
           
             <a href="/tags/wordnet/" rel="tag"><i class="fa fa-tag"></i> wordnet</a>
           
