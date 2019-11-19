@@ -23,9 +23,9 @@
       </categories>
       <tags>
         <tag>nlp</tag>
+        <tag>mrc</tag>
         <tag>paper</tag>
         <tag>knowledge</tag>
-        <tag>mrc</tag>
       </tags>
   </entry>
   <entry>
@@ -37,9 +37,9 @@
       </categories>
       <tags>
         <tag>nlp</tag>
+        <tag>mrc</tag>
         <tag>paper</tag>
         <tag>knowledge</tag>
-        <tag>mrc</tag>
       </tags>
   </entry>
   <entry>
@@ -51,9 +51,9 @@
       </categories>
       <tags>
         <tag>nlp</tag>
+        <tag>mrc</tag>
         <tag>paper</tag>
         <tag>knowledge</tag>
-        <tag>mrc</tag>
       </tags>
   </entry>
   <entry>
@@ -65,9 +65,9 @@
       </categories>
       <tags>
         <tag>nlp</tag>
+        <tag>mrc</tag>
         <tag>knowledge</tag>
         <tag>text-generation</tag>
-        <tag>mrc</tag>
         <tag>note</tag>
         <tag>ml</tag>
       </tags>
@@ -82,8 +82,8 @@
       <tags>
         <tag>nlp</tag>
         <tag>knowledge</tag>
-        <tag>multi-hop</tag>
         <tag>dataset</tag>
+        <tag>multi-hop</tag>
         <tag>qa</tag>
         <tag>multiple-choice</tag>
       </tags>
@@ -125,8 +125,8 @@
       </categories>
       <tags>
         <tag>nlp</tag>
-        <tag>knowledge</tag>
         <tag>mrc</tag>
+        <tag>knowledge</tag>
         <tag>note</tag>
         <tag>commonsense</tag>
         <tag>graph</tag>
@@ -141,8 +141,8 @@
       </categories>
       <tags>
         <tag>nlp</tag>
-        <tag>knowledge</tag>
         <tag>mrc</tag>
+        <tag>knowledge</tag>
         <tag>note</tag>
         <tag>commonsense</tag>
         <tag>graph</tag>
@@ -173,8 +173,8 @@
       </categories>
       <tags>
         <tag>nlp</tag>
-        <tag>knowledge</tag>
         <tag>mrc</tag>
+        <tag>knowledge</tag>
         <tag>qa</tag>
       </tags>
   </entry>
@@ -202,8 +202,8 @@
       </categories>
       <tags>
         <tag>nlp</tag>
-        <tag>knowledge</tag>
         <tag>mrc</tag>
+        <tag>knowledge</tag>
         <tag>note</tag>
         <tag>pre-trained-lm</tag>
       </tags>
@@ -217,8 +217,8 @@
       </categories>
       <tags>
         <tag>nlp</tag>
-        <tag>knowledge</tag>
         <tag>mrc</tag>
+        <tag>knowledge</tag>
         <tag>note</tag>
         <tag>wordnet</tag>
       </tags>
@@ -276,8 +276,8 @@
       </categories>
       <tags>
         <tag>nlp</tag>
-        <tag>knowledge</tag>
         <tag>mrc</tag>
+        <tag>knowledge</tag>
         <tag>note</tag>
       </tags>
   </entry>
@@ -290,8 +290,8 @@
       </categories>
       <tags>
         <tag>nlp</tag>
-        <tag>knowledge</tag>
         <tag>research</tag>
+        <tag>knowledge</tag>
         <tag>note</tag>
       </tags>
   </entry>
@@ -334,8 +334,8 @@
       </categories>
       <tags>
         <tag>nlp</tag>
-        <tag>knowledge</tag>
         <tag>mrc</tag>
+        <tag>knowledge</tag>
         <tag>reasoning</tag>
         <tag>commonsense</tag>
         <tag>survey</tag>
@@ -419,9 +419,9 @@
       </categories>
       <tags>
         <tag>nlp</tag>
+        <tag>mrc</tag>
         <tag>paper</tag>
         <tag>knowledge</tag>
-        <tag>mrc</tag>
       </tags>
   </entry>
   <entry>
@@ -433,8 +433,8 @@
       </categories>
       <tags>
         <tag>nlp</tag>
-        <tag>knowledge</tag>
         <tag>mrc</tag>
+        <tag>knowledge</tag>
         <tag>note</tag>
         <tag>nli</tag>
       </tags>
@@ -535,8 +535,8 @@
       </categories>
       <tags>
         <tag>nlp</tag>
-        <tag>paper</tag>
         <tag>mrc</tag>
+        <tag>paper</tag>
         <tag>research</tag>
       </tags>
   </entry>
@@ -563,8 +563,8 @@
       </categories>
       <tags>
         <tag>nlp</tag>
-        <tag>paper</tag>
         <tag>mrc</tag>
+        <tag>paper</tag>
         <tag>dataset</tag>
       </tags>
   </entry>
@@ -661,8 +661,8 @@
       </categories>
       <tags>
         <tag>nlp</tag>
-        <tag>knowledge</tag>
         <tag>mrc</tag>
+        <tag>knowledge</tag>
         <tag>note</tag>
         <tag>cloze</tag>
       </tags>
