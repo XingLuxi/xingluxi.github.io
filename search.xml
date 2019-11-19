@@ -1,6 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[Wluper Blog - Dialogue System]]></title>
+    <url>%2F2019%2F11%2F19%2Fnote-20191119-wluper-blog-dialogue%2F</url>
+    <content type="text"><![CDATA[Blog series about Dialogue Systems by wluper: Part 0: An overview of Conversational AI https://medium.com/voice-tech-podcast/an-overview-of-conversational-ai-174adc295f1e Part 1: Not another Conversation AI report, But an overview on SOTA and Emerging Dialogue Management - State Tracking https://medium.com/wluper/not-another-conversational-ai-report-4a094337e6f1 Part 2: How do Dialogue Systems decide what to say or which actions to take? - Dialogue Policies https://medium.com/wluper/how-do-dialogue-systems-decide-what-to-say-or-which-actions-to-take-b32ca223aff1 Part 3: Common SenseTBU Part 4: Dynamic MemoryTBU Part 5: LearningTBU Appendix:Full list of references and links: https://wluper.com/appendix]]></content>
+      <categories>
+        <category>NLP-Resource</category>
+      </categories>
+      <tags>
+        <tag>nlp</tag>
+        <tag>tutorial</tag>
+        <tag>dialogue</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[EMNLP 2019 Highlight and Resource]]></title>
     <url>%2F2019%2F11%2F19%2Fnote-20191119-emnlp2019-resource%2F</url>
     <content type="text"><![CDATA[part of this post refers from: NLP News by Sebastian Ruder Some Tutorials Data Collection and End-to-End Learning for Conversational AI by PolyAI link backup link Graph-based Deep Learning in Natural Language Processing by Shikhar Vashishth code link slide link Semantic Specialization of Distributional Word Vectors by Goran Glavas, Deoardo Ponti, Ivan Vulic google doc link backup link Topic: A SOTA-less, novelty-less journey into Neural Sequence Models by Kyunghyun Cho google drive link backup link Topic：cross-lingual and cross-domain learning by Barbara Plank at the DeepLo 2019 workshop dropbox link backup link Highlight Blogs Michael Galkin’s two-part blog posts about Knowledge Graphs &amp; NLP Part 1 Part 2 Naver Labs Europe’s blog link]]></content>
@@ -9,9 +22,7 @@
       </categories>
       <tags>
         <tag>nlp</tag>
-        <tag>mrc</tag>
-        <tag>research</tag>
-        <tag>report</tag>
+        <tag>tutorial</tag>
       </tags>
   </entry>
   <entry>
@@ -249,8 +260,8 @@
         <tag>knowledge</tag>
         <tag>note</tag>
         <tag>reasoning</tag>
-        <tag>graph</tag>
         <tag>kbqa</tag>
+        <tag>graph</tag>
       </tags>
   </entry>
   <entry>
