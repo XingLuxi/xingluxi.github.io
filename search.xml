@@ -3,7 +3,7 @@
   <entry>
     <title><![CDATA[Wluper Blog - Dialogue System]]></title>
     <url>%2F2019%2F11%2F19%2Fnote-20191119-wluper-blog-dialogue%2F</url>
-    <content type="text"><![CDATA[Blog series about Dialogue Systems by wluper: Part 0: An overview of Conversational AI https://medium.com/voice-tech-podcast/an-overview-of-conversational-ai-174adc295f1e Part 1: Not another Conversation AI report, But an overview on SOTA and Emerging Dialogue Management - State Tracking https://medium.com/wluper/not-another-conversational-ai-report-4a094337e6f1 Part 2: How do Dialogue Systems decide what to say or which actions to take? - Dialogue Policies https://medium.com/wluper/how-do-dialogue-systems-decide-what-to-say-or-which-actions-to-take-b32ca223aff1 Part 3: Common SenseTBU Part 4: Dynamic MemoryTBU Part 5: LearningTBU Appendix:Full list of references and links: https://wluper.com/appendix]]></content>
+    <content type="text"><![CDATA[Blog series about Dialogue Systems by wluper: Part 0: OverviewAn overview of Conversational AI https://medium.com/voice-tech-podcast/an-overview-of-conversational-ai-174adc295f1e Part 1: State TrackingNot another Conversation AI report, But an overview on SOTA and Emerging Dialogue Management. https://medium.com/wluper/not-another-conversational-ai-report-4a094337e6f1 Part 2: Dialogue PoliciesHow do Dialogue Systems decide what to say or which actions to take? https://medium.com/wluper/how-do-dialogue-systems-decide-what-to-say-or-which-actions-to-take-b32ca223aff1 Part 3: Common SenseTBU Part 4: Dynamic MemoryTBU Part 5: LearningTBU Appendix:Full list of references and links: https://wluper.com/appendix]]></content>
       <categories>
         <category>NLP-Resource</category>
       </categories>
@@ -302,8 +302,8 @@
       <tags>
         <tag>nlp</tag>
         <tag>knowledge</tag>
-        <tag>research</tag>
         <tag>note</tag>
+        <tag>research</tag>
       </tags>
   </entry>
   <entry>
@@ -389,8 +389,8 @@
       <tags>
         <tag>nlp</tag>
         <tag>mrc</tag>
-        <tag>research</tag>
         <tag>note</tag>
+        <tag>research</tag>
       </tags>
   </entry>
   <entry>
@@ -403,8 +403,8 @@
       <tags>
         <tag>nlp</tag>
         <tag>mrc</tag>
-        <tag>research</tag>
         <tag>note</tag>
+        <tag>research</tag>
       </tags>
   </entry>
   <entry>
@@ -504,8 +504,8 @@
       <tags>
         <tag>nlp</tag>
         <tag>mrc</tag>
-        <tag>research</tag>
         <tag>note</tag>
+        <tag>research</tag>
         <tag>cs-know</tag>
       </tags>
   </entry>
