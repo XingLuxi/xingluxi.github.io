@@ -35,22 +35,22 @@
       <tags>
         <tag>nlp</tag>
         <tag>knowledge</tag>
-        <tag>mrc</tag>
         <tag>paper</tag>
+        <tag>mrc</tag>
       </tags>
   </entry>
   <entry>
     <title><![CDATA[Papers on Multiple-Hop Machine Reading Comprehension]]></title>
     <url>%2F2019%2F11%2F08%2Fmrc-paper-list-multi-hop%2F</url>
-    <content type="text"><![CDATA[A list of recent papers about Multiple-Hop Machine Reading Comprehension (MHMRC). Contributed by Luxi Xing and Yuqiang Xie. Institute of Information Engineering, Chinese Academy of Sciences, Beijing, China. Update on Nov. 08, 2019. Content Benchmark-Datasets WikiHop Tasks HotpotQA Tasks Benchmark Datasets [WikiHop] Constructing Datasets for Multi-hop Reading Comprehension Across Documents. TACL,2018. [paper / data] Authors: Johannes Welbl, Pontus Stenetorp, Sebastian Riedel HotpotQA: A Dataset for Diverse, Explainable Multi-hop Question Answering. EMNLP,2018. [paper / data] Authors: Zhilin Yang, Peng Qi, Saizheng Zhang, Yoshua Bengio, William Cohen, Ruslan Salakhutdinov, Christopher D. Manning WikiHop Tasks Title Publish Links Neural Models for Reasoning over Multiple Mentions using Coreference NAACL2018short paper Exploring graph-structured passage representation for multihop reading comprehension with graph neural networks. 2018. Exploiting explicit paths for multihop reading comprehension. 2018. BAG: Bi-directional Attention Entity Graph Convolutional Network for Multi-hop Reasoning Question Answering. NAACL,2019. Question Answering by Reasoning Across Documents with Graph Convolutional Networks. NAACL,2019. Multi-hop Reading Comprehension across Multiple Documents by Reasoning over Heterogeneous Graphs. ACL,2019. Coarse-Grain Fine-Grain Coattention Network for Multi-Evidence Question Answering. ICLR,2019. Explore, Propose, and Assemble: An Interpretable Model for Multi-Hop Reading Comprehension. ACL,2019. HotpotQA Tasks Title Publish Links Cognitive Graph for Multi-Hop Reading Comprehension at Scale ACL2019 paper Dynamically Fused Graph Network for Multi-hop Reasoning ACL2019 paper Answering while Summarizing: Multi-task Learning for Multi-Hop QA with Evidence Extraction ACL2019 paper Compositional Questions Do Not Necessitate Multi-hop Reasoning ACL2019 paper Multi-hop Reading Comprehension through Question Decomposition and Rescoring ACL2019 paper Answering Complex Open-domain Questions Through Iterative Query Generation EMNLP2019 paper Revealing the Importance of Semantic Retrieval for Machine Reading at Scale EMNLP2019 paper Identifying Supporting Facts for Multi-hop Question Answering with Document Graph Networks EMNLP2019TextGraphs-13 paper Self-Assembling Modular Networks for Interpretable Multi-Hop Reasoning EMNLP2019 paper Multi-step Entity-centric Information Retrieval for Multi-Hop Question Answering EMNLP2019MRQA paper Multi-Hop Paragraph Retrieval for Open-Domain Question Answering. ICLR,2019. Avoiding Reasoning Shortcuts: Adversarial Evaluation, Training, and Model Development for Multi-Hop QA. ACL,2019. Multi-hop Reading Comprehension through Question Decomposition and Rescoring. ACL,2019. Simple yet Effective Bridge Reasoning for Open-Domain Multi-Hop Question Answering. MRQA,2019. Answering Complex Open-domain Questions Through Iterative Query Generation. EMNLP,2019. Select, Answer and Explain: Interpretable Multi-hop Reading Comprehension over Multiple Documents. 2019. Propagate-Selector: Detecting Supporting Sentences for Question Answering via Graph Neural Networks. 2019. Multi-hop Question Answering via Reasoning Chains. 2019. A Road-map Towards Explainable Question Answering A Solution for Information Pollution. 2019. Hierarchical Graph Network for Multi-hop Question Answering. 2019. Multi-Paragraph Reasoning with Knowledge-enhanced Graph Neural Network. 2019. Neural Module Networks for Reasoning over Text. 2019.]]></content>
+    <content type="text"><![CDATA[A list of recent papers about Multiple-Hop Machine Reading Comprehension (MHMRC). Contributed by Luxi Xing and Yuqiang Xie. Institute of Information Engineering, Chinese Academy of Sciences, Beijing, China. Update on Nov. 08, 2019. table th:nth-of-type(1){ width: 80%; } Content Benchmark-Datasets WikiHop Tasks HotpotQA Tasks Benchmark Datasets [WikiHop] Constructing Datasets for Multi-hop Reading Comprehension Across Documents. TACL,2018. [paper / data] Authors: Johannes Welbl, Pontus Stenetorp, Sebastian Riedel HotpotQA: A Dataset for Diverse, Explainable Multi-hop Question Answering. EMNLP,2018. [paper / data] Authors: Zhilin Yang, Peng Qi, Saizheng Zhang, Yoshua Bengio, William Cohen, Ruslan Salakhutdinov, Christopher D. Manning WikiHop Tasks Title Publish Links Neural Models for Reasoning over Multiple Mentions using Coreference NAACL2018short paper Exploring graph-structured passage representation for multihop reading comprehension with graph neural networks. 2018. Exploiting explicit paths for multihop reading comprehension. 2018. BAG: Bi-directional Attention Entity Graph Convolutional Network for Multi-hop Reasoning Question Answering. NAACL,2019. Question Answering by Reasoning Across Documents with Graph Convolutional Networks. NAACL,2019. Multi-hop Reading Comprehension across Multiple Documents by Reasoning over Heterogeneous Graphs. ACL,2019. Coarse-Grain Fine-Grain Coattention Network for Multi-Evidence Question Answering. ICLR,2019. Explore, Propose, and Assemble: An Interpretable Model for Multi-Hop Reading Comprehension. ACL,2019. HotpotQA Tasks Title Publish Links Cognitive Graph for Multi-Hop Reading Comprehension at Scale ACL2019 paper Dynamically Fused Graph Network for Multi-hop Reasoning ACL2019 paper Answering while Summarizing: Multi-task Learning for Multi-Hop QA with Evidence Extraction ACL2019 paper Compositional Questions Do Not Necessitate Multi-hop Reasoning ACL2019 paper Multi-hop Reading Comprehension through Question Decomposition and Rescoring ACL2019 paper Answering Complex Open-domain Questions Through Iterative Query Generation EMNLP2019 paper Revealing the Importance of Semantic Retrieval for Machine Reading at Scale EMNLP2019 paper Identifying Supporting Facts for Multi-hop Question Answering with Document Graph Networks EMNLP2019TextGraphs-13 paper Self-Assembling Modular Networks for Interpretable Multi-Hop Reasoning EMNLP2019 paper Multi-step Entity-centric Information Retrieval for Multi-Hop Question Answering EMNLP2019MRQA paper Multi-Hop Paragraph Retrieval for Open-Domain Question Answering. ICLR,2019. Avoiding Reasoning Shortcuts: Adversarial Evaluation, Training, and Model Development for Multi-Hop QA. ACL,2019. Multi-hop Reading Comprehension through Question Decomposition and Rescoring. ACL,2019. Simple yet Effective Bridge Reasoning for Open-Domain Multi-Hop Question Answering. MRQA,2019. Answering Complex Open-domain Questions Through Iterative Query Generation. EMNLP,2019. Select, Answer and Explain: Interpretable Multi-hop Reading Comprehension over Multiple Documents. 2019. Propagate-Selector: Detecting Supporting Sentences for Question Answering via Graph Neural Networks. 2019. Multi-hop Question Answering via Reasoning Chains. 2019. A Road-map Towards Explainable Question Answering A Solution for Information Pollution. 2019. Hierarchical Graph Network for Multi-hop Question Answering. 2019. Multi-Paragraph Reasoning with Knowledge-enhanced Graph Neural Network. 2019. Neural Module Networks for Reasoning over Text. 2019.]]></content>
       <categories>
         <category>MRC-Paper-Intro</category>
       </categories>
       <tags>
         <tag>nlp</tag>
         <tag>knowledge</tag>
-        <tag>mrc</tag>
         <tag>paper</tag>
+        <tag>mrc</tag>
       </tags>
   </entry>
   <entry>
@@ -63,8 +63,8 @@
       <tags>
         <tag>nlp</tag>
         <tag>knowledge</tag>
-        <tag>mrc</tag>
         <tag>paper</tag>
+        <tag>mrc</tag>
       </tags>
   </entry>
   <entry>
@@ -77,9 +77,9 @@
       <tags>
         <tag>nlp</tag>
         <tag>knowledge</tag>
+        <tag>text-generation</tag>
         <tag>mrc</tag>
         <tag>note</tag>
-        <tag>text-generation</tag>
         <tag>ml</tag>
       </tags>
   </entry>
@@ -431,8 +431,8 @@
       <tags>
         <tag>nlp</tag>
         <tag>knowledge</tag>
-        <tag>mrc</tag>
         <tag>paper</tag>
+        <tag>mrc</tag>
       </tags>
   </entry>
   <entry>
@@ -489,8 +489,8 @@
       </categories>
       <tags>
         <tag>nlp</tag>
-        <tag>note</tag>
         <tag>text-generation</tag>
+        <tag>note</tag>
         <tag>commonsense</tag>
       </tags>
   </entry>
@@ -546,8 +546,8 @@
       </categories>
       <tags>
         <tag>nlp</tag>
-        <tag>mrc</tag>
         <tag>paper</tag>
+        <tag>mrc</tag>
         <tag>research</tag>
       </tags>
   </entry>
@@ -574,8 +574,8 @@
       </categories>
       <tags>
         <tag>nlp</tag>
-        <tag>mrc</tag>
         <tag>paper</tag>
+        <tag>mrc</tag>
         <tag>dataset</tag>
       </tags>
   </entry>
