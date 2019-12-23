@@ -1,0 +1,1467 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon-universe-32.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-universe-32.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-universe-16.ico?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/favicon-universe-32.ico?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="nlp,note,commonsense,lm,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="Probing LM with CommonSenseReferences:  Do Language Models have Common Sense? Commonsense Knowledge Mining from Pretrained Models. Evaluating Commonsense in Pre-trained Language Models. Why Do Masked">
+<meta name="keywords" content="nlp,note,commonsense,lm">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Probing LM with CommonSense">
+<meta property="og:url" content="http://xingluxi.github.io/2019/12/23/papers-prob-lm-csk/index.html">
+<meta property="og:site_name" content="Luxi Xing - Blog">
+<meta property="og:description" content="Probing LM with CommonSenseReferences:  Do Language Models have Common Sense? Commonsense Knowledge Mining from Pretrained Models. Evaluating Commonsense in Pre-trained Language Models. Why Do Masked">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://xingluxi.github.io/images/papers-prob-lm-csk/image-20191220000101665.png">
+<meta property="og:image" content="http://xingluxi.github.io/images/papers-prob-lm-csk/image-20191217153433549.png">
+<meta property="og:updated_time" content="2019-12-23T12:15:15.806Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Probing LM with CommonSense">
+<meta name="twitter:description" content="Probing LM with CommonSenseReferences:  Do Language Models have Common Sense? Commonsense Knowledge Mining from Pretrained Models. Evaluating Commonsense in Pre-trained Language Models. Why Do Masked">
+<meta name="twitter:image" content="http://xingluxi.github.io/images/papers-prob-lm-csk/image-20191220000101665.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":true,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://xingluxi.github.io/2019/12/23/papers-prob-lm-csk/">
+
+
+
+
+
+  <title>Probing LM with CommonSense | Luxi Xing - Blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Luxi Xing - Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Time is In NO Hurry</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            About
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            Search
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="Searching..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://xingluxi.github.io/2019/12/23/papers-prob-lm-csk/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Luxi Xing">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Luxi Xing - Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Probing LM with CommonSense</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-12-23T20:08:14+08:00">
+                2019-12-23
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Post modified&#58;</span>
+              
+              <time title="Post modified" itemprop="dateModified" datetime="2019-12-23T20:15:15+08:00">
+                2019-12-23
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Paper-Note/" itemprop="url" rel="index">
+                    <span itemprop="name">Paper-Note</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-area-chart"></i> Post Total Visits
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Words count in article&#58;</span>
+                
+                <span title="Words count in article">
+                  2k
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Reading time &asymp;</span>
+                
+                <span title="Reading time">
+                  7
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="Probing-LM-with-CommonSense"><a href="#Probing-LM-with-CommonSense" class="headerlink" title="Probing LM with CommonSense"></a>Probing LM with CommonSense</h1><p>References:</p>
+<ol>
+<li>Do Language Models have Common Sense?</li>
+<li>Commonsense Knowledge Mining from Pretrained Models.</li>
+<li>Evaluating Commonsense in Pre-trained Language Models.</li>
+<li>Why Do Masked Neural LMs Still Need Common Sense Knowledge.</li>
+</ol>
+<h2 id="Do-Language-Models-have-Common-Sense-2019"><a href="#Do-Language-Models-have-Common-Sense-2019" class="headerlink" title="Do Language Models have Common Sense? 2019."></a>Do Language Models have Common Sense? 2019.</h2><p>TBU</p>
+<h2 id="Commonsense-Knowledge-Mining-from-Pretrained-Models-EMNLP-2019"><a href="#Commonsense-Knowledge-Mining-from-Pretrained-Models-EMNLP-2019" class="headerlink" title="Commonsense Knowledge Mining from Pretrained Models. EMNLP,2019."></a>Commonsense Knowledge Mining from Pretrained Models. EMNLP,2019.</h2><p>动机：</p>
+<ul>
+<li>inferring commonsense knowledge 是NLP的关键挑战，但是训练数据很稀疏，之前的工作表明，有监督学习下的commonsense mining在新的数据上的效果不好。</li>
+<li>之前的利用常识知识增强机器学习模型方法：<ul>
+<li>1、直接用常识知识库对模型进行增强，虽然包含了高质量的信息，但是缺少覆盖度；</li>
+<li>2、常识知识库补全，由提高资源的覆盖度为驱动；</li>
+</ul>
+</li>
+</ul>
+<p>本文方法</p>
+<ul>
+<li><p>本文设计了一种利用大型预训练的双向语言模型生成常识知识的方法；</p>
+<ul>
+<li>通过转换 relational triples 为 masked sentence，可以使用PBLM通过估计两个实体的点互信息，对三元组的有效性进行排序；</li>
+<li>由于<strong>没有对PBLM的权重进行更新</strong>，本文的方法不会对知识库覆盖的常识知识产生偏置；</li>
+</ul>
+</li>
+<li><p>本文尝试利用语言模型的世界知识来直接识别常识事实；</p>
+<ul>
+<li>利用MLM来确定再一个可能的关系下，两个实体之间的点互信息；</li>
+<li>构建以句子的形式知识候选候选片段，可以用语言模型来近似一个文本的似然；</li>
+</ul>
+</li>
+<li><p>给定一个常识 <code>head-relation-tail</code> 三元组：$x = (h,r,t)$，确定一个数值 $y\in \mathbb{R}$ 来反应一个给定三元组反映真实知识的确信度；</p>
+<ul>
+<li><code>head</code> 和 <code>tail</code> 都是任意长度词序列：<ul>
+<li>$h = \{ h_1, h_2, …, h_n\}$</li>
+<li>$t = \{t_1, t_2, …, t_m \}$</li>
+</ul>
+</li>
+<li>关系 $r \in \mathbb{R}$ 属于一个已知的关系集合；</li>
+<li>目标：确定一个函数 $f$ 映射 relational triples 到一个有效性打分；<ul>
+<li>$f(x) = \sigma(\tau (x))$</li>
+<li>$\tau$  是句子生成函数；</li>
+<li>$\sigma$ 是打分模型；</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>本文方法依赖于两种类型的PLM：标准的单向模型和Masked双向模型；</p>
+</li>
+<li><p>Coherency Ranking (一致性打分)</p>
+<ul>
+<li>将三元组根据模板转化为一个自然语句，可以产生一个候选句子集合，根据预训练单向语言模型 $P_{coh}$ 选择具有最高log-likelihood打分的候选句子；<ul>
+<li>$S^\ast = argmax_{S\in \mathcal{S}} [logP_{coh}(S)]$</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>Scoring Generated Triples</p>
+<ul>
+<li>$PMI(t,h|r) = log p(t|h, r) - log p(t|r)$</li>
+<li>使用MLM模型 $P_{cmp}$ 计算打分;</li>
+<li>$p(t|h,r) = P_{cmp} (w_i = t| w_{1:i-1}, w_{i+1:m})$<ul>
+<li>由于 <code>tail</code> 可能是由$j$个词构成，使用贪婪近似的方法来估计其概率。</li>
+<li>首先 mask 所有 <code>tail</code> 中的词，然后计算每个的概率；</li>
+<li>然后找到最大概率的词的概率 $p_k$ ，重复 $j$ 次；</li>
+<li>最终的条件似然：$p(t|h,r) = \prod _{k=1}^{j} p_k$</li>
+</ul>
+</li>
+<li>边缘概率 $p(t|r)$ 计算类似，只不过在此时将 <code>head</code> 也全都mask掉；</li>
+<li><img src="/../images/papers-prob-lm-csk/image-20191220000101665.png" alt="image-1"></li>
+</ul>
+</li>
+<li><p>最终的分数：</p>
+<ul>
+<li>$PMI_{\lambda}(t,h|r) = \lambda log p (t|h,r) - log p(t|r)$</li>
+<li>$\lambda$ 是超参数；</li>
+<li>由于PMI的计算是对称的，我们还可以计算得到 $PMI_{\lambda}(h,t|r)$ 打分；</li>
+</ul>
+</li>
+<li><p>最终是将两个打分进行平均，以减少我们估计的方差；</p>
+</li>
+</ul>
+<h4 id="Cited"><a href="#Cited" class="headerlink" title="Cited"></a>Cited</h4><ul>
+<li>A recent study shows how to attain common sense knowledge from pretrained MNLMs without additional training (Feldman, Davison, and Rush 2019).</li>
+</ul>
+<h2 id="Evaluating-Commonsense-in-Pre-trained-Language-Models-AAAI-2020"><a href="#Evaluating-Commonsense-in-Pre-trained-Language-Models-AAAI-2020" class="headerlink" title="Evaluating Commonsense in Pre-trained Language Models. AAAI,2020."></a>Evaluating Commonsense in Pre-trained Language Models. AAAI,2020.</h2><p>Motivation:</p>
+<ul>
+<li>目前已经有很多工作对 Contextualize Representation（CR） 的 syntactic、semantic、word sense 知识进行了研究，并解释了为什么 CR 适用于这些任务；<ul>
+<li>但是鲜有工作调查 CR 中包含的 Commonsense Knowledge；</li>
+</ul>
+</li>
+<li>本文主要研究 GPT、BERT、XLNET、RoBERTa 的常识能力（Commonsense ability），通过在几个 challenging benchmarks 上进行测试，我们发现：<ul>
+<li>1、语言模型及其变体是提升模型常识能力的 effective objectives；</li>
+<li>2、双向上下文和更大的训练集是加分项；</li>
+<li>3、在需要更多推理步的任务上，现有的语言模型效果表现不佳；</li>
+<li>通过构造 dual test cases 测试模型的鲁棒性，结果表明，LMs对于这些cases表示出了困惑，LMs只是学到了surface层面的常识而不是的deep level；</li>
+</ul>
+</li>
+</ul>
+<p>本文的方法：</p>
+<ul>
+<li>benchmark包括：Conjunction Acceptability、Sense Making、WSC、SWAG、HellaSwag、Sense Making with Reasoning、Argument Reasoning Comprehension；<ul>
+<li>对上述数据集进行分类和重组，划分为 word-level 和 sentence-level 两组，从这两个层次来测试模型；<ul>
+<li>word-level：CA、WSC、SM；<ul>
+<li>关注 名词、动词、形容词、副词、代词、连词；</li>
+</ul>
+</li>
+<li>sentence-level：SMR、SWAG、HellaSwag、ARCT；<ul>
+<li>关注 常识推理；</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>常识能力</strong>可以分为两个方面：<ul>
+<li>拥有常识能力的模型应该具备关于世界的基础知识；</li>
+<li>拥有常识能力的模型应该具备基于常识知识的推理能力；</li>
+</ul>
+</li>
+<li>实验设计（Experiment Design）<ul>
+<li>从 单向上下文LM模型 和 双向上下文LM模型 两类分别考虑一个句子的打分；</li>
+<li>假设句子 $S$ 有 $n$ 个词组成 $S=\{w_1, …, w_{k-1}, w_k, w_{k+1}, …, w_n\}$，定义其得分为：<script type="math/tex">Score(S)=\frac{\sum_{k=1}^n log(P_\theta (w_k | context_k))}{n}</script><ul>
+<li>分母上的 $n$ 是为了消除句子长度的影响；</li>
+</ul>
+</li>
+<li>对于单向模型：<ul>
+<li>$context_k = S_{&lt;k} = \{w_1, …, w_{k-1}\}$</li>
+</ul>
+</li>
+<li>对于双向模型：<ul>
+<li>$context_k = S_{-k}$ ，表示移除 $S$ 中的第 $k$ 个词，被替换为 <code>[MASK]</code>；</li>
+</ul>
+</li>
+<li>直觉上，$P_{\theta}(w_k | context_k)$ 可以解释为 在给定 $context_k$ 的条件下 $w_k$ （出现）的可能性；</li>
+<li>在计算完句子打分之后，模型选择得分高的结果作为预测输出；</li>
+</ul>
+</li>
+<li>Robustness Test，通过几种方法构造dual test样例<ul>
+<li>add、delete、replace、swap two words；</li>
+<li>理论上，具备相关常识知识的模型，应该对于一对dual test样例给出<strong>一致</strong>的预测结果。</li>
+<li>为了更好的调查模型给出poor consistency的原因，计算模型是如何在 $S_{correct}$ 和 $S_{incorrect}$ 之间做出选择的， 两个 $S$ 拥有相同的词数；<ul>
+<li>$q_k = log( \frac{P_{\theta} (w_k | S_{correct} - \{w_k\}) }{ P_{\theta} (w_k | S_{incorrect} - \{w_k\}) })$， $1 \leq k \leq n$</li>
+<li>$Q = \sum_k q_k$<ul>
+<li>看 $Q$ 是否大于0</li>
+</ul>
+</li>
+<li>打分方法参考【A simple method for commonsense reasoning. 2018.】</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="Why-Do-Masked-Neural-LMs-Still-Need-Common-Sense-Knowledge"><a href="#Why-Do-Masked-Neural-LMs-Still-Need-Common-Sense-Knowledge" class="headerlink" title="Why Do Masked Neural LMs Still Need Common Sense Knowledge?"></a>Why Do Masked Neural LMs Still Need Common Sense Knowledge?</h2><p>MNLM = masked neural language model</p>
+<ul>
+<li>本文的工作：本文的重点是通过理解单词之间的语义关系，来验证基于MNLM的RC模型可以回答多少或处理多少复杂的RC任务。 针对这个问题，我们提出了以下有关MNLM的常识理解的问题<ul>
+<li>1、MNLM是否理解不同的常识知识类型，尤其是关于 relations of attributes；</li>
+<li>2、MNLM是否理解 两个相关关系的关联（a relationship between two related relations）；</li>
+<li>3、基于MNLM的RC模型如何解决不同难度水平的问题？</li>
+<li>4、对于基于MNLM的RC模型，最难的RC任务是什么？</li>
+</ul>
+</li>
+<li>针对问题1和问题2，设计了一个 knowledge probing test 来分析MNLM是否理解结构化的常识知识，如外部知识库中的语义三元组；<ul>
+<li>实验结果反映，MNLM可以部分地理解不同类型的常识知识，并且发现还有很多知识尚未训练到，不能准确地分别relations；</li>
+</ul>
+</li>
+<li>针对问题3和问题4，首先根据context和question的lexical overlapping定义了一个RC问题的难度；<ul>
+<li>lexical variation（词汇多样性）是一个RC难度的关键的决定因素；</li>
+<li>问题需要常识知识的对基于MNLM的RC模型是个挑战；</li>
+</ul>
+</li>
+<li>基于上述的结果，本文提出了一个改善MNLM的方法，通过外部知识库加入知识：<ul>
+<li>任务数据集：SQuAD</li>
+<li>manual，</li>
+<li>automatic，提出了一个神经网络结构来引入知识；<ul>
+<li><img src="/../images/papers-prob-lm-csk/image-20191217153433549.png" alt="image-2"></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>本文贡献：<ul>
+<li>提出了一个 knowledge probing 测试，度量训练的 MNLM 中包含多少常识知识；<ul>
+<li>发现，MNLM，并没有完全、准确地理解知识；</li>
+</ul>
+</li>
+<li>通过审查基于MNLM的RC模型的结果，发现目前的MNLM在解决需要常识知识的问题上存在决定性的瓶颈；</li>
+<li>实验性的证实了，可以通过手工/自动地方式向MNLM中补充常识知识；</li>
+</ul>
+</li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+      <div>
+        
+    <div style="text-align:center;color: #ccc;font-size:14px;">
+    **** END of This Post. Thank for Your READING ****
+    </div>
+    <div style="text-align:center;color: #ccc;font-size:14px;">
+    If you have any Question, welcome to Email me or leave your comments below.
+    </div>
+
+      </div>
+    
+
+    
+
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>Post author:</strong>
+    Luxi Xing
+  </li>
+  <li class="post-copyright-link">
+    <strong>Post link:</strong>
+    <a href="http://xingluxi.github.io/2019/12/23/papers-prob-lm-csk/" title="Probing LM with CommonSense">http://xingluxi.github.io/2019/12/23/papers-prob-lm-csk/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>Copyright Notice: </strong>
+    All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> unless stating additionally.
+  </li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/nlp/" rel="tag"><i class="fa fa-tag"></i> nlp</a>
+          
+            <a href="/tags/note/" rel="tag"><i class="fa fa-tag"></i> note</a>
+          
+            <a href="/tags/commonsense/" rel="tag"><i class="fa fa-tag"></i> commonsense</a>
+          
+            <a href="/tags/lm/" rel="tag"><i class="fa fa-tag"></i> lm</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/11/19/note-20191119-wluper-blog-dialogue/" rel="next" title="Wluper Blog - Dialogue System">
+                <i class="fa fa-chevron-left"></i> Wluper Blog - Dialogue System
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="lv-container" data-id="city" data-uid="MTAyMC80MjA1OC8xODYwNQ=="></div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.gif" alt="Luxi Xing">
+            
+              <p class="site-author-name" itemprop="name">Luxi Xing</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">52</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">48</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/XingLuxi" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://twitter.com/XingLuxi" target="_blank" title="Twitter">
+                      
+                        <i class="fa fa-fw fa-twitter"></i>Twitter</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:xingluxixlx@gmail.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Probing-LM-with-CommonSense"><span class="nav-text">Probing LM with CommonSense</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Do-Language-Models-have-Common-Sense-2019"><span class="nav-text">Do Language Models have Common Sense? 2019.</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Commonsense-Knowledge-Mining-from-Pretrained-Models-EMNLP-2019"><span class="nav-text">Commonsense Knowledge Mining from Pretrained Models. EMNLP,2019.</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Cited"><span class="nav-text">Cited</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Evaluating-Commonsense-in-Pre-trained-Language-Models-AAAI-2020"><span class="nav-text">Evaluating Commonsense in Pre-trained Language Models. AAAI,2020.</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Why-Do-Masked-Neural-LMs-Still-Need-Common-Sense-Knowledge"><span class="nav-text">Why Do Masked Neural LMs Still Need Common Sense Knowledge?</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+            <span id="scrollpercent"><span>0</span>%</span>
+          
+        </div>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-grav"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Luxi Xing</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a></div>
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i> Site Total Visiters
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
+  
+
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+</body>
+</html>
