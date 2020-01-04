@@ -96,7 +96,7 @@
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://xingluxi.github.io/images/papers-prob-lm-csk/image-20191220000101665.png">
 <meta property="og:image" content="http://xingluxi.github.io/images/papers-prob-lm-csk/image-20191217153433549.png">
-<meta property="og:updated_time" content="2020-01-02T14:26:10.493Z">
+<meta property="og:updated_time" content="2020-01-04T02:14:44.518Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Probing Language Models with CommonSense">
 <meta name="twitter:description" content="References:  Do Language Models have Common Sense? [ paper ] Commonsense Knowledge Mining from Pretrained Models. [ paper ] Evaluating Commonsense in Pre-trained Language Models. [ paper ] Why Do Mas">
@@ -350,8 +350,8 @@
               
                 <span class="post-meta-item-text">Post modified&#58;</span>
               
-              <time title="Post modified" itemprop="dateModified" datetime="2020-01-02T22:26:10+08:00">
-                2020-01-02
+              <time title="Post modified" itemprop="dateModified" datetime="2020-01-04T10:14:44+08:00">
+                2020-01-04
               </time>
             
           </span>
@@ -421,7 +421,7 @@
                   <span class="post-meta-item-text">Reading time &asymp;</span>
                 
                 <span title="Reading time">
-                  7
+                  8
                 </span>
               
             </div>
@@ -450,8 +450,13 @@
 <li>Evaluating Commonsense in Pre-trained Language Models. [ <a href="http://arxiv.org/abs/1911.11931" target="_blank" rel="noopener">paper</a> ]</li>
 <li>Why Do Masked Neural LMs Still Need Common Sense Knowledge. [ <a href="http://arxiv.org/abs/1911.03024" target="_blank" rel="noopener">paper</a> ]</li>
 </ol>
-<h2 id="Do-Language-Models-have-Common-Sense-2019"><a href="#Do-Language-Models-have-Common-Sense-2019" class="headerlink" title="Do Language Models have Common Sense? 2019."></a>Do Language Models have Common Sense? 2019.</h2><p>TBU</p>
-<h2 id="Commonsense-Knowledge-Mining-from-Pretrained-Models-EMNLP-2019"><a href="#Commonsense-Knowledge-Mining-from-Pretrained-Models-EMNLP-2019" class="headerlink" title="Commonsense Knowledge Mining from Pretrained Models. EMNLP,2019."></a>Commonsense Knowledge Mining from Pretrained Models. EMNLP,2019.</h2><p>动机：</p>
+<h2 id="Do-Language-Models-have-Common-Sense-2019"><a href="#Do-Language-Models-have-Common-Sense-2019" class="headerlink" title="Do Language Models have Common Sense? 2019."></a>Do Language Models have Common Sense? 2019.</h2><blockquote>
+<p>Authors: Trieu H. Trinh, Quoc V. Le<br>Org.: Google</p>
+</blockquote>
+<h2 id="Commonsense-Knowledge-Mining-from-Pretrained-Models-EMNLP-2019"><a href="#Commonsense-Knowledge-Mining-from-Pretrained-Models-EMNLP-2019" class="headerlink" title="Commonsense Knowledge Mining from Pretrained Models. EMNLP,2019."></a>Commonsense Knowledge Mining from Pretrained Models. EMNLP,2019.</h2><blockquote>
+<p>Authors: Joshua Feldman, Joe Davison, Alexander M. Rush<br>Org.: Harvard University</p>
+</blockquote>
+<p>动机：</p>
 <ul>
 <li>inferring commonsense knowledge 是NLP的关键挑战，但是训练数据很稀疏，之前的工作表明，有监督学习下的commonsense mining在新的数据上的效果不好。</li>
 <li>之前的利用常识知识增强机器学习模型方法：<ul>
@@ -528,7 +533,10 @@
 <h4 id="Cited"><a href="#Cited" class="headerlink" title="Cited"></a>Cited</h4><ul>
 <li>A recent study shows how to attain common sense knowledge from pretrained MNLMs without additional training (Feldman, Davison, and Rush 2019).</li>
 </ul>
-<h2 id="Evaluating-Commonsense-in-Pre-trained-Language-Models-AAAI-2020"><a href="#Evaluating-Commonsense-in-Pre-trained-Language-Models-AAAI-2020" class="headerlink" title="Evaluating Commonsense in Pre-trained Language Models. AAAI,2020."></a>Evaluating Commonsense in Pre-trained Language Models. AAAI,2020.</h2><p>Motivation:</p>
+<h2 id="Evaluating-Commonsense-in-Pre-trained-Language-Models-AAAI-2020"><a href="#Evaluating-Commonsense-in-Pre-trained-Language-Models-AAAI-2020" class="headerlink" title="Evaluating Commonsense in Pre-trained Language Models. AAAI,2020."></a>Evaluating Commonsense in Pre-trained Language Models. AAAI,2020.</h2><blockquote>
+<p>Authors: Xuhui Zhou, Yue Zhang, Leyang Cui, Dandan Huang<br>Org.: UW, Westlake University, Zhejiang University</p>
+</blockquote>
+<p>Motivation:</p>
 <ul>
 <li>目前已经有很多工作对 Contextualize Representation（CR） 的 syntactic、semantic、word sense 知识进行了研究，并解释了为什么 CR 适用于这些任务；<ul>
 <li>但是鲜有工作调查 CR 中包含的 Commonsense Knowledge；</li>
@@ -544,7 +552,8 @@
 </ul>
 <p>本文的方法：</p>
 <ul>
-<li>benchmark包括：Conjunction Acceptability、Sense Making、WSC、SWAG、HellaSwag、Sense Making with Reasoning、Argument Reasoning Comprehension；<ul>
+<li><p>benchmark包括：Conjunction Acceptability、Sense Making、WSC、SWAG、HellaSwag、Sense Making with Reasoning、Argument Reasoning Comprehension；</p>
+<ul>
 <li>对上述数据集进行分类和重组，划分为 word-level 和 sentence-level 两组，从这两个层次来测试模型；<ul>
 <li>word-level：CA、WSC、SM；<ul>
 <li>关注 名词、动词、形容词、副词、代词、连词；</li>
@@ -558,12 +567,14 @@
 </li>
 </ul>
 </li>
-<li><strong>常识能力</strong>可以分为两个方面：<ul>
+<li><p><strong>常识能力</strong>可以分为两个方面：</p>
+<ul>
 <li>拥有常识能力的模型应该具备关于世界的基础知识；</li>
 <li>拥有常识能力的模型应该具备基于常识知识的推理能力；</li>
 </ul>
 </li>
-<li>实验设计（Experiment Design）<ul>
+<li><p>实验设计（Experiment Design）</p>
+<ul>
 <li>从 单向上下文LM模型 和 双向上下文LM模型 两类分别考虑一个句子的打分；</li>
 <li>假设句子 $S$ 有 $n$ 个词组成 $S=\{w_1, …, w_{k-1}, w_k, w_{k+1}, …, w_n\}$，定义其得分为：<script type="math/tex">Score(S)=\frac{\sum_{k=1}^n log(P_\theta (w_k | context_k))}{n}</script><ul>
 <li>分母上的 $n$ 是为了消除句子长度的影响；</li>
@@ -581,7 +592,8 @@
 <li>在计算完句子打分之后，模型选择得分高的结果作为预测输出；</li>
 </ul>
 </li>
-<li>Robustness Test，通过几种方法构造dual test样例<ul>
+<li><p>Robustness Test，通过几种方法构造dual test样例</p>
+<ul>
 <li>add、delete、replace、swap two words；</li>
 <li>理论上，具备相关常识知识的模型，应该对于一对dual test样例给出<strong>一致</strong>的预测结果。</li>
 <li>为了更好的调查模型给出poor consistency的原因，计算模型是如何在 $S_{correct}$ 和 $S_{incorrect}$ 之间做出选择的， 两个 $S$ 拥有相同的词数；<ul>
@@ -596,7 +608,10 @@
 </ul>
 </li>
 </ul>
-<h2 id="Why-Do-Masked-Neural-LMs-Still-Need-Common-Sense-Knowledge"><a href="#Why-Do-Masked-Neural-LMs-Still-Need-Common-Sense-Knowledge" class="headerlink" title="Why Do Masked Neural LMs Still Need Common Sense Knowledge?"></a>Why Do Masked Neural LMs Still Need Common Sense Knowledge?</h2><p>MNLM = masked neural language model</p>
+<h2 id="Why-Do-Masked-Neural-LMs-Still-Need-Common-Sense-Knowledge"><a href="#Why-Do-Masked-Neural-LMs-Still-Need-Common-Sense-Knowledge" class="headerlink" title="Why Do Masked Neural LMs Still Need Common Sense Knowledge?"></a>Why Do Masked Neural LMs Still Need Common Sense Knowledge?</h2><blockquote>
+<p>Authors: Sunjae Kwon et al.<br>Org.: Korea Advanced Institute of Science and Technology</p>
+</blockquote>
+<p>MNLM = masked neural language model</p>
 <ul>
 <li>本文的工作：本文的重点是通过理解单词之间的语义关系，来验证基于MNLM的RC模型可以回答多少或处理多少复杂的RC任务。 针对这个问题，我们提出了以下有关MNLM的常识理解的问题<ul>
 <li>1、MNLM是否理解不同的常识知识类型，尤其是关于 relations of attributes；</li>
