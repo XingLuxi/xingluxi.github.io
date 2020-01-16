@@ -96,7 +96,7 @@
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://xingluxi.github.io/images/papers-prob-lm-csk/image-20191220000101665.png">
 <meta property="og:image" content="http://xingluxi.github.io/images/papers-prob-lm-csk/image-20191217153433549.png">
-<meta property="og:updated_time" content="2020-01-08T00:43:44.168Z">
+<meta property="og:updated_time" content="2020-01-16T03:03:25.343Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Probing Language Models with CommonSense">
 <meta name="twitter:description" content="References:  Do Language Models have Common Sense? [ paper ] Commonsense Knowledge Mining from Pretrained Models. [ paper ] Evaluating Commonsense in Pre-trained Language Models. [ paper ] Why Do Mas">
@@ -350,8 +350,8 @@
               
                 <span class="post-meta-item-text">Post modified&#58;</span>
               
-              <time title="Post modified" itemprop="dateModified" datetime="2020-01-08T08:43:44+08:00">
-                2020-01-08
+              <time title="Post modified" itemprop="dateModified" datetime="2020-01-16T11:03:25+08:00">
+                2020-01-16
               </time>
             
           </span>
@@ -405,7 +405,7 @@
                   <span class="post-meta-item-text">Words count in article&#58;</span>
                 
                 <span title="Words count in article">
-                  2.1k
+                  2.2k
                 </span>
               
 
@@ -458,9 +458,13 @@
 <li>展示能够证明LM可以学习捕获一定常识知识的证据，并且这种知识可以很容易的捕获到；</li>
 <li>本文的主要观察：LM可以计算任意statement的概率，这个概率可以用于评价一个statement的<strong>真实性</strong>；</li>
 </ul>
-<p>本文方法:</p>
+<p>本文方法: LM Scoring；</p>
 <ul>
-<li>LM Scoring；</li>
+<li>与其他增加特定分类层的做法不同，本文对于MLM模型不进行任何模块的增加，而是增加了一项额外的training objective，联合原始的LM训练object，在数据集上对LM进行微调；</li>
+<li>$Loss_{new} = Loss_{LM} + max(0, log(Perp_{positive}) - log(Perp_{negative}) + \alpha)$<ul>
+<li>$\alpha = 0.5$</li>
+</ul>
+</li>
 </ul>
 <p>Excerpt:</p>
 <ul>
