@@ -49,8 +49,8 @@
       <tags>
         <tag>nlp</tag>
         <tag>knowledge</tag>
-        <tag>mrc</tag>
         <tag>paper</tag>
+        <tag>mrc</tag>
       </tags>
   </entry>
   <entry>
@@ -63,8 +63,8 @@
       <tags>
         <tag>nlp</tag>
         <tag>knowledge</tag>
-        <tag>mrc</tag>
         <tag>paper</tag>
+        <tag>mrc</tag>
       </tags>
   </entry>
   <entry>
@@ -77,8 +77,8 @@
       <tags>
         <tag>nlp</tag>
         <tag>knowledge</tag>
-        <tag>mrc</tag>
         <tag>paper</tag>
+        <tag>mrc</tag>
       </tags>
   </entry>
   <entry>
@@ -91,9 +91,9 @@
       <tags>
         <tag>nlp</tag>
         <tag>knowledge</tag>
+        <tag>text-generation</tag>
         <tag>mrc</tag>
         <tag>note</tag>
-        <tag>text-generation</tag>
         <tag>ml</tag>
       </tags>
   </entry>
@@ -316,8 +316,8 @@
       <tags>
         <tag>nlp</tag>
         <tag>knowledge</tag>
-        <tag>research</tag>
         <tag>note</tag>
+        <tag>research</tag>
       </tags>
   </entry>
   <entry>
@@ -362,8 +362,8 @@
         <tag>knowledge</tag>
         <tag>mrc</tag>
         <tag>reasoning</tag>
-        <tag>commonsense</tag>
         <tag>survey</tag>
+        <tag>commonsense</tag>
       </tags>
   </entry>
   <entry>
@@ -403,8 +403,8 @@
       <tags>
         <tag>nlp</tag>
         <tag>mrc</tag>
-        <tag>research</tag>
         <tag>note</tag>
+        <tag>research</tag>
       </tags>
   </entry>
   <entry>
@@ -417,14 +417,14 @@
       <tags>
         <tag>nlp</tag>
         <tag>mrc</tag>
-        <tag>research</tag>
         <tag>note</tag>
+        <tag>research</tag>
       </tags>
   </entry>
   <entry>
     <title><![CDATA[Practicable Course List (continually updated)]]></title>
     <url>%2F2019%2F03%2F12%2Fcourse-list%2F</url>
-    <content type="text"><![CDATA[The main areas of concern are: Natural Language ProcessingMachine Learning and Deep LearningReinforcement LearningFoundation of Mathematics NLP Stanford，CS224n http://web.stanford.edu/class/cs224n/index.html video：Winter 2019 CMU，CS 11-731 Machine Translation and Seq-to-Seq Models，2018 http://www.phontron.com/class/mtandseq2seq2018/ CMU，CS 11-747 Neural Networks for NLP，Spring 2018 http://www.phontron.com/class/nn4nlp2018/schedule.html video：2019 Oxford https://github.com/oxford-cs-deepnlp-2017/lectures Berkeley Applied Natural Language Processing http://people.ischool.berkeley.edu/~dbamman/info256.html Penn，CIS 700 Advanced Machine Learning for Natural Language Processing，Dan Roth http://www.cis.upenn.edu/~danroth/Teaching/CIS-700-006/index.html CS 4650 and 7650 https://github.com/jacobeisenstein/gt-nlp-class University of Washington CSE 447/547M: Natural Language Processing https://courses.cs.washington.edu/courses/cse447/19wi/ MLandDL Stanford，CS229 http://cs229.stanford.edu/index.html#info 李宏毅 http://speech.ee.ntu.edu.tw/~tlkagk/courses.html Berkeley，STAT 157 Introduction to Deep Learning http://courses.d2l.ai/berkeley-stat-157/index.html Berkeley，2019，无监督学习 CS294-158 Deep Unsupervised Learning Spring 2019 https://sites.google.com/view/berkeley-cs294-158-sp19/home Stanford，CS 236: Deep Generative Models https://deepgenerativemodels.github.io/ MIT，6.883 Science of Deep Learning：Bridging Theory and Practice https://people.csail.mit.edu/madry/6.883/ Maching Learning Summer School http://mlss.cc/ RL UCL，David Sliver http://www0.cs.ucl.ac.uk/staff/d.silver/web/Teaching.html Berkeley S294-112 Deep Reinforcement Learning http://rail.eecs.berkeley.edu/deeprlcourse/ Stanford CS234: Reinforcement Learning Winter 2019 http://web.stanford.edu/class/cs234/ Berkeley CS188 Introduction to Artificial Intelligence https://inst.eecs.berkeley.edu/~cs188/sp19/ MathBasic Stanford，CS229T/STATS231 Statistical Learning Theory https://web.stanford.edu/class/cs229t/ CMU，10-708，Probabilistic Graphical Models Eric Xing， Spring 2014 http://www.cs.cmu.edu/~epxing/Class/10708/lecture.html NYU，MathsDL-spring18 Topics course Mathematics of Deep Learning, NYU, Spring 18. CSCI-GA 3033. https://github.com/joanbruna/MathsDL-spring18 Recommend Archive Links https://deep-learning-drizzle.github.io/index.html#contents]]></content>
+    <content type="text"><![CDATA[The main areas of concern are: Natural Language ProcessingMachine Learning and Deep LearningReinforcement LearningFoundation of Mathematics NLP Stanford，CS224n http://web.stanford.edu/class/cs224n/index.html video：Winter 2019 CMU，CS 11-731 Machine Translation and Seq-to-Seq Models，2018 http://www.phontron.com/class/mtandseq2seq2018/ CMU，CS 11-747 Neural Networks for NLP，Spring 2018 link: 2018 spring,2020 video：2019 Oxford https://github.com/oxford-cs-deepnlp-2017/lectures Berkeley Applied Natural Language Processing http://people.ischool.berkeley.edu/~dbamman/info256.html Penn，CIS 700 Advanced Machine Learning for Natural Language Processing，Dan Roth http://www.cis.upenn.edu/~danroth/Teaching/CIS-700-006/index.html CS 4650 and 7650 https://github.com/jacobeisenstein/gt-nlp-class University of Washington CSE 447/547M: Natural Language Processing https://courses.cs.washington.edu/courses/cse447/19wi/ CS 521: Statistical Natural Language Processing by Natalie Parde at the University of Illinois; introduces advanced topics in statistical and neural NLP and provides an overview of active research in those topic areas link MLandDL Stanford，CS229 http://cs229.stanford.edu/index.html#info 李宏毅 http://speech.ee.ntu.edu.tw/~tlkagk/courses.html Berkeley，STAT 157 Introduction to Deep Learning http://courses.d2l.ai/berkeley-stat-157/index.html Berkeley，2019，无监督学习 CS294-158 Deep Unsupervised Learning Spring 2019 https://sites.google.com/view/berkeley-cs294-158-sp19/home Stanford，CS 236: Deep Generative Models https://deepgenerativemodels.github.io/ MIT，6.883 Science of Deep Learning：Bridging Theory and Practice https://people.csail.mit.edu/madry/6.883/ Maching Learning Summer School http://mlss.cc/ RL UCL，David Sliver http://www0.cs.ucl.ac.uk/staff/d.silver/web/Teaching.html Berkeley S294-112 Deep Reinforcement Learning http://rail.eecs.berkeley.edu/deeprlcourse/ Stanford CS234: Reinforcement Learning Winter 2019 http://web.stanford.edu/class/cs234/ Berkeley CS188 Introduction to Artificial Intelligence https://inst.eecs.berkeley.edu/~cs188/sp19/ MathBasic Stanford，CS229T/STATS231 Statistical Learning Theory https://web.stanford.edu/class/cs229t/ CMU，10-708，Probabilistic Graphical Models Eric Xing， Spring 2014 http://www.cs.cmu.edu/~epxing/Class/10708/lecture.html NYU，MathsDL-spring18 Topics course Mathematics of Deep Learning, NYU, Spring 18. CSCI-GA 3033. https://github.com/joanbruna/MathsDL-spring18 Recommend Archive Links https://deep-learning-drizzle.github.io/index.html#contents]]></content>
       <categories>
         <category>ForStudy</category>
       </categories>
@@ -445,8 +445,8 @@
       <tags>
         <tag>nlp</tag>
         <tag>knowledge</tag>
-        <tag>mrc</tag>
         <tag>paper</tag>
+        <tag>mrc</tag>
       </tags>
   </entry>
   <entry>
@@ -503,8 +503,8 @@
       </categories>
       <tags>
         <tag>nlp</tag>
-        <tag>note</tag>
         <tag>text-generation</tag>
+        <tag>note</tag>
         <tag>commonsense</tag>
       </tags>
   </entry>
@@ -518,8 +518,8 @@
       <tags>
         <tag>nlp</tag>
         <tag>mrc</tag>
-        <tag>research</tag>
         <tag>note</tag>
+        <tag>research</tag>
         <tag>cs-know</tag>
       </tags>
   </entry>
@@ -560,8 +560,8 @@
       </categories>
       <tags>
         <tag>nlp</tag>
-        <tag>mrc</tag>
         <tag>paper</tag>
+        <tag>mrc</tag>
         <tag>research</tag>
       </tags>
   </entry>
@@ -588,8 +588,8 @@
       </categories>
       <tags>
         <tag>nlp</tag>
-        <tag>mrc</tag>
         <tag>paper</tag>
+        <tag>mrc</tag>
         <tag>dataset</tag>
       </tags>
   </entry>
