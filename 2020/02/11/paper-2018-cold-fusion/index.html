@@ -75,7 +75,7 @@
 
 
 
-  <meta name="keywords" content="nlp,paper,mrc,research,">
+  <meta name="keywords" content="nlp,note,tg,seq2seq,pre-trained-lm,">
 
 
 
@@ -86,18 +86,18 @@
 
 
 
-<meta name="description" content="FEVER Introduction FEVER data: link 包含 185,445 条断言(claims)   FEVER shared Task(with NAACL 2018) info: details here FEVER official baseline code: github repo  FEVER(Fact Extraction and VERification) 任务">
-<meta name="keywords" content="nlp,paper,mrc,research">
+<meta name="description" content="Title: Cold Fusion: Traning Seq2Seq Models Together with Language Models Org.: Baidu Research Published: Interspeech, 2018. Research Topic/Problem如何在seq2seq模型训练时利用PLM提升模型的效果（相当于引入无标注数据） 引入PLM的优势/目的：">
+<meta name="keywords" content="nlp,note,tg,seq2seq,pre-trained-lm">
 <meta property="og:type" content="article">
-<meta property="og:title" content="WIP| Analysis of FEVER">
-<meta property="og:url" content="http://xingluxi.github.io/2019/01/15/mrc-analysis-fever/index.html">
+<meta property="og:title" content="TG | Seq2Seq with LM using Cold Fusion">
+<meta property="og:url" content="http://xingluxi.github.io/2020/02/11/paper-2018-cold-fusion/index.html">
 <meta property="og:site_name" content="Luxi Xing - Blog">
-<meta property="og:description" content="FEVER Introduction FEVER data: link 包含 185,445 条断言(claims)   FEVER shared Task(with NAACL 2018) info: details here FEVER official baseline code: github repo  FEVER(Fact Extraction and VERification) 任务">
+<meta property="og:description" content="Title: Cold Fusion: Traning Seq2Seq Models Together with Language Models Org.: Baidu Research Published: Interspeech, 2018. Research Topic/Problem如何在seq2seq模型训练时利用PLM提升模型的效果（相当于引入无标注数据） 引入PLM的优势/目的：">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-01-29T02:57:13.000Z">
+<meta property="og:updated_time" content="2020-02-11T07:02:12.637Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="WIP| Analysis of FEVER">
-<meta name="twitter:description" content="FEVER Introduction FEVER data: link 包含 185,445 条断言(claims)   FEVER shared Task(with NAACL 2018) info: details here FEVER official baseline code: github repo  FEVER(Fact Extraction and VERification) 任务">
+<meta name="twitter:title" content="TG | Seq2Seq with LM using Cold Fusion">
+<meta name="twitter:description" content="Title: Cold Fusion: Traning Seq2Seq Models Together with Language Models Org.: Baidu Research Published: Interspeech, 2018. Research Topic/Problem如何在seq2seq模型训练时利用PLM提升模型的效果（相当于引入无标注数据） 引入PLM的优势/目的：">
 
 
 
@@ -127,13 +127,13 @@
 
 
 
-  <link rel="canonical" href="http://xingluxi.github.io/2019/01/15/mrc-analysis-fever/">
+  <link rel="canonical" href="http://xingluxi.github.io/2020/02/11/paper-2018-cold-fusion/">
 
 
 
 
 
-  <title>WIP| Analysis of FEVER | Luxi Xing - Blog</title>
+  <title>TG | Seq2Seq with LM using Cold Fusion | Luxi Xing - Blog</title>
   
 
 
@@ -302,7 +302,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://xingluxi.github.io/2019/01/15/mrc-analysis-fever/">
+    <link itemprop="mainEntityOfPage" href="http://xingluxi.github.io/2020/02/11/paper-2018-cold-fusion/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Luxi Xing">
@@ -319,7 +319,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">WIP| Analysis of FEVER</h1>
+          <h1 class="post-title" itemprop="name headline">TG | Seq2Seq with LM using Cold Fusion</h1>
         
 
         <div class="post-meta">
@@ -331,8 +331,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-01-15T11:36:12+08:00">
-                2019-01-15
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-02-11T15:00:19+08:00">
+                2020-02-11
               </time>
             
 
@@ -347,8 +347,8 @@
               
                 <span class="post-meta-item-text">Post modified&#58;</span>
               
-              <time title="Post modified" itemprop="dateModified" datetime="2019-01-29T10:57:13+08:00">
-                2019-01-29
+              <time title="Post modified" itemprop="dateModified" datetime="2020-02-11T15:02:12+08:00">
+                2020-02-11
               </time>
             
           </span>
@@ -366,8 +366,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/MRC-Paper-Intro/" itemprop="url" rel="index">
-                    <span itemprop="name">MRC-Paper-Intro</span>
+                  <a href="/categories/Paper-Note/" itemprop="url" rel="index">
+                    <span itemprop="name">Paper-Note</span>
                   </a>
                 </span>
 
@@ -402,7 +402,7 @@
                   <span class="post-meta-item-text">Words count in article&#58;</span>
                 
                 <span title="Words count in article">
-                  352
+                  876
                 </span>
               
 
@@ -418,7 +418,7 @@
                   <span class="post-meta-item-text">Reading time &asymp;</span>
                 
                 <span title="Reading time">
-                  1
+                  3
                 </span>
               
             </div>
@@ -439,67 +439,66 @@
       
 
       
-        <h2 id="FEVER-Introduction"><a href="#FEVER-Introduction" class="headerlink" title="FEVER Introduction"></a>FEVER Introduction</h2><ul>
-<li>FEVER data: <a href="http://fever.ai/resources.html" target="_blank" rel="noopener">link</a><ul>
-<li>包含 185,445 条断言(claims)</li>
+        <p>Title: Cold Fusion: Traning Seq2Seq Models Together with Language Models</p>
+<p>Org.: Baidu Research</p>
+<p>Published: Interspeech, 2018.</p>
+<h2 id="Research-Topic-Problem"><a href="#Research-Topic-Problem" class="headerlink" title="Research Topic/Problem"></a>Research Topic/Problem</h2><p>如何在seq2seq模型训练时利用PLM提升模型的效果（相当于引入无标注数据）</p>
+<p>引入PLM的优势/目的：</p>
+<ul>
+<li>提升生成文本的fluency；</li>
+<li>可以充分利用大规模无标注数据；</li>
 </ul>
-</li>
-<li>FEVER shared Task(with NAACL 2018) info: <a href="http://fever.ai/task.html" target="_blank" rel="noopener">details here</a></li>
-<li>FEVER official baseline code: <a href="https://github.com/sheffieldnlp/fever-naacl-2018" target="_blank" rel="noopener">github repo</a></li>
+<p>最基本的向Seq2Seq模型引入PLM的方法<sup id="fnref:1"><a href="#fn:1" rel="footnote">1</a></sup><sup id="fnref:2"><a href="#fn:2" rel="footnote">2</a></sup><sup id="fnref:3"><a href="#fn:3" rel="footnote">3</a></sup>：</p>
+<ul>
+<li>分别训练seq2seq和PLM模型，然后在测试推理阶段，通过结合两个模型的输出指导beam search；</li>
 </ul>
-<p>FEVER(Fact Extraction and VERification) 任务中，给定一个未经验证的断言(claim)，即一个句子，要求模型/系统从Wikipedia中找到对应的证据句(evidence)，来验证这个断言，是否可以被证实(<strong>SUPPORTED</strong>)、反驳(<strong>REFUTED</strong>)或是没有足够的信息判断(<strong>NOT ENOUGH INFO</strong>)。对于SUPPORTED和REFUTED的判断，需要给出证据句子。其中 16.82%的例子中，需要多个证据句子来进行判断，12.15%的情况下，证据句来源于多篇文档。</p>
-<h3 id="Data-Statistics"><a href="#Data-Statistics" class="headerlink" title="Data Statistics"></a>Data Statistics</h3><div class="table-container">
-<table>
-<thead>
-<tr>
-<th>split</th>
-<th>SUPPORTED</th>
-<th>REFUTED</th>
-<th>NEI</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Train</td>
-<td>80035</td>
-<td>29775</td>
-<td>35639</td>
-</tr>
-<tr>
-<td>Dev</td>
-<td>6666</td>
-<td>6666</td>
-<td>6666</td>
-</tr>
-<tr>
-<td>Test</td>
-<td>6666</td>
-<td>6666</td>
-<td>6666</td>
-</tr>
-</tbody>
-</table>
-</div>
-<h3 id="Baseline-System"><a href="#Baseline-System" class="headerlink" title="Baseline System"></a>Baseline System</h3><p>baseline 系统是 pipelined 形式，由三部分组成: 1.document retrieval, 2.sentence-level evidence selection, 3.textual entailment.</p>
-<p>其中文本蕴含识别(recognizing textual entailment)部分采用的是 谷歌的 Decomposable Attention 模型</p>
-<h3 id="Score-Metrics"><a href="#Score-Metrics" class="headerlink" title="Score Metrics"></a>Score Metrics</h3><p>official scorer: <a href="https://github.com/sheffieldnlp/fever-scorer" target="_blank" rel="noopener">https://github.com/sheffieldnlp/fever-scorer</a></p>
-<p>判断 claim 的类型(SUPPORTED/REFUTED/NOT ENOUGH INFO)是个三分类问题，对此使用 accuracy 来评价。<br>对于 SUPPORTED 和 REFUTED 的类别，还需要提供证据片段，对此使用 F1 来评价。</p>
-<h2 id="FEVER-Shared-Task-Top-3-Systems-Solutions"><a href="#FEVER-Shared-Task-Top-3-Systems-Solutions" class="headerlink" title="FEVER Shared Task Top-3 Systems Solutions"></a>FEVER Shared Task Top-3 Systems Solutions</h2><blockquote>
-<p>The Fact Extraction and VERification (FEVER) Shared Task</p>
-</blockquote>
-<h3 id="Top-1-UNC-NLP"><a href="#Top-1-UNC-NLP" class="headerlink" title="Top-1: UNC-NLP"></a>Top-1: UNC-NLP</h3><blockquote>
-<p>Combining Fact Extraction and Verification with Neural Semantic Matching Networks<br>AAAI 2019</p>
-</blockquote>
-<h3 id="Top-2-UCL-Machine-Reading-Group"><a href="#Top-2-UCL-Machine-Reading-Group" class="headerlink" title="Top-2: UCL Machine Reading Group"></a>Top-2: UCL Machine Reading Group</h3><blockquote>
-<p>UCL Machine Reading Group: Four Factor Framework For Fact Finding (HexaF)</p>
-</blockquote>
-<h3 id="Top-3-Athene-UKP-TU-Darmstadt"><a href="#Top-3-Athene-UKP-TU-Darmstadt" class="headerlink" title="Top-3: Athene UKP TU Darmstadt"></a>Top-3: Athene UKP TU Darmstadt</h3><blockquote>
-<p>Multi-Sentence Textual Entailment for Claim Verification</p>
-</blockquote>
-<h3 id="Shared-Task-Overview"><a href="#Shared-Task-Overview" class="headerlink" title="Shared Task Overview"></a>Shared Task Overview</h3><h2 id="FEVER-Workshop-Notes"><a href="#FEVER-Workshop-Notes" class="headerlink" title="FEVER Workshop Notes"></a>FEVER Workshop Notes</h2><ul>
-<li>FEVER workshop info: <a href="http://fever.ai/workshop.html" target="_blank" rel="noopener">details here</a></li>
+<p>存在的限制：</p>
+<ul>
+<li>seq2seq模型完全基于有标注的序列进行训练，decoder可以看做隐式的LM，通过序列的标注信息进行习，decoder的很大一部分容量都被用于学习冗余的信息；</li>
+<li>Seq2Seq的decoder中的剩余语言模型偏向于并行语料库的训练标签；</li>
 </ul>
-
+<p>导致：</p>
+<ul>
+<li>a) 很难适应于新的领域；</li>
+<li>b) 为了适应新的领域，Seq2Seq模型必须首先学会忽略语言模型中的隐含知识；</li>
+</ul>
+<h2 id="Background-amp-Related-Work"><a href="#Background-amp-Related-Work" class="headerlink" title="Background &amp; Related Work"></a>Background &amp; Related Work</h2><p>输入source序列：$\mathbb{x}=\{x_1,…,x_T\}$</p>
+<p>中间状态：$\mathbb{h}$</p>
+<p>输出target序列：$\mathbb{y}=\{y_1,…,y_K\}$</p>
+<p>预测推理：$\hat{y}=argmax_y logp(y|x)$</p>
+<p>将seq2seq的decoder与LM结合的方法：</p>
+<p>1、<strong>Shallow Fusion</strong><sup id="fnref:1"><a href="#fn:1" rel="footnote">1</a></sup><sup id="fnref:4"><a href="#fn:4" rel="footnote">4</a></sup></p>
+<p>只在推理阶段利用LM输出的概率，计算如下：</p>
+<script type="math/tex; mode=display">\hat{y}=argmax_y logp(y|x) + \lambda logp_{LM}(y)</script><p>其中，$p_{LM}(y)$ 即为LM关于序列$y$的概率；</p>
+<p>2、<strong>Deep Fusion</strong><sup id="fnref:3"><a href="#fn:3" rel="footnote">3</a></sup></p>
+<p>通过引入带有参数的门控模块，结合decoder和LM的隐状态，加强decoder与LM的连接；</p>
+<p>在训练时，先是分开训练，然后在结合起来学习门控模块的参数；</p>
+<p>Deep Fusion的劣势：</p>
+<ul>
+<li>task-specific模型的训练和LM的训练时分开的；</li>
+<li>decoder需要从有标注训练数据中学习一个LM，由于有标注训练数据的限制，其训练与训练LM存在很大的不平衡，且相当大一部分decoder的能力被浪费；</li>
+<li>因此，Fusion机制需要克服这种偏置，以结合新的语言信息；</li>
+</ul>
+<h2 id="Cold-Fusion"><a href="#Cold-Fusion" class="headerlink" title="Cold Fusion"></a>Cold Fusion</h2><p>Cold Fusion启发自Deep Fusion，鼓励seq2seq中的decoder在训练中学习利用LM，使seq2seq模型可以利用无限的无监督文本数据，使其能够快速适用于new domain，此外，decoder只需要学习任务相关的信息，因此训练更快；</p>
+<p>与Deep Fusion的区别：seq2seq模型从头开始和一个fixed PLM共同训练；</p>
+<p>在此情况下，seq2seq模型在训练中可以一直感知LM，使用LM中的language-specific信息，并且只捕获与任务相关（有助于将source映射到target）的信息，这样的解耦方式，可以增加模型的effective capacity，即使小型decoder也可以需要较好的性能；</p>
+<h3 id="Fusion-Mechanism"><a href="#Fusion-Mechanism" class="headerlink" title="Fusion Mechanism"></a>Fusion Mechanism</h3><p>1、门控计算的输入：a) seq2seq的隐状态 $s_t$，和b) LM的隐状态 $s_t^{LM}$；</p>
+<ul>
+<li>融合层根据input的不确定性，决定多大程度上依赖LM；</li>
+</ul>
+<p>2、采用 fine-grained (FG) 门控机制<sup id="fnref:5"><a href="#fn:5" rel="footnote">5</a></sup></p>
+<ul>
+<li>对语言模型状态的每个隐藏节点使用不同的门值；</li>
+<li>使得语言模型的集成更加灵活性，因为融合算法可以在每个时间步长中选择更需要强调的语言模型的哪些方面；</li>
+</ul>
+<p>3、用LM的概率替换LM的隐状态；【？？】</p>
+<ul>
+<li>$s_t^{LM}$ 的分布和动态性，在不同的LM和数据上差别很大；</li>
+<li>将token的分布映射到一个common 嵌入空间；</li>
+</ul>
+<p>Cold Fuison Layer的计算过程：</p>
+<script type="math/tex; mode=display">h_t^{LM}=DNN(l_t^{LM})</script><script type="math/tex; mode=display">g_t = \sigma(W[s_t;h_t^{LM}]+b)</script><script type="math/tex; mode=display">s_t^{CF}=[s_t;g_t\circ h_t^{LM}]</script><script type="math/tex; mode=display">r_t^{CF}=DNN(s_t^{CF})</script><script type="math/tex; mode=display">\hat{P}(y_t|x,y_{<t})=softmax(r_t^{CF})</script><p>其中，$l_t^{LM}$ 为 LM的logit输出；</p>
+<div id="footnotes"><hr><div id="footnotelist"><ol style="list-style:none; padding-left: 0;"><li id="fn:1"><span style="display: inline-block; vertical-align: top; padding-right: 10px;">1.</span><span style="display: inline-block; vertical-align: top;">Towards better decoding and language model integration in sequence to sequence models. 2016.</span><a href="#fnref:1" rev="footnote"> ↩</a></li><li id="fn:2"><span style="display: inline-block; vertical-align: top; padding-right: 10px;">2.</span><span style="display: inline-block; vertical-align: top;">Sequence to sequence learning with neural networks. NIPS,2014.</span><a href="#fnref:2" rev="footnote"> ↩</a></li><li id="fn:3"><span style="display: inline-block; vertical-align: top; padding-right: 10px;">3.</span><span style="display: inline-block; vertical-align: top;">On using monolingual corpora in neural machine translation. 2015.</span><a href="#fnref:3" rev="footnote"> ↩</a></li><li id="fn:4"><span style="display: inline-block; vertical-align: top; padding-right: 10px;">4.</span><span style="display: inline-block; vertical-align: top;">Google’s neural machine translation system: Bridging the gap between human and machine translation. 2016.</span><a href="#fnref:4" rev="footnote"> ↩</a></li><li id="fn:5"><span style="display: inline-block; vertical-align: top; padding-right: 10px;">5.</span><span style="display: inline-block; vertical-align: top;">Words or characters? ﬁne-grained gating for reading comprehension. arXiv preprint arXiv:1611.01724, 2016.</span><a href="#fnref:5" rev="footnote"> ↩</a></li></ol></div></div>
       
     </div>
     
@@ -532,7 +531,7 @@
   </li>
   <li class="post-copyright-link">
     <strong>Post link:</strong>
-    <a href="http://xingluxi.github.io/2019/01/15/mrc-analysis-fever/" title="WIP| Analysis of FEVER">http://xingluxi.github.io/2019/01/15/mrc-analysis-fever/</a>
+    <a href="http://xingluxi.github.io/2020/02/11/paper-2018-cold-fusion/" title="TG | Seq2Seq with LM using Cold Fusion">http://xingluxi.github.io/2020/02/11/paper-2018-cold-fusion/</a>
   </li>
   <li class="post-copyright-license">
     <strong>Copyright Notice: </strong>
@@ -549,11 +548,13 @@
           
             <a href="/tags/nlp/" rel="tag"><i class="fa fa-tag"></i> nlp</a>
           
-            <a href="/tags/paper/" rel="tag"><i class="fa fa-tag"></i> paper</a>
+            <a href="/tags/note/" rel="tag"><i class="fa fa-tag"></i> note</a>
           
-            <a href="/tags/mrc/" rel="tag"><i class="fa fa-tag"></i> mrc</a>
+            <a href="/tags/tg/" rel="tag"><i class="fa fa-tag"></i> tg</a>
           
-            <a href="/tags/research/" rel="tag"><i class="fa fa-tag"></i> research</a>
+            <a href="/tags/seq2seq/" rel="tag"><i class="fa fa-tag"></i> seq2seq</a>
+          
+            <a href="/tags/pre-trained-lm/" rel="tag"><i class="fa fa-tag"></i> pre-trained-lm</a>
           
         </div>
       
@@ -566,8 +567,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/01/14/mrc-measure-skills/" rel="next" title="MRC 的评测与所需能力">
-                <i class="fa fa-chevron-left"></i> MRC 的评测与所需能力
+              <a href="/2020/02/10/paper-2019-k-adapter/" rel="next" title="2019 | K-Adapter, Infusing Knowledge into Pre-Trained Models with Adapters">
+                <i class="fa fa-chevron-left"></i> 2019 | K-Adapter, Infusing Knowledge into Pre-Trained Models with Adapters
               </a>
             
           </div>
@@ -575,10 +576,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/01/16/nli-paper-info/" rel="prev" title="Natural Language Inference | Analysis and Paper List">
-                Natural Language Inference | Analysis and Paper List <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -739,7 +736,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#FEVER-Introduction"><span class="nav-text">FEVER Introduction</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Data-Statistics"><span class="nav-text">Data Statistics</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Baseline-System"><span class="nav-text">Baseline System</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Score-Metrics"><span class="nav-text">Score Metrics</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#FEVER-Shared-Task-Top-3-Systems-Solutions"><span class="nav-text">FEVER Shared Task Top-3 Systems Solutions</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Top-1-UNC-NLP"><span class="nav-text">Top-1: UNC-NLP</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Top-2-UCL-Machine-Reading-Group"><span class="nav-text">Top-2: UCL Machine Reading Group</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Top-3-Athene-UKP-TU-Darmstadt"><span class="nav-text">Top-3: Athene UKP TU Darmstadt</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Shared-Task-Overview"><span class="nav-text">Shared Task Overview</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#FEVER-Workshop-Notes"><span class="nav-text">FEVER Workshop Notes</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Research-Topic-Problem"><span class="nav-text">Research Topic/Problem</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Background-amp-Related-Work"><span class="nav-text">Background &amp; Related Work</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Cold-Fusion"><span class="nav-text">Cold Fusion</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Fusion-Mechanism"><span class="nav-text">Fusion Mechanism</span></a></li></ol></li></ol></div>
             
 
           </div>
