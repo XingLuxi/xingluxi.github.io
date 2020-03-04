@@ -3,7 +3,7 @@
   <entry>
     <title><![CDATA[TG | Seq2Seq with LM using Cold Fusion]]></title>
     <url>%2F2020%2F02%2F11%2Fpaper-2018-cold-fusion%2F</url>
-    <content type="text"><![CDATA[Title: Cold Fusion: Traning Seq2Seq Models Together with Language ModelsOrg.: Baidu ResearchPublished: Interspeech, 2018. Research Topic/Problem如何在seq2seq模型训练时利用PLM提升模型的效果（相当于引入无标注数据） 引入PLM的优势/目的： 提升生成文本的fluency； 可以充分利用大规模无标注数据； 最基本的向Seq2Seq模型引入PLM的方法[1][2][3]： 分别训练seq2seq和PLM模型，然后在测试推理阶段，通过结合两个模型的输出指导beam search； 存在的限制： seq2seq模型完全基于有标注的序列进行训练，decoder可以看做隐式的LM，通过序列的标注信息进行习，decoder的很大一部分容量都被用于学习冗余的信息； Seq2Seq的decoder中的剩余语言模型偏向于并行语料库的训练标签； 导致： a) 很难适应于新的领域； b) 为了适应新的领域，Seq2Seq模型必须首先学会忽略语言模型中的隐含知识； Background &amp; Related Work输入source序列：$\mathbb{x}=\{x_1,…,x_T\}$ 中间状态：$\mathbb{h}$ 输出target序列：$\mathbb{y}=\{y_1,…,y_K\}$ 预测推理：$\hat{y}=argmax_y logp(y|x)$ 将seq2seq的decoder与LM结合的方法： 1、Shallow Fusion[1][4] 只在推理阶段利用LM输出的概率，计算如下： \hat{y}=argmax_y logp(y|x) + \lambda logp_{LM}(y)其中，$p_{LM}(y)$ 即为LM关于序列$y$的概率； 2、Deep Fusion[3] 通过引入带有参数的门控模块，结合decoder和LM的隐状态，加强decoder与LM的连接； 在训练时，先是分开训练，然后在结合起来学习门控模块的参数； Deep Fusion的劣势： task-specific模型的训练和LM的训练时分开的； decoder需要从有标注训练数据中学习一个LM，由于有标注训练数据的限制，其训练与训练LM存在很大的不平衡，且相当大一部分decoder的能力被浪费； 因此，Fusion机制需要克服这种偏置，以结合新的语言信息； Cold FusionCold Fusion启发自Deep Fusion，鼓励seq2seq中的decoder在训练中学习利用LM，使seq2seq模型可以利用无限的无监督文本数据，使其能够快速适用于new domain，此外，decoder只需要学习任务相关的信息，因此训练更快； 与Deep Fusion的区别：seq2seq模型从头开始和一个fixed PLM共同训练； 在此情况下，seq2seq模型在训练中可以一直感知LM，使用LM中的language-specific信息，并且只捕获与任务相关（有助于将source映射到target）的信息，这样的解耦方式，可以增加模型的effective capacity，即使小型decoder也可以需要较好的性能； Fusion Mechanism1、门控计算的输入：a) seq2seq的隐状态 $s_t$，和b) LM的隐状态 $s_t^{LM}$； 融合层根据input的不确定性，决定多大程度上依赖LM； 2、采用 fine-grained (FG) 门控机制[5] 对语言模型状态的每个隐藏节点使用不同的门值； 使得语言模型的集成更加灵活性，因为融合算法可以在每个时间步长中选择更需要强调的语言模型的哪些方面； 3、用LM的概率替换LM的隐状态；【？？】 $s_t^{LM}$ 的分布和动态性，在不同的LM和数据上差别很大； 将token的分布映射到一个common 嵌入空间； Cold Fuison Layer的计算过程： h_t^{LM}=DNN(l_t^{LM})g_t = \sigma(W[s_t;h_t^{LM}]+b)s_t^{CF}=[s_t;g_t\circ h_t^{LM}]r_t^{CF}=DNN(s_t^{CF})\hat{P}(y_t|x,y_{]]></content>
+    <content type="text"><![CDATA[Title: Cold Fusion: Traning Seq2Seq Models Together with Language ModelsAuthors: Anuroop Sriram, Heewoo Jun, Sanjeev Satheesh, Adam CoatesOrg.: Baidu ResearchPublished: Interspeech, 2018. Research Topic/Problem如何在seq2seq模型训练时利用PLM提升模型的效果（相当于引入无标注数据） 引入PLM的优势/目的： 提升生成文本的fluency； 可以充分利用大规模无标注数据； 最基本的向Seq2Seq模型引入PLM的方法[1][2][3]： 分别训练seq2seq和PLM模型，然后在测试推理阶段，通过结合两个模型的输出指导beam search； 存在的限制： seq2seq模型完全基于有标注的序列进行训练，decoder可以看做隐式的LM，通过序列的标注信息进行习，decoder的很大一部分容量都被用于学习冗余的信息； Seq2Seq的decoder中的剩余语言模型偏向于并行语料库的训练标签； 导致： a) 很难适应于新的领域； b) 为了适应新的领域，Seq2Seq模型必须首先学会忽略语言模型中的隐含知识； Background &amp; Related Work输入source序列：$\mathbb{x}=\{x_1,…,x_T\}$ 中间状态：$\mathbb{h}$ 输出target序列：$\mathbb{y}=\{y_1,…,y_K\}$ 预测推理：$\hat{y}=argmax_y logp(y|x)$ 将seq2seq的decoder与LM结合的方法： 1、Shallow Fusion[1][4] 只在推理阶段利用LM输出的概率，计算如下： \hat{y}=argmax_y logp(y|x) + \lambda logp_{LM}(y)其中，$p_{LM}(y)$ 即为LM关于序列$y$的概率； 2、Deep Fusion[3] 通过引入带有参数的门控模块，结合decoder和LM的隐状态，加强decoder与LM的连接； 在训练时，先是分开训练，然后在结合起来学习门控模块的参数； Deep Fusion的劣势： task-specific模型的训练和LM的训练时分开的； decoder需要从有标注训练数据中学习一个LM，由于有标注训练数据的限制，其训练与训练LM存在很大的不平衡，且相当大一部分decoder的能力被浪费； 因此，Fusion机制需要克服这种偏置，以结合新的语言信息； Cold FusionCold Fusion启发自Deep Fusion，鼓励seq2seq中的decoder在训练中学习利用LM，使seq2seq模型可以利用无限的无监督文本数据，使其能够快速适用于new domain，此外，decoder只需要学习任务相关的信息，因此训练更快； 与Deep Fusion的区别：seq2seq模型从头开始和一个fixed PLM共同训练； 在此情况下，seq2seq模型在训练中可以一直感知LM，使用LM中的language-specific信息，并且只捕获与任务相关（有助于将source映射到target）的信息，这样的解耦方式，可以增加模型的effective capacity，即使小型decoder也可以需要较好的性能； Fusion Mechanism1、门控计算的输入：a) seq2seq的隐状态 $s_t$，和b) LM的隐状态 $s_t^{LM}$； 融合层根据input的不确定性，决定多大程度上依赖LM； 2、采用 fine-grained (FG) 门控机制[5] 对语言模型状态的每个隐藏节点使用不同的门值； 使得语言模型的集成更加灵活性，因为融合算法可以在每个时间步长中选择更需要强调的语言模型的哪些方面； 3、用LM的概率替换LM的隐状态；【？？】 $s_t^{LM}$ 的分布和动态性，在不同的LM和数据上差别很大； 将token的分布映射到一个common 嵌入空间； Cold Fuison Layer的计算过程： h_t^{LM}=DNN(l_t^{LM})g_t = \sigma(W[s_t;h_t^{LM}]+b)s_t^{CF}=[s_t;g_t\circ h_t^{LM}]r_t^{CF}=DNN(s_t^{CF})\hat{P}(y_t|x,y_{]]></content>
       <categories>
         <category>Paper-Note</category>
       </categories>
@@ -24,8 +24,8 @@
       </categories>
       <tags>
         <tag>nlp</tag>
-        <tag>knowledge</tag>
         <tag>note</tag>
+        <tag>knowledge</tag>
         <tag>pre-trained-lm</tag>
       </tags>
   </entry>
@@ -77,9 +77,9 @@
       </categories>
       <tags>
         <tag>nlp</tag>
-        <tag>knowledge</tag>
         <tag>mrc</tag>
         <tag>paper</tag>
+        <tag>knowledge</tag>
       </tags>
   </entry>
   <entry>
@@ -91,9 +91,9 @@
       </categories>
       <tags>
         <tag>nlp</tag>
-        <tag>knowledge</tag>
         <tag>mrc</tag>
         <tag>paper</tag>
+        <tag>knowledge</tag>
       </tags>
   </entry>
   <entry>
@@ -105,9 +105,9 @@
       </categories>
       <tags>
         <tag>nlp</tag>
-        <tag>knowledge</tag>
         <tag>mrc</tag>
         <tag>paper</tag>
+        <tag>knowledge</tag>
       </tags>
   </entry>
   <entry>
@@ -119,10 +119,10 @@
       </categories>
       <tags>
         <tag>nlp</tag>
-        <tag>knowledge</tag>
         <tag>mrc</tag>
-        <tag>text-generation</tag>
         <tag>note</tag>
+        <tag>knowledge</tag>
+        <tag>text-generation</tag>
         <tag>ml</tag>
       </tags>
   </entry>
@@ -179,9 +179,9 @@
       </categories>
       <tags>
         <tag>nlp</tag>
-        <tag>knowledge</tag>
         <tag>mrc</tag>
         <tag>note</tag>
+        <tag>knowledge</tag>
         <tag>commonsense</tag>
         <tag>graph</tag>
       </tags>
@@ -195,9 +195,9 @@
       </categories>
       <tags>
         <tag>nlp</tag>
-        <tag>knowledge</tag>
         <tag>mrc</tag>
         <tag>note</tag>
+        <tag>knowledge</tag>
         <tag>commonsense</tag>
         <tag>graph</tag>
       </tags>
@@ -227,8 +227,8 @@
       </categories>
       <tags>
         <tag>nlp</tag>
-        <tag>knowledge</tag>
         <tag>mrc</tag>
+        <tag>knowledge</tag>
         <tag>qa</tag>
       </tags>
   </entry>
@@ -241,8 +241,8 @@
       </categories>
       <tags>
         <tag>nlp</tag>
-        <tag>knowledge</tag>
         <tag>note</tag>
+        <tag>knowledge</tag>
         <tag>pre-trained-lm</tag>
         <tag>wordnet</tag>
       </tags>
@@ -256,9 +256,9 @@
       </categories>
       <tags>
         <tag>nlp</tag>
-        <tag>knowledge</tag>
         <tag>mrc</tag>
         <tag>note</tag>
+        <tag>knowledge</tag>
         <tag>pre-trained-lm</tag>
       </tags>
   </entry>
@@ -271,9 +271,9 @@
       </categories>
       <tags>
         <tag>nlp</tag>
-        <tag>knowledge</tag>
         <tag>mrc</tag>
         <tag>note</tag>
+        <tag>knowledge</tag>
         <tag>wordnet</tag>
       </tags>
   </entry>
@@ -286,8 +286,8 @@
       </categories>
       <tags>
         <tag>nlp</tag>
-        <tag>knowledge</tag>
         <tag>note</tag>
+        <tag>knowledge</tag>
         <tag>commonsense</tag>
       </tags>
   </entry>
@@ -300,8 +300,8 @@
       </categories>
       <tags>
         <tag>nlp</tag>
-        <tag>knowledge</tag>
         <tag>note</tag>
+        <tag>knowledge</tag>
         <tag>reasoning</tag>
         <tag>kbqa</tag>
         <tag>graph</tag>
@@ -316,8 +316,8 @@
       </categories>
       <tags>
         <tag>nlp</tag>
-        <tag>knowledge</tag>
         <tag>note</tag>
+        <tag>knowledge</tag>
         <tag>tg</tag>
       </tags>
   </entry>
@@ -330,9 +330,9 @@
       </categories>
       <tags>
         <tag>nlp</tag>
-        <tag>knowledge</tag>
         <tag>mrc</tag>
         <tag>note</tag>
+        <tag>knowledge</tag>
       </tags>
   </entry>
   <entry>
@@ -344,9 +344,9 @@
       </categories>
       <tags>
         <tag>nlp</tag>
-        <tag>knowledge</tag>
-        <tag>research</tag>
         <tag>note</tag>
+        <tag>research</tag>
+        <tag>knowledge</tag>
       </tags>
   </entry>
   <entry>
@@ -388,8 +388,8 @@
       </categories>
       <tags>
         <tag>nlp</tag>
-        <tag>knowledge</tag>
         <tag>mrc</tag>
+        <tag>knowledge</tag>
         <tag>reasoning</tag>
         <tag>commonsense</tag>
         <tag>survey</tag>
@@ -432,8 +432,8 @@
       <tags>
         <tag>nlp</tag>
         <tag>mrc</tag>
-        <tag>research</tag>
         <tag>note</tag>
+        <tag>research</tag>
       </tags>
   </entry>
   <entry>
@@ -446,8 +446,8 @@
       <tags>
         <tag>nlp</tag>
         <tag>mrc</tag>
-        <tag>research</tag>
         <tag>note</tag>
+        <tag>research</tag>
       </tags>
   </entry>
   <entry>
@@ -473,9 +473,9 @@
       </categories>
       <tags>
         <tag>nlp</tag>
-        <tag>knowledge</tag>
         <tag>mrc</tag>
         <tag>paper</tag>
+        <tag>knowledge</tag>
       </tags>
   </entry>
   <entry>
@@ -487,9 +487,9 @@
       </categories>
       <tags>
         <tag>nlp</tag>
-        <tag>knowledge</tag>
         <tag>mrc</tag>
         <tag>note</tag>
+        <tag>knowledge</tag>
         <tag>nli</tag>
       </tags>
   </entry>
@@ -532,8 +532,8 @@
       </categories>
       <tags>
         <tag>nlp</tag>
-        <tag>text-generation</tag>
         <tag>note</tag>
+        <tag>text-generation</tag>
         <tag>commonsense</tag>
       </tags>
   </entry>
@@ -547,8 +547,8 @@
       <tags>
         <tag>nlp</tag>
         <tag>mrc</tag>
-        <tag>research</tag>
         <tag>note</tag>
+        <tag>research</tag>
         <tag>cs-know</tag>
       </tags>
   </entry>
@@ -575,8 +575,8 @@
       </categories>
       <tags>
         <tag>nlp</tag>
-        <tag>paper</tag>
         <tag>research</tag>
+        <tag>paper</tag>
         <tag>nli</tag>
       </tags>
   </entry>
@@ -590,8 +590,8 @@
       <tags>
         <tag>nlp</tag>
         <tag>mrc</tag>
-        <tag>paper</tag>
         <tag>research</tag>
+        <tag>paper</tag>
       </tags>
   </entry>
   <entry>
@@ -700,8 +700,8 @@
       </categories>
       <tags>
         <tag>nlp</tag>
-        <tag>knowledge</tag>
         <tag>note</tag>
+        <tag>knowledge</tag>
         <tag>nli</tag>
         <tag>wordnet</tag>
       </tags>
@@ -715,9 +715,9 @@
       </categories>
       <tags>
         <tag>nlp</tag>
-        <tag>knowledge</tag>
         <tag>mrc</tag>
         <tag>note</tag>
+        <tag>knowledge</tag>
         <tag>cloze</tag>
       </tags>
   </entry>
@@ -730,8 +730,8 @@
       </categories>
       <tags>
         <tag>nlp</tag>
-        <tag>knowledge</tag>
         <tag>paper</tag>
+        <tag>knowledge</tag>
         <tag>text-generation</tag>
       </tags>
   </entry>
