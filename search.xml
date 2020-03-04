@@ -121,8 +121,8 @@
         <tag>nlp</tag>
         <tag>knowledge</tag>
         <tag>mrc</tag>
-        <tag>text-generation</tag>
         <tag>note</tag>
+        <tag>text-generation</tag>
         <tag>ml</tag>
       </tags>
   </entry>
@@ -532,8 +532,8 @@
       </categories>
       <tags>
         <tag>nlp</tag>
-        <tag>text-generation</tag>
         <tag>note</tag>
+        <tag>text-generation</tag>
         <tag>commonsense</tag>
       </tags>
   </entry>
