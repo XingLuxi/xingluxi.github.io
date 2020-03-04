@@ -7,7 +7,7 @@
 
 <html class="theme-next gemini use-motion" lang="zh-CN">
 <head><meta name="generator" content="Hexo 3.8.0">
-  <meta charset="UTF-8">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="theme-color" content="#222">
@@ -138,7 +138,7 @@
 
 
 
-  <title>2019 | Exploring ways to incorporate additional knowledge to improve Natural Language Commonsense Question Answering | Luxi Xing - Blog</title>
+  <title>2019 | Exploring ways to incorporate additional knowledge to improve Natural Language Commonsense Question Answering | Luxi Xing - Blog</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
   
 
 
@@ -157,7 +157,7 @@
     
   
 
-  <div class="container sidebar-position-left page-post-detail">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -490,9 +490,12 @@
 <h2 id="MCQ-Datasets-amp-Knowledge"><a href="#MCQ-Datasets-amp-Knowledge" class="headerlink" title="MCQ Datasets &amp; Knowledge"></a>MCQ Datasets &amp; Knowledge</h2><p>(为了研究如何引入知识，首先要选出需要外部知识的一些数据集作为测试系统的QA任务)</p>
 <p>MCQ Tasks:</p>
 <ol>
-<li>Abductive Natural Language Inference<sup id="fnref:1"><a href="#fn:1" rel="footnote">1</a></sup></li>
-<li>Physical Interaction QA<sup id="fnref:2"><a href="#fn:2" rel="footnote">2</a></sup></li>
-<li>Social Interaction QA<sup id="fnref:3"><a href="#fn:3" rel="footnote">3</a></sup></li>
+<li>Abductive Natural Language Inference<sup id="fnref:1"><a href="#fn:1" rel="footnote"><span class="hint--top hint--error hint--medium hint--rounded hint--bounce" aria-label="Abductive commonsense reasoning. 2019. Bhagavatula, C.; Bras, R. L.; Malaviya, C.; Sakaguchi, K.; Holtzman, A.; Rashkin, H.; Downey, D.; Yih, S. W.-t.; and Choi, Y.. arXiv preprint arXiv:1908.05739.
+">[1]</span></a></sup></li>
+<li>Physical Interaction QA<sup id="fnref:2"><a href="#fn:2" rel="footnote"><span class="hint--top hint--error hint--medium hint--rounded hint--bounce" aria-label="https://leaderboard.allenai.org/physicaliqa
+">[2]</span></a></sup></li>
+<li>Social Interaction QA<sup id="fnref:3"><a href="#fn:3" rel="footnote"><span class="hint--top hint--error hint--medium hint--rounded hint--bounce" aria-label="Socialiqa: Commonsense reasoning about social interactions. 2019. Sap, M.; Rashkin, H.; Chen, D.; LeBras, R.; and Choi, Y. arXiv preprint arXiv:1904.09728.
+">[3]</span></a></sup></li>
 <li>Parent and Family QA<ul>
 <li>这个数据集是本文为了对知识有更好的可控性而合成的数据集；</li>
 <li>一方面来测试NLM的记忆能力，另一方面测试将分散在多个句子中的知识结合起来的能力；</li>
@@ -502,15 +505,18 @@
 </ol>
 <p>Knowledge Sources (different KBs for different tasks):</p>
 <ol>
-<li>SCT and RCOStories Corpora<sup id="fnref:4"><a href="#fn:4" rel="footnote">4</a></sup></li>
-<li>Wikihow<sup id="fnref:5"><a href="#fn:5" rel="footnote">5</a></sup></li>
-<li>ATOMIC<sup id="fnref:6"><a href="#fn:6" rel="footnote">6</a></sup></li>
+<li>SCT and RCOStories Corpora<sup id="fnref:4"><a href="#fn:4" rel="footnote"><span class="hint--top hint--error hint--medium hint--rounded hint--bounce" aria-label="A corpus and evaluation framework for deeper understanding of commonsense stories. 2016. Mostafazadeh, N.; Chambers, N.; He, X.; Parikh, D.; Batra, D.; Vanderwende, L.; Kohli, P.; and Allen, J.arXiv preprint arXiv:1604.01696.
+">[4]</span></a></sup></li>
+<li>Wikihow<sup id="fnref:5"><a href="#fn:5" rel="footnote"><span class="hint--top hint--error hint--medium hint--rounded hint--bounce" aria-label="Wikihow: A large scale text summarization dataset. 2018. Koupaee, M., and Wang, W. Y. arXiv preprint arXiv:1810.09305.
+">[5]</span></a></sup></li>
+<li>ATOMIC<sup id="fnref:6"><a href="#fn:6" rel="footnote"><span class="hint--top hint--error hint--medium hint--rounded hint--bounce" aria-label="Atomic: an atlas of machine commonsense for if-then reasoning. 2019. Sap, M.; Le Bras, R.; Allaway, E.; Bhagavatula, C.; Lourie, N.; Rashkin, H.; Roof, B.; Smith, N. A.; and Choi, Y.  In Proceedings of the AAAI Conference on Artiﬁcial Intelligence, volume 33, 3027–3035.
+">[6]</span></a></sup></li>
 <li>DBPedia</li>
 </ol>
 <p>Relevant Knowledge Extraction:</p>
 <ul>
 <li>使用IR和Re-ranking等方法抽取出相关的 knowledge paragraph</li>
-<li>这里使用的方法参考自ACL 2019的一篇文章<sup id="fnref:7"><a href="#fn:7" rel="footnote">7</a></sup><ul>
+<li>这里使用的方法参考自ACL 2019的一篇文章<sup id="fnref:7"><a href="#fn:7" rel="footnote"><span class="hint--top hint--error hint--medium hint--rounded hint--bounce" aria-label="Careful selection of knowledge to solve open book question answering. 2019. Banerjee, P.; Pal, K. K.; Mitra, A.; and Baral, C. In Proceedings of the 57th Annual Meeting of the Association for Computational Linguistics, 6120–6129. Florence, Italy: Association for Computational Linguistics.">[7]</span></a></sup><ul>
 <li>先使用IR模型，然后通过计算 Information Gain 进行 re-ranking</li>
 <li>query 通过简单的 heuristic 方法产生（即，question/answer option/context中出现的非停用词）</li>
 <li>对于每个数据集，选择 top-10 的知识句子。</li>
@@ -607,7 +613,7 @@
 <li>虽然已有的KB无法包含所有回答问题所需要的knowledge，但是KB确实能够提供重要的knowledge。</li>
 <li>BERT虽然已经具备了一些knowledge，但是仍然存在 <strong>给定knowledge但是模型无法回答的情况</strong>，或是<strong>使用了 irrelevant knowledge 产生了错误预测的情况</strong>，这些都是值得进一步研究的问题。</li>
 </ul>
-<div id="footnotes"><hr><div id="footnotelist"><ol style="list-style:none; padding-left: 0;"><li id="fn:1"><span style="display: inline-block; vertical-align: top; padding-right: 10px;">1.</span><span style="display: inline-block; vertical-align: top;">Abductive commonsense reasoning. 2019. Bhagavatula, C.; Bras, R. L.; Malaviya, C.; Sakaguchi, K.; Holtzman, A.; Rashkin, H.; Downey, D.; Yih, S. W.-t.; and Choi, Y.. arXiv preprint arXiv:1908.05739.</span><a href="#fnref:1" rev="footnote"> ↩</a></li><li id="fn:2"><span style="display: inline-block; vertical-align: top; padding-right: 10px;">2.</span><span style="display: inline-block; vertical-align: top;">https://leaderboard.allenai.org/physicaliqa</span><a href="#fnref:2" rev="footnote"> ↩</a></li><li id="fn:3"><span style="display: inline-block; vertical-align: top; padding-right: 10px;">3.</span><span style="display: inline-block; vertical-align: top;">Socialiqa: Commonsense reasoning about social interactions. 2019. Sap, M.; Rashkin, H.; Chen, D.; LeBras, R.; and Choi, Y. arXiv preprint arXiv:1904.09728.</span><a href="#fnref:3" rev="footnote"> ↩</a></li><li id="fn:4"><span style="display: inline-block; vertical-align: top; padding-right: 10px;">4.</span><span style="display: inline-block; vertical-align: top;">A corpus and evaluation framework for deeper understanding of commonsense stories. 2016. Mostafazadeh, N.; Chambers, N.; He, X.; Parikh, D.; Batra, D.; Vanderwende, L.; Kohli, P.; and Allen, J.arXiv preprint arXiv:1604.01696.</span><a href="#fnref:4" rev="footnote"> ↩</a></li><li id="fn:5"><span style="display: inline-block; vertical-align: top; padding-right: 10px;">5.</span><span style="display: inline-block; vertical-align: top;">Wikihow: A large scale text summarization dataset. 2018. Koupaee, M., and Wang, W. Y. arXiv preprint arXiv:1810.09305.</span><a href="#fnref:5" rev="footnote"> ↩</a></li><li id="fn:6"><span style="display: inline-block; vertical-align: top; padding-right: 10px;">6.</span><span style="display: inline-block; vertical-align: top;">Atomic: an atlas of machine commonsense for if-then reasoning. 2019. Sap, M.; Le Bras, R.; Allaway, E.; Bhagavatula, C.; Lourie, N.; Rashkin, H.; Roof, B.; Smith, N. A.; and Choi, Y.  In Proceedings of the AAAI Conference on Artiﬁcial Intelligence, volume 33, 3027–3035.</span><a href="#fnref:6" rev="footnote"> ↩</a></li><li id="fn:7"><span style="display: inline-block; vertical-align: top; padding-right: 10px;">7.</span><span style="display: inline-block; vertical-align: top;">Careful selection of knowledge to solve open book question answering. 2019. Banerjee, P.; Pal, K. K.; Mitra, A.; and Baral, C. In Proceedings of the 57th Annual Meeting of the Association for Computational Linguistics, 6120–6129. Florence, Italy: Association for Computational Linguistics.</span><a href="#fnref:7" rev="footnote"> ↩</a></li></ol></div></div>
+<div id="footnotes"><hr><div id="footnotelist"><ol style="list-style: none; padding-left: 0; margin-left: 40px"><li id="fn:1"><span style="display: inline-block; vertical-align: top; padding-right: 10px; margin-left: -40px">1.</span><span style="display: inline-block; vertical-align: top; margin-left: 10px;">Abductive commonsense reasoning. 2019. Bhagavatula, C.; Bras, R. L.; Malaviya, C.; Sakaguchi, K.; Holtzman, A.; Rashkin, H.; Downey, D.; Yih, S. W.-t.; and Choi, Y.. arXiv preprint arXiv:1908.05739.<a href="#fnref:1" rev="footnote"> ↩</a></span></li><li id="fn:2"><span style="display: inline-block; vertical-align: top; padding-right: 10px; margin-left: -40px">2.</span><span style="display: inline-block; vertical-align: top; margin-left: 10px;">https://leaderboard.allenai.org/physicaliqa<a href="#fnref:2" rev="footnote"> ↩</a></span></li><li id="fn:3"><span style="display: inline-block; vertical-align: top; padding-right: 10px; margin-left: -40px">3.</span><span style="display: inline-block; vertical-align: top; margin-left: 10px;">Socialiqa: Commonsense reasoning about social interactions. 2019. Sap, M.; Rashkin, H.; Chen, D.; LeBras, R.; and Choi, Y. arXiv preprint arXiv:1904.09728.<a href="#fnref:3" rev="footnote"> ↩</a></span></li><li id="fn:4"><span style="display: inline-block; vertical-align: top; padding-right: 10px; margin-left: -40px">4.</span><span style="display: inline-block; vertical-align: top; margin-left: 10px;">A corpus and evaluation framework for deeper understanding of commonsense stories. 2016. Mostafazadeh, N.; Chambers, N.; He, X.; Parikh, D.; Batra, D.; Vanderwende, L.; Kohli, P.; and Allen, J.arXiv preprint arXiv:1604.01696.<a href="#fnref:4" rev="footnote"> ↩</a></span></li><li id="fn:5"><span style="display: inline-block; vertical-align: top; padding-right: 10px; margin-left: -40px">5.</span><span style="display: inline-block; vertical-align: top; margin-left: 10px;">Wikihow: A large scale text summarization dataset. 2018. Koupaee, M., and Wang, W. Y. arXiv preprint arXiv:1810.09305.<a href="#fnref:5" rev="footnote"> ↩</a></span></li><li id="fn:6"><span style="display: inline-block; vertical-align: top; padding-right: 10px; margin-left: -40px">6.</span><span style="display: inline-block; vertical-align: top; margin-left: 10px;">Atomic: an atlas of machine commonsense for if-then reasoning. 2019. Sap, M.; Le Bras, R.; Allaway, E.; Bhagavatula, C.; Lourie, N.; Rashkin, H.; Roof, B.; Smith, N. A.; and Choi, Y.  In Proceedings of the AAAI Conference on Artiﬁcial Intelligence, volume 33, 3027–3035.<a href="#fnref:6" rev="footnote"> ↩</a></span></li><li id="fn:7"><span style="display: inline-block; vertical-align: top; padding-right: 10px; margin-left: -40px">7.</span><span style="display: inline-block; vertical-align: top; margin-left: 10px;">Careful selection of knowledge to solve open book question answering. 2019. Banerjee, P.; Pal, K. K.; Mitra, A.; and Baral, C. In Proceedings of the 57th Annual Meeting of the Association for Computational Linguistics, 6120–6129. Florence, Italy: Association for Computational Linguistics.<a href="#fnref:7" rev="footnote"> ↩</a></span></li></ol></div></div>
       
     </div>
     
@@ -1434,7 +1440,24 @@
         }
       });
     </script>
-    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
   
 
 

@@ -7,7 +7,7 @@
 
 <html class="theme-next gemini use-motion" lang="zh-CN">
 <head><meta name="generator" content="Hexo 3.8.0">
-  <meta charset="UTF-8">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="theme-color" content="#222">
@@ -75,7 +75,7 @@
 
 
 
-  <meta name="keywords" content="nlp,knowledge,mrc,text-generation,note,ml,">
+  <meta name="keywords" content="nlp,knowledge,text-generation,mrc,note,ml,">
 
 
 
@@ -87,7 +87,7 @@
 
 
 <meta name="description" content="Title: Incorporating External Knowledge into Machine Reading for Generative Question AnsweringAuthors: Bin Bi, Chen Wu, Ming Yan, Wei Wang, Jiangnan Xia, Chenliang LiOrg.: Alibaba DAMOPublished: EMNL">
-<meta name="keywords" content="nlp,knowledge,mrc,text-generation,note,ml">
+<meta name="keywords" content="nlp,knowledge,text-generation,mrc,note,ml">
 <meta property="og:type" content="article">
 <meta property="og:title" content="EMNLP2019 | Incorporating External Knowledge into Machine Reading for Generative Question Answering">
 <meta property="og:url" content="http://xingluxi.github.io/2019/10/13/paper-emnlp2019-keag/index.html">
@@ -141,7 +141,7 @@
 
 
 
-  <title>EMNLP2019 | Incorporating External Knowledge into Machine Reading for Generative Question Answering | Luxi Xing - Blog</title>
+  <title>EMNLP2019 | Incorporating External Knowledge into Machine Reading for Generative Question Answering | Luxi Xing - Blog</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
   
 
 
@@ -160,7 +160,7 @@
     
   
 
-  <div class="container sidebar-position-left page-post-detail">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -574,12 +574,14 @@
 </ul>
 <h2 id="Related-Works"><a href="#Related-Works" class="headerlink" title="Related Works"></a>Related Works</h2><ul>
 <li>generate natural answers in QA<ul>
-<li>在抽取式模型上面增加一个decoder，使用抽取得到的evidence用于答案生成<sup id="fnref:1"><a href="#fn:1" rel="footnote">1</a></sup>；<ul>
+<li>在抽取式模型上面增加一个decoder，使用抽取得到的evidence用于答案生成<sup id="fnref:1"><a href="#fn:1" rel="footnote"><span class="hint--top hint--error hint--medium hint--rounded hint--bounce" aria-label="Chuanqi Tan, Furu Wei, Nan Yang, Bowen Du, Weifeng Lv, and Ming Zhou. 2018. S-net: From answer extraction to answer synthesis for machine reading comprehension. In AAAI.
+">[1]</span></a></sup>；<ul>
 <li>缺点：依赖于抽取部分，需要抽取位置的标注</li>
 </ul>
 </li>
-<li>使用 seq2seq 模型学习 question 和 passage 之间的对齐，产生丰富的 question 感知 passage 表示，直接用于生成答案<sup id="fnref:2"><a href="#fn:2" rel="footnote">2</a></sup>；</li>
-<li>natural answer generation 可以被定义为 query-focused 摘要<sup id="fnref:3"><a href="#fn:3" rel="footnote">3</a></sup>；</li>
+<li>使用 seq2seq 模型学习 question 和 passage 之间的对齐，产生丰富的 question 感知 passage 表示，直接用于生成答案<sup id="fnref:2"><a href="#fn:2" rel="footnote"><span class="hint--top hint--error hint--medium hint--rounded hint--bounce" aria-label="Rajarshee Mitra. 2017. An abstractive approach to question answering. CoRR, abs/1711.06238.
+">[2]</span></a></sup>；</li>
+<li>natural answer generation 可以被定义为 query-focused 摘要<sup id="fnref:3"><a href="#fn:3" rel="footnote"><span class="hint--top hint--error hint--medium hint--rounded hint--bounce" aria-label="Preksha Nema, Mitesh M. Khapra, Anirban Laha, and Balaraman Ravindran. 2017. Diversity driven attention model for query-based abstractive summarization. In Proceedings of the 55th Annual Meeting of the Association for Computational Linguistics, pages 1063–1072. Association for Computational Linguistics.">[3]</span></a></sup>；</li>
 </ul>
 </li>
 <li>知识在 QA 任务中的作用：<ul>
@@ -622,7 +624,7 @@
 <h2 id="Analysis-amp-Summary"><a href="#Analysis-amp-Summary" class="headerlink" title="Analysis &amp; Summary"></a>Analysis &amp; Summary</h2><ul>
 <li>可视化实验中缺少了fact selector的结果；</li>
 </ul>
-<div id="footnotes"><hr><div id="footnotelist"><ol style="list-style:none; padding-left: 0;"><li id="fn:1"><span style="display: inline-block; vertical-align: top; padding-right: 10px;">1.</span><span style="display: inline-block; vertical-align: top;">Chuanqi Tan, Furu Wei, Nan Yang, Bowen Du, Weifeng Lv, and Ming Zhou. 2018. S-net: From answer extraction to answer synthesis for machine reading comprehension. In AAAI.</span><a href="#fnref:1" rev="footnote"> ↩</a></li><li id="fn:2"><span style="display: inline-block; vertical-align: top; padding-right: 10px;">2.</span><span style="display: inline-block; vertical-align: top;">Rajarshee Mitra. 2017. An abstractive approach to question answering. CoRR, abs/1711.06238.</span><a href="#fnref:2" rev="footnote"> ↩</a></li><li id="fn:3"><span style="display: inline-block; vertical-align: top; padding-right: 10px;">3.</span><span style="display: inline-block; vertical-align: top;">Preksha Nema, Mitesh M. Khapra, Anirban Laha, and Balaraman Ravindran. 2017. Diversity driven attention model for query-based abstractive summarization. In Proceedings of the 55th Annual Meeting of the Association for Computational Linguistics, pages 1063–1072. Association for Computational Linguistics.</span><a href="#fnref:3" rev="footnote"> ↩</a></li></ol></div></div>
+<div id="footnotes"><hr><div id="footnotelist"><ol style="list-style: none; padding-left: 0; margin-left: 40px"><li id="fn:1"><span style="display: inline-block; vertical-align: top; padding-right: 10px; margin-left: -40px">1.</span><span style="display: inline-block; vertical-align: top; margin-left: 10px;">Chuanqi Tan, Furu Wei, Nan Yang, Bowen Du, Weifeng Lv, and Ming Zhou. 2018. S-net: From answer extraction to answer synthesis for machine reading comprehension. In AAAI.<a href="#fnref:1" rev="footnote"> ↩</a></span></li><li id="fn:2"><span style="display: inline-block; vertical-align: top; padding-right: 10px; margin-left: -40px">2.</span><span style="display: inline-block; vertical-align: top; margin-left: 10px;">Rajarshee Mitra. 2017. An abstractive approach to question answering. CoRR, abs/1711.06238.<a href="#fnref:2" rev="footnote"> ↩</a></span></li><li id="fn:3"><span style="display: inline-block; vertical-align: top; padding-right: 10px; margin-left: -40px">3.</span><span style="display: inline-block; vertical-align: top; margin-left: 10px;">Preksha Nema, Mitesh M. Khapra, Anirban Laha, and Balaraman Ravindran. 2017. Diversity driven attention model for query-based abstractive summarization. In Proceedings of the 55th Annual Meeting of the Association for Computational Linguistics, pages 1063–1072. Association for Computational Linguistics.<a href="#fnref:3" rev="footnote"> ↩</a></span></li></ol></div></div>
       
     </div>
     
@@ -674,9 +676,9 @@
           
             <a href="/tags/knowledge/" rel="tag"><i class="fa fa-tag"></i> knowledge</a>
           
-            <a href="/tags/mrc/" rel="tag"><i class="fa fa-tag"></i> mrc</a>
-          
             <a href="/tags/text-generation/" rel="tag"><i class="fa fa-tag"></i> text-generation</a>
+          
+            <a href="/tags/mrc/" rel="tag"><i class="fa fa-tag"></i> mrc</a>
           
             <a href="/tags/note/" rel="tag"><i class="fa fa-tag"></i> note</a>
           
@@ -1453,7 +1455,24 @@
         }
       });
     </script>
-    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
   
 
 

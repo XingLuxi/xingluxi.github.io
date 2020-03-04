@@ -7,7 +7,7 @@
 
 <html class="theme-next gemini use-motion" lang="zh-CN">
 <head><meta name="generator" content="Hexo 3.8.0">
-  <meta charset="UTF-8">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="theme-color" content="#222">
@@ -137,7 +137,7 @@
 
 
 
-  <title>ACL2019 | Enhancing Pre-Trained Language Representations with Rich Knowledge for Machine Reading Comprehension | Luxi Xing - Blog</title>
+  <title>ACL2019 | Enhancing Pre-Trained Language Representations with Rich Knowledge for Machine Reading Comprehension | Luxi Xing - Blog</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
   
 
 
@@ -156,7 +156,7 @@
     
   
 
-  <div class="container sidebar-position-left page-post-detail">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -525,7 +525,7 @@
 </ul>
 <h3 id="Knowledge-Embedding-and-Retrieval"><a href="#Knowledge-Embedding-and-Retrieval" class="headerlink" title="Knowledge Embedding and Retrieval"></a>Knowledge Embedding and Retrieval</h3><p>KB Embedding：</p>
 <ul>
-<li>采用的是 Yang et al. (2015)<sup id="fnref:1"><a href="#fn:1" rel="footnote">1</a></sup> 提出的 BILINEAR 算法</li>
+<li>采用的是 Yang et al. (2015)<sup id="fnref:1"><a href="#fn:1" rel="footnote"><span class="hint--top hint--error hint--medium hint--rounded hint--bounce" aria-label="Embedding entities and relations for learning and inference in knowledge bases. ICLR,2015.">[1]</span></a></sup> 提出的 BILINEAR 算法</li>
 </ul>
 <p>KB Concepts Retrieval:</p>
 <ul>
@@ -562,7 +562,7 @@
 <li>如何选择预训练KB embedding的方法？</li>
 <li>从在SQuAD数据集上的实验可以看出，相比$KT-NET_{BOTH}$和$KT-NET_{NELL}$，$KT-NET_{wordnet}$取得了最好的结果，可以间接的说明，SQuAD数据集仅需要文本的信息就可以很好的回答问题，并不依赖外部的世界知识（实体信息）</li>
 </ul>
-<div id="footnotes"><hr><div id="footnotelist"><ol style="list-style:none; padding-left: 0;"><li id="fn:1"><span style="display: inline-block; vertical-align: top; padding-right: 10px;">1.</span><span style="display: inline-block; vertical-align: top;">Embedding entities and relations for learning and inference in knowledge bases. ICLR,2015.</span><a href="#fnref:1" rev="footnote"> ↩</a></li></ol></div></div>
+<div id="footnotes"><hr><div id="footnotelist"><ol style="list-style: none; padding-left: 0; margin-left: 40px"><li id="fn:1"><span style="display: inline-block; vertical-align: top; padding-right: 10px; margin-left: -40px">1.</span><span style="display: inline-block; vertical-align: top; margin-left: 10px;">Embedding entities and relations for learning and inference in knowledge bases. ICLR,2015.<a href="#fnref:1" rev="footnote"> ↩</a></span></li></ol></div></div>
       
     </div>
     
@@ -1391,7 +1391,24 @@
         }
       });
     </script>
-    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
   
 
 

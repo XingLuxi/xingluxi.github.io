@@ -7,7 +7,7 @@
 
 <html class="theme-next gemini use-motion" lang="zh-CN">
 <head><meta name="generator" content="Hexo 3.8.0">
-  <meta charset="UTF-8">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="theme-color" content="#222">
@@ -137,7 +137,7 @@
 
 
 
-  <title>ACL2019 | Modeling Semantic Compositionality with Sememe Knowledge | Luxi Xing - Blog</title>
+  <title>ACL2019 | Modeling Semantic Compositionality with Sememe Knowledge | Luxi Xing - Blog</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
   
 
 
@@ -156,7 +156,7 @@
     
   
 
-  <div class="container sidebar-position-left page-post-detail">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -449,7 +449,8 @@
 <p>official code: <a href="https://github.com/thunlp/Sememe-SC" target="_blank" rel="noopener">https://github.com/thunlp/Sememe-SC</a></p>
 <h2 id="Task-Definition"><a href="#Task-Definition" class="headerlink" title="Task Definition"></a>Task Definition</h2><ul>
 <li>Semantic Compositionality (SC, 语义组合):<ul>
-<li>is deﬁned as the linguistic phenomenon that the meaning of a syntactically complex unit is a function of meanings of the complex unit’s constituents and their combination rule <sup id="fnref:1"><a href="#fn:1" rel="footnote">1</a></sup></li>
+<li>is deﬁned as the linguistic phenomenon that the meaning of a syntactically complex unit is a function of meanings of the complex unit’s constituents and their combination rule <sup id="fnref:1"><a href="#fn:1" rel="footnote"><span class="hint--top hint--error hint--medium hint--rounded hint--bounce" aria-label="Francis Jeffry Pelletier. 1994. The Principle of Semantic Compositionality. Topoi, 13(1):11–24.
+">[1]</span></a></sup></li>
 </ul>
 </li>
 <li>Multiword Expressions (MWE, 多字/词表达):<ul>
@@ -470,7 +471,7 @@
 </li>
 <li>Sememe (义原)：<ul>
 <li>the minimum Semantic units of human language</li>
-<li><strong>all the words can be composed of a limited set of sememes</strong>, which is similar to the idea of <em>semantic primes</em> (语义启动)<sup id="fnref:2"><a href="#fn:2" rel="footnote">2</a></sup></li>
+<li><strong>all the words can be composed of a limited set of sememes</strong>, which is similar to the idea of <em>semantic primes</em> (语义启动)<sup id="fnref:2"><a href="#fn:2" rel="footnote"><span class="hint--top hint--error hint--medium hint--rounded hint--bounce" aria-label="Anna Wierzbicka. 1996. Semantics: Primes and Universals: Primes and Universals. Oxford University Press, UK.">[2]</span></a></sup></li>
 <li>HowNet：义原知识库</li>
 </ul>
 </li>
@@ -594,7 +595,7 @@
 </ul>
 </li>
 </ul>
-<h2 id="Experiments"><a href="#Experiments" class="headerlink" title="Experiments"></a>Experiments</h2><h2 id="Analysis-amp-Summary"><a href="#Analysis-amp-Summary" class="headerlink" title="Analysis &amp; Summary"></a>Analysis &amp; Summary</h2><div id="footnotes"><hr><div id="footnotelist"><ol style="list-style:none; padding-left: 0;"><li id="fn:1"><span style="display: inline-block; vertical-align: top; padding-right: 10px;">1.</span><span style="display: inline-block; vertical-align: top;">Francis Jeffry Pelletier. 1994. The Principle of Semantic Compositionality. Topoi, 13(1):11–24.</span><a href="#fnref:1" rev="footnote"> ↩</a></li><li id="fn:2"><span style="display: inline-block; vertical-align: top; padding-right: 10px;">2.</span><span style="display: inline-block; vertical-align: top;">Anna Wierzbicka. 1996. Semantics: Primes and Universals: Primes and Universals. Oxford University Press, UK.</span><a href="#fnref:2" rev="footnote"> ↩</a></li></ol></div></div>
+<h2 id="Experiments"><a href="#Experiments" class="headerlink" title="Experiments"></a>Experiments</h2><h2 id="Analysis-amp-Summary"><a href="#Analysis-amp-Summary" class="headerlink" title="Analysis &amp; Summary"></a>Analysis &amp; Summary</h2><div id="footnotes"><hr><div id="footnotelist"><ol style="list-style: none; padding-left: 0; margin-left: 40px"><li id="fn:1"><span style="display: inline-block; vertical-align: top; padding-right: 10px; margin-left: -40px">1.</span><span style="display: inline-block; vertical-align: top; margin-left: 10px;">Francis Jeffry Pelletier. 1994. The Principle of Semantic Compositionality. Topoi, 13(1):11–24.<a href="#fnref:1" rev="footnote"> ↩</a></span></li><li id="fn:2"><span style="display: inline-block; vertical-align: top; padding-right: 10px; margin-left: -40px">2.</span><span style="display: inline-block; vertical-align: top; margin-left: 10px;">Anna Wierzbicka. 1996. Semantics: Primes and Universals: Primes and Universals. Oxford University Press, UK.<a href="#fnref:2" rev="footnote"> ↩</a></span></li></ol></div></div>
       
     </div>
     
@@ -1425,7 +1426,24 @@
         }
       });
     </script>
-    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
   
 
 

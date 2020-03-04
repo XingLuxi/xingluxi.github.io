@@ -7,7 +7,7 @@
 
 <html class="theme-next gemini use-motion" lang="zh-CN">
 <head><meta name="generator" content="Hexo 3.8.0">
-  <meta charset="UTF-8">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="theme-color" content="#222">
@@ -86,18 +86,18 @@
 
 
 
-<meta name="description" content="Reading Comprehension Skills An Analysis of Prerequisite Skills for Reading Comprehension.1Prerequisite skills for reading comprehension: Multi-perspective analysis of mctest datasets and systems. AAA">
+<meta name="description" content="Reading Comprehension Skills An Analysis of Prerequisite Skills for Reading Comprehension.[1]Prerequisite skills for reading comprehension: Multi-perspective analysis of mctest datasets and systems. A">
 <meta name="keywords" content="nlp,mrc,research,metric">
 <meta property="og:type" content="article">
 <meta property="og:title" content="MRC 的评测与所需能力">
 <meta property="og:url" content="http://xingluxi.github.io/2019/01/14/mrc-measure-skills/index.html">
 <meta property="og:site_name" content="Luxi Xing - Blog">
-<meta property="og:description" content="Reading Comprehension Skills An Analysis of Prerequisite Skills for Reading Comprehension.1Prerequisite skills for reading comprehension: Multi-perspective analysis of mctest datasets and systems. AAA">
+<meta property="og:description" content="Reading Comprehension Skills An Analysis of Prerequisite Skills for Reading Comprehension.[1]Prerequisite skills for reading comprehension: Multi-perspective analysis of mctest datasets and systems. A">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:updated_time" content="2019-02-21T14:39:02.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="MRC 的评测与所需能力">
-<meta name="twitter:description" content="Reading Comprehension Skills An Analysis of Prerequisite Skills for Reading Comprehension.1Prerequisite skills for reading comprehension: Multi-perspective analysis of mctest datasets and systems. AAA">
+<meta name="twitter:description" content="Reading Comprehension Skills An Analysis of Prerequisite Skills for Reading Comprehension.[1]Prerequisite skills for reading comprehension: Multi-perspective analysis of mctest datasets and systems. A">
 
 
 
@@ -133,7 +133,7 @@
 
 
 
-  <title>MRC 的评测与所需能力 | Luxi Xing - Blog</title>
+  <title>MRC 的评测与所需能力 | Luxi Xing - Blog</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
   
 
 
@@ -152,7 +152,7 @@
     
   
 
-  <div class="container sidebar-position-left page-post-detail">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -402,7 +402,7 @@
                   <span class="post-meta-item-text">Words count in article&#58;</span>
                 
                 <span title="Words count in article">
-                  652
+                  654
                 </span>
               
 
@@ -440,11 +440,14 @@
 
       
         <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h2 id="Reading-Comprehension-Skills"><a href="#Reading-Comprehension-Skills" class="headerlink" title="Reading Comprehension Skills"></a>Reading Comprehension Skills</h2><blockquote>
-<p>An Analysis of Prerequisite Skills for Reading Comprehension.<sup id="fnref:1"><a href="#fn:1" rel="footnote">1</a></sup><br>Prerequisite skills for reading comprehension: Multi-perspective analysis of mctest datasets and systems. AAAI,2017.<sup id="fnref:2"><a href="#fn:2" rel="footnote">2</a></sup><br>Evaluation Metrics for Machine Reading Comprehension: Prerequisite Skills and Readability. ACL,2017.<sup id="fnref:3"><a href="#fn:3" rel="footnote">3</a></sup></p>
+<p>An Analysis of Prerequisite Skills for Reading Comprehension.<sup id="fnref:1"><a href="#fn:1" rel="footnote"><span class="hint--top hint--error hint--medium hint--rounded hint--bounce" aria-label="https://aclweb.org/anthology/W16-6001
+">[1]</span></a></sup><br>Prerequisite skills for reading comprehension: Multi-perspective analysis of mctest datasets and systems. AAAI,2017.<sup id="fnref:2"><a href="#fn:2" rel="footnote"><span class="hint--top hint--error hint--medium hint--rounded hint--bounce" aria-label="http://www.aaai.org/Conferences/AAAI/2017/PreliminaryPapers/14-Sugawara-14614.pdf
+">[2]</span></a></sup><br>Evaluation Metrics for Machine Reading Comprehension: Prerequisite Skills and Readability. ACL,2017.<sup id="fnref:3"><a href="#fn:3" rel="footnote"><span class="hint--top hint--error hint--medium hint--rounded hint--bounce" aria-label="https://aclanthology.info/papers/P17-1075/p17-1075
+">[3]</span></a></sup></p>
 </blockquote>
 <p>(从数据的角度)将阅读理解所需要的能力分为两类: <span id="inline-blue">认知能力(prerequisite skill)</span> 和 <span id="inline-blue">语言能力(readability)</span></p>
 <h3 id="1-prerequisite-skills"><a href="#1-prerequisite-skills" class="headerlink" title="1.prerequisite skills"></a>1.prerequisite skills</h3><p>认知能力: measure different types of reasoning and knowledge required to answer the question</p>
-<p>定义了 13 种认知能力<sup id="fnref:4"><a href="#fn:4" rel="footnote">4</a></sup>, 如下:</p>
+<p>定义了 13 种认知能力<sup id="fnref:4"><a href="#fn:4" rel="footnote"><span class="hint--top hint--error hint--medium hint--rounded hint--bounce" aria-label="王炳宁《A_Cognitive_Perspective_of_Machine_Comprehension_And_Recent_Advances》">[4]</span></a></sup>, 如下:</p>
 <ol>
 <li>object tracking 目标跟踪<ul>
 <li>同时锁定和跟踪多个目标，如集合或个体，也被称为列举或枚举</li>
@@ -513,7 +516,7 @@
 <li>语义组合：根据句法信息将基本单元（字、词）的语义组 合成高等单元（句子，篇章）的语义。</li>
 </ul>
 <h2 id="Metrics-Evaluation"><a href="#Metrics-Evaluation" class="headerlink" title="Metrics/Evaluation"></a>Metrics/Evaluation</h2><p>如何评价一个example的难度？</p>
-<div id="footnotes"><hr><div id="footnotelist"><ol style="list-style:none; padding-left: 0;"><li id="fn:1"><span style="display: inline-block; vertical-align: top; padding-right: 10px;">1.</span><span style="display: inline-block; vertical-align: top;">https://aclweb.org/anthology/W16-6001</span><a href="#fnref:1" rev="footnote"> ↩</a></li><li id="fn:2"><span style="display: inline-block; vertical-align: top; padding-right: 10px;">2.</span><span style="display: inline-block; vertical-align: top;">http://www.aaai.org/Conferences/AAAI/2017/PreliminaryPapers/14-Sugawara-14614.pdf</span><a href="#fnref:2" rev="footnote"> ↩</a></li><li id="fn:3"><span style="display: inline-block; vertical-align: top; padding-right: 10px;">3.</span><span style="display: inline-block; vertical-align: top;">https://aclanthology.info/papers/P17-1075/p17-1075</span><a href="#fnref:3" rev="footnote"> ↩</a></li><li id="fn:4"><span style="display: inline-block; vertical-align: top; padding-right: 10px;">4.</span><span style="display: inline-block; vertical-align: top;">王炳宁《A_Cognitive_Perspective_of_Machine_Comprehension_And_Recent_Advances》</span><a href="#fnref:4" rev="footnote"> ↩</a></li></ol></div></div>
+<div id="footnotes"><hr><div id="footnotelist"><ol style="list-style: none; padding-left: 0; margin-left: 40px"><li id="fn:1"><span style="display: inline-block; vertical-align: top; padding-right: 10px; margin-left: -40px">1.</span><span style="display: inline-block; vertical-align: top; margin-left: 10px;">https://aclweb.org/anthology/W16-6001<a href="#fnref:1" rev="footnote"> ↩</a></span></li><li id="fn:2"><span style="display: inline-block; vertical-align: top; padding-right: 10px; margin-left: -40px">2.</span><span style="display: inline-block; vertical-align: top; margin-left: 10px;">http://www.aaai.org/Conferences/AAAI/2017/PreliminaryPapers/14-Sugawara-14614.pdf<a href="#fnref:2" rev="footnote"> ↩</a></span></li><li id="fn:3"><span style="display: inline-block; vertical-align: top; padding-right: 10px; margin-left: -40px">3.</span><span style="display: inline-block; vertical-align: top; margin-left: 10px;">https://aclanthology.info/papers/P17-1075/p17-1075<a href="#fnref:3" rev="footnote"> ↩</a></span></li><li id="fn:4"><span style="display: inline-block; vertical-align: top; padding-right: 10px; margin-left: -40px">4.</span><span style="display: inline-block; vertical-align: top; margin-left: 10px;">王炳宁《A_Cognitive_Perspective_of_Machine_Comprehension_And_Recent_Advances》<a href="#fnref:4" rev="footnote"> ↩</a></span></li></ol></div></div>
       
     </div>
     
@@ -1340,7 +1343,24 @@
         }
       });
     </script>
-    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
   
 
 

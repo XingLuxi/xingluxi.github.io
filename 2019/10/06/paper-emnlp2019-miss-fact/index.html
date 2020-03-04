@@ -7,7 +7,7 @@
 
 <html class="theme-next gemini use-motion" lang="zh-CN">
 <head><meta name="generator" content="Hexo 3.8.0">
-  <meta charset="UTF-8">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="theme-color" content="#222">
@@ -148,7 +148,7 @@
 
 
 
-  <title>EMNLP2019 | What's Missing? A Knowledge Gap Guided Approach for Multi-hop Question Answering | Luxi Xing - Blog</title>
+  <title>EMNLP2019 | What's Missing? A Knowledge Gap Guided Approach for Multi-hop Question Answering | Luxi Xing - Blog</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
   
 
 
@@ -167,7 +167,7 @@
     
   
 
-  <div class="container sidebar-position-left page-post-detail">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -460,7 +460,7 @@
 <p>Code: <a href="https://github.com/allenai/missing-fact" target="_blank" rel="noopener">https://github.com/allenai/missing-fact</a></p>
 <h2 id="Motivation"><a href="#Motivation" class="headerlink" title="Motivation"></a>Motivation</h2><p>大多数的RC任务/数据集假设给待测试系统（或模型）提供了回答问题所需要的所有知识。<br>实际上，在处理<strong>multi-hop</strong>类型的问题时，模型只能接触到部分的知识，那么想要正确地回答数据集中的问题，就必须基于问题和提供的知识，抽取出额外的知识/事实。<br>正是这部分额外的知识的存在，造成了 <font color="red"><strong>knowledge gap</strong></font> 问题。</p>
 <p>本文对knowledge gap问题展开研究，目标是确定这样的 gap，并且利用额外的知识源填充这个 knowledge gap。</p>
-<p>本文主要研究的数据集是 OpenBookQA<sup id="fnref:1"><a href="#fn:1" rel="footnote">1</a></sup>，可以看做是一类 <strong>提供了部分知识的QA任务</strong>。<br>OpenBookQA数据集的主要特点是：</p>
+<p>本文主要研究的数据集是 OpenBookQA<sup id="fnref:1"><a href="#fn:1" rel="footnote"><span class="hint--top hint--error hint--medium hint--rounded hint--bounce" aria-label="Can a suit of armor conduct electricity? A new dataset for open book question answering. 2018. Todor Mihaylov, Peter Clark, Tushar Khot, and Ashish Sabharwal. In EMNLP.">[1]</span></a></sup>，可以看做是一类 <strong>提供了部分知识的QA任务</strong>。<br>OpenBookQA数据集的主要特点是：</p>
 <ol>
 <li>问题的领域是科学事实</li>
 <li>回答问题时，不仅需要从一个给定的 <strong>small book</strong> 中确定相关的核心科学事实（core science fact），还需要从外部的知识源中抽取出额外的常识知识。<ol>
@@ -479,7 +479,7 @@
 </ul>
 </li>
 <li>第二步，填充 knowledge gap：确定 key span 和候选项之间的关系，然后回答问题；<ul>
-<li>具体分为3个子步骤：(a) 从 ConceptNet/text corpora<sup id="fnref:2"><a href="#fn:2" rel="footnote">2</a></sup> 中抽取相关知识；(b) 预测 key span 和 候选答案之间的潜在关系；(c) 组合 core fact 和 抽取的外部知识来填充gap；</li>
+<li>具体分为3个子步骤：(a) 从 ConceptNet/text corpora<sup id="fnref:2"><a href="#fn:2" rel="footnote"><span class="hint--top hint--error hint--medium hint--rounded hint--bounce" aria-label="Think you have solved question answering? Try ARC, the AI2 reasoning challenge. 2018. Peter Clark, Isaac Cowhey, Oren Etzioni, Tushar Khot, Ashish Sabharwal, Carissa Schoenick, and Oyvind Tafjord. CoRR, abs/1803.05457.">[2]</span></a></sup> 中抽取相关知识；(b) 预测 key span 和 候选答案之间的潜在关系；(c) 组合 core fact 和 抽取的外部知识来填充gap；</li>
 <li>这一步中，采取multi-task学习，联合学习 gap 的关系预测 和 最终的答案预测；</li>
 </ul>
 </li>
@@ -638,7 +638,7 @@
 <li><p>从解决方法上看，先确定在填充整体上为pipline的形式，在实验部分没有看到使用标注的gold span进行GapQA计算的结果？</p>
 </li>
 </ul>
-<div id="footnotes"><hr><div id="footnotelist"><ol style="list-style:none; padding-left: 0;"><li id="fn:1"><span style="display: inline-block; vertical-align: top; padding-right: 10px;">1.</span><span style="display: inline-block; vertical-align: top;">Can a suit of armor conduct electricity? A new dataset for open book question answering. 2018. Todor Mihaylov, Peter Clark, Tushar Khot, and Ashish Sabharwal. In EMNLP.</span><a href="#fnref:1" rev="footnote"> ↩</a></li><li id="fn:2"><span style="display: inline-block; vertical-align: top; padding-right: 10px;">2.</span><span style="display: inline-block; vertical-align: top;">Think you have solved question answering? Try ARC, the AI2 reasoning challenge. 2018. Peter Clark, Isaac Cowhey, Oren Etzioni, Tushar Khot, Ashish Sabharwal, Carissa Schoenick, and Oyvind Tafjord. CoRR, abs/1803.05457.</span><a href="#fnref:2" rev="footnote"> ↩</a></li></ol></div></div>
+<div id="footnotes"><hr><div id="footnotelist"><ol style="list-style: none; padding-left: 0; margin-left: 40px"><li id="fn:1"><span style="display: inline-block; vertical-align: top; padding-right: 10px; margin-left: -40px">1.</span><span style="display: inline-block; vertical-align: top; margin-left: 10px;">Can a suit of armor conduct electricity? A new dataset for open book question answering. 2018. Todor Mihaylov, Peter Clark, Tushar Khot, and Ashish Sabharwal. In EMNLP.<a href="#fnref:1" rev="footnote"> ↩</a></span></li><li id="fn:2"><span style="display: inline-block; vertical-align: top; padding-right: 10px; margin-left: -40px">2.</span><span style="display: inline-block; vertical-align: top; margin-left: 10px;">Think you have solved question answering? Try ARC, the AI2 reasoning challenge. 2018. Peter Clark, Isaac Cowhey, Oren Etzioni, Tushar Khot, Ashish Sabharwal, Carissa Schoenick, and Oyvind Tafjord. CoRR, abs/1803.05457.<a href="#fnref:2" rev="footnote"> ↩</a></span></li></ol></div></div>
       
     </div>
     
@@ -1469,7 +1469,24 @@
         }
       });
     </script>
-    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
   
 
 

@@ -7,7 +7,7 @@
 
 <html class="theme-next gemini use-motion" lang="zh-CN">
 <head><meta name="generator" content="Hexo 3.8.0">
-  <meta charset="UTF-8">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="theme-color" content="#222">
@@ -138,7 +138,7 @@
 
 
 
-  <title>EMNLP2019 | KagNet - Knowledge-Aware Graph Networks for Commonsense Reasoning | Luxi Xing - Blog</title>
+  <title>EMNLP2019 | KagNet - Knowledge-Aware Graph Networks for Commonsense Reasoning | Luxi Xing - Blog</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
   
 
 
@@ -157,7 +157,7 @@
     
   
 
-  <div class="container sidebar-position-left page-post-detail">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -452,8 +452,10 @@
 <ul>
 <li><strong>empowering</strong> machines with the ability to perform commonsense reasoning/inferences<ul>
 <li>关于推理的定义：<ul>
-<li>reasoning is the process of combining facts and beliefs to make new decisions <sup id="fnref:1"><a href="#fn:1" rel="footnote">1</a></sup>.</li>
-<li>reasoning is the ability to manipulate knowledge to draw inferences <sup id="fnref:2"><a href="#fn:2" rel="footnote">2</a></sup>.</li>
+<li>reasoning is the process of combining facts and beliefs to make new decisions <sup id="fnref:1"><a href="#fn:1" rel="footnote"><span class="hint--top hint--error hint--medium hint--rounded hint--bounce" aria-label="Philip N Johnson-Laird. 1980. Mental models in cognitive science. Cognitive science, 4(1):71–115.
+">[1]</span></a></sup>.</li>
+<li>reasoning is the ability to manipulate knowledge to draw inferences <sup id="fnref:2"><a href="#fn:2" rel="footnote"><span class="hint--top hint--error hint--medium hint--rounded hint--bounce" aria-label="Drew A. Hudson and Christopher D. Manning. 2018. Compositional attention networks for machine reasoning. In Proc. of ICLR.
+">[2]</span></a></sup>.</li>
 </ul>
 </li>
 <li>关于常识推理的定义：<ul>
@@ -622,7 +624,7 @@
 <h2 id="Analysis-amp-Summary"><a href="#Analysis-amp-Summary" class="headerlink" title="Analysis &amp; Summary"></a>Analysis &amp; Summary</h2><ul>
 <li>kAGNET 可以看做是 knowledge-augmented Relation Network (RN) module</li>
 </ul>
-<div id="footnotes"><hr><div id="footnotelist"><ol style="list-style:none; padding-left: 0;"><li id="fn:1"><span style="display: inline-block; vertical-align: top; padding-right: 10px;">1.</span><span style="display: inline-block; vertical-align: top;">Philip N Johnson-Laird. 1980. Mental models in cognitive science. Cognitive science, 4(1):71–115.</span><a href="#fnref:1" rev="footnote"> ↩</a></li><li id="fn:2"><span style="display: inline-block; vertical-align: top; padding-right: 10px;">2.</span><span style="display: inline-block; vertical-align: top;">Drew A. Hudson and Christopher D. Manning. 2018. Compositional attention networks for machine reasoning. In Proc. of ICLR.</span><a href="#fnref:2" rev="footnote"> ↩</a></li></ol></div></div>
+<div id="footnotes"><hr><div id="footnotelist"><ol style="list-style: none; padding-left: 0; margin-left: 40px"><li id="fn:1"><span style="display: inline-block; vertical-align: top; padding-right: 10px; margin-left: -40px">1.</span><span style="display: inline-block; vertical-align: top; margin-left: 10px;">Philip N Johnson-Laird. 1980. Mental models in cognitive science. Cognitive science, 4(1):71–115.<a href="#fnref:1" rev="footnote"> ↩</a></span></li><li id="fn:2"><span style="display: inline-block; vertical-align: top; padding-right: 10px; margin-left: -40px">2.</span><span style="display: inline-block; vertical-align: top; margin-left: 10px;">Drew A. Hudson and Christopher D. Manning. 2018. Compositional attention networks for machine reasoning. In Proc. of ICLR.<a href="#fnref:2" rev="footnote"> ↩</a></span></li></ol></div></div>
       
     </div>
     
@@ -1453,7 +1455,24 @@
         }
       });
     </script>
-    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
   
 
 
