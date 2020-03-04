@@ -99,7 +99,7 @@
 <meta property="og:image" content="http://xingluxi.github.io/images/paper-2019-k-adapter/arch-adapter.png">
 <meta property="og:image" content="http://xingluxi.github.io/images/paper-2019-k-adapter/exp-qa.png">
 <meta property="og:image" content="http://xingluxi.github.io/images/paper-2019-k-adapter/exp-lama.png">
-<meta property="og:updated_time" content="2020-03-04T08:07:25.085Z">
+<meta property="og:updated_time" content="2020-03-04T08:12:40.530Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="2019 | K-Adapter, Infusing Knowledge into Pre-Trained Models with Adapters">
 <meta name="twitter:description" content="Title: K-A DAPTER: Infusing Knowledge into Pre-Trained Models with AdaptersAuthors: Ruize Wang, et. al.Org: MSRA, Fudan University.Published: unpublished  Motivation本文研究问题：向大型预训练（语言）模型中注入知识。 尽管预训练模型（">
@@ -353,7 +353,7 @@
               
                 <span class="post-meta-item-text">Post modified&#58;</span>
               
-              <time title="Post modified" itemprop="dateModified" datetime="2020-03-04T16:07:25+08:00">
+              <time title="Post modified" itemprop="dateModified" datetime="2020-03-04T16:12:40+08:00">
                 2020-03-04
               </time>
             
@@ -449,7 +449,7 @@
 <p>Title: <a href="https://arxiv.org/abs/2002.01808" target="_blank" rel="noopener">K-A DAPTER: Infusing Knowledge into Pre-Trained Models with Adapters</a><br>Authors: Ruize Wang, et. al.<br>Org: MSRA, Fudan University.<br>Published: unpublished</p>
 </blockquote>
 <h2 id="Motivation"><a href="#Motivation" class="headerlink" title="Motivation"></a>Motivation</h2><p>本文研究问题：向大型预训练（语言）模型中注入知识。</p>
-<p>尽管预训练模型（GPT、BERT、XLNET等模型）取得了很大的进展，最近的一些研究<sup><a href="#fn_1," id="reffn_1,">1,</a></sup><sup><a href="#fn_2," id="reffn_2,">2,</a></sup><sup id="fnref:3"><a href="#fn:3" rel="footnote">3</a></sup>表明，以无监督方式训练的语言模型很难捕获丰富的知识；</p>
+<p>尽管预训练模型（GPT、BERT、XLNET等模型）取得了很大的进展，最近的一些研究<sup><a href="#fn_1;" id="reffn_1;">1;</a></sup><sup><a href="#fn_2;" id="reffn_2;">2;</a></sup><sup id="fnref:3"><a href="#fn:3" rel="footnote">3</a></sup>表明，以无监督方式训练的语言模型很难捕获丰富的知识；</p>
 <p>先前的工作<sup id="fnref:4"><a href="#fn:4" rel="footnote">4</a></sup><sup id="fnref:5"><a href="#fn:5" rel="footnote">5</a></sup><sup id="fnref:6"><a href="#fn:6" rel="footnote">6</a></sup><sup id="fnref:7"><a href="#fn:7" rel="footnote">7</a></sup><sup id="fnref:8"><a href="#fn:8" rel="footnote">8</a></sup><sup id="fnref:9"><a href="#fn:9" rel="footnote">9</a></sup>主要集中与通过设计knowledge-driven的训练目标来增强standard LM的训练目标，然后通过多任务学习的方式更新模型的全部参数；</p>
 <p>这样的方式存在几点限制：</p>
 <ul>
@@ -543,11 +543,11 @@
 <li>两个训练K-Adapter的任务，是否适用于学到事实型知识和语言学知识？</li>
 <li>如何针对不同的知识设计不同的学习/预训练任务？</li>
 </ul>
-<blockquote id="fn_1,">
-<sup>1,</sup>. BERT is Not a Knowledge Base (Yet): Factual Knowledge vs. Name-Based Reasoning in Unsupervised QA. arXiv preprint arXiv:1911.03681, 2019.<a href="#reffn_1," title="Jump back to footnote [1,] in the text."> &#8617;</a>
+<blockquote id="fn_1;">
+<sup>1;</sup>. BERT is Not a Knowledge Base (Yet): Factual Knowledge vs. Name-Based Reasoning in Unsupervised QA. arXiv preprint arXiv:1911.03681, 2019.<a href="#reffn_1;" title="Jump back to footnote [1;] in the text."> &#8617;</a>
 </blockquote>
-<blockquote id="fn_2,">
-<sup>2,</sup>. Negated LAMA: Birds cannot ﬂy. arXiv preprint arXiv:1911.03343, 2019.<a href="#reffn_2," title="Jump back to footnote [2,] in the text."> &#8617;</a>
+<blockquote id="fn_2;">
+<sup>2;</sup>. Negated LAMA: Birds cannot ﬂy. arXiv preprint arXiv:1911.03343, 2019.<a href="#reffn_2;" title="Jump back to footnote [2;] in the text."> &#8617;</a>
 </blockquote>
 <div id="footnotes"><hr><div id="footnotelist"><ol style="list-style:none; padding-left: 0;"><li id="fn:3"><span style="display: inline-block; vertical-align: top; padding-right: 10px;">3.</span><span style="display: inline-block; vertical-align: top;">oLMpics On what Language Model Pre-training Captures. arXiv preprint arXiv:1912.13283, 2019.</span><a href="#fnref:3" rev="footnote"> ↩</a></li><li id="fn:4"><span style="display: inline-block; vertical-align: top; padding-right: 10px;">4.</span><span style="display: inline-block; vertical-align: top;">ERNIE: Enhanced Language Representation with Informative Entities. In ACL, pp. 1441–1451, 2019.</span><a href="#fnref:4" rev="footnote"> ↩</a></li><li id="fn:5"><span style="display: inline-block; vertical-align: top; padding-right: 10px;">5.</span><span style="display: inline-block; vertical-align: top;">Informing unsupervised pretraining with external linguistic knowledge. arXiv preprint arXiv:1909.02339, 2019.</span><a href="#fnref:5" rev="footnote"> ↩</a></li><li id="fn:6"><span style="display: inline-block; vertical-align: top; padding-right: 10px;">6.</span><span style="display: inline-block; vertical-align: top;">Sensebert: Driving some sense into bert. arXiv preprint arXiv:1908.05646, 2019.</span><a href="#fnref:6" rev="footnote"> ↩</a></li><li id="fn:7"><span style="display: inline-block; vertical-align: top; padding-right: 10px;">7.</span><span style="display: inline-block; vertical-align: top;">Knowledge enhanced contextual word representations. In EMNLP, pp. 43–54, 2019.</span><a href="#fnref:7" rev="footnote"> ↩</a></li><li id="fn:8"><span style="display: inline-block; vertical-align: top; padding-right: 10px;">8.</span><span style="display: inline-block; vertical-align: top;">Integrating Graph Contextualized Knowledge into Pre-trained Language Models. In AAAI, 2020.</span><a href="#fnref:8" rev="footnote"> ↩</a></li><li id="fn:9"><span style="display: inline-block; vertical-align: top; padding-right: 10px;">9.</span><span style="display: inline-block; vertical-align: top;">Pretrained Encyclopedia: Weakly Supervised Knowledge-Pretrained Language Model. In ICLR, 2020.</span><a href="#fnref:9" rev="footnote"> ↩</a></li></ol></div></div>
       
