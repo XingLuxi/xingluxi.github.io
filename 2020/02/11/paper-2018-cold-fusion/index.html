@@ -94,7 +94,7 @@
 <meta property="og:site_name" content="Luxi Xing - Blog">
 <meta property="og:description" content="Title: Cold Fusion: Traning Seq2Seq Models Together with Language Models Org.: Baidu Research Published: Interspeech, 2018. Research Topic/Problem如何在seq2seq模型训练时利用PLM提升模型的效果（相当于引入无标注数据） 引入PLM的优势/目的：">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2020-02-11T07:02:12.637Z">
+<meta property="og:updated_time" content="2020-02-11T07:02:24.601Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="TG | Seq2Seq with LM using Cold Fusion">
 <meta name="twitter:description" content="Title: Cold Fusion: Traning Seq2Seq Models Together with Language Models Org.: Baidu Research Published: Interspeech, 2018. Research Topic/Problem如何在seq2seq模型训练时利用PLM提升模型的效果（相当于引入无标注数据） 引入PLM的优势/目的：">
@@ -347,7 +347,7 @@
               
                 <span class="post-meta-item-text">Post modified&#58;</span>
               
-              <time title="Post modified" itemprop="dateModified" datetime="2020-02-11T15:02:12+08:00">
+              <time title="Post modified" itemprop="dateModified" datetime="2020-02-11T15:02:24+08:00">
                 2020-02-11
               </time>
             
@@ -497,7 +497,7 @@
 <li>将token的分布映射到一个common 嵌入空间；</li>
 </ul>
 <p>Cold Fuison Layer的计算过程：</p>
-<script type="math/tex; mode=display">h_t^{LM}=DNN(l_t^{LM})</script><script type="math/tex; mode=display">g_t = \sigma(W[s_t;h_t^{LM}]+b)</script><script type="math/tex; mode=display">s_t^{CF}=[s_t;g_t\circ h_t^{LM}]</script><script type="math/tex; mode=display">r_t^{CF}=DNN(s_t^{CF})</script><script type="math/tex; mode=display">\hat{P}(y_t|x,y_{<t})=softmax(r_t^{CF})</script><p>其中，$l_t^{LM}$ 为 LM的logit输出；</p>
+<script type="math/tex; mode=display">h_t^{LM}=DNN(l_t^{LM})</script><script type="math/tex; mode=display">g_t = \sigma(W[s_t;h_t^{LM}]+b)</script><script type="math/tex; mode=display">s_t^{CF}=[s_t;g_t\circ h_t^{LM}]</script><script type="math/tex; mode=display">r_t^{CF}=DNN(s_t^{CF})</script><script type="math/tex; mode=display">\hat{P}(y_t|x,y_{<t})=softmax(r_t^{CF})</script><p>其中，$l_t^{LM}$ 为 LM 的logit输出；</p>
 <div id="footnotes"><hr><div id="footnotelist"><ol style="list-style:none; padding-left: 0;"><li id="fn:1"><span style="display: inline-block; vertical-align: top; padding-right: 10px;">1.</span><span style="display: inline-block; vertical-align: top;">Towards better decoding and language model integration in sequence to sequence models. 2016.</span><a href="#fnref:1" rev="footnote"> ↩</a></li><li id="fn:2"><span style="display: inline-block; vertical-align: top; padding-right: 10px;">2.</span><span style="display: inline-block; vertical-align: top;">Sequence to sequence learning with neural networks. NIPS,2014.</span><a href="#fnref:2" rev="footnote"> ↩</a></li><li id="fn:3"><span style="display: inline-block; vertical-align: top; padding-right: 10px;">3.</span><span style="display: inline-block; vertical-align: top;">On using monolingual corpora in neural machine translation. 2015.</span><a href="#fnref:3" rev="footnote"> ↩</a></li><li id="fn:4"><span style="display: inline-block; vertical-align: top; padding-right: 10px;">4.</span><span style="display: inline-block; vertical-align: top;">Google’s neural machine translation system: Bridging the gap between human and machine translation. 2016.</span><a href="#fnref:4" rev="footnote"> ↩</a></li><li id="fn:5"><span style="display: inline-block; vertical-align: top; padding-right: 10px;">5.</span><span style="display: inline-block; vertical-align: top;">Words or characters? ﬁne-grained gating for reading comprehension. arXiv preprint arXiv:1611.01724, 2016.</span><a href="#fnref:5" rev="footnote"> ↩</a></li></ol></div></div>
       
     </div>
