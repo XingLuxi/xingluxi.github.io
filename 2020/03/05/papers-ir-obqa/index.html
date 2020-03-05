@@ -92,16 +92,16 @@
 <meta property="og:url" content="http://xingluxi.github.io/2020/03/05/papers-ir-obqa/index.html">
 <meta property="og:site_name" content="Luxi Xing - Blog">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="http://xingluxi.github.io/images/image-20200304214221063.png">
-<meta property="og:image" content="http://xingluxi.github.io/images/image-20200304220331985.png">
-<meta property="og:image" content="http://xingluxi.github.io/images/image-20200304233158435.png">
-<meta property="og:image" content="http://xingluxi.github.io/images/image-20200304233053774.png">
-<meta property="og:image" content="http://xingluxi.github.io/images/image-20200305122332298.png">
-<meta property="og:image" content="http://xingluxi.github.io/images/image-20200305180954446.png">
-<meta property="og:updated_time" content="2020-03-05T12:44:54.125Z">
+<meta property="og:image" content="http://xingluxi.github.io/images/papers-ir-obqa/image-20200304214221063.png">
+<meta property="og:image" content="http://xingluxi.github.io/images/papers-ir-obqa/image-20200304220331985.png">
+<meta property="og:image" content="http://xingluxi.github.io/images/papers-ir-obqa/image-20200304233158435.png">
+<meta property="og:image" content="http://xingluxi.github.io/images/papers-ir-obqa/image-20200304233053774.png">
+<meta property="og:image" content="http://xingluxi.github.io/images/papers-ir-obqa/image-20200305122332298.png">
+<meta property="og:image" content="http://xingluxi.github.io/images/papers-ir-obqa/image-20200305180954446.png">
+<meta property="og:updated_time" content="2020-03-05T12:46:06.699Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Retrieval Approach for Open-Book style Question Answering">
-<meta name="twitter:image" content="http://xingluxi.github.io/images/image-20200304214221063.png">
+<meta name="twitter:image" content="http://xingluxi.github.io/images/papers-ir-obqa/image-20200304214221063.png">
 
 
 
@@ -352,7 +352,7 @@
               
                 <span class="post-meta-item-text">Post modified&#58;</span>
               
-              <time title="Post modified" itemprop="dateModified" datetime="2020-03-05T20:44:54+08:00">
+              <time title="Post modified" itemprop="dateModified" datetime="2020-03-05T20:46:06+08:00">
                 2020-03-05
               </time>
             
@@ -446,8 +446,7 @@
       
         <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><!-- # Retrieval Approach for Open-Book style Question Answering -->
 <a id="more"></a>
-<p>Content</p>
-<ol>
+<h2 id="Content"><a href="#Content" class="headerlink" title="Content"></a>Content</h2><ol>
 <li>Alignment over Heterogeneous Embedding for Question Answering. NAACL,2019.</li>
 <li>Careful Selection of Knowledge to solve Open Book Question Answering. ACL,2019.</li>
 <li>Quick and (not so) Dirty: Unsupervised Selection of Justification Sentences for Multi-hop Question Answering. EMNLP,2019.</li>
@@ -502,7 +501,7 @@
 </ul>
 <p>Overall architecture:</p>
 <ul>
-<li><img src="/../images/image-20200304214221063.png" alt="image-20200304214221063"></li>
+<li><img src="/../images/papers-ir-obqa/image-20200304214221063.png" alt="image-20200304214221063"></li>
 </ul>
 <h4 id="3-1-Retrieve-Supporting-Paragraphs"><a href="#3-1-Retrieve-Supporting-Paragraphs" class="headerlink" title="3.1 Retrieve Supporting Paragraphs"></a>3.1 Retrieve Supporting Paragraphs</h4><ul>
 <li>retrieve supporting information from external KBs using Lucene, an off-the-shelf IR system<ul>
@@ -521,7 +520,7 @@
 </ul>
 </li>
 </ul>
-<h4 id="3-2-Alignment-Method"><a href="#3-2-Alignment-Method" class="headerlink" title="3.2 Alignment Method"></a>3.2 Alignment Method</h4><p>Alignment Algorithm:<br><img src="/../images/image-20200304220331985.png" alt="image-20200304220331985"></p>
+<h4 id="3-2-Alignment-Method"><a href="#3-2-Alignment-Method" class="headerlink" title="3.2 Alignment Method"></a>3.2 Alignment Method</h4><p>Alignment Algorithm:<br><img src="/../images/papers-ir-obqa/image-20200304220331985.png" alt="image-20200304220331985"></p>
 <ol>
 <li>compute <strong>each query token</strong> with <strong>every token</strong> in the given KB paragraph using <strong>cosine similarity</strong> of the two embedding vectors;<ul>
 <li>$cosSim(q_i, p_k) = \frac{\overrightarrow{q_i} \cdot \overrightarrow{p_k}}{ ||\overrightarrow{q_i}|| \cdot ||\overrightarrow{p_k}|| }$ </li>
@@ -649,7 +648,7 @@
 </ol>
 <p>A key aspect of this work’s approach is to <strong>accurately hunt the needed knowledge facts from the OpenBook knowledge corpus and hunt missing common knowledge using IR</strong>.</p>
 <h3 id="3-Method-1"><a href="#3-Method-1" class="headerlink" title="3.Method"></a>3.Method</h3><p>Approach Overall:</p>
-<p><img src="/../images/image-20200304233158435.png" alt="image-20200304233158435"></p>
+<p><img src="/../images/papers-ir-obqa/image-20200304233158435.png" alt="image-20200304233158435"></p>
 <p>The proposed approach involves six main modules: </p>
 <ol>
 <li>Hypothesis Generation, </li>
@@ -660,7 +659,7 @@
 <li>Question Answering.</li>
 </ol>
 <p>Example of the proposed approach:</p>
-<p><img src="/../images/image-20200304233053774.png" alt="image-20200304233053774"></p>
+<p><img src="/../images/papers-ir-obqa/image-20200304233053774.png" alt="image-20200304233053774"></p>
 <p>Hypothesis Generation:</p>
 <ul>
 <li>generate a hypothesis $H_{ij}$ for the $i$-th question and $j$-th answer option ($j\in \{1,2,3,4\}$);</li>
@@ -852,7 +851,7 @@
 <li>account for more intentional knowledge aggregation;</li>
 </ul>
 <p>Target Dataset: (a) ARC; (b) MultiRC;</p>
-<p>Example:<br><img src="/../images/image-20200305122332298.png" alt="image-20200305122332298"></p>
+<p>Example:<br><img src="/../images/papers-ir-obqa/image-20200305122332298.png" alt="image-20200305122332298"></p>
 <p>Brief introduction of the ROCC:</p>
 <ul>
 <li>first creating $\left( \begin{array}{c} n \\ k \end{array} \right)$ justification sets from the top-$n$ sentences selected by BM25 IR model;<ul>
@@ -863,7 +862,7 @@
 <li>then ranking them all by a formula that combines the three <strong>criteria</strong> above;</li>
 <li>the set with the top score becomes the set of justifications output by ROCC for a given question and candidate answer;</li>
 </ul>
-<h3 id="3-Method-2"><a href="#3-Method-2" class="headerlink" title="3.Method"></a>3.Method</h3><p>ROCC, coupled with a QA system, operates in the following steps:<br><img src="/../images/image-20200305180954446.png" alt="image-20200305180954446"></p>
+<h3 id="3-Method-2"><a href="#3-Method-2" class="headerlink" title="3.Method"></a>3.Method</h3><p>ROCC, coupled with a QA system, operates in the following steps:<br><img src="/../images/papers-ir-obqa/image-20200305180954446.png" alt="image-20200305180954446"></p>
 <h4 id="3-1-Retrieval-of-candidate-justification-sentences"><a href="#3-1-Retrieval-of-candidate-justification-sentences" class="headerlink" title="3.1 Retrieval of candidate justification sentences"></a>3.1 Retrieval of candidate justification sentences</h4><p>The overall score for a given justification set $P_i$ is calculated as:</p>
 <ul>
 <li>$S(P_i) = \frac{R}{\epsilon + O(P_i) } \cdot (\epsilon + C(A)) \cdot (\epsilon + C(Q))$<ul>
@@ -1175,7 +1174,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#AHE"><span class="nav-text">AHE</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-Motivation"><span class="nav-text">1.Motivation</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-This-Work"><span class="nav-text">2.This Work</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-Method"><span class="nav-text">3.Method</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#3-1-Retrieve-Supporting-Paragraphs"><span class="nav-text">3.1 Retrieve Supporting Paragraphs</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-2-Alignment-Method"><span class="nav-text">3.2 Alignment Method</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-3-Multiple-Representation-of-Text"><span class="nav-text">3.3 Multiple Representation of Text</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-4-Ensemble-Strategies-over-Representations"><span class="nav-text">3.4 Ensemble Strategies over Representations</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-Experiments"><span class="nav-text">4.Experiments</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Careful-Selection"><span class="nav-text">Careful Selection</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-Motivation-1"><span class="nav-text">1.Motivation</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-This-Work-1"><span class="nav-text">2.This Work</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-Method-1"><span class="nav-text">3.Method</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#3-1-Hypothesis-Generation"><span class="nav-text">3.1 Hypothesis Generation</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-2-OpenBook-Knowledge-Extraction"><span class="nav-text">3.2 OpenBook Knowledge Extraction</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-3-Natural-Language-Abduction-and-IR"><span class="nav-text">3.3 Natural Language Abduction and IR</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-4-Information-Gain-based-Re-ranking"><span class="nav-text">3.4 Information Gain based Re-ranking</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-5-Question-Answering"><span class="nav-text">3.5 Question Answering</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#3-5-1-Question-Answering-Model"><span class="nav-text">3.5.1 Question-Answering Model</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3-5-2-Passage-Selection-and-Weighted-Scoring"><span class="nav-text">3.5.2 Passage Selection and Weighted Scoring:</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-Experiments-1"><span class="nav-text">4.Experiments</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#AutoROCC"><span class="nav-text">AutoROCC</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-Motivation-2"><span class="nav-text">1.Motivation</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Related-Work"><span class="nav-text">Related Work</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-This-Work-2"><span class="nav-text">2.This Work</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-Method-2"><span class="nav-text">3.Method</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#3-1-Retrieval-of-candidate-justification-sentences"><span class="nav-text">3.1 Retrieval of candidate justification sentences</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-2-Generation-of-candidate-justification-sets"><span class="nav-text">3.2 Generation of candidate justification sets</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-3-Ranking-of-candidate-justification-sets"><span class="nav-text">3.3 Ranking of candidate justification sets</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-4-Answer-Classification"><span class="nav-text">3.4 Answer Classification</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-Experiments-2"><span class="nav-text">4.Experiments</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Content"><span class="nav-text">Content</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#AHE"><span class="nav-text">AHE</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-Motivation"><span class="nav-text">1.Motivation</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-This-Work"><span class="nav-text">2.This Work</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-Method"><span class="nav-text">3.Method</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#3-1-Retrieve-Supporting-Paragraphs"><span class="nav-text">3.1 Retrieve Supporting Paragraphs</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-2-Alignment-Method"><span class="nav-text">3.2 Alignment Method</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-3-Multiple-Representation-of-Text"><span class="nav-text">3.3 Multiple Representation of Text</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-4-Ensemble-Strategies-over-Representations"><span class="nav-text">3.4 Ensemble Strategies over Representations</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-Experiments"><span class="nav-text">4.Experiments</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Careful-Selection"><span class="nav-text">Careful Selection</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-Motivation-1"><span class="nav-text">1.Motivation</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-This-Work-1"><span class="nav-text">2.This Work</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-Method-1"><span class="nav-text">3.Method</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#3-1-Hypothesis-Generation"><span class="nav-text">3.1 Hypothesis Generation</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-2-OpenBook-Knowledge-Extraction"><span class="nav-text">3.2 OpenBook Knowledge Extraction</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-3-Natural-Language-Abduction-and-IR"><span class="nav-text">3.3 Natural Language Abduction and IR</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-4-Information-Gain-based-Re-ranking"><span class="nav-text">3.4 Information Gain based Re-ranking</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-5-Question-Answering"><span class="nav-text">3.5 Question Answering</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#3-5-1-Question-Answering-Model"><span class="nav-text">3.5.1 Question-Answering Model</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3-5-2-Passage-Selection-and-Weighted-Scoring"><span class="nav-text">3.5.2 Passage Selection and Weighted Scoring:</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-Experiments-1"><span class="nav-text">4.Experiments</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#AutoROCC"><span class="nav-text">AutoROCC</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-Motivation-2"><span class="nav-text">1.Motivation</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Related-Work"><span class="nav-text">Related Work</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-This-Work-2"><span class="nav-text">2.This Work</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-Method-2"><span class="nav-text">3.Method</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#3-1-Retrieval-of-candidate-justification-sentences"><span class="nav-text">3.1 Retrieval of candidate justification sentences</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-2-Generation-of-candidate-justification-sets"><span class="nav-text">3.2 Generation of candidate justification sets</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-3-Ranking-of-candidate-justification-sets"><span class="nav-text">3.3 Ranking of candidate justification sets</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-4-Answer-Classification"><span class="nav-text">3.4 Answer Classification</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-Experiments-2"><span class="nav-text">4.Experiments</span></a></li></ol></li></ol></div>
             
 
           </div>
