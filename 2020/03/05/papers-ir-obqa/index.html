@@ -1,0 +1,1776 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon-universe-32.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-universe-32.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-universe-16.ico?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/favicon-universe-32.ico?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="nlp,note,ir,open-book,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="Content  Alignment over Heterogeneous Embedding for Question Answering. NAACL,2019. Careful Selection of Knowledge to solve Open Book Question Answering. ACL,2019. Quick and (not so) Dirty: Unsupervi">
+<meta name="keywords" content="nlp,note,ir,open-book">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Retrieval Approach for Open-Book style Question Answering">
+<meta property="og:url" content="http://xingluxi.github.io/2020/03/05/papers-ir-obqa/index.html">
+<meta property="og:site_name" content="Luxi Xing - Blog">
+<meta property="og:description" content="Content  Alignment over Heterogeneous Embedding for Question Answering. NAACL,2019. Careful Selection of Knowledge to solve Open Book Question Answering. ACL,2019. Quick and (not so) Dirty: Unsupervi">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://xingluxi.github.io/images/image-20200304214221063.png">
+<meta property="og:image" content="http://xingluxi.github.io/images/image-20200304220331985.png">
+<meta property="og:image" content="http://xingluxi.github.io/images/image-20200304233158435.png">
+<meta property="og:image" content="http://xingluxi.github.io/images/image-20200304233053774.png">
+<meta property="og:image" content="http://xingluxi.github.io/images/image-20200305122332298.png">
+<meta property="og:image" content="http://xingluxi.github.io/images/image-20200305180954446.png">
+<meta property="og:updated_time" content="2020-03-05T12:41:48.761Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Retrieval Approach for Open-Book style Question Answering">
+<meta name="twitter:description" content="Content  Alignment over Heterogeneous Embedding for Question Answering. NAACL,2019. Careful Selection of Knowledge to solve Open Book Question Answering. ACL,2019. Quick and (not so) Dirty: Unsupervi">
+<meta name="twitter:image" content="http://xingluxi.github.io/images/image-20200304214221063.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":true,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://xingluxi.github.io/2020/03/05/papers-ir-obqa/">
+
+
+
+
+
+  <title>Retrieval Approach for Open-Book style Question Answering | Luxi Xing - Blog</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Luxi Xing - Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Time is In NO Hurry</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            About
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            Search
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="Searching..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://xingluxi.github.io/2020/03/05/papers-ir-obqa/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Luxi Xing">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Luxi Xing - Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Retrieval Approach for Open-Book style Question Answering</h1>
+        
+
+        <div class="post-meta">
+          
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-03-05T20:37:45+08:00">
+                2020-03-05
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Post modified&#58;</span>
+              
+              <time title="Post modified" itemprop="dateModified" datetime="2020-03-05T20:41:48+08:00">
+                2020-03-05
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Paper-Note/" itemprop="url" rel="index">
+                    <span itemprop="name">Paper-Note</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-area-chart"></i> Post Total Visits
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Words count in article&#58;</span>
+                
+                <span title="Words count in article">
+                  3.5k
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Reading time &asymp;</span>
+                
+                <span title="Reading time">
+                  21
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><!-- # Retrieval Approach for Open-Book style Question Answering -->
+<p>Content</p>
+<ol>
+<li>Alignment over Heterogeneous Embedding for Question Answering. NAACL,2019.</li>
+<li>Careful Selection of Knowledge to solve Open Book Question Answering. ACL,2019.</li>
+<li>Quick and (not so) Dirty: Unsupervised Selection of Justification Sentences for Multi-hop Question Answering. EMNLP,2019.</li>
+</ol>
+<h2 id="AHE"><a href="#AHE" class="headerlink" title="AHE"></a>AHE</h2><blockquote>
+<p>Title: <a href="https://aclweb.org/anthology/papers/N/N19/N19-1274/" target="_blank" rel="noopener">Alignment over Heterogeneous Embedding for Question Answering</a><br>Authors: Vikas Yadav, Steven Bethard, Mihai Surdeanu<br>Orig.: University of Arizona<br>Published: NAACL,2019.<br>Code: <a href="https://github.com/vikas95/AHE" target="_blank" rel="noopener">https://github.com/vikas95/AHE</a></p>
+</blockquote>
+<h3 id="1-Motivation"><a href="#1-Motivation" class="headerlink" title="1.Motivation"></a>1.Motivation</h3><ul>
+<li>some methods have fallen out of focus (strong unsupervised benchmarks), when comparing with neural approaches;<ul>
+<li>e.g.: alignment approaches</li>
+</ul>
+</li>
+<li>previous work adapted alignment methods to operate over word representations<ul>
+<li>rely on uncontextualized word representations (GloVe)</li>
+<li>—&gt; <strong>alignment approaches are more meaningful today after the advent of contextualized word representations</strong></li>
+</ul>
+</li>
+</ul>
+<h3 id="2-This-Work"><a href="#2-This-Work" class="headerlink" title="2.This Work"></a>2.This Work</h3><p><strong>Alignment over Heterogeneous Embeddings</strong> (AHE): a simple, fast, and <strong>mostly unsupervised</strong> approach for <strong>non-factoid</strong> question answering (QA)</p>
+<ul>
+<li>uses an off-the-shelf information retrieval (IR) component to retrieve likely supporting paragraphs from a knowledge base (KB) given a question and candidate answer.</li>
+<li>aligns each word in the <strong>question and candidate answer</strong> with the most similar word in the <strong>retrieved supporting paragraph</strong>;</li>
+<li>weighs each alignment score with the IDF of the corresponding question/answer term;</li>
+<li><strong>AHE’s overall alignment score is the sum of the IDF weighted scores of each of the question/answer term.</strong></li>
+<li>AHE’s similarity/alignment function operates over embeddings that model the underlying text at <strong>different levels of abstraction</strong>:<ul>
+<li>character: FLAIR -&gt; unsupervised</li>
+<li>word: BERT/GloVe -&gt; unsupervised</li>
+<li>sentence: InferSent -&gt; supervised</li>
+<li>capture substantially different semantic information;</li>
+</ul>
+</li>
+<li>a simple meta-classifier: learns how much to trust the predictions over each representation, further improves the performance of unsupervised AHE;</li>
+<li>Target Dataset:<ul>
+<li>ARC: multiple-choice QA;</li>
+<li>WikiQA: answer selection (select the sentences containing the correct answers);</li>
+</ul>
+</li>
+</ul>
+<h3 id="3-Method"><a href="#3-Method" class="headerlink" title="3.Method"></a>3.Method</h3><p>The core component of our approach computes the score of a candidate answer by aligning two texts.</p>
+<p>Inputs: </p>
+<ul>
+<li>multiple-choice task: <ul>
+<li>sent1: question concatenated with the candidate answer;</li>
+<li>sent2: supporting paragraph;</li>
+</ul>
+</li>
+<li>answer selection task:<ul>
+<li>sent1: question;</li>
+<li>sent2: candidate answer;</li>
+</ul>
+</li>
+</ul>
+<p>Overall architecture:</p>
+<ul>
+<li><img src="/../images/image-20200304214221063.png" alt="image-20200304214221063"></li>
+</ul>
+<h4 id="3-1-Retrieve-Supporting-Paragraphs"><a href="#3-1-Retrieve-Supporting-Paragraphs" class="headerlink" title="3.1 Retrieve Supporting Paragraphs"></a>3.1 Retrieve Supporting Paragraphs</h4><ul>
+<li>retrieve supporting information from external KBs using Lucene, an off-the-shelf IR system<ul>
+<li>query: question + answer candidate</li>
+<li>ranking function: BM25</li>
+<li>top C (C=20)</li>
+<li>retrieve corpus: ARC corpus</li>
+<li>IDF of each query term $q_i$:<ul>
+<li>$idf(q_i) = log(\frac{N-docfreq(q_i) + 0.5}{docfreq(q_i) + 0.5})$<ul>
+<li>$N$ is the number of documents;</li>
+<li>$docfreq(q_i)$ is the number of documents that contain $q_i$ ;</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="3-2-Alignment-Method"><a href="#3-2-Alignment-Method" class="headerlink" title="3.2 Alignment Method"></a>3.2 Alignment Method</h4><p>Alignment Algorithm:<br><img src="/../images/image-20200304220331985.png" alt="image-20200304220331985"></p>
+<ol>
+<li>compute <strong>each query token</strong> with <strong>every token</strong> in the given KB paragraph using <strong>cosine similarity</strong> of the two embedding vectors;<ul>
+<li>$cosSim(q_i, p_k) = \frac{\overrightarrow{q_i} \cdot \overrightarrow{p_k}}{ ||\overrightarrow{q_i}|| \cdot ||\overrightarrow{p_k}|| }$ </li>
+</ul>
+</li>
+<li>max-pooling layer over cosine similarity matrix is used to retrieve the most similar token in the supporting passage for each query token;<ul>
+<li>$align(q_i,P_j) = max_{k=1}^{|P_j|} cosSim(q_i,p_k)$</li>
+</ul>
+</li>
+<li>max-pooled vector of similarity scores is multiplied with the vector containing the IDF values of the query tokens;</li>
+<li>the resultant vector is summed to produce the overall alignment score $s$ for the given query $Q_a$ and the supporting paragraph $P_j$;<ul>
+<li>$s(Q_a, P_j) = \sum_{i=1}^{|Q_a|} idf(q_i) \cdot align(q_i, P_j)$</li>
+</ul>
+</li>
+</ol>
+<p>InferSent: $s(Q_a, P_j) = softmax(\overrightarrow{Q_a} \cdot \overrightarrow{P_j})$</p>
+<p>Aggregate the retrieved paragraph:</p>
+<ol>
+<li>Max: $S(cand_a) = max_{j=1}^{C}( s(Q_a, P_j) )$</li>
+<li>Weighted Average: $S(cand_a) = \sum_{j=1}^{C} \frac{1}{j}( s(Q_a, P_j) )$</li>
+</ol>
+<ul>
+<li>On ARC:<ul>
+<li>the max strategy is better for ARC Challenge;</li>
+<li>the weighted average is better for ARC Easy;</li>
+</ul>
+</li>
+</ul>
+<h4 id="3-3-Multiple-Representation-of-Text"><a href="#3-3-Multiple-Representation-of-Text" class="headerlink" title="3.3 Multiple Representation of Text"></a>3.3 Multiple Representation of Text</h4><p>Four different embedding representations that model the text at different levels of abstraction:</p>
+<ul>
+<li>character, word, and sentence</li>
+</ul>
+<p>Character-based Embeddings:</p>
+<ul>
+<li>FLAIR contextual character language model <sup id="fnref:1"><a href="#fn:1" rel="footnote"><span class="hint--top hint--error hint--medium hint--rounded hint--bounce" aria-label="Alan Akbik, Duncan Blythe, and Roland Vollgraf. 2018. Contextual string embeddings for sequence labeling. In Proceedings of the 27th International Conference on Computational Linguistics, pages 1638–1649.
+">[1]</span></a></sup><ul>
+<li>$w_i^{FLAIR} = [h_{t_i+1-1}^f; h_{t_i-1}^b] \in \mathbb{R}^{4096}$</li>
+<li>forward and backward of LSTM</li>
+<li>$t_i$ the character offset of the $i^{th}$ token;</li>
+</ul>
+</li>
+</ul>
+<p>Word-based Embeddings:</p>
+<ul>
+<li>BERT<ul>
+<li>$w_i^{BERT} = [Layer_{-1},…,Layer_{-4}] \in \mathbb{R}^{4096}$</li>
+<li>the last four layers</li>
+</ul>
+</li>
+<li>GloVE<ul>
+<li>dimension = 300</li>
+</ul>
+</li>
+</ul>
+<p>Sentence-based:</p>
+<ul>
+<li>InferSent:<ul>
+<li>trained InferSent on our data by maximizing the inference probability from the input query to the supporting paragraph.</li>
+<li>dimension:<ul>
+<li>WikiQA: 128</li>
+<li>ARC: 384</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="3-4-Ensemble-Strategies-over-Representations"><a href="#3-4-Ensemble-Strategies-over-Representations" class="headerlink" title="3.4 Ensemble Strategies over Representations"></a>3.4 Ensemble Strategies over Representations</h4><p>Aggregate the scores of candidate answers over the four different embedding representations using an unsupervised variant of the NoisyOr formula to compute the overall score for answer candidate $i$:</p>
+<script type="math/tex; mode=display">NoisyOr_M(i) = 1- (\prod_{m=0}^{M}(1-\alpha^m \ast S_i^m))</script><ul>
+<li>$M$, total number of representations</li>
+<li>$S_i^m$, score of answer candidate $i$ under representation $m$</li>
+<li>$\alpha^m$, a hyperparameter used to dampen peaky distributions of answer probabilities;<ul>
+<li>=1</li>
+<li>infersent = 0.2</li>
+</ul>
+</li>
+</ul>
+<p>Supervised Meta Multi-classifier: aims to learn the aggregation function directly from data </p>
+<ul>
+<li>2 fully connected dense layers of hidden size 16 and K, and a softmax layer;</li>
+<li>input vector size = $M \times K$</li>
+<li>K is the maximum number of candidate answers;</li>
+<li>activation function: tanh;</li>
+<li>for ARC, use an extra position in the input vector to indicate the grade of the corresponding exam question (provided in the dataset) with the intuition that the meta-classiﬁer will learn to trust different representations for different grade levels.</li>
+</ul>
+<h3 id="4-Experiments"><a href="#4-Experiments" class="headerlink" title="4.Experiments"></a>4.Experiments</h3><p>Reference to the Paper</p>
+<h2 id="Careful-Selection"><a href="#Careful-Selection" class="headerlink" title="Careful Selection"></a>Careful Selection</h2><blockquote>
+<p>Title: Careful Selection of Knowledge to solve Open Book Question Answering<br>Authors: Pratyay Banerjee, Kuntal Kumar Pal, Arindam Mitra, Chitta Baral<br>Orig.: Arizona State University<br>Published: ACL,2019.</p>
+</blockquote>
+<h3 id="1-Motivation-1"><a href="#1-Motivation-1" class="headerlink" title="1.Motivation"></a>1.Motivation</h3><p>Towards <strong>Open Book Question Answering</strong> task:</p>
+<ul>
+<li>questions are expected to be answered with respect to a given set of open book facts, and common knowledge about a topic;<ul>
+<li>e.g.: OpenBookQA</li>
+<li>the focus is not on memorization but on deeper understanding of the materials and its application to new situations <sup id="fnref:2"><a href="#fn:2" rel="footnote"><span class="hint--top hint--error hint--medium hint--rounded hint--bounce" aria-label="Todor Mihaylov, Peter Clark, Tushar Khot, and Ashish Sabharwal. 2018. Can a suit of armor conduct electricity? a new dataset for open book question answering. In EMNLP.
+">[2]</span></a></sup><sup id="fnref:3"><a href="#fn:3" rel="footnote"><span class="hint--top hint--error hint--medium hint--rounded hint--bounce" aria-label="Tony Jenkins. 1995. Open Book Assessment in Computing Degree Programmes. Citeseer.
+">[3]</span></a></sup><sup id="fnref:4"><a href="#fn:4" rel="footnote"><span class="hint--top hint--error hint--medium hint--rounded hint--bounce" aria-label="J Landsberger. 1996. Study guides and strategies.
+">[4]</span></a></sup>;</li>
+</ul>
+</li>
+<li>requires deeper reasoning involving linguistic understanding as well as reasoning with common knowledge;</li>
+</ul>
+<p><strong>Challenges in OpenBookQA</strong> (The open book part is much larger (than a small paragraph) and is not complete as additional common knowledge may be required.):</p>
+<ol>
+<li>finding <strong>the relevant facts in an open book</strong> is a challenge;</li>
+<li>finding <strong>the relevant common knowledge using the IR </strong>front end is bigger challenge;<ul>
+<li>can be misled by distractions;</li>
+</ul>
+</li>
+<li><strong>reasoning involving both facts from open book and common knowledge</strong> leads to <strong>multi-hop reasoning with respect to natural language text</strong>, which is also a challenge.</li>
+</ol>
+<h3 id="2-This-Work-1"><a href="#2-This-Work-1" class="headerlink" title="2.This Work"></a>2.This Work</h3><p>Address the first two challenges:</p>
+<ul>
+<li>improve on knowledge extraction from the OpenBook present in the dataset.<ul>
+<li>use semantic textual similarity models that are trained with different datasets for this task;</li>
+</ul>
+</li>
+<li>propose natural language abduction to generate queries for retrieving missing knowledge；</li>
+<li>use Information Gain based Re-ranking to reduce distractions and remove redundant information;</li>
+<li>provide an analysis of the dataset and the limitations of BERT Large model for such a question answering task.</li>
+</ul>
+<p>Key Approach:</p>
+<ol>
+<li>abductive information retrieval (IR);</li>
+<li>information gain based re-ranking;</li>
+<li>passage selection and weighted scoring;</li>
+</ol>
+<p>A key aspect of this work’s approach is to <strong>accurately hunt the needed knowledge facts from the OpenBook knowledge corpus and hunt missing common knowledge using IR</strong>.</p>
+<h3 id="3-Method-1"><a href="#3-Method-1" class="headerlink" title="3.Method"></a>3.Method</h3><p>Approach Overall:</p>
+<p><img src="/../images/image-20200304233158435.png" alt="image-20200304233158435"></p>
+<p>The proposed approach involves six main modules: </p>
+<ol>
+<li>Hypothesis Generation, </li>
+<li>OpenBook Knowledge Extraction, </li>
+<li>Abductive Information Retrieval, </li>
+<li>Information Gain based Re-ranking, </li>
+<li>Passage Selection,</li>
+<li>Question Answering.</li>
+</ol>
+<p>Example of the proposed approach:</p>
+<p><img src="/../images/image-20200304233053774.png" alt="image-20200304233053774"></p>
+<p>Hypothesis Generation:</p>
+<ul>
+<li>generate a hypothesis $H_{ij}$ for the $i$-th question and $j$-th answer option ($j\in \{1,2,3,4\}$);</li>
+</ul>
+<p>OpenBook Knowledge Extraction:</p>
+<ul>
+<li>retrieve appropriate knowledge $F_{ij}$  for a given hypothesis using semantic textual similarity, from the OpenBook knowledge corpus $F$;</li>
+</ul>
+<p>Abductive Information Retrieval:</p>
+<ul>
+<li>system abduces missing knowledge from $H_{ij}$ and $F_{ij}$;</li>
+<li>system formulates queries to perform IR to retrieve missing knowledge $K_{ij}$.</li>
+</ul>
+<p>Information Gain based Re-ranking and Passage Selection:</p>
+<ul>
+<li>create a knowledge passage $P_{ij}$</li>
+</ul>
+<p>Question Answering:</p>
+<ul>
+<li>system uses $P_{ij}$ to answer the questions using a BERT Large based MCQ model;</li>
+</ul>
+<h4 id="3-1-Hypothesis-Generation"><a href="#3-1-Hypothesis-Generation" class="headerlink" title="3.1 Hypothesis Generation"></a>3.1 Hypothesis Generation</h4><ol>
+<li>for questions with wh words, use the rule-based model<sup id="fnref:5"><a href="#fn:5" rel="footnote"><span class="hint--top hint--error hint--medium hint--rounded hint--bounce" aria-label="Dorottya Demszky, Kelvin Guu, and Percy Liang. 2018. Transforming question answering datasets into natural language inference datasets. arXiv preprint arXiv:1809.02922.
+">[5]</span></a></sup>.</li>
+<li>for the rest of the questions, concatenate the questions with each of the answers to produce the four hypotheses.</li>
+</ol>
+<h4 id="3-2-OpenBook-Knowledge-Extraction"><a href="#3-2-OpenBook-Knowledge-Extraction" class="headerlink" title="3.2 OpenBook Knowledge Extraction"></a>3.2 OpenBook Knowledge Extraction</h4><ul>
+<li>a textual similarity model is trained in a supervised fashion on two datasets<ul>
+<li>use large-cased BERT</li>
+<li>STS-B</li>
+<li>gold OpenBookQA facts<ul>
+<li>first find the similarity of the OpenBook $F$ facts with respect to each other using the BERT model trained on STS-B dataset;</li>
+<li>assign a score of $5.0$ for the gold $\hat{F}_i$ fact for a hypothesis;</li>
+<li>then sample different facts from the OpenBook and assign the STS-B similarity scores between the sampled fact and the gold fact $\hat{F}_i$ as the target score for that fact $F_{ij}$ and $H_{ij}$.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="3-3-Natural-Language-Abduction-and-IR"><a href="#3-3-Natural-Language-Abduction-and-IR" class="headerlink" title="3.3 Natural Language Abduction and IR"></a>3.3 Natural Language Abduction and IR</h4><p>To search for the missing knowledge, need to know what we are missing.</p>
+<ul>
+<li>use abduction to figure that out;</li>
+<li>Abduction: both the observation (hypothesis) and the domain knowledge (known fact) is represented in a formal language from which a logical solver abduces possible explanations (missing knowledge)</li>
+<li>propose three models</li>
+</ul>
+<p><strong>Word Symmetric Difference</strong> Model</p>
+<ul>
+<li>$K_{ij} = (H_{ij} \cup F_{ij}) \backslash (H_{ij} \cap F_{ij}), \forall j \in \{1,2,3,4\}$</li>
+</ul>
+<p><strong>Supervised</strong> <strong>Bag of Words</strong> Model</p>
+<ul>
+<li>select words which satisfy: $P(w_n \in K_{ij}) &gt; \theta$<ul>
+<li>$w_n \in \{ H_{ij} \cup F_{ij} \}$</li>
+</ul>
+</li>
+<li>To learn this probability, create a task:<ul>
+<li>where the words similar (cosine similarity useing SpaCy）to the words in the gold missing knowledge $\hat{K}_i$ (provided in the dataset) are labelled as positive class;</li>
+<li>all the other words not present in $\hat{K}_i$ but in $H_{ij} \cup F_{ij}$ are labelled as negative class.</li>
+<li>train a binary classifier using BERT Large with one additional feed forward network for classification.</li>
+</ul>
+</li>
+<li>$\theta = 0.4 $</li>
+</ul>
+<p><strong>CopyNet Seq2Seq</strong> Model</p>
+<ul>
+<li>to generate, instead of predict, the missing knowledge given, the hypothesis H and knowledge fact from the corpus F.</li>
+<li>choose from multiple generated knowledge which provided maximum overlap score:<ul>
+<li>$overlap_score = \frac{\sum_i count((\hat{H}_{i} \cup F_{i}) \cap K_i )}{\sum_i count(\hat{K}_i)}$</li>
+</ul>
+</li>
+</ul>
+<p><strong>Word Union</strong> Model:</p>
+<ul>
+<li>To see if abduction helps, compare the above models with a Word Union Model</li>
+<li>use the set of unique words from both the hypothesis and OpenBook knowledge as candidate keywords.<ul>
+<li>$K_{ij} = (H_{ij} \cup F_{ij})$</li>
+</ul>
+</li>
+</ul>
+<h4 id="3-4-Information-Gain-based-Re-ranking"><a href="#3-4-Information-Gain-based-Re-ranking" class="headerlink" title="3.4 Information Gain based Re-ranking"></a>3.4 Information Gain based Re-ranking</h4><p>Observation: BERT QA model gives a higher score if similar sentences are repeated, leading to wrong classification.</p>
+<ul>
+<li>Thus: introduce Information Gain based Re-ranking to remove redundant information.</li>
+<li>use the same BERT Knowledge Extraction model (3.2) Trained on OpenBookQA data;<ul>
+<li>to do an initial ranking of the retrieved missing knowledge $K$;</li>
+<li>the scores of this knowledge extraction model is used as relevancy score, $rel$.</li>
+</ul>
+</li>
+</ul>
+<p>To extract the top-10 missing knowledge $K$, define a redundancy score $red_{ij}$:</p>
+<ul>
+<li>as the maximum cosine similarity $sim$ between <ul>
+<li>the previously selected missing knowledge, in the previous iterations till $i$,</li>
+<li>and the candidate missing knowledge ${K_j}$:</li>
+</ul>
+</li>
+<li>$red_{ij}(K_j) = max(red_{i-1,j}(K_j), sim(K_i,K)j))$</li>
+<li>$randscore = (1- red_{ij}(K_j)) \ast rel(K_j) $</li>
+</ul>
+<p>Missing Knowledge Selection:</p>
+<ul>
+<li>first take the missing knowledge with the highest $rel$ score.</li>
+<li>from the subsequent iteration, we compute the redundancy score with the last selected missing knowledge for each of the candidates and then rank them using the updated $rankscore$.</li>
+<li>select the top-10 missing knowledge for each $H_{ij}$;</li>
+</ul>
+<h4 id="3-5-Question-Answering"><a href="#3-5-Question-Answering" class="headerlink" title="3.5 Question Answering"></a>3.5 Question Answering</h4><h5 id="3-5-1-Question-Answering-Model"><a href="#3-5-1-Question-Answering-Model" class="headerlink" title="3.5.1 Question-Answering Model"></a>3.5.1 Question-Answering Model</h5><p>finetune BERT MCQA</p>
+<p>To be within the restrictions of BERT max input length, create a passage for each of the answer options, and score for all answer options against each passage (Corpus $F$).</p>
+<ul>
+<li>for each answer option $A_j$ (?), create a passage $P_j$ and score against each of the answer options $A)i$</li>
+<li>To compute the ﬁnal score for the answer, we sum up each individual scores.</li>
+<li>$Pr(Q,A_i) = \sum_{j=1}^4 score(P_j, Q, A_i)$</li>
+<li>$A = argmax_A Pr(Q, A_i)$</li>
+</ul>
+<h5 id="3-5-2-Passage-Selection-and-Weighted-Scoring"><a href="#3-5-2-Passage-Selection-and-Weighted-Scoring" class="headerlink" title="3.5.2 Passage Selection and Weighted Scoring:"></a>3.5.2 Passage Selection and Weighted Scoring:</h5><ul>
+<li>In the first round, score each of the answer options using a passage created from the selected knowledge facts from corpus F. <ul>
+<li>For each question, ignore the passages of the answer options which are in the bottom two.</li>
+</ul>
+</li>
+<li>In the second round, score for only those passages which are selected after adding the missing knowledge $K$.</li>
+<li>Weighted Scoring<ul>
+<li>Assume that the correct answer has the highest score in each round;</li>
+<li>multiply the scores obtained after both rounds;</li>
+</ul>
+</li>
+<li>Define the combined passage selected scores and weighted scores as follows:<ul>
+<li>$Pr(F, Q, A_i) = \sum_{j=1}^4 score(P_j, Q, A_i)$<ul>
+<li>$P_j$ from extracted OpenBook knowledge $F$</li>
+<li>the top-2 passages are selected based on the scores of $Pr(F, Q, A_i)$</li>
+</ul>
+</li>
+<li>$Pr(F\cup K, Q, A_i) = \sum_{k=1}^4 \delta \ast score(P_k, Q, A_i)$<ul>
+<li>$\delta=1$ for the top two scores;</li>
+<li>$\delta=0$ for the rest;</li>
+<li>$P_k$ is the passage created using both the facts and missing knowledge</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Final weighted score:<ul>
+<li>$wPR(Q,A_i) = Pr(F, Q, A_i) \ast Pr(F\cup K, Q, A_i)$</li>
+</ul>
+</li>
+<li>$A = argmax_{A} wPr(Q,A_i)$</li>
+</ul>
+<h3 id="4-Experiments-1"><a href="#4-Experiments-1" class="headerlink" title="4.Experiments"></a>4.Experiments</h3><p>Reference to the Paper</p>
+<h2 id="AutoROCC"><a href="#AutoROCC" class="headerlink" title="AutoROCC"></a>AutoROCC</h2><blockquote>
+<p>Title: <a href="https://www.aclweb.org/anthology/D19-1260" target="_blank" rel="noopener">Quick and (not so) Dirty: Unsupervised Selection of Justiﬁcation Sentences for Multi-hop Question Answering</a><br>Authors: Vikas Yadav, Steven Bethard, Mihai Surdeanu<br>Orig.: University of Arizona<br>Published: EMNLP,2019.<br>Code: <a href="https://github.com/vikas95/AutoROCC" target="_blank" rel="noopener">https://github.com/vikas95/AutoROCC</a></p>
+</blockquote>
+<h3 id="1-Motivation-2"><a href="#1-Motivation-2" class="headerlink" title="1.Motivation"></a>1.Motivation</h3><ul>
+<li>For complex NLP task, such as QA, human readable explanations of the inference process have been proposed as a way to interpret QA models;</li>
+<li>The task of selecting justification sentences is complex for multi-hop QA, because of the additional knowledge aggregation requirement;<ul>
+<li>more effort must be dedicated to explaining their inference process.</li>
+</ul>
+</li>
+</ul>
+<h4 id="Related-Work"><a href="#Related-Work" class="headerlink" title="Related Work"></a>Related Work</h4><p>The selection of justification sentences can be classified into roughly four categories:</p>
+<ol>
+<li>supervised approaches that require training data to learn how to select justification sentences;<ol>
+<li>use entailment resources to train components for selecting sentences for QA <sup id="fnref:6"><a href="#fn:6" rel="footnote"><span class="hint--top hint--error hint--medium hint--rounded hint--bounce" aria-label="Harsh Trivedi, Heeyoung Kwon, Tushar Khot, Ashish Sabharwal, and Niranjan Balasubramanian. 2019. Repurposing entailment for multi-hop question answering tasks. arXiv preprint arXiv:1904.09380.
+">[6]</span></a></sup>;</li>
+<li>explicitly focused on training sentence selection components for QA models <sup id="fnref:7"><a href="#fn:7" rel="footnote"><span class="hint--top hint--error hint--medium hint--rounded hint--bounce" aria-label="Sewon Min, Victor Zhong, Richard Socher, and Caiming Xiong. 2018. Efﬁcient and robust question answering from minimal context over documents. arXiv preprint arXiv:1805.08092.
+">[7]</span></a></sup><sup id="fnref:8"><a href="#fn:8" rel="footnote"><span class="hint--top hint--error hint--medium hint--rounded hint--bounce" aria-label="Yankai Lin, Haozhe Ji, Zhiyuan Liu, and Maosong Sun. 2018. Denoising distantly supervised open-domain question answering. In Proceedings of the 56th Annual Meeting of the Association for Computational Linguistics (Volume 1: Long Papers), pages 17361745.
+">[8]</span></a></sup><sup id="fnref:9"><a href="#fn:9" rel="footnote"><span class="hint--top hint--error hint--medium hint--rounded hint--bounce" aria-label="Hai Wang, Dian Yu, Kai Sun, Jianshu Chen, Dong Yu, Dan Roth, and David McAllester. 2019. Evidence sentence extraction for machine reading comprehension. arXiv preprint arXiv:1902.08852.
+">[9]</span></a></sup>;</li>
+<li>when the gold justification sentences are not provided:<ul>
+<li>retrieve justifications from structured KBs;</li>
+<li>IR systems coupled with denoising components <sup id="fnref:9"><a href="#fn:9" rel="footnote"><span class="hint--top hint--error hint--medium hint--rounded hint--bounce" aria-label="Hai Wang, Dian Yu, Kai Sun, Jianshu Chen, Dong Yu, Dan Roth, and David McAllester. 2019. Evidence sentence extraction for machine reading comprehension. arXiv preprint arXiv:1902.08852.
+">[9]</span></a></sup>;</li>
+</ul>
+</li>
+</ol>
+</li>
+<li>treat justification as latent variables and learn jointly how to answer questions and how to select justification from questions and answers alone;<ul>
+<li>rely on reinforcement learning or PageRank to learn how to select justification sentences without explicit training data;</li>
+<li>use end-to-end (mostly RNNs with attention mechanisms) QA architectures for learning to pay more attention on better justification sentences;</li>
+</ul>
+</li>
+<li>rely on information retrieval to select justification sentences;</li>
+<li>do not use justification sentences at all;</li>
+</ol>
+<p>The detailed works please refer to the original paper.</p>
+<h3 id="2-This-Work-2"><a href="#2-This-Work-2" class="headerlink" title="2.This Work"></a>2.This Work</h3><p>Propose an <strong>unsupervised, non-parametric strategy</strong> (<strong>ROCC</strong>) for the <strong>selection of justification sentences</strong> from <strong>unstructured knowledge bases</strong> for <strong>Multi-Hop QA</strong>:</p>
+<ol>
+<li>maximizes the <strong>Relevance</strong> of the selected sentences;</li>
+<li>minimizes the <strong>Overlap</strong> between the selected facts;</li>
+<li>maximizes the <strong>Coverage</strong> of both question and answer;</li>
+</ol>
+<ul>
+<li>can be coupled with any supervised QA approach;</li>
+<li>account for more intentional knowledge aggregation;</li>
+</ul>
+<p>Target Dataset: (a) ARC; (b) MultiRC;</p>
+<p>Example:<br><img src="/../images/image-20200305122332298.png" alt="image-20200305122332298"></p>
+<p>Brief introduction of the ROCC:</p>
+<ul>
+<li>first creating $\left( \begin{array}{c} n \\ k \end{array} \right)$ justification sets from the top-$n$ sentences selected by BM25 IR model;<ul>
+<li>$k$ ranges from $2$ to $n$;</li>
+<li>$n = 20$;</li>
+</ul>
+</li>
+<li>then ranking them all by a formula that combines the three <strong>criteria</strong> above;</li>
+<li>the set with the top score becomes the set of justifications output by ROCC for a given question and candidate answer;</li>
+</ul>
+<h3 id="3-Method-2"><a href="#3-Method-2" class="headerlink" title="3.Method"></a>3.Method</h3><p>ROCC, coupled with a QA system, operates in the following steps:<br><img src="/../images/image-20200305180954446.png" alt="image-20200305180954446"></p>
+<h4 id="3-1-Retrieval-of-candidate-justification-sentences"><a href="#3-1-Retrieval-of-candidate-justification-sentences" class="headerlink" title="3.1 Retrieval of candidate justification sentences"></a>3.1 Retrieval of candidate justification sentences</h4><p>The overall score for a given justification set $P_i$ is calculated as:</p>
+<ul>
+<li>$S(P_i) = \frac{R}{\epsilon + O(P_i) } \cdot (\epsilon + C(A)) \cdot (\epsilon + C(Q))$<ul>
+<li>$\epsilon = 1$ to avoid zeros;</li>
+</ul>
+</li>
+</ul>
+<p><strong>Relevance</strong> (R)</p>
+<ul>
+<li>use BM25 IR model to estimate the relevance of each justification sentence to a given question and candidate answer;</li>
+<li>IR query: concatenate the question and candidate answer;</li>
+<li>the arithmetic mean of BM25 scores over all sentences in a given justification set gives the value of R for the entire set;</li>
+</ul>
+<p><strong>Overlap</strong> (O)</p>
+<ul>
+<li>to ensure <strong>diversity</strong> and <strong>complementarity</strong> between justification sentences;</li>
+<li>overlap between <strong>all sentence pairs</strong> in a given group;</li>
+<li><strong>minimizing</strong> this score <strong>reduces redundancy</strong> and <strong>encourages the aggregated sentences</strong> to <strong>address different parts</strong> of the question and answer:</li>
+<li>$O(S) = \frac{ \sum_{s_i \in S} \sum_{s_j \in S - s_i} \frac{ |t(s_i) \cap t(s_j)| }{ max(|t(s_i)|,|t(s_j)|) } }{ \left( \begin{array}{c} |S| \\ 2 \end{array} \right) }$<ul>
+<li>$S$ is the given set of justification sentences;</li>
+<li>$s_i$ is the $i^{th}$ sentence in $S$;</li>
+<li>$t(s_i)$ is the set of unique terms in sentence $s_i$;</li>
+<li>divide by $\left( \begin{array}{c} n \\ k \end{array} \right)$ to normalize across different sizes of justification sets;</li>
+</ul>
+</li>
+</ul>
+<p><strong>Coverage</strong> (C)</p>
+<ul>
+<li>complementing the overlap score, Coverage measures t<strong>he lexical coverage of the question and the answer texts</strong> by the given set of justification $S$;</li>
+<li>$C$ is <strong>weighted by the IDF</strong> of questions and answer terms;</li>
+<li><strong>maximizing</strong> this value <strong>encourages the justifications to address more of the meaningful content</strong> mentioned in the question ($X=Q$) and the answer ($X=A$);</li>
+<li>$C(X) = \frac{ \sum_{t=1}^{|C_t(X)|} IDF[C_t(X)[t]] }{ |t(X)| }$<ul>
+<li>$C_t(X) = \bigcup_{s_i \in S} t(X) \cap t(s_i)$</li>
+<li>$t(X)$ is the unique terms in $X$;</li>
+<li>$C_t(X)$ is the set of all unique terms in $X$ that are present in any of the sentences of the given justification set.</li>
+</ul>
+</li>
+</ul>
+<h4 id="3-2-Generation-of-candidate-justification-sets"><a href="#3-2-Generation-of-candidate-justification-sets" class="headerlink" title="3.2 Generation of candidate justification sets"></a>3.2 Generation of candidate justification sets</h4><p>ROCC ranks <strong>sets</strong> of justification sentences rather than individual sentences.</p>
+<ul>
+<li>create candidate justification sets by generating $\left( \begin{array}{c} n \\ k \end{array} \right)$ groups of sentences from the previous top-$n$ sentences, using multiple values of $k$;</li>
+</ul>
+<h4 id="3-3-Ranking-of-candidate-justification-sets"><a href="#3-3-Ranking-of-candidate-justification-sets" class="headerlink" title="3.3 Ranking of candidate justification sets"></a>3.3 Ranking of candidate justification sets</h4><p>ROCC score estimates <strong>the likelihood that this group of justification explains</strong> the given answer.</p>
+<ul>
+<li>rank the justification sets in descending order of ROCC score;</li>
+<li>choose the top set as the group of justification that is the output of ROCC for the given question and answer.</li>
+<li>In MultiRC, rearrange the justification sentences according to their original indexes in the given passage to bring coherence in the selected sequence of sentences.</li>
+</ul>
+<h4 id="3-4-Answer-Classification"><a href="#3-4-Answer-Classification" class="headerlink" title="3.4 Answer Classification"></a>3.4 Answer Classification</h4><p>ROCC can be coupled with any supervised QA component for answer classification (BERT in this work).</p>
+<ul>
+<li>Justification sentences in the reading comprehension (MultiRC) come from the same passage and their sequence is likely to be coherent;<ul>
+<li><strong>concatenate</strong> them into a single passage;</li>
+<li>use a <strong>single</strong> BERT instance for classification.</li>
+</ul>
+</li>
+<li>Justification sentences retrieved from an external KB (ARC) may not form a coherent passage when aggregated;<ul>
+<li>classify each justification sentence <strong>separately</strong> (together with the question and candidate answer);</li>
+<li>then <strong>average</strong> all these scores to produce a single score for the candidate answer;</li>
+</ul>
+</li>
+<li>The first text consists of the concatenated question and answer, and the second text consists of the justification text.</li>
+</ul>
+<h3 id="4-Experiments-2"><a href="#4-Experiments-2" class="headerlink" title="4.Experiments"></a>4.Experiments</h3><p>AutoROCC: $k$ is selected automatically.</p>
+<p>Alignment ROCC</p>
+<ul>
+<li>to understand the dependence between ROCC and exact lexical match:<ul>
+<li>compare the justification selection performance of ROCC when its score components are computed based on <strong>lexical match</strong> vs. <strong>semantic alignment match</strong></li>
+</ul>
+</li>
+</ul>
+<p>Reference to the Paper</p>
+<div id="footnotes"><hr><div id="footnotelist"><ol style="list-style: none; padding-left: 0; margin-left: 40px"><li id="fn:1"><span style="display: inline-block; vertical-align: top; padding-right: 10px; margin-left: -40px">1.</span><span style="display: inline-block; vertical-align: top; margin-left: 10px;">Alan Akbik, Duncan Blythe, and Roland Vollgraf. 2018. Contextual string embeddings for sequence labeling. In Proceedings of the 27th International Conference on Computational Linguistics, pages 1638–1649.<a href="#fnref:1" rev="footnote"> ↩</a></span></li><li id="fn:2"><span style="display: inline-block; vertical-align: top; padding-right: 10px; margin-left: -40px">2.</span><span style="display: inline-block; vertical-align: top; margin-left: 10px;">Todor Mihaylov, Peter Clark, Tushar Khot, and Ashish Sabharwal. 2018. Can a suit of armor conduct electricity? a new dataset for open book question answering. In EMNLP.<a href="#fnref:2" rev="footnote"> ↩</a></span></li><li id="fn:3"><span style="display: inline-block; vertical-align: top; padding-right: 10px; margin-left: -40px">3.</span><span style="display: inline-block; vertical-align: top; margin-left: 10px;">Tony Jenkins. 1995. Open Book Assessment in Computing Degree Programmes. Citeseer.<a href="#fnref:3" rev="footnote"> ↩</a></span></li><li id="fn:4"><span style="display: inline-block; vertical-align: top; padding-right: 10px; margin-left: -40px">4.</span><span style="display: inline-block; vertical-align: top; margin-left: 10px;">J Landsberger. 1996. Study guides and strategies.<a href="#fnref:4" rev="footnote"> ↩</a></span></li><li id="fn:5"><span style="display: inline-block; vertical-align: top; padding-right: 10px; margin-left: -40px">5.</span><span style="display: inline-block; vertical-align: top; margin-left: 10px;">Dorottya Demszky, Kelvin Guu, and Percy Liang. 2018. Transforming question answering datasets into natural language inference datasets. arXiv preprint arXiv:1809.02922.<a href="#fnref:5" rev="footnote"> ↩</a></span></li><li id="fn:6"><span style="display: inline-block; vertical-align: top; padding-right: 10px; margin-left: -40px">6.</span><span style="display: inline-block; vertical-align: top; margin-left: 10px;">Harsh Trivedi, Heeyoung Kwon, Tushar Khot, Ashish Sabharwal, and Niranjan Balasubramanian. 2019. Repurposing entailment for multi-hop question answering tasks. arXiv preprint arXiv:1904.09380.<a href="#fnref:6" rev="footnote"> ↩</a></span></li><li id="fn:7"><span style="display: inline-block; vertical-align: top; padding-right: 10px; margin-left: -40px">7.</span><span style="display: inline-block; vertical-align: top; margin-left: 10px;">Sewon Min, Victor Zhong, Richard Socher, and Caiming Xiong. 2018. Efﬁcient and robust question answering from minimal context over documents. arXiv preprint arXiv:1805.08092.<a href="#fnref:7" rev="footnote"> ↩</a></span></li><li id="fn:8"><span style="display: inline-block; vertical-align: top; padding-right: 10px; margin-left: -40px">8.</span><span style="display: inline-block; vertical-align: top; margin-left: 10px;">Yankai Lin, Haozhe Ji, Zhiyuan Liu, and Maosong Sun. 2018. Denoising distantly supervised open-domain question answering. In Proceedings of the 56th Annual Meeting of the Association for Computational Linguistics (Volume 1: Long Papers), pages 17361745.<a href="#fnref:8" rev="footnote"> ↩</a></span></li><li id="fn:9"><span style="display: inline-block; vertical-align: top; padding-right: 10px; margin-left: -40px">9.</span><span style="display: inline-block; vertical-align: top; margin-left: 10px;">Hai Wang, Dian Yu, Kai Sun, Jianshu Chen, Dong Yu, Dan Roth, and David McAllester. 2019. Evidence sentence extraction for machine reading comprehension. arXiv preprint arXiv:1902.08852.<a href="#fnref:9" rev="footnote"> ↩</a></span></li><li id="fn:10"><span style="display: inline-block; vertical-align: top; padding-right: 10px; margin-left: -40px">10.</span><span style="display: inline-block; vertical-align: top; margin-left: 10px;">* lexical match: the approach used throughout the paper up to this point;
+* semantic alignment match: relaxes the requirement for lexical match;
+* i.e., two tokens are considered to be matched when the cosine similarity of their embedding vectors is larger than a margin;
+* Table 7 shows the alignment-based ROCC indeed performs better than the ROCC that relies on lexical match;
+* but the improvements are not large;<a href="#fnref:10" rev="footnote"> ↩</a></span></li><li id="fn:10"><span style="display: inline-block; vertical-align: top; padding-right: 10px; margin-left: -40px">10.</span><span style="display: inline-block; vertical-align: top; margin-left: 10px;">Vikas Yadav, Rebecca Sharp, and Mihai Surdeanu. 2018. Sanity check: A strong alignment and information retrieval baseline for question answering. In The 41st International ACM SIGIR Conference on Research &amp; Development in Information Retrieval, pages 1217–1220. ACM.<a href="#fnref:10" rev="footnote"> ↩</a></span></li></ol></div></div>
+      
+    </div>
+    
+    
+    
+
+    
+      <div>
+        
+    <div style="text-align:center;color: #ccc;font-size:14px;">
+    **** END of This Post. Thank for Your READING ****
+    </div>
+    <div style="text-align:center;color: #ccc;font-size:14px;">
+    If you have any Question, welcome to Email me or leave your comments below.
+    </div>
+
+      </div>
+    
+
+    
+
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>Post author:</strong>
+    Luxi Xing
+  </li>
+  <li class="post-copyright-link">
+    <strong>Post link:</strong>
+    <a href="http://xingluxi.github.io/2020/03/05/papers-ir-obqa/" title="Retrieval Approach for Open-Book style Question Answering">http://xingluxi.github.io/2020/03/05/papers-ir-obqa/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>Copyright Notice: </strong>
+    All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> unless stating additionally.
+  </li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/nlp/" rel="tag"><i class="fa fa-tag"></i> nlp</a>
+          
+            <a href="/tags/note/" rel="tag"><i class="fa fa-tag"></i> note</a>
+          
+            <a href="/tags/ir/" rel="tag"><i class="fa fa-tag"></i> ir</a>
+          
+            <a href="/tags/open-book/" rel="tag"><i class="fa fa-tag"></i> open-book</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/03/04/paper-2020-rover/" rel="next" title="2020 | 以transformer作为语言软推理机">
+                <i class="fa fa-chevron-left"></i> 2020 | 以transformer作为语言软推理机
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="lv-container" data-id="city" data-uid="MTAyMC80MjA1OC8xODYwNQ=="></div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.gif" alt="Luxi Xing">
+            
+              <p class="site-author-name" itemprop="name">Luxi Xing</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">56</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">51</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/XingLuxi" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://twitter.com/XingLuxi" target="_blank" title="Twitter">
+                      
+                        <i class="fa fa-fw fa-twitter"></i>Twitter</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:xingluxixlx@gmail.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#AHE"><span class="nav-text">AHE</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-Motivation"><span class="nav-text">1.Motivation</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-This-Work"><span class="nav-text">2.This Work</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-Method"><span class="nav-text">3.Method</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#3-1-Retrieve-Supporting-Paragraphs"><span class="nav-text">3.1 Retrieve Supporting Paragraphs</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-2-Alignment-Method"><span class="nav-text">3.2 Alignment Method</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-3-Multiple-Representation-of-Text"><span class="nav-text">3.3 Multiple Representation of Text</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-4-Ensemble-Strategies-over-Representations"><span class="nav-text">3.4 Ensemble Strategies over Representations</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-Experiments"><span class="nav-text">4.Experiments</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Careful-Selection"><span class="nav-text">Careful Selection</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-Motivation-1"><span class="nav-text">1.Motivation</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-This-Work-1"><span class="nav-text">2.This Work</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-Method-1"><span class="nav-text">3.Method</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#3-1-Hypothesis-Generation"><span class="nav-text">3.1 Hypothesis Generation</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-2-OpenBook-Knowledge-Extraction"><span class="nav-text">3.2 OpenBook Knowledge Extraction</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-3-Natural-Language-Abduction-and-IR"><span class="nav-text">3.3 Natural Language Abduction and IR</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-4-Information-Gain-based-Re-ranking"><span class="nav-text">3.4 Information Gain based Re-ranking</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-5-Question-Answering"><span class="nav-text">3.5 Question Answering</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#3-5-1-Question-Answering-Model"><span class="nav-text">3.5.1 Question-Answering Model</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3-5-2-Passage-Selection-and-Weighted-Scoring"><span class="nav-text">3.5.2 Passage Selection and Weighted Scoring:</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-Experiments-1"><span class="nav-text">4.Experiments</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#AutoROCC"><span class="nav-text">AutoROCC</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-Motivation-2"><span class="nav-text">1.Motivation</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Related-Work"><span class="nav-text">Related Work</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-This-Work-2"><span class="nav-text">2.This Work</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-Method-2"><span class="nav-text">3.Method</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#3-1-Retrieval-of-candidate-justification-sentences"><span class="nav-text">3.1 Retrieval of candidate justification sentences</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-2-Generation-of-candidate-justification-sets"><span class="nav-text">3.2 Generation of candidate justification sets</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-3-Ranking-of-candidate-justification-sets"><span class="nav-text">3.3 Ranking of candidate justification sets</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-4-Answer-Classification"><span class="nav-text">3.4 Answer Classification</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-Experiments-2"><span class="nav-text">4.Experiments</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+            <span id="scrollpercent"><span>0</span>%</span>
+          
+        </div>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-grav"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Luxi Xing</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a></div>
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i> Site Total Visiters
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
+  
+
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  
+
+
+  
+
+  
+
+</body>
+</html>
