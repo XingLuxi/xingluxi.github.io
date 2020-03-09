@@ -96,7 +96,7 @@
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://xingluxi.github.io/images/paper-emnlp2019-hgat/1-hin-example.png">
 <meta property="og:image" content="http://xingluxi.github.io/images/paper-emnlp2019-hgat/2-hgat.png">
-<meta property="og:updated_time" content="2020-03-09T08:56:28.354Z">
+<meta property="og:updated_time" content="2020-03-09T09:10:58.838Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="EMNLP2019 | Heterogeneous Graph Attention Networks for Semi-Supervised Short Text Classification">
 <meta name="twitter:description" content="Title: Heterogeneous Graph Attention Networks for Semi-supervised Short Text ClassificationAuthors: Linmei Hu, Tianchi Yang, Chuan Shi, Houye Ji, Xiaoli Li.Org.: BUPT, IIR(Singapore).Published: EMNLP">
@@ -351,7 +351,7 @@
               
                 <span class="post-meta-item-text">Post modified&#58;</span>
               
-              <time title="Post modified" itemprop="dateModified" datetime="2020-03-09T16:56:28+08:00">
+              <time title="Post modified" itemprop="dateModified" datetime="2020-03-09T17:10:58+08:00">
                 2020-03-09
               </time>
             
@@ -406,7 +406,7 @@
                   <span class="post-meta-item-text">Words count in article&#58;</span>
                 
                 <span title="Words count in article">
-                  832
+                  862
                 </span>
               
 
@@ -588,7 +588,15 @@
 <h4 id="Model-Training"><a href="#Model-Training" class="headerlink" title="Model Training"></a>Model Training</h4><p>$Z = softmax(H^{(L)})$</p>
 <ul>
 <li>$H^{(L)}$ = short text embeddings </li>
-<li></li>
+</ul>
+<p>Objective:</p>
+<ul>
+<li>$L = - \sum_{i\in D_{train}} \sum_{j=1}^C Y_{ij}\cdot log Z_{ij} + \eta ||\Theta||_2 $<ul>
+<li>$C$ = number of classes</li>
+<li>$\Theta$ = model parameters</li>
+<li>$\eta$ = regularization factor</li>
+</ul>
+</li>
 </ul>
 <h2 id="Summary-amp-Analysis"><a href="#Summary-amp-Analysis" class="headerlink" title="Summary &amp; Analysis"></a>Summary &amp; Analysis</h2><div id="footnotes"><hr><div id="footnotelist"><ol style="list-style: none; padding-left: 0; margin-left: 40px"><li id="fn:1"><span style="display: inline-block; vertical-align: top; padding-right: 10px; margin-left: -40px">1.</span><span style="display: inline-block; vertical-align: top; margin-left: 10px;">Xuan-Hieu Phan, Le-Minh Nguyen, and Susumu Horiguchi. 2008. Learning to classify short and sparse text &amp; web with hidden topics from largescale data collections. In WWW, pages 91–100. ACM.<a href="#fnref:1" rev="footnote"> ↩</a></span></li><li id="fn:2"><span style="display: inline-block; vertical-align: top; padding-right: 10px; margin-left: -40px">2.</span><span style="display: inline-block; vertical-align: top; margin-left: 10px;">https://sobigdata.d4science.org/group/tagme/<a href="#fnref:2" rev="footnote"> ↩</a></span></li></ol></div></div>
       
