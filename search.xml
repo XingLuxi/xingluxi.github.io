@@ -107,8 +107,8 @@
       </categories>
       <tags>
         <tag>nlp</tag>
-        <tag>dialogue</tag>
         <tag>tutorial</tag>
+        <tag>dialogue</tag>
       </tags>
   </entry>
   <entry>
@@ -132,9 +132,9 @@
       </categories>
       <tags>
         <tag>nlp</tag>
+        <tag>paper</tag>
         <tag>knowledge</tag>
         <tag>mrc</tag>
-        <tag>paper</tag>
       </tags>
   </entry>
   <entry>
@@ -146,9 +146,9 @@
       </categories>
       <tags>
         <tag>nlp</tag>
+        <tag>paper</tag>
         <tag>knowledge</tag>
         <tag>mrc</tag>
-        <tag>paper</tag>
       </tags>
   </entry>
   <entry>
@@ -160,9 +160,9 @@
       </categories>
       <tags>
         <tag>nlp</tag>
+        <tag>paper</tag>
         <tag>knowledge</tag>
         <tag>mrc</tag>
-        <tag>paper</tag>
       </tags>
   </entry>
   <entry>
@@ -175,9 +175,9 @@
       <tags>
         <tag>nlp</tag>
         <tag>knowledge</tag>
+        <tag>text-generation</tag>
         <tag>mrc</tag>
         <tag>note</tag>
-        <tag>text-generation</tag>
         <tag>ml</tag>
       </tags>
   </entry>
@@ -529,9 +529,9 @@
       </categories>
       <tags>
         <tag>nlp</tag>
+        <tag>paper</tag>
         <tag>knowledge</tag>
         <tag>mrc</tag>
-        <tag>paper</tag>
       </tags>
   </entry>
   <entry>
@@ -588,8 +588,8 @@
       </categories>
       <tags>
         <tag>nlp</tag>
-        <tag>note</tag>
         <tag>text-generation</tag>
+        <tag>note</tag>
         <tag>commonsense</tag>
       </tags>
   </entry>
@@ -631,8 +631,8 @@
       </categories>
       <tags>
         <tag>nlp</tag>
-        <tag>research</tag>
         <tag>paper</tag>
+        <tag>research</tag>
         <tag>nli</tag>
       </tags>
   </entry>
@@ -645,9 +645,9 @@
       </categories>
       <tags>
         <tag>nlp</tag>
+        <tag>paper</tag>
         <tag>mrc</tag>
         <tag>research</tag>
-        <tag>paper</tag>
       </tags>
   </entry>
   <entry>
@@ -673,8 +673,8 @@
       </categories>
       <tags>
         <tag>nlp</tag>
-        <tag>mrc</tag>
         <tag>paper</tag>
+        <tag>mrc</tag>
         <tag>dataset</tag>
       </tags>
   </entry>
@@ -786,8 +786,8 @@
       </categories>
       <tags>
         <tag>nlp</tag>
-        <tag>knowledge</tag>
         <tag>paper</tag>
+        <tag>knowledge</tag>
         <tag>text-generation</tag>
       </tags>
   </entry>
