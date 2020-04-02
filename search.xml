@@ -3,7 +3,7 @@
   <entry>
     <title><![CDATA[2020 | Natural Language QA Approaches using Reasoning with External Knowledge]]></title>
     <url>%2F2020%2F04%2F02%2Fpaper-2020-survey-nlqa-r-with-kn%2F</url>
-    <content type="text"><![CDATA[Title: Natural Language QA Approaches using Reasoning with External KnowledgeAuthors: Chitta Baral, Pratyay Banerjee, Kuntal Pal, Arindam MitraOrg.: Arizona State University, Microsoft;Published: unpublishedAnother Version: link 1. Introduction and Motivation Various NLQA datasets[1], research on knowledge acquisition in the NLQA context, and their use in various NLQA models have brought the issue of NLQA using “reasoning” with external knowledge to the forefront. Understanding text often requires knowledge beyond what is explicitly stated in the text. Examples from various datasets illustrate the need for “reasoning” with external knowledge in NLQA.: Winograd bAbI To answer the above question one needs knowledge about: directions and their opposites; the effect of actions of going in speciﬁc directions; composing actions (i.e., planning) to achieve a goal. ProPara Processes are actions with duration. Reasoning about processes, where they occur and what they change is somewhat more complex. LifeCycleQA The knowledge needed in many question answering domain can be present in unstructured textual form. But often speciﬁc words and phrases in those texts have “deeper meaning” that may not be easy to learn from examples. OpenBookQA / SocialIQA / PiQA some datasets where it is explicitly stated that external knowledge is needed to answer questions in those datasets. DARPA MCS (machine commonsense) program Allen AI has developed 5 different QA datasets where reasoning with common sense knowledge (which are not given) is required to answer questions correctly. LSAT / GMAT One of the most challenging natural language QA task is solving grid puzzles. Building a system to solve them is a challenge as it requires precise understanding of several clues of the puzzle, leaving very little room for error. 2. Knowledge Repositories and their creationRepositories of Unstructured Knowledge: Any natural language text or book or even the web can be thought of as a source of unstructured knowledge. Wikipedia Corpus: 4.4M articles; Toronto BookCorpus: 11K books; unstructured commonsense knowledge Aristo Reasoning Challenge (ARC): 14M science sentences; WikiHow Text Summarization: 230K articles and summaries extracted from the online WikiHow website; ROCStories Repositories of Structured Knowledge: Yago / NELL / DBPedia / ConceptNet Wikitionary: multilingual dictionary describing words using deﬁnitions and descriptions with examples WordNet ATOMIC / VerbPyhsics / WebChild collections of commonsense knowledge. 3. Reasoning with external knowledge: Models and Architectures3.1 Extracting the External KnowledgeNeural Language Models Word Vectors Information/Knowledge Retrieval: The knowledge retrieval step consists of: search keyword identiﬁcation; initial retrieval from the search engine; then depending on the task, a knowledge re-ranking step; Semantic Knowledge Ranking/Retrieval: The knowledge sentences retrieved through IR are re-ranked further using Semantic Knowledge Ranking/Retrieval (SKR) models; Neural Networks are used to rank knowledge sentences: These neural networks are trained on the task of semantic textual similarity (STS), knowledge relevance classiﬁcation or natural language inference (NLI). Existing Structured Knowledge Sources Hand Coded Knowledge Knowledge learned using Inductive Logic Programming (ILP) 3.2 Models and Architecture for NLQA with External KnowledgeNLQA systems with external knowledge can be grouped based on how knowledge is expressed (structured, free text, implicit in pre-trained neural networks, or a combination) and the type of reasoning module (symbolic, neural or mixed). Structured Knowledge and Symbolic Reasoner Neural Implicit Knowledge with Neural Reasoners Structured Knowledge and Neural Reasoners Structured knowledge can be in the form of trees (abstract syntax tree, dependency tree, constituency tree), graphs, concepts or rules. Tree-based LSTM GNN Free text Knowledge and Neural Reasoners Memory Network Free text Knowledge and Mixed Reasoners neuro-symbolic approaches Combination of Knowledge and Mixed Reasoners 4. Discussion: How Much Reasoning the Models are Dong?Commonsense Reasoning Multi-Hop Reasoning Abductive Reasoning Quantitative and Qualitative Reasoning Non-Monotonic Reasoning 5. Conclusion and Future Directions1.The website https://quantumstat.com/dataset/dataset.html has a large list of NLP and QA datasets. ↩]]></content>
+    <content type="text"><![CDATA[Title: Natural Language QA Approaches using Reasoning with External KnowledgeAuthors: Chitta Baral, Pratyay Banerjee, Kuntal Pal, Arindam MitraOrg.: Arizona State University, Microsoft;Published: unpublishedAnother Version: link 1. Introduction and Motivation Various NLQA datasets[1], research on knowledge acquisition in the NLQA context, and their use in various NLQA models have brought the issue of NLQA using “reasoning” with external knowledge to the forefront. Understanding text often requires knowledge beyond what is explicitly stated in the text. Examples from various datasets illustrate the need for “reasoning” with external knowledge in NLQA.: Winograd bAbI To answer the above question one needs knowledge about: directions and their opposites; the effect of actions of going in speciﬁc directions; composing actions (i.e., planning) to achieve a goal. ProPara Processes are actions with duration. Reasoning about processes, where they occur and what they change is somewhat more complex. LifeCycleQA The knowledge needed in many question answering domain can be present in unstructured textual form. But often speciﬁc words and phrases in those texts have “deeper meaning” that may not be easy to learn from examples. OpenBookQA / SocialIQA / PiQA some datasets where it is explicitly stated that external knowledge is needed to answer questions in those datasets. DARPA MCS (machine commonsense) program Allen AI has developed 5 different QA datasets where reasoning with common sense knowledge (which are not given) is required to answer questions correctly. LSAT / GMAT One of the most challenging natural language QA task is solving grid puzzles. Building a system to solve them is a challenge as it requires precise understanding of several clues of the puzzle, leaving very little room for error. 2. Knowledge Repositories and their creationRepositories of Unstructured Knowledge: Any natural language text or book or even the web can be thought of as a source of unstructured knowledge. Wikipedia Corpus: 4.4M articles; Toronto BookCorpus: 11K books; unstructured commonsense knowledge Aristo Reasoning Challenge (ARC): 14M science sentences; WikiHow Text Summarization: 230K articles and summaries extracted from the online WikiHow website; ROCStories Repositories of Structured Knowledge: Yago / NELL / DBPedia / ConceptNet Wikitionary: multilingual dictionary describing words using deﬁnitions and descriptions with examples WordNet ATOMIC / VerbPyhsics / WebChild collections of commonsense knowledge. 3. Reasoning with external knowledge: Models and Architectures3.1 Extracting the External KnowledgeNeural Language Models Word Vectors Information/Knowledge Retrieval: The knowledge retrieval step consists of: search keyword identiﬁcation; initial retrieval from the search engine; then depending on the task, a knowledge re-ranking step; Semantic Knowledge Ranking/Retrieval: The knowledge sentences retrieved through IR are re-ranked further using Semantic Knowledge Ranking/Retrieval (SKR) models; Neural Networks are used to rank knowledge sentences: These neural networks are trained on the task of semantic textual similarity (STS), knowledge relevance classiﬁcation or natural language inference (NLI). Existing Structured Knowledge Sources Hand Coded Knowledge Knowledge learned using Inductive Logic Programming (ILP) 3.2 Models and Architecture for NLQA with External Knowledge NLQA systems with external knowledge can be grouped based on how knowledge is expressed (structured, free text, implicit in pre-trained neural networks, or a combination) and the type of reasoning module (symbolic, neural or mixed). Structured Knowledge and Symbolic Reasoner Neural Implicit Knowledge with Neural Reasoners Structured Knowledge and Neural Reasoners Structured knowledge can be in the form of trees (abstract syntax tree, dependency tree, constituency tree), graphs, concepts or rules. Tree-based LSTM GNN Free text Knowledge and Neural Reasoners Memory Network Free text Knowledge and Mixed Reasoners neuro-symbolic approaches Combination of Knowledge and Mixed Reasoners 4. Discussion: How Much Reasoning the Models are Dong?Commonsense Reasoning Multi-Hop Reasoning Abductive Reasoning Quantitative and Qualitative Reasoning Non-Monotonic Reasoning 5. Conclusion and Future Directions1.The website https://quantumstat.com/dataset/dataset.html has a large list of NLP and QA datasets. ↩]]></content>
       <categories>
         <category>MRC-Paper-Intro</category>
       </categories>
@@ -166,8 +166,8 @@
       </categories>
       <tags>
         <tag>nlp</tag>
-        <tag>paper</tag>
         <tag>knowledge</tag>
+        <tag>paper</tag>
         <tag>mrc</tag>
       </tags>
   </entry>
@@ -180,8 +180,8 @@
       </categories>
       <tags>
         <tag>nlp</tag>
-        <tag>paper</tag>
         <tag>knowledge</tag>
+        <tag>paper</tag>
         <tag>mrc</tag>
       </tags>
   </entry>
@@ -194,8 +194,8 @@
       </categories>
       <tags>
         <tag>nlp</tag>
-        <tag>paper</tag>
         <tag>knowledge</tag>
+        <tag>paper</tag>
         <tag>mrc</tag>
       </tags>
   </entry>
@@ -563,8 +563,8 @@
       </categories>
       <tags>
         <tag>nlp</tag>
-        <tag>paper</tag>
         <tag>knowledge</tag>
+        <tag>paper</tag>
         <tag>mrc</tag>
       </tags>
   </entry>
@@ -820,8 +820,8 @@
       </categories>
       <tags>
         <tag>nlp</tag>
-        <tag>paper</tag>
         <tag>knowledge</tag>
+        <tag>paper</tag>
         <tag>tg</tag>
       </tags>
   </entry>
