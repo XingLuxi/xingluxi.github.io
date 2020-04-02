@@ -100,8 +100,8 @@
         <tag>nlp</tag>
         <tag>tg</tag>
         <tag>note</tag>
-        <tag>pre-trained-lm</tag>
         <tag>seq2seq</tag>
+        <tag>pre-trained-lm</tag>
       </tags>
   </entry>
   <entry>
@@ -141,8 +141,8 @@
       </categories>
       <tags>
         <tag>nlp</tag>
-        <tag>dialogue</tag>
         <tag>tutorial</tag>
+        <tag>dialogue</tag>
       </tags>
   </entry>
   <entry>
