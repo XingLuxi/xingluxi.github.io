@@ -26,8 +26,8 @@
       <tags>
         <tag>nlp</tag>
         <tag>knowledge</tag>
-        <tag>mrc</tag>
         <tag>tg</tag>
+        <tag>mrc</tag>
         <tag>note</tag>
         <tag>pre-trained-lm</tag>
         <tag>commonsense</tag>
@@ -37,7 +37,7 @@
   <entry>
     <title><![CDATA[Note | Capsule Network]]></title>
     <url>%2F2020%2F04%2F01%2Fnote-nn-capsule%2F</url>
-    <content type="text"><![CDATA[Capsule Network 相关学习资料： 视频： 李宏毅-capsule network blog: 1-苏剑林-揭开迷雾，来一顿美味的Capsule盛宴 2-苏剑林-再来一顿贺岁宴：从K-Means到Capsule 3-苏剑林-三味Capsule：矩阵Capsule与EM路由]]></content>
+    <content type="text"><![CDATA[Capsule Network 相关学习资料： 视频： 李宏毅-capsule network blog: 1-苏剑林-揭开迷雾，来一顿美味的Capsule盛宴 2-苏剑林-再来一顿贺岁宴：从K-Means到Capsule 3-苏剑林-三味Capsule：矩阵Capsule与EM路由 https://www.tinymind.cn/articles/61]]></content>
       <categories>
         <category>ML-NN</category>
       </categories>
@@ -167,8 +167,8 @@
       <tags>
         <tag>nlp</tag>
         <tag>knowledge</tag>
-        <tag>mrc</tag>
         <tag>paper</tag>
+        <tag>mrc</tag>
       </tags>
   </entry>
   <entry>
@@ -181,8 +181,8 @@
       <tags>
         <tag>nlp</tag>
         <tag>knowledge</tag>
-        <tag>mrc</tag>
         <tag>paper</tag>
+        <tag>mrc</tag>
       </tags>
   </entry>
   <entry>
@@ -195,8 +195,8 @@
       <tags>
         <tag>nlp</tag>
         <tag>knowledge</tag>
-        <tag>mrc</tag>
         <tag>paper</tag>
+        <tag>mrc</tag>
       </tags>
   </entry>
   <entry>
@@ -209,8 +209,8 @@
       <tags>
         <tag>nlp</tag>
         <tag>knowledge</tag>
-        <tag>mrc</tag>
         <tag>tg</tag>
+        <tag>mrc</tag>
         <tag>note</tag>
         <tag>ml</tag>
       </tags>
@@ -435,8 +435,8 @@
       <tags>
         <tag>nlp</tag>
         <tag>knowledge</tag>
-        <tag>research</tag>
         <tag>note</tag>
+        <tag>research</tag>
       </tags>
   </entry>
   <entry>
@@ -522,8 +522,8 @@
       <tags>
         <tag>nlp</tag>
         <tag>mrc</tag>
-        <tag>research</tag>
         <tag>note</tag>
+        <tag>research</tag>
       </tags>
   </entry>
   <entry>
@@ -536,8 +536,8 @@
       <tags>
         <tag>nlp</tag>
         <tag>mrc</tag>
-        <tag>research</tag>
         <tag>note</tag>
+        <tag>research</tag>
       </tags>
   </entry>
   <entry>
@@ -564,8 +564,8 @@
       <tags>
         <tag>nlp</tag>
         <tag>knowledge</tag>
-        <tag>mrc</tag>
         <tag>paper</tag>
+        <tag>mrc</tag>
       </tags>
   </entry>
   <entry>
@@ -637,8 +637,8 @@
       <tags>
         <tag>nlp</tag>
         <tag>mrc</tag>
-        <tag>research</tag>
         <tag>note</tag>
+        <tag>research</tag>
         <tag>cs-know</tag>
       </tags>
   </entry>
@@ -679,8 +679,8 @@
       </categories>
       <tags>
         <tag>nlp</tag>
-        <tag>mrc</tag>
         <tag>paper</tag>
+        <tag>mrc</tag>
         <tag>research</tag>
       </tags>
   </entry>
@@ -707,8 +707,8 @@
       </categories>
       <tags>
         <tag>nlp</tag>
-        <tag>mrc</tag>
         <tag>paper</tag>
+        <tag>mrc</tag>
         <tag>dataset</tag>
       </tags>
   </entry>
