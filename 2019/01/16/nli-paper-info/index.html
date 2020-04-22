@@ -94,7 +94,7 @@
 <meta property="og:site_name" content="Luxi Xing - Blog">
 <meta property="og:description" content="NLI IntroductionChallenges 词语匹配的多元性（同义词、一词多义）lexical gap、lexical variant； 短语匹配的结构性、多粒度计算语义； 文本匹配的层次性； 利用不相似部分的信息； 自然语言的基础现象：Variability of Semantic expression 是语言歧义的对偶问题； 语义表达的多变性、语言结构的多样性；    Approac">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-04-04T01:30:04.000Z">
+<meta property="og:updated_time" content="2020-04-22T03:01:32.055Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Natural Language Inference | Analysis and Paper List">
 <meta name="twitter:description" content="NLI IntroductionChallenges 词语匹配的多元性（同义词、一词多义）lexical gap、lexical variant； 短语匹配的结构性、多粒度计算语义； 文本匹配的层次性； 利用不相似部分的信息； 自然语言的基础现象：Variability of Semantic expression 是语言歧义的对偶问题； 语义表达的多变性、语言结构的多样性；    Approac">
@@ -348,8 +348,8 @@
               
                 <span class="post-meta-item-text">Post modified&#58;</span>
               
-              <time title="Post modified" itemprop="dateModified" datetime="2019-04-04T09:30:04+08:00">
-                2019-04-04
+              <time title="Post modified" itemprop="dateModified" datetime="2020-04-22T11:01:32+08:00">
+                2020-04-22
               </time>
             
           </span>
@@ -403,7 +403,7 @@
                   <span class="post-meta-item-text">Words count in article&#58;</span>
                 
                 <span title="Words count in article">
-                  212
+                  288
                 </span>
               
 
@@ -455,10 +455,26 @@
 <ul>
 <li>基于encoding的基本框架：<ul>
 <li>input encoding —&gt;concat vector —&gt;vector &amp; element-wise difference/product—&gt; prediction</li>
+<li>Pros: <ul>
+<li>1、可预处理；2、易于建立索引；</li>
+</ul>
+</li>
+<li>Cons:<ul>
+<li>1、失去语义焦点，易语义偏移；2、词上下文重要性难以衡量；</li>
+</ul>
+</li>
 </ul>
 </li>
 <li>基于交互的基本框架：<ul>
 <li>input encoding —&gt; inference(interaction) —&gt; composition —&gt; prediction</li>
+<li>Pros:<ul>
+<li>1、把握语义焦点；2、可以对上下文重要性进行合理的建模；</li>
+</ul>
+</li>
+<li>Cons:<ul>
+<li>1、信息损失（主要由交互带来）；</li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
