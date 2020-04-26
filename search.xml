@@ -1,6 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[paper-2020-2004-05483-self-talk]]></title>
+    <url>%2F2020%2F04%2F26%2Fpaper-2020-2004-05483-self-talk%2F</url>
+    <content type="text"><![CDATA[Title: Unsupervised Commonsense Question Answering with Self-TalkAuthors: Vered Shwartz, Peter West, Ronan Le Bras , Chandra Bhagavatula, Yejin Choi.Org.: AI2Published: nullCode: https://github.com/vered1986/self_talk Motivation Method Experiment]]></content>
+      <categories>
+        <category>Paper-Note</category>
+      </categories>
+      <tags>
+        <tag>nlp</tag>
+        <tag>note</tag>
+        <tag>knowledge</tag>
+        <tag>qa</tag>
+        <tag>pre-trained-lm</tag>
+        <tag>commonsense</tag>
+        <tag>zero-shot</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[2020 | Natural Language QA Approaches using Reasoning with External Knowledge]]></title>
     <url>%2F2020%2F04%2F02%2Fpaper-2020-survey-nlqa-r-with-kn%2F</url>
     <content type="text"><![CDATA[Title: Natural Language QA Approaches using Reasoning with External KnowledgeAuthors: Chitta Baral, Pratyay Banerjee, Kuntal Pal, Arindam MitraOrg.: Arizona State University, Microsoft;Published: unpublishedAnother Version: link 1. Introduction and Motivation Various NLQA datasets[1], research on knowledge acquisition in the NLQA context, and their use in various NLQA models have brought the issue of NLQA using “reasoning” with external knowledge to the forefront. Understanding text often requires knowledge beyond what is explicitly stated in the text. Examples from various datasets illustrate the need for “reasoning” with external knowledge in NLQA.: Winograd bAbI To answer the above question one needs knowledge about: directions and their opposites; the effect of actions of going in speciﬁc directions; composing actions (i.e., planning) to achieve a goal. ProPara Processes are actions with duration. Reasoning about processes, where they occur and what they change is somewhat more complex. LifeCycleQA The knowledge needed in many question answering domain can be present in unstructured textual form. But often speciﬁc words and phrases in those texts have “deeper meaning” that may not be easy to learn from examples. OpenBookQA / SocialIQA / PiQA some datasets where it is explicitly stated that external knowledge is needed to answer questions in those datasets. DARPA MCS (machine commonsense) program Allen AI has developed 5 different QA datasets where reasoning with common sense knowledge (which are not given) is required to answer questions correctly. LSAT / GMAT One of the most challenging natural language QA task is solving grid puzzles. Building a system to solve them is a challenge as it requires precise understanding of several clues of the puzzle, leaving very little room for error. 2. Knowledge Repositories and their creationRepositories of Unstructured Knowledge: Any natural language text or book or even the web can be thought of as a source of unstructured knowledge. Wikipedia Corpus: 4.4M articles; Toronto BookCorpus: 11K books; unstructured commonsense knowledge Aristo Reasoning Challenge (ARC): 14M science sentences; WikiHow Text Summarization: 230K articles and summaries extracted from the online WikiHow website; ROCStories Repositories of Structured Knowledge: Yago / NELL / DBPedia / ConceptNet Wikitionary: multilingual dictionary describing words using deﬁnitions and descriptions with examples WordNet ATOMIC / VerbPyhsics / WebChild collections of commonsense knowledge. 3. Reasoning with external knowledge: Models and Architectures3.1 Extracting the External Knowledge1 - Neural Language Models 2 - Word Vectors 3 - Information/Knowledge Retrieval: The knowledge retrieval step consists of: search keyword identiﬁcation; initial retrieval from the search engine; then depending on the task, a knowledge re-ranking step; 4 - Semantic Knowledge Ranking/Retrieval: The knowledge sentences retrieved through IR are re-ranked further using Semantic Knowledge Ranking/Retrieval (SKR) models; Neural Networks are used to rank knowledge sentences: These neural networks are trained on the task of semantic textual similarity (STS), knowledge relevance classiﬁcation or natural language inference (NLI). 5 - Existing Structured Knowledge Sources 6 - Hand Coded Knowledge 7 - Knowledge learned using Inductive Logic Programming (ILP) 3.2 Models and Architecture for NLQA with External Knowledge NLQA systems with external knowledge can be grouped based on how knowledge is expressed (structured, free text, implicit in pre-trained neural networks, or a combination) and the type of reasoning module (symbolic, neural or mixed). 1 - Structured Knowledge and Symbolic Reasoner 2 - Neural Implicit Knowledge with Neural Reasoners 3 - Structured Knowledge and Neural Reasoners Structured knowledge can be in the form of trees (abstract syntax tree, dependency tree, constituency tree), graphs, concepts or rules. Tree-based LSTM GNN 4 - Free text Knowledge and Neural Reasoners Memory Network 5 - Free text Knowledge and Mixed Reasoners neuro-symbolic approaches 6 - Combination of Knowledge and Mixed Reasoners 4. Discussion: How Much Reasoning the Models are Dong? Commonsense Reasoning Multi-Hop Reasoning Abductive Reasoning Quantitative and Qualitative Reasoning Non-Monotonic Reasoning 5. Conclusion and Future Directions1.The website https://quantumstat.com/dataset/dataset.html has a large list of NLP and QA datasets. ↩]]></content>
@@ -26,9 +43,9 @@
       <tags>
         <tag>nlp</tag>
         <tag>mrc</tag>
+        <tag>note</tag>
         <tag>knowledge</tag>
         <tag>tg</tag>
-        <tag>note</tag>
         <tag>pre-trained-lm</tag>
         <tag>commonsense</tag>
         <tag>zero-shot</tag>
@@ -98,8 +115,8 @@
       </categories>
       <tags>
         <tag>nlp</tag>
-        <tag>tg</tag>
         <tag>note</tag>
+        <tag>tg</tag>
         <tag>pre-trained-lm</tag>
         <tag>seq2seq</tag>
       </tags>
@@ -113,8 +130,8 @@
       </categories>
       <tags>
         <tag>nlp</tag>
-        <tag>knowledge</tag>
         <tag>note</tag>
+        <tag>knowledge</tag>
         <tag>pre-trained-lm</tag>
       </tags>
   </entry>
@@ -209,9 +226,9 @@
       <tags>
         <tag>nlp</tag>
         <tag>mrc</tag>
+        <tag>note</tag>
         <tag>knowledge</tag>
         <tag>tg</tag>
-        <tag>note</tag>
         <tag>ml</tag>
       </tags>
   </entry>
@@ -269,8 +286,8 @@
       <tags>
         <tag>nlp</tag>
         <tag>mrc</tag>
-        <tag>knowledge</tag>
         <tag>note</tag>
+        <tag>knowledge</tag>
         <tag>commonsense</tag>
         <tag>graph</tag>
       </tags>
@@ -285,8 +302,8 @@
       <tags>
         <tag>nlp</tag>
         <tag>mrc</tag>
-        <tag>knowledge</tag>
         <tag>note</tag>
+        <tag>knowledge</tag>
         <tag>commonsense</tag>
         <tag>graph</tag>
       </tags>
@@ -317,8 +334,8 @@
       <tags>
         <tag>nlp</tag>
         <tag>mrc</tag>
-        <tag>knowledge</tag>
         <tag>note</tag>
+        <tag>knowledge</tag>
         <tag>qa</tag>
       </tags>
   </entry>
@@ -331,8 +348,8 @@
       </categories>
       <tags>
         <tag>nlp</tag>
-        <tag>knowledge</tag>
         <tag>note</tag>
+        <tag>knowledge</tag>
         <tag>pre-trained-lm</tag>
         <tag>wordnet</tag>
       </tags>
@@ -347,8 +364,8 @@
       <tags>
         <tag>nlp</tag>
         <tag>mrc</tag>
-        <tag>knowledge</tag>
         <tag>note</tag>
+        <tag>knowledge</tag>
         <tag>pre-trained-lm</tag>
       </tags>
   </entry>
@@ -362,8 +379,8 @@
       <tags>
         <tag>nlp</tag>
         <tag>mrc</tag>
-        <tag>knowledge</tag>
         <tag>note</tag>
+        <tag>knowledge</tag>
         <tag>wordnet</tag>
       </tags>
   </entry>
@@ -376,8 +393,8 @@
       </categories>
       <tags>
         <tag>nlp</tag>
-        <tag>knowledge</tag>
         <tag>note</tag>
+        <tag>knowledge</tag>
         <tag>commonsense</tag>
       </tags>
   </entry>
@@ -390,8 +407,8 @@
       </categories>
       <tags>
         <tag>nlp</tag>
-        <tag>knowledge</tag>
         <tag>note</tag>
+        <tag>knowledge</tag>
         <tag>reasoning</tag>
         <tag>kbqa</tag>
         <tag>graph</tag>
@@ -406,9 +423,9 @@
       </categories>
       <tags>
         <tag>nlp</tag>
+        <tag>note</tag>
         <tag>knowledge</tag>
         <tag>tg</tag>
-        <tag>note</tag>
       </tags>
   </entry>
   <entry>
@@ -421,8 +438,8 @@
       <tags>
         <tag>nlp</tag>
         <tag>mrc</tag>
-        <tag>knowledge</tag>
         <tag>note</tag>
+        <tag>knowledge</tag>
       </tags>
   </entry>
   <entry>
@@ -434,9 +451,9 @@
       </categories>
       <tags>
         <tag>nlp</tag>
+        <tag>note</tag>
         <tag>research</tag>
         <tag>knowledge</tag>
-        <tag>note</tag>
       </tags>
   </entry>
   <entry>
@@ -522,8 +539,8 @@
       <tags>
         <tag>nlp</tag>
         <tag>mrc</tag>
-        <tag>research</tag>
         <tag>note</tag>
+        <tag>research</tag>
       </tags>
   </entry>
   <entry>
@@ -536,8 +553,8 @@
       <tags>
         <tag>nlp</tag>
         <tag>mrc</tag>
-        <tag>research</tag>
         <tag>note</tag>
+        <tag>research</tag>
       </tags>
   </entry>
   <entry>
@@ -578,8 +595,8 @@
       <tags>
         <tag>nlp</tag>
         <tag>mrc</tag>
-        <tag>knowledge</tag>
         <tag>note</tag>
+        <tag>knowledge</tag>
         <tag>nli</tag>
       </tags>
   </entry>
@@ -622,8 +639,8 @@
       </categories>
       <tags>
         <tag>nlp</tag>
-        <tag>tg</tag>
         <tag>note</tag>
+        <tag>tg</tag>
         <tag>commonsense</tag>
       </tags>
   </entry>
@@ -637,8 +654,8 @@
       <tags>
         <tag>nlp</tag>
         <tag>mrc</tag>
-        <tag>research</tag>
         <tag>note</tag>
+        <tag>research</tag>
         <tag>cs-know</tag>
       </tags>
   </entry>
@@ -665,8 +682,8 @@
       </categories>
       <tags>
         <tag>nlp</tag>
-        <tag>paper</tag>
         <tag>research</tag>
+        <tag>paper</tag>
         <tag>nli</tag>
       </tags>
   </entry>
@@ -680,8 +697,8 @@
       <tags>
         <tag>nlp</tag>
         <tag>mrc</tag>
-        <tag>paper</tag>
         <tag>research</tag>
+        <tag>paper</tag>
       </tags>
   </entry>
   <entry>
@@ -790,8 +807,8 @@
       </categories>
       <tags>
         <tag>nlp</tag>
-        <tag>knowledge</tag>
         <tag>note</tag>
+        <tag>knowledge</tag>
         <tag>nli</tag>
         <tag>wordnet</tag>
       </tags>
@@ -806,8 +823,8 @@
       <tags>
         <tag>nlp</tag>
         <tag>mrc</tag>
-        <tag>knowledge</tag>
         <tag>note</tag>
+        <tag>knowledge</tag>
         <tag>cloze</tag>
       </tags>
   </entry>
