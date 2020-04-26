@@ -11,8 +11,8 @@
         <tag>nlp</tag>
         <tag>knowledge</tag>
         <tag>note</tag>
-        <tag>qa</tag>
         <tag>pre-trained-lm</tag>
+        <tag>qa</tag>
         <tag>commonsense</tag>
         <tag>zero-shot</tag>
       </tags>
@@ -158,8 +158,8 @@
       </categories>
       <tags>
         <tag>nlp</tag>
-        <tag>dialogue</tag>
         <tag>tutorial</tag>
+        <tag>dialogue</tag>
       </tags>
   </entry>
   <entry>
@@ -183,8 +183,8 @@
       </categories>
       <tags>
         <tag>nlp</tag>
-        <tag>paper</tag>
         <tag>knowledge</tag>
+        <tag>paper</tag>
         <tag>mrc</tag>
       </tags>
   </entry>
@@ -197,8 +197,8 @@
       </categories>
       <tags>
         <tag>nlp</tag>
-        <tag>paper</tag>
         <tag>knowledge</tag>
+        <tag>paper</tag>
         <tag>mrc</tag>
       </tags>
   </entry>
@@ -211,8 +211,8 @@
       </categories>
       <tags>
         <tag>nlp</tag>
-        <tag>paper</tag>
         <tag>knowledge</tag>
+        <tag>paper</tag>
         <tag>mrc</tag>
       </tags>
   </entry>
@@ -580,8 +580,8 @@
       </categories>
       <tags>
         <tag>nlp</tag>
-        <tag>paper</tag>
         <tag>knowledge</tag>
+        <tag>paper</tag>
         <tag>mrc</tag>
       </tags>
   </entry>
@@ -837,8 +837,8 @@
       </categories>
       <tags>
         <tag>nlp</tag>
-        <tag>paper</tag>
         <tag>knowledge</tag>
+        <tag>paper</tag>
         <tag>tg</tag>
       </tags>
   </entry>
