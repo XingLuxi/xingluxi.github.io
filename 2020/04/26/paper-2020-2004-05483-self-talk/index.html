@@ -75,7 +75,7 @@
 
 
 
-  <meta name="keywords" content="nlp,knowledge,note,pre-trained-lm,commonsense,zero-shot,qa,">
+  <meta name="keywords" content="nlp,note,knowledge,qa,pre-trained-lm,commonsense,zero-shot,">
 
 
 
@@ -87,9 +87,9 @@
 
 
 <meta name="description" content="Title: Unsupervised Commonsense Question Answering with Self-TalkAuthors: Vered Shwartz, Peter West, Ronan Le Bras , Chandra Bhagavatula, Yejin Choi.Org.: AI2Published: nullCode: https://github.com/v">
-<meta name="keywords" content="nlp,knowledge,note,pre-trained-lm,commonsense,zero-shot,qa">
+<meta name="keywords" content="nlp,note,knowledge,qa,pre-trained-lm,commonsense,zero-shot">
 <meta property="og:type" content="article">
-<meta property="og:title" content="paper-2020-2004-05483-self-talk">
+<meta property="og:title" content="2020 | Unsupervised Commonsense Question Answering with Self-Talk">
 <meta property="og:url" content="http://xingluxi.github.io/2020/04/26/paper-2020-2004-05483-self-talk/index.html">
 <meta property="og:site_name" content="Luxi Xing - Blog">
 <meta property="og:description" content="Title: Unsupervised Commonsense Question Answering with Self-TalkAuthors: Vered Shwartz, Peter West, Ronan Le Bras , Chandra Bhagavatula, Yejin Choi.Org.: AI2Published: nullCode: https://github.com/v">
@@ -108,9 +108,9 @@
 <meta property="og:image" content="http://xingluxi.github.io/images/paper-2020-2004-05483-self-talk/12.png">
 <meta property="og:image" content="http://xingluxi.github.io/images/paper-2020-2004-05483-self-talk/13.png">
 <meta property="og:image" content="http://xingluxi.github.io/images/paper-2020-2004-05483-self-talk/14.png">
-<meta property="og:updated_time" content="2020-04-26T15:08:48.112Z">
+<meta property="og:updated_time" content="2020-04-26T15:19:04.807Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="paper-2020-2004-05483-self-talk">
+<meta name="twitter:title" content="2020 | Unsupervised Commonsense Question Answering with Self-Talk">
 <meta name="twitter:description" content="Title: Unsupervised Commonsense Question Answering with Self-TalkAuthors: Vered Shwartz, Peter West, Ronan Le Bras , Chandra Bhagavatula, Yejin Choi.Org.: AI2Published: nullCode: https://github.com/v">
 <meta name="twitter:image" content="http://xingluxi.github.io/images/paper-2020-2004-05483-self-talk/1.png">
 
@@ -148,7 +148,7 @@
 
 
 
-  <title>paper-2020-2004-05483-self-talk | Luxi Xing - Blog</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  <title>2020 | Unsupervised Commonsense Question Answering with Self-Talk | Luxi Xing - Blog</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
   
 
 
@@ -334,7 +334,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">paper-2020-2004-05483-self-talk</h1>
+          <h1 class="post-title" itemprop="name headline">2020 | Unsupervised Commonsense Question Answering with Self-Talk</h1>
         
 
         <div class="post-meta">
@@ -363,7 +363,7 @@
               
                 <span class="post-meta-item-text">Post modified&#58;</span>
               
-              <time title="Post modified" itemprop="dateModified" datetime="2020-04-26T23:08:48+08:00">
+              <time title="Post modified" itemprop="dateModified" datetime="2020-04-26T23:19:04+08:00">
                 2020-04-26
               </time>
             
@@ -418,7 +418,7 @@
                   <span class="post-meta-item-text">Words count in article&#58;</span>
                 
                 <span title="Words count in article">
-                  30
+                  122
                 </span>
               
 
@@ -458,10 +458,12 @@
         <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><blockquote>
 <p><em>Title</em>: <a href="http://arxiv.org/abs/2004.05483" target="_blank" rel="noopener">Unsupervised Commonsense Question Answering with Self-Talk</a><br><em>Authors</em>: Vered Shwartz, Peter West, Ronan Le Bras , Chandra Bhagavatula, Yejin Choi.<br><em>Org.</em>: AI2<br><em>Published</em>: null<br><em>Code</em>: <a href="https://github.com/vered1986/self_talk" target="_blank" rel="noopener">https://github.com/vered1986/self_talk</a></p>
 </blockquote>
+<p>近期arxiv更新的一篇来自AI2的工作：基于self-talk进行无监督的常识问答</p>
+<p>self-talk，启发自 inquiry-based discovery learning <sup id="fnref:1"><a href="#fn:1" rel="footnote"><span class="hint--top hint--error hint--medium hint--rounded hint--bounce" aria-label="Jerome S Bruner. 1961. The act of discovery. Harvard educational review, 31:21–32.">[1]</span></a></sup>，核心是构造一些query，来挖掘KB中的相关知识，得到的相关知识作为探索的结果，用于辅助目标任务。</p>
 <h2 id="Motivation"><a href="#Motivation" class="headerlink" title="Motivation"></a>Motivation</h2><p><img src="/images/paper-2020-2004-05483-self-talk/1.png" alt="1"><br><img src="/images/paper-2020-2004-05483-self-talk/2.png" alt="2"></p>
 <h2 id="Method"><a href="#Method" class="headerlink" title="Method"></a>Method</h2><p><img src="/images/paper-2020-2004-05483-self-talk/3.png" alt="3"><br><img src="/images/paper-2020-2004-05483-self-talk/4.png" alt="4"><br><img src="/images/paper-2020-2004-05483-self-talk/5.png" alt="5"><br><img src="/images/paper-2020-2004-05483-self-talk/6.png" alt="6"><br><img src="/images/paper-2020-2004-05483-self-talk/7.png" alt="7"><br><img src="/images/paper-2020-2004-05483-self-talk/8.png" alt="8"><br><img src="/images/paper-2020-2004-05483-self-talk/9.png" alt="9"><br><img src="/images/paper-2020-2004-05483-self-talk/10.png" alt="10"><br><img src="/images/paper-2020-2004-05483-self-talk/11.png" alt="11"></p>
 <h2 id="Experiment"><a href="#Experiment" class="headerlink" title="Experiment"></a>Experiment</h2><p><img src="/images/paper-2020-2004-05483-self-talk/12.png" alt="12"><br><img src="/images/paper-2020-2004-05483-self-talk/13.png" alt="13"><br><img src="/images/paper-2020-2004-05483-self-talk/14.png" alt="14"></p>
-
+<div id="footnotes"><hr><div id="footnotelist"><ol style="list-style: none; padding-left: 0; margin-left: 40px"><li id="fn:1"><span style="display: inline-block; vertical-align: top; padding-right: 10px; margin-left: -40px">1.</span><span style="display: inline-block; vertical-align: top; margin-left: 10px;">Jerome S Bruner. 1961. The act of discovery. Harvard educational review, 31:21–32.<a href="#fnref:1" rev="footnote"> ↩</a></span></li></ol></div></div>
       
     </div>
     
@@ -494,7 +496,7 @@
   </li>
   <li class="post-copyright-link">
     <strong>Post link:</strong>
-    <a href="http://xingluxi.github.io/2020/04/26/paper-2020-2004-05483-self-talk/" title="paper-2020-2004-05483-self-talk">http://xingluxi.github.io/2020/04/26/paper-2020-2004-05483-self-talk/</a>
+    <a href="http://xingluxi.github.io/2020/04/26/paper-2020-2004-05483-self-talk/" title="2020 | Unsupervised Commonsense Question Answering with Self-Talk">http://xingluxi.github.io/2020/04/26/paper-2020-2004-05483-self-talk/</a>
   </li>
   <li class="post-copyright-license">
     <strong>Copyright Notice: </strong>
@@ -511,17 +513,17 @@
           
             <a href="/tags/nlp/" rel="tag"><i class="fa fa-tag"></i> nlp</a>
           
+            <a href="/tags/note/" rel="tag"><i class="fa fa-tag"></i> note</a>
+          
             <a href="/tags/knowledge/" rel="tag"><i class="fa fa-tag"></i> knowledge</a>
           
-            <a href="/tags/note/" rel="tag"><i class="fa fa-tag"></i> note</a>
+            <a href="/tags/qa/" rel="tag"><i class="fa fa-tag"></i> qa</a>
           
             <a href="/tags/pre-trained-lm/" rel="tag"><i class="fa fa-tag"></i> pre-trained-lm</a>
           
             <a href="/tags/commonsense/" rel="tag"><i class="fa fa-tag"></i> commonsense</a>
           
             <a href="/tags/zero-shot/" rel="tag"><i class="fa fa-tag"></i> zero-shot</a>
-          
-            <a href="/tags/qa/" rel="tag"><i class="fa fa-tag"></i> qa</a>
           
         </div>
       
