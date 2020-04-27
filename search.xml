@@ -43,9 +43,9 @@
       <tags>
         <tag>nlp</tag>
         <tag>knowledge</tag>
+        <tag>tg</tag>
         <tag>mrc</tag>
         <tag>note</tag>
-        <tag>tg</tag>
         <tag>pre-trained-lm</tag>
         <tag>commonsense</tag>
         <tag>zero-shot</tag>
@@ -115,8 +115,8 @@
       </categories>
       <tags>
         <tag>nlp</tag>
-        <tag>note</tag>
         <tag>tg</tag>
+        <tag>note</tag>
         <tag>seq2seq</tag>
         <tag>pre-trained-lm</tag>
       </tags>
@@ -184,8 +184,8 @@
       <tags>
         <tag>nlp</tag>
         <tag>knowledge</tag>
-        <tag>mrc</tag>
         <tag>paper</tag>
+        <tag>mrc</tag>
       </tags>
   </entry>
   <entry>
@@ -198,8 +198,8 @@
       <tags>
         <tag>nlp</tag>
         <tag>knowledge</tag>
-        <tag>mrc</tag>
         <tag>paper</tag>
+        <tag>mrc</tag>
       </tags>
   </entry>
   <entry>
@@ -212,8 +212,8 @@
       <tags>
         <tag>nlp</tag>
         <tag>knowledge</tag>
-        <tag>mrc</tag>
         <tag>paper</tag>
+        <tag>mrc</tag>
       </tags>
   </entry>
   <entry>
@@ -226,9 +226,9 @@
       <tags>
         <tag>nlp</tag>
         <tag>knowledge</tag>
+        <tag>tg</tag>
         <tag>mrc</tag>
         <tag>note</tag>
-        <tag>tg</tag>
         <tag>ml</tag>
       </tags>
   </entry>
@@ -424,8 +424,8 @@
       <tags>
         <tag>nlp</tag>
         <tag>knowledge</tag>
-        <tag>note</tag>
         <tag>tg</tag>
+        <tag>note</tag>
       </tags>
   </entry>
   <entry>
@@ -452,8 +452,8 @@
       <tags>
         <tag>nlp</tag>
         <tag>knowledge</tag>
-        <tag>note</tag>
         <tag>research</tag>
+        <tag>note</tag>
       </tags>
   </entry>
   <entry>
@@ -539,8 +539,8 @@
       <tags>
         <tag>nlp</tag>
         <tag>mrc</tag>
-        <tag>note</tag>
         <tag>research</tag>
+        <tag>note</tag>
       </tags>
   </entry>
   <entry>
@@ -553,8 +553,8 @@
       <tags>
         <tag>nlp</tag>
         <tag>mrc</tag>
-        <tag>note</tag>
         <tag>research</tag>
+        <tag>note</tag>
       </tags>
   </entry>
   <entry>
@@ -581,8 +581,8 @@
       <tags>
         <tag>nlp</tag>
         <tag>knowledge</tag>
-        <tag>mrc</tag>
         <tag>paper</tag>
+        <tag>mrc</tag>
       </tags>
   </entry>
   <entry>
@@ -639,8 +639,8 @@
       </categories>
       <tags>
         <tag>nlp</tag>
-        <tag>note</tag>
         <tag>tg</tag>
+        <tag>note</tag>
         <tag>commonsense</tag>
       </tags>
   </entry>
@@ -654,8 +654,8 @@
       <tags>
         <tag>nlp</tag>
         <tag>mrc</tag>
-        <tag>note</tag>
         <tag>research</tag>
+        <tag>note</tag>
         <tag>cs-know</tag>
       </tags>
   </entry>
@@ -682,8 +682,8 @@
       </categories>
       <tags>
         <tag>nlp</tag>
-        <tag>research</tag>
         <tag>paper</tag>
+        <tag>research</tag>
         <tag>nli</tag>
       </tags>
   </entry>
@@ -696,9 +696,9 @@
       </categories>
       <tags>
         <tag>nlp</tag>
+        <tag>paper</tag>
         <tag>mrc</tag>
         <tag>research</tag>
-        <tag>paper</tag>
       </tags>
   </entry>
   <entry>
@@ -724,8 +724,8 @@
       </categories>
       <tags>
         <tag>nlp</tag>
-        <tag>mrc</tag>
         <tag>paper</tag>
+        <tag>mrc</tag>
         <tag>dataset</tag>
       </tags>
   </entry>
