@@ -94,7 +94,7 @@
 <meta property="og:site_name" content="Luxi Xing - Blog">
 <meta property="og:description" content="KnE-PTM">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2020-05-13T08:24:31.719Z">
+<meta property="og:updated_time" content="2020-05-13T08:34:01.158Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Knowledge Enriched Pre-trained Models">
 <meta name="twitter:description" content="KnE-PTM">
@@ -348,7 +348,7 @@
               
                 <span class="post-meta-item-text">Post modified&#58;</span>
               
-              <time title="Post modified" itemprop="dateModified" datetime="2020-05-13T16:24:31+08:00">
+              <time title="Post modified" itemprop="dateModified" datetime="2020-05-13T16:34:01+08:00">
                 2020-05-13
               </time>
             
@@ -419,7 +419,7 @@
                   <span class="post-meta-item-text">Reading time &asymp;</span>
                 
                 <span title="Reading time">
-                  4
+                  5
                 </span>
               
             </div>
@@ -499,17 +499,20 @@
 </ol>
 <h3 id="外部知识库类型及相关工作："><a href="#外部知识库类型及相关工作：" class="headerlink" title="外部知识库类型及相关工作："></a>外部知识库类型及相关工作：</h3><ul>
 <li>引入 linguistic 知识的工作：<ul>
-<li>LIBERT【Informing unsupervised pretraining with external linguistic knowledge. 2019.】<ul>
+<li>LIBERT<sup id="fnref:01"><a href="#fn:01" rel="footnote"><span class="hint--top hint--error hint--medium hint--rounded hint--bounce" aria-label="Informing unsupervised pretraining with external linguistic knowledge. 2019.
+">[01]</span></a></sup><ul>
 <li>lexical semantic relations：wordnet、babelnet；</li>
 <li>add task：lexical relation classiﬁcation (LRC) -&gt; linguistic constraints task.</li>
 </ul>
 </li>
-<li>Sentilr: Linguistic knowledge enhanced language representation for sentiment analysis. 2019.<ul>
+<li>Sentilr<sup id="fnref:02"><a href="#fn:02" rel="footnote"><span class="hint--top hint--error hint--medium hint--rounded hint--bounce" aria-label="Linguistic knowledge enhanced language representation for sentiment analysis. 2019.
+">[02]</span></a></sup><ul>
 <li>将 MLM 扩展为 Label-aware MLM，引入每个词的情感极性；</li>
 </ul>
 </li>
 <li>KnowBERT.</li>
-<li>K-adapter: Infusing knowledge into pre-trained models with adapters. 2020.</li>
+<li>K-adapter<sup id="fnref:03"><a href="#fn:03" rel="footnote"><span class="hint--top hint--error hint--medium hint--rounded hint--bounce" aria-label="K-adapter: Infusing knowledge into pre-trained models with adapters. 2020.
+">[03]</span></a></sup></li>
 </ul>
 </li>
 <li>引入 semantic 知识（实际上是语言学知识）<ul>
@@ -578,16 +581,17 @@
 <li>在下游任务中应用：<ul>
 <li>K-BERT：侧重输入格式的处理</li>
 <li>KT-NET：结合预训练的KGE完成QA任务；</li>
-<li>intermediate pre-training 的方式；</li>
+</ul>
+</li>
+<li>intermediate pre-training 的方式；<ul>
+<li>针对下游任务的需求，</li>
 </ul>
 </li>
 </ul>
 </li>
-<li>将LM扩展为KG-conditioned LM (knowledge graph conditioned LM) <ul>
-<li>【Barack’s wife hillary: Using knowledge graphs for fact-aware language modeling. ACL, 2019.】</li>
-<li>【Latent relation language models. 2019.】</li>
-</ul>
-</li>
+<li>将LM扩展为KG-conditioned LM (knowledge graph conditioned LM)<sup id="fnref:14"><a href="#fn:14" rel="footnote"><span class="hint--top hint--error hint--medium hint--rounded hint--bounce" aria-label="Barack’s wife hillary: Using knowledge graphs for fact-aware language modeling. ACL, 2019.
+">[14]</span></a></sup><sup id="fnref:15"><a href="#fn:15" rel="footnote"><span class="hint--top hint--error hint--medium hint--rounded hint--bounce" aria-label="Latent relation language models. 2019.
+">[15]</span></a></sup></li>
 </ul>
 <h2 id="Probe-Knowledge-in-LM"><a href="#Probe-Knowledge-in-LM" class="headerlink" title="Probe Knowledge in LM"></a>Probe Knowledge in LM</h2><h3 id="Probe-Linguistic-Knowledge"><a href="#Probe-Linguistic-Knowledge" class="headerlink" title="Probe Linguistic Knowledge"></a>Probe Linguistic Knowledge</h3><ul>
 <li>BERT 在 句法任务上表现出色<sup id="fnref:1"><a href="#fn:1" rel="footnote"><span class="hint--top hint--error hint--medium hint--rounded hint--bounce" aria-label="What do you learn from context? probing for sentence structure in contextualized word representations. ICLR, 2019.
@@ -622,7 +626,7 @@
 </ul>
 </li>
 </ul>
-<div id="footnotes"><hr><div id="footnotelist"><ol style="list-style: none; padding-left: 0; margin-left: 40px"><li id="fn:1"><span style="display: inline-block; vertical-align: top; padding-right: 10px; margin-left: -40px">1.</span><span style="display: inline-block; vertical-align: top; margin-left: 10px;">What do you learn from context? probing for sentence structure in contextualized word representations. ICLR, 2019.<a href="#fnref:1" rev="footnote"> ↩</a></span></li><li id="fn:2"><span style="display: inline-block; vertical-align: top; padding-right: 10px; margin-left: -40px">2.</span><span style="display: inline-block; vertical-align: top; margin-left: 10px;">Linguistic knowledge and transferability of contextual representations. NAACL,2019.<a href="#fnref:2" rev="footnote"> ↩</a></span></li><li id="fn:3"><span style="display: inline-block; vertical-align: top; padding-right: 10px; margin-left: -40px">3.</span><span style="display: inline-block; vertical-align: top; margin-left: 10px;">Assessing BERT’s syntactic abilities. 2019.<a href="#fnref:3" rev="footnote"> ↩</a></span></li><li id="fn:4"><span style="display: inline-block; vertical-align: top; padding-right: 10px; margin-left: -40px">4.</span><span style="display: inline-block; vertical-align: top; margin-left: 10px;">What BERT is not: Lessons from a new suite of psycholinguistic diagnostics for language models. TACL,2020.<a href="#fnref:4" rev="footnote"> ↩</a></span></li><li id="fn:5"><span style="display: inline-block; vertical-align: top; padding-right: 10px; margin-left: -40px">5.</span><span style="display: inline-block; vertical-align: top; margin-left: 10px;">A structural probe for ﬁnding syntax in word representations. NAACL,2019.<a href="#fnref:5" rev="footnote"> ↩</a></span></li><li id="fn:6"><span style="display: inline-block; vertical-align: top; padding-right: 10px; margin-left: -40px">6.</span><span style="display: inline-block; vertical-align: top; margin-left: 10px;">What does BERT learn about the structure of language? ACL,2019.<a href="#fnref:6" rev="footnote"> ↩</a></span></li><li id="fn:7"><span style="display: inline-block; vertical-align: top; padding-right: 10px; margin-left: -40px">7.</span><span style="display: inline-block; vertical-align: top; margin-left: 10px;">Are pre-trained language models aware of phrases? simple but strong baselines for grammar induction. 2020.<a href="#fnref:7" rev="footnote"> ↩</a></span></li><li id="fn:8"><span style="display: inline-block; vertical-align: top; padding-right: 10px; margin-left: -40px">8.</span><span style="display: inline-block; vertical-align: top; margin-left: 10px;">Language models as knowledge bases? EMNLP,2019.<a href="#fnref:8" rev="footnote"> ↩</a></span></li><li id="fn:9"><span style="display: inline-block; vertical-align: top; padding-right: 10px; margin-left: -40px">9.</span><span style="display: inline-block; vertical-align: top; margin-left: 10px;">How can we know what language models know? 2019.<a href="#fnref:9" rev="footnote"> ↩</a></span></li><li id="fn:10"><span style="display: inline-block; vertical-align: top; padding-right: 10px; margin-left: -40px">10.</span><span style="display: inline-block; vertical-align: top; margin-left: 10px;">BERT is not a knowledge base (yet): Factual knowledge vs. name-based reasoning in unsupervised QA. 2019.<a href="#fnref:10" rev="footnote"> ↩</a></span></li><li id="fn:11"><span style="display: inline-block; vertical-align: top; padding-right: 10px; margin-left: -40px">11.</span><span style="display: inline-block; vertical-align: top; margin-left: 10px;">Negated LAMA: birds cannot ﬂy. 2019.<a href="#fnref:11" rev="footnote"> ↩</a></span></li><li id="fn:12"><span style="display: inline-block; vertical-align: top; padding-right: 10px; margin-left: -40px">12.</span><span style="display: inline-block; vertical-align: top; margin-left: 10px;">Inducing relational knowledge from BERT. 2019.<a href="#fnref:12" rev="footnote"> ↩</a></span></li><li id="fn:13"><span style="display: inline-block; vertical-align: top; padding-right: 10px; margin-left: -40px">13.</span><span style="display: inline-block; vertical-align: top; margin-left: 10px;">Commonsense knowledge mining from pretrained models. EMNLP,2019.<a href="#fnref:13" rev="footnote"> ↩</a></span></li></ol></div></div>
+<div id="footnotes"><hr><div id="footnotelist"><ol style="list-style: none; padding-left: 0; margin-left: 40px"><li id="fn:01"><span style="display: inline-block; vertical-align: top; padding-right: 10px; margin-left: -40px">01.</span><span style="display: inline-block; vertical-align: top; margin-left: 10px;">Informing unsupervised pretraining with external linguistic knowledge. 2019.<a href="#fnref:01" rev="footnote"> ↩</a></span></li><li id="fn:1"><span style="display: inline-block; vertical-align: top; padding-right: 10px; margin-left: -40px">1.</span><span style="display: inline-block; vertical-align: top; margin-left: 10px;">What do you learn from context? probing for sentence structure in contextualized word representations. ICLR, 2019.<a href="#fnref:1" rev="footnote"> ↩</a></span></li><li id="fn:2"><span style="display: inline-block; vertical-align: top; padding-right: 10px; margin-left: -40px">2.</span><span style="display: inline-block; vertical-align: top; margin-left: 10px;">Linguistic knowledge and transferability of contextual representations. NAACL,2019.<a href="#fnref:2" rev="footnote"> ↩</a></span></li><li id="fn:02"><span style="display: inline-block; vertical-align: top; padding-right: 10px; margin-left: -40px">02.</span><span style="display: inline-block; vertical-align: top; margin-left: 10px;">Linguistic knowledge enhanced language representation for sentiment analysis. 2019.<a href="#fnref:02" rev="footnote"> ↩</a></span></li><li id="fn:03"><span style="display: inline-block; vertical-align: top; padding-right: 10px; margin-left: -40px">03.</span><span style="display: inline-block; vertical-align: top; margin-left: 10px;">K-adapter: Infusing knowledge into pre-trained models with adapters. 2020.<a href="#fnref:03" rev="footnote"> ↩</a></span></li><li id="fn:3"><span style="display: inline-block; vertical-align: top; padding-right: 10px; margin-left: -40px">3.</span><span style="display: inline-block; vertical-align: top; margin-left: 10px;">Assessing BERT’s syntactic abilities. 2019.<a href="#fnref:3" rev="footnote"> ↩</a></span></li><li id="fn:4"><span style="display: inline-block; vertical-align: top; padding-right: 10px; margin-left: -40px">4.</span><span style="display: inline-block; vertical-align: top; margin-left: 10px;">What BERT is not: Lessons from a new suite of psycholinguistic diagnostics for language models. TACL,2020.<a href="#fnref:4" rev="footnote"> ↩</a></span></li><li id="fn:5"><span style="display: inline-block; vertical-align: top; padding-right: 10px; margin-left: -40px">5.</span><span style="display: inline-block; vertical-align: top; margin-left: 10px;">A structural probe for ﬁnding syntax in word representations. NAACL,2019.<a href="#fnref:5" rev="footnote"> ↩</a></span></li><li id="fn:6"><span style="display: inline-block; vertical-align: top; padding-right: 10px; margin-left: -40px">6.</span><span style="display: inline-block; vertical-align: top; margin-left: 10px;">What does BERT learn about the structure of language? ACL,2019.<a href="#fnref:6" rev="footnote"> ↩</a></span></li><li id="fn:7"><span style="display: inline-block; vertical-align: top; padding-right: 10px; margin-left: -40px">7.</span><span style="display: inline-block; vertical-align: top; margin-left: 10px;">Are pre-trained language models aware of phrases? simple but strong baselines for grammar induction. 2020.<a href="#fnref:7" rev="footnote"> ↩</a></span></li><li id="fn:8"><span style="display: inline-block; vertical-align: top; padding-right: 10px; margin-left: -40px">8.</span><span style="display: inline-block; vertical-align: top; margin-left: 10px;">Language models as knowledge bases? EMNLP,2019.<a href="#fnref:8" rev="footnote"> ↩</a></span></li><li id="fn:9"><span style="display: inline-block; vertical-align: top; padding-right: 10px; margin-left: -40px">9.</span><span style="display: inline-block; vertical-align: top; margin-left: 10px;">How can we know what language models know? 2019.<a href="#fnref:9" rev="footnote"> ↩</a></span></li><li id="fn:10"><span style="display: inline-block; vertical-align: top; padding-right: 10px; margin-left: -40px">10.</span><span style="display: inline-block; vertical-align: top; margin-left: 10px;">BERT is not a knowledge base (yet): Factual knowledge vs. name-based reasoning in unsupervised QA. 2019.<a href="#fnref:10" rev="footnote"> ↩</a></span></li><li id="fn:11"><span style="display: inline-block; vertical-align: top; padding-right: 10px; margin-left: -40px">11.</span><span style="display: inline-block; vertical-align: top; margin-left: 10px;">Negated LAMA: birds cannot ﬂy. 2019.<a href="#fnref:11" rev="footnote"> ↩</a></span></li><li id="fn:12"><span style="display: inline-block; vertical-align: top; padding-right: 10px; margin-left: -40px">12.</span><span style="display: inline-block; vertical-align: top; margin-left: 10px;">Inducing relational knowledge from BERT. 2019.<a href="#fnref:12" rev="footnote"> ↩</a></span></li><li id="fn:13"><span style="display: inline-block; vertical-align: top; padding-right: 10px; margin-left: -40px">13.</span><span style="display: inline-block; vertical-align: top; margin-left: 10px;">Commonsense knowledge mining from pretrained models. EMNLP,2019.<a href="#fnref:13" rev="footnote"> ↩</a></span></li><li id="fn:14"><span style="display: inline-block; vertical-align: top; padding-right: 10px; margin-left: -40px">14.</span><span style="display: inline-block; vertical-align: top; margin-left: 10px;">Barack’s wife hillary: Using knowledge graphs for fact-aware language modeling. ACL, 2019.<a href="#fnref:14" rev="footnote"> ↩</a></span></li><li id="fn:15"><span style="display: inline-block; vertical-align: top; padding-right: 10px; margin-left: -40px">15.</span><span style="display: inline-block; vertical-align: top; margin-left: 10px;">Latent relation language models. 2019.<a href="#fnref:15" rev="footnote"> ↩</a></span></li></ol></div></div>
       
     </div>
     
