@@ -3,7 +3,7 @@
   <entry>
     <title><![CDATA[Knowledge Enriched Pre-trained Models]]></title>
     <url>%2F2020%2F05%2F13%2Fnlu-kn-e-ptm%2F</url>
-    <content type="text"><![CDATA[KnE-PTM E: Enriched / Enhanced Main Related Work Pre-trained Models for Natural Language Processing: A Survey. 2020. ERNIE(THU) ERNIE: enhanced language representation with informative entities. In ACL, 2019. KnowBERT Knowledge enhanced contextual word representations. EMNLP-IJCNLP, 2019. K-BERT K-BERT: Enabling language representation with knowledge graph. AAAI,2020. KEPLER KEPLER: A uniﬁed model for knowledge embedding and pre-trained language representation. 2019. WKLM Pretrained encyclopedia: Weakly supervised knowledge-pretrained language model. ICLR, 2020. Introduction of KnE-PTMPTMs通常是从general-purpose large-scale text corpora中学习universal language representation，但是缺少 domain-specific knowledge。 从外部知识库向PTM中引入领域知识是一种有效的方式。 Note1: Pre-training 的优势： 在大规模文本语料库上进行预训练，可以学习通用语言表示并辅助下游任务； 预训练提供了更好的模型初始化，通常会带来更好的泛化性能，并加速对目标任务的收敛； 预训练可以看作是一种正则化，以避免小数据的过拟合； Note2: Pre-training 任务： LM with Maximum-likelihood estimation (MLE)； Masked Language Modeling (MLM) uni/bidirectional MLM Seq2Seq MLM E-MLM： span boundary objective、span order recovery Permuted Language Modeling (PLM) Denoising Autoencoder (DAE)； token masking token deletion text infilling sentence permutation document rotation Contrastive Learning (CTL) Deep InfoMax Replaced Token Detection (RTD) Next Sentence Prediction (NSP) Sentence Order Prediction (SOP) 外部知识库类型及相关工作： 引入 linguistic 知识的工作： LIBERT[01] lexical semantic relations：wordnet、babelnet； add task：lexical relation classiﬁcation (LRC) -&gt; linguistic constraints task. Sentilr[02] 将 MLM 扩展为 Label-aware MLM，引入每个词的情感极性； KnowBERT. K-adapter[03] 引入 semantic 知识（实际上是语言学知识） SenseBERT[04] 利用wordnet，在预测 masked tokens 的同时，还预测其在 wordnet 中的supersenses； 引入 commonsense 知识 A knowledge-enhanced pretraining model for commonsense story generation. 2020. 针对特定下游任务 引入 factual 知识 ERNIE:-THU 利用预训练的KGE通过实体提及链接到文本，增强文本表示； KnowBERT. 联合BERT训练和entity linking任务； K-BERT. 显式地从KG中抽取三元组扩展输入句子（树形） WKLM. 通过实体替换识别任务，鼓励模型感知事实型知识； KEPLER. 联合优化 KE 和 LM 的目标函数； 通过 实体表示，引入KG的结构信息； 引入 domain-specific 知识[05][06][07][08] 引入知识的方法 在 pre-training 阶段引入外部知识 BERT之前，早期工作，联合学习 KGE 和 word embeddin； BERT之后，增加 auxiliary pre-training 任务： pros. cons.： 更新PTM的参数，导致在引入多种类型的知识时发生灾难性遗忘； 仅适配单一知识； 引入外部知识而不从头训练PTM 在下游任务中应用： K-BERT：侧重输入格式的处理 KT-NET：结合预训练的KGE完成QA任务； intermediate pre-training 的方式； 针对下游任务的需求， 将LM扩展为KG-conditioned LM (knowledge graph conditioned LM)[14][15] Probe Knowledge in LMProbe Linguistic Knowledge BERT 在 句法任务上表现出色[1][2] ; eg: POS Tag、Constituent Label BERT 在 语义任务和细粒度句法任务上稍逊色； BERT 的已知能力： subject-verb agreement [3]； semantic roles [4]； encode sentence structure (dependency trees, constituency trees)[5][6]； Probe World Knowledge 采用 fill-in-the-blank 的形式构造输入查询 BERT； LAMA (Language Model Analysis) [8] [9] [10] [11] relational knowledge [12]; commonsense knowledge [13]； 01.Informing unsupervised pretraining with external linguistic knowledge. 2019. ↩1.What do you learn from context? probing for sentence structure in contextualized word representations. ICLR, 2019. ↩02.Linguistic knowledge enhanced language representation for sentiment analysis. 2019. ↩2.Linguistic knowledge and transferability of contextual representations. NAACL,2019. ↩03.K-adapter: Infusing knowledge into pre-trained models with adapters. 2020. ↩3.Assessing BERT’s syntactic abilities. 2019. ↩4.What BERT is not: Lessons from a new suite of psycholinguistic diagnostics for language models. TACL,2020. ↩04.SenseBERT: Driving some sense into BERT. 2019. ↩05.Integrating graph contextualized knowledge into pre-trained language models. 2019. ↩5.A structural probe for ﬁnding syntax in word representations. NAACL,2019. ↩06.BioBERT: a pre-trained biomedical language representation model for biomedical text mining. 2019. ↩6.What does BERT learn about the structure of language? ACL,2019. ↩7.Are pre-trained language models aware of phrases? simple but strong baselines for grammar induction. 2020. ↩07.SciBERT: A pretrained language model for scientiﬁc text. EMNLP,2019. ↩8.Language models as knowledge bases? EMNLP,2019. ↩08.PatentBERT: Patent classiﬁcation with ﬁne-tuning a pre-trained BERT model. 2019. ↩9.How can we know what language models know? 2019. ↩10.BERT is not a knowledge base (yet): Factual knowledge vs. name-based reasoning in unsupervised QA. 2019. ↩11.Negated LAMA: birds cannot ﬂy. 2019. ↩12.Inducing relational knowledge from BERT. 2019. ↩13.Commonsense knowledge mining from pretrained models. EMNLP,2019. ↩14.Barack’s wife hillary: Using knowledge graphs for fact-aware language modeling. ACL, 2019. ↩15.Latent relation language models. 2019. ↩]]></content>
+    <content type="text"><![CDATA[KnE-PTM E: Enriched / Enhanced Main Related Work Pre-trained Models for Natural Language Processing: A Survey. 2020. ERNIE(THU) ERNIE: enhanced language representation with informative entities. In ACL, 2019. KnowBERT Knowledge enhanced contextual word representations. EMNLP-IJCNLP, 2019. K-BERT K-BERT: Enabling language representation with knowledge graph. AAAI,2020. KEPLER KEPLER: A uniﬁed model for knowledge embedding and pre-trained language representation. 2019. WKLM Pretrained encyclopedia: Weakly supervised knowledge-pretrained language model. ICLR, 2020. Introduction of KnE-PTMPTMs通常是从general-purpose large-scale text corpora中学习universal language representation，但是缺少 domain-specific knowledge。 从外部知识库向PTM中引入领域知识是一种有效的方式。 Note1: Pre-training 的优势： 在大规模文本语料库上进行预训练，可以学习通用语言表示并辅助下游任务； 预训练提供了更好的模型初始化，通常会带来更好的泛化性能，并加速对目标任务的收敛； 预训练可以看作是一种正则化，以避免模型在小数据集上过拟合； Note2: Pre-training 任务： LM with Maximum-likelihood estimation (MLE)； Masked Language Modeling (MLM) uni/bidirectional MLM Seq2Seq MLM E-MLM： span boundary objective、span order recovery Permuted Language Modeling (PLM) Denoising Autoencoder (DAE)； token masking token deletion text infilling sentence permutation document rotation Contrastive Learning (CTL) Deep InfoMax Replaced Token Detection (RTD) Next Sentence Prediction (NSP) Sentence Order Prediction (SOP) 外部知识库类型及相关工作： 引入 linguistic 知识的工作： LIBERT[01] lexical semantic relations：wordnet、babelnet； add task：lexical relation classiﬁcation (LRC) -&gt; linguistic constraints task. Sentilr[02] 将 MLM 扩展为 Label-aware MLM，引入每个词的情感极性； KnowBERT. K-adapter[03] 引入 semantic 知识（实际上是语言学知识） SenseBERT[04] 利用wordnet，在预测 masked tokens 的同时，还预测其在 wordnet 中的supersenses； 引入 commonsense 知识 A knowledge-enhanced pretraining model for commonsense story generation. 2020. 针对特定下游任务 引入 factual 知识 ERNIE:-THU 利用预训练的KGE通过实体提及链接到文本，增强文本表示； KnowBERT. 联合BERT训练和entity linking任务； K-BERT. 显式地从KG中抽取三元组扩展输入句子（树形） WKLM. 通过实体替换识别任务，鼓励模型感知事实型知识； KEPLER. 联合优化 KE 和 LM 的目标函数； 通过 实体表示，引入KG的结构信息； 引入 domain-specific 知识[05][06][07][08] 引入知识的方法 在 pre-training 阶段引入外部知识 BERT之前，早期工作，联合学习 KGE 和 word embeddin； BERT之后，增加 auxiliary pre-training 任务： pros. cons.： 更新PTM的参数，导致在引入多种类型的知识时发生灾难性遗忘； 仅适配单一知识； 引入外部知识而不从头训练PTM 在下游任务中应用： K-BERT：侧重输入格式的处理 KT-NET：结合预训练的KGE完成QA任务； intermediate pre-training 的方式； 针对下游任务的需求， 将LM扩展为KG-conditioned LM (knowledge graph conditioned LM)[14][15] Probe Knowledge in LMProbe Linguistic Knowledge BERT 在 句法任务上表现出色[1][2] ; eg: POS Tag、Constituent Label BERT 在 语义任务和细粒度句法任务上稍逊色； BERT 的已知能力： subject-verb agreement [3]； semantic roles [4]； encode sentence structure (dependency trees, constituency trees)[5][6]； Probe World Knowledge 采用 fill-in-the-blank 的形式构造输入查询 BERT； LAMA (Language Model Analysis) [8] [9] [10] [11] relational knowledge [12]; commonsense knowledge [13]； 01.Informing unsupervised pretraining with external linguistic knowledge. 2019. ↩1.What do you learn from context? probing for sentence structure in contextualized word representations. ICLR, 2019. ↩02.Linguistic knowledge enhanced language representation for sentiment analysis. 2019. ↩2.Linguistic knowledge and transferability of contextual representations. NAACL,2019. ↩03.K-adapter: Infusing knowledge into pre-trained models with adapters. 2020. ↩3.Assessing BERT’s syntactic abilities. 2019. ↩4.What BERT is not: Lessons from a new suite of psycholinguistic diagnostics for language models. TACL,2020. ↩04.SenseBERT: Driving some sense into BERT. 2019. ↩05.Integrating graph contextualized knowledge into pre-trained language models. 2019. ↩5.A structural probe for ﬁnding syntax in word representations. NAACL,2019. ↩06.BioBERT: a pre-trained biomedical language representation model for biomedical text mining. 2019. ↩6.What does BERT learn about the structure of language? ACL,2019. ↩7.Are pre-trained language models aware of phrases? simple but strong baselines for grammar induction. 2020. ↩07.SciBERT: A pretrained language model for scientiﬁc text. EMNLP,2019. ↩8.Language models as knowledge bases? EMNLP,2019. ↩08.PatentBERT: Patent classiﬁcation with ﬁne-tuning a pre-trained BERT model. 2019. ↩9.How can we know what language models know? 2019. ↩10.BERT is not a knowledge base (yet): Factual knowledge vs. name-based reasoning in unsupervised QA. 2019. ↩11.Negated LAMA: birds cannot ﬂy. 2019. ↩12.Inducing relational knowledge from BERT. 2019. ↩13.Commonsense knowledge mining from pretrained models. EMNLP,2019. ↩14.Barack’s wife hillary: Using knowledge graphs for fact-aware language modeling. ACL, 2019. ↩15.Latent relation language models. 2019. ↩]]></content>
       <categories>
         <category>NLU</category>
       </categories>
@@ -173,8 +173,8 @@
       </categories>
       <tags>
         <tag>nlp</tag>
-        <tag>tutorial</tag>
         <tag>dialogue</tag>
+        <tag>tutorial</tag>
       </tags>
   </entry>
   <entry>
@@ -467,8 +467,8 @@
       <tags>
         <tag>nlp</tag>
         <tag>knowledge</tag>
-        <tag>research</tag>
         <tag>note</tag>
+        <tag>research</tag>
       </tags>
   </entry>
   <entry>
@@ -554,8 +554,8 @@
       <tags>
         <tag>nlp</tag>
         <tag>mrc</tag>
-        <tag>research</tag>
         <tag>note</tag>
+        <tag>research</tag>
       </tags>
   </entry>
   <entry>
@@ -568,8 +568,8 @@
       <tags>
         <tag>nlp</tag>
         <tag>mrc</tag>
-        <tag>research</tag>
         <tag>note</tag>
+        <tag>research</tag>
       </tags>
   </entry>
   <entry>
@@ -669,8 +669,8 @@
       <tags>
         <tag>nlp</tag>
         <tag>mrc</tag>
-        <tag>research</tag>
         <tag>note</tag>
+        <tag>research</tag>
         <tag>cs-know</tag>
       </tags>
   </entry>
