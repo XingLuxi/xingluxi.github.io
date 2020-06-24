@@ -75,7 +75,7 @@
 
 
 
-  <meta name="keywords" content="nlp,note,knowledge,pre-trained-lm,qa,commonsense,zero-shot,">
+  <meta name="keywords" content="nlp,knowledge,pre-trained-lm,network,">
 
 
 
@@ -86,33 +86,18 @@
 
 
 
-<meta name="description" content="Title: Unsupervised Commonsense Question Answering with Self-TalkAuthors: Vered Shwartz, Peter West, Ronan Le Bras , Chandra Bhagavatula, Yejin Choi.Org.: AI2Published: nullCode: https://github.com/v">
-<meta name="keywords" content="nlp,note,knowledge,pre-trained-lm,qa,commonsense,zero-shot">
+<meta name="description" content="引入Adapter的优势 减少了任务相关的（训练）参数量，不需要调整PLM参数； 不会在re-training整体模型时产生灾难性遗忘； 尽可能在减少参数量的同时，保持与MTL相同的性能； 可以序列化训练多任务； 增加新的任务时，不需要重新训练之前所有的子任务；   预训练/下游任务上学习到的知识可以以模块化的方式进行迁移；  Adapter Pre-train / Fine-tune 过程中的N">
+<meta name="keywords" content="nlp,knowledge,pre-trained-lm,network">
 <meta property="og:type" content="article">
-<meta property="og:title" content="2020 | Unsupervised Commonsense Question Answering with Self-Talk">
-<meta property="og:url" content="http://xingluxi.github.io/2020/04/26/paper-2020-2004-05483-self-talk/index.html">
+<meta property="og:title" content="Pre-trained Models with Adapter">
+<meta property="og:url" content="http://xingluxi.github.io/2020/06/24/note-2020-ptm-with-adapter/index.html">
 <meta property="og:site_name" content="Luxi Xing - Blog">
-<meta property="og:description" content="Title: Unsupervised Commonsense Question Answering with Self-TalkAuthors: Vered Shwartz, Peter West, Ronan Le Bras , Chandra Bhagavatula, Yejin Choi.Org.: AI2Published: nullCode: https://github.com/v">
+<meta property="og:description" content="引入Adapter的优势 减少了任务相关的（训练）参数量，不需要调整PLM参数； 不会在re-training整体模型时产生灾难性遗忘； 尽可能在减少参数量的同时，保持与MTL相同的性能； 可以序列化训练多任务； 增加新的任务时，不需要重新训练之前所有的子任务；   预训练/下游任务上学习到的知识可以以模块化的方式进行迁移；  Adapter Pre-train / Fine-tune 过程中的N">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="http://xingluxi.github.io/images/paper-2020-2004-05483-self-talk/1.png">
-<meta property="og:image" content="http://xingluxi.github.io/images/paper-2020-2004-05483-self-talk/2.png">
-<meta property="og:image" content="http://xingluxi.github.io/images/paper-2020-2004-05483-self-talk/3.png">
-<meta property="og:image" content="http://xingluxi.github.io/images/paper-2020-2004-05483-self-talk/4.png">
-<meta property="og:image" content="http://xingluxi.github.io/images/paper-2020-2004-05483-self-talk/5.png">
-<meta property="og:image" content="http://xingluxi.github.io/images/paper-2020-2004-05483-self-talk/6.png">
-<meta property="og:image" content="http://xingluxi.github.io/images/paper-2020-2004-05483-self-talk/7.png">
-<meta property="og:image" content="http://xingluxi.github.io/images/paper-2020-2004-05483-self-talk/8.png">
-<meta property="og:image" content="http://xingluxi.github.io/images/paper-2020-2004-05483-self-talk/9.png">
-<meta property="og:image" content="http://xingluxi.github.io/images/paper-2020-2004-05483-self-talk/10.png">
-<meta property="og:image" content="http://xingluxi.github.io/images/paper-2020-2004-05483-self-talk/11.png">
-<meta property="og:image" content="http://xingluxi.github.io/images/paper-2020-2004-05483-self-talk/12.png">
-<meta property="og:image" content="http://xingluxi.github.io/images/paper-2020-2004-05483-self-talk/13.png">
-<meta property="og:image" content="http://xingluxi.github.io/images/paper-2020-2004-05483-self-talk/14.png">
-<meta property="og:updated_time" content="2020-04-26T15:19:04.807Z">
+<meta property="og:updated_time" content="2020-06-24T03:37:35.850Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="2020 | Unsupervised Commonsense Question Answering with Self-Talk">
-<meta name="twitter:description" content="Title: Unsupervised Commonsense Question Answering with Self-TalkAuthors: Vered Shwartz, Peter West, Ronan Le Bras , Chandra Bhagavatula, Yejin Choi.Org.: AI2Published: nullCode: https://github.com/v">
-<meta name="twitter:image" content="http://xingluxi.github.io/images/paper-2020-2004-05483-self-talk/1.png">
+<meta name="twitter:title" content="Pre-trained Models with Adapter">
+<meta name="twitter:description" content="引入Adapter的优势 减少了任务相关的（训练）参数量，不需要调整PLM参数； 不会在re-training整体模型时产生灾难性遗忘； 尽可能在减少参数量的同时，保持与MTL相同的性能； 可以序列化训练多任务； 增加新的任务时，不需要重新训练之前所有的子任务；   预训练/下游任务上学习到的知识可以以模块化的方式进行迁移；  Adapter Pre-train / Fine-tune 过程中的N">
 
 
 
@@ -142,13 +127,13 @@
 
 
 
-  <link rel="canonical" href="http://xingluxi.github.io/2020/04/26/paper-2020-2004-05483-self-talk/">
+  <link rel="canonical" href="http://xingluxi.github.io/2020/06/24/note-2020-ptm-with-adapter/">
 
 
 
 
 
-  <title>2020 | Unsupervised Commonsense Question Answering with Self-Talk | Luxi Xing - Blog</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  <title>Pre-trained Models with Adapter | Luxi Xing - Blog</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
   
 
 
@@ -317,7 +302,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://xingluxi.github.io/2020/04/26/paper-2020-2004-05483-self-talk/">
+    <link itemprop="mainEntityOfPage" href="http://xingluxi.github.io/2020/06/24/note-2020-ptm-with-adapter/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Luxi Xing">
@@ -334,7 +319,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">2020 | Unsupervised Commonsense Question Answering with Self-Talk</h1>
+          <h1 class="post-title" itemprop="name headline">Pre-trained Models with Adapter</h1>
         
 
         <div class="post-meta">
@@ -347,8 +332,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-04-26T23:02:07+08:00">
-                2020-04-26
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-06-24T11:34:16+08:00">
+                2020-06-24
               </time>
             
 
@@ -363,34 +348,12 @@
               
                 <span class="post-meta-item-text">Post modified&#58;</span>
               
-              <time title="Post modified" itemprop="dateModified" datetime="2020-04-26T23:19:04+08:00">
-                2020-04-26
+              <time title="Post modified" itemprop="dateModified" datetime="2020-06-24T11:37:35+08:00">
+                2020-06-24
               </time>
             
           </span>
 
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Paper-Note/" itemprop="url" rel="index">
-                    <span itemprop="name">Paper-Note</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
           
 
           
@@ -418,7 +381,7 @@
                   <span class="post-meta-item-text">Words count in article&#58;</span>
                 
                 <span title="Words count in article">
-                  122
+                  299
                 </span>
               
 
@@ -455,15 +418,40 @@
       
 
       
-        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><blockquote>
-<p><em>Title</em>: <a href="http://arxiv.org/abs/2004.05483" target="_blank" rel="noopener">Unsupervised Commonsense Question Answering with Self-Talk</a><br><em>Authors</em>: Vered Shwartz, Peter West, Ronan Le Bras , Chandra Bhagavatula, Yejin Choi.<br><em>Org.</em>: AI2<br><em>Published</em>: null<br><em>Code</em>: <a href="https://github.com/vered1986/self_talk" target="_blank" rel="noopener">https://github.com/vered1986/self_talk</a></p>
-</blockquote>
-<p>近期arxiv更新的一篇来自AI2的工作：基于self-talk进行无监督的常识问答</p>
-<p>self-talk，启发自 inquiry-based discovery learning <sup id="fnref:1"><a href="#fn:1" rel="footnote"><span class="hint--top hint--error hint--medium hint--rounded hint--bounce" aria-label="Jerome S Bruner. 1961. The act of discovery. Harvard educational review, 31:21–32.">[1]</span></a></sup>，核心是构造一些query，来挖掘KB中的相关知识，得到的相关知识作为探索的结果，用于辅助目标任务。</p>
-<h2 id="Motivation"><a href="#Motivation" class="headerlink" title="Motivation"></a>Motivation</h2><p><img src="/images/paper-2020-2004-05483-self-talk/1.png" alt="1"><br><img src="/images/paper-2020-2004-05483-self-talk/2.png" alt="2"></p>
-<h2 id="Method"><a href="#Method" class="headerlink" title="Method"></a>Method</h2><p><img src="/images/paper-2020-2004-05483-self-talk/3.png" alt="3"><br><img src="/images/paper-2020-2004-05483-self-talk/4.png" alt="4"><br><img src="/images/paper-2020-2004-05483-self-talk/5.png" alt="5"><br><img src="/images/paper-2020-2004-05483-self-talk/6.png" alt="6"><br><img src="/images/paper-2020-2004-05483-self-talk/7.png" alt="7"><br><img src="/images/paper-2020-2004-05483-self-talk/8.png" alt="8"><br><img src="/images/paper-2020-2004-05483-self-talk/9.png" alt="9"><br><img src="/images/paper-2020-2004-05483-self-talk/10.png" alt="10"><br><img src="/images/paper-2020-2004-05483-self-talk/11.png" alt="11"></p>
-<h2 id="Experiment"><a href="#Experiment" class="headerlink" title="Experiment"></a>Experiment</h2><p><img src="/images/paper-2020-2004-05483-self-talk/12.png" alt="12"><br><img src="/images/paper-2020-2004-05483-self-talk/13.png" alt="13"><br><img src="/images/paper-2020-2004-05483-self-talk/14.png" alt="14"></p>
-<div id="footnotes"><hr><div id="footnotelist"><ol style="list-style: none; padding-left: 0; margin-left: 40px"><li id="fn:1"><span style="display: inline-block; vertical-align: top; padding-right: 10px; margin-left: -40px">1.</span><span style="display: inline-block; vertical-align: top; margin-left: 10px;">Jerome S Bruner. 1961. The act of discovery. Harvard educational review, 31:21–32.<a href="#fnref:1" rev="footnote"> ↩</a></span></li></ol></div></div>
+        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h2 id="引入Adapter的优势"><a href="#引入Adapter的优势" class="headerlink" title="引入Adapter的优势"></a>引入Adapter的优势</h2><ul>
+<li>减少了任务相关的（训练）参数量，不需要调整PLM参数；</li>
+<li>不会在re-training整体模型时产生灾难性遗忘；</li>
+<li>尽可能在减少参数量的同时，保持与MTL相同的性能；<ul>
+<li>可以序列化训练多任务；</li>
+<li>增加新的任务时，不需要重新训练之前所有的子任务；</li>
+</ul>
+</li>
+<li>预训练/下游任务上学习到的知识可以以模块化的方式进行迁移；</li>
+</ul>
+<h2 id="Adapter-Pre-train-Fine-tune-过程中的N个要点"><a href="#Adapter-Pre-train-Fine-tune-过程中的N个要点" class="headerlink" title="Adapter Pre-train / Fine-tune 过程中的N个要点"></a>Adapter Pre-train / Fine-tune 过程中的N个要点</h2><ul>
+<li>与原始的PLM相比，需要调整的参数；<ul>
+<li>PLM是否fixed，训练adapter；</li>
+</ul>
+</li>
+<li>Adapter的预训练任务？</li>
+<li>PLM+Adapter组合之后，在下游任务上的使用，Task Specific Layer是什么？</li>
+<li>在哪些阶段训练；<ul>
+<li>多任务训练？单任务训练？序列型训练？</li>
+</ul>
+</li>
+</ul>
+<h2 id="NLP领域相关工作"><a href="#NLP领域相关工作" class="headerlink" title="NLP领域相关工作"></a>NLP领域相关工作</h2><ol>
+<li>Parameter-Efficient Transfer Learning for NLP. ICML,2019.</li>
+<li>BERT and PALs: Projected Attention Layers for Efﬁcient Adaptation in Multi-Task Learning. ICML,2019.</li>
+<li>K-ADAPTER: Infusing Knowledge into Pre-Trained Models with Adapters. 2020.</li>
+<li>Common Sense or World Knowledge? Investigating Adapter-Based Knowledge Injection into Pretrained Transformers. 2020.</li>
+<li>AdapterFusion: Non-Destructive Task Composition for Transfer Learning. 2020.</li>
+</ol>
+<h2 id="其他领域-CV-相关工作"><a href="#其他领域-CV-相关工作" class="headerlink" title="其他领域(CV)相关工作"></a>其他领域(CV)相关工作</h2><ol>
+<li>Learning multiple visual domains with residual adapters. NeurIPS,2017.</li>
+<li>On Self Modulation For Generative Adversarial Networks. ICLR,2019.</li>
+</ol>
+
       
     </div>
     
@@ -496,7 +484,7 @@
   </li>
   <li class="post-copyright-link">
     <strong>Post link:</strong>
-    <a href="http://xingluxi.github.io/2020/04/26/paper-2020-2004-05483-self-talk/" title="2020 | Unsupervised Commonsense Question Answering with Self-Talk">http://xingluxi.github.io/2020/04/26/paper-2020-2004-05483-self-talk/</a>
+    <a href="http://xingluxi.github.io/2020/06/24/note-2020-ptm-with-adapter/" title="Pre-trained Models with Adapter">http://xingluxi.github.io/2020/06/24/note-2020-ptm-with-adapter/</a>
   </li>
   <li class="post-copyright-license">
     <strong>Copyright Notice: </strong>
@@ -513,17 +501,11 @@
           
             <a href="/tags/nlp/" rel="tag"><i class="fa fa-tag"></i> nlp</a>
           
-            <a href="/tags/note/" rel="tag"><i class="fa fa-tag"></i> note</a>
-          
             <a href="/tags/knowledge/" rel="tag"><i class="fa fa-tag"></i> knowledge</a>
           
             <a href="/tags/pre-trained-lm/" rel="tag"><i class="fa fa-tag"></i> pre-trained-lm</a>
           
-            <a href="/tags/qa/" rel="tag"><i class="fa fa-tag"></i> qa</a>
-          
-            <a href="/tags/commonsense/" rel="tag"><i class="fa fa-tag"></i> commonsense</a>
-          
-            <a href="/tags/zero-shot/" rel="tag"><i class="fa fa-tag"></i> zero-shot</a>
+            <a href="/tags/network/" rel="tag"><i class="fa fa-tag"></i> network</a>
           
         </div>
       
@@ -536,8 +518,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2020/04/02/paper-2020-survey-nlqa-r-with-kn/" rel="next" title="2020 | Natural Language QA Approaches using Reasoning with External Knowledge">
-                <i class="fa fa-chevron-left"></i> 2020 | Natural Language QA Approaches using Reasoning with External Knowledge
+              <a href="/2020/06/24/excerpt-20200619-damotrend-1/" rel="next" title="文摘|人工智能从感知智能向认知智能演进">
+                <i class="fa fa-chevron-left"></i> 文摘|人工智能从感知智能向认知智能演进
               </a>
             
           </div>
@@ -545,10 +527,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2020/05/13/nlu-kn-e-ptm/" rel="prev" title="Knowledge Enriched Pre-trained Models">
-                Knowledge Enriched Pre-trained Models <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -709,7 +687,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Motivation"><span class="nav-text">Motivation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Method"><span class="nav-text">Method</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Experiment"><span class="nav-text">Experiment</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#引入Adapter的优势"><span class="nav-text">引入Adapter的优势</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Adapter-Pre-train-Fine-tune-过程中的N个要点"><span class="nav-text">Adapter Pre-train / Fine-tune 过程中的N个要点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#NLP领域相关工作"><span class="nav-text">NLP领域相关工作</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#其他领域-CV-相关工作"><span class="nav-text">其他领域(CV)相关工作</span></a></li></ol></div>
             
 
           </div>
