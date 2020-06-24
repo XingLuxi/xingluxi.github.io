@@ -14,7 +14,7 @@
   <entry>
     <title><![CDATA[文摘|人工智能从感知智能向认知智能演进]]></title>
     <url>%2F2020%2F06%2F24%2Fexcerpt-20200619-damotrend-1%2F</url>
-    <content type="text"><![CDATA[文章来源: link阿里巴巴达摩院2020十大科技趋势 Part 1 引言人工智能已经在“听、说、看”等感知智能领域达到或超越了人类水准，但在需要外部知识、逻辑推理或者领域迁移的认知智能领域还处于初级阶段。认知智能将从认知心理学、脑科学及人类社会历史中汲取灵感，并结合跨领域知识图谱、因果推理、持续学习等技术，建立稳定获取和表达知识的有效机制，让知识能够被机器理解和运用，实现从感知智能到认知智能的关键突破。 趋势解读近些年来，人工智能已经在感知智能上取得了长足的进步，甚至在许多领域已经达到货超出了人类的水准，解决了“听、说、看”的问题。但对于需要外部知识、逻辑推理或者领域迁移等需要“思考和反馈”的问题，仍然存在诸多难题去攻破。相较于感知智能（人工智能1.0），人工智能2.0将更多机遇数据，自动将非结构化的数据转变为结构化的知识，做到真正意义上的认知智能。探索如何保持大数据智能优势的同时，赋予机器常识和因果逻辑推理能力，实现认知智能，成为当下人工智能研究的核心。认知智能的机制设计非常重要，包括如何建立有效的机制来稳定获取和表达知识，如何让知识能够被所有模型理解和运用。这需要从认知心理学、脑科学以及人类社会的发展历史中汲取更多的灵感，并结合跨领域知识图谱、因果推理、持续学习等研究领域的发展进行突破。认知智能将结合人脑的推理过程，解决复杂的阅读理解问题和少样本的知识图谱推理问题，协同结构化的推理过程和非结构的语义理解。它也需要解决多模态预训练问题，帮助机器获得多模感知能力，赋能海量任务。 大规模图神经网络将被认为是推动认知智能发展强有力的推理方法。图神经网络将深度神经网络从处理传统非结构化数据（如图像、语言和文本序列等）推广到更高层次的结构化数据（如图结构等）。大规模的图数据可以表达丰富并蕴含逻辑关系的人类常识和专家规则，图节点定义了可理解的符号化知识，不规则图拓扑结构表达了图节点直接的依赖、从属、逻辑规则等推理关系。以保险和金融风险评估为例，一个完备的AI系统需要分析个人的履历、行为习惯、健康程度等，还需要通过其父母、亲友、同事、同学之间的来往数据和相互评价进一步进行信用评估和推断。基于图结构的学习系统能够利用用户之间、用户与产品之间的交互，做出非常准确的因果和关联推理。 结语未来人工智能热潮能否进一步打开天花板，形成更大的产业规模，认知智能的突破是关键。认知智能可以帮助机器跨越模态理解数据，学习到最接近人脑认知的“一般表达”，获得类似于人脑的多模感知能力，有望带来颠覆性的产业价值。认知智能的出现使得AI系统主动了解事物发展的背后规律和因果关系，而不再只是简单的统计拟合，从而进一步推动实现下一代具有认知能力的AI系统。]]></content>
+    <content type="text"><![CDATA[阿里巴巴达摩院2020十大科技趋势 Part 1 文章来源: link阿里巴巴达摩院2020十大科技趋势 Part 1 引言人工智能已经在“听、说、看”等感知智能领域达到或超越了人类水准，但在需要外部知识、逻辑推理或者领域迁移的认知智能领域还处于初级阶段。认知智能将从认知心理学、脑科学及人类社会历史中汲取灵感，并结合跨领域知识图谱、因果推理、持续学习等技术，建立稳定获取和表达知识的有效机制，让知识能够被机器理解和运用，实现从感知智能到认知智能的关键突破。 趋势解读近些年来，人工智能已经在感知智能上取得了长足的进步，甚至在许多领域已经达到货超出了人类的水准，解决了“听、说、看”的问题。但对于需要外部知识、逻辑推理或者领域迁移等需要“思考和反馈”的问题，仍然存在诸多难题去攻破。相较于感知智能（人工智能1.0），人工智能2.0将更多机遇数据，自动将非结构化的数据转变为结构化的知识，做到真正意义上的认知智能。探索如何保持大数据智能优势的同时，赋予机器常识和因果逻辑推理能力，实现认知智能，成为当下人工智能研究的核心。认知智能的机制设计非常重要，包括如何建立有效的机制来稳定获取和表达知识，如何让知识能够被所有模型理解和运用。这需要从认知心理学、脑科学以及人类社会的发展历史中汲取更多的灵感，并结合跨领域知识图谱、因果推理、持续学习等研究领域的发展进行突破。认知智能将结合人脑的推理过程，解决复杂的阅读理解问题和少样本的知识图谱推理问题，协同结构化的推理过程和非结构的语义理解。它也需要解决多模态预训练问题，帮助机器获得多模感知能力，赋能海量任务。 大规模图神经网络将被认为是推动认知智能发展强有力的推理方法。图神经网络将深度神经网络从处理传统非结构化数据（如图像、语言和文本序列等）推广到更高层次的结构化数据（如图结构等）。大规模的图数据可以表达丰富并蕴含逻辑关系的人类常识和专家规则，图节点定义了可理解的符号化知识，不规则图拓扑结构表达了图节点直接的依赖、从属、逻辑规则等推理关系。以保险和金融风险评估为例，一个完备的AI系统需要分析个人的履历、行为习惯、健康程度等，还需要通过其父母、亲友、同事、同学之间的来往数据和相互评价进一步进行信用评估和推断。基于图结构的学习系统能够利用用户之间、用户与产品之间的交互，做出非常准确的因果和关联推理。 结语未来人工智能热潮能否进一步打开天花板，形成更大的产业规模，认知智能的突破是关键。认知智能可以帮助机器跨越模态理解数据，学习到最接近人脑认知的“一般表达”，获得类似于人脑的多模感知能力，有望带来颠覆性的产业价值。认知智能的出现使得AI系统主动了解事物发展的背后规律和因果关系，而不再只是简单的统计拟合，从而进一步推动实现下一代具有认知能力的AI系统。]]></content>
       <tags>
         <tag>ai</tag>
         <tag>report</tag>
@@ -45,8 +45,8 @@
       </categories>
       <tags>
         <tag>nlp</tag>
-        <tag>note</tag>
         <tag>knowledge</tag>
+        <tag>note</tag>
         <tag>pre-trained-lm</tag>
         <tag>qa</tag>
         <tag>commonsense</tag>
@@ -61,8 +61,8 @@
         <category>MRC-Paper-Intro</category>
       </categories>
       <tags>
-        <tag>mrc</tag>
         <tag>knowledge</tag>
+        <tag>mrc</tag>
         <tag>dataset</tag>
         <tag>survey</tag>
         <tag>reasoning</tag>
@@ -78,10 +78,10 @@
       </categories>
       <tags>
         <tag>nlp</tag>
-        <tag>mrc</tag>
-        <tag>note</tag>
         <tag>knowledge</tag>
+        <tag>mrc</tag>
         <tag>tg</tag>
+        <tag>note</tag>
         <tag>pre-trained-lm</tag>
         <tag>commonsense</tag>
         <tag>zero-shot</tag>
@@ -151,8 +151,8 @@
       </categories>
       <tags>
         <tag>nlp</tag>
-        <tag>note</tag>
         <tag>tg</tag>
+        <tag>note</tag>
         <tag>pre-trained-lm</tag>
         <tag>seq2seq</tag>
       </tags>
@@ -166,8 +166,8 @@
       </categories>
       <tags>
         <tag>nlp</tag>
-        <tag>note</tag>
         <tag>knowledge</tag>
+        <tag>note</tag>
         <tag>pre-trained-lm</tag>
       </tags>
   </entry>
@@ -194,8 +194,8 @@
       </categories>
       <tags>
         <tag>nlp</tag>
-        <tag>tutorial</tag>
         <tag>dialogue</tag>
+        <tag>tutorial</tag>
       </tags>
   </entry>
   <entry>
@@ -219,9 +219,9 @@
       </categories>
       <tags>
         <tag>nlp</tag>
+        <tag>knowledge</tag>
         <tag>mrc</tag>
         <tag>paper</tag>
-        <tag>knowledge</tag>
       </tags>
   </entry>
   <entry>
@@ -233,9 +233,9 @@
       </categories>
       <tags>
         <tag>nlp</tag>
+        <tag>knowledge</tag>
         <tag>mrc</tag>
         <tag>paper</tag>
-        <tag>knowledge</tag>
       </tags>
   </entry>
   <entry>
@@ -247,9 +247,9 @@
       </categories>
       <tags>
         <tag>nlp</tag>
+        <tag>knowledge</tag>
         <tag>mrc</tag>
         <tag>paper</tag>
-        <tag>knowledge</tag>
       </tags>
   </entry>
   <entry>
@@ -261,10 +261,10 @@
       </categories>
       <tags>
         <tag>nlp</tag>
-        <tag>mrc</tag>
-        <tag>note</tag>
         <tag>knowledge</tag>
+        <tag>mrc</tag>
         <tag>tg</tag>
+        <tag>note</tag>
         <tag>ml</tag>
       </tags>
   </entry>
@@ -321,9 +321,9 @@
       </categories>
       <tags>
         <tag>nlp</tag>
+        <tag>knowledge</tag>
         <tag>mrc</tag>
         <tag>note</tag>
-        <tag>knowledge</tag>
         <tag>commonsense</tag>
         <tag>graph</tag>
       </tags>
@@ -337,9 +337,9 @@
       </categories>
       <tags>
         <tag>nlp</tag>
+        <tag>knowledge</tag>
         <tag>mrc</tag>
         <tag>note</tag>
-        <tag>knowledge</tag>
         <tag>commonsense</tag>
         <tag>graph</tag>
       </tags>
@@ -369,9 +369,9 @@
       </categories>
       <tags>
         <tag>nlp</tag>
+        <tag>knowledge</tag>
         <tag>mrc</tag>
         <tag>note</tag>
-        <tag>knowledge</tag>
         <tag>qa</tag>
       </tags>
   </entry>
@@ -384,8 +384,8 @@
       </categories>
       <tags>
         <tag>nlp</tag>
-        <tag>note</tag>
         <tag>knowledge</tag>
+        <tag>note</tag>
         <tag>pre-trained-lm</tag>
         <tag>wordnet</tag>
       </tags>
@@ -399,9 +399,9 @@
       </categories>
       <tags>
         <tag>nlp</tag>
+        <tag>knowledge</tag>
         <tag>mrc</tag>
         <tag>note</tag>
-        <tag>knowledge</tag>
         <tag>pre-trained-lm</tag>
       </tags>
   </entry>
@@ -414,9 +414,9 @@
       </categories>
       <tags>
         <tag>nlp</tag>
+        <tag>knowledge</tag>
         <tag>mrc</tag>
         <tag>note</tag>
-        <tag>knowledge</tag>
         <tag>wordnet</tag>
       </tags>
   </entry>
@@ -429,8 +429,8 @@
       </categories>
       <tags>
         <tag>nlp</tag>
-        <tag>note</tag>
         <tag>knowledge</tag>
+        <tag>note</tag>
         <tag>commonsense</tag>
       </tags>
   </entry>
@@ -443,8 +443,8 @@
       </categories>
       <tags>
         <tag>nlp</tag>
-        <tag>note</tag>
         <tag>knowledge</tag>
+        <tag>note</tag>
         <tag>reasoning</tag>
         <tag>kbqa</tag>
         <tag>graph</tag>
@@ -459,9 +459,9 @@
       </categories>
       <tags>
         <tag>nlp</tag>
-        <tag>note</tag>
         <tag>knowledge</tag>
         <tag>tg</tag>
+        <tag>note</tag>
       </tags>
   </entry>
   <entry>
@@ -473,9 +473,9 @@
       </categories>
       <tags>
         <tag>nlp</tag>
+        <tag>knowledge</tag>
         <tag>mrc</tag>
         <tag>note</tag>
-        <tag>knowledge</tag>
       </tags>
   </entry>
   <entry>
@@ -486,11 +486,11 @@
         <category>MRC-Research</category>
       </categories>
       <tags>
-        <tag>cognition</tag>
         <tag>nlp</tag>
-        <tag>note</tag>
-        <tag>research</tag>
         <tag>knowledge</tag>
+        <tag>cognition</tag>
+        <tag>research</tag>
+        <tag>note</tag>
       </tags>
   </entry>
   <entry>
@@ -532,8 +532,8 @@
       </categories>
       <tags>
         <tag>nlp</tag>
-        <tag>mrc</tag>
         <tag>knowledge</tag>
+        <tag>mrc</tag>
         <tag>survey</tag>
         <tag>reasoning</tag>
         <tag>commonsense</tag>
@@ -576,8 +576,8 @@
       <tags>
         <tag>nlp</tag>
         <tag>mrc</tag>
-        <tag>note</tag>
         <tag>research</tag>
+        <tag>note</tag>
       </tags>
   </entry>
   <entry>
@@ -590,8 +590,8 @@
       <tags>
         <tag>nlp</tag>
         <tag>mrc</tag>
-        <tag>note</tag>
         <tag>research</tag>
+        <tag>note</tag>
       </tags>
   </entry>
   <entry>
@@ -617,9 +617,9 @@
       </categories>
       <tags>
         <tag>nlp</tag>
+        <tag>knowledge</tag>
         <tag>mrc</tag>
         <tag>paper</tag>
-        <tag>knowledge</tag>
       </tags>
   </entry>
   <entry>
@@ -631,9 +631,9 @@
       </categories>
       <tags>
         <tag>nlp</tag>
+        <tag>knowledge</tag>
         <tag>mrc</tag>
         <tag>note</tag>
-        <tag>knowledge</tag>
         <tag>nli</tag>
       </tags>
   </entry>
@@ -676,8 +676,8 @@
       </categories>
       <tags>
         <tag>nlp</tag>
-        <tag>note</tag>
         <tag>tg</tag>
+        <tag>note</tag>
         <tag>commonsense</tag>
       </tags>
   </entry>
@@ -691,8 +691,8 @@
       <tags>
         <tag>nlp</tag>
         <tag>mrc</tag>
-        <tag>note</tag>
         <tag>research</tag>
+        <tag>note</tag>
         <tag>cs-know</tag>
       </tags>
   </entry>
@@ -704,8 +704,8 @@
         <category>MRC-Research</category>
       </categories>
       <tags>
-        <tag>report</tag>
         <tag>nlp</tag>
+        <tag>report</tag>
         <tag>mrc</tag>
         <tag>research</tag>
       </tags>
@@ -719,8 +719,8 @@
       </categories>
       <tags>
         <tag>nlp</tag>
-        <tag>research</tag>
         <tag>paper</tag>
+        <tag>research</tag>
         <tag>nli</tag>
       </tags>
   </entry>
@@ -734,8 +734,8 @@
       <tags>
         <tag>nlp</tag>
         <tag>mrc</tag>
-        <tag>research</tag>
         <tag>paper</tag>
+        <tag>research</tag>
       </tags>
   </entry>
   <entry>
@@ -844,8 +844,8 @@
       </categories>
       <tags>
         <tag>nlp</tag>
-        <tag>note</tag>
         <tag>knowledge</tag>
+        <tag>note</tag>
         <tag>nli</tag>
         <tag>wordnet</tag>
       </tags>
@@ -859,9 +859,9 @@
       </categories>
       <tags>
         <tag>nlp</tag>
+        <tag>knowledge</tag>
         <tag>mrc</tag>
         <tag>note</tag>
-        <tag>knowledge</tag>
         <tag>cloze</tag>
       </tags>
   </entry>
@@ -874,8 +874,8 @@
       </categories>
       <tags>
         <tag>nlp</tag>
-        <tag>paper</tag>
         <tag>knowledge</tag>
+        <tag>paper</tag>
         <tag>tg</tag>
       </tags>
   </entry>
