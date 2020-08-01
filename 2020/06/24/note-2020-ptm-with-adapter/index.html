@@ -94,10 +94,12 @@
 <meta property="og:site_name" content="Luxi Xing - Blog">
 <meta property="og:description" content="Injecting Knowledge into Pre-trained Models through Adapter">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2020-06-24T06:45:37.485Z">
+<meta property="og:image" content="http://xingluxi.github.io/images/note-2020-ptm-with-adapter/fig-arch.png">
+<meta property="og:updated_time" content="2020-08-01T04:15:52.834Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Pre-trained Models with Adapter">
 <meta name="twitter:description" content="Injecting Knowledge into Pre-trained Models through Adapter">
+<meta name="twitter:image" content="http://xingluxi.github.io/images/note-2020-ptm-with-adapter/fig-arch.png">
 
 
 
@@ -348,8 +350,8 @@
               
                 <span class="post-meta-item-text">Post modified&#58;</span>
               
-              <time title="Post modified" itemprop="dateModified" datetime="2020-06-24T14:45:37+08:00">
-                2020-06-24
+              <time title="Post modified" itemprop="dateModified" datetime="2020-08-01T12:15:52+08:00">
+                2020-08-01
               </time>
             
           </span>
@@ -381,7 +383,7 @@
                   <span class="post-meta-item-text">Words count in article&#58;</span>
                 
                 <span title="Words count in article">
-                  307
+                  937
                 </span>
               
 
@@ -397,7 +399,7 @@
                   <span class="post-meta-item-text">Reading time &asymp;</span>
                 
                 <span title="Reading time">
-                  1
+                  4
                 </span>
               
             </div>
@@ -419,6 +421,64 @@
 
       
         <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>Injecting Knowledge into Pre-trained Models through Adapter<br><a id="more"></a></p>
+<p>什么是Adapter<sup id="fnref:0"><a href="#fn:0" rel="footnote"><span class="hint--top hint--error hint--medium hint--rounded hint--bounce" aria-label="AdapterHub: A Framework for Adapting Transformers. 2020.
+">[0]</span></a></sup></p>
+<blockquote>
+<p>“Adapter” refers to a set of newly introduced weights, typically within the layers of a transformer model. Adapters provide an alternative to fully fine-tuning the model for each downstream task, while maintaining performance. They also have the added benefit of requiring as little as 1MB of storage space per task!<br>Adapter，适配器指一组新引入的参数权重，通常在transformer模型的层内/间。适配器为每个下游任务提供了一种完全微调模型的替代方法，同时保持了性能。它们还有一个额外的好处，就是每个任务（的网络）只需要少量的存储空间.</p>
+</blockquote>
+<h2 id="Adapter的结构（Architecture）"><a href="#Adapter的结构（Architecture）" class="headerlink" title="Adapter的结构（Architecture）"></a>Adapter的结构（Architecture）</h2><ul>
+<li>A Two-layer feed-forward neural network with a bottleneck<ul>
+<li>Down-Projection</li>
+<li>（may be a nonlinearity）</li>
+<li>Up-Projection</li>
+</ul>
+</li>
+<li>Layer Norm</li>
+</ul>
+<p>现有两种形式：Pfeiffer Architecture<sup id="fnref:2"><a href="#fn:2" rel="footnote"><span class="hint--top hint--error hint--medium hint--rounded hint--bounce" aria-label="AdapterFusion: Non-Destructive Task Composition for Transfer Learning. 2020.
+">[2]</span></a></sup> 和 Houlsby Architecture<sup id="fnref:1"><a href="#fn:1" rel="footnote"><span class="hint--top hint--error hint--medium hint--rounded hint--bounce" aria-label="Parameter-Efficient Transfer Learning for NLP. ICML,2019.
+">[1]</span></a></sup></p>
+<ul>
+<li><img src="/images/note-2020-ptm-with-adapter/fig-arch.png" alt="arch"></li>
+</ul>
+<h2 id="Why-Adapter【AdapterHub】"><a href="#Why-Adapter【AdapterHub】" class="headerlink" title="Why Adapter【AdapterHub】"></a>Why Adapter【AdapterHub】</h2><blockquote>
+<p> Adapters provide numerous benefits over fully fine- tuning a model such as scalability, modularity, and composition. </p>
+</blockquote>
+<h3 id="1-Task-specific-Layer-wise-Representation-Learning"><a href="#1-Task-specific-Layer-wise-Representation-Learning" class="headerlink" title="1\ Task-specific Layer-wise Representation Learning."></a>1\ Task-specific Layer-wise Representation Learning.</h3><ul>
+<li>为了实现SotA的性能，大多数工作都对预训练模型进行整体微调；<ul>
+<li>而Adapter仅通过适应/调节每层的表示，就展示出了与整体模型微调相当的效果；</li>
+</ul>
+</li>
+</ul>
+<h3 id="2-Small-Scalable-Shareable"><a href="#2-Small-Scalable-Shareable" class="headerlink" title="2\ Small, Scalable, Shareable"></a>2\ Small, Scalable, Shareable</h3><ul>
+<li>微调整体模型，需要将完整的结果模型存储，存储开销大；<ul>
+<li>可根据需要调整adapter内部的bottleneck size，极大地减少了需要存储的新的参数量；</li>
+</ul>
+</li>
+</ul>
+<h3 id="3-Modularity-of-Representations"><a href="#3-Modularity-of-Representations" class="headerlink" title="3\ Modularity of Representations"></a>3\ Modularity of Representations</h3><ul>
+<li>adapter学习编码任务相关信息，而不需要指定参数；</li>
+<li>adapter可作为模块化组建的原因：<ul>
+<li>由于适配器的封装布局（encapsulated placement），其中周围的参数是固定的，在每一层，适配器被迫学习与变压器模型的后续层兼容的输出表示。</li>
+</ul>
+</li>
+<li>MAD-X的工作，成功将任务、语言独立训练的adapters进行了组合；</li>
+</ul>
+<h3 id="4-Non-Interfering-Composition-of-Information-（不冲突的信息组合）"><a href="#4-Non-Interfering-Composition-of-Information-（不冲突的信息组合）" class="headerlink" title="4\ Non-Interfering Composition of Information. （不冲突的信息组合）"></a>4\ Non-Interfering Composition of Information. （不冲突的信息组合）</h3><ul>
+<li>跨任务共享信息</li>
+<li>多任务学习的问题：<ul>
+<li>灾难性遗忘（catastrophic forgetting）<sup id="fnref:3"><a href="#fn:3" rel="footnote"><span class="hint--top hint--error hint--medium hint--rounded hint--bounce" aria-label="https://blog.csdn.net/u013468614/article/details/95623987">[3]</span></a></sup><ul>
+<li>序列迁移过程中，早期学习的知识被覆盖；</li>
+</ul>
+</li>
+<li>灾难性干扰（catastrophic interference）<ul>
+<li>增加新任务时，原有任务的性能下降；</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Adapter封装的特性，不同的任务信息存储在了各自的参数中</li>
+</ul>
 <h2 id="引入Adapter的优势"><a href="#引入Adapter的优势" class="headerlink" title="引入Adapter的优势"></a>引入Adapter的优势</h2><ul>
 <li>减少了任务相关的（训练）参数量，不需要调整PLM参数；</li>
 <li>不会在re-training整体模型时产生灾难性遗忘；</li>
@@ -446,7 +506,11 @@
 <li>BERT and PALs: Projected Attention Layers for Efﬁcient Adaptation in Multi-Task Learning. ICML,2019.</li>
 <li>K-ADAPTER: Infusing Knowledge into Pre-Trained Models with Adapters. 2020.</li>
 <li>Common Sense or World Knowledge? Investigating Adapter-Based Knowledge Injection into Pretrained Transformers. 2020.</li>
-<li>AdapterFusion: Non-Destructive Task Composition for Transfer Learning. 2020.</li>
+<li>AdapterFusion: Non-Destructive Task Composition for Transfer Learning. 2020. (与MAD-X同一作)</li>
+<li>MAD-X: An Adapter-based Framework for Multi-task Cross-lingual Transfer. 2020. (与AdapterFuison同一作)</li>
+<li>Out-rageously Large Neural Networks: The Sparsely- Gated Mixture-of-Experts Layer. ICLR,2017.</li>
+<li>Simple, scalable adaptation for neural machine translation. EMNLP,2019.</li>
+<li>Intermediate-Task Transfer Learning with Pretrained Models for Natural Language Understanding: When and Why Does It Work? ACL,2020.</li>
 </ol>
 <h2 id="其他领域-CV-相关工作"><a href="#其他领域-CV-相关工作" class="headerlink" title="其他领域(CV)相关工作"></a>其他领域(CV)相关工作</h2><ol>
 <li>Learning multiple visual domains with residual adapters. NeurIPS,2017.</li>
@@ -456,6 +520,7 @@
 References:
 http://mp.weixin.qq.com/s?__biz=MzIxMzkwNjM2NQ==&mid=2247484460&idx=1&sn=87f3f00e6730bb363d3b77fd092c3e3a&chksm=97aee2fea0d96be8a3c0c07a2891bd802fa78e02cb73026a088dd5b67177ea3507cf0166915d&mpshare=1&scene=1&srcid=&sharer_sharetime=1583897742597&sharer_shareid=63af200aa81df8e5ac8dfb942e96e35d#rd
  -->
+<div id="footnotes"><hr><div id="footnotelist"><ol style="list-style: none; padding-left: 0; margin-left: 40px"><li id="fn:0"><span style="display: inline-block; vertical-align: top; padding-right: 10px; margin-left: -40px">0.</span><span style="display: inline-block; vertical-align: top; margin-left: 10px;">AdapterHub: A Framework for Adapting Transformers. 2020.<a href="#fnref:0" rev="footnote"> ↩</a></span></li><li id="fn:1"><span style="display: inline-block; vertical-align: top; padding-right: 10px; margin-left: -40px">1.</span><span style="display: inline-block; vertical-align: top; margin-left: 10px;">Parameter-Efficient Transfer Learning for NLP. ICML,2019.<a href="#fnref:1" rev="footnote"> ↩</a></span></li><li id="fn:2"><span style="display: inline-block; vertical-align: top; padding-right: 10px; margin-left: -40px">2.</span><span style="display: inline-block; vertical-align: top; margin-left: 10px;">AdapterFusion: Non-Destructive Task Composition for Transfer Learning. 2020.<a href="#fnref:2" rev="footnote"> ↩</a></span></li><li id="fn:3"><span style="display: inline-block; vertical-align: top; padding-right: 10px; margin-left: -40px">3.</span><span style="display: inline-block; vertical-align: top; margin-left: 10px;">https://blog.csdn.net/u013468614/article/details/95623987<a href="#fnref:3" rev="footnote"> ↩</a></span></li></ol></div></div>
       
     </div>
     
@@ -691,7 +756,7 @@ http://mp.weixin.qq.com/s?__biz=MzIxMzkwNjM2NQ==&mid=2247484460&idx=1&sn=87f3f00
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#引入Adapter的优势"><span class="nav-text">引入Adapter的优势</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Adapter-Pre-train-Fine-tune-过程中的N个要点"><span class="nav-text">Adapter Pre-train / Fine-tune 过程中的N个要点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#NLP领域相关工作"><span class="nav-text">NLP领域相关工作</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#其他领域-CV-相关工作"><span class="nav-text">其他领域(CV)相关工作</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Adapter的结构（Architecture）"><span class="nav-text">Adapter的结构（Architecture）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Why-Adapter【AdapterHub】"><span class="nav-text">Why Adapter【AdapterHub】</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-Task-specific-Layer-wise-Representation-Learning"><span class="nav-text">1\ Task-specific Layer-wise Representation Learning.</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-Small-Scalable-Shareable"><span class="nav-text">2\ Small, Scalable, Shareable</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-Modularity-of-Representations"><span class="nav-text">3\ Modularity of Representations</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-Non-Interfering-Composition-of-Information-（不冲突的信息组合）"><span class="nav-text">4\ Non-Interfering Composition of Information. （不冲突的信息组合）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#引入Adapter的优势"><span class="nav-text">引入Adapter的优势</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Adapter-Pre-train-Fine-tune-过程中的N个要点"><span class="nav-text">Adapter Pre-train / Fine-tune 过程中的N个要点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#NLP领域相关工作"><span class="nav-text">NLP领域相关工作</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#其他领域-CV-相关工作"><span class="nav-text">其他领域(CV)相关工作</span></a></li></ol></div>
             
 
           </div>
