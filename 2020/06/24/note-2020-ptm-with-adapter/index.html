@@ -86,20 +86,18 @@
 
 
 
-<meta name="description" content="Injecting Knowledge into Pre-trained Models through Adapter">
+<meta name="description" content="Please Enter password to open this blog.">
 <meta name="keywords" content="nlp,knowledge,pre-trained-lm,network">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Pre-trained Models with Adapter">
 <meta property="og:url" content="http://xingluxi.github.io/2020/06/24/note-2020-ptm-with-adapter/index.html">
 <meta property="og:site_name" content="Luxi Xing - Blog">
-<meta property="og:description" content="Injecting Knowledge into Pre-trained Models through Adapter">
+<meta property="og:description" content="Please Enter password to open this blog.">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="http://xingluxi.github.io/images/note-2020-ptm-with-adapter/fig-arch.png">
-<meta property="og:updated_time" content="2020-08-01T04:15:52.834Z">
+<meta property="og:updated_time" content="2020-08-07T13:10:42.640Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Pre-trained Models with Adapter">
-<meta name="twitter:description" content="Injecting Knowledge into Pre-trained Models through Adapter">
-<meta name="twitter:image" content="http://xingluxi.github.io/images/note-2020-ptm-with-adapter/fig-arch.png">
+<meta name="twitter:description" content="Please Enter password to open this blog.">
 
 
 
@@ -350,8 +348,8 @@
               
                 <span class="post-meta-item-text">Post modified&#58;</span>
               
-              <time title="Post modified" itemprop="dateModified" datetime="2020-08-01T12:15:52+08:00">
-                2020-08-01
+              <time title="Post modified" itemprop="dateModified" datetime="2020-08-07T21:10:42+08:00">
+                2020-08-07
               </time>
             
           </span>
@@ -383,7 +381,7 @@
                   <span class="post-meta-item-text">Words count in article&#58;</span>
                 
                 <span title="Words count in article">
-                  937
+                  8
                 </span>
               
 
@@ -399,7 +397,7 @@
                   <span class="post-meta-item-text">Reading time &asymp;</span>
                 
                 <span title="Reading time">
-                  4
+                  1
                 </span>
               
             </div>
@@ -420,107 +418,15 @@
       
 
       
-        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>Injecting Knowledge into Pre-trained Models through Adapter<br><a id="more"></a></p>
-<p>什么是Adapter<sup id="fnref:0"><a href="#fn:0" rel="footnote"><span class="hint--top hint--error hint--medium hint--rounded hint--bounce" aria-label="AdapterHub: A Framework for Adapting Transformers. 2020.
-">[0]</span></a></sup></p>
-<blockquote>
-<p>“Adapter” refers to a set of newly introduced weights, typically within the layers of a transformer model. Adapters provide an alternative to fully fine-tuning the model for each downstream task, while maintaining performance. They also have the added benefit of requiring as little as 1MB of storage space per task!<br>Adapter，适配器指一组新引入的参数权重，通常在transformer模型的层内/间。适配器为每个下游任务提供了一种完全微调模型的替代方法，同时保持了性能。它们还有一个额外的好处，就是每个任务（的网络）只需要少量的存储空间.</p>
-</blockquote>
-<h2 id="Adapter的结构（Architecture）"><a href="#Adapter的结构（Architecture）" class="headerlink" title="Adapter的结构（Architecture）"></a>Adapter的结构（Architecture）</h2><ul>
-<li>A Two-layer feed-forward neural network with a bottleneck<ul>
-<li>Down-Projection</li>
-<li>（may be a nonlinearity）</li>
-<li>Up-Projection</li>
-</ul>
-</li>
-<li>Layer Norm</li>
-</ul>
-<p>现有两种形式：Pfeiffer Architecture<sup id="fnref:2"><a href="#fn:2" rel="footnote"><span class="hint--top hint--error hint--medium hint--rounded hint--bounce" aria-label="AdapterFusion: Non-Destructive Task Composition for Transfer Learning. 2020.
-">[2]</span></a></sup> 和 Houlsby Architecture<sup id="fnref:1"><a href="#fn:1" rel="footnote"><span class="hint--top hint--error hint--medium hint--rounded hint--bounce" aria-label="Parameter-Efficient Transfer Learning for NLP. ICML,2019.
-">[1]</span></a></sup></p>
-<ul>
-<li><img src="/images/note-2020-ptm-with-adapter/fig-arch.png" alt="arch"></li>
-</ul>
-<h2 id="Why-Adapter【AdapterHub】"><a href="#Why-Adapter【AdapterHub】" class="headerlink" title="Why Adapter【AdapterHub】"></a>Why Adapter【AdapterHub】</h2><blockquote>
-<p> Adapters provide numerous benefits over fully fine- tuning a model such as scalability, modularity, and composition. </p>
-</blockquote>
-<h3 id="1-Task-specific-Layer-wise-Representation-Learning"><a href="#1-Task-specific-Layer-wise-Representation-Learning" class="headerlink" title="1\ Task-specific Layer-wise Representation Learning."></a>1\ Task-specific Layer-wise Representation Learning.</h3><ul>
-<li>为了实现SotA的性能，大多数工作都对预训练模型进行整体微调；<ul>
-<li>而Adapter仅通过适应/调节每层的表示，就展示出了与整体模型微调相当的效果；</li>
-</ul>
-</li>
-</ul>
-<h3 id="2-Small-Scalable-Shareable"><a href="#2-Small-Scalable-Shareable" class="headerlink" title="2\ Small, Scalable, Shareable"></a>2\ Small, Scalable, Shareable</h3><ul>
-<li>微调整体模型，需要将完整的结果模型存储，存储开销大；<ul>
-<li>可根据需要调整adapter内部的bottleneck size，极大地减少了需要存储的新的参数量；</li>
-</ul>
-</li>
-</ul>
-<h3 id="3-Modularity-of-Representations"><a href="#3-Modularity-of-Representations" class="headerlink" title="3\ Modularity of Representations"></a>3\ Modularity of Representations</h3><ul>
-<li>adapter学习编码任务相关信息，而不需要指定参数；</li>
-<li>adapter可作为模块化组建的原因：<ul>
-<li>由于适配器的封装布局（encapsulated placement），其中周围的参数是固定的，在每一层，适配器被迫学习与变压器模型的后续层兼容的输出表示。</li>
-</ul>
-</li>
-<li>MAD-X的工作，成功将任务、语言独立训练的adapters进行了组合；</li>
-</ul>
-<h3 id="4-Non-Interfering-Composition-of-Information-（不冲突的信息组合）"><a href="#4-Non-Interfering-Composition-of-Information-（不冲突的信息组合）" class="headerlink" title="4\ Non-Interfering Composition of Information. （不冲突的信息组合）"></a>4\ Non-Interfering Composition of Information. （不冲突的信息组合）</h3><ul>
-<li>跨任务共享信息</li>
-<li>多任务学习的问题：<ul>
-<li>灾难性遗忘（catastrophic forgetting）<sup id="fnref:3"><a href="#fn:3" rel="footnote"><span class="hint--top hint--error hint--medium hint--rounded hint--bounce" aria-label="https://blog.csdn.net/u013468614/article/details/95623987">[3]</span></a></sup><ul>
-<li>序列迁移过程中，早期学习的知识被覆盖；</li>
-</ul>
-</li>
-<li>灾难性干扰（catastrophic interference）<ul>
-<li>增加新任务时，原有任务的性能下降；</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>Adapter封装的特性，不同的任务信息存储在了各自的参数中</li>
-</ul>
-<h2 id="引入Adapter的优势"><a href="#引入Adapter的优势" class="headerlink" title="引入Adapter的优势"></a>引入Adapter的优势</h2><ul>
-<li>减少了任务相关的（训练）参数量，不需要调整PLM参数；</li>
-<li>不会在re-training整体模型时产生灾难性遗忘；</li>
-<li>尽可能在减少参数量的同时，保持与MTL相同的性能；<ul>
-<li>可以序列化训练多任务；</li>
-<li>增加新的任务时，不需要重新训练之前所有的子任务；</li>
-</ul>
-</li>
-<li>预训练/下游任务上学习到的知识可以以模块化的方式进行迁移；</li>
-</ul>
-<h2 id="Adapter-Pre-train-Fine-tune-过程中的N个要点"><a href="#Adapter-Pre-train-Fine-tune-过程中的N个要点" class="headerlink" title="Adapter Pre-train / Fine-tune 过程中的N个要点"></a>Adapter Pre-train / Fine-tune 过程中的N个要点</h2><ul>
-<li>与原始的PLM相比，需要调整的参数；<ul>
-<li>PLM是否fixed，训练adapter；</li>
-</ul>
-</li>
-<li>Adapter的预训练任务？</li>
-<li>PLM+Adapter组合之后，在下游任务上的使用，Task Specific Layer是什么？</li>
-<li>在哪些阶段训练；<ul>
-<li>多任务训练？单任务训练？序列型训练？</li>
-</ul>
-</li>
-</ul>
-<h2 id="NLP领域相关工作"><a href="#NLP领域相关工作" class="headerlink" title="NLP领域相关工作"></a>NLP领域相关工作</h2><ol>
-<li>Parameter-Efficient Transfer Learning for NLP. ICML,2019.</li>
-<li>BERT and PALs: Projected Attention Layers for Efﬁcient Adaptation in Multi-Task Learning. ICML,2019.</li>
-<li>K-ADAPTER: Infusing Knowledge into Pre-Trained Models with Adapters. 2020.</li>
-<li>Common Sense or World Knowledge? Investigating Adapter-Based Knowledge Injection into Pretrained Transformers. 2020.</li>
-<li>AdapterFusion: Non-Destructive Task Composition for Transfer Learning. 2020. (与MAD-X同一作)</li>
-<li>MAD-X: An Adapter-based Framework for Multi-task Cross-lingual Transfer. 2020. (与AdapterFuison同一作)</li>
-<li>Out-rageously Large Neural Networks: The Sparsely- Gated Mixture-of-Experts Layer. ICLR,2017.</li>
-<li>Simple, scalable adaptation for neural machine translation. EMNLP,2019.</li>
-<li>Intermediate-Task Transfer Learning with Pretrained Models for Natural Language Understanding: When and Why Does It Work? ACL,2020.</li>
-</ol>
-<h2 id="其他领域-CV-相关工作"><a href="#其他领域-CV-相关工作" class="headerlink" title="其他领域(CV)相关工作"></a>其他领域(CV)相关工作</h2><ol>
-<li>Learning multiple visual domains with residual adapters. NeurIPS,2017.</li>
-<li>On Self Modulation For Generative Adversarial Networks. ICLR,2019.</li>
-</ol>
-<!-- 
-References:
-http://mp.weixin.qq.com/s?__biz=MzIxMzkwNjM2NQ==&mid=2247484460&idx=1&sn=87f3f00e6730bb363d3b77fd092c3e3a&chksm=97aee2fea0d96be8a3c0c07a2891bd802fa78e02cb73026a088dd5b67177ea3507cf0166915d&mpshare=1&scene=1&srcid=&sharer_sharetime=1583897742597&sharer_shareid=63af200aa81df8e5ac8dfb942e96e35d#rd
- -->
-<div id="footnotes"><hr><div id="footnotelist"><ol style="list-style: none; padding-left: 0; margin-left: 40px"><li id="fn:0"><span style="display: inline-block; vertical-align: top; padding-right: 10px; margin-left: -40px">0.</span><span style="display: inline-block; vertical-align: top; margin-left: 10px;">AdapterHub: A Framework for Adapting Transformers. 2020.<a href="#fnref:0" rev="footnote"> ↩</a></span></li><li id="fn:1"><span style="display: inline-block; vertical-align: top; padding-right: 10px; margin-left: -40px">1.</span><span style="display: inline-block; vertical-align: top; margin-left: 10px;">Parameter-Efficient Transfer Learning for NLP. ICML,2019.<a href="#fnref:1" rev="footnote"> ↩</a></span></li><li id="fn:2"><span style="display: inline-block; vertical-align: top; padding-right: 10px; margin-left: -40px">2.</span><span style="display: inline-block; vertical-align: top; margin-left: 10px;">AdapterFusion: Non-Destructive Task Composition for Transfer Learning. 2020.<a href="#fnref:2" rev="footnote"> ↩</a></span></li><li id="fn:3"><span style="display: inline-block; vertical-align: top; padding-right: 10px; margin-left: -40px">3.</span><span style="display: inline-block; vertical-align: top; margin-left: 10px;">https://blog.csdn.net/u013468614/article/details/95623987<a href="#fnref:3" rev="footnote"> ↩</a></span></li></ol></div></div>
+        <div id="hexo-blog-encrypt" data-wpm="Oh, this is an invalid password. Check and try again, please." data-whm="OOPS, these decrypted content may changed, but you can still have a look.">
+  <div class="hbe-input-container">
+  <input type="password" id="hbePass" placeholder>
+    <label for="hbePass">Please Enter password to open this blog.</label>
+    <div class="bottom-line"></div>
+  </div>
+  <script id="hbeData" type="hbeData" data-hmacdigest="2c63980ae603220b1114924c985152b377a3ff90760dd77756d7127f064d7247">b3c5347fd465ea3fda76b5687e46af8e4b9c7691b8e634b365ae495b498527785eaf1f73ba9aa3fa0f0990eef58cb5515d9ef52bf98cf9ce22a7fe38741ff86c65c4e961445f4748e07931cdc9c7bacc0112402db56070698f6845bec3a9501fd88ef5226529fbc2a7209156da53c282cde4b092949c8944486dfd5424ef4818d756f79ce9d1ba06912868e248bb51378846bf1747d7aff910167e237baeccc51b56d4c3612b2a3f3664a401d139e0a05c4087f92afc68765ceeee6eee213adbfa2208619ccfc20d8a8303ca50ea4367506a2dbf3511e8ae739c873078567ca84166689a6a97b7ea8a5e0e2b09712456581e88a5d46cb55c56014e59d7e3b33a166a77578897080af1e70c63a9cd8abc39727e43a99b6fada3b5cdb80c5a75b8745bb68c633a099764a2a6e88594c13fbbaa064a2febcfee93040a84cc592c3e17a86542aceb57b048c48ef3dcf16737e6b096a97a4edd95d954824ce4983d3762c6790de200d12dba03b212351922589ded2c2236161d08e5c0613b9d31b4ccb50affacf55a41e075c7216c93089822cb75739338a153cec457a73728afb785f15c9871b34aa9ef16b456e8b278a59dc98d5dacb567b0e79a98787c15080200f5eb9f6c084d91f076951e65d0144b60409e1ec35e61e9a5624420e3476a7daab5fca3b3fa281e09619be93f7e9fdf96f2363681e16d4f23e175533661caea233e288d0bb09c6088f6f8f85c957b196d8ca1d5f1a3c2b329fd892a2056a5e9f9da9038a6a2844bc1c9edc950f93618687feb65508e5a4d1047494dfc5be275e3f12a8378e1b6e41de55d674409e81ac2a0f99682389d76cb5f39c7ef65662f23719c218f10f4d028cbbcd6102b510afcd09e2e106d72062aee2d541a5e660eed8dedbd7ecd7267a6cb6221e71177abd41dc2eec4b46115344853b9026883f0e65a8236f538c5fca3a25021d1e2eb070a7f371318c4098361858624dac9978d2f4830c7333377a724cb3424310486c8b23a21fad4332073f57ee313e2694d827c73efd2c3b4abdf19e51b05f1263c78cef3c96c0180a58d6251c2a2ad228f7d85c2a129532b6f8ca649bb8bcb6d3163b452c31bcba2199a58153d85bc1ebcdb80e37ac1ae5b0dacfffd54a651a34e4bc748b960703aeb93985df8c391a062256a17de5ae30a005801ed1792d065e847b6b114ff174dbe916c1c9b378dec5de5f00a9d25c58419114957f2977371925195edb97f2440bf25256fa6131f71423220e98517f8828608972b80c6e7aaeabba909d31888d80428d6584712159ab5da269675de2be72c029afbb7a46c35dc614e826511298155ea6dc45c2ec0a5c9a80baac6c16db769cfcd5b4b9bfe9139af574650e0a2c1ea1caa0b0754d5515863ce3406b7796233adac87d13e1db04a730ea4b1d6757c4ea408505019151acd02233d8bc62c7e506ad0ce7910183f810bae125a5e6551e33839fb500cd54c491f37bde6bccc17a8e7755e66559c26c33685a337f8ac7081fab3901fc3b4ee95c9acc650b7a549b2e1646eb786bd20a2037af64a3933339a7af8fa95ef6dda38366ca95009569631a4e7f80044ba8374bb346840bab8ebcdc786c08e36aeca076519c614cadcf7df2c14034b113f3b1e040da331a470848d9ac28db6b65ea6ea0b6a185cb7383c2c8e51c23f064ce60f3d56d8ccad6df8caf30fc3450d11d492f307f45cd1cf7d97b96300a017b39670659864ff2ab549dfe51e7ab2bd956f13467e1c9d5d74bcf42d631e7b98993b68f5dbf28fda5aa64cfd7b480c63ebf5802b7efdeea69caeb2b428ee9b5393f9510759731b2c21b2b43e5d4708a87a7d7940b470e51906aa71cc12ba11dd4b87afeeb2f7e9c234904b302f2d795b13b48b460e8db960fd5716a1ed77241a9396d20297aa32a815d04cb7684d0ed089ecb5d62ad6b05a63438eb8e0d1e2471fc3b4d1188efa8e109971fdf77e94bcce7aff29b5b470e7b830aa7d28500e7df026b82511bbe8c5d999604c981433ed4e15b7db8e5872bdcd01b54e76d6aee3c779fea079fe7fb170385fca62788aa810f039eca49d4dc099913f0621617bc5283d723c7878ed849b274377cd4430c7fa578b0df28b897fe7baaec6b50e0e66634028baf8f7c4899f7b8d23960ff4a781d7247ef2d216c3c5dd174b5e2a8250cb707c9711a7f33af654507cf5af2d39bd4e518d447d30d04383daed7d46e28879a598bab1d9318940e1b145b9cbd50b13219dc105211be49c7341e94b42e7d6edf3602ffefec268b09316dd79c57b89d6a4221c1bf006ce42a4ce6a9149c429ed29f0dd8ce436b35e6edd25a6e52ca5593d923b786f0c1379e5a25a0237b0e20abb3268461e72747f1882c3719cbbd057a8d6818a7c9da8ce341c4c29a91842038cdd3b16ac3add3d95b58dc5bcde1bd0cdb43c901d1b29d45702737010719da3293048308ec4b08bcc73bd004123bcadcd593a03ee6fdcb54437ba0856073828de987ce3a1b0fe2dc9a5ef6db2211b78144e2258f28155f18449fab838754c8585ecdf3c53c4c0bc2e700e4a6c8562178d9f5ec2d4ca249be607126c9bd0a8b5a2c31f8cf60ebd29ed4ac129f84741381a8c70ef60559f39416bbae9b86e01319a8fb545eaa7e239bb2c68449ff62b034e1ffee6e1a1cacef8f909263435d3f8f522553267c2bde7e102fd21a6544a5d5d436b124c078ba66070ee4864f1f12fd2131fca9335e2a80c11ac9c5b1db9a126aeaf177916bd3fb43a3492606fb5a72b2edd94a393a7403eda6741725e6538f7264eb1ec60a9a7c616ca8d92225885ed476c9cbcc3797073ae870594bdb5cb087d6d18039524c44754320b08b57ee00254f9c3ed31123f6a562fc4b4365cd0500fbbd2204a5393d6b058a9dc6baf586a340fcd23b8a8bcc810831c38172fffe1435f2778ac32ca184c557d0f4bb23f0487c019fbda3df182c857d9dc119fe042aa1e62a447b939298c4d9afdc1283babf9a4ad4ceede533a9742816a4ac05f5f3f91aed47d004b62f7481d079ea172e19fe06b0b151c30692913b266bd7020ca75ae51c27b3e57e9b350eda7d3146d395160d7f233c17bed062a7d14e8d99f5d5dd60d6ee9c51c1d7d273b0f65c86b3cab9adf1c25c6d8260cc440c4b26fcb25679dc80bc742a3dbc6ebfda37afc6c11e005df3a640ff579cee5788682b9ebdf8cd556216344c5937c9b60bd016e8668b9c22b83932b3b3126ae32ee6dbf48e42e07278cf0cd726dc9fc023f8e7b99e9197f3d4b741e8e96a3674235c69e0e5a7d43d3d8d21872c51d985939d6b8cd4ee0989cbaf9381a547f6e3526ae4e820c0c844c77f67d22c16d5c63044b828a225f8af0ce0485b3e04dc5a46df14be0dc440dfea887f5a85f3e8280aae3eaea69bd3e50f451ab96f4643a95bb8afc719c2906d5233e4912d975136217a3de3c7d8c5bb82810b9466e39de11026f8bdb0080fdb6c8624b3a185375bfd817c730b4b9e7b897ae6c2a7f77ece337cc3ff2427238deca67a1c0d40a99664bc1c066597007700dcde9bc3e90960f21d10c074052ac6e11901e3e641a14bf3fbd498116611c66ff04c30b6bf8b05d52111b02b5a0a28150c70a0b565c52f806506533847056372a9a6eecc8034517edec526dc1891886c727e21818296bf0a7e748012ce83278eb4548c64a69ce4f172d397847126d2f217697cb171538fbca1722ee42ff037cc02d483e0f07194a567f2ab51a8375d4099c7355994347e904aa17299b09433400800f15ed32206f0cfa11d58599b3a50a51f3d6886e3a88af8094b1d77dc2c4a78f071cb68ac2591cb8117489266f8930f30b4bcae5feab7a29c62391653acd0d0f946353026584a41605db80b83b1ce7c6a826e24db73545d1cb27a4d1fb58e710658c70fbc3df70d3b5c5023047a948a54054f0b2b29384aaca0f7ecfdd8b064854e8a9b536fa912eae39ae52528854cbf941a7ea1b78d1d436306e2ae5cc2d933e97cf079e800b23e943bf6c0ed9476e14a54e2462506fbabc6733a82fbca209fd4b3a6450f0c233a003906e4ab24bbc50e50e68e07f9f9c0a697f089eb5e1445c1fff2716259402a232ec365858dcfd6beb1484bf2fdad71b8ca247e755c531145a2638efdc51b63d20e82b22642ef9a9e50c99a977d1beb77399a9d0cc107258fef3d7a1f2d504869c9b7b3fbc1c8c58cae2c563a1b12fd47c44f31a4be86994286fbf48de270795487c638833e687c10cc344089ac2e43c78423c6f7cdca2cb6f868284aba158764817e1b20e0f07f6fa96fb78263a7794c59d5bdc5f2a533a407d36c8557acfc1f3ecaf4919e1fd0841197131054d82e1174e53683cd2d463115e40775ced1db243e5a7f1b026afbaa8689780e18eb9df487ea5dab1042c49167470dc312b88cc98863d287d961d23b644611bbd143ff060d6f10b384c219179246bbed81cbf10496de97ec281f0d8a4678295a7e8bc7f682db4bc33eb1d1007fe0848b6d478daee878ea395c28293d818bd2f3e1a13d82ca2aa33bc31dc250feb4a0e0fe4670cb42623be6a4292f06f73960c977b17f7eb924a421e14913b81db74257a371907c61912e0f6e2efa8be4e2069f99fa100e097c2262d448e0b8e4522f95a8daf07e83e20da53c437b8589fdc87dfeaea25d24eb4b5479aeb9cdd9b3dc8290df5733be5737da3c92b105677f698ae6f6d321fc859dd706e4cad66da32aa7dbbbb7ff6aed71a2761f2f253a0b2c9ac10c7faa5348d4deb200a0e0f6bb3b8c641d76ed7e46991c849ed2857644d17d8ba7a41b451c12d99cd1d3cc4e2846f7207eeda54f3257ed42b26f34682b36f155ace8ad0ea084635f8d0fe939511e3cba5ed3831c79b0f9c4d77a099f18bae240239cf5688b09914b96fbf8e752ffd92525542789cbad618c3eadb61a4e3f1a9ba2ccf6e9c244b5995b30fecf0dcac641da7da85c41d3bfdc401292aeb7f7e2b5a945bd61cf9a731cc57bd800cc8462902cf5cca805d74149a1f073b8c4669c457fa0dc6c7dab44f2ab7dd83ba893214a761b2d3adabc04551419b6aaf7d48d8f906b3f010b67909e33cc966a717a383d83cc048567b7b6851b66d1e4c9edc48548175c146235e67f67cbf6dfc808ec7ed3bb899c94ae14c64028202c7903561bcef622eab3ae05dedfb62dcaa27f6575563a3c1989de283107a089ed817cff3a7b14b78a7292d5d1865906f62cf7ac458893a9ae500d5db42e265e5cd4b5e1cb4e3055b8fdb4ecd539d8d13fac3e8d374921be9c2d3bba718c49c1e4ff0c8dfc09688c3753f569bb3445b58fa5a40c44073694af9070f294a6558b1d47469de500c33d5d416faeb358724193018c67ff7de6dc86e4b0abda9a036ee155324935fca628d0836f12cfda42010f461e49e7e63e96351726d0630863fa0920285f97c1e919b563444451c8da7c2431e3ee3805b3b74f494a46dd246b6102eaa885ca9a61bc281789ed07c0d556a309a2380b39c233d8e8fa73c6dde6fa192b77f556dfc9a2393550221247cd0bf3c587ec5582a8b8e8fa5e73ea4baa222227f59011daaa43bd340d79858b83aa8318fe5738f8f64e1333d4132cecdfd71d2f5ca50f632b879941c7ef1949f3f47f3d60a42c82d546a43612acedb4935cf878fe82dbab993d3f60289f96d55f067434e3699102af9fb173da1b2f4a7abc3e22cd10f1d7a2b0d27df72c2306534c4597e540991aae519f0075817aad45c7b752269fa40ed7f5f534a3607e41e45a4826ac0ce6f8dbd91d86cc3d2773d3c754b9a18cf2d0bfaa7fd11945d2f08e4a8e3d85e1b42fedf3a9489502312fae47b24082ddf50646a746882f837f44a48130cfb94339372c175763b432345aa5ecbaeac3eb02d19dcfe4896385c464de22e8a1f96b65dfab9b5c4b2305cdf0c6ac182f9e8fe91e8e97bbd354c68a7abb02d9918ee767ce053b7a721094650de77d4aaa77545a6a84bc25cde27225713b3aad9cb1d909a4005ae7437cd7685cc2e7c38846931241857b431567749fe34eb8353b31136a13f3b538f741e7eab9046fe422a0c6ff7a5e1742a8ce306e50975071ee47e2ce92fff3f6c51ea56de31c736fd9f54feb0517dca9cc968117c42843168f76e0e6eeff012c00e7ec322f75f4e9ada44110b2f03a3bf035fe1ef1e3a330d2ef47bcd6c04fddc829b61147b8e3c1cd4e8a616d4721d93f7a7bffc65fc8998bab0fd0103f2894928eac0ccd607ce139e3c1e60176dc49480a0b9394a108d8a85360e3afdae5207bfed4fcf7d9caf2392839882a6e3d920719d296965203cc025922c0684c24eef3ff641f83cc21abb8aa009696276d306678a90e4583145402736aba3cfcc5da43506b762449ba66bdb387484a7cdc4cda461ff49e87fca1ad06cacef578525478cd7bdfee36a63d17aa667e69e1cac273a7d3322521c72f1e4a5a371cd2025b1fac1ed08efd217567d28ef63c7e2a9f4f98aee59a6026d676eab1f4a2501432a5f3a1fcda4e2f6cdd05c5476382366975b9ae97dde61ee7469eec17ad474be34fa0c01f6617bb71f5129e2fb509b89c15564e60731b756c0ceafa7ecf93da29be3439f47026867093287e368e0c9697d42db2ea13cfbca1b49743d479c6a232f8c3488133fbd593e898eca993a895872b986429c9074a8edfb1e7e18483d2a987b7ac816b6e65e89c03e17c28e75658a7cfa6522c1045502ced43ae6834157f09ac743c7d3da0a13b06112d71d445e525bb41a21eab0b7ea5b07d43cb84ec12cc247a7fc77f6b6651bbbac6fe6310f8320b177be449168460126bc0652f3f0d19fa25bd5dc991963b3384e1d8344c60024c91e398f4f096404bdb44c43b1f2b47eee431d1059e2491faff6aca37016b158cf3b72c2a0c99cc36c52f09e665d9347fea5b2a605223c7dfdae672052d0f54c25dc8ed87d109ecf1a522c9397f8bbaff79b73f6cea7d644483e14ac40984337fb9289c3bf53f381e1b8002ac0b79cbf2b6e751d6d94ce92c27abac5d5df57792bc24ef4f885deb8f024425560a9c7f4e4050060c662fa71f0edfe4d88648198513bb01cc86db7d2cbbd6805b6dc14c4318314fca03d3e3eb28ed9f111848a1b192af885c71c7a7a88417ad5ec58d39eef020faf510e670d534190572dba75d0883aa27a16786fca34c9d56a8e16010663c12340aab0daea752dcee3a33d1dc5fbf81e45f42cb4bef637c7ac62bbade98c3bb07f481b1ea0f5c1747d5a3d93bb18595d5c792334a45be24af31d9e10d2dd95668fe0ee596f95e33a9a04884885a4ef906c95c47c1f7b8fc10b182cceb68bc45a13958d610fc3587af50491a98dee06978d3aa18842a73d0837abd1023b47a9910a3ba524ab1ad0c1ea0a4449f291d55c37f2251f2caa194771738454bfd6609362520dcb3893f12c7afac9390e7bd55cc8fa3aee71be6b23e8b8fd70b26bba5bec4e1c2d395be4044781019d455189fe4c6e03eb5fc8e65ca351375fc8eb44d58bdc753663d0de251c4b374356651b0b5225599ddd48e95e203e79f10f3bee60d177dbbd4cad418666f55ca7b868a65b9c2d1d842b7a508b529b4d14837c8ec62735670c52c97c7f07d741d949655a00f51423c4e8be9146fab8cb7354d86667bedb296c08d5b0c938e76a0ff9f85f58d99270c8b9c9cd85b58860f944de0bf4b291fa338c635183209e6c1b9fc5f74708a4ad0e9148680a824e6dbcb7297e0d2d6f17b422ab6328cbe32384a62c5825a4885c029dbfbb258ef7ce432750630f0e5448a3dac3f84a3e787db84c12b0748f850fcdea8316fbce7eb57e0ce4164182e099fd5897507bbcfae563a44ade95e3affa261fab1883c9aaa5f088f7e8ee7acb3f34ddab78e3a2c5b22a96ebd9bb109b9d9ee6129538091d0b71ea893a993b6a2af5b5dc9fd6fa643a42d96a17144b0e0f83ad3962314c7404790292e74eb98684c32ee5955c439a0fe2cd678383a8145d3ff831d5083c1d6f4fa8e3b7e0a4d33fcb52cf2857f7655aaaf1ab6bcd19a24def7e5a3baa51c389f5ef7cb37aa6333216c691a8cd1632442b3fe4e941da0b9dae08bc21ac9846d1c47b9443e3fddfb1c5eec3882c52197afb1619f8aea981151541947c4f01bf368a1c3bfed6fe34ea206a7ba9d27469920582f8f4cb28e2578f20c6cfca613d014a8165ed525e8a249033f71f47fdfe4ef0a511df547846a0b69e19a0bfc7dcafd7f1e731d3449c1fe65928662c24487a6cf412153af7f6782430ac20df6186188d0323027e488cd0b00755cd0111bdff41705b243223a56c550da1467784dfe88ce0a5e7f99d7ff8b11dc523a7d264e723ef82416a39c2ab8d4a666c6a3ebd538b3569c0c1f5e872eee1b32c0d2ab998a2b65f7bff16a411a7685f0e0de99048f9776afa960634397b9b007fabee1c3db95f983b1df105e16d7b4dd0d7995ec0b1d4138ea383496a8bd0e2771db29a94881953d2b85455d7f4a922dc371631c48e6851cb361d8bd4daa08986323c8faf4a5e1615f77f5c753b4daff1c4f114db050e2b51cf125c901fdb427a9fb99cccf5c859ce40aecfbb33c710ac0586d813db809200256ffbeb7911ffef7292672b4f0587a3883e6d2802902f6c23076d0d9efae5098f2032d6fda7271e17defc318b208f2309108006756896ea6c8fed77c2412ed40f13b799e4373efa719f8152015b843cf64d06168df3bbf3c7739cbe515e319a7cedb1477a132f1a18fb3085fe712a1133404f65820e30575d667c7e3f479fecea133cc8d7d7879ec65c542f3a5d360256f03c1d380f2385e12d4480dd709315b4925074550bcd312fbf90f7246103446a48f5e82beb0ef1d48d434192aed04c3fb083831c4ca5f5ca9f6a66dbd62d2d75e1a986295aa1e3fc6e0530edf31ca3ba032b5ab3f8bab7c78cc2a652babdef7486eea1f91c1d89e70379db8279a05c9ccca0a34ce5ba21192e4e15e3480128b12648148dc19785fed3179a67a2627e539e20dde78dd8c0c78c85faf6e952f132886581e7768e515daf73d3eb2d0870b9a0f31be986d3779025285b7e01167948027ddf1a3adcc3db3444b796482e6b7c4b95fea1177e0c56d90af8b7530fa4d7409428990fa1db2a3b0d0452c96e53971cf066aff96c4e145af3aa6e2eab55918774140bd2b63b0fe39f840484aff3ce80102c01a300a180fce9760115fd2a695ec8d300aa8fdff22b46f68e861d9a9168a5216cdbc0febfbf9b62a112ae9e76c3426199bd84d53a6d66a4a574c5e023cb96abb7065283b15d5abc8b0ee407908b89d14a4b51f60e1b59c3030595498d447ec394598d26f525e0858d1100afcd3522016dd47f4c7cfbce8641756e7e89338b57d686251728d18cd330964e52dbb88c944d657ff6190450df04477763ecc5253fe8c9f5c856cd1a14750da1c8ae0b0e8151c99eaf0cb09bb149b2eac98fe7d6406a9e7dbaa4ea372b6e28385ed90a1a115cef264e9614a9b66401615b657490939fea40b591b7db290f349e63e387bd02cccd7b8e4efe133729783398704b91e142e8286b51cba3ea579b8e92cd728d474a8fda9fec17afb95b0c89741fe0103670cd1d126fded0439116f7751f8bc528a46b3250b485f46ea49282203b500ab95bc9101bbcdd795272113ae247e26a27c8c63901e2bc85273adad2269905897ddb0d41a7a702156f49811992bd21aa6c3c42d9ed7111b431fcd78d434f0f9eba83c633b4192b77643de40890cffc0fd2db65877111060597a8288e615ec4e7fe089cbf7ad83f74f919ffc7cdf5abe9c7dcf7a1ad53a9d626e162e0d2fbe9cbc5d9a70e761ae5bfccafd1efbce09846bb4ef90d48985ce259e018f5cbed7d0d3302b998da3ac4dfbc7869f3537761082ea908b7f7abaeaac36498002a3def498788bfef3a7536305b9c0f843cbd4e9542f64f172db69d8599598200a42a04fc0bdf969ff941604bce2dbc8ac46a99e088292b113084e74a96c6e2b56fae36a0b3e9edc415b7613ed8d6779b33cb6243f466b8d301f6345aa797f122362580f91e9b5b0074876b114d1667ab9f5d3bee7275ca62aece8e3f26a953977e8fbddcba54842eab1269a405c004fd17b55c894a5b923e51aa6c0bc85384ff5190580e94b9e472fa3b918a5e868d82c5759982cf563211ecd5b913e4b8918e9b7e2b6b8e280e587799506d16f43ddfe73ad511bab70630f3b31d6b5cbb1790c2fe152ea4d1ed67adc8b32376a03335320282d440621a20a40d41decb7cb93b111e6eb4877c321afd004cc69f835937098972604bb7945fa883edd83f14eba735f756d1c06ed6cc2d6eef6b157d279ddd25f858c540b275d79d3d0f600cff69b14379dc29bbe494e6c1aa2aef4ea3b253ceaac9744888da9f97831acac9d0a09d55c573e600936b1dfee14f18e7031341bb61d5858fe4a244b08707d672844757f41dff9d40c7fe420c45f5f53fc576147d5928a23767296f717b31470d535b4390640d23ab706b4c9036192e537e434e26344ea5b035a72d7a9afcc4403104405cfa34bcde78afdb5fa899560db78e884f98b658866b233a203bd5c71dc4b6c96204364bc8b1216b433021eb536769c0ba8554f0afe401adbd926f724474b5e81aa5c85d1bec079c3bb54da17d5fba513a39a87f1f0c2e066e5a89545f6981925e53211b469346b22d92c46ee791c06c74b93ba2ea36cb683d79b33a1c31c719e05d0186e6fa40cd50a6158cad587f2fbc59034e0dfe8c4274405efa320877e98407ce7b33193344864f90d0389ba26667fc15a821a7ee6fe2e897a4ab934b6e59e2d2c2c80850c2512f19b8f41eeaf42a96265f170bf66ba4fa3ff12db49ca1cb52f3088e246b48e40d986461ac58c1721835e66325155b767a5ef8f6e1f4d68c5c57b743bf4778dc4a4799bb96a32d073ef918d8636ad661cad799ba685d5d60d41d573b274e0e39245a67cc9d5dece1c311378146fd7e77a7e3c61bd0b854bf6fd11b81c74a91582a8c275260ead1e6658582705db015e1542c3513a9dbf736ce34a665e6c110fe695d9a20926a1dc86a10b296b637c08fac706d755f7d1ce3f55ed068fd7727f764fd043990478f52f36379626eb50e11cd8172cf263ad45f25a445c8f11f4fda62b62b5ae1d88ba224faa4e0aeda5e049d8fbb5527a10f63f379dafb63ac5f69e745ac041e37796e4a6926304dc2fa30d5f7b3183c82fa385bb232582fcf5ac18a83843d60f1ad90462ecfd5d6b25877be16230000b71356ccdb0d30e447b195c5f1f3575fc811edd91fc9d4b283d7714aa0b34c7c449e265801ba5c17e0b03d03d1f92477fb2289ec3873b2d682be2d1d7969c98a409428f0240724a8da4285082bcf8a383fe74520a8e32f3da0c7bb74920e43e4c8452b1a1858b12238605157facd85728eb50e1dc8777f699c3ebf78a87b952f10102787ce1634f903f969789ec72b1a5d7618273b6d2e6aef11b41cbdbaf81f40554ec5878aa219bf65dd66f7c2afca7dc83f4c9108b04ec7cbe8e55d07f11af102271e27245c0b5805c40d50635f66da55a70d5ef048ea9ead085fd37027833c3b96ba6258a3794054e35ffde7ac8d1e28dcc0043e7b2bdc5765d6b940b6cbc60c9bda92eb24616be017a395068d1ddc59f871e101a1587b808970d3f76068cef29250635f1466221ff7047b03ca0115db21a3dbc27e6f7482b95d9eb88e64eb358eb8a0f98ad314106f98be8c2f0fd556ee0113ccbb028d2b13d35396472cb6c0114697e68498db6c1c7302da61f4fb561611b5f6ec5a85079f385ed61ff0cccc89ffad2a3f3182f1d2cddd875de2eb3ce59172914e094bc92fdbc87d68341a708b1c6368c815ad87afa8892b43ee7a335ee83319a76f6681858ddb05041eace64b8203acd89db9853c4b7bcdbda421f6df9abd95bdacd5cd7fc56fc80fcb1c6902e45912ac78c395a2ba2c1eca1291b70d169596e22601932e2eb6709ed0ecfaeaa620eb0ad02b26b40a68fcd528748005f68da051a1eadebd1a211410580f51dd6c29b2a0a87d4b2efb827104f6c956d5d4321c2e4511170af40edffac7116c374fdd689e8a30cf584eefaf5e1ef2936d14b94553a02147fcbcc0dcb5af74c3d80009bb8664a1c1663db5529da82ee5c4fae8452d7c681e7af986d1c7810506452b823c0f11d9bbf8c2c609bce98a352864427af297712c2017483905fc2e8c451962e53f88e577d465d474d63e869e250b7387ddc6d49513e2243e99dd3796ff32cade5ed6d6526260ec17420ba70ee19519ca56bdf27d966425c2d8faee4b5cedb3b24466ddc6fe3c04384caf688cd1a8d248cdb3ca3aed46ba09d3d41834a3fe2fa448ed938fa9672f1c84b417c52ce831270c03bf387f6f7d9bf57ed8ee94ab1fc7df3f59db6add71c7d80d6423835de95e5eb27abf08966fc0ed11f3b4e947c404fb1ec24057e5b436e06035210e995d5e8bcb555fa056180cf7cd871f452dd8a2d702537042d59dd22781a145e07437c971027ba3c5af9edac08aa53eb68625748a3f70d47b0e10c72fbb67200a831e4221dae1fc57b791589f0194a4411827465d767361b0f9c8849155e698b0f2ba7ad4e9358f1b8bc03c54cd611178a133089e8597db44075d161bf7e14a0cf340ded3720dc8a08ad5e7bbf1e6d70d0a7bdca2d1842d59125cf958f52089fa391221be57c62cd8fc1f0555530b27885090e731f48997d6417d5326a81e9f09212b9f7d7cbca9c4dab1dc60465593268a90d9283ed3cb2a268f23fae02761f6d6232da91f3ea317b417ecef2b2b286b6a39b42421053045bfe9d513e861ed8c81b7916b636a0fdfd721cd9694c6d17b976743d6faaee705c47b8b59fd7310a6ab6bceb7b0635c657de1b46e4b1fd5b5c4f578544535496423a20cc0dab6d1c66037e6ab68c5f32967a23b0a8dbb0b30e17735f70e17f8d405a149a465b5feb201158e54c331152e01f916d96f1aa3e8e82c63f8024751ee76bf8294d3936760d8bcbe9adbaced1b31c5698caec5198095e2570a50f5a656bcaad6af03f97f59d57c1e2222f10b5b77ceb86b5272c219c5cdd25e419d6b88577d62ddd1c669a3af8d7c45cb60bda16ca5e459e3bc19184a8818984a3b61a35985986690204500c18ef8243c612bfc6f2c589f9947684356771f536e08c588b4de425ebd2af9ca0665f2a849f89d84c36d08b4a81180</script>
+</div>
+<script src="/lib/blog-encrypt.js"></script><link href="/css/blog-encrypt.css" rel="stylesheet" type="text/css">
       
     </div>
     
@@ -652,17 +558,8 @@ http://mp.weixin.qq.com/s?__biz=MzIxMzkwNjM2NQ==&mid=2247484460&idx=1&sn=87f3f00
       
 
       
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            Table of Contents
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            Overview
-          </li>
-        </ul>
-      
 
-      <section class="site-overview-wrap sidebar-panel">
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -746,22 +643,6 @@ http://mp.weixin.qq.com/s?__biz=MzIxMzkwNjM2NQ==&mid=2247484460&idx=1&sn=87f3f00
         </div>
       </section>
 
-      
-      <!--noindex-->
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-              
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Adapter的结构（Architecture）"><span class="nav-text">Adapter的结构（Architecture）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Why-Adapter【AdapterHub】"><span class="nav-text">Why Adapter【AdapterHub】</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-Task-specific-Layer-wise-Representation-Learning"><span class="nav-text">1\ Task-specific Layer-wise Representation Learning.</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-Small-Scalable-Shareable"><span class="nav-text">2\ Small, Scalable, Shareable</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-Modularity-of-Representations"><span class="nav-text">3\ Modularity of Representations</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-Non-Interfering-Composition-of-Information-（不冲突的信息组合）"><span class="nav-text">4\ Non-Interfering Composition of Information. （不冲突的信息组合）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#引入Adapter的优势"><span class="nav-text">引入Adapter的优势</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Adapter-Pre-train-Fine-tune-过程中的N个要点"><span class="nav-text">Adapter Pre-train / Fine-tune 过程中的N个要点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#NLP领域相关工作"><span class="nav-text">NLP领域相关工作</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#其他领域-CV-相关工作"><span class="nav-text">其他领域(CV)相关工作</span></a></li></ol></div>
-            
-
-          </div>
-        </section>
-      <!--/noindex-->
       
 
       
