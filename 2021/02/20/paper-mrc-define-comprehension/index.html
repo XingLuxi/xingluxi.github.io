@@ -1,0 +1,1439 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon-universe-32.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-universe-32.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-universe-16.ico?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/favicon-universe-32.ico?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="nlp,mrc,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="Content1 - On Making Reading Comprehension More Comprehensive  Authors: Matt Gardner, Jonathan Berant, Hannaneh Hajishirzi, Alon Talmor, Sewon MinOrg.: AI2, Tel Aviv University, UWPublished: EMNLP 201">
+<meta name="keywords" content="nlp,mrc">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Defining Comprehension on MRC">
+<meta property="og:url" content="http://xingluxi.github.io/2021/02/20/paper-mrc-define-comprehension/index.html">
+<meta property="og:site_name" content="Luxi Xing - Blog">
+<meta property="og:description" content="Content1 - On Making Reading Comprehension More Comprehensive  Authors: Matt Gardner, Jonathan Berant, Hannaneh Hajishirzi, Alon Talmor, Sewon MinOrg.: AI2, Tel Aviv University, UWPublished: EMNLP 201">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2021-02-24T15:58:21.987Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Defining Comprehension on MRC">
+<meta name="twitter:description" content="Content1 - On Making Reading Comprehension More Comprehensive  Authors: Matt Gardner, Jonathan Berant, Hannaneh Hajishirzi, Alon Talmor, Sewon MinOrg.: AI2, Tel Aviv University, UWPublished: EMNLP 201">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":true,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://xingluxi.github.io/2021/02/20/paper-mrc-define-comprehension/">
+
+
+
+
+
+  <title>Defining Comprehension on MRC | Luxi Xing - Blog</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Luxi Xing - Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Time is In NO Hurry</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            About
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            Search
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="Searching..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://xingluxi.github.io/2021/02/20/paper-mrc-define-comprehension/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Luxi Xing">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Luxi Xing - Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Defining Comprehension on MRC</h1>
+        
+
+        <div class="post-meta">
+          
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2021-02-20T15:09:53+08:00">
+                2021-02-20
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Post modified&#58;</span>
+              
+              <time title="Post modified" itemprop="dateModified" datetime="2021-02-24T23:58:21+08:00">
+                2021-02-24
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Paper-Note/" itemprop="url" rel="index">
+                    <span itemprop="name">Paper-Note</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-area-chart"></i> Post Total Visits
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Words count in article&#58;</span>
+                
+                <span title="Words count in article">
+                  2.3k
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Reading time &asymp;</span>
+                
+                <span title="Reading time">
+                  8
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h2 id="Content"><a href="#Content" class="headerlink" title="Content"></a>Content</h2><p>1 - <a href="https://www.aclweb.org/anthology/D19-5815" target="_blank" rel="noopener">On Making Reading Comprehension More Comprehensive</a></p>
+<blockquote>
+<p><em>Authors</em>: Matt Gardner, Jonathan Berant, Hannaneh Hajishirzi, Alon Talmor, Sewon Min<br><em>Org.</em>: AI2, Tel Aviv University, UW<br><em>Published</em>: EMNLP 2019 workshop on MRQA</p>
+</blockquote>
+<p>2 - <a href="https://www.aclweb.org/anthology/2020.acl-main.701" target="_blank" rel="noopener">To Test Machine Comprehension, Start by Defining Comprehension</a></p>
+<blockquote>
+<p><em>Authors</em>: Jesse Dunietz, Gregory Burnham, Akash Baharadwaj, Owen Rambow, Jennifer Chu-Carroll, David Ferrucci<br><em>Org.</em>: Elemental Cognition<br><em>Published</em>: ACL 2020</p>
+</blockquote>
+<h2 id="On-Making-RC-more-Comprehensive"><a href="#On-Making-RC-more-Comprehensive" class="headerlink" title="On Making RC more Comprehensive"></a>On Making RC more Comprehensive</h2><h3 id="Intro："><a href="#Intro：" class="headerlink" title="Intro："></a>Intro：</h3><p>使机器<strong>理解</strong>自然语言文本是一个重要的任务，令这个任务更有挑战性的是我们尚未搞清什么是理解文本，或，如何评判一个machine是否成功完成了这个任务。</p>
+<p>现有研究中，采取了问答式机器阅读理解的方式来验证一个系统是否理解了文本，即，给定一个文本片段，一个自然语言问题（假定该问题需要在一定程度上对文本的理解才能回答）。</p>
+<p>但是却没有工作系统地验证这种理解的方法（问答式机器阅读理解），或讨论其缺点。</p>
+<p>本文认为，QA式MRC是一种很好的但是存在潜在担忧的方式以衡量机器对文本的理解。</p>
+<p>数据集层面：<br>现有的RC数据集，大部分其发自SQuAD，SQuAD数据集为RC的研究开启了很好的铺垫，但是远不足以探究系统的理解能力。<br>这些数据集仅需要简单的对局部的谓词-论元结构或实体类型的理解，然而理解文本远不止这些，还有比如，在篇章中跟踪实体，理解所读文本暗含的意思，以及恢复作者想要传达的潜在世界模型。</p>
+<p>任务层面：<br>Question Answering是用来探究这些复杂问题的自然形式，但是QA存在很多固有的挑战。<br>具体而言：（在构造数据集时）非常容易写一些看似需要深入理解文本才能回答的问题，但事实上，这些问题会给机器提供词汇或其他线索，让系统在回答问题时绕过预期的推理。<br>这就需要我们在数据收集的过程中，设计一些机制以对抗这样的shortcuts。</p>
+<p>本文的工作：</p>
+<ol>
+<li>证实了问答式阅读理解的合理性；</li>
+<li>并描述了各种问题，可以用来更全面地测试一个系统对一篇文章的理解，而不仅仅是探究局部的predicate-argument结构；</li>
+<li>该方法（问答式阅读理解）的主要陷阱问题是：问题容易找到surface cue，或者其他偏置，而使模型找到推理过程中的捷径（shortcut）<ul>
+<li>本文针对当前文献中提出的mitigate shortcuts 的方法进行了讨论，并对未来数据集收集工作提出了建议。</li>
+</ul>
+</li>
+</ol>
+<h3 id="Defining-Reading-Comprehension"><a href="#Defining-Reading-Comprehension" class="headerlink" title="Defining Reading Comprehension"></a>Defining Reading Comprehension</h3><p>如何定义<strong>理解</strong>一段文本？</p>
+<p>根据[Kendeou and Trevors,2012]，理想的基准是像人一样：人类在阅读一篇文章时用来恢复某些意义概念的过程。但是这样的过程在计算上并没有明确的定义。</p>
+<p>长期以来，自然语言处理界一直利用<strong>语言形式</strong>（<strong>linguistic formalism</strong>）来表示这一意义，比如：语法树、词义消歧、语义角色、共指消解。然而，没有一种语言形式主义能够抓住段落的全部含义。</p>
+<p>本文借助图灵测试的想法（通过在自然语言中进行交互，agents才能展示他们对语言的理解），提出了一个postulate：</p>
+<blockquote>
+<p>an entity (human or machine) understands a passage of text if it can correctly answer arbitrary questions about that text.</p>
+</blockquote>
+<p>该postulate的内容是理解的充分条件，而非必要条件（还会存在其他定义理解的方式）。</p>
+<p>基于上述的postulate，本文将MRC定义为一个任务，旨在理解一个连贯段落文本，其中会给定系统一个段落和一个关于该段落的问题，并且系统必须给出答案。</p>
+<p>然而利用Questions来评判理解存在几个问题，比如：</p>
+<ol>
+<li>尚不清楚问题的范围应该是什么？</li>
+<li>收集任意的问题是非常有挑战性的，因为那些似乎在探索某种特定理解的问题可能有捷径，可以在没有真正理解文本的情况下正确地回答它们。</li>
+</ol>
+<p>本文后续对这两个问题进行了分析</p>
+<h3 id="What-kinds-of-Questions"><a href="#What-kinds-of-Questions" class="headerlink" title="What kinds of Questions?"></a>What kinds of Questions?</h3><p>本文中列举了一些能够刻画文本理解的高层次问题，目前很少有数据集中显示地提出这些问题。</p>
+<p>Sentence-level Linguistic Structure</p>
+<ul>
+<li>目前的工作：鼓励非常局部（单个句子内部）的推理</li>
+<li>超越单个句子：需要结果passage中多个文本片段；<ul>
+<li>E.g.: Drop</li>
+</ul>
+</li>
+<li>关注针对谓词论元结构以外的其他现象：<ul>
+<li>在语义分析中存在着许多丰富的问题，如否定范围、分配与非分配的协调、事实性、指示语、结合与空成分、介词意义、名词复合词等等；</li>
+<li>这些问题都已经有很好的形式化定义；</li>
+</ul>
+</li>
+</ul>
+<p>Paragraph-level Structure</p>
+<ul>
+<li>目前的工作：虽然阅读理解数据集的输入是一段文本，但大多数数据集并没有明确针对需要理解整个段落的问题，或者句子如何组合成一个连贯的整体；</li>
+<li>关注段落或语篇层面现象的问题，如实体跟踪、语篇关系或语用学；<ul>
+<li>E.g.: Quoref</li>
+</ul>
+</li>
+</ul>
+<p>Grounding and Background Knowledge</p>
+<ul>
+<li>根据已知的知识来理解文本</li>
+<li>人们在阅读特定文本时表现出不同的理解水平，这在很大程度上取决于他们在适当背景知识的下理解文本的能力。</li>
+</ul>
+<p>Implicative Reasoning</p>
+<ul>
+<li>理解文本包括理解该文本对可能看到的其他文本的含义（或蕴涵）</li>
+<li>在某种意义上，这可以看作是将文本中的谓词grounding到一些先验知识中，这些先验知识包括该谓词的含义，也包括重建文本所描述的世界模型的更一般的概念；<ul>
+<li>E.g.: ShARC、ROPES</li>
+</ul>
+</li>
+</ul>
+<p>Communicative Aspects</p>
+<h3 id="Ways-to-Combat-Shortcuts"><a href="#Ways-to-Combat-Shortcuts" class="headerlink" title="Ways to Combat Shortcuts"></a>Ways to Combat Shortcuts</h3><p>在解决阅读理解任务时有一些捷径shortcuts，使模型能够通过lexical overlap和entity types等表面线索（superficial clues）找到答案</p>
+<p>以下几种方式可以防止这种shortcus：</p>
+<p>1、 Question/Passage Mismatch: 减少 lexical overlap；</p>
+<ul>
+<li>构造问题时，不提供原文，而是提供相同语义的文本；<ul>
+<li>NarrativeQA、DuoRC</li>
+</ul>
+</li>
+<li>先收集问题，再去pair到相应的文本上；<ul>
+<li>QuAC、TriviaQA</li>
+</ul>
+</li>
+<li>更真实的问题；<ul>
+<li>Natural Question、BoolQ</li>
+</ul>
+</li>
+</ul>
+<p>2、“No answer” option</p>
+<p>3、Dialog</p>
+<ul>
+<li>需要额外上下文</li>
+</ul>
+<p>4、Complex Reasoning</p>
+<p>5、Context Construction</p>
+<p>6、Adversarial Construction</p>
+<p>7、Minimal question pairs</p>
+<ul>
+<li>借用语言分析中的“最小对”概念：ROPES；<ul>
+<li>为了避免问题或段落中哪个实体首先出现的细微偏差，或者问题和段落词之间的简单词汇联想偏差，人群工作者被要求对他们写的问题进行最小的修改，以改变答案；</li>
+<li>例如，问题【哪个城市会有更多的树？】可能会改成【哪个城市的树会更少？】。</li>
+<li>这种方法并不适用于所有的阅读理解场景，但它可以成为减少捷径的有效手段：一个单独的问题可能会表现出捷径的特征，但假设最小对中的另一个问题也会有相同的捷径，导致了一个依赖于快捷方式的系统，使其中至少一个错误。</li>
+</ul>
+</li>
+</ul>
+<p>8、Free-form answers</p>
+<ul>
+<li>捷径出现的原因：有限的输出空间，可以搜索到导致正确答案的简单偏差。</li>
+</ul>
+<p>9、Multi-task Evaluation</p>
+<ul>
+<li>在多个数据集上评估模型</li>
+</ul>
+<p>10、Explainability</p>
+<ul>
+<li>要求对阅读理解模型提供的最终答案进行某种解释:<ul>
+<li>E.g.: HotpotQA</li>
+</ul>
+</li>
+</ul>
+<h3 id="Recommendations-for-Future-Research"><a href="#Recommendations-for-Future-Research" class="headerlink" title="Recommendations for Future Research"></a>Recommendations for Future Research</h3><ul>
+<li>创建没有捷径的数据集</li>
+<li>在多数据集上评估模型<ul>
+<li>防止模型过度拟合单个数据集中的统计偏差</li>
+</ul>
+</li>
+<li>防止先验偏差</li>
+<li>检测偏差</li>
+<li>构建对抗性样例</li>
+</ul>
+<h2 id="To-test-MC-start-by-Defining-Comprehension"><a href="#To-test-MC-start-by-Defining-Comprehension" class="headerlink" title="To test MC, start by Defining Comprehension"></a>To test MC, start by Defining Comprehension</h2><h3 id="Contributions"><a href="#Contributions" class="headerlink" title="Contributions"></a>Contributions</h3><p>本文贡献：</p>
+<ol>
+<li>本文认为，现有的方法不能充分定义理解，对于测试的内容太不系统。</li>
+<li>本文对一类广泛使用的文本，即简短的叙述，给出了理解的详细定义——理解的模板。</li>
+<li>实验表明现有的系统不能胜任本文中定义的叙事理解任务。</li>
+</ol>
+<h3 id="Defining-deep-story-understanding"><a href="#Defining-deep-story-understanding" class="headerlink" title="Defining deep story understanding"></a>Defining deep story understanding</h3><p>Template of Understanding (ToU):</p>
+<ul>
+<li>一组问题模板，可以填写任何给定段落的特定事件和实体。</li>
+</ul>
+<p>A ToU for Story，针对故事理解:</p>
+<ol>
+<li>Spatial<ul>
+<li>Where are entities positioned over time, relative to landmarks and each other? How are they physically oriented? And where do events take place?</li>
+</ul>
+</li>
+<li>Temporal<ul>
+<li>What events and sub-events occur, and in what order? Also, for what blocks of that timeline do entities’ states hold true?</li>
+</ul>
+</li>
+<li>Causal<ul>
+<li>How do events and states lead mechanistically to the events and states described or implied by the text?</li>
+</ul>
+</li>
+<li>Motivational<ul>
+<li>How do agents’ beliefs, desires, and emotions lead to their actions?</li>
+</ul>
+</li>
+</ol>
+<p>参考：</p>
+<ol>
+<li>四组重叠的故事理解问题，对应于[1]<sup id="fnref:01"><a href="#fn:01" rel="footnote"><span class="hint--top hint--error hint--medium hint--rounded hint--bounce" aria-label="Rolf A. Zwaan, Mark C. Langston, and Arthur C. Graesser. 1995. The construction of situation models in narrative comprehension: An event-indexing model. Psychological Science, 6(5):292–297.
+">[01]</span></a></sup>确定的人类阅读故事时关注的四个要素。</li>
+<li>后两个问题，来自于计算故事理解的早期工作：[2]<sup id="fnref:02"><a href="#fn:02" rel="footnote"><span class="hint--top hint--error hint--medium hint--rounded hint--bounce" aria-label="Roger C. Schank and Robert P. Abelson. 1977. Scripts, Plans, Goals and Understanding. Lawrence Erlbaum Associates, Hillsdale, NJ.">[02]</span></a></sup>将causal chains、plans和goals确定为理解多句故事的关键要素。</li>
+</ol>
+<div id="footnotes"><hr><div id="footnotelist"><ol style="list-style: none; padding-left: 0; margin-left: 40px"><li id="fn:01"><span style="display: inline-block; vertical-align: top; padding-right: 10px; margin-left: -40px">01.</span><span style="display: inline-block; vertical-align: top; margin-left: 10px;">Rolf A. Zwaan, Mark C. Langston, and Arthur C. Graesser. 1995. The construction of situation models in narrative comprehension: An event-indexing model. Psychological Science, 6(5):292–297.<a href="#fnref:01" rev="footnote"> ↩</a></span></li><li id="fn:02"><span style="display: inline-block; vertical-align: top; padding-right: 10px; margin-left: -40px">02.</span><span style="display: inline-block; vertical-align: top; margin-left: 10px;">Roger C. Schank and Robert P. Abelson. 1977. Scripts, Plans, Goals and Understanding. Lawrence Erlbaum Associates, Hillsdale, NJ.<a href="#fnref:02" rev="footnote"> ↩</a></span></li></ol></div></div>
+      
+    </div>
+    
+    
+    
+
+    
+      <div>
+        
+    <div style="text-align:center;color: #ccc;font-size:14px;">
+    **** END of This Post. Thank for Your READING ****
+    </div>
+    <div style="text-align:center;color: #ccc;font-size:14px;">
+    If you have any Question, welcome to Email me or leave your comments below.
+    </div>
+
+      </div>
+    
+
+    
+
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>Post author:</strong>
+    Luxi Xing
+  </li>
+  <li class="post-copyright-link">
+    <strong>Post link:</strong>
+    <a href="http://xingluxi.github.io/2021/02/20/paper-mrc-define-comprehension/" title="Defining Comprehension on MRC">http://xingluxi.github.io/2021/02/20/paper-mrc-define-comprehension/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>Copyright Notice: </strong>
+    All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> unless stating additionally.
+  </li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/nlp/" rel="tag"><i class="fa fa-tag"></i> nlp</a>
+          
+            <a href="/tags/mrc/" rel="tag"><i class="fa fa-tag"></i> mrc</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/12/26/paper-2020-x-as-expert/" rel="next" title="2020 | X as Expert">
+                <i class="fa fa-chevron-left"></i> 2020 | X as Expert
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="lv-container" data-id="city" data-uid="MTAyMC80MjA1OC8xODYwNQ=="></div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.gif" alt="Luxi Xing">
+            
+              <p class="site-author-name" itemprop="name">Luxi Xing</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">67</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">57</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/XingLuxi" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://twitter.com/XingLuxi" target="_blank" title="Twitter">
+                      
+                        <i class="fa fa-fw fa-twitter"></i>Twitter</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:xingluxixlx@gmail.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Content"><span class="nav-text">Content</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#On-Making-RC-more-Comprehensive"><span class="nav-text">On Making RC more Comprehensive</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Intro："><span class="nav-text">Intro：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Defining-Reading-Comprehension"><span class="nav-text">Defining Reading Comprehension</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#What-kinds-of-Questions"><span class="nav-text">What kinds of Questions?</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Ways-to-Combat-Shortcuts"><span class="nav-text">Ways to Combat Shortcuts</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Recommendations-for-Future-Research"><span class="nav-text">Recommendations for Future Research</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#To-test-MC-start-by-Defining-Comprehension"><span class="nav-text">To test MC, start by Defining Comprehension</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Contributions"><span class="nav-text">Contributions</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Defining-deep-story-understanding"><span class="nav-text">Defining deep story understanding</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+            <span id="scrollpercent"><span>0</span>%</span>
+          
+        </div>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-grav"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Luxi Xing</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a></div>
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i> Site Total Visiters
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
+  
+
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  
+
+
+  
+
+  
+
+</body>
+</html>

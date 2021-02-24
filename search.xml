@@ -1,6 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[Defining Comprehension on MRC]]></title>
+    <url>%2F2021%2F02%2F20%2Fpaper-mrc-define-comprehension%2F</url>
+    <content type="text"><![CDATA[Content1 - On Making Reading Comprehension More Comprehensive Authors: Matt Gardner, Jonathan Berant, Hannaneh Hajishirzi, Alon Talmor, Sewon MinOrg.: AI2, Tel Aviv University, UWPublished: EMNLP 2019 workshop on MRQA 2 - To Test Machine Comprehension, Start by Defining Comprehension Authors: Jesse Dunietz, Gregory Burnham, Akash Baharadwaj, Owen Rambow, Jennifer Chu-Carroll, David FerrucciOrg.: Elemental CognitionPublished: ACL 2020 On Making RC more ComprehensiveIntro：使机器理解自然语言文本是一个重要的任务，令这个任务更有挑战性的是我们尚未搞清什么是理解文本，或，如何评判一个machine是否成功完成了这个任务。 现有研究中，采取了问答式机器阅读理解的方式来验证一个系统是否理解了文本，即，给定一个文本片段，一个自然语言问题（假定该问题需要在一定程度上对文本的理解才能回答）。 但是却没有工作系统地验证这种理解的方法（问答式机器阅读理解），或讨论其缺点。 本文认为，QA式MRC是一种很好的但是存在潜在担忧的方式以衡量机器对文本的理解。 数据集层面：现有的RC数据集，大部分其发自SQuAD，SQuAD数据集为RC的研究开启了很好的铺垫，但是远不足以探究系统的理解能力。这些数据集仅需要简单的对局部的谓词-论元结构或实体类型的理解，然而理解文本远不止这些，还有比如，在篇章中跟踪实体，理解所读文本暗含的意思，以及恢复作者想要传达的潜在世界模型。 任务层面：Question Answering是用来探究这些复杂问题的自然形式，但是QA存在很多固有的挑战。具体而言：（在构造数据集时）非常容易写一些看似需要深入理解文本才能回答的问题，但事实上，这些问题会给机器提供词汇或其他线索，让系统在回答问题时绕过预期的推理。这就需要我们在数据收集的过程中，设计一些机制以对抗这样的shortcuts。 本文的工作： 证实了问答式阅读理解的合理性； 并描述了各种问题，可以用来更全面地测试一个系统对一篇文章的理解，而不仅仅是探究局部的predicate-argument结构； 该方法（问答式阅读理解）的主要陷阱问题是：问题容易找到surface cue，或者其他偏置，而使模型找到推理过程中的捷径（shortcut） 本文针对当前文献中提出的mitigate shortcuts 的方法进行了讨论，并对未来数据集收集工作提出了建议。 Defining Reading Comprehension如何定义理解一段文本？ 根据[Kendeou and Trevors,2012]，理想的基准是像人一样：人类在阅读一篇文章时用来恢复某些意义概念的过程。但是这样的过程在计算上并没有明确的定义。 长期以来，自然语言处理界一直利用语言形式（linguistic formalism）来表示这一意义，比如：语法树、词义消歧、语义角色、共指消解。然而，没有一种语言形式主义能够抓住段落的全部含义。 本文借助图灵测试的想法（通过在自然语言中进行交互，agents才能展示他们对语言的理解），提出了一个postulate： an entity (human or machine) understands a passage of text if it can correctly answer arbitrary questions about that text. 该postulate的内容是理解的充分条件，而非必要条件（还会存在其他定义理解的方式）。 基于上述的postulate，本文将MRC定义为一个任务，旨在理解一个连贯段落文本，其中会给定系统一个段落和一个关于该段落的问题，并且系统必须给出答案。 然而利用Questions来评判理解存在几个问题，比如： 尚不清楚问题的范围应该是什么？ 收集任意的问题是非常有挑战性的，因为那些似乎在探索某种特定理解的问题可能有捷径，可以在没有真正理解文本的情况下正确地回答它们。 本文后续对这两个问题进行了分析 What kinds of Questions?本文中列举了一些能够刻画文本理解的高层次问题，目前很少有数据集中显示地提出这些问题。 Sentence-level Linguistic Structure 目前的工作：鼓励非常局部（单个句子内部）的推理 超越单个句子：需要结果passage中多个文本片段； E.g.: Drop 关注针对谓词论元结构以外的其他现象： 在语义分析中存在着许多丰富的问题，如否定范围、分配与非分配的协调、事实性、指示语、结合与空成分、介词意义、名词复合词等等； 这些问题都已经有很好的形式化定义； Paragraph-level Structure 目前的工作：虽然阅读理解数据集的输入是一段文本，但大多数数据集并没有明确针对需要理解整个段落的问题，或者句子如何组合成一个连贯的整体； 关注段落或语篇层面现象的问题，如实体跟踪、语篇关系或语用学； E.g.: Quoref Grounding and Background Knowledge 根据已知的知识来理解文本 人们在阅读特定文本时表现出不同的理解水平，这在很大程度上取决于他们在适当背景知识的下理解文本的能力。 Implicative Reasoning 理解文本包括理解该文本对可能看到的其他文本的含义（或蕴涵） 在某种意义上，这可以看作是将文本中的谓词grounding到一些先验知识中，这些先验知识包括该谓词的含义，也包括重建文本所描述的世界模型的更一般的概念； E.g.: ShARC、ROPES Communicative Aspects Ways to Combat Shortcuts在解决阅读理解任务时有一些捷径shortcuts，使模型能够通过lexical overlap和entity types等表面线索（superficial clues）找到答案 以下几种方式可以防止这种shortcus： 1、 Question/Passage Mismatch: 减少 lexical overlap； 构造问题时，不提供原文，而是提供相同语义的文本； NarrativeQA、DuoRC 先收集问题，再去pair到相应的文本上； QuAC、TriviaQA 更真实的问题； Natural Question、BoolQ 2、“No answer” option 3、Dialog 需要额外上下文 4、Complex Reasoning 5、Context Construction 6、Adversarial Construction 7、Minimal question pairs 借用语言分析中的“最小对”概念：ROPES； 为了避免问题或段落中哪个实体首先出现的细微偏差，或者问题和段落词之间的简单词汇联想偏差，人群工作者被要求对他们写的问题进行最小的修改，以改变答案； 例如，问题【哪个城市会有更多的树？】可能会改成【哪个城市的树会更少？】。 这种方法并不适用于所有的阅读理解场景，但它可以成为减少捷径的有效手段：一个单独的问题可能会表现出捷径的特征，但假设最小对中的另一个问题也会有相同的捷径，导致了一个依赖于快捷方式的系统，使其中至少一个错误。 8、Free-form answers 捷径出现的原因：有限的输出空间，可以搜索到导致正确答案的简单偏差。 9、Multi-task Evaluation 在多个数据集上评估模型 10、Explainability 要求对阅读理解模型提供的最终答案进行某种解释: E.g.: HotpotQA Recommendations for Future Research 创建没有捷径的数据集 在多数据集上评估模型 防止模型过度拟合单个数据集中的统计偏差 防止先验偏差 检测偏差 构建对抗性样例 To test MC, start by Defining ComprehensionContributions本文贡献： 本文认为，现有的方法不能充分定义理解，对于测试的内容太不系统。 本文对一类广泛使用的文本，即简短的叙述，给出了理解的详细定义——理解的模板。 实验表明现有的系统不能胜任本文中定义的叙事理解任务。 Defining deep story understandingTemplate of Understanding (ToU): 一组问题模板，可以填写任何给定段落的特定事件和实体。 A ToU for Story，针对故事理解: Spatial Where are entities positioned over time, relative to landmarks and each other? How are they physically oriented? And where do events take place? Temporal What events and sub-events occur, and in what order? Also, for what blocks of that timeline do entities’ states hold true? Causal How do events and states lead mechanistically to the events and states described or implied by the text? Motivational How do agents’ beliefs, desires, and emotions lead to their actions? 参考： 四组重叠的故事理解问题，对应于[1][01]确定的人类阅读故事时关注的四个要素。 后两个问题，来自于计算故事理解的早期工作：[2][02]将causal chains、plans和goals确定为理解多句故事的关键要素。 01.Rolf A. Zwaan, Mark C. Langston, and Arthur C. Graesser. 1995. The construction of situation models in narrative comprehension: An event-indexing model. Psychological Science, 6(5):292–297. ↩02.Roger C. Schank and Robert P. Abelson. 1977. Scripts, Plans, Goals and Understanding. Lawrence Erlbaum Associates, Hillsdale, NJ. ↩]]></content>
+      <categories>
+        <category>Paper-Note</category>
+      </categories>
+      <tags>
+        <tag>nlp</tag>
+        <tag>mrc</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[2020 | X as Expert]]></title>
     <url>%2F2020%2F12%2F26%2Fpaper-2020-x-as-expert%2F</url>
     <content type="text"><![CDATA[Content Entities as Experts: Sparse Memory Access with Entity Supervision. EMNLP,2020. Facts as Experts: Adaptable and Interpretable Neural Memory over Symbolic Knowledge. 2020. Entities as Experts Title: Entities as Experts: Sparse Memory Access with Entity SupervisionAuthors: Thibault Févry, Livio Baldini Soares, Nicholas FitzGerald, Eunsol Choi, Tom KwiatkowskiOrg.: Google Research;Published: EMNLP,2020. A. Motivation 捕获语言模型参数中的实体陈述型知识 学习、使用专用的独立的实体表示，可以在使用时，直接对目标entity的memory进行读取 B. Contribution 设计了一个新的模型结构，可以通过文本，和其他的模型参数一起学习实体表示； 在开放域QA数据集和LAMA任务上验证了模型性能 C. Approach 监督信号： mention boundary detection loss：BIO分类 entity linking loss：用hyperlinked entity去监督entity memory assess？access？ masked language modeling loss D. Experiment QA Knowledge Probing：LAMA、预测Wikipedia hyperlink K近邻的选择 E. Analysis 预定义实体词表，存在unseen entity问题 entity memory layer的训练和主体模型训练是耦合的，训练好的entity memory无法迁移 针对Wikipedia领域，factual entity 的学习，对常识知识不敏感 从头训练模型，没有借助任何预先可获取的LM参数 Fact as Experts Title: Fact as Experts: Adaptable and Interpretable Neural Memory over Symbolic KnowledgeAuthors: Pat Verga, Haitian Sun, Livio Baldini Soares, William W. CohenOrg.: Google Research;Published: 2020. A. Motivation针对问题： 知识以隐式参数的形式存在在模型中，无法检查和解释； 训练语料中事实信息易过时； 存储在模型参数中的知识，容易受到源材料内在bias的影响； 文本中无法包含符号化知识 B. Contribution 本文提出了一个神经语言模型，构建了一个显式的接口，连接符号化可解释事实信息和非符号的神经知识； 将上下文编码和从外部记忆中抽取的知识整合，这些外部的记忆和符号知识相绑定，可以添加和修改； 可以在Inference阶段注入新的记忆，处理在pretrain阶段没有见过的实体 可以用新的事实overwrite先验记忆，迭代更新 本文方法的优势： 模型可以通过操纵其符号化表示来更新，而不需要re-training can be inserted by updating the symbolically bound memory 本文的方法可以实现更好的factual coverage，通过向symbolic memory中插入受信的事实内容 与 Entity As Expert工作的不同： EaE以end-to-end的方式学习实体表示，本文的方法是采用separatly-trained KB embedding 本文对EaE进行扩展，引入关于triplets的符号化记忆 C. Approach fact memory的输入是symbolic KB中的三元组 三元组由EaE学习的entity embedding组合成 key-value 记忆的形式 key是head set = (subject, realtion) value是tail set = (object) 预训练输入： 构建一个cloze-type QA 任务 D. Experiment[TBU] E. Analysis 基于EaE模型之上的工作]]></content>
@@ -246,8 +258,8 @@
       </categories>
       <tags>
         <tag>nlp</tag>
-        <tag>paper</tag>
         <tag>knowledge</tag>
+        <tag>paper</tag>
         <tag>mrc</tag>
       </tags>
   </entry>
@@ -260,8 +272,8 @@
       </categories>
       <tags>
         <tag>nlp</tag>
-        <tag>paper</tag>
         <tag>knowledge</tag>
+        <tag>paper</tag>
         <tag>mrc</tag>
       </tags>
   </entry>
@@ -274,8 +286,8 @@
       </categories>
       <tags>
         <tag>nlp</tag>
-        <tag>paper</tag>
         <tag>knowledge</tag>
+        <tag>paper</tag>
         <tag>mrc</tag>
       </tags>
   </entry>
@@ -644,8 +656,8 @@
       </categories>
       <tags>
         <tag>nlp</tag>
-        <tag>paper</tag>
         <tag>knowledge</tag>
+        <tag>paper</tag>
         <tag>mrc</tag>
       </tags>
   </entry>
@@ -901,8 +913,8 @@
       </categories>
       <tags>
         <tag>nlp</tag>
-        <tag>paper</tag>
         <tag>knowledge</tag>
+        <tag>paper</tag>
         <tag>tg</tag>
       </tags>
   </entry>
