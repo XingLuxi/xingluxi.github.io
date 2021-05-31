@@ -23,8 +23,8 @@
         <tag>knowledge</tag>
         <tag>mrc</tag>
         <tag>dataset</tag>
-        <tag>survey</tag>
         <tag>reasoning</tag>
+        <tag>survey</tag>
         <tag>qa</tag>
       </tags>
   </entry>
@@ -70,9 +70,9 @@
       <tags>
         <tag>nlp</tag>
         <tag>knowledge</tag>
+        <tag>pre-trained-lm</tag>
         <tag>nlu</tag>
         <tag>survey</tag>
-        <tag>pre-trained-lm</tag>
       </tags>
   </entry>
   <entry>
@@ -103,8 +103,8 @@
         <tag>knowledge</tag>
         <tag>mrc</tag>
         <tag>dataset</tag>
-        <tag>survey</tag>
         <tag>reasoning</tag>
+        <tag>survey</tag>
         <tag>qa</tag>
       </tags>
   </entry>
@@ -233,8 +233,8 @@
       </categories>
       <tags>
         <tag>nlp</tag>
-        <tag>tutorial</tag>
         <tag>dialogue</tag>
+        <tag>tutorial</tag>
       </tags>
   </entry>
   <entry>
@@ -525,11 +525,11 @@
         <category>MRC-Research</category>
       </categories>
       <tags>
-        <tag>nlp</tag>
         <tag>cognition</tag>
+        <tag>nlp</tag>
         <tag>knowledge</tag>
-        <tag>note</tag>
         <tag>research</tag>
+        <tag>note</tag>
       </tags>
   </entry>
   <entry>
@@ -573,8 +573,8 @@
         <tag>nlp</tag>
         <tag>knowledge</tag>
         <tag>mrc</tag>
-        <tag>survey</tag>
         <tag>reasoning</tag>
+        <tag>survey</tag>
         <tag>commonsense</tag>
       </tags>
   </entry>
@@ -615,8 +615,8 @@
       <tags>
         <tag>nlp</tag>
         <tag>mrc</tag>
-        <tag>note</tag>
         <tag>research</tag>
+        <tag>note</tag>
       </tags>
   </entry>
   <entry>
@@ -629,8 +629,8 @@
       <tags>
         <tag>nlp</tag>
         <tag>mrc</tag>
-        <tag>note</tag>
         <tag>research</tag>
+        <tag>note</tag>
       </tags>
   </entry>
   <entry>
@@ -730,8 +730,8 @@
       <tags>
         <tag>nlp</tag>
         <tag>mrc</tag>
-        <tag>note</tag>
         <tag>research</tag>
+        <tag>note</tag>
         <tag>cs-know</tag>
       </tags>
   </entry>
@@ -743,8 +743,8 @@
         <category>MRC-Research</category>
       </categories>
       <tags>
-        <tag>nlp</tag>
         <tag>report</tag>
+        <tag>nlp</tag>
         <tag>mrc</tag>
         <tag>research</tag>
       </tags>
